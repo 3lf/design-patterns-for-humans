@@ -150,10 +150,28 @@ print(door.getWidth())
 
 
 <br>
+<br>
 
-```diff
-+ جمله طلایی : factory design کارش اینه که کاربر از پیچیدگی های ساخت یک ابجکت دور کنه
-```
+
+
+<div align="center">
+
+## 🏭 Factory Method
+</div>
+
+
+یک مثال از دنیای واقعی:
+> یک مدیر رو فرض کنید که وظیفه استخدام افراد رو به عهده داره. مطمئنن براش غیر ممکنه که مصاحبه با همه افراد در پوزیشن های مختلف شرکت رو خودش انجام بده! پس میاد با توجه به پوزیشن تصمیم میگیره که کدوم یکی از کارمند ها مسئولیت مصاحبه رو به عهده بگیره.
+
+به زبون ساده:
+> این دیزاین پترن میگه جای اینکه خودمون مستقیم درگیر ساخت ابجکت بشیم، این کار رو به عهده کلاس های فرزند بزاریم.  
+
+ویکی پدیا:
+<div dir="ltr">
+
+> In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object that will be created. This is done by creating objects by calling a factory method—either specified in an interface and implemented by child classes, or implemented in a base class and optionally overridden by derived classes—rather than by calling a constructor.
+
+</div>
 
 
 </div>
