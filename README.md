@@ -174,4 +174,79 @@ print(door.getWidth())
 </div>
 
 
+
+
+**Programmatic Example**
+
+بیاین از مثال مدیر استخدام برای درک بهتر استفاده کنیم
+
+پس اول یک اینترفیس برای مصاحبه کننده ها میسازیم و چند پیاده سازی هم براش میسازیم
+<div dir="ltr">
+
+```python
+class Interviewer:
+    def askQuestions(self):
+        pass
+
+
+class Developer(Interviewer):
+    def askQuestions(self):
+        print
+        'Asking about design patterns'
+
+
+class CommunityExecutive(Interviewer):
+    def askQuestions(self):
+        print
+        'Asking about community building'
+```
+</div>
+
+خب حالا `HiringManager` رو میسازیم
+<div dir="ltr">
+
+```python
+class HiringManager:
+    def makeInterviewer(self):
+        pass
+
+    def takeInterview(self):
+        interviewer = self.makeInterviewer()
+        interviewer.askQuestions()
+
+```
+</div>
+
+در نهایت هر فرزند میتونه ازش ارث بری کنه و متد `makeInterviewer` خودش رو داشته باشه 
+<div dir="ltr">
+
+```python
+class DevelopmentManager(HiringManager):
+    def makeInterviewer(self):
+        return Developer()
+
+
+class MarketingManager(HiringManager):
+    def makeInterviewer(self):
+        return CommunityExecutive()
+```
+</div>
+
+برای استفاده ازش به این صورت عمل می کنیم:
+<div dir="ltr">
+
+```python
+devManager = DevelopmentManager()
+devManager.takeInterview()
+
+marketingManager = MarketingManager()
+marketingManager.takeInterview()
+```
+</div>
+
+<br>
+**چه موقع باید ازش استفاده کنیم؟**
+
+اساساً برای شرایطی ازین الگو استفاده میشه که چندین کلاس با ریشه مشترک داریم (یعنی چندین کلاس یک کلاس parent رو پیاده‌سازی می‌کنند)
+
 </div>
