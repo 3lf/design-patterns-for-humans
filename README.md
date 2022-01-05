@@ -568,25 +568,24 @@ print(vars(burger))
 
 
 
-
-
-------------
 یک مثال از دنیای واقعی:
 > چیزی درمورد دالی شنیدین ؟ ([اگه نه اینجارو بخونید](https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%84%DB%8C_(%DA%AF%D9%88%D8%B3%D9%81%D9%86%D8%AF)))
 >
 >خیلی اینجا توضیح نمیدم، فقط بدونید همه‌چیز مربوط به شبیه سازیه!
 
 به زبون ساده:
-> مشکل از اینجا شروع میشه که یک ابجکت دارید و نیاز دارید از اون یک کپی ایجاد کنین. چطوری این کار رو میکنین؟ اول باید یک ابجکت جدید از همون کلاس ایجاد کنین بعد باید مقادیر ابجکت اصلی رو در ابجکت جدید کپی کنید. بارز ترین مشکلی که وجود داره این هست که به متغیر های خصوصی دسترسی ندارید.
+> مشکل از اینجا شروع میشه که یک ابجکت دارید و نیاز دارید از اون یک کپی ایجاد کنین. چطوری این کار رو میکنین؟ اول باید یک ابجکت جدید از همون کلاس ایجاد کنین بعد باید مقادیر ابجکت اصلی رو در ابجکت جدید کپی کنید. حالا از همین پروسه طاقت فرسا که بگذریم، این مشکل وجود داره این هست که به متغیر های خصوصی دسترسی ندارید.
 >
-> دیزاین پترن Prototype میگه یک Interface مشترک داشته باشید که وظیفه‌ش ساخت یک ابجکت کپی از خودش باشه
+> دیزاین پترن Prototype میگه یک Interface مشترک داشته باشید که وظیفه‌ش ساخت یک ابجکت کپی از روی ابجکت فعلی باشه.
 
 
 
 
 ویکی پدیا:
-> The prototype pattern is a creational design pattern in software development. It is used when the type of objects to create is determined by a prototypical instance, which is cloned to produce new objects.
+<div dir="ltr">
 
+> The prototype pattern is a creational design pattern in software development. It is used when the type of objects to create is determined by a prototypical instance, which is cloned to produce new objects.
+</div>
 
 
 
@@ -598,7 +597,6 @@ print(vars(burger))
 <div dir="ltr">
 
 ```python
-
 class SomeComponent:
     def __init__(self, some_int, some_list_of_objects, some_circular_ref):
         self.some_int = some_int
@@ -609,29 +607,29 @@ class SomeComponent:
 </div>
 
 
-پایتون دو magic method برای این مساله در نظر گرفته که ماهم همون توابع رو به کلاسمون اضافه می‌کنیم:
+پایتون magic method هایی برای این مساله در نظر گرفته که ماهم از همون دو تابع معروف copy و deep copy استفاده میکنیم:
 <div dir="ltr">
 
 ```python
     def __copy__(self):
-    some_list_of_objects = copy.copy(self.some_list_of_objects)
-    some_circular_ref = copy.copy(self.some_circular_ref)
-    new = self.__class__(
-        self.some_int, some_list_of_objects, some_circular_ref
-    )
-    new.__dict__.update(self.__dict__)
-    return new
+      some_list_of_objects = copy.copy(self.some_list_of_objects)
+      some_circular_ref = copy.copy(self.some_circular_ref)
+      new = self.__class__(
+          self.some_int, some_list_of_objects, some_circular_ref
+      )
+      new.__dict__.update(self.__dict__)
+      return new
 
 
-def __deepcopy__(self, memo={}):
-    some_list_of_objects = copy.deepcopy(self.some_list_of_objects, memo)
-    some_circular_ref = copy.deepcopy(self.some_circular_ref, memo)
-    new = self.__class__(
-        self.some_int, some_list_of_objects, some_circular_ref
-    )
-    new.__dict__ = copy.deepcopy(self.__dict__, memo)
-
-    return new
+  def __deepcopy__(self, memo={}):
+      some_list_of_objects = copy.deepcopy(self.some_list_of_objects, memo)
+      some_circular_ref = copy.deepcopy(self.some_circular_ref, memo)
+      new = self.__class__(
+          self.some_int, some_list_of_objects, some_circular_ref
+      )
+      new.__dict__ = copy.deepcopy(self.__dict__, memo)
+  
+      return new
 ```
 
 </div>
@@ -642,9 +640,7 @@ def __deepcopy__(self, memo={}):
 متغیر اول رو تغییر بدین، متغیر دوم هم تغییر می‌کنه. و همین‌طور اگر مقدار متغیر دوم رو تغییر بدین، مقدار متغیر اول هم
 تغییر می‌کنه.
 
-ولی توی deep copy، یک متغیر ساخته می‌شه و مقدار متغیر قبلی توی اون کپی می‌شه. در نتیجه تغییر ابجکتفاوت Copy و Deep Copy ؟
-ت اول یا ابجکت کپی
-تغییری توی اون یکی به وجود نمیاره.
+ولی توی deep copy، یک متغیر ساخته می‌شه و مقدار متغیر قبلی توی اون کپی می‌شه. در نتیجه تغییر ابجکت اول یا ابجکت کپی تغییری توی اون یکی به وجود نمیاره.
 
 
 
@@ -659,12 +655,12 @@ def __deepcopy__(self, memo={}):
 </div>
 در هر زمان فقط یک رئیس جمهور یک کشور می تواند وجود داشته باشد. همان رئیس جمهور باید هر زمان که وظیفه می خواهد وارد عمل شود. رئیس جمهور اینجا مجرد است.
 
-------------
+
 یک مثال از دنیای واقعی:
-> در هر زمان فقط یک رئیس جمهور میتونه برای کشور وجود داشته باشه. در نتیجه رئیس جمهور هرجا بهش نیاز هست باید خودش وارد عمل بشه. رئیس جمهور توی این مثال singleton هست.
+> در هر زمان فقط یک رئیس جمهور میتونه برای کشور وجود داشته باشه. در نتیجه هرجا به رئیس جمهور نیاز هست باید خودش وارد عمل بشه. رئیس جمهور توی این مثال singleton هست.
 
 به زبون ساده:
-> این دیزاین پترن تضمین می‌کنه از یک کلاس خاص فقط یک ابجکت وجود داشته باشه
+> این دیزاین پترن تضمین می‌کنه از یک کلاس خاص فقط یک ابجکت وجود داشته باشه.
 
 ویکی پدیا:
 
@@ -672,12 +668,13 @@ def __deepcopy__(self, memo={}):
 
 > In software engineering, the singleton pattern is a software design pattern that restricts the instantiation of a class to one object. This is useful when exactly one object is needed to coordinate actions across the system.
 </div>
-دیزاین پترن singleton در واقع یک آنتی پترن شناخته می‌شه و باید از استفاده زیاد اون جلوگیری کنیم. لزوما بد نیست و میتونه کاربرد های خوبی داشته باشه ولی باید با احتیاط ازش استفاده کرد چون تغییر توی هر بخش برنامه، میتونه روی بخش‌های دیگه هم تاثیر بزاره که ابن خودش دیباگ کردن پروژه هارو خیلی سخت می‌کنه.
+⚠️ دیزاین پترن singleton در واقع یک آنتی پترن شناخته می‌شه و باید از استفاده زیاد اون جلوگیری کنیم. لزوما بد نیست و میتونه کاربرد های خوبی داشته باشه ولی باید با احتیاط ازش استفاده کرد چون تغییر توی هر بخش برنامه، میتونه روی بخش‌های دیگه هم تاثیر بزاره که ابن خودش دیباگ کردن پروژه هارو خیلی سخت می‌کنه.
 
+<br>
 
 **مثال برنامه نویسی**
 
-بطور کلی برای ساخت singleton باید تابع سازنده private بشه، cloning و متود های copy بسته بشن و تابع استاتیکیی برای ساخت
+بطور کلی برای ساخت singleton باید تابع سازنده private بشه، cloning و متود های copy بسته بشن و تابع استاتیکی برای ساخت
 ابجکت تعریف بشه.
 
 ولی توی پایتون راه حل ساده تری وجود داره که اون استفاده از metaclass هاست:
