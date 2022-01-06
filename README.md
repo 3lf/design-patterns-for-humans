@@ -33,7 +33,7 @@
 
 <br>
 
-**ویکی پدیا** دیزاین پترن‌ها رو اینطوری توصیف میکنه:
+**ویکی‌پدیا** دیزاین پترن‌ها رو اینطوری توصیف میکنه:
 
 > در مهندسی نرم‌افزار، الگوی طراحی یک راه‌حل عمومی قابل تکرار برای مشکلات متداول در زمینه طراحی نرم‌افزار است. الگوی طراحی، یک طراحی تمام‌شده نیست که به صورت مستقیم بتواند تبدیل به کد منبع یا ماشین شود؛ بلکه، یک توضیح یا قالب برای حل یک مسئله در شرایط مختلف است. الگوها در واقع بهترین روش ممکن هستند که یک برنامه‌نویس می‌تواند در هنگام طراحی یک برنامه برای حل مشکلاتش از آن‌ها استفاده کند.
 
@@ -99,7 +99,7 @@
 
 توی این مثال میخوایم از اون مثال ساخت درب استفاده کنیم
 
-پس اول ما اینترفیس مربوط به درب رو میسازیم و در ادامه یک نمونه پیاده سازی براش پیاده سازی میکنیم:
+پس اول ما اینترفیس مربوط به درب رو میسازیم و در ادامه یک نمونه پیاده‌سازی براش پیاده‌سازی میکنیم:
 
 <div dir="ltr">
 
@@ -175,7 +175,7 @@ print(door.getWidth())
 ویکی پدیا:
 <div dir="ltr">
 
-> In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object that will be created. This is done by creating objects by calling a factory method—either specified in an interface and implemented by child classes, or implemented in a base class and optionally overridden by derived classes—rather than by calling a constuctor.
+> In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object that will be created. This is done by creating objects by calling a factory method—either specified in an interface and implemented by child classes, or implemented in a base class and optionally overridden by derived classes—rather than by calling a constructor.
 
 </div>
 
@@ -343,7 +343,7 @@ class Carpenter(DoorFittingExpert):
 برای مثال کلاس `DoorFactory` زمانی استفاده میشه که نیاز به درب چوبی داریم و کارش اینه که برای ایجاد ابجکت درب (که اینجا
 درب چوبی هست) از کلاس `WoodenDoor` و برای ایجاد ابجکت متخصص (که اینجا نجار هست) از `Carpenter` استفاده کنه.
 
-این موضوع برای درب آهنی و ... هم بطور مشابه پیاده سازی میشه.
+این موضوع برای درب آهنی و ... هم بطور مشابه پیاده‌سازی میشه.
 
 <div dir="ltr">
 
@@ -614,7 +614,7 @@ class SomeComponent:
     def __copy__(self):
 
 
-    some_list_of_objects = copy.copy(self.some_list_of_objects)
+some_list_of_objects = copy.copy(self.some_list_of_objects)
 some_circular_ref = copy.copy(self.some_circular_ref)
 new = self.__class__(
     self.some_int, some_list_of_objects, some_circular_ref
@@ -853,12 +853,115 @@ hunter = Hunter()
 hunter.hunt(wildDogAdapter)
 ```
 
+</div>
+در واقع مثال واقعی و قابل حس نیست ولی مفهوم رو به خوبی منتقل می‌کنه.
+
+پیشنهاد میکنم برای درک بهتر این الگو، یک آداپتور برای این سناریو پیاده‌سازی کنید: ورودی یک کلاس excel است ولی دیتای شما
+csv هست.
+
+<br>
+
+<div align="center">
+
+## 🌉 Bridge
 
 </div>
-در واقع مثال خیلی خوبی نبود ولی مفهوم رو به خوبی منتقل میکنه.
 
-پیشنهاد میکنم برای درک بهتر این موضوع رو برای این سناریو آداپتور تعریف کنید: ورودی یک کلاس excel است ولی دیتای شما csv هست.
 
+یک مثال از دنیای واقعی:
+> فرض کنید یک وبسایت دارید و می‌خواید با توجه به تنظیمات کاربر از قالب های مختلف پشتیبانی کنید.
+>
+> برای انجام این کار چطور عمل می‌کنین؟
+>
+>به ازای هر قالب یک کپی از وبسایت ایجاد میکنید و قالب مخصوص براش اضافه میکنید؟
+>
+> یا قالب های مختلفی ایجاد میکنید با توجه به تنظیمات کاربر اون‌ها رو بارگذاری میکنید؟
+>
+> الگوی طراحی Bridge به شما کمک میکنه راه حل دوم رو پیاده‌سازی کنید.
+
+![With and without the bridge pattern](https://cloud.githubusercontent.com/assets/11269635/23065293/33b7aea0-f515-11e6-983f-98823c9845ee.png)
+
+به زبون ساده:
+> این الگوی طراحی درمورد **ترجیح دادن** `ترکیب` **نسبت به** `ارث‌بری` صحبت میکنه.
+
+ویکی پدیا:
+<div dir="ltr">
+
+> The bridge pattern is a design pattern used in software engineering that is meant to "decouple an abstraction from its implementation so that the two can vary independently"
+</div>
+
+**مثال برنامه نویسی**
+
+بیاید همون مثال سایت و قالب که بالاتر درموردش صحبت کردیم رو پیاده‌سازی کنیم.
+
+در مرحله اول کلاس `WebPage` و پیاده‌سازی هایی از اون رو داریم:
+
+<div dir="ltr">
+
+```python
+class WebPage:
+    _theme = None
+
+    def __init__(self, theme):
+        self.theme = theme
+
+    def getContent(self):
+        pass
+
+
+class About(WebPage):
+    def getContent(self):
+        return "About page in " + self.theme.getColor()
+
+
+class Careers(WebPage):
+    def getContent(self):
+        return "Careers page in " + self.theme.getColor()
+```
+
+</div>
+
+برای قالب هم، باید کلاس و پیاده سازی های مختلفی بنویسیم:
+
+<div dir="ltr">
+
+```python
+class Theme:
+    def getColor(self):
+        pass
+
+
+class DarkTheme(Theme):
+    def getColor(self):
+        return 'Dark Black'
+
+
+class LightTheme(Theme):
+    def getColor(self):
+        return 'Off White'
+
+
+class AquaTheme(Theme):
+    def getColor(self):
+        return 'Light Blue'
+```
+
+</div>
+
+حالا میتونید نحوه ترکیب کردن این دو تاروو باهم ببینید:
+<div dir="ltr">
+
+```python
+darkTheme = DarkTheme()
+
+about = About(darkTheme)
+careers = Careers(darkTheme)
+
+print(about.getContent())
+print(careers.getContent())
+```
+
+</div>
 
 
 
