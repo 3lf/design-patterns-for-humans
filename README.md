@@ -175,7 +175,7 @@ print(door.getWidth())
 ویکی پدیا:
 <div dir="ltr">
 
-> In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object that will be created. This is done by creating objects by calling a factory method—either specified in an interface and implemented by child classes, or implemented in a base class and optionally overridden by derived classes—rather than by calling a constructor.
+> In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object that will be created. This is done by creating objects by calling a factory method—either specified in an interface and implemented by child classes, or implemented in a base class and optionally overridden by derived classes—rather than by calling a constuctor.
 
 </div>
 
@@ -612,24 +612,26 @@ class SomeComponent:
 
 ```python
     def __copy__(self):
-      some_list_of_objects = copy.copy(self.some_list_of_objects)
-      some_circular_ref = copy.copy(self.some_circular_ref)
-      new = self.__class__(
-          self.some_int, some_list_of_objects, some_circular_ref
-      )
-      new.__dict__.update(self.__dict__)
-      return new
 
 
-  def __deepcopy__(self, memo={}):
-      some_list_of_objects = copy.deepcopy(self.some_list_of_objects, memo)
-      some_circular_ref = copy.deepcopy(self.some_circular_ref, memo)
-      new = self.__class__(
-          self.some_int, some_list_of_objects, some_circular_ref
-      )
-      new.__dict__ = copy.deepcopy(self.__dict__, memo)
-  
-      return new
+    some_list_of_objects = copy.copy(self.some_list_of_objects)
+some_circular_ref = copy.copy(self.some_circular_ref)
+new = self.__class__(
+    self.some_int, some_list_of_objects, some_circular_ref
+)
+new.__dict__.update(self.__dict__)
+return new
+
+
+def __deepcopy__(self, memo={}):
+    some_list_of_objects = copy.deepcopy(self.some_list_of_objects, memo)
+    some_circular_ref = copy.deepcopy(self.some_circular_ref, memo)
+    new = self.__class__(
+        self.some_int, some_list_of_objects, some_circular_ref
+    )
+    new.__dict__ = copy.deepcopy(self.__dict__, memo)
+
+    return new
 ```
 
 </div>
@@ -640,7 +642,8 @@ class SomeComponent:
 متغیر اول رو تغییر بدین، متغیر دوم هم تغییر می‌کنه. و همین‌طور اگر مقدار متغیر دوم رو تغییر بدین، مقدار متغیر اول هم
 تغییر می‌کنه.
 
-ولی توی deep copy، یک متغیر ساخته می‌شه و مقدار متغیر قبلی توی اون کپی می‌شه. در نتیجه تغییر ابجکت اول یا ابجکت کپی تغییری توی اون یکی به وجود نمیاره.
+ولی توی deep copy، یک متغیر ساخته می‌شه و مقدار متغیر قبلی توی اون کپی می‌شه. در نتیجه تغییر ابجکت اول یا ابجکت کپی
+تغییری توی اون یکی به وجود نمیاره.
 
 
 
@@ -719,9 +722,145 @@ if __name__ == "__main__":
 </div>
 
 
+
+
+
+<br>
+<br>
+
+***
+
+<br>
+
+<div align="center">
+
+# Creational Design Patterns
+
+</div>
+
+به طور کلی با روابط بین موجودیت‌ها سروکار دارند، این الگوها کار موجودیت‌ها با یکدیگر را ساده‌تر می‌کنند. به زبون ساده:
+> بطور کلی الگو های طراحی ساختاری با روابط بین موجودیت ها و ترکیب کردن اونا کار دارن.
+
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> In software engineering, structural design patterns are design patterns that ease the design by identifying a simple way to realize relationships between entities.
+
 </div>
 
 
+<br>
+
+<div align="center">
+
+## 🔌 Adapter
+
+</div>
+
+یک مثال از دنیای واقعی:
+> واضح ترین مثال برای این الگوی طراحی خوده آداپتور ها هستن (برای مثال، آداپتور های تبدیل سه شاخه به دو شاخه رو برای شارژر ها)
+>
+> یا مترجمی که کلمات یک نفر رو برای فرد دیگه ترجمه میکنه
+
+به زبون ساده:
+> آداپتور بهتون کمک میکنه تا یک شی ناسازگار رو سازگار کنین تا بتونین توی کلاس های مختلف ازش استفاده کنین.
+
+
+ویکی پدیا:
+<div dir="ltr">
+
+> In software engineering, the adapter pattern is a software design pattern that allows the interface of an existing class to be used as another interface. It is often used to make existing classes work with others without modifying their source code.
+</div>
+
+**مثال برنامه نویسی**
+
+فرض کنید یک شکارچی به شیر ها حمله میکنه و اون ها غرش میکنن
+
+خب اول باید یک اینترفیس `lion` بسازیم که انواع شیر های مختلف ازش استفاده کنن
+<div dir="ltr">
+
+```python
+class Lion:
+    def roar(self):
+        pass
+
+
+class AfricanLion(Lion):
+    def roar(self):
+        pass
+
+
+class AsianLion(Lion):
+    def roar(self):
+        pass
+```
+
+</div>
+
+خب حالا شکارچی وقتی شکار انجام بده اون شیر غرش انجام میده
+
+<div dir="ltr">
+
+```python
+class Hunter:
+    def hunt(self, lion):
+        lion.roar()
+```
+
+</div>
+
+حالا فرض کنید یک موجودیت جدید مثل `سگ وحشی` به برنامه اضافه شده.
+
+خب سگ غرش انجام نمیده بجای اون `bark` انجام میده.
+
+خب اینجا `سگ وحشی` با تابع `hunt` شکارچی ناسازگار میشه. (چون توی تابع hunt ما برای حیوونی در حال شکار شدن هست تابع roar
+رو صدا میزنیم)
+
+برای حلش به این صورت میتونیم براش آداپتور تعریف کنیم.
+
+<div dir="ltr">
+
+```python
+class WildDog:
+    @staticmethod
+    def bark():
+        pass
+
+
+class WildDogAdapter(Lion):
+    _dog = None
+
+    def __init__(self, dog):
+        self._dog = dog
+
+    def roar(self):
+        self._dog.bark()
+```
+
+</div>
+
+در ادامه هم نحوه استفاده ازش رو میبینید:
+
+<div dir="ltr">
+
+```python
+wildDog = WildDog
+wildDogAdapter = WildDogAdapter(wildDog)
+
+hunter = Hunter()
+hunter.hunt(wildDogAdapter)
+```
+
+
+</div>
+در واقع مثال خیلی خوبی نبود ولی مفهوم رو به خوبی منتقل میکنه.
+
+پیشنهاد میکنم برای درک بهتر این موضوع رو برای این سناریو آداپتور تعریف کنید: ورودی یک کلاس excel است ولی دیتای شما csv هست.
 
 
 
+
+
+</div>
