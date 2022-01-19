@@ -964,5 +964,110 @@ print(careers.getContent())
 
 
 
+<br>
 
+<div align="center">
+
+## 🌿 Composite
+
+</div>
+
+
+یک مثال از دنیای واقعی:
+>فرض کنید شما یک کلاس ارسال مرسوله طراحی میکنید:
+ <br>
+![](https://refactoring.guru/images/patterns/diagrams/composite/problem-en.png)
+>
+>هر کلاس یک جعبه هست که میتونه شامل چند جعبه دیگه یا شامل چند شیء باشه.
+> 
+> برای ثبت یا محاسبه قیمت چطور عمل میکنید؟
+> 
+> در هر جعبه رو باز میکنید و اشیای توش رو بررسی میکنید؟
+> 
+> این قضیه توی دنیای واقعی شاید قابل انجام باشه ولی توی دنیای برنامه نویسی یا نشدنیه یا خیلی طاقت‌فرسا
+
+به زبون ساده:
+> در واقع این دیزاین پترن این امکان رو بهتون میده که ساختار های درختی بسازید و سپس با این ساختار ها طوری کار کنید که انگار با یک ابجکت منفرد کار کردید.
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> In software engineering, the composite pattern is a partitioning design pattern. The composite pattern describes that a group of objects is to be treated in the same way as a single instance of an object. The intent of a composite is to "compose" objects into tree structures to represent part-whole hierarchies. Implementing the composite pattern lets clients treat individual objects and compositions uniformly.
+
+</div>
+
+**مثال برنامه نویسی**
+
+
+بطور کلی توی دیزاین پترن composite ما دو مدل دیتا داریم:
+
+۱- Composite که میتونه برای خودش زیرمجموعه داشته باشه. (هرچند خودش هم وظایفی داشته باشه)
+
+۲- Leaf که در واقع زیر مجموعه نداره و فقط یک سری وظیفه داره.
+
+
+خب اول بیایم یک اینترفیس پایه برای کامپوننت هامون بسازیم و در ادامه هم اینترفیس های Composite و Leaf رو بسازیم:
+<div dir="ltr">
+
+```python
+class Component():
+    def add(self, component: Component) -> None:
+        pass
+
+    def remove(self, component: Component) -> None:
+        pass
+
+    def operation(self) -> str:
+        pass
+
+    
+class Leaf(Component):
+    def operation(self) -> str:
+        return "Leaf"
+
+
+class Composite(Component):
+    def __init__(self) -> None:
+        self._children: List[Component] = []
+
+    def add(self, component: Component) -> None:
+        self._children.append(component)
+
+    def remove(self, component: Component) -> None:
+        self._children.remove(component)
+
+    def operation(self) -> str:
+        results = []
+        for child in self._children:
+            results.append(child.operation())
+        return f"Branch({'+'.join(results)})"
+
+
+```
+
+</div>
+استفاده ازش هم خیلی راحته:
+
+<div dir="ltr">
+
+```python
+tree = Composite()
+
+branch1 = Composite()
+branch1.add(Leaf())
+branch1.add(Leaf())
+
+branch2 = Composite()
+branch2.add(Leaf())
+
+tree.add(branch1)
+tree.add(branch2)
+
+print(f"RESULT: {tree.operation()}", end="")
+# RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
+
+```
+
+</div>
 </div>
