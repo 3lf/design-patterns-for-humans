@@ -17,7 +17,7 @@
 خودش نسخه پایتونیزه شده [این](https://github.com/kamranahmedse/design-patterns-for-humans) ریپازیتوریه
 ***
 
-fix<div dir="rtl" align="center">
+<div dir="rtl" align="center">
 
 🚀 مقدمه
 =================
