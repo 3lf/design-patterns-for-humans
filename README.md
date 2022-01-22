@@ -1077,4 +1077,137 @@ print(f"RESULT: {tree.operation()}", end="")
 ```
 
 </div>
+
+
+
+
+<br>
+
+<div align="center">
+
+## ☕ Decorator
+
+</div>
+
+
+
+یک مثال از دنیای واقعی:
+
+> فر کنید یک مغازه خدمات خودرویی دارید که خدمات متنوع ای ارائه می دهید. فاکتور نهایی رو چطور محاسبه می کنید؟ شما یک سرویس رو انتخاب می کنید و به صورت پویا قیمت خدمات ارائه شده رو به اون اضافه می کنید تا به هزینه نهایی برسید. در اینجا هر نوع خدمات یک دکوراتور است.
+
+
+به زبون ساده:
+> دکوریتور به ما کمک میکنه به یک ابجکت یک Behavior اضافه کنیم بدون اینکه اون ابجکت رو تغییر بدیم.
+> 
+> Behavior = اعمالی که یک شیء می‌تواند از خود بروز دهد.
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+
+> In object-oriented programming, the decorator pattern is a design pattern that allows behavior to be added to an individual object, either statically or dynamically, without affecting the behavior of other objects from the same class. The decorator pattern is often useful for adhering to the Single Responsibility Principle, as it allows functionality to be divided between classes with unique areas of concern.
+
+</div>
+
+**مثال برنامه نویسی**
+
+برای مثال قهوه را در نظر بگیرید. اول از همه ما یک قهوه ساده داریم که رابط قهوه را پیاده سازی می کند
+
+<div dir="ltr">
+
+```python
+class Coffee:
+    def getCost(self):
+        pass
+
+    def getDescription(self):
+        pass
+
+
+class SimpleCoffee(Coffee):
+    def getCost(self):
+        return 10
+
+    def getDescription(self):
+        return 'Simple Coffee'
+```
+
+</div>
+
+ما می‌خواهیم کد رو توسعه‌پذیر کنیم تا در صورت نیاز، گزینه‌ها بتوانند اون رو تغییر دهند.
+
+پس بیاید چند دکوریتور براش بسازیم:
+
+<div dir="ltr">
+
+
+```python
+class MilkCoffee(Coffee):
+    _coffee = None
+
+    def __init__(self, coffee):
+        self._coffee = coffee
+
+    def getCost(self):
+        return self._coffee.getCost() + 2
+
+    def getDescription(self):
+        return self._coffee.getDescription() + ', milk'
+
+
+class WhipCoffee(Coffee):
+    _coffee = None
+
+    def __init__(self, coffee):
+        self._coffee = coffee
+
+    def getCost(self):
+        return self._coffee.getCost() + 5
+
+    def getDescription(self):
+        return self._coffee.getDescription() + ', whip'
+
+
+class VanillaCoffee(Coffee):
+    _coffee = None
+
+    def __init__(self, coffee):
+        self._coffee = coffee
+
+    def getCost(self):
+        return self._coffee.getCost() + 3
+
+    def getDescription(self):
+        return self._coffee.getDescription() + ', vanilla'
+```
+</div>
+
+و حالا نحوه ساخت قهوه سفارشی:
+
+<div dir="ltr">
+
+
+```python
+someCoffee = SimpleCoffee()
+print(someCoffee.getCost())
+print(someCoffee.getDescription())
+
+someCoffee = MilkCoffee(someCoffee)
+print(someCoffee.getCost())
+print(someCoffee.getDescription())
+
+someCoffee = VanillaCoffee(someCoffee)
+print(someCoffee.getCost())
+print(someCoffee.getDescription())
+
+someCoffee = WhipCoffee(someCoffee)
+print(someCoffee.getCost())
+print(someCoffee.getDescription())
+```
+</div>
+همونطور که میبینید خیلی ساده میتونیم هر ابجکت رو به عنوان ورودی تابع بعدی بدیم و اینطوری چندین مرحله افزودنی رو خیلی راحت به ایجکتمون اضافه کردیم!
+
+
+
 </div>
