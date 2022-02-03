@@ -28,7 +28,7 @@
 </div>
 
 
-### دیزاین پترن ها یک سری دستور العمل برای مقابله با یک سری مشکلات رایج هستند.
+ دیزاین پترن ها یک سری دستور العمل برای مقابله با یک سری مشکلات رایج هستند.
 
 اونا یک سری کلاس، پکیج یا کتابخونه نیستند که با اضافه کردنشون به پروژه‌تون جادو کنن. در عوض یک سری راه حل بهتون میدن که
 در شرایط خاص به مشکل نخورین.
@@ -74,7 +74,7 @@
 
 
 به زبون ساده:
-> #### الگو های طراحی سازنده، به مشکلات مربوط به ساخت ابجکت ها می‌پردازن
+>  الگو های طراحی سازنده، به مشکلات مربوط به ساخت ابجکت ها می‌پردازن
 
 ویکی پدیا:
 <div dir="ltr">
@@ -105,7 +105,7 @@
 
 </div>
 
-### **مثال برنامه نویسی**
+**مثال برنامه نویسی**
 
 توی این مثال میخوایم از اون مثال ساخت درب استفاده کنیم
 
@@ -213,8 +213,7 @@ class Developer(Interviewer):
 
 class CommunityExecutive(Interviewer):
     def askQuestions(self):
-        print
-        'Asking about community building'
+        print('Asking about community building')
 ```
 
 </div>
@@ -735,7 +734,7 @@ if __name__ == "__main__":
 
 <div align="center">
 
-# Creational Design Patterns
+# Structural Design Patterns
 
 </div>
 
@@ -1250,32 +1249,25 @@ print(someCoffee.getDescription())
 ```python
 class Computer:
     def getElectricShock(self):
-        print
-        "Ouch!"
+        print("Ouch!")
 
     def makeSound(self):
-        print
-        "Beep Beep!"
+        print("Beep Beep!")
 
     def showLoadingScreen(self):
-        print
-        "Loading..."
+        print("Loading...")
 
     def bam(self):
-        print
-        "Ready to be used..."
+        print("Ready to be used...")
 
     def closeEverything(self):
-        print
-        "Bup bup bup buzzz!"
+        print("Bup bup bup buzzz!")
 
     def sooth(self):
-        print
-        "Zzzzz"
+        print("Zzzzz")
 
     def pullCurrent(self):
-        print
-        "Haaah!"
+        print("Haaah!")
 ```
 </div>
 
