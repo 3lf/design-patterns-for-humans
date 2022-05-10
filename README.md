@@ -14,7 +14,7 @@
 
 
 ***
-ایده اصلی این ریپازیتوری از    [این](https://github.com/rommel-sunga/design-patterns-for-humans-python) ریپازیتوری گرفته شده که
+منبع اصلی این ریپازیتوری    [این](https://github.com/rommel-sunga/design-patterns-for-humans-python) ریپازیتوری هست که
 خودش نسخه پایتونیزه شده [این](https://github.com/kamranahmedse/design-patterns-for-humans) ریپازیتوریه.
 
 در ترجمه، تعاریف و مثال ها از منابع مختلف فارسی و انگلیسی استفاده شده تا بهترین نتیجه حاصل بشه :)
@@ -1307,6 +1307,95 @@ computer.turnOff()
 ```
 </div>
 
+
+
+
+<br>
+
+<div align="center">
+
+## 🍃 Flyweight
+
+</div>
+
+
+یک مثال از دنیای واقعی:
+> تا حالا به غرفه های چای فروشی رفتین؟ توی این غرفه ها چند فنجان چای آماده میکنن و شما از هر مدل چای که بخواید براتون یک فنجون میریزن. با اینکار کلی توی زمان و انرژی و ... صرفه جویی میکنن. بطور خلاصه این الگوی طراحی در رابطه با اشتراک گذاری منابع هست.
+
+به زبون ساده:
+>  به حداقل رسوندن استفاده از حافظه یا هزینه های محاسباتی با اشتراک گذاری بخشی از شیء که قابل اشتراک گذاری هست.
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> In computer programming, flyweight is a software design pattern. A flyweight is an object that minimizes memory use by sharing as much data as possible with other similar objects; it is a way to use objects in large numbers when a simple repeated representation would use an unacceptable amount of memory.
+
+</div>
+
+**مثال برنامه نویسی**
+
+بیاین مثال غرفه چای رو پیاده سازی کنیم. اول باید انواع چای رو پیاده سازی کنیم و بعدش چای ساز.
+
+<div dir="ltr">
+
+```python
+class GreenTea:
+    pass
+
+class TeaMaker:
+    _availableTea = {}
+
+    def make(self, preference):
+        if not preference in self._availableTea:
+            self._availableTea[preference] = GreenTea()
+
+        return self._availableTea[preference]
+```
+
+</div>
+
+توی مرحله بعد ما یک کلاس `TeaShop` داریم که وظیفه ثبت سفارش و آماده کردن اون هارو به عهده داره:
+
+<div dir="ltr">
+
+```python
+class TeaShop:
+    _orders = {}
+    _teaMaker = None
+
+    def __init__(self, teaMaker):
+        self._teaMaker = teaMaker
+
+    def takeOrder(self, teaType, table):
+        self._orders[table] = self._teaMaker.make(teaType)
+
+    def serve(self):
+        for table, tea in self._orders.iteritems():
+            print("Serving tea to table #" + str(table))
+```
+
+</div>
+
+روش استفاده ازش هم به این صورته
+
+<div dir="ltr">
+
+```python
+teaMaker = TeaMaker()
+shop = TeaShop(teaMaker)
+
+shop.takeOrder('less sugar', 1)
+shop.takeOrder('more milk', 2)
+shop.takeOrder('without sugar', 5)
+
+shop.serve()
+# Serving tea to table# 1
+# Serving tea to table# 2
+# Serving tea to table# 5
+```
+
+</div>
 
 
 </div>
