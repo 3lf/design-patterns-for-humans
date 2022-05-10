@@ -1398,4 +1398,94 @@ shop.serve()
 </div>
 
 
+<br>
+
+<div align="center">
+
+## 🎱 Proxy
+
+</div>
+
+
+یک مثال از دنیای واقعی:
+> درب‌هایی که با کارت باز میشن رو دیدین؟ یا درب هایی که با رمز عددی باز میشن؟ در واقع این دو روش به عملکرد اصلی درب اضافه شدن تا کار مارو راحت تر کنن.
+
+به زبون ساده:
+> هدف اصلی Proxy راحت تر کردن استفاده از کلاس یا دسترسی کنترل‌شده هست.
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> A proxy, in its most general form, is a class functioning as an interface to something else. A proxy is a wrapper or agent object that is being called by the client to access the real serving object behind the scenes. Use of the proxy can simply be forwarding to the real object, or can provide additional logic. In the proxy extra functionality can be provided, for example caching when operations on the real object are resource intensive, or checking preconditions before operations on the real object are invoked.
+
+</div>
+
+**مثال برنامه نویسی**
+
+خب بیاید مثال درب رو پیاده سازی کنیم.
+
+اول اینترفیس درب رو میسازیم و بعدش یک مدل درب پیاده سازی میکنیم:
+
+<div dir="ltr">
+
+```python
+class Door:
+    def open(self):
+        pass
+
+    def close(self):
+        pass
+
+class LabDoor(Door):
+    def open(self):
+        print("Opening lab door")
+
+    def close(self):
+        print("Closing the lab door")
+```
+</div>
+
+حالا ما میخوایم یک پروکسی برای اضافه کردن امنیت به درب بسازیم:
+
+<div dir="ltr">
+
+```python
+class SecuredDoor():
+    _door = None
+
+    def __init__(self, door):
+        self.door = door
+
+    def open(self, password):
+        if self.authenticate(password):
+            self.door.open()
+        else:
+            print("Big no! It ain't possible.")
+
+    def authenticate(self, password):
+        return password == '$ecr@t'
+
+    def close(self):
+        self.door.close()
+```
+</div>
+
+
+نحوه استفاده از اون هم به این صورته :
+
+<div dir="ltr">
+
+```python
+door = SecuredDoor(LabDoor())
+door.open('invalid') # Big no! It ain't possible
+
+door.open('$ecr@t') # Opening lab door
+door.close() # Closing Lab Door
+```
+
+</div>
+
+
+
 </div>
