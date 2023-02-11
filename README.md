@@ -1936,4 +1936,162 @@ if __name__ == "__main__":
 توی این کد هم میتونید ببینید که چطوری میتونیم از Iterator ها استفاده کنیم!
 
 
+
+
+
+<br>
+
+<div align="center">
+
+## 👽 Mediator
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> وقتی دارین با یک نفر با کمک اینترنت چت میکنید، شبکه اینترنت بین شما و اون فرد قرار داره. این شبکه mediator هست!
+
+
+به زبون ساده:
+> این الگو یک ابجکت که ما mediator بهش میگیم بین دو ابجکت قرار میده که ارتباط بین این دو ابجکت (که بهشون colleagues
+> میگیم) رو مدیریت میکنه! حالا چرا
+> بهش نیاز داریم؟ چون در این صورت دیگه این دوتا نیاز نیست درمورد پیاده سازی طرف دیگه چیزی بدونن و این باعث کاهش coupling
+> بین دو ابجکت میشه!
+
+
+ویکی پدیا:
+<div dir="ltr">
+
+> In software engineering, the mediator pattern defines an object that encapsulates how a set of objects interact. This
+> pattern is considered to be a behavioral pattern due to the way it can alter the program's running behavior.
+
+
+</div>
+
+**مثال برنامه نویسی**
+
+میخوایم یک ساختار چت روم بسازیم! (Mediator)
+
+
+<div dir="ltr">
+
+```python
+class ChatRoomMediator:
+    def showMessage(self, user, message):
+        pass
+
+
+class ChatRoom(ChatRoomMediator):
+    def showMessage(self, user, message):
+        time = datetime.datetime.now()
+        sender = user.getName()
+
+        print(str(time) + '[' + sender + ']: ' + message)        
+```
+
+</div>
+
+
+خب حالا بخش یوزر ها: (Colleagues)
+
+<div dir="ltr">
+
+```python
+class User:
+    _name = None
+    _chatMediator = None
+
+    def __init__(self, name, chatMediator):
+        self.name = name
+        self._chatMediator = chatMediator
+
+    def getName(self):
+        return self.name
+
+    def send(self, message):
+        self._chatMediator.showMessage(self, message)
+```
+
+</div>
+
+
+نحوه استفاده ازشون هم به این صورته :
+
+
+<div dir="ltr">
+
+```python
+mediator = ChatRoom()
+
+john = User('John', mediator)
+jane = User('Jane', mediator)
+
+john.send('Hi There!')
+jane.send('Hey!')
+# Output will be
+# Feb 14, 10:58 [John]: Hi there!
+# Feb 14, 10:58 [Jane]: Hey!
+```
+
+</div>
+
+به همین راحتی :)
+
+
+
+
+
+<br>
+
+<div align="center">
+
+## 👽 Mediator
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> وقتی دارین با یک نفر با کمک اینترنت چت میکنید، شبکه اینترنت بین شما و اون فرد قرار داره. این شبکه mediator هست!
+
+
+به زبون ساده:
+> این الگو یک ابجکت که ما mediator بهش میگیم بین دو ابجکت قرار میده که ارتباط بین این دو ابجکت (که بهشون colleagues
+> میگیم) رو مدیریت میکنه! حالا چرا
+> بهش نیاز داریم؟ چون در این صورت دیگه این دوتا نیاز نیست درمورد پیاده سازی طرف دیگه چیزی بدونن و این باعث کاهش coupling
+> بین دو ابجکت میشه!
+
+
+ویکی پدیا:
+<div dir="ltr">
+
+> In software engineering, the mediator pattern defines an object that encapsulates how a set of objects interact. This
+> pattern is considered to be a behavioral pattern due to the way it can alter the program's running behavior.
+
+
+</div>
+
+**مثال برنامه نویسی**
+
+میخوایم یک ساختار چت روم بسازیم! (Mediator)
+
+
+<div dir="ltr">
+
+```python
+class ChatRoomMediator:
+    def showMessage(self, user, message):
+        pass
+
+
+class ChatRoom(ChatRoomMediator):
+    def showMessage(self, user, message):
+        time = datetime.datetime.now()
+        sender = user.getName()
+
+        print(str(time) + '[' + sender + ']: ' + message)        
+```
+
+</div>
+
+
 </div>
