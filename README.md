@@ -2245,4 +2245,185 @@ jobPostings.addJob(JobPost('Software Engineer at XXX'))
 
 
 
+<br>
+
+<div align="center">
+
+## 🏃 Visitor
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> شما یک وبسایت فروشگاهی دارید که دسته بندی های مختلفی دارید، این الگو به شما کمک میکنه درصد تخفیف مختلفی روی دسته بندی
+> های مختلف اعمال کنید یا همینکار رو در زمینه دسترسی داشته باشید مثلا یک دسترسی ویژه برای دسته بندی وسایل اداری ایجاد
+> کنید!
+
+به زبون ساده:
+> این الگو به شما این امکان میده که بدون نیاز به تغییر ابجکت ها عملیات بیشتری را بهشون اضافه کنید
+>
+> اون ابجکت هایی که بهشون امکانات اضافه میشه، Visitee گفته میشن و اون کلاس هایی که ویژگی رو به ابجکت ها اضافه میکنن
+> Visitor گفته میشن!
+
+ویکی پدیا:
+<div dir="ltr">
+
+> In object-oriented programming and software engineering, the visitor design pattern is a way of separating an
+> algorithm from an object structure on which it operates. A practical result of this separation is the ability to add
+> new
+> operations to existing object structures without modifying those structures. It is one way to follow the open/closed
+> principle.
+
+
+
+</div>
+
+**مثال برنامه نویسی**
+
+فرض کنید یک باغ وحش مجازی داریم و میخوایم یک عالمه امکان رو به حیوون های مختلف اضافه کنیم! مثلا صداشون، نحوه پریدنشون و
+...
+
+خب بریم Visitee و Visitor برای این مثال بسازیم:
+
+
+<div dir="ltr">
+
+```python
+
+# Visitee
+class Animal:
+    def accept(self, operation):
+        pass
+
+
+# Visitor
+class AnimalOperation:
+    def visitMonkey(self, monkey):
+        pass
+
+    def visitLion(self, lion):
+        pass
+
+    def visitDolphin(self, dolphin):
+        pass
+
+```
+
+</div>
+
+
+خب حالا حیوون هامون رو بسازیم و صداشون رو هم به کلاس خودشون اضافه کنیم:
+
+
+
+<div dir="ltr">
+
+```python
+
+class Monkey(Animal):
+    def shout(self):
+        print('Ooh oo aa aa!')
+
+    def accept(self, operation):
+        operation.visitMonkey(self)
+
+
+class Lion(Animal):
+    def roar(self):
+        print('Roaaar!')
+
+    def accept(self, operation):
+        operation.visitLion(self)
+
+
+class Dolphin(Animal):
+    def speak(self):
+        print('Tuut tuttu tuutt!')
+
+    def accept(self, operation):
+        operation.visitDolphin(self)
+
+```
+
+</div>
+
+
+حالا بیاید کلاس رو برای دیدن صداشون اضافه کنیم:
+
+
+<div dir="ltr">
+
+```python
+class Speak(AnimalOperation):
+    def visitMonkey(self, monkey):
+        monkey.shout()
+
+    def visitLion(self, lion):
+        lion.roar()
+
+    def visitDolphin(self, dolphin):
+        dolphin.speak()
+```
+
+</div>
+
+فراخوانیش رو ببینید:
+
+<div dir="ltr">
+
+```python
+monkey = Monkey()
+lion = Lion()
+dolphin = Dolphin()
+
+speak = Speak()
+monkey.accept(speak)  # Ooh oo aa aa!
+lion.accept(speak)  # Roaaar!
+dolphin.accept(speak)  # Tuut tutt tuttt!
+```
+
+</div>
+
+حالا اگه بخوایم قابلیت پریدن رو به حیوونا اضافه کنیم، کار خیلی راحته ببینید:
+
+<div dir="ltr">
+
+```python
+class Jump(AnimalOperation):
+    def visitMonkey(self, monkey):
+        print('Jumped 20 feet high! on to the tree!')
+
+    def visitLion(self, lion):
+        print('Jumped 7 feet! back on the ground!')
+
+    def visitDolphin(self, dolphin):
+        print('Walked on water a little and disappeared')
+```
+
+</div>
+
+حالا نحوه فراخوانیش رو در کنار صدای حیوونا ببینید:
+
+<div dir="ltr">
+
+```python
+jump = Jump()
+
+monkey.accept(speak)  # Ooh oo aa aa!
+monkey.accept(jump)  # Jumped 20 feet high! on to the tree!
+
+lion.accept(speak)  # Roaaar!
+lion.accept(jump)  # Jumped 7 feet! Back on the ground!
+
+dolphin.accept(speak)  # Tuut tutt tuutt!
+dolphin.accept(jump)  # Walked on water a little and disappeared
+```
+
+</div>
+
+یعنی بجای اینکه کلاس حیوونا رو تغییر بدیم کلاس های جداگانه ای برای صدا و پرش و ... میسازیم و به عنوان ورودی به حیوونا
+میدیم :)
+
+
+
 </div>
