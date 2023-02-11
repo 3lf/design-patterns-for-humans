@@ -20,6 +20,43 @@
 در ترجمه، تعاریف و مثال ها از منابع مختلف فارسی و انگلیسی استفاده شده تا بهترین نتیجه حاصل بشه :)
 ***
 
+
+</div>
+
+
+<!-- TOC -->
+
+* [Creational Design Patterns](#creational-design-patterns)
+    * [🏠 Simple Factory](#-simple-factory)
+    * [🏭 Factory Method](#-factory-method)
+    * [🔨 Abstract Factory](#-abstract-factory)
+    * [👷 Builder](#-builder)
+    * [🐑 Prototype](#-prototype)
+    * [💍 Singleton](#-singleton)
+* [Structural Design Patterns](#structural-design-patterns)
+    * [🔌 Adapter](#-adapter)
+    * [🌉 Bridge](#-bridge)
+    * [🌿 Composite](#-composite)
+    * [☕ Decorator](#-decorator)
+    * [📦 Facade](#-facade)
+    * [🍃 Flyweight](#-flyweight)
+    * [🎱 Proxy](#-proxy)
+* [Behavioral Design Patterns](#behavioral-design-patterns)
+    * [🔗 Chain of Responsibility](#-chain-of-responsibility)
+    * [👮 Command](#-command)
+    * [➿ Iterator](#-iterator)
+    * [👽 Mediator](#-mediator)
+    * [💾 Memento](#-memento)
+    * [😎 Observer](#-observer)
+    * [🏃 Visitor](#-visitor)
+    * [💡 Strategy](#-strategy)
+    * [💢 State](#-state)
+    * [📒 Template Method](#-template-method)
+
+<!-- TOC -->
+
+
+
 <div dir="rtl" align="center">
 
 🚀 مقدمه
@@ -27,6 +64,8 @@
 
 </div>
 
+
+<div dir="rtl">
 
 دیزاین پترن ها یک سری دستور العمل برای مقابله با یک سری مشکلات رایج هستند.
 
@@ -2783,14 +2822,14 @@ iosBuilder.build()
 
 <div align="center">
 
-# 🤝 کمک کردن به این پروژه! 
+# 🤝 کمک کردن به این پروژه!
 
 </div>
-
 
 - این پروژه رو fork کنید و به زبون های برنامه نویسی دیگه توسعه بدید و ترجمه کنید!
 - این ریپو رو برای دوستاتون بفرستید!
 - اشتباهاتی که وجود داره رو با issue و یا pull request حل کنید!
-- مثال ها بهبود ببخشید و  با issue و یا pull request به اشتراک بسازید !
+- مثال ها بهبود ببخشید و با issue و یا pull request به اشتراک بسازید !
 - با ⭐ به پروژه از من حمایت کنید و باعث دیده شدن بیشتر این ریپو بشید!
+
 </div>
