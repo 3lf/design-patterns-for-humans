@@ -2137,4 +2137,112 @@ print(editor.getContent())  ## This is the first sentence. This is second.
 
 
 
+
+<br>
+
+<div align="center">
+
+## 😎 Observer
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> یک سری سایت کاریابی وجود داره که شما میرید و مهارت‌هاتون رو به پروفایلتون اضافه میکنید تا هروقت شغل مناسبی براتون پیدا
+> بشه، براتون ایمیل اطلاع رسانی ارسال میشه!
+
+به زبون ساده:
+> یک سری ارتباط بین ابجکت ها ایجاد میکنه و هروقت تغییر در وضعیت اونا رخ بده به ابجکت های وابسته‌اشون اطلاع داده میشه!
+
+ویکی پدیا:
+<div dir="ltr">
+
+> The observer pattern is a software design pattern in which an object, called the subject, maintains a list of its
+> dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their
+> methods.
+
+
+</div>
+
+**مثال برنامه نویسی**
+
+در بخش اول یک کلاس برای ذخیره کردن یک شغل میسازیم و در بخش بعدی یک کلاس برای جویندگان کار میسازیم!
+
+<div dir="ltr">
+
+```python
+class JobPost:
+    _title = None
+
+    def __init__(self, title):
+        self.title = title
+
+    def getTitle(self):
+        return self.title
+
+
+class JobSeeker:
+    _name = None
+
+    def __init__(self, name):
+        self.name = name
+
+    def onJobPosted(self, job):
+        print('Hi ' + self.name + '! New job posted: ' + job.getTitle())
+
+```
+
+</div>
+
+
+و حالا باید یک کلاس برای دسته بندی های مختلف کار ایجاد کنیم و جویندگان کار میتونن بهش اضافه بشن و اگه شغلی توی اون دسته
+بندی ارسال بشه به اونا اطلاع رسانی میشه!
+
+<div dir="ltr">
+
+```python
+class JobCategory:
+    _observers = []
+
+    def notify(self, jobPosting):
+        for observer in self._observers:
+            observer.onJobPosted(jobPosting)
+
+    def attach(self, observer):
+        self._observers.append(observer)
+
+    def addJob(self, jobPosting):
+        self.notify(jobPosting)
+```
+
+</div>
+
+
+نحوه استفاده ازش رو ببینید:
+
+
+<div dir="ltr">
+
+```python
+
+johnDoe = JobSeeker('John Doe')
+janeDoe = JobSeeker('Jane Doe')
+
+jobPostings = JobCategory()
+jobPostings.attach(janeDoe)
+jobPostings.attach(johnDoe)
+
+jobPostings.addJob(JobPost('Software Engineer at XXX'))
+
+# Output
+# Hi John Doe! New job posted: Software Engineer
+# Hi Jane Doe! New job posted: Software Engineer
+
+```
+
+</div>
+
+
+
+
 </div>
