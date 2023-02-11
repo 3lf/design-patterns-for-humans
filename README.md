@@ -2426,4 +2426,120 @@ dolphin.accept(jump)  # Walked on water a little and disappeared
 
 
 
+
+<br>
+
+<div align="center">
+
+## 💢 State
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> نرم افزار paint ویندوز رو یادتونه؟ میومدیم خودکار رو انتخاب میکردیم و شروع میکردیم به نقاشی کردن. بعد توی قسمت پالت
+> رنگ قرمز کلیک میکردیم و بعدش خودکارمون قرمز میشد و میتونستیم ادامه بدیم! حتی متونستیم خودکار رو به قلمو تغییر بدیم!
+> این
+> مفهوم به یاد داشتن حالت و ادامه کار مشابه الگوی State هست!
+
+به زبون ساده:
+> به شما اجازه میده یک سری ویژگی رو مشخص کنید و حالت‌شون رو به یاد داشته باشید!
+
+
+ویکی پدیا:
+<div dir="ltr">
+
+> The state pattern is a behavioral software design pattern that implements a state machine in an object-oriented way.
+> With the state pattern, a state machine is implemented by implementing each individual state as a derived class of the
+> state pattern interface, and implementing state transitions by invoking methods defined by the pattern's superclass.
+> The
+> state pattern can be interpreted as a strategy pattern which is able to switch the current strategy through
+> invocations
+> of methods defined in the pattern's interface.
+
+
+
+
+</div>
+
+**مثال برنامه نویسی**
+
+میخوایم یک ادیتور بسازیم که قابلیت هایی مثل این داشته باشه که متنی که تایپ میشه حروف کوچیک باشه یا همش حروف بزرگ باشه یا
+معمولی باشه!
+
+اول بیاید کلاس هامون بر پایه الگوی State رو بسازیم:
+
+
+<div dir="ltr">
+
+```python
+class WritingState:
+    def write(self, words):
+        pass
+
+
+class UpperCase(WritingState):
+    def write(self, words):
+        print(words.upper())
+
+
+class LowerCase(WritingState):
+    def write(self, words):
+        print(words.lower())
+
+
+class DefaultText(WritingState):
+    def write(self, words):
+        print(words)
+```
+
+</div>
+
+حالا ادیتور رو بسازیم و بهش یاد بدیم این کلاس ها رو توی خودش نگه داره و ازشون استفاده کنه!
+
+<div dir="ltr">
+
+```python
+class TextEditor():
+    _state = None
+
+    def __init__(self, state):
+        self._state = state
+
+    def setState(self, state):
+        self._state = state
+
+    def type(self, words):
+        self._state.write(words)
+```
+
+</div>
+
+
+نحوه استفاده ازش هم به این صورته:
+
+
+
+<div dir="ltr">
+
+```python
+editor = TextEditor(DefaultText())
+editor.type('First Line')  # First line
+
+editor.setState(UpperCase())
+
+editor.type('Second Line')  # SECOND LINE
+
+editor.type('Third Line')  # THIRD LINE
+
+editor.setState(LowerCase())
+
+editor.type('Fourth Line')  # fourth line
+
+editor.type('Fifth Line')  # fifth line
+
+```
+
+</div>
+
 </div>
