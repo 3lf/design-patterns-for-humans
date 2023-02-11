@@ -2045,53 +2045,96 @@ jane.send('Hey!')
 
 <div align="center">
 
-## 👽 Mediator
+## 💾 Memento
 
 </div>
 
 یک مثال از دنیای واقعی:
 
-> وقتی دارین با یک نفر با کمک اینترنت چت میکنید، شبکه اینترنت بین شما و اون فرد قرار داره. این شبکه mediator هست!
+> ماشین حساب های گوشی رو دیدید که وقتی محاسبه‌هاتون پیش میره، یک قسمت حافظه داره که محاسبه های قبلی رو بهتون نشون میده و
+> هروقت بخواید میتونید مقدار فعلی رو برگردونید به محاسبه های قبلی!
 
 
 به زبون ساده:
-> این الگو یک ابجکت که ما mediator بهش میگیم بین دو ابجکت قرار میده که ارتباط بین این دو ابجکت (که بهشون colleagues
-> میگیم) رو مدیریت میکنه! حالا چرا
-> بهش نیاز داریم؟ چون در این صورت دیگه این دوتا نیاز نیست درمورد پیاده سازی طرف دیگه چیزی بدونن و این باعث کاهش coupling
-> بین دو ابجکت میشه!
-
+> به زبون ساده این الگو یک حافظه از حالت های قبلی داره که قابلیت برگشت بهشون وجود داره!
 
 ویکی پدیا:
 <div dir="ltr">
 
-> In software engineering, the mediator pattern defines an object that encapsulates how a set of objects interact. This
-> pattern is considered to be a behavioral pattern due to the way it can alter the program's running behavior.
+> The memento pattern is a software design pattern that provides the ability to restore an object to its previous
+> state (undo via rollback).
 
 
 </div>
 
 **مثال برنامه نویسی**
 
-میخوایم یک ساختار چت روم بسازیم! (Mediator)
+میخوایم یک ادیتور متن بسازیم و قابلیت ذخیره کردن و بازگردانی بهش اضافه کنیم!
+
+<div dir="ltr">
+
+```python
+class EditorMemento:
+    _content = None
+
+    def __init__(self, content):
+        self._content = content
+
+    def getContent(self):
+        return self._content
+```
+
+</div>
+
+خب اول یک کلاس به عنوان حافظه ادیتور میسازیم! مشخصه که وظیفه‌اش فقط نگهداری یک مقدار هست!
+
+در ادامه یک کلاس ادیتور میسازیم که قابلیت تایپ کردن، خالی کردن، سیو و برگشت حافظه داره!
 
 
 <div dir="ltr">
 
 ```python
-class ChatRoomMediator:
-    def showMessage(self, user, message):
-        pass
+class Editor:
+    _content = ''
 
+    def type(self, words):
+        self._content = self._content + ' ' + words
 
-class ChatRoom(ChatRoomMediator):
-    def showMessage(self, user, message):
-        time = datetime.datetime.now()
-        sender = user.getName()
+    def getContent(self):
+        return self._content
 
-        print(str(time) + '[' + sender + ']: ' + message)        
+    def save(self):
+        return EditorMemento(self._content)
+
+    def restore(self, memento):
+        self.content = memento.getContent()
 ```
 
 </div>
+
+و در مرحله آخر هم نحوه استفاده‌اش رو ببینید:
+
+
+
+<div dir="ltr">
+
+```python
+editor = Editor()
+editor.type('This is the first sentence')
+editor.type('This is the second.')
+
+saved = editor.save()
+editor.type('And this is the third')
+
+print(editor.getContent())  ## This is the first sentence. This is second. And this is third.
+
+editor.restore(saved)
+print(editor.getContent())  ## This is the first sentence. This is second.
+
+```
+
+</div>
+
 
 
 </div>
