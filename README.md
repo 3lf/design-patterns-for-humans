@@ -2643,4 +2643,135 @@ editor.type('Fifth Line')  # fifth line
 
 </div>
 
+
+
+<br>
+
+<div align="center">
+
+## 📒 Template Method
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> فرض کنید قصد خونه سازی دارید! مراحلش به این صورته که اول باید زیربنا رو درست کنید بعد دیوار بسازید و بعد برید سراغ
+> سقف! مشخصا شما نمیتونید اول سقف بزنید و بعد زیر بنا! پس این قضیه یک ترتیب داره که شما فقط میتونید مثلا جنس دیوار رو
+> عوض
+> کنید یا نحوه ساخت زیربنا رو عوض کنید ولی ترتیب و کلیت قضیه تغییر نمیکنه
+
+به زبون ساده:
+> درواقع توی این الگو ما یک الگوریتم مشخص داریم که از قبل پیاده سازی شده و فقط میتونیم مراحل اون رو ما پیاده سازی کنیم
+> یا تغییر بدیم!
+
+ویکی پدیا:
+<div dir="ltr">
+
+> In software engineering, the template method pattern is a behavioral design pattern that defines the program skeleton
+> of an algorithm in an operation, deferring some steps to subclasses. It lets one redefine certain steps of an
+> algorithm
+> without changing the algorithm's structure.
+
+
+
+</div>
+
+**مثال برنامه نویسی**
+
+فرض کنید ما یک زیرساخت برای ساخت اپلیکیشن های گوشی نیاز داریم!
+
+خب مراحل تقریبا مشخصه و فقط ما باید مراحل build, lint , test و deploy رو پیاده سازی کنیم!
+
+خب زیرساخت رو اینطوری میسازیم:
+
+<div dir="ltr">
+
+```python
+class Builder:
+    def build(self):
+        self.test()
+        self.lint()
+        self.assemble()
+        self.deploy()
+
+    def test(self):
+        pass
+
+    def lint(self):
+        pass
+
+    def assemble(self):
+        pass
+
+    def deploy(self):
+        pass
+```
+
+</div>
+
+خب حالا پیاده سازی برای اندروید و آی او اس رو میسازیم:
+
+<div dir="ltr">
+
+```python
+class AndroidBuilder(Builder):
+    def test(self):
+        print('Running android tests')
+
+    def lint(self):
+        print('Linting the android code')
+
+    def assemble(self):
+        print('Assembling the android build')
+
+    def deploy(self):
+        print('Deploying android build to server')
+
+
+class IosBuilder(Builder):
+    def test(self):
+        print('Running ios tests')
+
+    def lint(self):
+        print('Linting the ios code')
+
+    def assemble(self):
+        print('Assembling the ios build')
+
+    def deploy(self):
+        print('Deploying ios build to server')
+```
+
+</div>
+
+
+نحوه استفاده ازش هم به این صورته:
+
+
+
+<div dir="ltr">
+
+```python
+androidBuilder = AndroidBuilder()
+androidBuilder.build()
+
+# Output:
+# Running android tests
+# Linting the android code
+# Assembling the android build
+# Deploying android build to server
+
+
+iosBuilder = IosBuilder()
+iosBuilder.build()
+
+# Output:
+# Running ios tests
+# Linting the ios code
+# Assembling the ios build
+# Deploying ios build to server
+```
+
+</div>
+
 </div>
