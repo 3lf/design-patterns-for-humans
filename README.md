@@ -28,7 +28,7 @@
 </div>
 
 
- دیزاین پترن ها یک سری دستور العمل برای مقابله با یک سری مشکلات رایج هستند.
+دیزاین پترن ها یک سری دستور العمل برای مقابله با یک سری مشکلات رایج هستند.
 
 اونا یک سری کلاس، پکیج یا کتابخونه نیستند که با اضافه کردنشون به پروژه‌تون جادو کنن. در عوض یک سری راه حل بهتون میدن که
 در شرایط خاص به مشکل نخورین.
@@ -42,7 +42,10 @@
 
 **ویکی‌پدیا** دیزاین پترن‌ها رو اینطوری توصیف میکنه:
 
-> در مهندسی نرم‌افزار، الگوی طراحی یک راه‌حل عمومی قابل تکرار برای مشکلات متداول در زمینه طراحی نرم‌افزار است. الگوی طراحی، یک طراحی تمام‌شده نیست که به صورت مستقیم بتواند تبدیل به کد منبع یا ماشین شود؛ بلکه، یک توضیح یا قالب برای حل یک مسئله در شرایط مختلف است. الگوها در واقع بهترین روش ممکن هستند که یک برنامه‌نویس می‌تواند در هنگام طراحی یک برنامه برای حل مشکلاتش از آن‌ها استفاده کند.
+> در مهندسی نرم‌افزار، الگوی طراحی یک راه‌حل عمومی قابل تکرار برای مشکلات متداول در زمینه طراحی نرم‌افزار است. الگوی
+> طراحی، یک طراحی تمام‌شده نیست که به صورت مستقیم بتواند تبدیل به کد منبع یا ماشین شود؛ بلکه، یک توضیح یا قالب برای حل یک
+> مسئله در شرایط مختلف است. الگوها در واقع بهترین روش ممکن هستند که یک برنامه‌نویس می‌تواند در هنگام طراحی یک برنامه برای
+> حل مشکلاتش از آن‌ها استفاده کند.
 
 
 <br>
@@ -74,12 +77,13 @@
 
 
 به زبون ساده:
->  الگو های طراحی سازنده، به مشکلات مربوط به ساخت ابجکت ها می‌پردازن
+> الگو های طراحی سازنده، به مشکلات مربوط به ساخت ابجکت ها می‌پردازن
 
 ویکی پدیا:
 <div dir="ltr">
 
-> In software engineering, creational design patterns are design patterns that deal with object creation mechanisms, trying to create objects in a manner
+> In software engineering, creational design patterns are design patterns that deal with object creation mechanisms,
+> trying to create objects in a manner
 
 </div>
 
@@ -92,7 +96,9 @@
 </div>
 
 یک مثال از دنیای واقعی:
-> فرض کنید درحال ساخت یک خونه هستین و توی بخش های مختلف به درب نیاز دارین، خب اگه برای هر کدومش بخواین لباس نجاری بپوشین و درگیر ساختنش بشین، قراره کلی هرج و مرج تجربه کنین. به همین دلیل مردم ترجیح میدن برای حل این مشکل اونو از یک کارخونه تهیه کنن.
+> فرض کنید درحال ساخت یک خونه هستین و توی بخش های مختلف به درب نیاز دارین، خب اگه برای هر کدومش بخواین لباس نجاری بپوشین
+> و درگیر ساختنش بشین، قراره کلی هرج و مرج تجربه کنین. به همین دلیل مردم ترجیح میدن برای حل این مشکل اونو از یک کارخونه
+> تهیه کنن.
 
 
 به زبون ساده:
@@ -101,7 +107,9 @@
 ویکی پدیا:
 <div dir="ltr">
 
-> In object-oriented programming (OOP), a factory is an object for creating other objects – formally a factory is a function or method that returns objects of a varying prototype or class from some method call, which is assumed to be "new".
+> In object-oriented programming (OOP), a factory is an object for creating other objects – formally a factory is a
+> function or method that returns objects of a varying prototype or class from some method call, which is assumed to be "
+> new".
 
 </div>
 
@@ -177,7 +185,9 @@ print(door.getWidth())
 
 
 یک مثال از دنیای واقعی:
-> یک مدیر رو فرض کنید که وظیفه استخدام افراد رو به عهده داره. مطمئنن براش غیر ممکنه که مصاحبه با همه افراد در پوزیشن های مختلف شرکت رو خودش انجام بده! پس میاد با توجه به پوزیشن تصمیم میگیره که مسئولیت مصاحبه رو به عهده یکی از کارمند هاش بزاره.
+> یک مدیر رو فرض کنید که وظیفه استخدام افراد رو به عهده داره. مطمئنن براش غیر ممکنه که مصاحبه با همه افراد در پوزیشن های
+> مختلف شرکت رو خودش انجام بده! پس میاد با توجه به پوزیشن تصمیم میگیره که مسئولیت مصاحبه رو به عهده یکی از کارمند هاش
+> بزاره.
 
 به زبون ساده:
 > این دیزاین پترن میگه جای اینکه خودمون مستقیم درگیر ساخت ابجکت بشیم، این کار رو به عهده کلاس های فرزند بزاریم.
@@ -185,7 +195,10 @@ print(door.getWidth())
 ویکی پدیا:
 <div dir="ltr">
 
-> In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object that will be created. This is done by creating objects by calling a factory method—either specified in an interface and implemented by child classes, or implemented in a base class and optionally overridden by derived classes—rather than by calling a constructor.
+> In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with
+> the problem of creating objects without having to specify the exact class of the object that will be created. This is
+> done by creating objects by calling a factory method—either specified in an interface and implemented by child classes,
+> or implemented in a base class and optionally overridden by derived classes—rather than by calling a constructor.
 
 </div>
 
@@ -282,7 +295,10 @@ marketingManager.takeInterview()
 
 
 یک مثال از دنیای واقعی:
-> بیاین از مثال مربوط به Simple Factory اینجا استفاده کنیم. فرض کنید در حال ساخت خونه هستین و نیاز به چند درب مختلف دارید ولی اینبار نیاز به درب چوبی، درب ضد سرقت، درب شیشه و ... دارین. به طبع برای خرید باید به مغازه های مختلفی مراجعه کنید ، از طرفی برای استفاده ازشون هم ممکنه نیاز به متخصص مربوطه داشته باشین. برای مثال ما برای درب چوبی به چوب فروشی میریم و برای نصبش هم از یک نجار کمک میگیریم یا برای درب شیشه ای به مغازه و متخصص مربوط به خودش مراجعه میکنیم.
+> بیاین از مثال مربوط به Simple Factory اینجا استفاده کنیم. فرض کنید در حال ساخت خونه هستین و نیاز به چند درب مختلف
+> دارید ولی اینبار نیاز به درب چوبی، درب ضد سرقت، درب شیشه و ... دارین. به طبع برای خرید باید به مغازه های مختلفی مراجعه
+> کنید ، از طرفی برای استفاده ازشون هم ممکنه نیاز به متخصص مربوطه داشته باشین. برای مثال ما برای درب چوبی به چوب فروشی
+> میریم و برای نصبش هم از یک نجار کمک میگیریم یا برای درب شیشه ای به مغازه و متخصص مربوط به خودش مراجعه میکنیم.
 
 به زبون ساده:
 > این دیزاین پترن تا حد زیادی مشابه simple factory هست با این تفاوت که `مجموعه ای` از اشیا مرتبط بهم رو ایجاد میکنه.
@@ -290,7 +306,8 @@ marketingManager.takeInterview()
 ویکی پدیا:
 <div dir="ltr">
 
-> The abstract factory pattern provides a way to encapsulate a group of individual factories that have a common theme without specifying their concrete classes
+> The abstract factory pattern provides a way to encapsulate a group of individual factories that have a common theme
+> without specifying their concrete classes
 
 </div>
 
@@ -345,7 +362,8 @@ class Carpenter(DoorFittingExpert):
 
 حالا اینجاست که ما سراغ پیاده‌سازی دیزاین پترن‌مون میریم.
 
-برای مثال کلاس `WoodenDoorFactory` زمانی استفاده میشه که نیاز به درب چوبی داریم و کارش اینه که برای ایجاد ابجکت درب (که اینجا
+برای مثال کلاس `WoodenDoorFactory` زمانی استفاده میشه که نیاز به درب چوبی داریم و کارش اینه که برای ایجاد ابجکت درب (که
+اینجا
 درب چوبی هست) از کلاس `WoodenDoor` و برای ایجاد ابجکت متخصص (که اینجا نجار هست) از `Carpenter` استفاده کنه.
 
 این موضوع برای درب آهنی و ... هم بطور مشابه پیاده‌سازی میشه.
@@ -404,7 +422,8 @@ expert.getDescription()
 
 </div>
 
-**همونطور که میبیند، می‌تونیم بطور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک درب
+**همونطور که میبیند، می‌تونیم بطور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+درب
 انتخاب نمی‌کنیم.**
 
 <br>
@@ -427,7 +446,9 @@ expert.getDescription()
 </div>
 
 یک مثال از دنیای واقعی:
-> فرض کنید به یک رستوران رفتید و شما یک همبرگر معمولی سفارش می‌دید. این یک مثال از Simple Factory هست یعنی بدون اینکه سوال اضافه ای بپرسن اون رو براتون میارن. توی بعضی موارد پیش میاد که نیاز به یک سفارش سفارشی تر دارین. یعنی میخواین نوع نون رو مشخص کنید یا نوع سسی که براتون استفاده میکنن، توی این شرایط Builder به کمکمون میاد.
+> فرض کنید به یک رستوران رفتید و شما یک همبرگر معمولی سفارش می‌دید. این یک مثال از Simple Factory هست یعنی بدون اینکه
+> سوال اضافه ای بپرسن اون رو براتون میارن. توی بعضی موارد پیش میاد که نیاز به یک سفارش سفارشی تر دارین. یعنی میخواین نوع
+> نون رو مشخص کنید یا نوع سسی که براتون استفاده میکنن، توی این شرایط Builder به کمکمون میاد.
 
 
 <br>
@@ -435,7 +456,8 @@ expert.getDescription()
 به زبون ساده:
 > در واقع کار Builder اینه که توی ساخت ابجکت های پیچیده یا ابجکت هایی که نیاز به شخصی سازی زیادی دارن، بهمون کمک بکنه.
 >
-> در واقع روش کارش به این صورت هست که بجای اینکه تعداد زیادی پارامتر رو از ورودی تابع سازنده دریافت کنیم (`__init__`) ، اون دیتارو بصورت مرحله به مرحله دریافت کنیم.
+> در واقع روش کارش به این صورت هست که بجای اینکه تعداد زیادی پارامتر رو از ورودی تابع سازنده دریافت کنیم (`__init__`) ،
+> اون دیتارو بصورت مرحله به مرحله دریافت کنیم.
 
 برای همه ما پیش اومد که یک تابع سازنده به این شکل ببینیم:
 
@@ -456,7 +478,8 @@ def __init__(self, size, cheese=True, pepperoni=True, tomato=False, lettuce=True
 
 <div dir="ltr">
 
-> The builder pattern is an object creation software design pattern with the intentions of finding a solution to the telescoping constructor anti-pattern.
+> The builder pattern is an object creation software design pattern with the intentions of finding a solution to the
+> telescoping constructor anti-pattern.
 </div>
 
 <br>
@@ -574,12 +597,15 @@ print(vars(burger))
 
 
 یک مثال از دنیای واقعی:
-> چیزی درمورد دالی شنیدین ؟ ([اگه نه اینجارو بخونید](https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%84%DB%8C_(%DA%AF%D9%88%D8%B3%D9%81%D9%86%D8%AF)))
+> چیزی درمورد دالی شنیدین
+> ؟ ([اگه نه اینجارو بخونید](https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%84%DB%8C_(%DA%AF%D9%88%D8%B3%D9%81%D9%86%D8%AF)))
 >
 >خیلی اینجا توضیح نمیدم، فقط بدونید همه‌چیز مربوط به شبیه سازیه!
 
 به زبون ساده:
-> مشکل از اینجا شروع میشه که یک ابجکت دارید و نیاز دارید از اون یک کپی ایجاد کنین. چطوری این کار رو میکنین؟ اول باید یک ابجکت جدید از همون کلاس ایجاد کنین بعد باید مقادیر ابجکت اصلی رو در ابجکت جدید کپی کنید. حالا از همین پروسه طاقت فرسا که بگذریم، این مشکل وجود داره این هست که به متغیر های خصوصی دسترسی ندارید.
+> مشکل از اینجا شروع میشه که یک ابجکت دارید و نیاز دارید از اون یک کپی ایجاد کنین. چطوری این کار رو میکنین؟ اول باید یک
+> ابجکت جدید از همون کلاس ایجاد کنین بعد باید مقادیر ابجکت اصلی رو در ابجکت جدید کپی کنید. حالا از همین پروسه طاقت فرسا که
+> بگذریم، این مشکل وجود داره این هست که به متغیر های خصوصی دسترسی ندارید.
 >
 > دیزاین پترن Prototype میگه یک Interface مشترک داشته باشید که وظیفه‌ش ساخت یک ابجکت کپی از روی ابجکت فعلی باشه.
 
@@ -589,7 +615,8 @@ print(vars(burger))
 ویکی پدیا:
 <div dir="ltr">
 
-> The prototype pattern is a creational design pattern in software development. It is used when the type of objects to create is determined by a prototypical instance, which is cloned to produce new objects.
+> The prototype pattern is a creational design pattern in software development. It is used when the type of objects to
+> create is determined by a prototypical instance, which is cloned to produce new objects.
 </div>
 
 
@@ -617,13 +644,13 @@ class SomeComponent:
 
 ```python
 def __copy__(self):
-  some_list_of_objects = copy.copy(self.some_list_of_objects)
-  some_circular_ref = copy.copy(self.some_circular_ref)
-  new = self.__class__(
-      self.some_int, some_list_of_objects, some_circular_ref
-  )
-  new.__dict__.update(self.__dict__)
-  return new
+    some_list_of_objects = copy.copy(self.some_list_of_objects)
+    some_circular_ref = copy.copy(self.some_circular_ref)
+    new = self.__class__(
+        self.some_int, some_list_of_objects, some_circular_ref
+    )
+    new.__dict__.update(self.__dict__)
+    return new
 
 
 def __deepcopy__(self, memo={}):
@@ -641,7 +668,8 @@ def __deepcopy__(self, memo={}):
 
 **تفاوت Shadow Copy و Deep Copy ؟**
 <br>
-توی Shadow Copy، یک متغیر ساخته می‌شود و به مکانی توی حافظه، که مقدار متغیر قبلی توش قرار گرفته، اشاره می‌کنه. پس اگر شما مقدار
+توی Shadow Copy، یک متغیر ساخته می‌شود و به مکانی توی حافظه، که مقدار متغیر قبلی توش قرار گرفته، اشاره می‌کنه. پس اگر
+شما مقدار
 متغیر اول رو تغییر بدین، متغیر دوم هم تغییر می‌کنه. و همین‌طور اگر مقدار متغیر دوم رو تغییر بدین، مقدار متغیر اول هم
 تغییر می‌کنه.
 
@@ -661,7 +689,8 @@ def __deepcopy__(self, memo={}):
 </div>
 
 یک مثال از دنیای واقعی:
-> در هر زمان فقط یک رئیس جمهور میتونه برای کشور وجود داشته باشه. در نتیجه هرجا به رئیس جمهور نیاز هست باید خودش وارد عمل بشه. رئیس جمهور توی این مثال singleton هست.
+> در هر زمان فقط یک رئیس جمهور میتونه برای کشور وجود داشته باشه. در نتیجه هرجا به رئیس جمهور نیاز هست باید خودش وارد عمل
+> بشه. رئیس جمهور توی این مثال singleton هست.
 
 به زبون ساده:
 > این دیزاین پترن تضمین می‌کنه از یک کلاس خاص فقط یک ابجکت وجود داشته باشه.
@@ -670,7 +699,8 @@ def __deepcopy__(self, memo={}):
 
 <div dir="ltr">
 
-> In software engineering, the singleton pattern is a software design pattern that restricts the instantiation of a class to one object. This is useful when exactly one object is needed to coordinate actions across the system.
+> In software engineering, the singleton pattern is a software design pattern that restricts the instantiation of a
+> class to one object. This is useful when exactly one object is needed to coordinate actions across the system.
 </div>
 ⚠️ دیزاین پترن singleton در واقع یک آنتی پترن شناخته می‌شه و باید از استفاده زیاد اون جلوگیری کنیم. لزوما بد نیست و میتونه کاربرد های خوبی داشته باشه ولی باید با احتیاط ازش استفاده کرد چون تغییر توی هر بخش برنامه، میتونه روی بخش‌های دیگه هم تاثیر بزاره که ابن خودش دیباگ کردن پروژه هارو خیلی سخت می‌کنه.
 
@@ -719,6 +749,7 @@ if __name__ == "__main__":
     else:
         print("Singleton failed, variables contain different instances.")
 ```
+
 </div>
 این روش Thread Safe نیست. برای اطلاعات بیشتر سرچ کنید :)
 
@@ -746,7 +777,8 @@ if __name__ == "__main__":
 
 <div dir="ltr">
 
-> In software engineering, structural design patterns are design patterns that ease the design by identifying a simple way to realize relationships between entities.
+> In software engineering, structural design patterns are design patterns that ease the design by identifying a simple
+> way to realize relationships between entities.
 
 </div>
 
@@ -760,10 +792,11 @@ if __name__ == "__main__":
 </div>
 
 یک مثال از دنیای واقعی:
-> واضح ترین مثال برای این الگوی طراحی خوده آداپتور ها هستن. (برای مثال، آداپتور های شارژر که سه شاخه رو به دو شاخه تبدیل میکنن)
+> واضح ترین مثال برای این الگوی طراحی خوده آداپتور ها هستن. (برای مثال، آداپتور های شارژر که سه شاخه رو به دو شاخه تبدیل
+> میکنن)
 >
 > **یا**
-> 
+>
 >مترجمی که کلمات یک نفر رو برای فرد دیگه ترجمه میکنه.
 
 
@@ -774,7 +807,9 @@ if __name__ == "__main__":
 ویکی پدیا:
 <div dir="ltr">
 
-> In software engineering, the adapter pattern is a software design pattern that allows the interface of an existing class to be used as another interface. It is often used to make existing classes work with others without modifying their source code.
+> In software engineering, the adapter pattern is a software design pattern that allows the interface of an existing
+> class to be used as another interface. It is often used to make existing classes work with others without modifying
+> their source code.
 </div>
 
 **مثال برنامه نویسی**
@@ -862,7 +897,7 @@ hunter.hunt(wildDogAdapter)
 <br>
 <br>
 
-پیشنهاد میکنم برای درک بهتر این الگو، یک آداپتور برای این سناریو پیاده‌سازی کنید: 
+پیشنهاد میکنم برای درک بهتر این الگو، یک آداپتور برای این سناریو پیاده‌سازی کنید:
 
 کلاس اول شما خروجی excel میده ولی کلاس دوم ورودیش csv هست.
 
@@ -895,7 +930,8 @@ hunter.hunt(wildDogAdapter)
 ویکی پدیا:
 <div dir="ltr">
 
-> The bridge pattern is a design pattern used in software engineering that is meant to "decouple an abstraction from its implementation so that the two can vary independently"
+> The bridge pattern is a design pattern used in software engineering that is meant to "decouple an abstraction from its
+> implementation so that the two can vary independently"
 </div>
 
 **مثال برنامه نویسی**
@@ -983,38 +1019,40 @@ print(careers.getContent())
 
 
 یک مثال از دنیای واقعی:
->فرض کنید شما یک کلاس ارسال مرسوله طراحی میکنید:
- <br>
+> فرض کنید شما یک کلاس ارسال مرسوله طراحی میکنید:
+<br>
 ![](https://refactoring.guru/images/patterns/diagrams/composite/problem-en.png)
 >
 >هر کلاس یک جعبه هست که میتونه شامل چند جعبه دیگه یا شامل چند شیء باشه.
-> 
+>
 > برای ثبت یا محاسبه قیمت چطور عمل میکنید؟
-> 
+>
 > در هر جعبه رو باز میکنید و اشیای توش رو بررسی میکنید؟
-> 
+>
 > این قضیه توی دنیای واقعی شاید قابل انجام باشه ولی توی دنیای برنامه نویسی یا نشدنیه یا خیلی طاقت‌فرسا
 
 به زبون ساده:
-> در واقع این دیزاین پترن این امکان رو بهتون میده که ساختار های درختی بسازید و سپس با این ساختار ها طوری کار کنید که انگار با یک ابجکت منفرد کار کردید.
+> در واقع این دیزاین پترن این امکان رو بهتون میده که ساختار های درختی بسازید و سپس با این ساختار ها طوری کار کنید که
+> انگار با یک ابجکت منفرد کار کردید.
 
 ویکی پدیا:
 
 <div dir="ltr">
 
-> In software engineering, the composite pattern is a partitioning design pattern. The composite pattern describes that a group of objects is to be treated in the same way as a single instance of an object. The intent of a composite is to "compose" objects into tree structures to represent part-whole hierarchies. Implementing the composite pattern lets clients treat individual objects and compositions uniformly.
+> In software engineering, the composite pattern is a partitioning design pattern. The composite pattern describes that
+> a group of objects is to be treated in the same way as a single instance of an object. The intent of a composite is to "
+> compose" objects into tree structures to represent part-whole hierarchies. Implementing the composite pattern lets
+> clients treat individual objects and compositions uniformly.
 
 </div>
 
 **مثال برنامه نویسی**
-
 
 بطور کلی توی دیزاین پترن composite ما دو مدل دیتا داریم:
 
 ۱- Composite که میتونه برای خودش زیرمجموعه داشته باشه. (هرچند خودش هم وظایفی داشته باشه)
 
 ۲- Leaf که در واقع زیر مجموعه نداره و فقط یک سری وظیفه داره.
-
 
 خب اول بیایم یک اینترفیس پایه برای کامپوننت هامون بسازیم و در ادامه هم اینترفیس های Composite و Leaf رو بسازیم:
 <div dir="ltr">
@@ -1030,7 +1068,7 @@ class Component():
     def operation(self) -> str:
         pass
 
-    
+
 class Leaf(Component):
     def operation(self) -> str:
         return "Leaf"
@@ -1095,12 +1133,14 @@ print(f"RESULT: {tree.operation()}", end="")
 
 یک مثال از دنیای واقعی:
 
-> فرض کنید یک مغازه خدمات خودرویی دارید که خدمات متنوع ای ارائه می دهید. فاکتور نهایی رو چطور محاسبه می کنید؟ شما یک سرویس رو انتخاب می کنید و به صورت پویا قیمت خدمات ارائه شده رو به اون اضافه می کنید تا به هزینه نهایی برسید. در اینجا هر نوع خدمات یک دکوراتور است.
+> فرض کنید یک مغازه خدمات خودرویی دارید که خدمات متنوع ای ارائه می دهید. فاکتور نهایی رو چطور محاسبه می کنید؟ شما یک
+> سرویس رو انتخاب می کنید و به صورت پویا قیمت خدمات ارائه شده رو به اون اضافه می کنید تا به هزینه نهایی برسید. در اینجا هر
+> نوع خدمات یک دکوراتور است.
 
 
 به زبون ساده:
 > دکوریتور به ما کمک میکنه به یک ابجکت یک Behavior اضافه کنیم بدون اینکه اون ابجکت رو تغییر بدیم.
-> 
+>
 > Behavior = اعمالی که یک شیء می‌تواند از خود بروز دهد.
 
 ویکی پدیا:
@@ -1108,7 +1148,10 @@ print(f"RESULT: {tree.operation()}", end="")
 <div dir="ltr">
 
 
-> In object-oriented programming, the decorator pattern is a design pattern that allows behavior to be added to an individual object, either statically or dynamically, without affecting the behavior of other objects from the same class. The decorator pattern is often useful for adhering to the Single Responsibility Principle, as it allows functionality to be divided between classes with unique areas of concern.
+> In object-oriented programming, the decorator pattern is a design pattern that allows behavior to be added to an
+> individual object, either statically or dynamically, without affecting the behavior of other objects from the same
+> class. The decorator pattern is often useful for adhering to the Single Responsibility Principle, as it allows
+> functionality to be divided between classes with unique areas of concern.
 
 </div>
 
@@ -1142,7 +1185,6 @@ class SimpleCoffee(Coffee):
 پس بیاید چند دکوریتور براش بسازیم:
 
 <div dir="ltr">
-
 
 ```python
 class MilkCoffee(Coffee):
@@ -1183,12 +1225,12 @@ class VanillaCoffee(Coffee):
     def getDescription(self):
         return self._coffee.getDescription() + ', vanilla'
 ```
+
 </div>
 
 و حالا نحوه ساخت قهوه سفارشی:
 
 <div dir="ltr">
-
 
 ```python
 someCoffee = SimpleCoffee()
@@ -1207,6 +1249,7 @@ someCoffee = WhipCoffee(someCoffee)
 print(someCoffee.getCost())
 print(someCoffee.getDescription())
 ```
+
 </div>
 همونطور که میبینید خیلی ساده میتونیم هر ابجکت رو به عنوان ورودی تابع بعدی بدیم و اینطوری چندین مرحله افزودنی رو خیلی راحت به ایجکتمون اضافه کردیم!
 
@@ -1225,8 +1268,9 @@ print(someCoffee.getDescription())
 
 یک مثال از دنیای واقعی:
 > اگه ازتون بپرسم چطور یک لپ تاپ رو روشن میکنید؟ جواب شما این هست که "دکمه پاور رو میزنم"
-> 
-> خب این چیزیه که شما بهش باور دارین، ولی در واقع دارین از یک رابط کاربری ساده میکنید تا یک عمل پیچیده با مراحل زیاد رو انجام بدین.
+>
+> خب این چیزیه که شما بهش باور دارین، ولی در واقع دارین از یک رابط کاربری ساده میکنید تا یک عمل پیچیده با مراحل زیاد رو
+> انجام بدین.
 
 به زبون ساده:
 > این دیزاین پترن یک رابط ساده برای یک سیستم پیچیده دراختیار ما میزاره.
@@ -1269,9 +1313,11 @@ class Computer:
     def pullCurrent(self):
         print("Haaah!")
 ```
+
 </div>
 
-کلاس Facade به این صورت پیاده‌سازی میشه که یک ابجکت رو به عنوان ورودی دریافت میکنه و با هر تابع خودش یک سری عملیات رو روی اون ابجکت اعمال میکنه.
+کلاس Facade به این صورت پیاده‌سازی میشه که یک ابجکت رو به عنوان ورودی دریافت میکنه و با هر تابع خودش یک سری عملیات رو
+روی اون ابجکت اعمال میکنه.
 
 به نحوه پیاده‌سازی Facade برای کلاس کامپیوتر دقت کنین:
 
@@ -1295,6 +1341,7 @@ class ComputerFacade:
         self.computer.pullCurrent()
         self.computer.sooth()
 ```
+
 </div>
 
 نحوه استفاده از یک کلاس فساد هم به این صورته:
@@ -1305,6 +1352,7 @@ computer = ComputerFacade(Computer())
 computer.turnOn()
 computer.turnOff()
 ```
+
 </div>
 
 
@@ -1320,16 +1368,21 @@ computer.turnOff()
 
 
 یک مثال از دنیای واقعی:
-> تا حالا به غرفه های چای فروشی رفتین؟ توی این غرفه ها چند فنجان چای آماده میکنن و شما از هر مدل چای که بخواید براتون یک فنجون میریزن. با اینکار کلی توی زمان و انرژی و ... صرفه جویی میکنن. بطور خلاصه این الگوی طراحی در رابطه با اشتراک گذاری منابع هست.
+> تا حالا به غرفه های چای فروشی رفتین؟ توی این غرفه ها چند فنجان چای آماده میکنن و شما از هر مدل چای که بخواید براتون یک
+> فنجون میریزن. با اینکار کلی توی زمان و انرژی و ... صرفه جویی میکنن. بطور خلاصه این الگوی طراحی در رابطه با اشتراک گذاری
+> منابع هست.
 
 به زبون ساده:
-> در واقع کار این دیزاین پترن این هست که با اشتراک گذاری بخش های مشترک شیء‌ها، استفاد از حافظه و هزینه های محاسباتی رو بهینه کنه.
+> در واقع کار این دیزاین پترن این هست که با اشتراک گذاری بخش های مشترک شیء‌ها، استفاد از حافظه و هزینه های محاسباتی رو
+> بهینه کنه.
 
 ویکی پدیا:
 
 <div dir="ltr">
 
-> In computer programming, flyweight is a software design pattern. A flyweight is an object that minimizes memory use by sharing as much data as possible with other similar objects; it is a way to use objects in large numbers when a simple repeated representation would use an unacceptable amount of memory.
+> In computer programming, flyweight is a software design pattern. A flyweight is an object that minimizes memory use by
+> sharing as much data as possible with other similar objects; it is a way to use objects in large numbers when a simple
+> repeated representation would use an unacceptable amount of memory.
 
 </div>
 
@@ -1342,6 +1395,7 @@ computer.turnOff()
 ```python
 class GreenTea:
     pass
+
 
 class TeaMaker:
     _availableTea = {}
@@ -1408,7 +1462,8 @@ shop.serve()
 
 
 یک مثال از دنیای واقعی:
-> درب‌هایی که با کارت باز میشن رو دیدین؟ یا درب هایی که با رمز عددی باز میشن؟ در واقع این دو روش به عملکرد اصلی درب اضافه شدن تا کار مارو راحت تر کنن.
+> درب‌هایی که با کارت باز میشن رو دیدین؟ یا درب هایی که با رمز عددی باز میشن؟ در واقع این دو روش به عملکرد اصلی درب
+> اضافه شدن تا کار مارو راحت تر کنن.
 
 به زبون ساده:
 > هدف اصلی Proxy راحت تر کردن استفاده از کلاس یا دسترسی کنترل‌شده هست.
@@ -1417,7 +1472,11 @@ shop.serve()
 
 <div dir="ltr">
 
-> A proxy, in its most general form, is a class functioning as an interface to something else. A proxy is a wrapper or agent object that is being called by the client to access the real serving object behind the scenes. Use of the proxy can simply be forwarding to the real object, or can provide additional logic. In the proxy extra functionality can be provided, for example caching when operations on the real object are resource intensive, or checking preconditions before operations on the real object are invoked.
+> A proxy, in its most general form, is a class functioning as an interface to something else. A proxy is a wrapper or
+> agent object that is being called by the client to access the real serving object behind the scenes. Use of the proxy
+> can simply be forwarding to the real object, or can provide additional logic. In the proxy extra functionality can be
+> provided, for example caching when operations on the real object are resource intensive, or checking preconditions
+> before operations on the real object are invoked.
 
 </div>
 
@@ -1437,6 +1496,7 @@ class Door:
     def close(self):
         pass
 
+
 class LabDoor(Door):
     def open(self):
         print("Opening lab door")
@@ -1444,6 +1504,7 @@ class LabDoor(Door):
     def close(self):
         print("Closing the lab door")
 ```
+
 </div>
 
 حالا ما میخوایم یک پروکسی برای اضافه کردن امنیت به درب بسازیم:
@@ -1469,6 +1530,7 @@ class SecuredDoor():
     def close(self):
         self.door.close()
 ```
+
 </div>
 
 
@@ -1478,10 +1540,10 @@ class SecuredDoor():
 
 ```python
 door = SecuredDoor(LabDoor())
-door.open('invalid') # Big no! It ain't possible
+door.open('invalid')  # Big no! It ain't possible
 
-door.open('$ecr@t') # Opening lab door
-door.close() # Closing Lab Door
+door.open('$ecr@t')  # Opening lab door
+door.close()  # Closing Lab Door
 ```
 
 </div>
@@ -1505,14 +1567,15 @@ door.close() # Closing Lab Door
 
 
 به زبون ساده:
->  این الگوها به شما اجازه میدهند که رفتار کلاس ها رو تغییر بدین و یا اینکه این رفتار رو به کلاس های دیگه اضافه کنین.
+> این الگوها به شما اجازه میدهند که رفتار کلاس ها رو تغییر بدین و یا اینکه این رفتار رو به کلاس های دیگه اضافه کنین.
 
 
 
 ویکی پدیا:
 <div dir="ltr">
 
-> In software engineering, behavioral design patterns are design patterns that identify common communication patterns among objects. By doing so, these patterns increase flexibility in carrying out communication.
+> In software engineering, behavioral design patterns are design patterns that identify common communication patterns
+> among objects. By doing so, these patterns increase flexibility in carrying out communication.
 
 
 
@@ -1527,17 +1590,24 @@ door.close() # Closing Lab Door
 </div>
 
 یک مثال از دنیای واقعی:
-> یکی از مثال های خوب این الگو، یک سیستم پشتیبانی میباشد. اگر یک کاربر یک مشکل داشته باشد، اون مشکل به یکی از مراحل پشتیبانی ارسال میشه. اگر مشکل در این مرحله حل نشد، مشکل به مرحله بعدی ارسال میشه و این کار تا زمانی که مشکل حل نشد ادامه میشه.
-> 
-> مثال دیگه ای که میشه زد اینه که شما سه تا حساب دارید که اولی ۱۰۰ تومن پول داره دومی ۳۰۰ و سومی ۱۰۰۰، حالا میخواید یک جنس که ۲۱۰ تومن قیمت داره رو بخرید، خب اول سعی میشه از حساب اول خرید بشه وقتی موجودی نداشت، با حساب دوم تلاش میشه و پرداخت انجام میشه!
+> یکی از مثال های خوب این الگو، یک سیستم پشتیبانی میباشد. اگر یک کاربر یک مشکل داشته باشد، اون مشکل به یکی از مراحل
+> پشتیبانی ارسال میشه. اگر مشکل در این مرحله حل نشد، مشکل به مرحله بعدی ارسال میشه و این کار تا زمانی که مشکل حل نشد ادامه
+> میشه.
+>
+> مثال دیگه ای که میشه زد اینه که شما سه تا حساب دارید که اولی ۱۰۰ تومن پول داره دومی ۳۰۰ و سومی ۱۰۰۰، حالا میخواید یک
+> جنس که ۲۱۰ تومن قیمت داره رو بخرید، خب اول سعی میشه از حساب اول خرید بشه وقتی موجودی نداشت، با حساب دوم تلاش میشه و
+> پرداخت انجام میشه!
 
 به زبون ساده:
-> به زبون ساده این الگو سعی میکنه در یک مسیر سعی در انجام یک کار داشته باشه و اگر اون کار در مرحله اول انجام نشد، اون کار رو به مرحله بعدی انتقال بده.
+> به زبون ساده این الگو سعی میکنه در یک مسیر سعی در انجام یک کار داشته باشه و اگر اون کار در مرحله اول انجام نشد، اون
+> کار رو به مرحله بعدی انتقال بده.
 
 ویکی پدیا:
 <div dir="ltr">
 
-> In object-oriented design, the chain-of-responsibility pattern is a design pattern consisting of a source of command objects and a series of processing objects. Each processing object contains logic that defines the types of command objects that it can handle; the rest are passed to the next processing object in the chain.
+> In object-oriented design, the chain-of-responsibility pattern is a design pattern consisting of a source of command
+> objects and a series of processing objects. Each processing object contains logic that defines the types of command
+> objects that it can handle; the rest are passed to the next processing object in the chain.
 
 
 
@@ -1545,13 +1615,13 @@ door.close() # Closing Lab Door
 
 **مثال برنامه نویسی**
 
-
 میخوایم همون مثال پرداخت رو باهم پیاده سازی کنیم:
 
 <div dir="ltr">
 
 ```python
 import inspect
+
 
 class Account:
     _successor = None
@@ -1564,14 +1634,18 @@ class Account:
         import inspect
         myCaller = inspect.stack()[1][3]
         if self.canPay(amountToPay):
-            print "Paid " + str(amountToPay) + " using " + myCaller
+            print
+            "Paid " + str(amountToPay) + " using " + myCaller
         elif (self._successor):
-            print "Cannot pay using " + myCaller + ". Proceeding .."
+            print
+            "Cannot pay using " + myCaller + ". Proceeding .."
             self._successor.pay(amountToPay)
         else:
             raise ValueError('None of the accounts have enough balance')
+
     def canPay(self, amount):
         return self.balance >= amount
+
 
 class Bank(Account):
     _balance = None
@@ -1579,11 +1653,13 @@ class Bank(Account):
     def __init__(self, balance):
         self.balance = balance
 
+
 class Paypal(Account):
     _balance = None
 
     def __init__(self, balance):
         self.balance = balance
+
 
 class Bitcoin(Account):
     _balance = None
@@ -1594,18 +1670,20 @@ class Bitcoin(Account):
 
 </div>
 
-خب توی کد بالا یک کلاس مرجع ساختیم که اسمش Account هست. این کلاس یک متد داره که اسمش pay هست. این متد یک مقدار رو میگیره و سعی میکنه اون مقدار رو از حساب خود پرداخت کنه. اگر موفق نشد، اون مقدار رو به حساب بعدی انتقال میده.
+خب توی کد بالا یک کلاس مرجع ساختیم که اسمش Account هست. این کلاس یک متد داره که اسمش pay هست. این متد یک مقدار رو میگیره
+و سعی میکنه اون مقدار رو از حساب خود پرداخت کنه. اگر موفق نشد، اون مقدار رو به حساب بعدی انتقال میده.
 
-تابع inspect.stack() یک تابعیه که میتونه اطلاعاتی از فراخوانی تابع رو برگردونه. مثلا اگر ما از این تابع در یک تابع دیگه استفاده کنیم، این تابع میتونه اسم تابعی که از اون استفاده شده رو برگردونه.
+تابع inspect.stack() یک تابعیه که میتونه اطلاعاتی از فراخوانی تابع رو برگردونه. مثلا اگر ما از این تابع در یک تابع دیگه
+استفاده کنیم، این تابع میتونه اسم تابعی که از اون استفاده شده رو برگردونه.
 
 خب حالا میخوایم یک حساب بانکی، یک حساب پی پال و یک حساب بیت کوین بسازیم:
 
 <div dir="ltr">
 
 ```python
-bank = Bank(100) # Bank with balance 100
-paypal = Paypal(200) # Paypal with balance 200
-bitcoin = Bitcoin(300) # Bitcoin with balance 300
+bank = Bank(100)  # Bank with balance 100
+paypal = Paypal(200)  # Paypal with balance 200
+bitcoin = Bitcoin(300)  # Bitcoin with balance 300
 
 bank.setNext(paypal)
 paypal.setNext(bitcoin)
@@ -1625,7 +1703,117 @@ Paid 259 using Bitcoin!
 
 همونطور که میبینید اومدیم و بعد از ساختن این حساب ها اونارو به هم متصل کردیم!
 
-سیستم اول سعی کرده با حساب بانکی پرداخت کنه ولی موجودی کافی نداشت، بعدش سعی کرده با حساب پی پال پرداخت کنه ولی موجودی کافی نداشت، ولی در نهایت با حساب بیت کوین پرداخت میکنه!
+سیستم اول سعی کرده با حساب بانکی پرداخت کنه ولی موجودی کافی نداشت، بعدش سعی کرده با حساب پی پال پرداخت کنه ولی موجودی
+کافی نداشت، ولی در نهایت با حساب بیت کوین پرداخت میکنه!
+
+
+
+
+<br>
+
+<div align="center">
+
+## 👮 Command
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> فرض کنید توی یک رستوران یک غذا سفارش میدید! شما(client) از گارسون (Invoker) میخواید که براتون مقداری غذا بیاره(
+> Command)! گارسون درخواست شمارو به آشپر میرسونه و آشپر اطلاعات و مهارت کافی برای اجرای درخواست شمارو داره!
+
+به زبون ساده:
+> ایده اصلی پشت این الگو اینه که مشتری رو از آشپر جدا کنه! یعنی Client یا درخواست کننده از Receiver یا همون اجراکننده
+> کار جدا بشه
+
+ویکی پدیا:
+<div dir="ltr">
+
+> In object-oriented programming, the command pattern is a behavioral design pattern in which an object is used to
+> encapsulate all information needed to perform an action or trigger an event at a later time. This information includes
+> the method name, the object that owns the method and values for the method parameters.
+
+
+</div>
+
+**مثال برنامه نویسی**
+
+میخوایم یک کنترل برای لامپ درست کنیم (Receiver):
+
+<div dir="ltr">
+
+```python
+class Bulb:
+    def turnOn(self):
+        print("Bulb has been lit")
+
+    def turnOff(self):
+        print("Darkness!")
+```
+
+</div>
+
+اول باید یک ساختار برای دستوران درست کنیم (Command):
+
+<div dir="ltr">
+
+```python
+class Command:
+    _bulb = None
+
+    def __init__(self, bulb):
+        self._bulb = bulb
+
+    def execute(self):
+        pass
+
+
+class TurnOn(Command):
+    def execute(self):
+        self._bulb.turnOn()
+
+
+class TurnOff(Command):
+    def execute(self):
+        self._bulb.turnOff()
+```
+
+</div>
+
+و در نهایت باید کنترل رو بسازیم که میتونه دستوران رو اجرا کنه! (Invoker)
+
+<div dir="ltr">
+
+
+```python
+class RemoteControl:
+    def submit(self, command):
+        command.execute()
+```
+
+</div>
+
+نحوه استفاده از این کنترل به این صورته:
+
+<div dir="ltr">
+
+```python
+bulb = Bulb()
+
+turnOn = TurnOn(bulb)
+turnOff = TurnOff(bulb)
+
+remote = RemoteControl()
+remote.submit(turnOn)  # Bulb has been lit!
+remote.submit(turnOff)  # Darkness!
+
+```
+
+</div>
+
+توی این کد هم اول یک لامپ میسازیم و بعدش کامند های روشن کردن و خاموش کردن رو ایجاد میکنیم!
+
+در نهایت وقتی نیاز به خاموش کردن یا روشن کردن داشته باشیم این کامند هارو به کنترلمون میفرستیم و اون اجراشون میکنه!
 
 
 </div>
