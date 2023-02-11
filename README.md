@@ -43,8 +43,10 @@
 **ویکی‌پدیا** دیزاین پترن‌ها رو اینطوری توصیف میکنه:
 
 > در مهندسی نرم‌افزار، الگوی طراحی یک راه‌حل عمومی قابل تکرار برای مشکلات متداول در زمینه طراحی نرم‌افزار است. الگوی
-> طراحی، یک طراحی تمام‌شده نیست که به صورت مستقیم بتواند تبدیل به کد منبع یا ماشین شود؛ بلکه، یک توضیح یا قالب برای حل یک
-> مسئله در شرایط مختلف است. الگوها در واقع بهترین روش ممکن هستند که یک برنامه‌نویس می‌تواند در هنگام طراحی یک برنامه برای
+> طراحی، یک طراحی تمام‌شده نیست که به صورت مستقیم بتواند تبدیل به کد منبع یا ماشین شود؛ بلکه، یک توضیح یا قالب برای حل
+> یک
+> مسئله در شرایط مختلف است. الگوها در واقع بهترین روش ممکن هستند که یک برنامه‌نویس می‌تواند در هنگام طراحی یک برنامه
+> برای
 > حل مشکلاتش از آن‌ها استفاده کند.
 
 
@@ -108,7 +110,8 @@
 <div dir="ltr">
 
 > In object-oriented programming (OOP), a factory is an object for creating other objects – formally a factory is a
-> function or method that returns objects of a varying prototype or class from some method call, which is assumed to be "
+> function or method that returns objects of a varying prototype or class from some method call, which is assumed to
+> be "
 > new".
 
 </div>
@@ -197,7 +200,8 @@ print(door.getWidth())
 
 > In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with
 > the problem of creating objects without having to specify the exact class of the object that will be created. This is
-> done by creating objects by calling a factory method—either specified in an interface and implemented by child classes,
+> done by creating objects by calling a factory method—either specified in an interface and implemented by child
+> classes,
 > or implemented in a base class and optionally overridden by derived classes—rather than by calling a constructor.
 
 </div>
@@ -598,13 +602,15 @@ print(vars(burger))
 
 یک مثال از دنیای واقعی:
 > چیزی درمورد دالی شنیدین
-> ؟ ([اگه نه اینجارو بخونید](https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%84%DB%8C_(%DA%AF%D9%88%D8%B3%D9%81%D9%86%D8%AF)))
+>
+؟ ([اگه نه اینجارو بخونید](https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%84%DB%8C_(%DA%AF%D9%88%D8%B3%D9%81%D9%86%D8%AF)))
 >
 >خیلی اینجا توضیح نمیدم، فقط بدونید همه‌چیز مربوط به شبیه سازیه!
 
 به زبون ساده:
 > مشکل از اینجا شروع میشه که یک ابجکت دارید و نیاز دارید از اون یک کپی ایجاد کنین. چطوری این کار رو میکنین؟ اول باید یک
-> ابجکت جدید از همون کلاس ایجاد کنین بعد باید مقادیر ابجکت اصلی رو در ابجکت جدید کپی کنید. حالا از همین پروسه طاقت فرسا که
+> ابجکت جدید از همون کلاس ایجاد کنین بعد باید مقادیر ابجکت اصلی رو در ابجکت جدید کپی کنید. حالا از همین پروسه طاقت فرسا
+> که
 > بگذریم، این مشکل وجود داره این هست که به متغیر های خصوصی دسترسی ندارید.
 >
 > دیزاین پترن Prototype میگه یک Interface مشترک داشته باشید که وظیفه‌ش ساخت یک ابجکت کپی از روی ابجکت فعلی باشه.
@@ -1040,7 +1046,8 @@ print(careers.getContent())
 <div dir="ltr">
 
 > In software engineering, the composite pattern is a partitioning design pattern. The composite pattern describes that
-> a group of objects is to be treated in the same way as a single instance of an object. The intent of a composite is to "
+> a group of objects is to be treated in the same way as a single instance of an object. The intent of a composite is
+> to "
 > compose" objects into tree structures to represent part-whole hierarchies. Implementing the composite pattern lets
 > clients treat individual objects and compositions uniformly.
 
@@ -1134,7 +1141,8 @@ print(f"RESULT: {tree.operation()}", end="")
 یک مثال از دنیای واقعی:
 
 > فرض کنید یک مغازه خدمات خودرویی دارید که خدمات متنوع ای ارائه می دهید. فاکتور نهایی رو چطور محاسبه می کنید؟ شما یک
-> سرویس رو انتخاب می کنید و به صورت پویا قیمت خدمات ارائه شده رو به اون اضافه می کنید تا به هزینه نهایی برسید. در اینجا هر
+> سرویس رو انتخاب می کنید و به صورت پویا قیمت خدمات ارائه شده رو به اون اضافه می کنید تا به هزینه نهایی برسید. در اینجا
+> هر
 > نوع خدمات یک دکوراتور است.
 
 
@@ -1369,7 +1377,8 @@ computer.turnOff()
 
 یک مثال از دنیای واقعی:
 > تا حالا به غرفه های چای فروشی رفتین؟ توی این غرفه ها چند فنجان چای آماده میکنن و شما از هر مدل چای که بخواید براتون یک
-> فنجون میریزن. با اینکار کلی توی زمان و انرژی و ... صرفه جویی میکنن. بطور خلاصه این الگوی طراحی در رابطه با اشتراک گذاری
+> فنجون میریزن. با اینکار کلی توی زمان و انرژی و ... صرفه جویی میکنن. بطور خلاصه این الگوی طراحی در رابطه با اشتراک
+> گذاری
 > منابع هست.
 
 به زبون ساده:
@@ -1591,7 +1600,8 @@ door.close()  # Closing Lab Door
 
 یک مثال از دنیای واقعی:
 > یکی از مثال های خوب این الگو، یک سیستم پشتیبانی میباشد. اگر یک کاربر یک مشکل داشته باشد، اون مشکل به یکی از مراحل
-> پشتیبانی ارسال میشه. اگر مشکل در این مرحله حل نشد، مشکل به مرحله بعدی ارسال میشه و این کار تا زمانی که مشکل حل نشد ادامه
+> پشتیبانی ارسال میشه. اگر مشکل در این مرحله حل نشد، مشکل به مرحله بعدی ارسال میشه و این کار تا زمانی که مشکل حل نشد
+> ادامه
 > میشه.
 >
 > مثال دیگه ای که میشه زد اینه که شما سه تا حساب دارید که اولی ۱۰۰ تومن پول داره دومی ۳۰۰ و سومی ۱۰۰۰، حالا میخواید یک
@@ -1784,7 +1794,6 @@ class TurnOff(Command):
 
 <div dir="ltr">
 
-
 ```python
 class RemoteControl:
     def submit(self, command):
@@ -1814,6 +1823,117 @@ remote.submit(turnOff)  # Darkness!
 توی این کد هم اول یک لامپ میسازیم و بعدش کامند های روشن کردن و خاموش کردن رو ایجاد میکنیم!
 
 در نهایت وقتی نیاز به خاموش کردن یا روشن کردن داشته باشیم این کامند هارو به کنترلمون میفرستیم و اون اجراشون میکنه!
+
+
+
+<br>
+
+<div align="center">
+
+## ➿ Iterator
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> یک رادیو رو در نظر بگیرین که میتونین بین فرکانس های مختلفش جابجا بشین! در واقع این رادیو یک Iterator هستش!
+>
+> چون میتونین از یک فرکانس به فرکانس دیگه بروید و از اونجا به فرکانس دیگه و ... بدون اینکه درگیر فرکانس قبلی یا بعدی
+> بشین!
+
+به زبون ساده:
+> دسترسی پی در پی به عناصر مختلف یک مجموعه هست بدون اینکه نیاز باشه به جزئیات بقیه عناصر نگاه کنیم!
+
+
+ویکی پدیا:
+<div dir="ltr">
+
+> In object-oriented programming, the iterator pattern is a design pattern in which an iterator is used to traverse a
+> container and access the container's elements. The iterator pattern decouples algorithms from containers; in some
+> cases,
+> algorithms are necessarily container-specific and thus cannot be decoupled.
+
+
+</div>
+
+**مثال برنامه نویسی**
+
+این مثال رو میخوایم یکم پایتونیک پیش بریم! میدونید که توی پایتون دو تا مفهوم Iterable و Iterator رو داریم پس میریم ازشون
+استفاده کنیم!
+
+<div dir="ltr">
+
+```python
+from __future__ import annotations
+from collections.abc import Iterable, Iterator
+from typing import Any, List
+
+
+class AlphabeticalOrderIterator(Iterator):
+    _position: int = None
+
+    def __init__(self, collection: WordsCollection, reverse: bool = False) -> None:
+        self._collection = collection
+        self._reverse = reverse
+        self._position = -1 if reverse else 0
+
+    def __next__(self):
+        try:
+            value = self._collection[self._position]
+            self._position += -1 if self._reverse else 1
+        except IndexError:
+            raise StopIteration()
+
+        return value
+```
+
+</div>
+
+این کلاس یک Iterator هستش که میتونه توی یک WordsCollection جابجا بشه و عناصرش رو برگردونه!
+
+<div dir="ltr">
+
+```python
+
+class WordsCollection(Iterable):
+    def __init__(self, collection: List[Any] = []) -> None:
+        self._collection = collection
+
+    def __iter__(self) -> AlphabeticalOrderIterator:
+        return AlphabeticalOrderIterator(self._collection)
+
+    def get_reverse_iterator(self) -> AlphabeticalOrderIterator:
+        return AlphabeticalOrderIterator(self._collection, True)
+
+    def add_item(self, item: Any) -> None:
+        self._collection.append(item)
+```
+
+</div>
+
+این کلاس یک Iterable هستش که میتونه توی یک WordsCollection جابجا بشه و عناصرش رو برگردونه!
+
+<div dir="ltr">
+
+```python
+
+if __name__ == "__main__":
+    collection = WordsCollection()
+    collection.add_item("First")
+    collection.add_item("Second")
+    collection.add_item("Third")
+
+    print("Straight traversal:")
+    print("\n".join(collection))
+
+    print("\n")
+    print("Reverse traversal:")
+    print("\n".join(collection.get_reverse_iterator()), end="")
+```
+
+</div>
+
+توی این کد هم میتونید ببینید که چطوری میتونیم از Iterator ها استفاده کنیم!
 
 
 </div>
