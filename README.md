@@ -1488,4 +1488,144 @@ door.close() # Closing Lab Door
 
 
 
+
+<br>
+<br>
+
+***
+
+<br>
+
+<div align="center">
+
+# Behavioral Design Patterns
+
+</div>
+
+
+
+به زبون ساده:
+>  این الگوها به شما اجازه میدهند که رفتار کلاس ها رو تغییر بدین و یا اینکه این رفتار رو به کلاس های دیگه اضافه کنین.
+
+
+
+ویکی پدیا:
+<div dir="ltr">
+
+> In software engineering, behavioral design patterns are design patterns that identify common communication patterns among objects. By doing so, these patterns increase flexibility in carrying out communication.
+
+
+
+</div>
+
+<br>
+
+<div align="center">
+
+## 🔗 Chain of Responsibility
+
+</div>
+
+یک مثال از دنیای واقعی:
+> یکی از مثال های خوب این الگو، یک سیستم پشتیبانی میباشد. اگر یک کاربر یک مشکل داشته باشد، اون مشکل به یکی از مراحل پشتیبانی ارسال میشه. اگر مشکل در این مرحله حل نشد، مشکل به مرحله بعدی ارسال میشه و این کار تا زمانی که مشکل حل نشد ادامه میشه.
+> 
+> مثال دیگه ای که میشه زد اینه که شما سه تا حساب دارید که اولی ۱۰۰ تومن پول داره دومی ۳۰۰ و سومی ۱۰۰۰، حالا میخواید یک جنس که ۲۱۰ تومن قیمت داره رو بخرید، خب اول سعی میشه از حساب اول خرید بشه وقتی موجودی نداشت، با حساب دوم تلاش میشه و پرداخت انجام میشه!
+
+به زبون ساده:
+> به زبون ساده این الگو سعی میکنه در یک مسیر سعی در انجام یک کار داشته باشه و اگر اون کار در مرحله اول انجام نشد، اون کار رو به مرحله بعدی انتقال بده.
+
+ویکی پدیا:
+<div dir="ltr">
+
+> In object-oriented design, the chain-of-responsibility pattern is a design pattern consisting of a source of command objects and a series of processing objects. Each processing object contains logic that defines the types of command objects that it can handle; the rest are passed to the next processing object in the chain.
+
+
+
+</div>
+
+**مثال برنامه نویسی**
+
+
+میخوایم همون مثال پرداخت رو باهم پیاده سازی کنیم:
+
+<div dir="ltr">
+
+```python
+import inspect
+
+class Account:
+    _successor = None
+    _balance = None
+
+    def setNext(self, account):
+        self._successor = account
+
+    def pay(self, amountToPay):
+        import inspect
+        myCaller = inspect.stack()[1][3]
+        if self.canPay(amountToPay):
+            print "Paid " + str(amountToPay) + " using " + myCaller
+        elif (self._successor):
+            print "Cannot pay using " + myCaller + ". Proceeding .."
+            self._successor.pay(amountToPay)
+        else:
+            raise ValueError('None of the accounts have enough balance')
+    def canPay(self, amount):
+        return self.balance >= amount
+
+class Bank(Account):
+    _balance = None
+
+    def __init__(self, balance):
+        self.balance = balance
+
+class Paypal(Account):
+    _balance = None
+
+    def __init__(self, balance):
+        self.balance = balance
+
+class Bitcoin(Account):
+    _balance = None
+
+    def __init__(self, balance):
+        self.balance = balance
+```
+
+</div>
+
+خب توی کد بالا یک کلاس مرجع ساختیم که اسمش Account هست. این کلاس یک متد داره که اسمش pay هست. این متد یک مقدار رو میگیره و سعی میکنه اون مقدار رو از حساب خود پرداخت کنه. اگر موفق نشد، اون مقدار رو به حساب بعدی انتقال میده.
+
+تابع inspect.stack() یک تابعیه که میتونه اطلاعاتی از فراخوانی تابع رو برگردونه. مثلا اگر ما از این تابع در یک تابع دیگه استفاده کنیم، این تابع میتونه اسم تابعی که از اون استفاده شده رو برگردونه.
+
+خب حالا میخوایم یک حساب بانکی، یک حساب پی پال و یک حساب بیت کوین بسازیم:
+
+<div dir="ltr">
+
+```python
+bank = Bank(100) # Bank with balance 100
+paypal = Paypal(200) # Paypal with balance 200
+bitcoin = Bitcoin(300) # Bitcoin with balance 300
+
+bank.setNext(paypal)
+paypal.setNext(bitcoin)
+
+bank.pay(259)
+
+'''
+Output will be
+==============
+Cannot pay using bank. Proceeding ..
+Cannot pay using paypal. Proceeding ..:
+Paid 259 using Bitcoin!
+'''
+```
+
+</div>
+
+همونطور که میبینید اومدیم و بعد از ساختن این حساب ها اونارو به هم متصل کردیم!
+
+سیستم اول سعی کرده با حساب بانکی پرداخت کنه ولی موجودی کافی نداشت، بعدش سعی کرده با حساب پی پال پرداخت کنه ولی موجودی کافی نداشت، ولی در نهایت با حساب بیت کوین پرداخت میکنه!
+
+
 </div>
