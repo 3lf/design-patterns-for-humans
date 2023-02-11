@@ -2431,6 +2431,107 @@ dolphin.accept(jump)  # Walked on water a little and disappeared
 
 <div align="center">
 
+## 💡 Strategy
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> فرض کنید که شما یک سرباز درحال جنگ هستید که چندین سلاح همراه خودتون دارید از جمله کلت، کلاش و نارنجک. حالا مشخصه که در
+> شرایط مختلف با توجه به شرایط تصمیم میگیرید که یکی از اونا استفاده کنید! به این انتخاب های مختلف با توجه به شرایط
+> استراتژی میگن!
+
+به زبون ساده:
+> این الگو به شما امکان میده الگوریتم یا استراتژی را بر اساس موقعیت تغییر بدین
+
+
+ویکی پدیا:
+<div dir="ltr">
+
+> In computer programming, the strategy pattern (also known as the policy pattern) is a behavioural software design
+> pattern that enables an algorithm's behavior to be selected at runtime.
+
+
+
+
+</div>
+
+**مثال برنامه نویسی**
+
+میخوایم یک سرویس پیاده سازی کنیم که با توجه به داده هامون تصمیم بگیریم از یک نوع از مرتب سازی استفاده کنیم!
+
+بخش اول پیاده سازی استراتژی هامون هست:
+
+
+<div dir="ltr">
+
+```python
+class SortStrategy:
+    def sort(self, dataset):
+        pass
+
+
+class BubbleSortStrategy(SortStrategy):
+    def sort(self, dataset):
+        print('Sorting using bubble sort')
+
+        return dataset
+
+
+class QuickSortStrategy(SortStrategy):
+    def sort(self, dataset):
+        print('Sorting using quick sort')
+        return dataset
+```
+
+</div>
+
+
+حالا باید یک کلاس بسازیم که وظیفه‌اش مدیریت این استراتژی ها باشه:
+
+
+<div dir="ltr">
+
+```python
+class Sorter:
+    _sorter = None
+
+    def __init__(self, sorter):
+        self._sorter = sorter
+
+    def sort(self, dataset):
+        return self._sorter.sort(dataset)
+```
+
+</div>
+
+
+نحوه استفاده ازش هم خیلی راحته:
+
+
+
+<div dir="ltr">
+
+```python
+dataset = [1, 5, 4, 3, 2, 8]
+
+sorter = Sorter(BubbleSortStrategy())
+sorter.sort(dataset)
+
+sorter = Sorter(QuickSortStrategy())
+sorter.sort(dataset)
+```
+
+</div>
+
+
+
+
+
+<br>
+
+<div align="center">
+
 ## 💢 State
 
 </div>
