@@ -4126,7 +4126,6 @@ iosBuilder.build();
 </details>
 
 <br>
-<br>
 
 ---
 
@@ -4141,8 +4140,6 @@ iosBuilder.build();
 
 <div align="right">
 
-# 🤝 کمک کردن به این پروژه!
-
 - این پروژه رو fork کنید و به زبون‌های برنامه نویسی دیگه توسعه بدید!
 - این ریپو رو برای دوستاتون بفرستید!
 - اشتباهاتی که وجود داره رو با issue و یا pull request فیکس کنید!
@@ -4152,5 +4149,18 @@ iosBuilder.build();
 
 </div>
 
+
+<div align="center">
+
+## مشارکت کنندگان
+
+</div>
+
+<div align="right">
+
+- [amirmalekian](https://github.com/amirmalekian) که زحمت مثال های TypeScript رو کشید.
+- [Atefe-Komeili](https://github.com/Atefe-Komeili) که زحمت رفع اشکالات تایپی و بهتر کردن جملات رو کشید.
+
+</div>
 
 </div>
