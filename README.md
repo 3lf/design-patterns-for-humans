@@ -123,6 +123,8 @@
 
 <br>
 
+---
+
 <div align="center">
 
 ## 🏠 Simple Factory
@@ -250,7 +252,9 @@ console.log(door.getWidth());
 </details>
 
 <br>
-<br>
+
+---
+
 
 <div align="center">
 
@@ -415,6 +419,9 @@ marketingManager.takeInterview();
 
 
 <br>
+
+---
+
 
 <div align="center">
 
@@ -669,6 +676,9 @@ expert.getDescription();
 
 <br>
 
+---
+
+
 <div align="center">
 
 ## 👷 Builder
@@ -890,6 +900,10 @@ console.log(Object.keys(burger));
 
 <br>
 
+
+---
+
+
 <div align="center">
 
 ## 🐑 Prototype
@@ -1027,6 +1041,9 @@ class SomeComponent {
 
 
 <br>
+
+---
+
 
 <div align="center">
 
@@ -1171,6 +1188,9 @@ if (Object.is(s1, s2)) {
 
 
 <br>
+
+---
+
 
 <div align="center">
 
@@ -1330,7 +1350,10 @@ hunter.hunt(wildDogAdapter);
 </div>
 </details>
 <br>
-<br>
+
+
+---
+
 
 <div align="center">
 
@@ -1505,6 +1528,10 @@ console.log(careers.getContent());
 </details>
 
 <br>
+
+
+---
+
 
 <div align="center">
 
@@ -1681,6 +1708,9 @@ console.log(`RESULT: ${tree.operation()}`);
 </details>
 
 <br>
+
+---
+
 
 <div align="center">
 
@@ -1903,6 +1933,9 @@ console.log(someCoffee.getDescription());
 
 <br>
 
+---
+
+
 <div align="center">
 
 ## 📦 Facade
@@ -2077,6 +2110,9 @@ computer.turnOff();
 
 <br>
 
+---
+
+
 <div align="center">
 
 ## 🍃 Flyweight
@@ -2222,6 +2258,9 @@ shop.serve();
 </details>
 
 <br>
+
+---
+
 
 <div align="center">
 
@@ -2393,6 +2432,9 @@ door.close(); // Closing Lab Door
 
 
 <br>
+
+---
+
 
 <div align="center">
 
@@ -2607,6 +2649,9 @@ Paid 259 using Bitcoin!
 
 <br>
 
+---
+
+
 <div align="center">
 
 ## 👮 Command
@@ -2761,6 +2806,9 @@ remote.submit(turnOff); // Darkness!
 </details>
 
 <br>
+
+---
+
 
 <div align="center">
 
@@ -2934,6 +2982,9 @@ for (const item of collection.getReverseIterator()) {
 
 <br>
 
+---
+
+
 <div align="center">
 
 ## 👽 Mediator
@@ -3078,6 +3129,9 @@ jane.send("Hey!");
 </details>
 <br>
 
+---
+
+
 <div align="center">
 
 ## 💾 Memento
@@ -3219,6 +3273,10 @@ console.log(editor.getContent()); // This is the first sentence. This is second.
 </details>
 
 <br>
+
+---
+
+
 
 <div align="center">
 
@@ -3379,6 +3437,9 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 </details>
 
 <br>
+
+---
+
 
 <div align="center">
 
@@ -3625,6 +3686,9 @@ dolphin.accept(jump); // Walked on water a little and disappeared
 
 <br>
 
+---
+
+
 <div align="center">
 
 ## 💡 Strategy
@@ -3757,6 +3821,9 @@ sorter2.sort(dataset);
 </details>
 
 <br>
+
+---
+
 
 <div align="center">
 
@@ -3924,6 +3991,9 @@ editor.type("Fifth Line"); // fifth line
 </details>
 
 <br>
+
+---
+
 
 <div align="center">
 
