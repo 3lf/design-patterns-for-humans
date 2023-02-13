@@ -553,19 +553,19 @@ constructor(size: any, cheese: boolean = true, pepperoni: boolean = true, tomato
 
 ```typescript
 class Burger {
-  private _size: any;
+  private size: any;
 
-  private _cheese: boolean = false;
-  private _pepperoni: boolean = false;
-  private _lettuce: boolean = false;
-  private _tomato: boolean = false;
+  private cheese: boolean = false;
+  private pepperoni: boolean = false;
+  private lettuce: boolean = false;
+  private tomato: boolean = false;
 
   constructor(builder: any) {
-    this._size = builder.size;
-    this._cheese = builder.cheese;
-    this._pepperoni = builder.pepperoni;
-    this._lettuce = builder.lettuce;
-    this._tomato = builder.tomato;
+    this.size = builder.size;
+    this.cheese = builder.cheese;
+    this.pepperoni = builder.pepperoni;
+    this.lettuce = builder.lettuce;
+    this.tomato = builder.tomato;
   }
 }
 ```
@@ -580,10 +580,10 @@ class Burger {
 class BurgerBuilder {
   size: number;
 
-  cheese: boolean;
-  pepperoni: boolean;
-  lettuce: boolean;
-  tomato: boolean;
+  cheese: boolean = false;
+  pepperoni: boolean = false;
+  lettuce: boolean = false;
+  tomato: boolean = false;
 
   constructor(size: number) {
     this.size = size;
@@ -611,23 +611,6 @@ class BurgerBuilder {
 
   build(): Burger {
     return new Burger(this);
-  }
-}
-
-class Burger {
-  private size: number;
-
-  private cheese: boolean;
-  private pepperoni: boolean;
-  private lettuce: boolean;
-  private tomato: boolean;
-
-  constructor(builder: BurgerBuilder) {
-    this.size = builder.size;
-    this.cheese = builder.cheese;
-    this.pepperoni = builder.pepperoni;
-    this.lettuce = builder.lettuce;
-    this.tomato = builder.tomato;
   }
 }
 ```
@@ -706,50 +689,25 @@ class SomeComponent {
     this.someListOfObjects = someListOfObjects;
     this.someCircularRef = someCircularRef;
   }
-}
-```
 
-</div>
-
-پایتون magic method‌هایی برای این مساله در نظر گرفته که ماهم از همون دو تابع معروف copy و deep copy استفاده میکنیم:
-
-<div dir="ltr">
-
-```typescript
-class SomeComponent {
-  constructor(
-    public some_int: number,
-    public some_list_of_objects: any[],
-    public some_circular_ref: any
-  ) {}
-
-  public copy(): SomeComponent {
-    const some_list_of_objects = [...this.some_list_of_objects];
-    const some_circular_ref = { ...this.some_circular_ref };
-    const newComponent = new SomeComponent(
-      this.some_int,
-      some_list_of_objects,
-      some_circular_ref
+  copy() {
+    let some_list_of_objects = Object.assign([], this.some_list_of_objects);
+    let some_circular_ref = Object.assign({}, this.some_circular_ref);
+    let new = new this.constructor(
+    this.some_int, some_list_of_objects, some_circular_ref
     );
-    Object.assign(newComponent, this);
-    return newComponent;
+    Object.assign(new, this);
+    return new;
   }
 
-  public deepCopy(): SomeComponent {
-    const some_list_of_objects = JSON.parse(
-      JSON.stringify(this.some_list_of_objects)
+  deepcopy(memo: object = {}) {
+    let some_list_of_objects = JSON.parse(JSON.stringify(this.some_list_of_objects));
+    let some_circular_ref = JSON.parse(JSON.stringify(this.some_circular_ref));
+    let new = new this.constructor(
+    this.some_int, some_list_of_objects, some_circular_ref
     );
-    const some_circular_ref = JSON.parse(
-      JSON.stringify(this.some_circular_ref)
-    );
-    const newComponent = new SomeComponent(
-      this.some_int,
-      some_list_of_objects,
-      some_circular_ref
-    );
-    newComponent.some_list_of_objects = some_list_of_objects;
-    newComponent.some_circular_ref = some_circular_ref;
-    return newComponent;
+    new = JSON.parse(JSON.stringify(this));
+    return new;
   }
 }
 ```
@@ -806,27 +764,23 @@ class SomeComponent {
 
 ```typescript
 class SingletonMeta extends Function {
-  private static _instances: { [key: string]: any } = {};
+  static _instances: { [key: string]: any } = {};
 
-  public static getInstance<T>(
-    this: new (...args: any[]) => T,
-    ...args: any[]
-  ): T {
-    const ctor = this;
-    if (!SingletonMeta._instances[ctor.name]) {
-      SingletonMeta._instances[ctor.name] = new ctor(...args);
+  constructor(...args: any[]) {
+    const instance = super(...args);
+    const className = this.constructor.name;
+    if (!SingletonMeta._instances[className]) {
+      SingletonMeta._instances[className] = instance;
     }
-    return SingletonMeta._instances[ctor.name] as T;
+    return SingletonMeta._instances[className];
   }
 }
 
 class Singleton extends SingletonMeta {
-  public someBusinessLogic() {
-    // ...
+  someBusinessLogic() {
+    // implementation
   }
 }
-
-Object.defineProperty(Singleton, "name", { value: "Singleton" });
 ```
 
 </div>
@@ -836,17 +790,12 @@ Object.defineProperty(Singleton, "name", { value: "Singleton" });
 <div dir="ltr">
 
 ```typescript
-if (require.main === module) {
-  // The client code.
-
-  const s1 = Singleton.getInstance();
-  const s2 = Singleton.getInstance();
-
-  if (Object.is(s1, s2)) {
-    console.log("Singleton works, both variables contain the same instance.");
-  } else {
-    console.log("Singleton failed, variables contain different instances.");
-  }
+const s1 = Singleton.getInstance();
+const s2 = Singleton.getInstance();
+if (Object.is(s1, s2)) {
+  console.log("Singleton works, both variables contain the same instance.");
+} else {
+  console.log("Singleton failed, variables contain different instances.");
 }
 ```
 
@@ -920,15 +869,15 @@ if (require.main === module) {
 
 ```typescript
 class Lion {
-  public roar(): void {}
+  roar(): void {}
 }
 
 class AfricanLion extends Lion {
-  public roar(): void {}
+  roar(): void {}
 }
 
 class AsianLion extends Lion {
-  public roar(): void {}
+  roar(): void {}
 }
 ```
 
@@ -940,7 +889,7 @@ class AsianLion extends Lion {
 
 ```typescript
 class Hunter {
-  public hunt(lion: Lion): void {
+  hunt(lion: Lion): void {
     lion.roar();
   }
 }
@@ -965,14 +914,14 @@ class WildDog {
 }
 
 class WildDogAdapter implements Lion {
-  private _dog: WildDog;
+  private dog: WildDog;
 
   constructor(dog: WildDog) {
-    this._dog = dog;
+    this.dog = dog;
   }
 
-  public roar(): void {
-    this._dog.bark();
+  roar(): void {
+    this.dog.bark();
   }
 }
 ```
@@ -1079,25 +1028,25 @@ class Careers extends WebPage {
 
 ```typescript
 class Theme {
-  public getColor(): string {
+  getColor(): string {
     return "";
   }
 }
 
 class DarkTheme extends Theme {
-  public getColor(): string {
+  getColor(): string {
     return "Dark Black";
   }
 }
 
 class LightTheme extends Theme {
-  public getColor(): string {
+  getColor(): string {
     return "Off White";
   }
 }
 
 class AquaTheme extends Theme {
-  public getColor(): string {
+  getColor(): string {
     return "Light Blue";
   }
 }
@@ -1179,26 +1128,26 @@ interface Component {
 }
 
 class Leaf implements Component {
-  public operation(): string {
+  operation(): string {
     return "Leaf";
   }
 }
 
 class Composite implements Component {
-  private _children: Component[] = [];
+  private children: Component[] = [];
 
-  public add(component: Component): void {
-    this._children.push(component);
+  add(component: Component): void {
+    this.children.push(component);
   }
 
-  public remove(component: Component): void {
-    const index = this._children.indexOf(component);
-    this._children.splice(index, 1);
+  remove(component: Component): void {
+    const index = this.children.indexOf(component);
+    this.children.splice(index, 1);
   }
 
-  public operation(): string {
+  operation(): string {
     const results: string[] = [];
-    for (const child of this._children) {
+    for (const child of this.children) {
       results.push(child.operation());
     }
     return `Branch(${results.join("+")})`;
@@ -1271,10 +1220,10 @@ console.log(`RESULT: ${tree.operation()}`);
 ```typescript
 class Coffee {
   getCost(): number {
-    throw new Error("Method not implemented.");
+    return;
   }
   getDescription(): string {
-    throw new Error("Method not implemented.");
+    return;
   }
 }
 
@@ -1298,51 +1247,51 @@ class SimpleCoffee extends Coffee {
 
 ```typescript
 class MilkCoffee extends Coffee {
-  private _coffee: Coffee;
+  private coffee: Coffee;
 
   constructor(coffee: Coffee) {
     super();
-    this._coffee = coffee;
+    this.coffee = coffee;
   }
 
   getCost(): number {
-    return this._coffee.getCost() + 2;
+    return this.coffee.getCost() + 2;
   }
 
   getDescription(): string {
-    return this._coffee.getDescription() + ", milk";
+    return this.coffee.getDescription() + ", milk";
   }
 }
 
 class WhipCoffee extends Coffee {
-  private _coffee: Coffee;
+  private coffee: Coffee;
   constructor(coffee: Coffee) {
     super();
-    this._coffee = coffee;
+    this.coffee = coffee;
   }
 
   getCost(): number {
-    return this._coffee.getCost() + 5;
+    return this.coffee.getCost() + 5;
   }
 
   getDescription(): string {
-    return this._coffee.getDescription() + ", whip";
+    return this.coffee.getDescription() + ", whip";
   }
 }
 
 class VanillaCoffee extends Coffee {
-  private _coffee: Coffee;
+  private coffee: Coffee;
   constructor(coffee: Coffee) {
     super();
-    this._coffee = coffee;
+    this.coffee = coffee;
   }
 
   getCost(): number {
-    return this._coffee.getCost() + 3;
+    return this.coffee.getCost() + 3;
   }
 
   getDescription(): string {
-    return this._coffee.getDescription() + ", vanilla";
+    return this.coffee.getDescription() + ", vanilla";
   }
 }
 ```
@@ -1451,26 +1400,26 @@ class Computer {
 
 ```typescript
 class ComputerFacade {
-  private _computer: Computer;
+  private computer: Computer;
   constructor(computer: Computer) {
     this.computer = computer;
   }
 
   set computer(computer: Computer) {
-    this._computer = computer;
+    this.computer = computer;
   }
 
   turnOn() {
-    this._computer.getElectricShock();
-    this._computer.makeSound();
-    this._computer.showLoadingScreen();
-    this._computer.bam();
+    this.computer.getElectricShock();
+    this.computer.makeSound();
+    this.computer.showLoadingScreen();
+    this.computer.bam();
   }
 
   turnOff() {
-    this._computer.closeEverything();
-    this._computer.pullCurrent();
-    this._computer.sooth();
+    this.computer.closeEverything();
+    this.computer.pullCurrent();
+    this.computer.sooth();
   }
 }
 ```
@@ -1529,13 +1478,13 @@ computer.turnOff();
 class GreenTea {}
 
 class TeaMaker {
-  private _availableTea: { [key: string]: GreenTea } = {};
+  private availableTea: { [key: string]: GreenTea } = {};
   make(preference: string): GreenTea {
-    if (!(preference in this._availableTea)) {
-      this._availableTea[preference] = new GreenTea();
+    if (!(preference in this.availableTea)) {
+      this.availableTea[preference] = new GreenTea();
     }
 
-    return this._availableTea[preference];
+    return this.availableTea[preference];
   }
 }
 ```
@@ -1548,19 +1497,19 @@ class TeaMaker {
 
 ```typescript
 class TeaShop {
-  private _orders: { [key: number]: GreenTea } = {};
-  private _teaMaker: TeaMaker;
+  private orders: { [key: number]: GreenTea } = {};
+  private teaMaker: TeaMaker;
   constructor(teaMaker: TeaMaker) {
-    this._teaMaker = teaMaker;
+    this.teaMaker = teaMaker;
   }
 
   takeOrder(teaType: string, table: number) {
-    this._orders[table] = this._teaMaker.make(teaType);
+    this.orders[table] = this.teaMaker.make(teaType);
   }
 
   serve() {
-    for (const table in this._orders) {
-      const tea = this._orders[table];
+    for (const table in this.orders) {
+      const tea = this.orders[table];
       console.log(`Serving tea to table #${table}`);
     }
   }
@@ -1766,9 +1715,9 @@ class Account {
     pay(amountToPay: number): void {
         const myCaller = (new Error().stack as string).split("at ")[2].split(" ")[0];
         if (this.canPay(amountToPay)) {
-            console.log(Paid ${amountToPay} using ${myCaller});
+            console.log(‍‍`Paid ${amountToPay} using ${myCaller}`);
         } else if (this._successor) {
-            console.log(Cannot pay using ${myCaller}. Proceeding ..);
+            console.log(`Cannot pay using ${myCaller}. Proceeding ..`);
             this._successor.pay(amountToPay);
         } else {
             throw new Error("None of the accounts have enough balance");
@@ -1943,30 +1892,14 @@ class RemoteControl {
 <div dir="ltr">
 
 ```typescript
-class Bulb {}
-
-class TurnOn {
-  constructor(private bulb: Bulb) {}
-  execute() {
-    console.log("Bulb has been lit!");
-  }
-}
-
-class TurnOff {
-  constructor(private bulb: Bulb) {}
-  execute() {
-    console.log("Darkness!");
-  }
-}
-
 const bulb = new Bulb();
 
 const turnOn = new TurnOn(bulb);
 const turnOff = new TurnOff(bulb);
 
 const remote = new RemoteControl();
-remote.submit(turnOn);
-remote.submit(turnOff);
+remote.submit(turnOn); // Bulb has been lit!
+remote.submit(turnOff); // Darkness!
 ```
 
 </div>
@@ -2013,22 +1946,21 @@ remote.submit(turnOff);
 <div dir="ltr">
 
 ```typescript
-import { Iterable, Iterator } from "typescript";
+interface Iterator<T> {
+  next(): { value: T; done: boolean };
+}
 
-class AlphabeticalOrderIterator implements Iterator {
-  private _position: number = null;
+class AlphabeticalOrderIterator implements Iterator<string> {
+  private position: number;
 
-  constructor(
-    private collection: WordsCollection,
-    private reverse: boolean = false
-  ) {
-    this._position = this._reverse ? -1 : 0;
+  constructor(private collection: WordsCollection, private reverse = false) {
+    this.position = this.reverse ? -1 : 0;
   }
 
-  public next(): IteratorResult<any> {
+  next() {
     try {
-      let value = this._collection[this._position];
-      this._position += this._reverse ? -1 : 1;
+      const value = this.collection.collection[this.position];
+      this.position += this.reverse ? -1 : 1;
       return { value, done: false };
     } catch (error) {
       return { value: undefined, done: true };
@@ -2044,25 +1976,23 @@ class AlphabeticalOrderIterator implements Iterator {
 <div dir="ltr">
 
 ```typescript
-import { Iterable, IteratorResult } from "typescript";
+class WordsCollection {
+  collection: string[];
 
-class WordsCollection implements Iterable {
-  private _collection: any[];
-
-  constructor(collection: any[] = []) {
-    this._collection = collection;
+  constructor(collection: string[] = []) {
+    this.collection = collection;
   }
 
-  [Symbol.iterator](): AlphabeticalOrderIterator {
-    return new AlphabeticalOrderIterator(this._collection);
+  [Symbol.iterator]() {
+    return new AlphabeticalOrderIterator(this);
   }
 
-  public getReverseIterator(): AlphabeticalOrderIterator {
-    return new AlphabeticalOrderIterator(this._collection, true);
+  getReverseIterator() {
+    return new AlphabeticalOrderIterator(this, true);
   }
 
-  public addItem(item: any): void {
-    this._collection.push(item);
+  addItem(item: string) {
+    this.collection.push(item);
   }
 }
 ```
@@ -2074,18 +2004,19 @@ class WordsCollection implements Iterable {
 <div dir="ltr">
 
 ```typescript
-if (require.main === module) {
-  const collection = new WordsCollection();
-  collection.addItem("First");
-  collection.addItem("Second");
-  collection.addItem("Third");
+const collection = new WordsCollection();
+collection.addItem("First");
+collection.addItem("Second");
+collection.addItem("Third");
 
-  console.log("Straight traversal:");
-  console.log([...collection].join("\n"));
+console.log("Straight traversal:");
+for (const item of collection) {
+  console.log(item);
+}
 
-  console.log("\n");
-  console.log("Reverse traversal:");
-  console.log([...collection.getReverseIterator()].join("\n"));
+console.log("\nReverse traversal:");
+for (const item of collection.getReverseIterator()) {
+  console.log(item);
 }
 ```
 
@@ -2128,11 +2059,11 @@ if (require.main === module) {
 <div dir="ltr">
 
 ```typescript
-interface ChatRoomMediator {
-  showMessage(user: User, message: string): void;
+class ChatRoomMediator {
+  showMessage(user: User, message: string): void {}
 }
 
-class ChatRoom implements ChatRoomMediator {
+class ChatRoom extends ChatRoomMediator {
   showMessage(user: User, message: string): void {
     let time = new Date();
     let sender = user.getName();
@@ -2150,20 +2081,20 @@ class ChatRoom implements ChatRoomMediator {
 
 ```typescript
 class User {
-  private _name: string | null = null;
-  private _chatMediator: any;
+  private name: string;
+  private chatMediator: ChatRoomMediator;
 
-  constructor(name: string, chatMediator: any) {
+  constructor(name: string, chatMediator: ChatRoomMediator) {
     this.name = name;
-    this._chatMediator = chatMediator;
+    this.chatMediator = chatMediator;
   }
 
-  public getName(): string {
+  getName(): string {
     return this.name;
   }
 
-  public send(message: string): void {
-    this._chatMediator.showMessage(this, message);
+  send(message: string): void {
+    this.chatMediator.showMessage(this, message);
   }
 }
 ```
@@ -2226,13 +2157,13 @@ jane.send("Hey!");
 
 ```typescript
 class EditorMemento {
-  private _content: string | null = null;
+  private content: string | null = null;
   constructor(content: string) {
-    this._content = content;
+    this.content = content;
   }
 
-  public getContent(): string {
-    return this._content;
+  getContent(): string {
+    return this.content;
   }
 }
 ```
@@ -2247,22 +2178,22 @@ class EditorMemento {
 
 ```typescript
 class Editor {
-  private _content = "";
+  private content = "";
 
-  public type(words: string): void {
-    this._content = this._content + " " + words;
+  type(words: string): void {
+    this.content = this.content + " " + words;
   }
 
-  public getContent(): string {
-    return this._content;
+  getContent(): string {
+    return this.content;
   }
 
-  public save(): EditorMemento {
-    return new EditorMemento(this._content);
+  save(): EditorMemento {
+    return new EditorMemento(this.content);
   }
 
-  public restore(memento: EditorMemento): void {
-    this._content = memento.getContent();
+  restore(memento: EditorMemento): void {
+    this.content = memento.getContent();
   }
 }
 ```
@@ -2324,22 +2255,22 @@ console.log(editor.getContent()); // This is the first sentence. This is second.
 
 ```typescript
 class JobPost {
-  private _title: string | null = null;
+  private title: string | null = null;
   constructor(title: string) {
     this.title = title;
   }
 
-  public getTitle(): string {
+  getTitle(): string {
     return this.title;
   }
 }
 class JobSeeker {
-  private _name: string | null = null;
+  private name: string | null = null;
   constructor(name: string) {
     this.name = name;
   }
 
-  public onJobPosted(job: JobPost): void {
+  onJobPosted(job: JobPost): void {
     console.log(`Hi ${this.name}! New job posted: ${job.getTitle()}`);
   }
 }
@@ -2354,18 +2285,18 @@ class JobSeeker {
 
 ```typescript
 class JobCategory {
-  private _observers: JobSeeker[] = [];
-  public notify(jobPosting: JobPost): void {
-    for (const observer of this._observers) {
+  private observers: JobSeeker[] = [];
+  notify(jobPosting: JobPost): void {
+    for (const observer of this.observers) {
       observer.onJobPosted(jobPosting);
     }
   }
 
-  public attach(observer: JobSeeker): void {
-    this._observers.push(observer);
+  attach(observer: JobSeeker): void {
+    this.observers.push(observer);
   }
 
-  public addJob(jobPosting: JobPost): void {
+  addJob(jobPosting: JobPost): void {
     this.notify(jobPosting);
   }
 }
@@ -2446,22 +2377,6 @@ interface AnimalOperation {
 interface Animal {
   accept(operation: AnimalOperation): void;
 }
-class Monkey implements Animal {
-  accept(operation: AnimalOperation): void {
-    operation.visitMonkey(this);
-  }
-}
-
-class Lion implements Animal {
-  accept(operation: AnimalOperation): void {
-    operation.visitLion(this);
-  }
-}
-class Dolphin implements Animal {
-  accept(operation: AnimalOperation): void {
-    operation.visitDolphin(this);
-  }
-}
 ```
 
 </div>
@@ -2534,7 +2449,7 @@ const dolphin = new Dolphin();
 const speak = new Speak();
 
 monkey.accept(speak); // Ooh oo aa aa!
-lion.accept(speak); //Roaaar!
+lion.accept(speak); // Roaaar!
 dolphin.accept(speak); //Tuut tutt tuttt!
 ```
 
@@ -2647,14 +2562,14 @@ class QuickSortStrategy implements SortStrategy {
 
 ```typescript
 class Sorter {
-  private _sorter: SortStrategy;
+  private sorter: SortStrategy;
 
   constructor(sorter: SortStrategy) {
-    this._sorter = sorter;
+    this.sorter = sorter;
   }
 
   sort(dataset: any[]): any[] {
-    return this._sorter.sort(dataset);
+    return this.sorter.sort(dataset);
   }
 }
 ```
@@ -2751,18 +2666,18 @@ class DefaultText implements WritingState {
 
 ```typescript
 class TextEditor {
-  private _state: WritingState;
+  private state: WritingState;
 
   constructor(state: WritingState) {
-    this._state = state;
+    this.state = state;
   }
 
   setState(state: WritingState) {
-    this._state = state;
+    this.state = state;
   }
 
   type(words: string) {
-    this._state.write(words);
+    this.state.write(words);
   }
 }
 ```
