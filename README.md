@@ -152,12 +152,14 @@
 
 **مثال برنامه نویسی**
 
+
+توی این مثال میخوایم از اون مثال ساخت درب استفاده کنیم.
+
+پس اول ما اینترفیس مربوط به درب رو میسازیم و بعدش یک کلاس factory برای ساخت درب میسازیم.
+
+
 <details>
 <summary>🐍 Python</summary>
-
-توی این مثال میخوایم از اون مثال ساخت درب استفاده کنیم
-
-پس اول ما اینترفیس مربوط به درب رو میسازیم و در ادامه یک نمونه پیاده‌سازی براش پیاده‌سازی میکنیم:
 
 <div dir="ltr">
 
@@ -183,28 +185,14 @@ class WoodenDoor(Door):
 
     def getHeight(self):
         return self.height
-```
 
-</div>
 
-و حالا یک کلاس factory برای ساخت درب میسازیم:
-
-<div dir="ltr">
-
-```python
 class DoorFactory:
     @staticmethod
     def makeDoor(width, height):
         return WoodenDoor(width, height)
-```
 
-</div>
-
-حالا بیاین ببینیم چطوری می‌تونیم ازشون استفاده کنیم:
-
-<div dir="ltr">
-
-```python
+----------------------------
 door = DoorFactory.makeDoor(10, 10)
 print(door.getHeight())
 print(door.getWidth())
@@ -250,6 +238,8 @@ class DoorFactory {
   }
 }
 
+----------------------------
+
 let door = DoorFactory.makeDoor(10, 10);
 console.log(door.getHeight());
 console.log(door.getWidth());
@@ -292,12 +282,20 @@ console.log(door.getWidth());
 
 **مثال برنامه نویسی**
 
+بیاین از مثال مدیر استخدام برای درک بهتر استفاده کنیم.
+
+پس اول یک اینترفیس برای مصاحبه کننده‌ها میسازیم و چند پیاده‌سازی هم برای اون ایجاد می‌کنیم.
+
+
+بعد از اون `HiringManager` رو پیاده سازی میکنیم
+
+
+در نهایت هر فرزند میتونه ازش ارث بری کنه و متد `makeInterviewer` خودش رو داشته باشه:
+
+
 <details>
 <summary>🐍 Python</summary>
 
-بیاین از مثال مدیر استخدام برای درک بهتر استفاده کنیم.
-
-پس اول یک اینترفیس برای مصاحبه کننده‌ها میسازیم و چند پیاده‌سازی هم برای اون ایجاد می‌کنیم:
 
 <div dir="ltr">
 
@@ -316,15 +314,8 @@ class Developer(Interviewer):
 class CommunityExecutive(Interviewer):
     def askQuestions(self):
         print('Asking about community building')
-```
 
-</div>
 
-خب حالا `HiringManager` رو میسازیم:
-
-<div dir="ltr">
-
-```python
 class HiringManager:
     def makeInterviewer(self):
         pass
@@ -333,15 +324,8 @@ class HiringManager:
         interviewer = self.makeInterviewer()
         interviewer.askQuestions()
 
-```
 
-</div>
 
-در نهایت هر فرزند میتونه ازش ارث بری کنه و متد `makeInterviewer` خودش رو داشته باشه:
-
-<div dir="ltr">
-
-```python
 class DevelopmentManager(HiringManager):
     def makeInterviewer(self):
         return Developer()
@@ -350,15 +334,10 @@ class DevelopmentManager(HiringManager):
 class MarketingManager(HiringManager):
     def makeInterviewer(self):
         return CommunityExecutive()
-```
 
-</div>
 
-و برای استفاده ازش به این صورت عمل می کنیم:
+----------------------------
 
-<div dir="ltr">
-
-```python
 devManager = DevelopmentManager()
 devManager.takeInterview()
 
@@ -367,13 +346,6 @@ marketingManager.takeInterview()
 ```
 
 </div>
-
-<br>
-
-**چه موقع باید ازش استفاده کنیم؟**
-
-اساساً زمانی ازین الگو استفاده میشه که چندین کلاس با ریشه مشترک داریم (یعنی چندین کلاس یک کلاس parent رو پیاده‌سازی
-می‌کنند) و با توجه به شرایط تصمیم میگیریم از یکی از اون‌ها استفاده کنیم.
 
 </details>
 
@@ -433,6 +405,15 @@ marketingManager.takeInterview();
 
 </details>
 
+
+<br>
+
+**چه موقع باید ازش استفاده کنیم؟**
+
+اساساً زمانی ازین الگو استفاده میشه که چندین کلاس با ریشه مشترک داریم (یعنی چندین کلاس یک کلاس parent رو پیاده‌سازی
+می‌کنند) و با توجه به شرایط تصمیم میگیریم از یکی از اون‌ها استفاده کنیم.
+
+
 <br>
 
 <div align="center">
@@ -465,12 +446,30 @@ marketingManager.takeInterview();
 
 **مثال برنامه نویسی**
 
-<details>
-<summary>🐍 Python</summary>
+
 
 خب همون مثال ساخت خونه و نیاز به درب‌های مختلف رو ترجمه میکنیم.
 
-اول باید اینترفیس درب رو بسازیم و چند پیاده‌سازی ازش ایجاد کنیم :
+اول باید اینترفیس درب رو بسازیم و چند پیاده‌سازی ازش ایجاد کنیم.
+
+
+در مرحله بعد برای هر درب متخصص مربوطه رو ایجاد می‌کنیم.
+
+
+
+و در مرحله آخر سراغ پیاده‌سازی دیزاین پترن‌مون میریم.
+
+برای مثال کلاس `WoodenDoorFactory` زمانی استفاده میشه که نیاز به درب چوبی داریم و کارش اینه که برای ایجاد ابجکت درب (که
+اینجا
+درب چوبی هست) از کلاس `WoodenDoor` و برای ایجاد ابجکت متخصص (که اینجا نجار هست) از `Carpenter` استفاده کنه.
+
+این موضوع برای درب آهنی و ... هم بطور مشابه پیاده‌سازی میشه.
+
+
+
+<details>
+<summary>🐍 Python</summary>
+
 
 <div dir="ltr">
 
@@ -488,15 +487,9 @@ class WoodenDoor(Door):
 class IronDoor(Door):
     def getDescription(self):
         print('I am an iron door')
-```
 
-</div>
 
-در مرحله بعد برای هر درب متخصص مربوطه رو ایجاد می‌کنیم:
 
-<div dir="ltr">
-
-```python
 class DoorFittingExpert:
     def getDescription(self):
         pass
@@ -510,21 +503,9 @@ class Welder(DoorFittingExpert):
 class Carpenter(DoorFittingExpert):
     def getDescription(self):
         print('I can only fit wooden doors')
-```
 
-</div>
 
-حالا اینجاست که ما سراغ پیاده‌سازی دیزاین پترن‌مون میریم.
 
-برای مثال کلاس `WoodenDoorFactory` زمانی استفاده میشه که نیاز به درب چوبی داریم و کارش اینه که برای ایجاد ابجکت درب (که
-اینجا
-درب چوبی هست) از کلاس `WoodenDoor` و برای ایجاد ابجکت متخصص (که اینجا نجار هست) از `Carpenter` استفاده کنه.
-
-این موضوع برای درب آهنی و ... هم بطور مشابه پیاده‌سازی میشه.
-
-<div dir="ltr">
-
-```python
 class DoorFactory:
     def makeDoor(self):
         pass
@@ -547,15 +528,10 @@ class IronDoorFactory(DoorFactory):
 
     def makeFittingExpert(self):
         return Welder()
-```
 
-</div>
 
-روش استفاده ازش هم به این صورت هست:
+----------------------------
 
-<div dir="ltr">
-
-```python
 woodenFactory = WoodenDoorFactory()
 
 door = woodenFactory.makeDoor()
@@ -564,7 +540,7 @@ expert = woodenFactory.makeFittingExpert()
 door.getDescription()
 expert.getDescription()
 
------------------------------------------------
+----------------------------
 
 ironFactory = IronDoorFactory()
 
@@ -580,12 +556,6 @@ expert.getDescription()
 **همونطور که میبیند، می‌تونیم بطور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
 انتخاب نمی‌کنیم.**
-
-<br>
-
-**چه موقع باید ازش استفاده کنیم؟**
-
-زمانی که وابستگی‌های منطقی نه چندان ساده برای ایجاد وجود داره، میتونیم ازین دیزاین پترن استفاده کنیم.
 
 </details>
 
@@ -657,6 +627,8 @@ class IronDoorFactory extends DoorFactory {
   }
 }
 
+----------------------------
+
 let woodenFactory = new WoodenDoorFactory();
 
 let door = woodenFactory.makeDoor();
@@ -665,7 +637,7 @@ let expert = woodenFactory.makeFittingExpert();
 door.getDescription();
 expert.getDescription();
 
------------------------------------------------
+----------------------------
 
 let ironFactory = new IronDoorFactory();
 
@@ -679,7 +651,21 @@ expert.getDescription();
 
 </div>
 
+
+**همونطور که میبیند، می‌تونیم بطور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+درب
+انتخاب نمی‌کنیم.**
+
+
 </details>
+
+
+<br>
+
+**چه موقع باید ازش استفاده کنیم؟**
+
+زمانی که وابستگی‌های منطقی نه چندان ساده برای ایجاد وجود داره، میتونیم ازین دیزاین پترن استفاده کنیم.
+
 
 <br>
 
@@ -709,6 +695,7 @@ expert.getDescription();
 <details>
 <summary>🐍 Python</summary>
 <div dir="ltr">
+
 ```python
 def __init__(self, size, cheese=True, pepperoni=True, tomato=False, lettuce=True)
 ```
@@ -744,12 +731,17 @@ constructor(size: any, cheese: boolean = true, pepperoni: boolean = true, tomato
 
 **مثال برنامه نویسی**
 
+
+
+در این بخش هم میخوام مثال برگر رو براتون ترجمه کنم.
+
+اولین مرحله اینه که یک کلاس برگر معمولی داشته باشیم
+
+در ادامه کلاس Builder رو براش ایجاد میکنیم.
+
+
 <details>
 <summary>🐍 Python</summary>
-
-در بخش برنامه نویسی هم میخوام مثال برگر رو براتون ترجمه کنم.
-
-اولین مرحله اینه که یک کلاس برگر معمولی داشته باشیم:
 
 <div dir="ltr">
 
@@ -768,15 +760,9 @@ class Burger:
         self._pepperoni = builder.pepperoni
         self._lettuce = builder.lettuce
         self._tomato = builder.tomato
-```
 
-</div>
 
-در ادامه کلاس Builder رو براش ایجاد میکنیم:
 
-<div dir="ltr">
-
-```python
 class BurgerBuilder:
     size = None
 
@@ -806,15 +792,10 @@ class BurgerBuilder:
 
     def build(self):
         return Burger(self)
-```
 
-</div>
 
-روش استفاده از کلاس Builder هم به این صورت هست:
+----------------------------
 
-<div dir="ltr">
-
-```python
 burger = BurgerBuilder(10).addPepperoni().addLettuce().addTomato().build()
 
 print(vars(burger))
@@ -822,10 +803,6 @@ print(vars(burger))
 
 </div>
 
-**چه موقع باید ازش استفاده کنیم؟**
-
-همونطور که قبل تر اشاره کردم این دیزاین پترن رو معمولا برای ساخت ابجکت‌های پیچیده یا ابجکت‌هایی که نیاز به شخصی سازی
-زیادی دارن استفاده میکنیم.
 
 </details>
 
@@ -888,6 +865,8 @@ class BurgerBuilder {
   }
 }
 
+----------------------------
+
 let burger = new BurgerBuilder(10)
   .addPepperoni()
   .addLettuce()
@@ -899,6 +878,15 @@ console.log(Object.keys(burger));
 
 </div>
 </details>
+
+<br>
+
+
+**چه موقع باید ازش استفاده کنیم؟**
+
+همونطور که قبل تر اشاره کردم این دیزاین پترن رو معمولا برای ساخت ابجکت‌های پیچیده یا ابجکت‌هایی که نیاز به شخصی سازی
+زیادی دارن استفاده میکنیم.
+
 
 <br>
 
@@ -936,12 +924,21 @@ console.log(Object.keys(burger));
 
 **مثال برنامه نویسی**
 
+
+فرض کنید کلاس SomeComponent رو به صورتی که در کد میبینید داریم.
+
+باید دو کلاس copy و deep کپی ایجاد کنیم.
+
+
 <details>
 <summary>🐍 Python</summary>
 
-فرض کنید کلاس SomeComponent به این صورت تعریف شده:
+
+پایتون magic method‌هایی برای این مساله در نظر گرفته که ماهم از همون دو تابع معروف copy و deep copy استفاده میکنیم:
+
 
 <div dir="ltr">
+
 
 ```python
 class SomeComponent:
@@ -949,47 +946,30 @@ class SomeComponent:
         self.some_int = some_int
         self.some_list_of_objects = some_list_of_objects
         self.some_circular_ref = some_circular_ref
+
+    def __copy__(self):
+        some_list_of_objects = copy.copy(self.some_list_of_objects)
+        some_circular_ref = copy.copy(self.some_circular_ref)
+        new = self.__class__(
+            self.some_int, some_list_of_objects, some_circular_ref
+        )
+        new.__dict__.update(self.__dict__)
+        return new
+
+
+    def __deepcopy__(self, memo={}):
+        some_list_of_objects = copy.deepcopy(self.some_list_of_objects, memo)
+        some_circular_ref = copy.deepcopy(self.some_circular_ref, memo)
+        new = self.__class__(
+            self.some_int, some_list_of_objects, some_circular_ref
+        )
+        new.__dict__ = copy.deepcopy(self.__dict__, memo)
+
+        return new
 ```
 
 </div>
 
-پایتون magic method‌هایی برای این مساله در نظر گرفته که ماهم از همون دو تابع معروف copy و deep copy استفاده میکنیم:
-
-<div dir="ltr">
-
-```python
-def __copy__(self):
-    some_list_of_objects = copy.copy(self.some_list_of_objects)
-    some_circular_ref = copy.copy(self.some_circular_ref)
-    new = self.__class__(
-        self.some_int, some_list_of_objects, some_circular_ref
-    )
-    new.__dict__.update(self.__dict__)
-    return new
-
-
-def __deepcopy__(self, memo={}):
-    some_list_of_objects = copy.deepcopy(self.some_list_of_objects, memo)
-    some_circular_ref = copy.deepcopy(self.some_circular_ref, memo)
-    new = self.__class__(
-        self.some_int, some_list_of_objects, some_circular_ref
-    )
-    new.__dict__ = copy.deepcopy(self.__dict__, memo)
-
-    return new
-```
-
-</div>
-
-**تفاوت Shadow Copy و Deep Copy ؟**
-<br>
-توی Shadow Copy، یک متغیر ساخته می‌شود و به مکانی توی حافظه، که مقدار متغیر قبلی توش قرار گرفته، اشاره می‌کنه. پس اگر
-شما مقدار
-متغیر اول رو تغییر بدین، متغیر دوم هم تغییر می‌کنه. و همین‌طور اگر مقدار متغیر دوم رو تغییر بدین، مقدار متغیر اول هم
-تغییر می‌کنه.
-
-ولی توی deep copy، یک متغیر ساخته می‌شه و مقدار متغیر قبلی توی اون کپی می‌شه. در نتیجه تغییر ابجکت اول یا ابجکت کپی
-تغییری توی اون یکی به وجود نمیاره.
 
 </details>
 
@@ -1033,6 +1013,18 @@ class SomeComponent {
 
 </div>
 </details>
+<br>
+
+**تفاوت Shadow Copy و Deep Copy ؟**
+<br>
+توی Shadow Copy، یک متغیر ساخته می‌شود و به مکانی توی حافظه، که مقدار متغیر قبلی توش قرار گرفته، اشاره می‌کنه. پس اگر
+شما مقدار
+متغیر اول رو تغییر بدین، متغیر دوم هم تغییر می‌کنه. و همین‌طور اگر مقدار متغیر دوم رو تغییر بدین، مقدار متغیر اول هم
+تغییر می‌کنه.
+
+ولی توی deep copy، یک متغیر ساخته می‌شه و مقدار متغیر قبلی توی اون کپی می‌شه. در نتیجه تغییر ابجکت اول یا ابجکت کپی
+تغییری توی اون یکی به وجود نمیاره.
+
 
 <br>
 
@@ -1065,13 +1057,15 @@ class SomeComponent {
 
 **مثال برنامه نویسی**
 
-<details>
-<summary>🐍 Python</summary>
-
 بطور کلی برای ساخت singleton باید تابع سازنده private بشه، cloning و متود‌های copy بسته بشن و تابع استاتیکی برای ساخت
 ابجکت تعریف بشه.
 
 ولی توی پایتون راه حل ساده تری وجود داره که اون استفاده از metaclass هاست:
+
+
+<details>
+<summary>🐍 Python</summary>
+
 
 <div dir="ltr">
 
@@ -1091,15 +1085,6 @@ class Singleton(metaclass=SingletonMeta):
         pass
 
 
-```
-
-</div>
-
-نحوه فراخوانی هم در این روش تفاوتی نمیکنه:
-
-<div dir="ltr">
-
-```python
 if __name__ == "__main__":
     # The client code.
 
@@ -1115,31 +1100,6 @@ if __name__ == "__main__":
 </div>
 این روش Thread Safe نیست. برای اطلاعات بیشتر سرچ کنید :)
 
-<br>
-<br>
-
----
-
-<br>
-
-<div align="center">
-
-# Structural Design Patterns
-
-</div>
-
-به زبون ساده:
-
-> بطور کلی الگو‌های طراحی ساختاری با روابط بین موجودیت‌ها و ترکیب کردن اونا کار دارن.
-
-ویکی پدیا:
-
-<div dir="ltr">
-
-> In software engineering, structural design patterns are design patterns that ease the design by identifying a simple
-> way to realize relationships between entities.
-
-</div>
 
 </details>
 
@@ -1167,6 +1127,8 @@ class Singleton extends SingletonMeta {
   }
 }
 
+----------------------------
+
 const s1 = Singleton.getInstance();
 const s2 = Singleton.getInstance();
 if (Object.is(s1, s2)) {
@@ -1179,6 +1141,35 @@ if (Object.is(s1, s2)) {
 </div>
 
 </details>
+
+
+<br>
+<br>
+
+---
+
+<br>
+
+<div align="center">
+
+# Structural Design Patterns
+
+</div>
+
+به زبون ساده:
+
+> بطور کلی الگو‌های طراحی ساختاری با روابط بین موجودیت‌ها و ترکیب کردن اونا کار دارن.
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> In software engineering, structural design patterns are design patterns that ease the design by identifying a simple
+> way to realize relationships between entities.
+
+</div>
+
+
 <br>
 
 <div align="center">
@@ -1212,12 +1203,28 @@ if (Object.is(s1, s2)) {
 
 **مثال برنامه نویسی**
 
-<details>
-<summary>🐍 Python</summary>
+
 
 فرض کنید یک شکارچی به شیر‌ها حمله میکنه و اون‌ها غرش میکنن.
 
-خب اول باید یک اینترفیس `lion` بسازیم که شیر‌های مختلف ازش استفاده کنن:
+خب اول باید یک اینترفیس `lion` بسازیم که شیر‌های مختلف ازش استفاده کنن.
+
+در مرحله بعد شکارچی وقتی شکار انجام بده اون شیر غرش انجام میده.
+
+
+حالا فرض کنید یک موجودیت جدید مثل `سگ وحشی` به برنامه اضافه شده.
+
+خب سگ غرش انجام نمیده بجای اون `bark` انجام میده.
+
+خب اینجا `سگ وحشی` با تابع `hunt` شکارچی ناسازگار میشه. (چون در زمان شکار تابع roar رو صدا میزنیم و سگ شکاری این تابع رو
+نداره!)
+
+برای حلش به این صورت میتونیم براش آداپتور تعریف کنیم:
+
+
+<details>
+<summary>🐍 Python</summary>
+
 
 <div dir="ltr">
 
@@ -1235,34 +1242,13 @@ class AfricanLion(Lion):
 class AsianLion(Lion):
     def roar(self):
         pass
-```
 
-</div>
 
-خب حالا شکارچی وقتی شکار انجام بده اون شیر غرش انجام میده:
-
-<div dir="ltr">
-
-```python
 class Hunter:
     def hunt(self, lion):
         lion.roar()
-```
 
-</div>
 
-حالا فرض کنید یک موجودیت جدید مثل `سگ وحشی` به برنامه اضافه شده.
-
-خب سگ غرش انجام نمیده بجای اون `bark` انجام میده.
-
-خب اینجا `سگ وحشی` با تابع `hunt` شکارچی ناسازگار میشه. (چون در زمان شکار تابع roar رو صدا میزنیم و سگ شکاری این تابع رو
-نداره!)
-
-برای حلش به این صورت میتونیم براش آداپتور تعریف کنیم:
-
-<div dir="ltr">
-
-```python
 class WildDog:
     @staticmethod
     def bark():
@@ -1277,15 +1263,10 @@ class WildDogAdapter(Lion):
 
     def roar(self):
         self._dog.bark()
-```
 
-</div>
 
-در ادامه هم نحوه استفاده ازش رو میبینید:
+----------------------------
 
-<div dir="ltr">
-
-```python
 wildDog = WildDog()
 wildDogAdapter = WildDogAdapter(wildDog)
 
@@ -1295,13 +1276,6 @@ hunter.hunt(wildDogAdapter)
 
 </div>
 در واقع مثال واقعی و قابل حس نیست ولی مفهوم رو به خوبی منتقل می‌کنه.
-
-<br>
-<br>
-
-پیشنهاد میکنم برای درک بهتر این الگو، یک آداپتور برای این سناریو پیاده‌سازی کنید:
-
-کلاس اول شما خروجی excel میده ولی کلاس دوم ورودیش csv هست.
 
 </details>
 
@@ -1343,6 +1317,8 @@ class WildDogAdapter implements Lion {
     this.dog.bark();
   }
 }
+
+----------------------------
 
 const wildDog = new WildDog();
 const wildDogAdapter = new WildDogAdapter(wildDog);
@@ -1391,12 +1367,16 @@ hunter.hunt(wildDogAdapter);
 
 **مثال برنامه نویسی**
 
-<details>
-<summary>🐍 Python</summary>
 
 بیاید همون مثال سایت و قالب که بالاتر درموردش صحبت کردیم رو پیاده‌سازی کنیم.
 
-در مرحله اول کلاس `WebPage` و پیاده‌سازی‌هایی از اون رو داریم:
+در مرحله اول کلاس `WebPage` و پیاده‌سازی‌هایی از اون رو داریم.
+
+برای قالب هم، باید کلاس و پیاده سازی‌های مختلفی بنویسیم:
+
+
+<details>
+<summary>🐍 Python</summary>
 
 <div dir="ltr">
 
@@ -1419,15 +1399,8 @@ class About(WebPage):
 class Careers(WebPage):
     def getContent(self):
         return "Careers page in " + self.theme.getColor()
-```
 
-</div>
 
-برای قالب هم، باید کلاس و پیاده سازی‌های مختلفی بنویسیم:
-
-<div dir="ltr">
-
-```python
 class Theme:
     def getColor(self):
         pass
@@ -1446,15 +1419,10 @@ class LightTheme(Theme):
 class AquaTheme(Theme):
     def getColor(self):
         return 'Light Blue'
-```
 
-</div>
 
-حالا میتونید نحوه ترکیب کردن این دو تاروو باهم ببینید:
+----------------------------
 
-<div dir="ltr">
-
-```python
 darkTheme = DarkTheme()
 
 about = About(darkTheme)
@@ -1470,7 +1438,7 @@ print(careers.getContent())
 
 <details>
 <summary>Typescript</summary>
-div dir="ltr">
+<div dir="ltr">
 
 ```typescript
 class WebPage {
@@ -1520,6 +1488,8 @@ class AquaTheme extends Theme {
     return "Light Blue";
   }
 }
+
+----------------------------
 
 const darkTheme = new DarkTheme();
 
@@ -1572,10 +1542,8 @@ console.log(careers.getContent());
 
 </div>
 
-**مثال برنامه نویسی**
 
-<details>
-<summary>🐍 Python</summary>
+**مثال برنامه نویسی**
 
 بطور کلی توی دیزاین پترن composite ما دو مدل دیتا داریم:
 
@@ -1584,6 +1552,12 @@ console.log(careers.getContent());
 دو: Leaf که در واقع زیر مجموعه نداره و فقط یک سری وظیفه داره.
 
 خب اول بیایم یک اینترفیس پایه برای کامپوننت‌هامون بسازیم و در ادامه هم اینترفیس‌های Composite و Leaf رو بسازیم:
+
+
+
+<details>
+
+<summary>🐍 Python</summary>
 
 <div dir="ltr">
 
@@ -1621,14 +1595,8 @@ class Composite(Component):
         return f"Branch({'+'.join(results)})"
 
 
-```
+----------------------------
 
-</div>
-استفاده ازش هم خیلی راحته:
-
-<div dir="ltr">
-
-```python
 tree = Composite()
 
 branch1 = Composite()
@@ -1651,7 +1619,9 @@ print(f"RESULT: {tree.operation()}", end="")
 </details>
 
 <details>
+
 <summary>Typescript</summary>
+
 <div dir="ltr">
 
 ```typescript
@@ -1688,6 +1658,8 @@ class Composite implements Component {
   }
 }
 
+----------------------------
+
 const tree = new Composite();
 
 const branch1 = new Composite();
@@ -1705,7 +1677,9 @@ console.log(`RESULT: ${tree.operation()}`);
 ```
 
 </div>
+
 </details>
+
 <br>
 
 <div align="center">
@@ -1745,6 +1719,13 @@ console.log(`RESULT: ${tree.operation()}`);
 
 برای مثال قهوه را در نظر بگیرید. اول از همه ما یک قهوه ساده داریم که رابط قهوه را پیاده سازی می کند.
 
+ما می‌خوایم کد رو توسعه‌پذیر کنیم تا در صورت نیاز، گزینه‌ها بتونند اون رو تغییر بدند.
+
+پس بیاید چند دکوریتور براش بسازیم.
+
+همونطور که میبینید خیلی ساده میتونیم هر ابجکت رو به عنوان ورودی تابع بعدی بدیم و اینطوری چندین مرحله افزودنی رو خیلی راحت به ابجکتمون اضافه کردیم!
+
+
 <div dir="ltr">
 
 ```python
@@ -1762,17 +1743,9 @@ class SimpleCoffee(Coffee):
 
     def getDescription(self):
         return 'Simple Coffee'
-```
 
-</div>
 
-ما می‌خوایم کد رو توسعه‌پذیر کنیم تا در صورت نیاز، گزینه‌ها بتونند اون رو تغییر بدند.
 
-پس بیاید چند دکوریتور براش بسازیم:
-
-<div dir="ltr">
-
-```python
 class MilkCoffee(Coffee):
     _coffee = None
 
@@ -1810,15 +1783,9 @@ class VanillaCoffee(Coffee):
 
     def getDescription(self):
         return self._coffee.getDescription() + ', vanilla'
-```
 
-</div>
+----------------------------
 
-و حالا نحوه ساخت قهوه سفارشی:
-
-<div dir="ltr">
-
-```python
 someCoffee = SimpleCoffee()
 print(someCoffee.getCost())
 print(someCoffee.getDescription())
@@ -1837,7 +1804,6 @@ print(someCoffee.getDescription())
 ```
 
 </div>
-همونطور که میبینید خیلی ساده میتونیم هر ابجکت رو به عنوان ورودی تابع بعدی بدیم و اینطوری چندین مرحله افزودنی رو خیلی راحت به ابجکتمون اضافه کردیم!
 
 </details>
 
@@ -1913,6 +1879,8 @@ class VanillaCoffee extends Coffee {
   }
 }
 
+----------------------------
+
 let someCoffee = new SimpleCoffee();
 console.log(someCoffee.getCost());
 console.log(someCoffee.getDescription());
@@ -1962,12 +1930,19 @@ console.log(someCoffee.getDescription());
 
 **مثال برنامه نویسی**
 
-<details>
-<summary>🐍 Python</summary>
-
 بیاین همون مثال مربوط به کامپیوتر رو پیاده‌سازی کنیم!
 
+
+<details>
+
+<summary>🐍 Python</summary>
+
+
 اول باید کلاس کامپیوتر رو بسازیم:
+
+کلاس Facade به این صورت پیاده‌سازی میشه که یک ابجکت رو به عنوان ورودی دریافت میکنه و با هر تابع خودش یک سری عملیات رو
+روی اون ابجکت اعمال میکنه.
+
 
 <div dir="ltr">
 
@@ -1993,18 +1968,8 @@ class Computer:
 
     def pullCurrent(self):
         print("Haaah!")
-```
 
-</div>
 
-کلاس Facade به این صورت پیاده‌سازی میشه که یک ابجکت رو به عنوان ورودی دریافت میکنه و با هر تابع خودش یک سری عملیات رو
-روی اون ابجکت اعمال میکنه.
-
-به نحوه پیاده‌سازی Facade برای کلاس کامپیوتر دقت کنین:
-
-<div dir="ltr">
-
-```python
 class ComputerFacade:
     _computer = None
 
@@ -2021,15 +1986,9 @@ class ComputerFacade:
         self.computer.closeEverything()
         self.computer.pullCurrent()
         self.computer.sooth()
-```
 
-</div>
+----------------------------
 
-نحوه استفاده از یک کلاس فساد هم به این صورته:
-
-<div dir="ltr">
-
-```python
 computer = ComputerFacade(Computer())
 computer.turnOn()
 computer.turnOff()
@@ -2038,6 +1997,13 @@ computer.turnOff()
 </div>
 
 </details>
+
+
+<details>
+
+<summary>TypeScript</summary>
+
+
 
 <div dir="ltr">
 
@@ -2095,12 +2061,19 @@ class ComputerFacade {
   }
 }
 
+----------------------------
+
 let computer = new ComputerFacade(new Computer());
 computer.turnOn();
 computer.turnOff();
 ```
 
 </div>
+
+
+</details>
+
+
 
 <br>
 
@@ -2134,10 +2107,13 @@ computer.turnOff();
 
 **مثال برنامه نویسی**
 
+بیاین مثال غرفه چای رو پیاده سازی کنیم. اول باید انواع چای و چای ساز رو پیاده سازی کنیم.
+
+توی مرحله بعد ما یک کلاس `TeaShop` داریم که وظیفه ثبت سفارش و آماده کردن اون‌هارو به عهده داره.
+
 <details>
 <summary>🐍 Python</summary>
 
-بیاین مثال غرفه چای رو پیاده سازی کنیم. اول باید انواع چای رو پیاده سازی کنیم و بعدش چای ساز:
 
 <div dir="ltr">
 
@@ -2154,15 +2130,8 @@ class TeaMaker:
             self._availableTea[preference] = GreenTea()
 
         return self._availableTea[preference]
-```
 
-</div>
 
-توی مرحله بعد ما یک کلاس `TeaShop` داریم که وظیفه ثبت سفارش و آماده کردن اون‌هارو به عهده داره:
-
-<div dir="ltr">
-
-```python
 class TeaShop:
     _orders = {}
     _teaMaker = None
@@ -2176,15 +2145,9 @@ class TeaShop:
     def serve(self):
         for table, tea in self._orders.iteritems():
             print("Serving tea to table #" + str(table))
-```
 
-</div>
+----------------------------
 
-روش استفاده ازش هم به این صورت هست:
-
-<div dir="ltr">
-
-```python
 teaMaker = TeaMaker()
 shop = TeaShop(teaMaker)
 
@@ -2239,6 +2202,8 @@ class TeaShop {
   }
 }
 
+----------------------------
+
 let teaMaker = new TeaMaker();
 let shop = new TeaShop(teaMaker);
 
@@ -2292,7 +2257,8 @@ shop.serve();
 
 خب بیاید مثال درب رو پیاده سازی کنیم.
 
-اول اینترفیس درب رو میسازیم و بعدش یک مدل درب پیاده سازی میکنیم:
+اول اینترفیس درب رو میسازیم و بعدش یک مدل درب پیاده سازی میکنیم.
+در مرحله بعد هم یک پروکسی برای اضافه کردن امنیت به درب میسازیم.
 
 <div dir="ltr">
 
@@ -2311,15 +2277,8 @@ class LabDoor(Door):
 
     def close(self):
         print("Closing the lab door")
-```
 
-</div>
 
-حالا ما میخوایم یک پروکسی برای اضافه کردن امنیت به درب بسازیم:
-
-<div dir="ltr">
-
-```python
 class SecuredDoor():
     _door = None
 
@@ -2337,15 +2296,9 @@ class SecuredDoor():
 
     def close(self):
         self.door.close()
-```
 
-</div>
+----------------------------
 
-نحوه استفاده از اون هم به این صورته :
-
-<div dir="ltr">
-
-```python
 door = SecuredDoor(LabDoor())
 door.open('invalid')  # Big no! It ain't possible
 
@@ -2355,31 +2308,6 @@ door.close()  # Closing Lab Door
 
 </div>
 
-<br>
-<br>
-
----
-
-<br>
-
-<div align="center">
-
-# Behavioral Design Patterns
-
-</div>
-
-به زبون ساده:
-
-> این الگوها به شما اجازه میدهند که رفتار کلاس‌ها رو تغییر بدین و یا اینکه این رفتار رو به کلاس‌های دیگه اضافه کنین.
-
-ویکی پدیا:
-
-<div dir="ltr">
-
-> In software engineering, behavioral design patterns are design patterns that identify common communication patterns
-> among objects. By doing so, these patterns increase flexibility in carrying out communication.
-
-</div>
 
 </details>
 
@@ -2425,6 +2353,8 @@ class SecuredDoor {
   }
 }
 
+----------------------------
+
 const door = new SecuredDoor(new LabDoor());
 door.open("invalid"); // Big no! It ain't possible
 door.open("$ecr@t"); // Opening lab door
@@ -2434,6 +2364,33 @@ door.close(); // Closing Lab Door
 </div>
 
 </details>
+
+<br>
+<br>
+
+---
+
+<br>
+
+<div align="center">
+
+# Behavioral Design Patterns
+
+</div>
+
+به زبون ساده:
+
+> این الگوها به شما اجازه میدهند که رفتار کلاس‌ها رو تغییر بدین و یا اینکه این رفتار رو به کلاس‌های دیگه اضافه کنین.
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> In software engineering, behavioral design patterns are design patterns that identify common communication patterns
+> among objects. By doing so, these patterns increase flexibility in carrying out communication.
+
+</div>
+
 
 <br>
 
@@ -2471,10 +2428,27 @@ door.close(); // Closing Lab Door
 
 **مثال برنامه نویسی**
 
+
+میخوایم همون مثال پرداخت رو باهم پیاده سازی کنیم.
+
+خب توی کد بالا یک کلاس مرجع ساختیم که اسمش Account هست. این کلاس یک متد داره که اسمش pay هست. این متد یک مقدار رو میگیره
+و سعی میکنه اون مقدار رو از حساب خود پرداخت کنه. اگر موفق نشد، اون مقدار رو به حساب بعدی انتقال میده.
+
+تابع inspect.stack یک تابعیه که میتونه اطلاعاتی از فراخوانی تابع رو برگردونه. مثلا اگر ما از این تابع در یک تابع دیگه
+استفاده کنیم، این تابع میتونه اسم تابعی که از اون استفاده شده رو برگردونه.
+
+خب حالا میخوایم یک حساب بانکی، یک حساب پی پال و یک حساب بیت کوین بسازیم.
+
+
+همونطور که میبینید اومدیم و بعد از ساختن این حساب‌ها اونارو به هم متصل کردیم!
+
+سیستم اول سعی کرده با حساب بانکی پرداخت کنه ولی موجودی کافی نداشت، بعدش سعی کرده با حساب پی پال پرداخت کنه ولی موجودی
+کافی نداشت، و در نهایت با حساب بیت کوین پرداخت میکنه!
+
+
+
 <details>
 <summary>🐍 Python</summary>
-
-میخوایم همون مثال پرداخت رو باهم پیاده سازی کنیم:
 
 <div dir="ltr">
 
@@ -2525,21 +2499,10 @@ class Bitcoin(Account):
 
     def __init__(self, balance):
         self.balance = balance
-```
 
-</div>
 
-خب توی کد بالا یک کلاس مرجع ساختیم که اسمش Account هست. این کلاس یک متد داره که اسمش pay هست. این متد یک مقدار رو میگیره
-و سعی میکنه اون مقدار رو از حساب خود پرداخت کنه. اگر موفق نشد، اون مقدار رو به حساب بعدی انتقال میده.
+----------------------------
 
-تابع inspect.stack یک تابعیه که میتونه اطلاعاتی از فراخوانی تابع رو برگردونه. مثلا اگر ما از این تابع در یک تابع دیگه
-استفاده کنیم، این تابع میتونه اسم تابعی که از اون استفاده شده رو برگردونه.
-
-خب حالا میخوایم یک حساب بانکی، یک حساب پی پال و یک حساب بیت کوین بسازیم:
-
-<div dir="ltr">
-
-```python
 bank = Bank(100)  # Bank with balance 100
 paypal = Paypal(200)  # Paypal with balance 200
 bitcoin = Bitcoin(300)  # Bitcoin with balance 300
@@ -2559,11 +2522,6 @@ Paid 259 using Bitcoin!
 ```
 
 </div>
-
-همونطور که میبینید اومدیم و بعد از ساختن این حساب‌ها اونارو به هم متصل کردیم!
-
-سیستم اول سعی کرده با حساب بانکی پرداخت کنه ولی موجودی کافی نداشت، بعدش سعی کرده با حساب پی پال پرداخت کنه ولی موجودی
-کافی نداشت، و در نهایت با حساب بیت کوین پرداخت میکنه!
 
 </details>
 
@@ -2624,6 +2582,8 @@ class Bitcoin extends Account {
     }
 }
 
+----------------------------
+
 const bank = new Bank(100);
 const paypal = new Paypal(200);
 const bitcoin = new Bitcoin(300);
@@ -2678,7 +2638,17 @@ Paid 259 using Bitcoin!
 <details>
 <summary>🐍 Python</summary>
 
-میخوایم یک کنترل برای لامپ درست کنیم (Receiver):
+میخوایم یک کنترل برای لامپ درست کنیم (Receiver).
+
+اول باید یک ساختار برای دستورات درست کنیم (Command).
+
+و در نهایت باید کنترل رو بسازیم که میتونه دستورات رو اجرا کنه! (Invoker)
+
+توی این کد هم اول یک لامپ میسازیم و بعدش کامند‌های روشن کردن و خاموش کردن رو ایجاد میکنیم!
+
+در نهایت وقتی نیاز به خاموش کردن یا روشن کردن داشته باشیم این کامند‌هارو به کنترلمون میفرستیم و اون اجراشون میکنه!
+
+
 
 <div dir="ltr">
 
@@ -2689,15 +2659,7 @@ class Bulb:
 
     def turnOff(self):
         print("Darkness!")
-```
 
-</div>
-
-اول باید یک ساختار برای دستورات درست کنیم (Command):
-
-<div dir="ltr">
-
-```python
 class Command:
     _bulb = None
 
@@ -2716,27 +2678,15 @@ class TurnOn(Command):
 class TurnOff(Command):
     def execute(self):
         self._bulb.turnOff()
-```
 
-</div>
 
-و در نهایت باید کنترل رو بسازیم که میتونه دستورات رو اجرا کنه! (Invoker)
-
-<div dir="ltr">
-
-```python
 class RemoteControl:
     def submit(self, command):
         command.execute()
-```
 
-</div>
 
-نحوه استفاده از این کنترل به این صورته:
+----------------------------
 
-<div dir="ltr">
-
-```python
 bulb = Bulb()
 
 turnOn = TurnOn(bulb)
@@ -2749,10 +2699,6 @@ remote.submit(turnOff)  # Darkness!
 ```
 
 </div>
-
-توی این کد هم اول یک لامپ میسازیم و بعدش کامند‌های روشن کردن و خاموش کردن رو ایجاد میکنیم!
-
-در نهایت وقتی نیاز به خاموش کردن یا روشن کردن داشته باشیم این کامند‌هارو به کنترلمون میفرستیم و اون اجراشون میکنه!
 
 </details>
 
@@ -2799,6 +2745,8 @@ class RemoteControl {
   }
 }
 
+----------------------------
+
 const bulb = new Bulb();
 
 const turnOn = new TurnOn(bulb);
@@ -2844,11 +2792,18 @@ remote.submit(turnOff); // Darkness!
 
 **مثال برنامه نویسی**
 
-<details>
-<summary>🐍 Python</summary>
 
 این مثال رو میخوایم یکم پایتونیک پیش بریم! میدونید که توی پایتون دو تا مفهوم Iterable و Iterator رو داریم پس میریم ازشون
 استفاده کنیم!
+
+این کلاس یک Iterator هستش که میتونه توی یک WordsCollection جابجا بشه و عناصرش رو برگردونه!
+
+توی این کد هم میتونید ببینید که چطوری میتونیم از Iterator‌ها استفاده کنیم!
+
+
+<details>
+<summary>🐍 Python</summary>
+
 
 <div dir="ltr">
 
@@ -2874,15 +2829,7 @@ class AlphabeticalOrderIterator(Iterator):
             raise StopIteration()
 
         return value
-```
 
-</div>
-
-این کلاس یک Iterator هستش که میتونه توی یک WordsCollection جابجا بشه و عناصرش رو برگردونه!
-
-<div dir="ltr">
-
-```python
 
 class WordsCollection(Iterable):
     def __init__(self, collection: List[Any] = []) -> None:
@@ -2896,15 +2843,7 @@ class WordsCollection(Iterable):
 
     def add_item(self, item: Any) -> None:
         self._collection.append(item)
-```
 
-</div>
-
-این کلاس یک Iterable هستش که میتونه توی یک WordsCollection جابجا بشه و عناصرش رو برگردونه!
-
-<div dir="ltr">
-
-```python
 
 if __name__ == "__main__":
     collection = WordsCollection()
@@ -2922,7 +2861,6 @@ if __name__ == "__main__":
 
 </div>
 
-توی این کد هم میتونید ببینید که چطوری میتونیم از Iterator‌ها استفاده کنیم!
 
 </details>
 
@@ -2973,6 +2911,8 @@ class WordsCollection {
   }
 }
 
+----------------------------
+
 const collection = new WordsCollection();
 collection.addItem("First");
 collection.addItem("Second");
@@ -3022,10 +2962,14 @@ for (const item of collection.getReverseIterator()) {
 
 **مثال برنامه نویسی**
 
+میخوایم یک ساختار چت روم بسازیم! (Mediator)
+
+خب حالا بخش یوزر‌ها: (Colleagues)
+
+
 <details>
 <summary>🐍 Python</summary>
 
-میخوایم یک ساختار چت روم بسازیم! (Mediator)
 
 <div dir="ltr">
 
@@ -3041,15 +2985,8 @@ class ChatRoom(ChatRoomMediator):
         sender = user.getName()
 
         print(str(time) + '[' + sender + ']: ' + message)
-```
 
-</div>
 
-خب حالا بخش یوزر‌ها: (Colleagues)
-
-<div dir="ltr">
-
-```python
 class User:
     _name = None
     _chatMediator = None
@@ -3063,15 +3000,10 @@ class User:
 
     def send(self, message):
         self._chatMediator.showMessage(self, message)
-```
 
-</div>
+----------------------------
 
-نحوه استفاده ازشون هم به این صورته :
 
-<div dir="ltr">
-
-```python
 mediator = ChatRoom()
 
 john = User('John', mediator)
@@ -3086,7 +3018,7 @@ jane.send('Hey!')
 
 </div>
 
-به همین راحتی :)
+
 
 </details>
 
@@ -3126,6 +3058,8 @@ class User {
     this.chatMediator.showMessage(this, message);
   }
 }
+
+----------------------------
 
 const mediator = new ChatRoom();
 
@@ -3170,10 +3104,17 @@ jane.send("Hey!");
 
 **مثال برنامه نویسی**
 
+میخوایم یک ادیتور متن بسازیم و قابلیت ذخیره کردن و بازگردانی بهش اضافه کنیم!
+
+خب اول یک کلاس به عنوان حافظه ادیتور میسازیم! مشخصه که وظیفه‌اش فقط نگهداری یک مقدار هست!
+
+در ادامه یک کلاس ادیتور میسازیم که قابلیت تایپ کردن، خالی کردن، سیو و برگشت حافظه داره!
+
+
+
 <details>
 <summary>🐍 Python</summary>
 
-میخوایم یک ادیتور متن بسازیم و قابلیت ذخیره کردن و بازگردانی بهش اضافه کنیم!
 
 <div dir="ltr">
 
@@ -3186,17 +3127,8 @@ class EditorMemento:
 
     def getContent(self):
         return self._content
-```
 
-</div>
 
-خب اول یک کلاس به عنوان حافظه ادیتور میسازیم! مشخصه که وظیفه‌اش فقط نگهداری یک مقدار هست!
-
-در ادامه یک کلاس ادیتور میسازیم که قابلیت تایپ کردن، خالی کردن، سیو و برگشت حافظه داره!
-
-<div dir="ltr">
-
-```python
 class Editor:
     _content = ''
 
@@ -3211,15 +3143,9 @@ class Editor:
 
     def restore(self, memento):
         self.content = memento.getContent()
-```
 
-</div>
+----------------------------
 
-و در مرحله آخر هم نحوه استفاده‌اش رو ببینید:
-
-<div dir="ltr">
-
-```python
 editor = Editor()
 editor.type('This is the first sentence')
 editor.type('This is the second.')
@@ -3274,6 +3200,8 @@ class Editor {
   }
 }
 
+----------------------------
+
 const editor = new Editor();
 editor.type("This is the first sentence");
 editor.type("This is the second.");
@@ -3319,10 +3247,16 @@ console.log(editor.getContent()); // This is the first sentence. This is second.
 
 **مثال برنامه نویسی**
 
+در بخش اول یک کلاس برای ذخیره کردن یک شغل میسازیم و در بخش بعدی یک کلاس برای جویندگان کار میسازیم!
+
+
+و بعد باید یک کلاس برای دسته بندی‌های مختلف کار ایجاد کنیم و جویندگان کار میتونن بهش اضافه بشن و اگه شغلی توی اون دسته
+بندی ارسال بشه به اونا اطلاع رسانی میشه!
+
+
 <details>
 <summary>🐍 Python</summary>
 
-در بخش اول یک کلاس برای ذخیره کردن یک شغل میسازیم و در بخش بعدی یک کلاس برای جویندگان کار میسازیم!
 
 <div dir="ltr">
 
@@ -3346,16 +3280,7 @@ class JobSeeker:
     def onJobPosted(self, job):
         print('Hi ' + self.name + '! New job posted: ' + job.getTitle())
 
-```
 
-</div>
-
-و حالا باید یک کلاس برای دسته بندی‌های مختلف کار ایجاد کنیم و جویندگان کار میتونن بهش اضافه بشن و اگه شغلی توی اون دسته
-بندی ارسال بشه به اونا اطلاع رسانی میشه!
-
-<div dir="ltr">
-
-```python
 class JobCategory:
     _observers = []
 
@@ -3368,15 +3293,9 @@ class JobCategory:
 
     def addJob(self, jobPosting):
         self.notify(jobPosting)
-```
 
-</div>
 
-نحوه استفاده ازش رو ببینید:
-
-<div dir="ltr">
-
-```python
+----------------------------
 
 johnDoe = JobSeeker('John Doe')
 janeDoe = JobSeeker('Jane Doe')
@@ -3440,6 +3359,8 @@ class JobCategory {
   }
 }
 
+----------------------------
+
 const johnDoe = new JobSeeker("John Doe");
 const janeDoe = new JobSeeker("Jane Doe");
 
@@ -3492,13 +3413,13 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 
 **مثال برنامه نویسی**
 
-<details>
-<summary>🐍 Python</summary>
-
 فرض کنید یک باغ وحش مجازی داریم و میخوایم یک عالمه امکان رو به حیوون‌های مختلف اضافه کنیم! مثلا صداشون، نحوه پریدنشون و
 ...
 
-خب بریم Visitee و Visitor برای این مثال بسازیم:
+
+<details>
+<summary>🐍 Python</summary>
+
 
 <div dir="ltr">
 
@@ -3521,15 +3442,6 @@ class AnimalOperation:
     def visitDolphin(self, dolphin):
         pass
 
-```
-
-</div>
-
-خب حالا حیوون‌هامون رو بسازیم و صداشون رو هم به کلاس خودشون اضافه کنیم:
-
-<div dir="ltr">
-
-```python
 
 class Monkey(Animal):
     def shout(self):
@@ -3554,15 +3466,7 @@ class Dolphin(Animal):
     def accept(self, operation):
         operation.visitDolphin(self)
 
-```
 
-</div>
-
-حالا بیاید کلاس رو برای دیدن صداشون اضافه کنیم:
-
-<div dir="ltr">
-
-```python
 class Speak(AnimalOperation):
     def visitMonkey(self, monkey):
         monkey.shout()
@@ -3572,15 +3476,8 @@ class Speak(AnimalOperation):
 
     def visitDolphin(self, dolphin):
         dolphin.speak()
-```
 
-</div>
 
-فراخوانیش رو ببینید:
-
-<div dir="ltr">
-
-```python
 monkey = Monkey()
 lion = Lion()
 dolphin = Dolphin()
@@ -3629,9 +3526,6 @@ dolphin.accept(jump)  # Walked on water a little and disappeared
 ```
 
 </div>
-
-یعنی بجای اینکه کلاس حیوونا رو تغییر بدیم کلاس‌های جداگانه ای برای صدا و پرش و ... میسازیم و به عنوان ورودی به حیوونا
-میدیم :)
 
 </details>
 
@@ -3758,12 +3652,14 @@ dolphin.accept(jump); // Walked on water a little and disappeared
 
 **مثال برنامه نویسی**
 
-<details>
-<summary>🐍 Python</summary>
+
 
 میخوایم یک سرویس پیاده سازی کنیم که با توجه به داده‌هامون تصمیم بگیریم از یک نوع از مرتب سازی استفاده کنیم!
 
-بخش اول پیاده سازی استراتژی‌هامون هست:
+ یک کلاس بسازیم که وظیفه‌اش مدیریت این استراتژی‌ها باشه.
+
+<details>
+<summary>🐍 Python</summary>
 
 <div dir="ltr">
 
@@ -3784,15 +3680,8 @@ class QuickSortStrategy(SortStrategy):
     def sort(self, dataset):
         print('Sorting using quick sort')
         return dataset
-```
 
-</div>
 
-حالا باید یک کلاس بسازیم که وظیفه‌اش مدیریت این استراتژی‌ها باشه:
-
-<div dir="ltr">
-
-```python
 class Sorter:
     _sorter = None
 
@@ -3801,15 +3690,10 @@ class Sorter:
 
     def sort(self, dataset):
         return self._sorter.sort(dataset)
-```
 
-</div>
 
-نحوه استفاده ازش هم خیلی راحته:
+----------------------------
 
-<div dir="ltr">
-
-```python
 dataset = [1, 5, 4, 3, 2, 8]
 
 sorter = Sorter(BubbleSortStrategy())
@@ -3858,6 +3742,8 @@ class Sorter {
   }
 }
 
+----------------------------
+
 const dataset = [1, 5, 4, 3, 2, 8];
 
 const sorter = new Sorter(new BubbleSortStrategy());
@@ -3905,13 +3791,17 @@ sorter2.sort(dataset);
 
 **مثال برنامه نویسی**
 
-<details>
-<summary>🐍 Python</summary>
-
 میخوایم یک ادیتور بسازیم که قابلیت‌هایی مثل این داشته باشه که متنی که تایپ میشه حروف کوچیک باشه یا همش حروف بزرگ باشه یا
 معمولی باشه!
 
 اول بیاید کلاس‌هامون بر پایه الگوی State رو بسازیم:
+
+بعد ادیتور رو بسازیم و بهش یاد بدیم این کلاس‌ها رو توی خودش نگه داره و ازشون استفاده کنه!
+
+
+<details>
+<summary>🐍 Python</summary>
+
 
 <div dir="ltr">
 
@@ -3934,15 +3824,7 @@ class LowerCase(WritingState):
 class DefaultText(WritingState):
     def write(self, words):
         print(words)
-```
 
-</div>
-
-حالا ادیتور رو بسازیم و بهش یاد بدیم این کلاس‌ها رو توی خودش نگه داره و ازشون استفاده کنه!
-
-<div dir="ltr">
-
-```python
 class TextEditor():
     _state = None
 
@@ -3954,15 +3836,10 @@ class TextEditor():
 
     def type(self, words):
         self._state.write(words)
-```
 
-</div>
 
-نحوه استفاده ازش هم به این صورته:
+----------------------------
 
-<div dir="ltr">
-
-```python
 editor = TextEditor(DefaultText())
 editor.type('First Line')  # First line
 
@@ -4027,6 +3904,8 @@ class TextEditor {
   }
 }
 
+----------------------------
+
 const editor = new TextEditor(new DefaultText());
 editor.type("First Line"); // First Line
 
@@ -4077,14 +3956,17 @@ editor.type("Fifth Line"); // fifth line
 
 **مثال برنامه نویسی**
 
-<details>
-<summary>🐍 Python</summary>
+
 
 فرض کنید ما یک زیرساخت برای ساخت اپلیکیشن‌های گوشی نیاز داریم!
 
 خب مراحل تقریبا مشخصه و فقط ما باید مراحل build, lint , test و deploy رو پیاده سازی کنیم!
 
-خب زیرساخت رو اینطوری میسازیم:
+بعد باید پیاده سازی برای اندروید و آی او اس رو بسازیم.
+
+
+<details>
+<summary>🐍 Python</summary>
 
 <div dir="ltr">
 
@@ -4107,15 +3989,8 @@ class Builder:
 
     def deploy(self):
         pass
-```
 
-</div>
 
-خب حالا پیاده سازی برای اندروید و آی او اس رو میسازیم:
-
-<div dir="ltr">
-
-```python
 class AndroidBuilder(Builder):
     def test(self):
         print('Running android tests')
@@ -4142,15 +4017,9 @@ class IosBuilder(Builder):
 
     def deploy(self):
         print('Deploying ios build to server')
-```
 
-</div>
+----------------------------
 
-نحوه استفاده ازش هم به این صورته:
-
-<div dir="ltr">
-
-```python
 androidBuilder = AndroidBuilder()
 androidBuilder.build()
 
@@ -4232,6 +4101,8 @@ class IosBuilder extends Builder {
   }
 }
 
+----------------------------
+
 const androidBuilder = new AndroidBuilder();
 androidBuilder.build();
 
@@ -4267,10 +4138,19 @@ iosBuilder.build();
 
 </div>
 
+
+<div align="right">
+
+# 🤝 کمک کردن به این پروژه!
+
 - این پروژه رو fork کنید و به زبون‌های برنامه نویسی دیگه توسعه بدید!
 - این ریپو رو برای دوستاتون بفرستید!
 - اشتباهاتی که وجود داره رو با issue و یا pull request فیکس کنید!
 - مثال‌ها رو بهبود ببخشید و با issue و یا pull request به اشتراک بسازید!
+- اگه تجربه عملی ای با هر الگو دارید اون رو به مثال ها اضافه کنید!
 - با ⭐ به پروژه از من و این ریپو حمایت کنید و باعث دیده شدنش بشید!
+
+</div>
+
 
 </div>
