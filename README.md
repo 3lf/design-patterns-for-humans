@@ -157,6 +157,9 @@
 
 **مثال برنامه نویسی**
 
+<details>
+<summary>🐍 Python</summary>
+
 توی این مثال میخوایم از اون مثال ساخت درب استفاده کنیم
 
 پس اول ما اینترفیس مربوط به درب رو میسازیم و در ادامه یک نمونه پیاده‌سازی براش پیاده‌سازی میکنیم:
@@ -213,6 +216,10 @@ print(door.getWidth())
 
 </div>
 
+</details>
+
+
+
 
 <br>
 <br>
@@ -249,6 +256,9 @@ print(door.getWidth())
 
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 بیاین از مثال مدیر استخدام برای درک بهتر استفاده کنیم.
 
@@ -327,6 +337,8 @@ marketingManager.takeInterview()
 می‌کنند) و با توجه به شرایط تصمیم میگیریم از یکی از اون‌ها استفاده کنیم.
 
 
+</details>
+
 <br>
 
 <div align="center">
@@ -357,6 +369,9 @@ marketingManager.takeInterview()
 <br>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 خب همون مثال ساخت خونه و نیاز به درب‌های مختلف رو ترجمه میکنیم.
 
@@ -479,6 +494,9 @@ expert.getDescription()
 
 
 
+</details>
+
+
 
 <br>
 
@@ -528,6 +546,9 @@ def __init__(self, size, cheese=True, pepperoni=True, tomato=False, lettuce=True
 <br>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 در بخش برنامه نویسی هم میخوام مثال برگر رو براتون ترجمه کنم.
 
@@ -628,6 +649,9 @@ print(vars(burger))
 
 
 
+</details>
+
+
 <br>
 
 <div align="center">
@@ -667,6 +691,9 @@ print(vars(burger))
 
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 فرض کنید کلاس SomeComponent به این صورت تعریف شده:
 
@@ -725,6 +752,9 @@ def __deepcopy__(self, memo={}):
 
 
 
+</details>
+
+
 <br>
 
 <div align="center">
@@ -752,6 +782,9 @@ def __deepcopy__(self, memo={}):
 <br>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 بطور کلی برای ساخت singleton باید تابع سازنده private بشه، cloning و متود‌های copy بسته بشن و تابع استاتیکی برای ساخت
 ابجکت تعریف بشه.
@@ -828,6 +861,10 @@ if __name__ == "__main__":
 </div>
 
 
+</details>
+
+
+
 <br>
 
 <div align="center">
@@ -858,6 +895,9 @@ if __name__ == "__main__":
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 فرض کنید یک شکارچی به شیر‌ها حمله میکنه و اون‌ها غرش میکنن.
 
@@ -946,6 +986,9 @@ hunter.hunt(wildDogAdapter)
 
 کلاس اول شما خروجی excel میده ولی کلاس دوم ورودیش csv هست.
 
+</details>
+
+
 <br>
 <br>
 
@@ -980,6 +1023,9 @@ hunter.hunt(wildDogAdapter)
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 بیاید همون مثال سایت و قالب که بالاتر درموردش صحبت کردیم رو پیاده‌سازی کنیم.
 
@@ -1053,6 +1099,9 @@ print(careers.getContent())
 </div>
 
 
+</details>
+
+
 
 <br>
 
@@ -1093,6 +1142,9 @@ print(careers.getContent())
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 بطور کلی توی دیزاین پترن composite ما دو مدل دیتا داریم:
 
@@ -1165,6 +1217,9 @@ print(f"RESULT: {tree.operation()}", end="")
 </div>
 
 
+</details>
+
+
 
 
 <br>
@@ -1203,6 +1258,9 @@ print(f"RESULT: {tree.operation()}", end="")
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 برای مثال قهوه را در نظر بگیرید. اول از همه ما یک قهوه ساده داریم که رابط قهوه را پیاده سازی می کند.
 
@@ -1303,6 +1361,9 @@ print(someCoffee.getDescription())
 
 
 
+</details>
+
+
 
 <br>
 
@@ -1330,6 +1391,9 @@ print(someCoffee.getDescription())
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 بیاین همون مثال مربوط به کامپیوتر رو پیاده‌سازی کنیم!
 
@@ -1403,6 +1467,9 @@ computer.turnOff()
 </div>
 
 
+</details>
+
+
 
 
 <br>
@@ -1435,6 +1502,9 @@ computer.turnOff()
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 بیاین مثال غرفه چای رو پیاده سازی کنیم. اول باید انواع چای رو پیاده سازی کنیم و بعدش چای ساز:
 
@@ -1500,6 +1570,10 @@ shop.serve()
 </div>
 
 
+</details>
+
+
+
 <br>
 
 <div align="center">
@@ -1529,6 +1603,9 @@ shop.serve()
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 خب بیاید مثال درب رو پیاده سازی کنیم.
 
@@ -1629,6 +1706,10 @@ door.close()  # Closing Lab Door
 
 </div>
 
+
+</details>
+
+
 <br>
 
 <div align="center">
@@ -1663,6 +1744,9 @@ door.close()  # Closing Lab Door
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 میخوایم همون مثال پرداخت رو باهم پیاده سازی کنیم:
 
@@ -1757,6 +1841,9 @@ Paid 259 using Bitcoin!
 
 
 
+</details>
+
+
 
 <br>
 
@@ -1786,6 +1873,9 @@ Paid 259 using Bitcoin!
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 میخوایم یک کنترل برای لامپ درست کنیم (Receiver):
 
@@ -1865,6 +1955,9 @@ remote.submit(turnOff)  # Darkness!
 
 
 
+</details>
+
+
 <br>
 
 <div align="center">
@@ -1896,6 +1989,9 @@ remote.submit(turnOff)  # Darkness!
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 این مثال رو میخوایم یکم پایتونیک پیش بریم! میدونید که توی پایتون دو تا مفهوم Iterable و Iterator رو داریم پس میریم ازشون
 استفاده کنیم!
@@ -1977,6 +2073,9 @@ if __name__ == "__main__":
 
 
 
+</details>
+
+
 
 <br>
 
@@ -2008,6 +2107,9 @@ if __name__ == "__main__":
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 میخوایم یک ساختار چت روم بسازیم! (Mediator)
 
@@ -2079,6 +2181,9 @@ jane.send('Hey!')
 
 
 
+</details>
+
+
 
 <br>
 
@@ -2107,6 +2212,9 @@ jane.send('Hey!')
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 میخوایم یک ادیتور متن بسازیم و قابلیت ذخیره کردن و بازگردانی بهش اضافه کنیم!
 
@@ -2175,6 +2283,9 @@ print(editor.getContent())  ## This is the first sentence. This is second.
 </div>
 
 
+</details>
+
+
 
 
 <br>
@@ -2204,6 +2315,9 @@ print(editor.getContent())  ## This is the first sentence. This is second.
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 در بخش اول یک کلاس برای ذخیره کردن یک شغل میسازیم و در بخش بعدی یک کلاس برای جویندگان کار میسازیم!
 
@@ -2283,6 +2397,9 @@ jobPostings.addJob(JobPost('Software Engineer at XXX'))
 
 
 
+</details>
+
+
 
 <br>
 
@@ -2318,6 +2435,9 @@ jobPostings.addJob(JobPost('Software Engineer at XXX'))
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 فرض کنید یک باغ وحش مجازی داریم و میخوایم یک عالمه امکان رو به حیوون‌های مختلف اضافه کنیم! مثلا صداشون، نحوه پریدنشون و
 ...
@@ -2465,6 +2585,9 @@ dolphin.accept(jump)  # Walked on water a little and disappeared
 
 
 
+</details>
+
+
 
 <br>
 
@@ -2496,6 +2619,9 @@ dolphin.accept(jump)  # Walked on water a little and disappeared
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 میخوایم یک سرویس پیاده سازی کنیم که با توجه به داده‌هامون تصمیم بگیریم از یک نوع از مرتب سازی استفاده کنیم!
 
@@ -2565,6 +2691,9 @@ sorter.sort(dataset)
 
 
 
+</details>
+
+
 
 
 <br>
@@ -2603,6 +2732,9 @@ sorter.sort(dataset)
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 میخوایم یک ادیتور بسازیم که قابلیت‌هایی مثل این داشته باشه که متنی که تایپ میشه حروف کوچیک باشه یا همش حروف بزرگ باشه یا
 معمولی باشه!
@@ -2683,6 +2815,9 @@ editor.type('Fifth Line')  # fifth line
 </div>
 
 
+</details>
+
+
 
 <br>
 
@@ -2716,6 +2851,9 @@ editor.type('Fifth Line')  # fifth line
 </div>
 
 **مثال برنامه نویسی**
+
+<details>
+<summary>🐍 Python</summary>
 
 فرض کنید ما یک زیرساخت برای ساخت اپلیکیشن‌های گوشی نیاز داریم!
 
@@ -2812,6 +2950,8 @@ iosBuilder.build()
 ```
 
 </div>
+
+</details>
 
 <br>
 <br>
