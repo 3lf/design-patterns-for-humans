@@ -4228,9 +4228,8 @@ iosBuilder.build();
 
 <div align="right">
 
-- [amirmalekian](https://github.com/amirmalekian) که زحمت مثال های TypeScript رو کشید.
-- [Atefe-Komeili](https://github.com/Atefe-Komeili) که زحمت رفع اشکالات تایپی و بهتر کردن جملات رو کشید.
-
+- امیر عزیز که زحمت مثال های TypeScript رو کشید.([amirmalekian](https://github.com/amirmalekian))
+- عاطفه عزیز که زحمت رفع اشکالات تایپی و بهتر کردن جملات رو کشید. ([Atefe-Komeili](https://github.com/Atefe-Komeili))
 </div>
 
 </div>
