@@ -302,6 +302,50 @@ Console.WriteLine($"Width of Door : {door.GetWidth()}");
 
 </details>
 
+<details>
+<summary >PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface IDoor {
+    public function getHeight();
+    public function getWidth();
+}
+
+class WoodenDoor implements IDoor {
+    private $height;
+    private $width;
+
+    public function __construct($height, $width) {
+        $this->height = $height;
+        $this->width = $width;
+    }
+
+    public function getHeight() {
+        return $this->height;
+    }
+    public function getWidth() {
+        return $this->width;
+    }
+}
+
+class DoorFactory {
+    public static function makeDoor($height, $width) {
+        return new woodenDoor($height, $width);
+    }
+}
+
+$door = DoorFactory::makeDoor(80, 30);
+echo "Height of Door : " . $door->getHeight() . "\n";
+echo "Width of Door : " . $door->getWidth() . "\n";
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
