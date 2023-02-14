@@ -1346,6 +1346,51 @@ class SomeComponent {
 
 </div>
 </details>
+
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+class Sheep
+{
+  public string Name { get; set; }
+
+  public string Category { get; set; }
+
+  public Sheep(string name, string category)
+  {
+    Name = name;
+    Category = category;
+  }
+
+  public Sheep Clone()
+  {
+    return MemberwiseClone() as Sheep;
+  }
+}
+
+----------------------------
+
+var original = new Sheep("Jolly", "Mountain Sheep");
+Console.WriteLine(original.Name); // Jolly
+Console.WriteLine(original.Category); // Mountain Sheep
+
+var cloned = original.Clone();
+cloned.Name = "Dolly";
+Console.WriteLine(cloned.Name); // Dolly
+Console.WriteLine(cloned.Category); // Mountain Sheep
+Console.WriteLine(original.Name); // Jolly
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 **تفاوت Shadow Copy و Deep Copy ؟**
