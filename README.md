@@ -2020,6 +2020,95 @@ console.log(careers.getContent());
 
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IWebPage
+{
+  string GetContent();
+}
+
+class About : IWebPage
+{
+  protected ITheme theme;
+
+  public About(ITheme theme)
+  {
+    this.theme = theme;
+  }
+
+  public string GetContent()
+  {
+    return $"About page in {theme.GetColor()}";
+  }
+}
+
+class Careers : IWebPage
+{
+  protected ITheme theme;
+
+  public Careers(ITheme theme)
+  {
+    this.theme = theme;
+  }
+
+  public string GetContent()
+  {
+    return $"Careers page in {theme.GetColor()}";
+  }
+}
+
+
+interface ITheme
+{
+  string GetColor();
+}
+
+class DarkTheme : ITheme
+{
+  public string GetColor()
+  {
+    return "Dark Black";
+  }
+}
+
+class LightTheme : ITheme
+{
+  public string GetColor()
+  {
+    return "Off White";
+  }
+}
+
+class AquaTheme : ITheme
+{
+  public string GetColor()
+  {
+    return "Light blue";
+  }
+}
+
+----------------------------
+
+var darkTheme = new DarkTheme();
+var lightTheme = new LightTheme();
+
+var about= new About(darkTheme);
+var careers = new Careers(lightTheme);
+
+Console.WriteLine(about.GetContent()); //Output: About page in Dark Black
+Console.WriteLine(careers.GetContent()); //Output: Careers page in Off White
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 
@@ -2194,6 +2283,120 @@ tree.add(branch2);
 
 console.log(`RESULT: ${tree.operation()}`);
 // RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
+```
+
+</div>
+
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IEmployee
+{
+  float GetSalary();
+  string GetRole();
+  string GetName();
+}
+
+
+class Developer : IEmployee
+{
+  private string mName;
+  private float mSalary;
+
+  public Developer(string name, float salary)
+  {
+    this.mName = name;
+    this.mSalary = salary;
+  }
+
+  public float GetSalary()
+  {
+    return this.mSalary;
+  }
+
+  public string GetRole()
+  {
+    return "Developer";
+  }
+
+  public string GetName()
+  {
+    return this.mName;
+  }
+}
+
+class Designer : IEmployee
+{
+  private string mName;
+  private float mSalary;
+
+  public Designer(string name, float salary)
+  {
+    this.mName = name;
+    this.mSalary = salary;
+  }
+
+  public float GetSalary()
+  {
+    return this.mSalary;
+  }
+
+  public string GetRole()
+  {
+    return "Designer";
+  }
+
+  public string GetName()
+  {
+    return this.mName;
+  }
+}
+
+
+class Organization
+{
+  protected List<IEmployee> employees;
+
+  public Organization()
+  {
+    employees = new List<IEmployee>();
+  }
+
+  public void AddEmployee(IEmployee employee)
+  {
+    employees.Add(employee);
+  }
+
+  public float GetNetSalaries()
+  {
+    float netSalary = 0;
+
+    foreach (var e in employees) {
+      netSalary += e.GetSalary();
+    }
+    return netSalary;
+  }
+}
+
+----------------------------
+
+//Arrange Employees, Organization and add employees
+var developer = new Developer("John", 5000);
+var designer = new Designer("Arya", 5000);
+
+var organization = new Organization();
+organization.AddEmployee(developer);
+organization.AddEmployee(designer);
+
+Console.WriteLine($"Net Salary of Employees in Organization is {organization.GetNetSalaries():c}");
+//Ouptut: Net Salary of Employees in Organization is $10000.00
+
 ```
 
 </div>
@@ -2424,6 +2627,114 @@ console.log(someCoffee.getDescription());
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface ICoffee
+{
+  int GetCost();
+  string GetDescription();
+}
+
+class SimpleCoffee : ICoffee
+{
+  public int GetCost()
+  {
+    return 5;
+  }
+
+  public string GetDescription()
+  {
+    return "Simple Coffee";
+  }
+}
+
+class MilkCoffee : ICoffee
+{
+  private readonly ICoffee mCoffee;
+
+  public MilkCoffee(ICoffee coffee)
+  {
+    mCoffee = coffee ?? throw new ArgumentNullException("coffee", "coffee should not be null");
+  }
+  public int GetCost()
+  {
+    return mCoffee.GetCost() + 1;
+  }
+
+  public string GetDescription()
+  {
+    return String.Concat(mCoffee.GetDescription(), ", milk");
+  }
+}
+
+class WhipCoffee : ICoffee
+{
+  private readonly ICoffee mCoffee;
+
+  public WhipCoffee(ICoffee coffee)
+  {
+    mCoffee = coffee ?? throw new ArgumentNullException("coffee", "coffee should not be null");
+  }
+  public int GetCost()
+  {
+    return mCoffee.GetCost() + 1;
+  }
+
+  public string GetDescription()
+  {
+    return String.Concat(mCoffee.GetDescription(), ", whip");
+  }
+}
+
+class VanillaCoffee : ICoffee
+{
+  private readonly ICoffee mCoffee;
+
+  public VanillaCoffee(ICoffee coffee)
+  {
+    mCoffee = coffee ?? throw new ArgumentNullException("coffee", "coffee should not be null");
+  }
+  public int GetCost()
+  {
+    return mCoffee.GetCost() + 1;
+  }
+
+  public string GetDescription()
+  {
+    return String.Concat(mCoffee.GetDescription(), ", vanilla");
+  }
+}
+
+
+----------------------------
+
+var myCoffee = new SimpleCoffee();
+Console.WriteLine($"{myCoffee.GetCost():c}"); // $ 5.00
+Console.WriteLine(myCoffee.GetDescription()); // Simple Coffee
+
+var milkCoffee = new MilkCoffee(myCoffee);
+Console.WriteLine($"{milkCoffee.GetCost():c}"); // $ 6.00
+Console.WriteLine(milkCoffee.GetDescription()); // Simple Coffee, milk
+
+var whipCoffee = new WhipCoffee(milkCoffee);
+Console.WriteLine($"{whipCoffee.GetCost():c}"); // $ 7.00
+Console.WriteLine(whipCoffee.GetDescription()); // Simple Coffee, milk, whip
+
+var vanillaCoffee = new VanillaCoffee(whipCoffee);
+Console.WriteLine($"{vanillaCoffee.GetCost():c}"); // $ 8.00
+Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip, vanilla
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -2599,6 +2910,91 @@ computer.turnOff();
 </details>
 
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+class Computer
+{
+  public void GetElectricShock()
+  {
+    Console.Write("Ouch!");
+  }
+
+  public void MakeSound()
+  {
+    Console.Write("Beep beep!");
+  }
+
+  public void ShowLoadingScreen()
+  {
+    Console.Write("Loading..");
+  }
+
+  public void Bam()
+  {
+    Console.Write("Ready to be used!");
+  }
+
+  public void CloseEverything()
+  {
+    Console.Write("Bup bup bup buzzzz!");
+  }
+
+  public void Sooth()
+  {
+    Console.Write("Zzzzz");
+  }
+
+  public void PullCurrent()
+  {
+    Console.Write("Haaah!");
+  }
+}
+
+
+class ComputerFacade
+{
+  private readonly Computer mComputer;
+
+  public ComputerFacade(Computer computer)
+  {
+    this.mComputer = computer ?? throw new ArgumentNullException("computer", "computer cannot be null");
+  }
+
+  public void TurnOn()
+  {
+    mComputer.GetElectricShock();
+    mComputer.MakeSound();
+    mComputer.ShowLoadingScreen();
+    mComputer.Bam();
+  }
+
+  public void TurnOff()
+  {
+    mComputer.CloseEverything();
+    mComputer.PullCurrent();
+    mComputer.Sooth();
+  }
+}
+
+----------------------------
+
+var computer = new ComputerFacade(new Computer());
+computer.TurnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
+Console.WriteLine();
+computer.TurnOff();  // Bup bup buzzz! Haah! Zzzzz
+Console.ReadLine();
+
+```
+
+</div>
+
+</details>
+
 
 <br>
 
@@ -2749,6 +3145,78 @@ shop.serve();
 
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+// Anything that will be cached is flyweight.
+// Types of tea here will be flyweights.
+class KarakTea
+{
+}
+
+// Acts as a factory and saves the tea
+class TeaMaker
+{
+  private Dictionary<string,KarakTea> mAvailableTea = new Dictionary<string,KarakTea>();
+
+  public KarakTea Make(string preference)
+  {
+    if (!mAvailableTea.ContainsKey(preference))
+    {
+      mAvailableTea[preference] = new KarakTea();
+    }
+
+    return mAvailableTea[preference];
+  }
+}
+
+class TeaShop
+{
+  private Dictionary<int,KarakTea> mOrders = new Dictionary<int,KarakTea>();
+  private readonly TeaMaker mTeaMaker;
+
+  public TeaShop(TeaMaker teaMaker)
+  {
+    mTeaMaker = teaMaker ?? throw new ArgumentNullException("teaMaker", "teaMaker cannot be null");
+  }
+
+  public void TakeOrder(string teaType, int table)
+  {
+    mOrders[table] = mTeaMaker.Make(teaType);
+  }
+
+  public void Serve()
+  {
+    foreach(var table  in mOrders.Keys){
+      Console.WriteLine($"Serving Tea to table # {table}");
+    }
+  }
+}
+
+----------------------------
+
+var teaMaker = new TeaMaker();
+var teaShop = new TeaShop(teaMaker);
+
+teaShop.TakeOrder("less sugar", 1);
+teaShop.TakeOrder("more milk", 2);
+teaShop.TakeOrder("without sugar", 5);
+
+teaShop.Serve();
+// Serving tea to table# 1
+// Serving tea to table# 2
+// Serving tea to table# 5
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -2891,6 +3359,78 @@ const door = new SecuredDoor(new LabDoor());
 door.open("invalid"); // Big no! It ain't possible
 door.open("$ecr@t"); // Opening lab door
 door.close(); // Closing Lab Door
+```
+
+</div>
+
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IDoor
+{
+  void Open();
+  void Close();
+}
+
+class LabDoor : IDoor
+{
+  public void Close()
+  {
+    Console.WriteLine("Closing lab door");
+  }
+
+  public void Open()
+  {
+    Console.WriteLine("Opening lab door");
+  }
+}
+
+class SecuredDoor : IDoor
+{
+  private IDoor mDoor;
+
+  public SecuredDoor(IDoor door)
+  {
+    mDoor = door ?? throw new ArgumentNullException("door", "door can not be null");
+  }
+
+  public void Open(string password)
+  {
+    if (Authenticate(password))
+    {
+      mDoor.Open();
+    }
+    else
+    {
+      Console.WriteLine("Big no! It ain't possible.");
+    }
+  }
+
+  private bool Authenticate(string password)
+  {
+    return password == "$ecr@t";
+  }
+
+  public void Close()
+  {
+    mDoor.Close();
+  }
+}
+
+----------------------------
+
+var door = new SecuredDoor(new LabDoor());
+door.Open("invalid"); // Big no! It ain't possible.
+
+door.Open("$ecr@t"); // Opening lab door
+door.Close(); // Closing lab door
+
 ```
 
 </div>
