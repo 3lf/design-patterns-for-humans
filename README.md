@@ -462,6 +462,58 @@ marketingManager.takeInterview();
 
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IInterviewer
+{
+    void AskQuestions();
+}
+
+class Developer : IInterviewer
+{
+    public void AskQuestions()
+    {
+        Console.WriteLine("Asking about design patterns!");
+    }
+}
+
+class CommunityExecutive : IInterviewer
+{
+    public void AskQuestions()
+    {
+        Console.WriteLine("Asking about community building!");
+    }
+}
+
+abstract class HiringManager
+{
+    // Factory method
+    abstract protected IInterviewer MakeInterviewer();
+    public void TakeInterview()
+    {
+        var interviewer = this.MakeInterviewer();
+        interviewer.AskQuestions();
+    }
+}
+
+----------------------------
+
+var devManager = new DevelopmentManager();
+devManager.TakeInterview(); //Output : Asking about design patterns!
+
+var marketingManager = new MarketingManager();
+marketingManager.TakeInterview();//Output : Asking about community building!
+
+```
+
+</div>
+
+</details>
 
 <br>
 
