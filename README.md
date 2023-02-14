@@ -154,11 +154,9 @@
 
 **مثال برنامه نویسی**
 
-
 توی این مثال میخوایم از اون مثال ساخت درب استفاده کنیم.
 
 پس اول ما اینترفیس مربوط به درب رو میسازیم و بعدش یک کلاس factory برای ساخت درب میسازیم.
-
 
 <details>
 <summary>🐍 Python</summary>
@@ -308,7 +306,6 @@ Console.WriteLine($"Width of Door : {door.GetWidth()}");
 
 ---
 
-
 <div align="center">
 
 ## 🏭 Factory Method
@@ -343,16 +340,12 @@ Console.WriteLine($"Width of Door : {door.GetWidth()}");
 
 پس اول یک اینترفیس برای مصاحبه کننده‌ها میسازیم و چند پیاده‌سازی هم برای اون ایجاد می‌کنیم.
 
-
 بعد از اون `HiringManager` رو پیاده سازی میکنیم
-
 
 در نهایت هر فرزند میتونه ازش ارث بری کنه و متد `makeInterviewer` خودش رو داشته باشه:
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -539,11 +532,9 @@ marketingManager.TakeInterview();//Output : Asking about community building!
 اساساً زمانی ازین الگو استفاده میشه که چندین کلاس با ریشه مشترک داریم (یعنی چندین کلاس یک کلاس parent رو پیاده‌سازی
 می‌کنند) و با توجه به شرایط تصمیم میگیریم از یکی از اون‌ها استفاده کنیم.
 
-
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -575,16 +566,11 @@ marketingManager.TakeInterview();//Output : Asking about community building!
 
 **مثال برنامه نویسی**
 
-
-
 خب همون مثال ساخت خونه و نیاز به درب‌های مختلف رو ترجمه میکنیم.
 
 اول باید اینترفیس درب رو بسازیم و چند پیاده‌سازی ازش ایجاد کنیم.
 
-
 در مرحله بعد برای هر درب متخصص مربوطه رو ایجاد می‌کنیم.
-
-
 
 و در مرحله آخر سراغ پیاده‌سازی دیزاین پترن‌مون میریم.
 
@@ -594,11 +580,8 @@ marketingManager.TakeInterview();//Output : Asking about community building!
 
 این موضوع برای درب آهنی و ... هم بطور مشابه پیاده‌سازی میشه.
 
-
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -780,11 +763,9 @@ expert.getDescription();
 
 </div>
 
-
 **همونطور که میبیند، می‌تونیم بطور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
 انتخاب نمی‌کنیم.**
-
 
 </details>
 
@@ -895,8 +876,8 @@ ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
 **همونطور که میبیند، می‌تونیم بطور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
 انتخاب نمی‌کنیم.**
-</details>
 
+</details>
 
 <br>
 
@@ -904,11 +885,9 @@ ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
 
 زمانی که وابستگی‌های منطقی نه چندان ساده برای ایجاد وجود داره، میتونیم ازین دیزاین پترن استفاده کنیم.
 
-
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -940,6 +919,7 @@ ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
 ```python
 def __init__(self, size, cheese=True, pepperoni=True, tomato=False, lettuce=True)
 ```
+
 </div>
 </details>
 
@@ -963,8 +943,6 @@ constructor(size: any, cheese: boolean = true, pepperoni: boolean = true, tomato
 ```C#
 
 public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
-{
-}
 
 ```
 
@@ -989,14 +967,11 @@ public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
 
 **مثال برنامه نویسی**
 
-
-
 در این بخش هم میخوام مثال برگر رو براتون ترجمه کنم.
 
 اولین مرحله اینه که یک کلاس برگر معمولی داشته باشیم
 
 در ادامه کلاس Builder رو براش ایجاد میکنیم.
-
 
 <details>
 <summary>🐍 Python</summary>
@@ -1060,7 +1035,6 @@ print(vars(burger))
 ```
 
 </div>
-
 
 </details>
 
@@ -1136,7 +1110,6 @@ console.log(Object.keys(burger));
 
 </div>
 </details>
-
 
 <details>
 <summary >#C</summary>
@@ -1228,18 +1201,14 @@ Console.WriteLine(burger.GetDescription());
 
 <br>
 
-
 **چه موقع باید ازش استفاده کنیم؟**
 
 همونطور که قبل تر اشاره کردم این دیزاین پترن رو معمولا برای ساخت ابجکت‌های پیچیده یا ابجکت‌هایی که نیاز به شخصی سازی
 زیادی دارن استفاده میکنیم.
 
-
 <br>
 
-
 ---
-
 
 <div align="center">
 
@@ -1275,21 +1244,16 @@ Console.WriteLine(burger.GetDescription());
 
 **مثال برنامه نویسی**
 
-
 فرض کنید کلاس SomeComponent رو به صورتی که در کد میبینید داریم.
 
 باید دو کلاس copy و deep کپی ایجاد کنیم.
 
-
 <details>
 <summary>🐍 Python</summary>
 
-
 پایتون magic method‌هایی برای این مساله در نظر گرفته که ماهم از همون دو تابع معروف copy و deep copy استفاده میکنیم:
 
-
 <div dir="ltr">
-
 
 ```python
 class SomeComponent:
@@ -1320,7 +1284,6 @@ class SomeComponent:
 ```
 
 </div>
-
 
 </details>
 
@@ -1365,7 +1328,6 @@ class SomeComponent {
 </div>
 </details>
 
-
 <details>
 <summary >#C</summary>
 
@@ -1373,35 +1335,47 @@ class SomeComponent {
 
 ```C#
 
-class Sheep
+public class SomeComponent
 {
-  public string Name { get; set; }
+    public int someInt;
+    public string? someString;
 
-  public string Category { get; set; }
+    public SomeComponent ShallowCopy()
+    {
+        return (SomeComponent)this.MemberwiseClone();
+    }
 
-  public Sheep(string name, string category)
-  {
-    Name = name;
-    Category = category;
-  }
-
-  public Sheep Clone()
-  {
-    return MemberwiseClone() as Sheep;
-  }
+    public SomeComponent DeepCopy()
+    {
+        SomeComponent clone = (SomeComponent)this.MemberwiseClone();
+        clone.someInt = someInt;
+        clone.someString = someString;
+        return clone;
+    }
 }
 
 ----------------------------
 
-var original = new Sheep("Jolly", "Mountain Sheep");
-Console.WriteLine(original.Name); // Jolly
-Console.WriteLine(original.Category); // Mountain Sheep
+SomeComponent c1 = new SomeComponent();
+c1.someInt = 1;
+c1.someString = "someString1";
 
-var cloned = original.Clone();
-cloned.Name = "Dolly";
-Console.WriteLine(cloned.Name); // Dolly
-Console.WriteLine(cloned.Category); // Mountain Sheep
-Console.WriteLine(original.Name); // Jolly
+// Perform a shallow copy of c1 and assign it to c2.
+SomeComponent c2 = c1.ShallowCopy();
+
+// Make a deep copy of c1 and assign it to c3.
+SomeComponent c3 = c1.DeepCopy();
+
+Console.WriteLine(c1.someInt + ":" + c1.someString); // 1:someString1
+Console.WriteLine(c2.someInt + ":" + c2.someString); // 1:someString1
+Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
+
+c1.someInt = 2;
+c1.someString = "someString2";
+
+Console.WriteLine(c1.someInt + ":" + c1.someString); // 2:someString2
+Console.WriteLine(c2.someInt + ":" + c2.someString); // 1:someString1
+Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
 
 ```
 
@@ -1421,11 +1395,9 @@ Console.WriteLine(original.Name); // Jolly
 ولی توی deep copy، یک متغیر ساخته می‌شه و مقدار متغیر قبلی توی اون کپی می‌شه. در نتیجه تغییر ابجکت اول یا ابجکت کپی
 تغییری توی اون یکی به وجود نمیاره.
 
-
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -1461,10 +1433,8 @@ Console.WriteLine(original.Name); // Jolly
 
 ولی توی پایتون راه حل ساده تری وجود داره که اون استفاده از metaclass هاست:
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -1498,7 +1468,6 @@ if __name__ == "__main__":
 
 </div>
 این روش Thread Safe نیست. برای اطلاعات بیشتر سرچ کنید :)
-
 
 </details>
 
@@ -1540,7 +1509,6 @@ if (Object.is(s1, s2)) {
 </div>
 
 </details>
-
 
 <details>
 <summary >#C</summary>
@@ -1607,11 +1575,9 @@ Console.WriteLine(a == b); //Output : true
 
 </div>
 
-
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -1644,14 +1610,11 @@ Console.WriteLine(a == b); //Output : true
 
 **مثال برنامه نویسی**
 
-
-
 فرض کنید یک شکارچی به شیر‌ها حمله میکنه و اون‌ها غرش میکنن.
 
 خب اول باید یک اینترفیس `lion` بسازیم که شیر‌های مختلف ازش استفاده کنن.
 
 در مرحله بعد شکارچی وقتی شکار انجام بده اون شیر غرش انجام میده.
-
 
 حالا فرض کنید یک موجودیت جدید مثل `سگ وحشی` به برنامه اضافه شده.
 
@@ -1662,10 +1625,8 @@ Console.WriteLine(a == b); //Output : true
 
 برای حلش به این صورت میتونیم براش آداپتور تعریف کنیم:
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -1844,9 +1805,7 @@ hunter.Hunt(wildDogAdapter);
 
 <br>
 
-
 ---
-
 
 <div align="center">
 
@@ -1883,13 +1842,11 @@ hunter.Hunt(wildDogAdapter);
 
 **مثال برنامه نویسی**
 
-
 بیاید همون مثال سایت و قالب که بالاتر درموردش صحبت کردیم رو پیاده‌سازی کنیم.
 
 در مرحله اول کلاس `WebPage` و پیاده‌سازی‌هایی از اون رو داریم.
 
 برای قالب هم، باید کلاس و پیاده سازی‌های مختلفی بنویسیم:
-
 
 <details>
 <summary>🐍 Python</summary>
@@ -2111,9 +2068,7 @@ Console.WriteLine(careers.GetContent()); //Output: Careers page in Off White
 
 <br>
 
-
 ---
-
 
 <div align="center">
 
@@ -2151,7 +2106,6 @@ Console.WriteLine(careers.GetContent()); //Output: Careers page in Off White
 
 </div>
 
-
 **مثال برنامه نویسی**
 
 بطور کلی توی دیزاین پترن composite ما دو مدل دیتا داریم:
@@ -2161,8 +2115,6 @@ Console.WriteLine(careers.GetContent()); //Output: Careers page in Off White
 دو: Leaf که در واقع زیر مجموعه نداره و فقط یک سری وظیفه داره.
 
 خب اول بیایم یک اینترفیس پایه برای کامپوننت‌هامون بسازیم و در ادامه هم اینترفیس‌های Composite و Leaf رو بسازیم:
-
-
 
 <details>
 
@@ -2407,7 +2359,6 @@ Console.WriteLine($"Net Salary of Employees in Organization is {organization.Get
 
 ---
 
-
 <div align="center">
 
 ## ☕ Decorator
@@ -2450,7 +2401,6 @@ Console.WriteLine($"Net Salary of Employees in Organization is {organization.Get
 
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -2739,7 +2689,6 @@ Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip,
 
 ---
 
-
 <div align="center">
 
 ## 📦 Facade
@@ -2769,7 +2718,6 @@ Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip,
 
 بیاین همون مثال مربوط به کامپیوتر رو پیاده‌سازی کنیم!
 
-
 اول باید کلاس کامپیوتر رو بسازیم.
 
 کلاس Facade به این صورت پیاده‌سازی میشه که یک ابجکت رو به عنوان ورودی دریافت میکنه و با هر تابع خودش یک سری عملیات رو
@@ -2778,7 +2726,6 @@ Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip,
 <details>
 
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -2834,12 +2781,9 @@ computer.turnOff()
 
 </details>
 
-
 <details>
 
 <summary>TypeScript</summary>
-
-
 
 <div dir="ltr">
 
@@ -2906,9 +2850,7 @@ computer.turnOff();
 
 </div>
 
-
 </details>
-
 
 <details>
 <summary >#C</summary>
@@ -2995,11 +2937,9 @@ Console.ReadLine();
 
 </details>
 
-
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -3037,7 +2977,6 @@ Console.ReadLine();
 
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -3221,7 +3160,6 @@ teaShop.Serve();
 
 ---
 
-
 <div align="center">
 
 ## 🎱 Proxy
@@ -3255,7 +3193,6 @@ teaShop.Serve();
 
 اول اینترفیس درب رو میسازیم و بعدش یک مدل درب پیاده سازی میکنیم.
 در مرحله بعد هم یک پروکسی برای اضافه کردن امنیت به درب میسازیم.
-
 
 <details>
 <summary>🐍 Python</summary>
@@ -3307,7 +3244,6 @@ door.close()  # Closing Lab Door
 ```
 
 </div>
-
 
 </details>
 
@@ -3463,11 +3399,9 @@ door.Close(); // Closing lab door
 
 </div>
 
-
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -3503,7 +3437,6 @@ door.Close(); // Closing lab door
 
 **مثال برنامه نویسی**
 
-
 میخوایم همون مثال پرداخت رو باهم پیاده سازی کنیم.
 
 خب توی کد بالا یک کلاس مرجع ساختیم که اسمش Account هست. این کلاس یک متد داره که اسمش pay هست. این متد یک مقدار رو میگیره
@@ -3514,13 +3447,10 @@ door.Close(); // Closing lab door
 
 خب حالا میخوایم یک حساب بانکی، یک حساب پی پال و یک حساب بیت کوین بسازیم.
 
-
 همونطور که میبینید اومدیم و بعد از ساختن این حساب‌ها اونارو به هم متصل کردیم!
 
 سیستم اول سعی کرده با حساب بانکی پرداخت کنه ولی موجودی کافی نداشت، بعدش سعی کرده با حساب پی پال پرداخت کنه ولی موجودی
 کافی نداشت، و در نهایت با حساب بیت کوین پرداخت میکنه!
-
-
 
 <details>
 <summary>🐍 Python</summary>
@@ -3776,7 +3706,6 @@ bank.Pay(259);
 
 ---
 
-
 <div align="center">
 
 ## 👮 Command
@@ -3817,9 +3746,6 @@ bank.Pay(259);
 
 <details>
 <summary>🐍 Python</summary>
-
-
-
 
 <div dir="ltr">
 
@@ -4046,7 +3972,6 @@ class RemoteControl
 
 ---
 
-
 <div align="center">
 
 ## ➿ Iterator
@@ -4077,7 +4002,6 @@ class RemoteControl
 
 **مثال برنامه نویسی**
 
-
 این مثال رو میخوایم یکم پایتونیک پیش بریم! میدونید که توی پایتون دو تا مفهوم Iterable و Iterator رو داریم پس میریم ازشون
 استفاده کنیم!
 
@@ -4085,10 +4009,8 @@ class RemoteControl
 
 توی این کد هم میتونید ببینید که چطوری میتونیم از Iterator‌ها استفاده کنیم!
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -4145,7 +4067,6 @@ if __name__ == "__main__":
 ```
 
 </div>
-
 
 </details>
 
@@ -4313,7 +4234,6 @@ Console.ReadLine();
 
 ---
 
-
 <div align="center">
 
 ## 👽 Mediator
@@ -4346,10 +4266,8 @@ Console.ReadLine();
 
 خب حالا بخش یوزر‌ها: (Colleagues)
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -4397,8 +4315,6 @@ jane.send('Hey!')
 ```
 
 </div>
-
-
 
 </details>
 
@@ -4524,7 +4440,6 @@ jane.Send("Hey!");
 
 ---
 
-
 <div align="center">
 
 ## 💾 Memento
@@ -4557,11 +4472,8 @@ jane.Send("Hey!");
 
 در ادامه یک کلاس ادیتور میسازیم که قابلیت تایپ کردن، خالی کردن، سیو و برگشت حافظه داره!
 
-
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -4754,12 +4666,9 @@ Console.Write(editor.Content); // This is the first sentence. This is second
 
 </details>
 
-
 <br>
 
 ---
-
-
 
 <div align="center">
 
@@ -4790,14 +4699,11 @@ Console.Write(editor.Content); // This is the first sentence. This is second
 
 در بخش اول یک کلاس برای ذخیره کردن یک شغل میسازیم و در بخش بعدی یک کلاس برای جویندگان کار میسازیم!
 
-
 و بعد باید یک کلاس برای دسته بندی‌های مختلف کار ایجاد کنیم و جویندگان کار میتونن بهش اضافه بشن و اگه شغلی توی اون دسته
 بندی ارسال بشه به اونا اطلاع رسانی میشه!
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -5048,7 +4954,6 @@ Console.ReadLine();
 
 ---
 
-
 <div align="center">
 
 ## 🏃 Visitor
@@ -5085,10 +4990,8 @@ Console.ReadLine();
 فرض کنید یک باغ وحش مجازی داریم و میخوایم یک عالمه امکان رو به حیوون‌های مختلف اضافه کنیم! مثلا صداشون، نحوه پریدنشون و
 ...
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -5429,7 +5332,6 @@ dolphin.Accept(jump);   // Walked on water a little and disappeared
 
 ---
 
-
 <div align="center">
 
 ## 💡 Strategy
@@ -5457,11 +5359,9 @@ dolphin.Accept(jump);   // Walked on water a little and disappeared
 
 **مثال برنامه نویسی**
 
-
-
 میخوایم یک سرویس پیاده سازی کنیم که با توجه به داده‌هامون تصمیم بگیریم از یک نوع از مرتب سازی استفاده کنیم!
 
- یک کلاس بسازیم که وظیفه‌اش مدیریت این استراتژی‌ها باشه.
+یک کلاس بسازیم که وظیفه‌اش مدیریت این استراتژی‌ها باشه.
 
 <details>
 <summary>🐍 Python</summary>
@@ -5626,7 +5526,6 @@ sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
 
 ---
 
-
 <div align="center">
 
 ## 💢 State
@@ -5667,10 +5566,8 @@ sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
 
 بعد ادیتور رو بسازیم و بهش یاد بدیم این کلاس‌ها رو توی خودش نگه داره و ازشون استفاده کنه!
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -5885,7 +5782,6 @@ editor.Type("Fifthe Line");
 
 ---
 
-
 <div align="center">
 
 ## 📒 Template Method
@@ -5917,14 +5813,11 @@ editor.Type("Fifthe Line");
 
 **مثال برنامه نویسی**
 
-
-
 فرض کنید ما یک زیرساخت برای ساخت اپلیکیشن‌های گوشی نیاز داریم!
 
 خب مراحل تقریبا مشخصه و فقط ما باید مراحل build, lint , test و deploy رو پیاده سازی کنیم!
 
 بعد باید پیاده سازی برای اندروید و آی او اس رو بسازیم.
-
 
 <details>
 <summary>🐍 Python</summary>
@@ -6198,7 +6091,6 @@ iosBuilder.Build();
 
 </div>
 
-
 <div align="right">
 
 - این پروژه رو fork کنید و به زبون‌های برنامه نویسی دیگه توسعه بدید!
@@ -6209,7 +6101,6 @@ iosBuilder.Build();
 - با ⭐ به پروژه از من و این ریپو حمایت کنید و باعث دیده شدنش بشید!
 
 </div>
-
 
 <div align="center">
 
