@@ -1524,6 +1524,44 @@ if (Object.is(s1, s2)) {
 </details>
 
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+public class President
+{
+  static President instance;
+  // Private constructor
+  private President()
+  {
+    //Hiding the Constructor
+  }
+
+  // Public constructor
+  public static President GetInstance()
+  {
+    if (instance == null) {
+      instance = new President();
+    }
+    return instance;
+  }
+}
+
+----------------------------
+President a = President.GetInstance();
+President b = President.GetInstance();
+
+Console.WriteLine(a == b); //Output : true
+
+```
+
+</div>
+
+</details>
+
 <br>
 <br>
 
