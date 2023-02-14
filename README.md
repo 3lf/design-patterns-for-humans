@@ -501,6 +501,23 @@ abstract class HiringManager
     }
 }
 
+class DevelopmentManager : HiringManager
+{
+    protected override IInterviewer MakeInterviewer()
+    {
+        return new Developer();
+    }
+}
+
+class MarketingManager : HiringManager
+{
+    protected override IInterviewer MakeInterviewer()
+    {
+        return new CommunityExecutive();
+    }
+}
+
+
 ----------------------------
 
 var devManager = new DevelopmentManager();
