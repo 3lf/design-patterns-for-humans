@@ -159,7 +159,7 @@
 پس اول ما اینترفیس مربوط به درب رو میسازیم و بعدش یک کلاس factory برای ساخت درب میسازیم.
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -345,7 +345,7 @@ Console.WriteLine($"Width of Door : {door.GetWidth()}");
 در نهایت هر فرزند میتونه ازش ارث بری کنه و متد `makeInterviewer` خودش رو داشته باشه:
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -581,7 +581,7 @@ marketingManager.TakeInterview();//Output : Asking about community building!
 این موضوع برای درب آهنی و ... هم بطور مشابه پیاده‌سازی میشه.
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -913,7 +913,7 @@ ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
 برای همه ما پیش اومد که یک تابع سازنده به این شکل ببینیم:
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 <div dir="ltr">
 
 ```python
@@ -974,7 +974,7 @@ public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
 در ادامه کلاس Builder رو براش ایجاد میکنیم.
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -1219,7 +1219,6 @@ Console.WriteLine(burger.GetDescription());
 یک مثال از دنیای واقعی:
 
 > چیزی درمورد دالی شنیدین
->
 > ؟ ([اگه نه اینجارو بخونید](<https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%84%DB%8C_(%DA%AF%D9%88%D8%B3%D9%81%D9%86%D8%AF)>))
 >
 > خیلی اینجا توضیح نمیدم، فقط بدونید همه‌چیز مربوط به شبیه سازیه!
@@ -1249,7 +1248,7 @@ Console.WriteLine(burger.GetDescription());
 باید دو کلاس copy و deep کپی ایجاد کنیم.
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 پایتون magic method‌هایی برای این مساله در نظر گرفته که ماهم از همون دو تابع معروف copy و deep copy استفاده میکنیم:
 
@@ -1434,7 +1433,7 @@ Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
 ولی توی پایتون راه حل ساده تری وجود داره که اون استفاده از metaclass هاست:
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -1626,7 +1625,7 @@ Console.WriteLine(a == b); //Output : true
 برای حلش به این صورت میتونیم براش آداپتور تعریف کنیم:
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -1849,7 +1848,7 @@ hunter.Hunt(wildDogAdapter);
 برای قالب هم، باید کلاس و پیاده سازی‌های مختلفی بنویسیم:
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -2118,7 +2117,7 @@ Console.WriteLine(careers.GetContent()); //Output: Careers page in Off White
 
 <details>
 
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -2400,7 +2399,7 @@ Console.WriteLine($"Net Salary of Employees in Organization is {organization.Get
 همونطور که میبینید خیلی ساده میتونیم هر ابجکت رو به عنوان ورودی تابع بعدی بدیم و اینطوری چندین مرحله افزودنی رو خیلی راحت به ابجکتمون اضافه کردیم!
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -2725,7 +2724,7 @@ Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip,
 
 <details>
 
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -2976,7 +2975,7 @@ Console.ReadLine();
 توی مرحله بعد ما یک کلاس `TeaShop` داریم که وظیفه ثبت سفارش و آماده کردن اون‌هارو به عهده داره.
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -3195,7 +3194,7 @@ teaShop.Serve();
 در مرحله بعد هم یک پروکسی برای اضافه کردن امنیت به درب میسازیم.
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -3453,7 +3452,7 @@ door.Close(); // Closing lab door
 کافی نداشت، و در نهایت با حساب بیت کوین پرداخت میکنه!
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -3745,7 +3744,7 @@ bank.Pay(259);
 در نهایت وقتی نیاز به خاموش کردن یا روشن کردن داشته باشیم این کامند‌هارو به کنترلمون میفرستیم و اون اجراشون میکنه!
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -4010,7 +4009,7 @@ class RemoteControl
 توی این کد هم میتونید ببینید که چطوری میتونیم از Iterator‌ها استفاده کنیم!
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -4267,7 +4266,7 @@ Console.ReadLine();
 خب حالا بخش یوزر‌ها: (Colleagues)
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -4473,7 +4472,7 @@ jane.Send("Hey!");
 در ادامه یک کلاس ادیتور میسازیم که قابلیت تایپ کردن، خالی کردن، سیو و برگشت حافظه داره!
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -4703,7 +4702,7 @@ Console.Write(editor.Content); // This is the first sentence. This is second
 بندی ارسال بشه به اونا اطلاع رسانی میشه!
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -4991,7 +4990,7 @@ Console.ReadLine();
 ...
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -5364,7 +5363,7 @@ dolphin.Accept(jump);   // Walked on water a little and disappeared
 یک کلاس بسازیم که وظیفه‌اش مدیریت این استراتژی‌ها باشه.
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -5567,7 +5566,7 @@ sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
 بعد ادیتور رو بسازیم و بهش یاد بدیم این کلاس‌ها رو توی خودش نگه داره و ازشون استفاده کنه!
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
@@ -5820,7 +5819,7 @@ editor.Type("Fifthe Line");
 بعد باید پیاده سازی برای اندروید و آی او اس رو بسازیم.
 
 <details>
-<summary>🐍 Python</summary>
+<summary>Python</summary>
 
 <div dir="ltr">
 
