@@ -870,6 +870,7 @@ var ironDoorFittingExpert = ironDoorFactory.MakeFittingExpert();
 
 ironDoor.GetDescription();//Output : I am a iron door
 ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
+
 ```
 
 </div>
@@ -1551,6 +1552,7 @@ public class President
 }
 
 ----------------------------
+
 President a = President.GetInstance();
 President b = President.GetInstance();
 
