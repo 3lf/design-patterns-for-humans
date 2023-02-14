@@ -154,11 +154,9 @@
 
 **مثال برنامه نویسی**
 
-
 توی این مثال میخوایم از اون مثال ساخت درب استفاده کنیم.
 
 پس اول ما اینترفیس مربوط به درب رو میسازیم و بعدش یک کلاس factory برای ساخت درب میسازیم.
-
 
 <details>
 <summary>🐍 Python</summary>
@@ -251,10 +249,62 @@ console.log(door.getWidth());
 
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+public interface IDoor
+{
+    int GetHeight();
+    int GetWidth();
+}
+
+public class WoodenDoor : IDoor
+{
+    private int Height { get; set; }
+    private int Width { get; set; }
+
+    public WoodenDoor(int height, int width)
+    {
+        this.Height = height;
+        this.Width = width;
+    }
+
+    public int GetHeight()
+    {
+        return this.Height;
+    }
+    public int GetWidth()
+    {
+        return this.Width;
+    }
+}
+
+public static class DoorFactory
+{
+    public static IDoor MakeDoor(int height, int width)
+    {
+        return new WoodenDoor(height, width);
+    }
+}
+
+
+----------------------------
+
+var door = DoorFactory.MakeDoor(80, 30);
+Console.WriteLine($"Height of Door : {door.GetHeight()}");
+Console.WriteLine($"Width of Door : {door.GetWidth()}");
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -290,16 +340,12 @@ console.log(door.getWidth());
 
 پس اول یک اینترفیس برای مصاحبه کننده‌ها میسازیم و چند پیاده‌سازی هم برای اون ایجاد می‌کنیم.
 
-
 بعد از اون `HiringManager` رو پیاده سازی میکنیم
-
 
 در نهایت هر فرزند میتونه ازش ارث بری کنه و متد `makeInterviewer` خودش رو داشته باشه:
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -409,6 +455,75 @@ marketingManager.takeInterview();
 
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IInterviewer
+{
+    void AskQuestions();
+}
+
+class Developer : IInterviewer
+{
+    public void AskQuestions()
+    {
+        Console.WriteLine("Asking about design patterns!");
+    }
+}
+
+class CommunityExecutive : IInterviewer
+{
+    public void AskQuestions()
+    {
+        Console.WriteLine("Asking about community building!");
+    }
+}
+
+abstract class HiringManager
+{
+    // Factory method
+    abstract protected IInterviewer MakeInterviewer();
+    public void TakeInterview()
+    {
+        var interviewer = this.MakeInterviewer();
+        interviewer.AskQuestions();
+    }
+}
+
+class DevelopmentManager : HiringManager
+{
+    protected override IInterviewer MakeInterviewer()
+    {
+        return new Developer();
+    }
+}
+
+class MarketingManager : HiringManager
+{
+    protected override IInterviewer MakeInterviewer()
+    {
+        return new CommunityExecutive();
+    }
+}
+
+
+----------------------------
+
+var devManager = new DevelopmentManager();
+devManager.TakeInterview(); //Output : Asking about design patterns!
+
+var marketingManager = new MarketingManager();
+marketingManager.TakeInterview();//Output : Asking about community building!
+
+```
+
+</div>
+
+</details>
 
 <br>
 
@@ -417,11 +532,9 @@ marketingManager.takeInterview();
 اساساً زمانی ازین الگو استفاده میشه که چندین کلاس با ریشه مشترک داریم (یعنی چندین کلاس یک کلاس parent رو پیاده‌سازی
 می‌کنند) و با توجه به شرایط تصمیم میگیریم از یکی از اون‌ها استفاده کنیم.
 
-
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -453,16 +566,11 @@ marketingManager.takeInterview();
 
 **مثال برنامه نویسی**
 
-
-
 خب همون مثال ساخت خونه و نیاز به درب‌های مختلف رو ترجمه میکنیم.
 
 اول باید اینترفیس درب رو بسازیم و چند پیاده‌سازی ازش ایجاد کنیم.
 
-
 در مرحله بعد برای هر درب متخصص مربوطه رو ایجاد می‌کنیم.
-
-
 
 و در مرحله آخر سراغ پیاده‌سازی دیزاین پترن‌مون میریم.
 
@@ -472,11 +580,8 @@ marketingManager.takeInterview();
 
 این موضوع برای درب آهنی و ... هم بطور مشابه پیاده‌سازی میشه.
 
-
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -658,14 +763,121 @@ expert.getDescription();
 
 </div>
 
+**همونطور که میبیند، می‌تونیم بطور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+درب
+انتخاب نمی‌کنیم.**
+
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IDoor {
+
+  void GetDescription();
+
+}
+class WoodenDoor : IDoor
+{
+  public void GetDescription()
+  {
+    Console.WriteLine("I am a wooden door");
+  }
+}
+
+class IronDoor : IDoor
+{
+  public void GetDescription()
+  {
+    Console.WriteLine("I am a iron door");
+  }
+}
+
+interface IDoorFittingExpert
+{
+  void GetDescription();
+}
+
+class Welder : IDoorFittingExpert
+{
+  public void GetDescription()
+  {
+    Console.WriteLine("I can only fit iron doors");
+  }
+}
+
+class Carpenter : IDoorFittingExpert
+{
+  public void GetDescription()
+  {
+    Console.WriteLine("I can only fit wooden doors");
+  }
+}
+
+interface IDoorFactory {
+  IDoor MakeDoor();
+  IDoorFittingExpert MakeFittingExpert();
+}
+
+// Wooden factory to return carpenter and wooden door
+class WoodenDoorFactory : IDoorFactory
+{
+  public IDoor MakeDoor()
+  {
+    return new WoodenDoor();
+  }
+
+  public IDoorFittingExpert MakeFittingExpert()
+  {
+    return new Carpenter();
+  }
+}
+
+// Iron door factory to get iron door and the relevant fitting expert
+class IronDoorFactory : IDoorFactory
+{
+  public IDoor MakeDoor()
+  {
+    return new IronDoor();
+  }
+
+  public IDoorFittingExpert MakeFittingExpert()
+  {
+    return new Welder();
+  }
+}
+----------------------------
+var woodenDoorFactory = new WoodenDoorFactory();
+
+var woodenDoor = woodenDoorFactory.MakeDoor();
+var woodenDoorFittingExpert = woodenDoorFactory.MakeFittingExpert();
+
+woodenDoor.GetDescription(); //Output : I am a wooden door
+woodenDoorFittingExpert.GetDescription();//Output : I can only fit woooden doors
+
+----------------------------
+
+var ironDoorFactory = new IronDoorFactory();
+
+var ironDoor = ironDoorFactory.MakeDoor();
+var ironDoorFittingExpert = ironDoorFactory.MakeFittingExpert();
+
+ironDoor.GetDescription();//Output : I am a iron door
+ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
+
+```
+
+</div>
 
 **همونطور که میبیند، می‌تونیم بطور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
 انتخاب نمی‌کنیم.**
 
-
 </details>
-
 
 <br>
 
@@ -673,11 +885,9 @@ expert.getDescription();
 
 زمانی که وابستگی‌های منطقی نه چندان ساده برای ایجاد وجود داره، میتونیم ازین دیزاین پترن استفاده کنیم.
 
-
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -709,6 +919,7 @@ expert.getDescription();
 ```python
 def __init__(self, size, cheese=True, pepperoni=True, tomato=False, lettuce=True)
 ```
+
 </div>
 </details>
 
@@ -722,6 +933,21 @@ constructor(size: any, cheese: boolean = true, pepperoni: boolean = true, tomato
 ```
 
 </div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
+
+```
+
+</div>
+
 </details>
 
 در این شرایط معمولا Builder میتونه به دادمون برسه.
@@ -741,14 +967,11 @@ constructor(size: any, cheese: boolean = true, pepperoni: boolean = true, tomato
 
 **مثال برنامه نویسی**
 
-
-
 در این بخش هم میخوام مثال برگر رو براتون ترجمه کنم.
 
 اولین مرحله اینه که یک کلاس برگر معمولی داشته باشیم
 
 در ادامه کلاس Builder رو براش ایجاد میکنیم.
-
 
 <details>
 <summary>🐍 Python</summary>
@@ -812,7 +1035,6 @@ print(vars(burger))
 ```
 
 </div>
-
 
 </details>
 
@@ -889,20 +1111,104 @@ console.log(Object.keys(burger));
 </div>
 </details>
 
-<br>
+<details>
+<summary >#C</summary>
 
+<div dir="ltr">
+
+```C#
+class Burger
+{
+  private int mSize;
+  private bool mCheese;
+  private bool mPepperoni;
+  private bool mLettuce;
+  private bool mTomato;
+
+  public Burger(BurgerBuilder builder)
+  {
+    this.mSize = builder.Size;
+    this.mCheese = builder.Cheese;
+    this.mPepperoni = builder.Pepperoni;
+    this.mLettuce = builder.Lettuce;
+    this.mTomato = builder.Tomato;
+  }
+
+  public string GetDescription()
+  {
+    var sb = new StringBuilder();
+    sb.Append($"This is {this.mSize} inch Burger. ");
+    return sb.ToString();
+  }
+}
+
+class BurgerBuilder {
+  public int Size;
+  public bool Cheese;
+  public bool Pepperoni;
+  public bool Lettuce;
+  public bool Tomato;
+
+  public BurgerBuilder(int size)
+  {
+    this.Size = size;
+  }
+
+  public BurgerBuilder AddCheese()
+  {
+    this.Cheese = true;
+    return this;
+  }
+
+  public BurgerBuilder AddPepperoni()
+  {
+    this.Pepperoni = true;
+    return this;
+  }
+
+  public BurgerBuilder AddLettuce()
+  {
+    this.Lettuce = true;
+    return this;
+  }
+
+  public BurgerBuilder AddTomato()
+  {
+    this.Tomato = true;
+    return this;
+  }
+
+  public Burger Build()
+  {
+    return new Burger(this);
+  }
+}
+
+----------------------------
+
+var burger = new BurgerBuilder(4).AddCheese()
+                                .AddPepperoni()
+                                .AddLettuce()
+                                .AddTomato()
+                                .Build();
+Console.WriteLine(burger.GetDescription());
+
+```
+
+</div>
+
+</details>
+
+<br>
 
 **چه موقع باید ازش استفاده کنیم؟**
 
 همونطور که قبل تر اشاره کردم این دیزاین پترن رو معمولا برای ساخت ابجکت‌های پیچیده یا ابجکت‌هایی که نیاز به شخصی سازی
 زیادی دارن استفاده میکنیم.
 
-
 <br>
 
-
 ---
-
 
 <div align="center">
 
@@ -938,21 +1244,16 @@ console.log(Object.keys(burger));
 
 **مثال برنامه نویسی**
 
-
 فرض کنید کلاس SomeComponent رو به صورتی که در کد میبینید داریم.
 
 باید دو کلاس copy و deep کپی ایجاد کنیم.
 
-
 <details>
 <summary>🐍 Python</summary>
 
-
 پایتون magic method‌هایی برای این مساله در نظر گرفته که ماهم از همون دو تابع معروف copy و deep copy استفاده میکنیم:
 
-
 <div dir="ltr">
-
 
 ```python
 class SomeComponent:
@@ -983,7 +1284,6 @@ class SomeComponent:
 ```
 
 </div>
-
 
 </details>
 
@@ -1027,6 +1327,62 @@ class SomeComponent {
 
 </div>
 </details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+public class SomeComponent
+{
+    public int someInt;
+    public string? someString;
+
+    public SomeComponent ShallowCopy()
+    {
+        return (SomeComponent)this.MemberwiseClone();
+    }
+
+    public SomeComponent DeepCopy()
+    {
+        SomeComponent clone = (SomeComponent)this.MemberwiseClone();
+        clone.someInt = someInt;
+        clone.someString = someString;
+        return clone;
+    }
+}
+
+----------------------------
+
+SomeComponent c1 = new SomeComponent();
+c1.someInt = 1;
+c1.someString = "someString1";
+
+// Perform a shallow copy of c1 and assign it to c2.
+SomeComponent c2 = c1.ShallowCopy();
+
+// Make a deep copy of c1 and assign it to c3.
+SomeComponent c3 = c1.DeepCopy();
+
+Console.WriteLine(c1.someInt + ":" + c1.someString); // 1:someString1
+Console.WriteLine(c2.someInt + ":" + c2.someString); // 1:someString1
+Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
+
+c1.someInt = 2;
+c1.someString = "someString2";
+
+Console.WriteLine(c1.someInt + ":" + c1.someString); // 2:someString2
+Console.WriteLine(c2.someInt + ":" + c2.someString); // 1:someString1
+Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 **تفاوت Shadow Copy و Deep Copy ؟**
@@ -1039,11 +1395,9 @@ class SomeComponent {
 ولی توی deep copy، یک متغیر ساخته می‌شه و مقدار متغیر قبلی توی اون کپی می‌شه. در نتیجه تغییر ابجکت اول یا ابجکت کپی
 تغییری توی اون یکی به وجود نمیاره.
 
-
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -1079,10 +1433,8 @@ class SomeComponent {
 
 ولی توی پایتون راه حل ساده تری وجود داره که اون استفاده از metaclass هاست:
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -1116,7 +1468,6 @@ if __name__ == "__main__":
 
 </div>
 این روش Thread Safe نیست. برای اطلاعات بیشتر سرچ کنید :)
-
 
 </details>
 
@@ -1159,6 +1510,44 @@ if (Object.is(s1, s2)) {
 
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+public class President
+{
+  static President instance;
+  // Private constructor
+  private President()
+  {
+    //Hiding the Constructor
+  }
+
+  // Public constructor
+  public static President GetInstance()
+  {
+    if (instance == null) {
+      instance = new President();
+    }
+    return instance;
+  }
+}
+
+----------------------------
+
+President a = President.GetInstance();
+President b = President.GetInstance();
+
+Console.WriteLine(a == b); //Output : true
+
+```
+
+</div>
+
+</details>
 
 <br>
 <br>
@@ -1186,11 +1575,9 @@ if (Object.is(s1, s2)) {
 
 </div>
 
-
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -1223,14 +1610,11 @@ if (Object.is(s1, s2)) {
 
 **مثال برنامه نویسی**
 
-
-
 فرض کنید یک شکارچی به شیر‌ها حمله میکنه و اون‌ها غرش میکنن.
 
 خب اول باید یک اینترفیس `lion` بسازیم که شیر‌های مختلف ازش استفاده کنن.
 
 در مرحله بعد شکارچی وقتی شکار انجام بده اون شیر غرش انجام میده.
-
 
 حالا فرض کنید یک موجودیت جدید مثل `سگ وحشی` به برنامه اضافه شده.
 
@@ -1241,10 +1625,8 @@ if (Object.is(s1, s2)) {
 
 برای حلش به این صورت میتونیم براش آداپتور تعریف کنیم:
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -1349,11 +1731,81 @@ hunter.hunt(wildDogAdapter);
 
 </div>
 </details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+interface ILion
+{
+  void Roar();
+}
+
+class AfricanLion : ILion
+{
+  public void Roar()
+  {
+
+  }
+}
+
+class AsiaLion : ILion
+{
+  public void Roar()
+  {
+
+  }
+}
+
+class Hunter
+{
+  public void Hunt(ILion lion)
+  {
+
+  }
+}
+
+// This needs to be added to the game
+class WildDog
+{
+  public void bark()
+  {
+  }
+}
+
+// Adapter around wild dog to make it compatible with our game
+class WildDogAdapter : ILion
+{
+  private WildDog mDog;
+  public WildDogAdapter(WildDog dog)
+  {
+    this.mDog = dog;
+  }
+  public void Roar()
+  {
+    mDog.bark();
+  }
+}
+
+----------------------------
+
+var wildDog = new WildDog();
+var wildDogAdapter = new WildDogAdapter(wildDog);
+
+var hunter = new Hunter();
+hunter.Hunt(wildDogAdapter);
+
+```
+
+</div>
+
+</details>
+
 <br>
 
-
 ---
-
 
 <div align="center">
 
@@ -1390,13 +1842,11 @@ hunter.hunt(wildDogAdapter);
 
 **مثال برنامه نویسی**
 
-
 بیاید همون مثال سایت و قالب که بالاتر درموردش صحبت کردیم رو پیاده‌سازی کنیم.
 
 در مرحله اول کلاس `WebPage` و پیاده‌سازی‌هایی از اون رو داریم.
 
 برای قالب هم، باید کلاس و پیاده سازی‌های مختلفی بنویسیم:
-
 
 <details>
 <summary>🐍 Python</summary>
@@ -1527,11 +1977,98 @@ console.log(careers.getContent());
 
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IWebPage
+{
+  string GetContent();
+}
+
+class About : IWebPage
+{
+  protected ITheme theme;
+
+  public About(ITheme theme)
+  {
+    this.theme = theme;
+  }
+
+  public string GetContent()
+  {
+    return $"About page in {theme.GetColor()}";
+  }
+}
+
+class Careers : IWebPage
+{
+  protected ITheme theme;
+
+  public Careers(ITheme theme)
+  {
+    this.theme = theme;
+  }
+
+  public string GetContent()
+  {
+    return $"Careers page in {theme.GetColor()}";
+  }
+}
+
+
+interface ITheme
+{
+  string GetColor();
+}
+
+class DarkTheme : ITheme
+{
+  public string GetColor()
+  {
+    return "Dark Black";
+  }
+}
+
+class LightTheme : ITheme
+{
+  public string GetColor()
+  {
+    return "Off White";
+  }
+}
+
+class AquaTheme : ITheme
+{
+  public string GetColor()
+  {
+    return "Light blue";
+  }
+}
+
+----------------------------
+
+var darkTheme = new DarkTheme();
+var lightTheme = new LightTheme();
+
+var about= new About(darkTheme);
+var careers = new Careers(lightTheme);
+
+Console.WriteLine(about.GetContent()); //Output: About page in Dark Black
+Console.WriteLine(careers.GetContent()); //Output: Careers page in Off White
+
+```
+
+</div>
+
+</details>
+
 <br>
 
-
 ---
-
 
 <div align="center">
 
@@ -1569,7 +2106,6 @@ console.log(careers.getContent());
 
 </div>
 
-
 **مثال برنامه نویسی**
 
 بطور کلی توی دیزاین پترن composite ما دو مدل دیتا داریم:
@@ -1579,8 +2115,6 @@ console.log(careers.getContent());
 دو: Leaf که در واقع زیر مجموعه نداره و فقط یک سری وظیفه داره.
 
 خب اول بیایم یک اینترفیس پایه برای کامپوننت‌هامون بسازیم و در ادامه هم اینترفیس‌های Composite و Leaf رو بسازیم:
-
-
 
 <details>
 
@@ -1707,10 +2241,123 @@ console.log(`RESULT: ${tree.operation()}`);
 
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IEmployee
+{
+  float GetSalary();
+  string GetRole();
+  string GetName();
+}
+
+
+class Developer : IEmployee
+{
+  private string mName;
+  private float mSalary;
+
+  public Developer(string name, float salary)
+  {
+    this.mName = name;
+    this.mSalary = salary;
+  }
+
+  public float GetSalary()
+  {
+    return this.mSalary;
+  }
+
+  public string GetRole()
+  {
+    return "Developer";
+  }
+
+  public string GetName()
+  {
+    return this.mName;
+  }
+}
+
+class Designer : IEmployee
+{
+  private string mName;
+  private float mSalary;
+
+  public Designer(string name, float salary)
+  {
+    this.mName = name;
+    this.mSalary = salary;
+  }
+
+  public float GetSalary()
+  {
+    return this.mSalary;
+  }
+
+  public string GetRole()
+  {
+    return "Designer";
+  }
+
+  public string GetName()
+  {
+    return this.mName;
+  }
+}
+
+
+class Organization
+{
+  protected List<IEmployee> employees;
+
+  public Organization()
+  {
+    employees = new List<IEmployee>();
+  }
+
+  public void AddEmployee(IEmployee employee)
+  {
+    employees.Add(employee);
+  }
+
+  public float GetNetSalaries()
+  {
+    float netSalary = 0;
+
+    foreach (var e in employees) {
+      netSalary += e.GetSalary();
+    }
+    return netSalary;
+  }
+}
+
+----------------------------
+
+//Arrange Employees, Organization and add employees
+var developer = new Developer("John", 5000);
+var designer = new Designer("Arya", 5000);
+
+var organization = new Organization();
+organization.AddEmployee(developer);
+organization.AddEmployee(designer);
+
+Console.WriteLine($"Net Salary of Employees in Organization is {organization.GetNetSalaries():c}");
+//Ouptut: Net Salary of Employees in Organization is $10000.00
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -1754,7 +2401,6 @@ console.log(`RESULT: ${tree.operation()}`);
 
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -1931,10 +2577,117 @@ console.log(someCoffee.getDescription());
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface ICoffee
+{
+  int GetCost();
+  string GetDescription();
+}
+
+class SimpleCoffee : ICoffee
+{
+  public int GetCost()
+  {
+    return 5;
+  }
+
+  public string GetDescription()
+  {
+    return "Simple Coffee";
+  }
+}
+
+class MilkCoffee : ICoffee
+{
+  private readonly ICoffee mCoffee;
+
+  public MilkCoffee(ICoffee coffee)
+  {
+    mCoffee = coffee ?? throw new ArgumentNullException("coffee", "coffee should not be null");
+  }
+  public int GetCost()
+  {
+    return mCoffee.GetCost() + 1;
+  }
+
+  public string GetDescription()
+  {
+    return String.Concat(mCoffee.GetDescription(), ", milk");
+  }
+}
+
+class WhipCoffee : ICoffee
+{
+  private readonly ICoffee mCoffee;
+
+  public WhipCoffee(ICoffee coffee)
+  {
+    mCoffee = coffee ?? throw new ArgumentNullException("coffee", "coffee should not be null");
+  }
+  public int GetCost()
+  {
+    return mCoffee.GetCost() + 1;
+  }
+
+  public string GetDescription()
+  {
+    return String.Concat(mCoffee.GetDescription(), ", whip");
+  }
+}
+
+class VanillaCoffee : ICoffee
+{
+  private readonly ICoffee mCoffee;
+
+  public VanillaCoffee(ICoffee coffee)
+  {
+    mCoffee = coffee ?? throw new ArgumentNullException("coffee", "coffee should not be null");
+  }
+  public int GetCost()
+  {
+    return mCoffee.GetCost() + 1;
+  }
+
+  public string GetDescription()
+  {
+    return String.Concat(mCoffee.GetDescription(), ", vanilla");
+  }
+}
+
+
+----------------------------
+
+var myCoffee = new SimpleCoffee();
+Console.WriteLine($"{myCoffee.GetCost():c}"); // $ 5.00
+Console.WriteLine(myCoffee.GetDescription()); // Simple Coffee
+
+var milkCoffee = new MilkCoffee(myCoffee);
+Console.WriteLine($"{milkCoffee.GetCost():c}"); // $ 6.00
+Console.WriteLine(milkCoffee.GetDescription()); // Simple Coffee, milk
+
+var whipCoffee = new WhipCoffee(milkCoffee);
+Console.WriteLine($"{whipCoffee.GetCost():c}"); // $ 7.00
+Console.WriteLine(whipCoffee.GetDescription()); // Simple Coffee, milk, whip
+
+var vanillaCoffee = new VanillaCoffee(whipCoffee);
+Console.WriteLine($"{vanillaCoffee.GetCost():c}"); // $ 8.00
+Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip, vanilla
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -1965,7 +2718,6 @@ console.log(someCoffee.getDescription());
 
 بیاین همون مثال مربوط به کامپیوتر رو پیاده‌سازی کنیم!
 
-
 اول باید کلاس کامپیوتر رو بسازیم.
 
 کلاس Facade به این صورت پیاده‌سازی میشه که یک ابجکت رو به عنوان ورودی دریافت میکنه و با هر تابع خودش یک سری عملیات رو
@@ -1974,7 +2726,6 @@ console.log(someCoffee.getDescription());
 <details>
 
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -2030,12 +2781,9 @@ computer.turnOff()
 
 </details>
 
-
 <details>
 
 <summary>TypeScript</summary>
-
-
 
 <div dir="ltr">
 
@@ -2102,15 +2850,96 @@ computer.turnOff();
 
 </div>
 
-
 </details>
 
+<details>
+<summary >#C</summary>
 
+<div dir="ltr">
+
+```C#
+
+class Computer
+{
+  public void GetElectricShock()
+  {
+    Console.Write("Ouch!");
+  }
+
+  public void MakeSound()
+  {
+    Console.Write("Beep beep!");
+  }
+
+  public void ShowLoadingScreen()
+  {
+    Console.Write("Loading..");
+  }
+
+  public void Bam()
+  {
+    Console.Write("Ready to be used!");
+  }
+
+  public void CloseEverything()
+  {
+    Console.Write("Bup bup bup buzzzz!");
+  }
+
+  public void Sooth()
+  {
+    Console.Write("Zzzzz");
+  }
+
+  public void PullCurrent()
+  {
+    Console.Write("Haaah!");
+  }
+}
+
+
+class ComputerFacade
+{
+  private readonly Computer mComputer;
+
+  public ComputerFacade(Computer computer)
+  {
+    this.mComputer = computer ?? throw new ArgumentNullException("computer", "computer cannot be null");
+  }
+
+  public void TurnOn()
+  {
+    mComputer.GetElectricShock();
+    mComputer.MakeSound();
+    mComputer.ShowLoadingScreen();
+    mComputer.Bam();
+  }
+
+  public void TurnOff()
+  {
+    mComputer.CloseEverything();
+    mComputer.PullCurrent();
+    mComputer.Sooth();
+  }
+}
+
+----------------------------
+
+var computer = new ComputerFacade(new Computer());
+computer.TurnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
+Console.WriteLine();
+computer.TurnOff();  // Bup bup buzzz! Haah! Zzzzz
+Console.ReadLine();
+
+```
+
+</div>
+
+</details>
 
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -2148,7 +2977,6 @@ computer.turnOff();
 
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -2256,10 +3084,81 @@ shop.serve();
 
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+// Anything that will be cached is flyweight.
+// Types of tea here will be flyweights.
+class KarakTea
+{
+}
+
+// Acts as a factory and saves the tea
+class TeaMaker
+{
+  private Dictionary<string,KarakTea> mAvailableTea = new Dictionary<string,KarakTea>();
+
+  public KarakTea Make(string preference)
+  {
+    if (!mAvailableTea.ContainsKey(preference))
+    {
+      mAvailableTea[preference] = new KarakTea();
+    }
+
+    return mAvailableTea[preference];
+  }
+}
+
+class TeaShop
+{
+  private Dictionary<int,KarakTea> mOrders = new Dictionary<int,KarakTea>();
+  private readonly TeaMaker mTeaMaker;
+
+  public TeaShop(TeaMaker teaMaker)
+  {
+    mTeaMaker = teaMaker ?? throw new ArgumentNullException("teaMaker", "teaMaker cannot be null");
+  }
+
+  public void TakeOrder(string teaType, int table)
+  {
+    mOrders[table] = mTeaMaker.Make(teaType);
+  }
+
+  public void Serve()
+  {
+    foreach(var table  in mOrders.Keys){
+      Console.WriteLine($"Serving Tea to table # {table}");
+    }
+  }
+}
+
+----------------------------
+
+var teaMaker = new TeaMaker();
+var teaShop = new TeaShop(teaMaker);
+
+teaShop.TakeOrder("less sugar", 1);
+teaShop.TakeOrder("more milk", 2);
+teaShop.TakeOrder("without sugar", 5);
+
+teaShop.Serve();
+// Serving tea to table# 1
+// Serving tea to table# 2
+// Serving tea to table# 5
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -2294,7 +3193,6 @@ shop.serve();
 
 اول اینترفیس درب رو میسازیم و بعدش یک مدل درب پیاده سازی میکنیم.
 در مرحله بعد هم یک پروکسی برای اضافه کردن امنیت به درب میسازیم.
-
 
 <details>
 <summary>🐍 Python</summary>
@@ -2346,7 +3244,6 @@ door.close()  # Closing Lab Door
 ```
 
 </div>
-
 
 </details>
 
@@ -2404,6 +3301,78 @@ door.close(); // Closing Lab Door
 
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IDoor
+{
+  void Open();
+  void Close();
+}
+
+class LabDoor : IDoor
+{
+  public void Close()
+  {
+    Console.WriteLine("Closing lab door");
+  }
+
+  public void Open()
+  {
+    Console.WriteLine("Opening lab door");
+  }
+}
+
+class SecuredDoor : IDoor
+{
+  private IDoor mDoor;
+
+  public SecuredDoor(IDoor door)
+  {
+    mDoor = door ?? throw new ArgumentNullException("door", "door can not be null");
+  }
+
+  public void Open(string password)
+  {
+    if (Authenticate(password))
+    {
+      mDoor.Open();
+    }
+    else
+    {
+      Console.WriteLine("Big no! It ain't possible.");
+    }
+  }
+
+  private bool Authenticate(string password)
+  {
+    return password == "$ecr@t";
+  }
+
+  public void Close()
+  {
+    mDoor.Close();
+  }
+}
+
+----------------------------
+
+var door = new SecuredDoor(new LabDoor());
+door.Open("invalid"); // Big no! It ain't possible.
+
+door.Open("$ecr@t"); // Opening lab door
+door.Close(); // Closing lab door
+
+```
+
+</div>
+
+</details>
+
 <br>
 <br>
 
@@ -2430,11 +3399,9 @@ door.close(); // Closing Lab Door
 
 </div>
 
-
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -2470,7 +3437,6 @@ door.close(); // Closing Lab Door
 
 **مثال برنامه نویسی**
 
-
 میخوایم همون مثال پرداخت رو باهم پیاده سازی کنیم.
 
 خب توی کد بالا یک کلاس مرجع ساختیم که اسمش Account هست. این کلاس یک متد داره که اسمش pay هست. این متد یک مقدار رو میگیره
@@ -2481,13 +3447,10 @@ door.close(); // Closing Lab Door
 
 خب حالا میخوایم یک حساب بانکی، یک حساب پی پال و یک حساب بیت کوین بسازیم.
 
-
 همونطور که میبینید اومدیم و بعد از ساختن این حساب‌ها اونارو به هم متصل کردیم!
 
 سیستم اول سعی کرده با حساب بانکی پرداخت کنه ولی موجودی کافی نداشت، بعدش سعی کرده با حساب پی پال پرداخت کنه ولی موجودی
 کافی نداشت، و در نهایت با حساب بیت کوین پرداخت میکنه!
-
-
 
 <details>
 <summary>🐍 Python</summary>
@@ -2647,10 +3610,101 @@ Paid 259 using Bitcoin!
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+abstract class Account
+{
+  private Account mSuccessor;
+  protected decimal mBalance;
+
+  public void SetNext(Account account)
+  {
+    mSuccessor = account;
+  }
+
+  public void Pay(decimal amountTopay)
+  {
+    if (CanPay(amountTopay))
+    {
+      Console.WriteLine($"Paid {amountTopay:c} using {this.GetType().Name}.");
+    }
+    else if (this.mSuccessor != null)
+    {
+      Console.WriteLine($"Cannot pay using {this.GetType().Name}. Proceeding..");
+      mSuccessor.Pay(amountTopay);
+    }
+    else
+    {
+      throw new Exception("None of the accounts have enough balance");
+    }
+  }
+  private bool CanPay(decimal amount)
+  {
+    return mBalance >= amount;
+  }
+}
+
+class Bank : Account
+{
+  public Bank(decimal balance)
+  {
+    this.mBalance = balance;
+  }
+}
+
+class Paypal : Account
+{
+  public Paypal(decimal balance)
+  {
+    this.mBalance = balance;
+  }
+}
+
+class Bitcoin : Account
+{
+  public Bitcoin(decimal balance)
+  {
+    this.mBalance = balance;
+  }
+}
+
+----------------------------
+
+// Let's prepare a chain like below
+//      $bank->$paypal->$bitcoin
+//
+// First priority bank
+//      If bank can't pay then paypal
+//      If paypal can't pay then bit coin
+var bank = new Bank(100);          // Bank with balance 100
+var paypal = new Paypal(200);      // Paypal with balance 200
+var bitcoin = new Bitcoin(300);    // Bitcoin with balance 300
+
+bank.SetNext(paypal);
+paypal.SetNext(bitcoin);
+
+// Let's try to pay using the first priority i.e. bank
+bank.Pay(259);
+// Output will be
+// ==============
+// Cannot pay using bank. Proceeding ..
+// Cannot pay using paypal. Proceeding ..:
+// Paid 259 using Bitcoin!
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -2692,9 +3746,6 @@ Paid 259 using Bitcoin!
 
 <details>
 <summary>🐍 Python</summary>
-
-
-
 
 <div dir="ltr">
 
@@ -2806,10 +3857,120 @@ remote.submit(turnOff); // Darkness!
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+// Receiver
+class Bulb
+{
+  public void TurnOn()
+  {
+    Console.WriteLine("Bulb has been lit");
+  }
+
+  public void TurnOff()
+  {
+    Console.WriteLine("Darkness!");
+  }
+}
+
+
+
+interface ICommand
+{
+  void Execute();
+  void Undo();
+  void Redo();
+}
+
+// Command
+class TurnOn : ICommand
+{
+  private Bulb mBulb;
+
+  public TurnOn(Bulb bulb)
+  {
+    mBulb = bulb ?? throw new ArgumentNullException("Bulb", "Bulb cannot be null");
+  }
+
+  public void Execute()
+  {
+    mBulb.TurnOn();
+  }
+
+  public void Undo()
+  {
+    mBulb.TurnOff();
+  }
+
+  public void Redo()
+  {
+    Execute();
+  }
+}
+
+class TurnOff : ICommand
+{
+  private Bulb mBulb;
+
+  public TurnOff(Bulb bulb)
+  {
+    mBulb = bulb ?? throw new ArgumentNullException("Bulb", "Bulb cannot be null");
+  }
+
+  public void Execute()
+  {
+    mBulb.TurnOff();
+  }
+
+  public void Undo()
+  {
+    mBulb.TurnOn();
+  }
+
+  public void Redo()
+  {
+    Execute();
+  }
+}
+
+
+// Invoker
+class RemoteControl
+{
+  public void Submit(ICommand command)
+  {
+    command.Execute();
+  }
+}
+
+
+----------------------------
+
+  var bulb = new Bulb();
+
+  var turnOn = new TurnOn(bulb);
+  var turnOff = new TurnOff(bulb);
+
+  var remote = new RemoteControl();
+  remote.Submit(turnOn); // Bulb has been lit!
+  remote.Submit(turnOff); // Darkness!
+
+  Console.ReadLine();
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -2841,7 +4002,6 @@ remote.submit(turnOff); // Darkness!
 
 **مثال برنامه نویسی**
 
-
 این مثال رو میخوایم یکم پایتونیک پیش بریم! میدونید که توی پایتون دو تا مفهوم Iterable و Iterator رو داریم پس میریم ازشون
 استفاده کنیم!
 
@@ -2849,10 +4009,8 @@ remote.submit(turnOff); // Darkness!
 
 توی این کد هم میتونید ببینید که چطوری میتونیم از Iterator‌ها استفاده کنیم!
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -2909,7 +4067,6 @@ if __name__ == "__main__":
 ```
 
 </div>
-
 
 </details>
 
@@ -2981,10 +4138,101 @@ for (const item of collection.getReverseIterator()) {
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+class RadioStation
+{
+  private float mFrequency;
+
+  public RadioStation(float frequency)
+  {
+    mFrequency = frequency;
+  }
+
+  public float GetFrequecy()
+  {
+    return mFrequency;
+  }
+
+}
+
+
+class StationList : IEnumerable<RadioStation>
+{
+  List<RadioStation> mStations = new List<RadioStation>();
+
+  public RadioStation this[int index]
+  {
+    get { return mStations[index]; }
+    set { mStations.Insert(index, value); }
+  }
+
+  public void Add(RadioStation station)
+  {
+    mStations.Add(station);
+  }
+
+  public void Remove(RadioStation station)
+  {
+    mStations.Remove(station);
+  }
+
+  public IEnumerator<RadioStation> GetEnumerator()
+  {
+    return this.GetEnumerator();
+  }
+
+  IEnumerator IEnumerable.GetEnumerator()
+  {
+    //Use can switch to this internal collection if you do not want to transform
+    //return mStations.GetEnumerator();
+
+    //use this if you want to transform the object before rendering
+    foreach (var x in mStations)
+    {
+      yield return x;
+    }
+  }
+}
+
+
+
+----------------------------
+
+var stations = new StationList();
+var station1 = new RadioStation(89);
+stations.Add(station1);
+
+var station2 = new RadioStation(101);
+stations.Add(station2);
+
+var station3 = new RadioStation(102);
+stations.Add(station3);
+
+foreach(var x in stations)
+{
+  Console.Write(x.GetFrequecy());
+}
+
+var q = stations.Where(x => x.GetFrequecy() == 89).FirstOrDefault();
+Console.WriteLine(q.GetFrequecy());
+
+Console.ReadLine();
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -3018,10 +4266,8 @@ for (const item of collection.getReverseIterator()) {
 
 خب حالا بخش یوزر‌ها: (Colleagues)
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -3069,8 +4315,6 @@ jane.send('Hey!')
 ```
 
 </div>
-
-
 
 </details>
 
@@ -3128,10 +4372,73 @@ jane.send("Hey!");
 
 </div>
 </details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IChatRoomMediator
+{
+  void ShowMessage(User user, string message);
+}
+
+//Mediator
+class ChatRoom : IChatRoomMediator
+{
+  public void ShowMessage(User user, string message)
+  {
+    Console.WriteLine($"{DateTime.Now.ToString("MMMM dd, H:mm")} [{user.GetName()}]:{message}");
+  }
+}
+
+
+class User
+{
+  private string mName;
+  private IChatRoomMediator mChatRoom;
+
+  public User(string name, IChatRoomMediator chatroom)
+  {
+    mChatRoom = chatroom;
+    mName = name;
+  }
+
+  public string GetName()
+  {
+    return mName;
+  }
+
+  public void Send(string message)
+  {
+    mChatRoom.ShowMessage(this, message);
+  }
+}
+
+----------------------------
+
+var mediator = new ChatRoom();
+
+var john = new User("John", mediator);
+var jane = new User("Jane", mediator);
+
+john.Send("Hi there!");
+jane.Send("Hey!");
+
+//April 14, 20:05[John]:Hi there!
+//April 14, 20:05[Jane]:Hey!
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -3165,11 +4472,8 @@ jane.send("Hey!");
 
 در ادامه یک کلاس ادیتور میسازیم که قابلیت تایپ کردن، خالی کردن، سیو و برگشت حافظه داره!
 
-
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -3273,11 +4577,98 @@ console.log(editor.getContent()); // This is the first sentence. This is second.
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+class EditorMemento
+{
+  private string mContent;
+
+  public EditorMemento(string content)
+  {
+    mContent = content;
+  }
+
+  public string Content
+  {
+    get
+    {
+      return mContent;
+    }
+  }
+}
+
+
+class Editor {
+
+  private string mContent = string.Empty;
+  private EditorMemento memento;
+
+  public Editor()
+  {
+    memento = new EditorMemento(string.Empty);
+  }
+
+  public void Type(string words)
+  {
+    mContent = String.Concat(mContent," ", words);
+  }
+
+  public string Content
+  {
+    get
+    {
+      return mContent;
+    }
+  }
+
+  public void Save()
+  {
+    memento = new EditorMemento(mContent);
+  }
+
+  public void Restore()
+  {
+    mContent = memento.Content;
+  }
+}
+
+----------------------------
+
+var editor = new Editor();
+
+//Type some stuff
+editor.Type("This is the first sentence.");
+editor.Type("This is second.");
+
+// Save the state to restore to : This is the first sentence. This is second.
+editor.Save();
+
+//Type some more
+editor.Type("This is third.");
+
+//Output the content
+Console.WriteLine(editor.Content); // This is the first sentence. This is second. This is third.
+
+//Restoring to last saved state
+editor.Restore();
+
+Console.Write(editor.Content); // This is the first sentence. This is second
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
-
 
 <div align="center">
 
@@ -3308,14 +4699,11 @@ console.log(editor.getContent()); // This is the first sentence. This is second.
 
 در بخش اول یک کلاس برای ذخیره کردن یک شغل میسازیم و در بخش بعدی یک کلاس برای جویندگان کار میسازیم!
 
-
 و بعد باید یک کلاس برای دسته بندی‌های مختلف کار ایجاد کنیم و جویندگان کار میتونن بهش اضافه بشن و اگه شغلی توی اون دسته
 بندی ارسال بشه به اونا اطلاع رسانی میشه!
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -3437,10 +4825,134 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+class JobPost
+{
+  public string Title { get; private set; }
+
+  public JobPost(string title)
+  {
+    Title = title;
+  }
+}
+class JobSeeker : IObserver<JobPost>
+{
+  public string Name { get; private set; }
+
+  public JobSeeker(string name)
+  {
+    Name = name;
+  }
+
+  //Method is not being called by JobPostings class currently
+  public void OnCompleted()
+  {
+    //No Implementation
+  }
+
+  //Method is not being called by JobPostings class currently
+  public void OnError(Exception error)
+  {
+    //No Implementation
+  }
+
+  public void OnNext(JobPost value)
+  {
+    Console.WriteLine($"Hi {Name} ! New job posted: {value.Title}");
+  }
+}
+
+
+class JobPostings : IObservable<JobPost>
+{
+  private List<IObserver<JobPost>> mObservers;
+  private List<JobPost> mJobPostings;
+
+  public JobPostings()
+  {
+    mObservers = new List<IObserver<JobPost>>();
+    mJobPostings = new List<JobPost>();
+  }
+
+  public IDisposable Subscribe(IObserver<JobPost> observer)
+  {
+    // Check whether observer is already registered. If not, add it
+    if (!mObservers.Contains(observer))
+    {
+      mObservers.Add(observer);
+    }
+    return new Unsubscriber<JobPost>(mObservers, observer);
+  }
+
+  private void Notify(JobPost jobPost)
+  {
+    foreach(var observer in mObservers)
+    {
+      observer.OnNext(jobPost);
+    }
+  }
+
+  public void AddJob(JobPost jobPost)
+  {
+    mJobPostings.Add(jobPost);
+    Notify(jobPost);
+  }
+
+}
+
+internal class Unsubscriber<JobPost> : IDisposable
+{
+  private List<IObserver<JobPost>> mObservers;
+  private IObserver<JobPost> mObserver;
+
+  internal Unsubscriber(List<IObserver<JobPost>> observers, IObserver<JobPost> observer)
+  {
+    this.mObservers = observers;
+    this.mObserver = observer;
+  }
+
+  public void Dispose()
+  {
+    if (mObservers.Contains(mObserver))
+      mObservers.Remove(mObserver);
+  }
+}
+
+----------------------------
+
+//Create Subscribers
+var johnDoe = new JobSeeker("John Doe");
+var janeDoe = new JobSeeker("Jane Doe");
+
+//Create publisher and attch subscribers
+var jobPostings = new JobPostings();
+jobPostings.Subscribe(johnDoe);
+jobPostings.Subscribe(janeDoe);
+
+//Add a new job and see if subscribers get notified
+jobPostings.AddJob(new JobPost("Software Engineer"));
+
+//Output
+// Hi John Doe! New job posted: Software Engineer
+// Hi Jane Doe! New job posted: Software Engineer
+
+Console.ReadLine();
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -3478,10 +4990,8 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 فرض کنید یک باغ وحش مجازی داریم و میخوایم یک عالمه امکان رو به حیوون‌های مختلف اضافه کنیم! مثلا صداشون، نحوه پریدنشون و
 ...
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -3685,10 +5195,142 @@ dolphin.accept(jump); // Walked on water a little and disappeared
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+// Visitee
+interface IAnimal
+{
+  void Accept(IAnimalOperation operation);
+}
+
+// Visitor
+interface IAnimalOperation
+{
+  void VisitMonkey(Monkey monkey);
+  void VisitLion(Lion lion);
+  void VisitDolphin(Dolphin dolphin);
+}
+
+
+
+class Monkey : IAnimal
+{
+  public void Shout()
+  {
+    Console.WriteLine("Oooh o aa aa!");
+  }
+
+  public void Accept(IAnimalOperation operation)
+  {
+      operation.VisitMonkey(this);
+  }
+}
+
+class Lion : IAnimal
+{
+  public void Roar()
+  {
+    Console.WriteLine("Roaar!");
+  }
+
+  public void Accept(IAnimalOperation operation)
+  {
+      operation.VisitLion(this);
+  }
+}
+
+class Dolphin : IAnimal
+{
+  public void Speak()
+  {
+    Console.WriteLine("Tuut tittu tuutt!");
+  }
+
+  public void Accept(IAnimalOperation operation)
+  {
+      operation.VisitDolphin(this);
+  }
+}
+
+
+class Speak : IAnimalOperation
+{
+  public void VisitDolphin(Dolphin dolphin)
+  {
+    dolphin.Speak();
+  }
+
+  public void VisitLion(Lion lion)
+  {
+    lion.Roar();
+  }
+
+  public void VisitMonkey(Monkey monkey)
+  {
+    monkey.Shout();
+  }
+}
+
+----------------------------
+
+var monkey = new Monkey();
+var lion = new Lion();
+var dolphin = new Dolphin();
+
+var speak = new Speak();
+
+monkey.Accept(speak);    // Ooh oo aa aa!
+lion.Accept(speak);      // Roaaar!
+dolphin.Accept(speak);   // Tuut tutt tuutt!
+
+-----------------------------
+
+class Jump : IAnimalOperation
+{
+  public void VisitDolphin(Dolphin dolphin)
+  {
+    Console.WriteLine("Walked on water a little and disappeared!");
+  }
+
+  public void VisitLion(Lion lion)
+  {
+    Console.WriteLine("Jumped 7 feet! Back on the ground!");
+  }
+
+  public void VisitMonkey(Monkey monkey)
+  {
+    Console.WriteLine("Jumped 20 feet high! on to the tree!");
+  }
+}
+
+------------------------------
+
+var jump = new Jump();
+
+monkey.Accept(speak);   // Ooh oo aa aa!
+monkey.Accept(jump);    // Jumped 20 feet high! on to the tree!
+
+lion.Accept(speak);     // Roaaar!
+lion.Accept(jump);      // Jumped 7 feet! Back on the ground!
+
+dolphin.Accept(speak);  // Tuut tutt tuutt!
+dolphin.Accept(jump);   // Walked on water a little and disappeared
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -3717,11 +5359,9 @@ dolphin.accept(jump); // Walked on water a little and disappeared
 
 **مثال برنامه نویسی**
 
-
-
 میخوایم یک سرویس پیاده سازی کنیم که با توجه به داده‌هامون تصمیم بگیریم از یک نوع از مرتب سازی استفاده کنیم!
 
- یک کلاس بسازیم که وظیفه‌اش مدیریت این استراتژی‌ها باشه.
+یک کلاس بسازیم که وظیفه‌اش مدیریت این استراتژی‌ها باشه.
 
 <details>
 <summary>🐍 Python</summary>
@@ -3821,10 +5461,70 @@ sorter2.sort(dataset);
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface ISortStrategy
+{
+  List<int> Sort(List<int> dataset);
+}
+
+class BubbleSortStrategy : ISortStrategy
+{
+  public List<int> Sort(List<int> dataset)
+  {
+    Console.WriteLine("Sorting using Bubble Sort !");
+    return dataset;
+  }
+}
+
+class QuickSortStrategy : ISortStrategy
+{
+  public List<int> Sort(List<int> dataset)
+  {
+    Console.WriteLine("Sorting using Quick Sort !");
+    return dataset;
+  }
+}
+
+class Sorter
+{
+  private readonly ISortStrategy mSorter;
+
+  public Sorter(ISortStrategy sorter)
+  {
+    mSorter = sorter;
+  }
+
+  public List<int> Sort(List<int> unSortedList)
+  {
+    return mSorter.Sort(unSortedList);
+  }
+}
+
+----------------------------
+
+var unSortedList = new List<int> { 1, 10, 2, 16, 19 };
+
+var sorter = new Sorter(new BubbleSortStrategy());
+sorter.Sort(unSortedList); // // Output : Sorting using Bubble Sort !
+
+sorter = new Sorter(new QuickSortStrategy());
+sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -3866,10 +5566,8 @@ sorter2.sort(dataset);
 
 بعد ادیتور رو بسازیم و بهش یاد بدیم این کلاس‌ها رو توی خودش نگه داره و ازشون استفاده کنه!
 
-
 <details>
 <summary>🐍 Python</summary>
-
 
 <div dir="ltr">
 
@@ -3991,10 +5689,98 @@ editor.type("Fifth Line"); // fifth line
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IWritingState {
+
+  void Write(string words);
+
+}
+
+class UpperCase : IWritingState
+{
+  public void Write(string words)
+  {
+    Console.WriteLine(words.ToUpper());
+  }
+}
+
+class LowerCase : IWritingState
+{
+  public void Write(string words)
+  {
+    Console.WriteLine(words.ToLower());
+  }
+}
+
+class DefaultText : IWritingState
+{
+  public void Write(string words)
+  {
+    Console.WriteLine(words);
+  }
+}
+
+
+class TextEditor {
+
+  private IWritingState mState;
+
+  public TextEditor()
+  {
+    mState = new DefaultText();
+  }
+
+  public void SetState(IWritingState state)
+  {
+    mState = state;
+  }
+
+  public void Type(string words)
+  {
+    mState.Write(words);
+  }
+
+}
+
+
+----------------------------
+
+var editor = new TextEditor();
+
+editor.Type("First line");
+
+editor.SetState(new UpperCase());
+
+editor.Type("Second Line");
+editor.Type("Third Line");
+
+editor.SetState(new LowerCase());
+
+editor.Type("Fourth Line");
+editor.Type("Fifthe Line");
+
+// Output:
+// First line
+// SECOND LINE
+// THIRD LINE
+// fourth line
+// fifth line
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
-
 
 <div align="center">
 
@@ -4027,14 +5813,11 @@ editor.type("Fifth Line"); // fifth line
 
 **مثال برنامه نویسی**
 
-
-
 فرض کنید ما یک زیرساخت برای ساخت اپلیکیشن‌های گوشی نیاز داریم!
 
 خب مراحل تقریبا مشخصه و فقط ما باید مراحل build, lint , test و deploy رو پیاده سازی کنیم!
 
 بعد باید پیاده سازی برای اندروید و آی او اس رو بسازیم.
-
 
 <details>
 <summary>🐍 Python</summary>
@@ -4196,6 +5979,106 @@ iosBuilder.build();
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+abstract class Builder
+{
+    // Template method
+    public void Build()
+    {
+      Test();
+      Lint();
+      Assemble();
+      Deploy();
+    }
+
+    abstract public void Test();
+    abstract public void Lint();
+    abstract public void Assemble();
+    abstract public void Deploy();
+}
+
+
+
+class AndroidBuilder : Builder
+{
+  public override void Assemble()
+  {
+    Console.WriteLine("Assembling the android build");
+  }
+
+  public override void Deploy()
+  {
+    Console.WriteLine("Deploying android build to server");
+  }
+
+  public override void Lint()
+  {
+    Console.WriteLine("Linting the android code");
+  }
+
+  public override void Test()
+  {
+    Console.WriteLine("Running android tests");
+  }
+}
+
+
+class IosBuilder : Builder
+{
+  public override void Assemble()
+  {
+    Console.WriteLine("Assembling the ios build");
+  }
+
+  public override void Deploy()
+  {
+    Console.WriteLine("Deploying ios build to server");
+  }
+
+  public override void Lint()
+  {
+    Console.WriteLine("Linting the ios code");
+  }
+
+  public override void Test()
+  {
+    Console.WriteLine("Running ios tests");
+  }
+}
+
+
+----------------------------
+
+var androidBuilder = new AndroidBuilder();
+androidBuilder.Build();
+
+// Output:
+// Running android tests
+// Linting the android code
+// Assembling the android build
+// Deploying android build to server
+
+var iosBuilder = new IosBuilder();
+iosBuilder.Build();
+
+// Output:
+// Running ios tests
+// Linting the ios code
+// Assembling the ios build
+// Deploying ios build to server
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -4208,7 +6091,6 @@ iosBuilder.build();
 
 </div>
 
-
 <div align="right">
 
 - این پروژه رو fork کنید و به زبون‌های برنامه نویسی دیگه توسعه بدید!
@@ -4219,7 +6101,6 @@ iosBuilder.build();
 - با ⭐ به پروژه از من و این ریپو حمایت کنید و باعث دیده شدنش بشید!
 
 </div>
-
 
 <div align="center">
 
