@@ -3680,6 +3680,98 @@ Paid 259 using Bitcoin!
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+abstract class Account
+{
+  private Account mSuccessor;
+  protected decimal mBalance;
+
+  public void SetNext(Account account)
+  {
+    mSuccessor = account;
+  }
+
+  public void Pay(decimal amountTopay)
+  {
+    if (CanPay(amountTopay))
+    {
+      Console.WriteLine($"Paid {amountTopay:c} using {this.GetType().Name}.");
+    }
+    else if (this.mSuccessor != null)
+    {
+      Console.WriteLine($"Cannot pay using {this.GetType().Name}. Proceeding..");
+      mSuccessor.Pay(amountTopay);
+    }
+    else
+    {
+      throw new Exception("None of the accounts have enough balance");
+    }
+  }
+  private bool CanPay(decimal amount)
+  {
+    return mBalance >= amount;
+  }
+}
+
+class Bank : Account
+{
+  public Bank(decimal balance)
+  {
+    this.mBalance = balance;
+  }
+}
+
+class Paypal : Account
+{
+  public Paypal(decimal balance)
+  {
+    this.mBalance = balance;
+  }
+}
+
+class Bitcoin : Account
+{
+  public Bitcoin(decimal balance)
+  {
+    this.mBalance = balance;
+  }
+}
+
+----------------------------
+
+// Let's prepare a chain like below
+//      $bank->$paypal->$bitcoin
+//
+// First priority bank
+//      If bank can't pay then paypal
+//      If paypal can't pay then bit coin
+var bank = new Bank(100);          // Bank with balance 100
+var paypal = new Paypal(200);      // Paypal with balance 200
+var bitcoin = new Bitcoin(300);    // Bitcoin with balance 300
+
+bank.SetNext(paypal);
+paypal.SetNext(bitcoin);
+
+// Let's try to pay using the first priority i.e. bank
+bank.Pay(259);
+// Output will be
+// ==============
+// Cannot pay using bank. Proceeding ..
+// Cannot pay using paypal. Proceeding ..:
+// Paid 259 using Bitcoin!
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -3837,6 +3929,117 @@ remote.submit(turnOff); // Darkness!
 ```
 
 </div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+// Receiver
+class Bulb
+{
+  public void TurnOn()
+  {
+    Console.WriteLine("Bulb has been lit");
+  }
+
+  public void TurnOff()
+  {
+    Console.WriteLine("Darkness!");
+  }
+}
+
+
+
+interface ICommand
+{
+  void Execute();
+  void Undo();
+  void Redo();
+}
+
+// Command
+class TurnOn : ICommand
+{
+  private Bulb mBulb;
+
+  public TurnOn(Bulb bulb)
+  {
+    mBulb = bulb ?? throw new ArgumentNullException("Bulb", "Bulb cannot be null");
+  }
+
+  public void Execute()
+  {
+    mBulb.TurnOn();
+  }
+
+  public void Undo()
+  {
+    mBulb.TurnOff();
+  }
+
+  public void Redo()
+  {
+    Execute();
+  }
+}
+
+class TurnOff : ICommand
+{
+  private Bulb mBulb;
+
+  public TurnOff(Bulb bulb)
+  {
+    mBulb = bulb ?? throw new ArgumentNullException("Bulb", "Bulb cannot be null");
+  }
+
+  public void Execute()
+  {
+    mBulb.TurnOff();
+  }
+
+  public void Undo()
+  {
+    mBulb.TurnOn();
+  }
+
+  public void Redo()
+  {
+    Execute();
+  }
+}
+
+
+// Invoker
+class RemoteControl
+{
+  public void Submit(ICommand command)
+  {
+    command.Execute();
+  }
+}
+
+
+----------------------------
+
+  var bulb = new Bulb();
+
+  var turnOn = new TurnOn(bulb);
+  var turnOff = new TurnOff(bulb);
+
+  var remote = new RemoteControl();
+  remote.Submit(turnOn); // Bulb has been lit!
+  remote.Submit(turnOff); // Darkness!
+
+  Console.ReadLine();
+
+```
+
+</div>
+
 </details>
 
 <br>
@@ -4014,6 +4217,98 @@ for (const item of collection.getReverseIterator()) {
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+class RadioStation
+{
+  private float mFrequency;
+
+  public RadioStation(float frequency)
+  {
+    mFrequency = frequency;
+  }
+
+  public float GetFrequecy()
+  {
+    return mFrequency;
+  }
+
+}
+
+
+class StationList : IEnumerable<RadioStation>
+{
+  List<RadioStation> mStations = new List<RadioStation>();
+
+  public RadioStation this[int index]
+  {
+    get { return mStations[index]; }
+    set { mStations.Insert(index, value); }
+  }
+
+  public void Add(RadioStation station)
+  {
+    mStations.Add(station);
+  }
+
+  public void Remove(RadioStation station)
+  {
+    mStations.Remove(station);
+  }
+
+  public IEnumerator<RadioStation> GetEnumerator()
+  {
+    return this.GetEnumerator();
+  }
+
+  IEnumerator IEnumerable.GetEnumerator()
+  {
+    //Use can switch to this internal collection if you do not want to transform
+    //return mStations.GetEnumerator();
+
+    //use this if you want to transform the object before rendering
+    foreach (var x in mStations)
+    {
+      yield return x;
+    }
+  }
+}
+
+
+
+----------------------------
+
+var stations = new StationList();
+var station1 = new RadioStation(89);
+stations.Add(station1);
+
+var station2 = new RadioStation(101);
+stations.Add(station2);
+
+var station3 = new RadioStation(102);
+stations.Add(station3);
+
+foreach(var x in stations)
+{
+  Console.Write(x.GetFrequecy());
+}
+
+var q = stations.Where(x => x.GetFrequecy() == 89).FirstOrDefault();
+Console.WriteLine(q.GetFrequecy());
+
+Console.ReadLine();
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -4161,6 +4456,70 @@ jane.send("Hey!");
 
 </div>
 </details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IChatRoomMediator
+{
+  void ShowMessage(User user, string message);
+}
+
+//Mediator
+class ChatRoom : IChatRoomMediator
+{
+  public void ShowMessage(User user, string message)
+  {
+    Console.WriteLine($"{DateTime.Now.ToString("MMMM dd, H:mm")} [{user.GetName()}]:{message}");
+  }
+}
+
+
+class User
+{
+  private string mName;
+  private IChatRoomMediator mChatRoom;
+
+  public User(string name, IChatRoomMediator chatroom)
+  {
+    mChatRoom = chatroom;
+    mName = name;
+  }
+
+  public string GetName()
+  {
+    return mName;
+  }
+
+  public void Send(string message)
+  {
+    mChatRoom.ShowMessage(this, message);
+  }
+}
+
+----------------------------
+
+var mediator = new ChatRoom();
+
+var john = new User("John", mediator);
+var jane = new User("Jane", mediator);
+
+john.Send("Hi there!");
+jane.Send("Hey!");
+
+//April 14, 20:05[John]:Hi there!
+//April 14, 20:05[Jane]:Hey!
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -4305,6 +4664,96 @@ console.log(editor.getContent()); // This is the first sentence. This is second.
 
 </div>
 </details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+class EditorMemento
+{
+  private string mContent;
+
+  public EditorMemento(string content)
+  {
+    mContent = content;
+  }
+
+  public string Content
+  {
+    get
+    {
+      return mContent;
+    }
+  }
+}
+
+
+class Editor {
+
+  private string mContent = string.Empty;
+  private EditorMemento memento;
+
+  public Editor()
+  {
+    memento = new EditorMemento(string.Empty);
+  }
+
+  public void Type(string words)
+  {
+    mContent = String.Concat(mContent," ", words);
+  }
+
+  public string Content
+  {
+    get
+    {
+      return mContent;
+    }
+  }
+
+  public void Save()
+  {
+    memento = new EditorMemento(mContent);
+  }
+
+  public void Restore()
+  {
+    mContent = memento.Content;
+  }
+}
+
+----------------------------
+
+var editor = new Editor();
+
+//Type some stuff
+editor.Type("This is the first sentence.");
+editor.Type("This is second.");
+
+// Save the state to restore to : This is the first sentence. This is second.
+editor.Save();
+
+//Type some more
+editor.Type("This is third.");
+
+//Output the content
+Console.WriteLine(editor.Content); // This is the first sentence. This is second. This is third.
+
+//Restoring to last saved state
+editor.Restore();
+
+Console.Write(editor.Content); // This is the first sentence. This is second
+
+
+```
+
+</div>
+
+</details>
+
 
 <br>
 
@@ -4468,6 +4917,131 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 ```
 
 </div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+class JobPost
+{
+  public string Title { get; private set; }
+
+  public JobPost(string title)
+  {
+    Title = title;
+  }
+}
+class JobSeeker : IObserver<JobPost>
+{
+  public string Name { get; private set; }
+
+  public JobSeeker(string name)
+  {
+    Name = name;
+  }
+
+  //Method is not being called by JobPostings class currently
+  public void OnCompleted()
+  {
+    //No Implementation
+  }
+
+  //Method is not being called by JobPostings class currently
+  public void OnError(Exception error)
+  {
+    //No Implementation
+  }
+
+  public void OnNext(JobPost value)
+  {
+    Console.WriteLine($"Hi {Name} ! New job posted: {value.Title}");
+  }
+}
+
+
+class JobPostings : IObservable<JobPost>
+{
+  private List<IObserver<JobPost>> mObservers;
+  private List<JobPost> mJobPostings;
+
+  public JobPostings()
+  {
+    mObservers = new List<IObserver<JobPost>>();
+    mJobPostings = new List<JobPost>();
+  }
+
+  public IDisposable Subscribe(IObserver<JobPost> observer)
+  {
+    // Check whether observer is already registered. If not, add it
+    if (!mObservers.Contains(observer))
+    {
+      mObservers.Add(observer);
+    }
+    return new Unsubscriber<JobPost>(mObservers, observer);
+  }
+
+  private void Notify(JobPost jobPost)
+  {
+    foreach(var observer in mObservers)
+    {
+      observer.OnNext(jobPost);
+    }
+  }
+
+  public void AddJob(JobPost jobPost)
+  {
+    mJobPostings.Add(jobPost);
+    Notify(jobPost);
+  }
+
+}
+
+internal class Unsubscriber<JobPost> : IDisposable
+{
+  private List<IObserver<JobPost>> mObservers;
+  private IObserver<JobPost> mObserver;
+
+  internal Unsubscriber(List<IObserver<JobPost>> observers, IObserver<JobPost> observer)
+  {
+    this.mObservers = observers;
+    this.mObserver = observer;
+  }
+
+  public void Dispose()
+  {
+    if (mObservers.Contains(mObserver))
+      mObservers.Remove(mObserver);
+  }
+}
+
+----------------------------
+
+//Create Subscribers
+var johnDoe = new JobSeeker("John Doe");
+var janeDoe = new JobSeeker("Jane Doe");
+
+//Create publisher and attch subscribers
+var jobPostings = new JobPostings();
+jobPostings.Subscribe(johnDoe);
+jobPostings.Subscribe(janeDoe);
+
+//Add a new job and see if subscribers get notified
+jobPostings.AddJob(new JobPost("Software Engineer"));
+
+//Output
+// Hi John Doe! New job posted: Software Engineer
+// Hi Jane Doe! New job posted: Software Engineer
+
+Console.ReadLine();
+
+```
+
+</div>
+
 </details>
 
 <br>
@@ -4718,6 +5292,139 @@ dolphin.accept(jump); // Walked on water a little and disappeared
 </div>
 </details>
 
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+// Visitee
+interface IAnimal
+{
+  void Accept(IAnimalOperation operation);
+}
+
+// Visitor
+interface IAnimalOperation
+{
+  void VisitMonkey(Monkey monkey);
+  void VisitLion(Lion lion);
+  void VisitDolphin(Dolphin dolphin);
+}
+
+
+
+class Monkey : IAnimal
+{
+  public void Shout()
+  {
+    Console.WriteLine("Oooh o aa aa!");
+  }
+
+  public void Accept(IAnimalOperation operation)
+  {
+      operation.VisitMonkey(this);
+  }
+}
+
+class Lion : IAnimal
+{
+  public void Roar()
+  {
+    Console.WriteLine("Roaar!");
+  }
+
+  public void Accept(IAnimalOperation operation)
+  {
+      operation.VisitLion(this);
+  }
+}
+
+class Dolphin : IAnimal
+{
+  public void Speak()
+  {
+    Console.WriteLine("Tuut tittu tuutt!");
+  }
+
+  public void Accept(IAnimalOperation operation)
+  {
+      operation.VisitDolphin(this);
+  }
+}
+
+
+class Speak : IAnimalOperation
+{
+  public void VisitDolphin(Dolphin dolphin)
+  {
+    dolphin.Speak();
+  }
+
+  public void VisitLion(Lion lion)
+  {
+    lion.Roar();
+  }
+
+  public void VisitMonkey(Monkey monkey)
+  {
+    monkey.Shout();
+  }
+}
+
+----------------------------
+
+var monkey = new Monkey();
+var lion = new Lion();
+var dolphin = new Dolphin();
+
+var speak = new Speak();
+
+monkey.Accept(speak);    // Ooh oo aa aa!
+lion.Accept(speak);      // Roaaar!
+dolphin.Accept(speak);   // Tuut tutt tuutt!
+
+-----------------------------
+
+class Jump : IAnimalOperation
+{
+  public void VisitDolphin(Dolphin dolphin)
+  {
+    Console.WriteLine("Walked on water a little and disappeared!");
+  }
+
+  public void VisitLion(Lion lion)
+  {
+    Console.WriteLine("Jumped 7 feet! Back on the ground!");
+  }
+
+  public void VisitMonkey(Monkey monkey)
+  {
+    Console.WriteLine("Jumped 20 feet high! on to the tree!");
+  }
+}
+
+------------------------------
+
+var jump = new Jump();
+
+monkey.Accept(speak);   // Ooh oo aa aa!
+monkey.Accept(jump);    // Jumped 20 feet high! on to the tree!
+
+lion.Accept(speak);     // Roaaar!
+lion.Accept(jump);      // Jumped 7 feet! Back on the ground!
+
+dolphin.Accept(speak);  // Tuut tutt tuutt!
+dolphin.Accept(jump);   // Walked on water a little and disappeared
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -4852,6 +5559,67 @@ sorter2.sort(dataset);
 ```
 
 </div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface ISortStrategy
+{
+  List<int> Sort(List<int> dataset);
+}
+
+class BubbleSortStrategy : ISortStrategy
+{
+  public List<int> Sort(List<int> dataset)
+  {
+    Console.WriteLine("Sorting using Bubble Sort !");
+    return dataset;
+  }
+}
+
+class QuickSortStrategy : ISortStrategy
+{
+  public List<int> Sort(List<int> dataset)
+  {
+    Console.WriteLine("Sorting using Quick Sort !");
+    return dataset;
+  }
+}
+
+class Sorter
+{
+  private readonly ISortStrategy mSorter;
+
+  public Sorter(ISortStrategy sorter)
+  {
+    mSorter = sorter;
+  }
+
+  public List<int> Sort(List<int> unSortedList)
+  {
+    return mSorter.Sort(unSortedList);
+  }
+}
+
+----------------------------
+
+var unSortedList = new List<int> { 1, 10, 2, 16, 19 };
+
+var sorter = new Sorter(new BubbleSortStrategy());
+sorter.Sort(unSortedList); // // Output : Sorting using Bubble Sort !
+
+sorter = new Sorter(new QuickSortStrategy());
+sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
+
+```
+
+</div>
+
 </details>
 
 <br>
@@ -5022,6 +5790,95 @@ editor.type("Fifth Line"); // fifth line
 ```
 
 </div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IWritingState {
+
+  void Write(string words);
+
+}
+
+class UpperCase : IWritingState
+{
+  public void Write(string words)
+  {
+    Console.WriteLine(words.ToUpper());
+  }
+}
+
+class LowerCase : IWritingState
+{
+  public void Write(string words)
+  {
+    Console.WriteLine(words.ToLower());
+  }
+}
+
+class DefaultText : IWritingState
+{
+  public void Write(string words)
+  {
+    Console.WriteLine(words);
+  }
+}
+
+
+class TextEditor {
+
+  private IWritingState mState;
+
+  public TextEditor()
+  {
+    mState = new DefaultText();
+  }
+
+  public void SetState(IWritingState state)
+  {
+    mState = state;
+  }
+
+  public void Type(string words)
+  {
+    mState.Write(words);
+  }
+
+}
+
+
+----------------------------
+
+var editor = new TextEditor();
+
+editor.Type("First line");
+
+editor.SetState(new UpperCase());
+
+editor.Type("Second Line");
+editor.Type("Third Line");
+
+editor.SetState(new LowerCase());
+
+editor.Type("Fourth Line");
+editor.Type("Fifthe Line");
+
+// Output:
+// First line
+// SECOND LINE
+// THIRD LINE
+// fourth line
+// fifth line
+
+```
+
+</div>
+
 </details>
 
 <br>
@@ -5227,6 +6084,106 @@ iosBuilder.build();
 ```
 
 </div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+abstract class Builder
+{
+    // Template method
+    public void Build()
+    {
+      Test();
+      Lint();
+      Assemble();
+      Deploy();
+    }
+
+    abstract public void Test();
+    abstract public void Lint();
+    abstract public void Assemble();
+    abstract public void Deploy();
+}
+
+
+
+class AndroidBuilder : Builder
+{
+  public override void Assemble()
+  {
+    Console.WriteLine("Assembling the android build");
+  }
+
+  public override void Deploy()
+  {
+    Console.WriteLine("Deploying android build to server");
+  }
+
+  public override void Lint()
+  {
+    Console.WriteLine("Linting the android code");
+  }
+
+  public override void Test()
+  {
+    Console.WriteLine("Running android tests");
+  }
+}
+
+
+class IosBuilder : Builder
+{
+  public override void Assemble()
+  {
+    Console.WriteLine("Assembling the ios build");
+  }
+
+  public override void Deploy()
+  {
+    Console.WriteLine("Deploying ios build to server");
+  }
+
+  public override void Lint()
+  {
+    Console.WriteLine("Linting the ios code");
+  }
+
+  public override void Test()
+  {
+    Console.WriteLine("Running ios tests");
+  }
+}
+
+
+----------------------------
+
+var androidBuilder = new AndroidBuilder();
+androidBuilder.Build();
+
+// Output:
+// Running android tests
+// Linting the android code
+// Assembling the android build
+// Deploying android build to server
+
+var iosBuilder = new IosBuilder();
+iosBuilder.Build();
+
+// Output:
+// Running ios tests
+// Linting the ios code
+// Assembling the ios build
+// Deploying ios build to server
+
+```
+
+</div>
+
 </details>
 
 <br>
