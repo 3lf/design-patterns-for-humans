@@ -6110,6 +6110,7 @@ iosBuilder.Build();
 <div align="right">
 
 - امیر عزیز که زحمت مثال های TypeScript رو کشید.([amirmalekian](https://github.com/amirmalekian))
+- رضا عزیز که زحمت مثال های #C رو کشید.([RezaMansouri70](https://github.com/RezaMansouri70))
 - عاطفه عزیز که زحمت رفع اشکالات تایپی و بهتر کردن جملات رو کشید. ([Atefe-Komeili](https://github.com/Atefe-Komeili))
 </div>
 
