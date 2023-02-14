@@ -252,7 +252,7 @@ console.log(door.getWidth());
 </details>
 
 <details>
-<summary>C#</summary>
+<summary dir="ltr" >C#</summary>
 
 <div dir="ltr">
 
