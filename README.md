@@ -5311,6 +5311,81 @@ Console.ReadLine();
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class RadioStation
+{
+    private $mFrequency;
+
+    public function __construct($frequency)
+    {
+        $this->mFrequency = $frequency;
+    }
+
+    public function getFrequency()
+    {
+        return $this->mFrequency;
+    }
+}
+
+class StationList implements IteratorAggregate
+{
+    private $mStations = [];
+
+    public function add(RadioStation $station)
+    {
+        array_push($this->mStations, $station);
+    }
+
+    public function remove(RadioStation $station)
+    {
+        $index = array_search($station, $this->mStations, true);
+        if ($index !== false) {
+            array_splice($this->mStations, $index, 1);
+        }
+    }
+
+    public function getIterator()
+    {
+        // Use can switch to this internal collection if you do not want to transform
+        // return new ArrayIterator($this->mStations);
+
+        // Use this if you want to transform the object before rendering
+        foreach ($this->mStations as $x) {
+            yield $x;
+        }
+    }
+}
+
+$stations = new StationList();
+$station1 = new RadioStation(89);
+$stations->add($station1);
+
+$station2 = new RadioStation(101);
+$stations->add($station2);
+
+$station3 = new RadioStation(102);
+$stations->add($station3);
+
+foreach ($stations as $x) {
+    echo $x->getFrequency() . ' ';
+}
+
+$q = array_filter($stations, function ($x) {
+    return $x->getFrequency() == 89;
+});
+echo reset($q)->getFrequency();
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
