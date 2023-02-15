@@ -2875,6 +2875,99 @@ Console.WriteLine($"Net Salary of Employees in Organization is {organization.Get
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface EmployeeInterface {
+  function getSalary(): float;
+  function getRole(): string;
+  function getName(): string;
+}
+
+class Developer implements EmployeeInterface {
+  private string $name;
+  private float $salary;
+
+  public function __construct(string $name, float $salary) {
+    $this->name = $name;
+    $this->salary = $salary;
+  }
+
+  public function getSalary(): float {
+    return $this->salary;
+  }
+
+  public function getRole(): string {
+    return "Developer";
+  }
+
+  public function getName(): string {
+    return $this->name;
+  }
+}
+
+class Designer implements EmployeeInterface {
+  private string $name;
+  private float $salary;
+
+  public function __construct(string $name, float $salary) {
+    $this->name = $name;
+    $this->salary = $salary;
+  }
+
+  public function getSalary(): float {
+    return $this->salary;
+  }
+
+  public function getRole(): string {
+    return "Designer";
+  }
+
+  public function getName(): string {
+    return $this->name;
+  }
+}
+
+class Organization {
+  protected array $employees;
+
+  public function __construct() {
+    $this->employees = array();
+  }
+
+  public function addEmployee(EmployeeInterface $employee): void {
+    $this->employees[] = $employee;
+  }
+
+  public function getNetSalaries(): float {
+    $netSalary = 0;
+    foreach ($this->employees as $e) {
+      $netSalary += $e->getSalary();
+    }
+    return $netSalary;
+  }
+}
+
+// Arrange Employees, Organization, and add employees
+$developer = new Developer("John", 5000);
+$designer = new Designer("Aria", 5000);
+
+$organization = new Organization();
+$organization->addEmployee($developer);
+$organization->addEmployee($designer);
+
+echo "Net Salary of Employees in Organization is " . number_format($organization->getNetSalaries(), 2, '.', ',') . PHP_EOL;
+// Output: Net Salary of Employees in Organization is $10,000.00
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
