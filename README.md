@@ -2192,6 +2192,67 @@ hunter.Hunt(wildDogAdapter);
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+
+interface Lion {
+    public function roar();
+}
+
+class AfricanLion implements Lion {
+    public function roar() {
+        // implementation specific to AfricanLion
+    }
+}
+
+class AsianLion implements Lion {
+    public function roar() {
+        // implementation specific to AsianLion
+    }
+}
+
+class Hunter {
+    public function hunt(Lion $lion) {
+        $lion->roar();
+    }
+}
+
+class WildDog {
+    public static function bark() {
+        // implementation specific to WildDog
+    }
+}
+
+// Adapter around wild dog to make it compatible with our game
+class WildDogAdapter implements Lion
+{
+    private $mDog;
+    public function __construct(WildDog $dog)
+    {
+        $this->mDog = $dog;
+    }
+    public function roar()
+    {
+        $this->mDog->bark();
+    }
+}
+
+$wildDog = new WildDog();
+$wildDogAdapter = new WildDogAdapter($wildDog);
+
+$hunter = new Hunter();
+$hunter->hunt($wildDogAdapter);
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
