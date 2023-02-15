@@ -5881,6 +5881,84 @@ Console.Write(editor.Content); // This is the first sentence. This is second
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class EditorMemento
+{
+  private $mContent;
+
+  public function __construct($content)
+  {
+    $this->mContent = $content;
+  }
+
+  public function getContent()
+  {
+    return $this->mContent;
+  }
+}
+
+class Editor
+{
+  private $mContent = '';
+  private $memento;
+
+  public function __construct()
+  {
+    $this->memento = new EditorMemento('');
+  }
+
+  public function type($words)
+  {
+    $this->mContent .= ' ' . $words;
+  }
+
+  public function getContent()
+  {
+    return $this->mContent;
+  }
+
+  public function save()
+  {
+    $this->memento = new EditorMemento($this->mContent);
+  }
+
+  public function restore()
+  {
+    $this->mContent = $this->memento->getContent();
+  }
+}
+
+$editor = new Editor();
+
+//Type some stuff
+$editor->type("This is the first sentence.");
+$editor->type("This is second.");
+
+// Save the state to restore to : This is the first sentence. This is second.
+$editor->save();
+
+//Type some more
+$editor->type("This is third.");
+
+//Output the content
+echo $editor->getContent(); // This is the first sentence. This is second. This is third.
+
+//Restoring to last saved state
+$editor->restore();
+
+echo $editor->getContent(); // This is the first sentence. This is second
+```
+
+</div>
+
+</details>
+
+
 <br>
 
 ---
