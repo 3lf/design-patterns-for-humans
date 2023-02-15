@@ -7031,6 +7031,57 @@ sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
 
 </details>
 
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface SortStrategyInterface {
+  public function sort($dataset);
+}
+
+class BubbleSortStrategy implements SortStrategyInterface {
+  public function sort($dataset) {
+    echo "Sorting using Bubble Sort !\n";
+    return $dataset;
+  }
+}
+
+class QuickSortStrategy implements SortStrategyInterface {
+  public function sort($dataset) {
+    echo "Sorting using Quick Sort !\n";
+    return $dataset;
+  }
+}
+
+class Sorter {
+  private $mSorter;
+
+  public function __construct(SortStrategyInterface $sorter) {
+    $this->mSorter = $sorter;
+  }
+
+  public function sort($unSortedList) {
+    return $this->mSorter->sort($unSortedList);
+  }
+}
+
+$unSortedList = [1, 10, 2, 16, 19];
+
+$sorter = new Sorter(new BubbleSortStrategy());
+$sorter->sort($unSortedList); // Output : Sorting using Bubble Sort !
+
+$sorter = new Sorter(new QuickSortStrategy());
+$sorter->sort($unSortedList); // Output : Sorting using Quick Sort !
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
