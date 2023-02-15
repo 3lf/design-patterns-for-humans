@@ -5592,6 +5592,65 @@ jane.Send("Hey!");
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface ChatRoomMediator
+{
+    public function showMessage(User $user, string $message): void;
+}
+
+class ChatRoom implements ChatRoomMediator
+{
+    public function showMessage(User $user, string $message): void
+    {
+        echo date('F d, H:i') . " [" . $user->getName() . "]: " . $message . "\n";
+    }
+}
+
+class User
+{
+    private $name;
+    private $chatRoom;
+
+    public function __construct(string $name, ChatRoomMediator $chatRoom)
+    {
+        $this->name = $name;
+        $this->chatRoom = $chatRoom;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function send(string $message): void
+    {
+        $this->chatRoom->showMessage($this, $message);
+    }
+}
+
+$mediator = new ChatRoom();
+
+$john = new User("John", $mediator);
+$jane = new User("Jane", $mediator);
+
+$john->send("Hi there!");
+$jane->send("Hey!");
+
+// Output:
+// February 15, 14:44 [John]: Hi there!
+// February 15, 14:44 [Jane]: Hey!
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
