@@ -1678,6 +1678,64 @@ Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+
+class SomeComponent
+{
+    public int $someInt;
+    public ?string $someString;
+
+    public function __clone()
+    {
+        // no need to manually copy fields, PHP's __clone does it automatically for primitive types
+    }
+
+    public function shallowCopy(): SomeComponent
+    {
+        return clone $this;
+    }
+
+    public function deepCopy(): SomeComponent
+    {
+        $clone = clone $this;
+        $clone->someInt = $this->someInt;
+        $clone->someString = $this->someString;
+        return $clone;
+    }
+}
+
+$c1 = new SomeComponent();
+$c1->someInt = 1;
+$c1->someString = "someString1";
+
+// Perform a shallow copy of c1 and assign it to c2.
+$c2 = $c1->shallowCopy();
+
+// Make a deep copy of c1 and assign it to c3.
+$c3 = $c1->deepCopy();
+
+echo $c1->someInt . ":" . $c1->someString . "\n"; // 1:someString1
+echo $c2->someInt . ":" . $c2->someString . "\n"; // 1:someString1
+echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
+
+$c1->someInt = 2;
+$c1->someString = "someString2";
+
+echo $c1->someInt . ":" . $c1->someString . "\n"; // 2:someString2
+echo $c2->someInt . ":" . $c2->someString . "\n"; // 1:someString1
+echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 **تفاوت Shadow Copy و Deep Copy ؟**
