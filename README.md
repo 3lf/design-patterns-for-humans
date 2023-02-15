@@ -6715,6 +6715,128 @@ dolphin.Accept(jump);   // Walked on water a little and disappeared
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+// Visitee
+interface AnimalInterface
+{
+  public function accept(AnimalOperationInterface $operation);
+}
+
+// Visitor
+interface AnimalOperationInterface
+{
+  public function visitMonkey(Monkey $monkey);
+  public function visitLion(Lion $lion);
+  public function visitDolphin(Dolphin $dolphin);
+}
+
+class Monkey implements AnimalInterface
+{
+  public function shout()
+  {
+    echo "Oooh o aa aa!";
+  }
+
+  public function accept(AnimalOperationInterface $operation)
+  {
+    $operation->visitMonkey($this);
+  }
+}
+
+class Lion implements AnimalInterface
+{
+  public function roar()
+  {
+    echo "Roaar!";
+  }
+
+  public function accept(AnimalOperationInterface $operation)
+  {
+    $operation->visitLion($this);
+  }
+}
+
+class Dolphin implements AnimalInterface
+{
+  public function speak()
+  {
+    echo "Tuut tittu tuutt!";
+  }
+
+  public function accept(AnimalOperationInterface $operation)
+  {
+    $operation->visitDolphin($this);
+  }
+}
+
+class Speak implements AnimalOperationInterface
+{
+  public function visitDolphin(Dolphin $dolphin)
+  {
+    $dolphin->speak();
+  }
+
+  public function visitLion(Lion $lion)
+  {
+    $lion->roar();
+  }
+
+  public function visitMonkey(Monkey $monkey)
+  {
+    $monkey->shout();
+  }
+}
+
+$monkey = new Monkey();
+$lion = new Lion();
+$dolphin = new Dolphin();
+
+$speak = new Speak();
+
+$monkey->accept($speak);    // Ooh oo aa aa!
+$lion->accept($speak);      // Roaaar!
+$dolphin->accept($speak);   // Tuut tutt tuutt!
+
+class Jump implements AnimalOperationInterface
+{
+  public function visitDolphin(Dolphin $dolphin)
+  {
+    echo "Walked on water a little and disappeared!";
+  }
+
+  public function visitLion(Lion $lion)
+  {
+    echo "Jumped 7 feet! Back on the ground!";
+  }
+
+  public function visitMonkey(Monkey $monkey)
+  {
+    echo "Jumped 20 feet high! on to the tree!";
+  }
+}
+
+$jump = new Jump();
+
+$monkey->accept($speak);   // Ooh oo aa aa!
+$monkey->accept($jump);    // Jumped 20 feet high! on to the tree!
+
+$lion->accept($speak);     // Roaaar!
+$lion->accept($jump);      // Jumped 7 feet! Back on the ground!
+
+$dolphin->accept($speak);  // Tuut tutt tuutt!
+$dolphin->accept($jump);   // Walked on water a little and disappeared
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
