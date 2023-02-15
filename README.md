@@ -3298,6 +3298,97 @@ Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip,
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface CoffeeInterface {
+  public function getCost();
+  public function getDescription();
+}
+
+class SimpleCoffee implements CoffeeInterface {
+  public function getCost() {
+    return 5;
+  }
+
+  public function getDescription() {
+    return "Simple Coffee";
+  }
+}
+
+class MilkCoffee implements CoffeeInterface {
+  private $coffee;
+
+  public function __construct(CoffeeInterface $coffee) {
+    $this->coffee = $coffee ?? throw new Exception("coffee should not be null");
+  }
+
+  public function getCost() {
+    return $this->coffee->getCost() + 1;
+  }
+
+  public function getDescription() {
+    return $this->coffee->getDescription() . ", milk";
+  }
+}
+
+class WhipCoffee implements CoffeeInterface {
+  private $coffee;
+
+  public function __construct(CoffeeInterface $coffee) {
+    $this->coffee = $coffee ?? throw new Exception("coffee should not be null");
+  }
+
+  public function getCost() {
+    return $this->coffee->getCost() + 1;
+  }
+
+  public function getDescription() {
+    return $this->coffee->getDescription() . ", whip";
+  }
+}
+
+class VanillaCoffee implements CoffeeInterface {
+  private $coffee;
+
+  public function __construct(CoffeeInterface $coffee) {
+    $this->coffee = $coffee ?? throw new Exception("coffee should not be null");
+  }
+
+  public function getCost() {
+    return $this->coffee->getCost() + 1;
+  }
+
+  public function getDescription() {
+    return $this->coffee->getDescription() . ", vanilla";
+  }
+}
+
+$myCoffee = new SimpleCoffee();
+echo "$" . number_format($myCoffee->getCost(), 2) . "\n"; // $5.00
+echo $myCoffee->getDescription() . "\n"; // Simple Coffee
+
+$milkCoffee = new MilkCoffee($myCoffee);
+echo "$" . number_format($milkCoffee->getCost(), 2) . "\n"; // $6.00
+echo $milkCoffee->getDescription() . "\n"; // Simple Coffee, milk
+
+$whipCoffee = new WhipCoffee($milkCoffee);
+echo "$" . number_format($whipCoffee->getCost(), 2) . "\n"; // $7.00
+echo $whipCoffee->getDescription() . "\n"; // Simple Coffee, milk, whip
+
+$vanillaCoffee = new VanillaCoffee($whipCoffee);
+echo "$" . number_format($vanillaCoffee->getCost(), 2) . "\n"; // $8.00
+echo $vanillaCoffee->getDescription() . "\n"; // Simple Coffee, milk, whip, vanilla
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
