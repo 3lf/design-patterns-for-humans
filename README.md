@@ -3641,6 +3641,83 @@ Console.ReadLine();
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class Computer
+{
+  public function getElectricShock()
+  {
+    echo "Ouch!";
+  }
+
+  public function makeSound()
+  {
+    echo "Beep beep!";
+  }
+
+  public function showLoadingScreen()
+  {
+    echo "Loading..";
+  }
+
+  public function bam()
+  {
+    echo "Ready to be used!";
+  }
+
+  public function closeEverything()
+  {
+    echo "Bup bup bup buzzzz!";
+  }
+
+  public function sooth()
+  {
+    echo "Zzzzz";
+  }
+
+  public function pullCurrent()
+  {
+    echo "Haaah!";
+  }
+}
+
+class ComputerFacade
+{
+  public function __construct(private Computer $computer)
+  {
+  }
+
+  public function turnOn()
+  {
+    $this->computer->getElectricShock();
+    $this->computer->makeSound();
+    $this->computer->showLoadingScreen();
+    $this->computer->bam();
+  }
+
+  public function turnOff()
+  {
+    $this->computer->closeEverything();
+    $this->computer->pullCurrent();
+    $this->computer->sooth();
+  }
+}
+
+$computerFacade = new ComputerFacade(new Computer());
+$computerFacade->turnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
+echo PHP_EOL;
+$computerFacade->turnOff();  // Bup bup buzzz! Haah! Zzzzz
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
