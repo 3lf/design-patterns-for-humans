@@ -6243,6 +6243,100 @@ Console.ReadLine();
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class JobPost
+{
+    public function __construct(private string $title)
+    {
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+}
+
+class JobSeeker implements SplObserver
+{
+    public function __construct(private string $name)
+    {
+    }
+
+    public function update(SplSubject $subject)
+    {
+        if ($subject instanceof JobPostings) {
+            $jobPost = $subject->getJobPost();
+            echo "Hi {$this->name} ! New job posted: {$jobPost->getTitle()}\n";
+        }
+    }
+}
+
+class JobPostings implements SplSubject
+{
+    private $observers;
+    private $jobPostings;
+
+    public function __construct()
+    {
+        $this->observers = new SplObjectStorage();
+        $this->jobPostings = [];
+    }
+
+    public function attach(SplObserver $observer)
+    {
+        $this->observers->attach($observer);
+    }
+
+    public function detach(SplObserver $observer)
+    {
+        $this->observers->detach($observer);
+    }
+
+    public function notify()
+    {
+        foreach ($this->observers as $observer) {
+            $observer->update($this);
+        }
+    }
+
+    public function addJob(JobPost $jobPost)
+    {
+        $this->jobPostings[] = $jobPost;
+        $this->notify();
+    }
+
+    public function getJobPost()
+    {
+        return end($this->jobPostings);
+    }
+}
+
+//Create Subscribers
+$johnDoe = new JobSeeker("John Doe");
+$janeDoe = new JobSeeker("Jane Doe");
+
+//Create publisher and attach subscribers
+$jobPostings = new JobPostings();
+$jobPostings->attach($johnDoe);
+$jobPostings->attach($janeDoe);
+
+//Add a new job and see if subscribers get notified
+$jobPostings->addJob(new JobPost("Software Engineer"));
+
+//Output
+// Hi John Doe! New job posted: Software Engineer
+// Hi Jane Doe! New job posted: Software Engineer
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
