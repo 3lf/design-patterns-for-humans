@@ -7338,6 +7338,86 @@ editor.Type("Fifthe Line");
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface WritingStateInterface {
+  public function write(string $words);
+}
+
+class UpperCase implements WritingStateInterface
+{
+  public function write(string $words)
+  {
+    echo strtoupper($words) . "\n";
+  }
+}
+
+class LowerCase implements WritingStateInterface
+{
+  public function write(string $words)
+  {
+    echo strtolower($words) . "\n";
+  }
+}
+
+class DefaultText implements WritingStateInterface
+{
+  public function write(string $words)
+  {
+    echo $words . "\n";
+  }
+}
+
+class TextEditor {
+  private WritingStateInterface $state;
+
+  public function __construct()
+  {
+    $this->state = new DefaultText();
+  }
+
+  public function setState(WritingStateInterface $state)
+  {
+    $this->state = $state;
+  }
+
+  public function type(string $words)
+  {
+    $this->state->write($words);
+  }
+}
+
+$editor = new TextEditor();
+
+$editor->type("First line");
+
+$editor->setState(new UpperCase());
+
+$editor->type("Second Line");
+$editor->type("Third Line");
+
+$editor->setState(new LowerCase());
+
+$editor->type("Fourth Line");
+$editor->type("Fifth Line");
+
+// Output:
+// First line
+// SECOND LINE
+// THIRD LINE
+// fourth line
+// fifth line
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
