@@ -2516,6 +2516,76 @@ Console.WriteLine(careers.GetContent()); //Output: Careers page in Off White
 
 </details>
 
+<details>
+<summary>PHP</summary>
+<div dir="ltr">
+
+```PHP
+interface WebPageInterface {
+  public function getContent();
+}
+
+class About implements WebPageInterface {
+  protected $theme;
+
+  public function __construct(ThemeInterface $theme) {
+    $this->theme = $theme;
+  }
+
+  public function getContent() {
+    return "About page in " . $this->theme->getColor();
+  }
+}
+
+class Careers implements WebPageInterface {
+  protected $theme;
+
+  public function __construct(ThemeInterface $theme) {
+    $this->theme = $theme;
+  }
+
+  public function getContent() {
+    return "Careers page in " . $this->theme->getColor();
+  }
+}
+
+interface ThemeInterface {
+  public function getColor();
+}
+
+class DarkTheme implements ThemeInterface {
+  public function getColor() {
+    return "Dark Black";
+  }
+}
+
+class LightTheme implements ThemeInterface {
+  public function getColor() {
+    return "Off White";
+  }
+}
+
+class AquaTheme implements ThemeInterface {
+  public function getColor() {
+    return "Light Blue";
+  }
+}
+
+$darkTheme = new DarkTheme();
+$lightTheme = new LightTheme();
+
+$about = new About($darkTheme);
+$careers = new Careers($lightTheme);
+
+echo $about->getColor() . "\n"; //Output: About page in Dark Black
+echo $careers->getColor() . "\n"; //Output: Careers page in Off White
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
