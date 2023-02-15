@@ -4600,6 +4600,91 @@ bank.Pay(259);
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+abstract class Account
+{
+    private $successor;
+    protected $balance;
+
+    public function setNext(Account $account)
+    {
+        $this->successor = $account;
+    }
+
+    public function pay($amountToPay)
+    {
+        if ($this->canPay($amountToPay)) {
+            echo "Paid " . number_format($amountToPay, 2) . " using " . get_class($this) . "." . PHP_EOL;
+        } elseif ($this->successor != null) {
+            echo "Cannot pay using " . get_class($this) . ". Proceeding.." . PHP_EOL;
+            $this->successor->pay($amountToPay);
+        } else {
+            throw new Exception("None of the accounts have enough balance");
+        }
+    }
+
+    private function canPay($amount)
+    {
+        return $this->balance >= $amount;
+    }
+}
+
+class Bank extends Account
+{
+    public function __construct($balance)
+    {
+        $this->balance = $balance;
+    }
+}
+
+class Paypal extends Account
+{
+    public function __construct($balance)
+    {
+        $this->balance = $balance;
+    }
+}
+
+class Bitcoin extends Account
+{
+    public function __construct($balance)
+    {
+        $this->balance = $balance;
+    }
+}
+
+// Let's prepare a chain like below
+//      $bank->$paypal->$bitcoin
+//
+// First priority bank
+//      If bank can't pay then PayPal
+//      If PayPal can't pay then bitcoin
+$bank = new Bank(100);          // Bank with balance 100
+$paypal = new Paypal(200);      // PayPal with balance 200
+$bitcoin = new Bitcoin(300);    // Bitcoin with balance 300
+
+$bank->setNext($paypal);
+$paypal->setNext($bitcoin);
+
+// Let's try to pay using the first priority i.e. bank
+$bank->pay(259);
+// Output will be
+// ==============
+// Cannot pay using Bank. Proceeding..
+// Cannot pay using Paypal. Proceeding..
+// Paid 259.00 using Bitcoin.
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
