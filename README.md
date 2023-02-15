@@ -3937,6 +3937,74 @@ teaShop.Serve();
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+// Anything that will be cached is flyweight.
+// Types of tea here will be flyweights.
+class KarakTea
+{
+}
+
+// Acts as a factory and saves the tea
+class TeaMaker
+{
+  private array $mAvailableTea = [];
+
+  public function make(string $preference): KarakTea
+  {
+    if (!array_key_exists($preference, $this->mAvailableTea)) {
+      $this->mAvailableTea[$preference] = new KarakTea();
+    }
+
+    return $this->mAvailableTea[$preference];
+  }
+}
+
+class TeaShop
+{
+  private array $mOrders = [];
+
+  public function __construct(private TeaMaker $teaMaker)
+  {
+  }
+
+  public function takeOrder(string $teaType, int $table): void
+  {
+    $this->mOrders[$table] = $this->teaMaker->make($teaType);
+  }
+
+  public function serve(): void
+  {
+    foreach ($this->mOrders as $table => $tea) {
+      echo "Serving tea to table # $table\n";
+    }
+  }
+}
+
+$teaMaker = new TeaMaker();
+$teaShop = new TeaShop($teaMaker);
+
+$teaShop->takeOrder("less sugar", 1);
+$teaShop->takeOrder("more milk", 2);
+$teaShop->takeOrder("without sugar", 5);
+
+$teaShop->serve();
+// Serving tea to table# 1
+// Serving tea to table# 2
+// Serving tea to table# 5
+?>
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
