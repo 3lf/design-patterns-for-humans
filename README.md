@@ -308,12 +308,12 @@ Console.WriteLine($"Width of Door : {door.GetWidth()}");
 <div dir="ltr">
 
 ```PHP
-interface IDoor {
+interface DoorInterface {
     public function getHeight();
     public function getWidth();
 }
 
-class WoodenDoor implements IDoor {
+class WoodenDoor implements DoorInterface {
     private $height;
     private $width;
 
@@ -575,12 +575,12 @@ marketingManager.TakeInterview();//Output : Asking about community building!
 <div dir="ltr">
 
 ```PHP
-interface IInterviewer
+interface InterviewerInterface
 {
     public function askQuestions();
 }
 
-class Developer implements IInterviewer
+class Developer implements InterviewerInterface
 {
     public function askQuestions()
     {
@@ -588,7 +588,7 @@ class Developer implements IInterviewer
     }
 }
 
-class CommunityExecutive implements IInterviewer
+class CommunityExecutive implements InterviewerInterface
 {
     public function askQuestions()
     {
@@ -599,7 +599,7 @@ class CommunityExecutive implements IInterviewer
 abstract class HiringManager
 {
     // Factory method
-    abstract protected function makeInterviewer(): IInterviewer;
+    abstract protected function makeInterviewer(): InterviewerInterface;
 
     public function takeInterview()
     {
@@ -610,7 +610,7 @@ abstract class HiringManager
 
 class DevelopmentManager extends HiringManager
 {
-    protected function makeInterviewer(): IInterviewer
+    protected function makeInterviewer(): InterviewerInterface
     {
         return new Developer();
     }
@@ -618,7 +618,7 @@ class DevelopmentManager extends HiringManager
 
 class MarketingManager extends HiringManager
 {
-    protected function makeInterviewer(): IInterviewer
+    protected function makeInterviewer(): InterviewerInterface
     {
         return new CommunityExecutive();
     }
@@ -999,61 +999,61 @@ ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
 
 ```PHP
 
-interface IDoor {
+interface DoorInterface {
   public function getDescription();
 }
 
-class WoodenDoor implements IDoor {
+class WoodenDoor implements DoorInterface {
   public function getDescription() {
     echo "I am a wooden door";
   }
 }
 
-class IronDoor implements IDoor {
+class IronDoor implements DoorInterface {
   public function getDescription() {
     echo "I am an iron door";
   }
 }
 
-interface IDoorFittingExpert {
+interface DoorFittingExpertInterface {
   public function getDescription();
 }
 
-class Welder implements IDoorFittingExpert {
+class Welder implements DoorFittingExpertInterface {
   public function getDescription() {
     echo "I can only fit iron doors";
   }
 }
 
-class Carpenter implements IDoorFittingExpert {
+class Carpenter implements DoorFittingExpertInterface {
   public function getDescription() {
     echo "I can only fit wooden doors";
   }
 }
 
-interface IDoorFactory {
-  public function makeDoor(): IDoor;
-  public function makeFittingExpert(): IDoorFittingExpert;
+interface DoorFactoryInterface {
+  public function makeDoor(): DoorInterface;
+  public function makeFittingExpert(): DoorFittingExpertInterface;
 }
 
 // Wooden factory to return carpenter and wooden door
-class WoodenDoorFactory implements IDoorFactory {
-  public function makeDoor(): IDoor {
+class WoodenDoorFactory implements DoorFactoryInterface {
+  public function makeDoor(): DoorInterface {
     return new WoodenDoor();
   }
 
-  public function makeFittingExpert(): IDoorFittingExpert {
+  public function makeFittingExpert(): DoorFittingExpertInterface {
     return new Carpenter();
   }
 }
 
 // Iron door factory to get iron door and the relevant fitting expert
-class IronDoorFactory implements IDoorFactory {
-  public function makeDoor(): IDoor {
+class IronDoorFactory implements DoorFactoryInterface {
+  public function makeDoor(): DoorInterface {
     return new IronDoor();
   }
 
-  public function makeFittingExpert(): IDoorFittingExpert {
+  public function makeFittingExpert(): DoorFittingExpertInterface {
     return new Welder();
   }
 }
