@@ -3996,7 +3996,6 @@ $teaShop->serve();
 // Serving tea to table# 1
 // Serving tea to table# 2
 // Serving tea to table# 5
-?>
 
 
 ```
