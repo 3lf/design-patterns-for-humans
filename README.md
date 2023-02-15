@@ -302,6 +302,50 @@ Console.WriteLine($"Width of Door : {door.GetWidth()}");
 
 </details>
 
+<details>
+<summary >PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface DoorInterface {
+    public function getHeight();
+    public function getWidth();
+}
+
+class WoodenDoor implements DoorInterface {
+    private $height;
+    private $width;
+
+    public function __construct($height, $width) {
+        $this->height = $height;
+        $this->width = $width;
+    }
+
+    public function getHeight() {
+        return $this->height;
+    }
+    public function getWidth() {
+        return $this->width;
+    }
+}
+
+class DoorFactory {
+    public static function makeDoor($height, $width) {
+        return new woodenDoor($height, $width);
+    }
+}
+
+$door = DoorFactory::makeDoor(80, 30);
+echo "Height of Door : " . $door->getHeight() . "\n";
+echo "Width of Door : " . $door->getWidth() . "\n";
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -518,6 +562,75 @@ devManager.TakeInterview(); //Output : Asking about design patterns!
 
 var marketingManager = new MarketingManager();
 marketingManager.TakeInterview();//Output : Asking about community building!
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface InterviewerInterface
+{
+    public function askQuestions();
+}
+
+class Developer implements InterviewerInterface
+{
+    public function askQuestions()
+    {
+        echo "Asking about design patterns!";
+    }
+}
+
+class CommunityExecutive implements InterviewerInterface
+{
+    public function askQuestions()
+    {
+        echo "Asking about community building!";
+    }
+}
+
+abstract class HiringManager
+{
+    // Factory method
+    abstract protected function makeInterviewer(): InterviewerInterface;
+
+    public function takeInterview()
+    {
+        $interviewer = $this->makeInterviewer();
+        $interviewer->askQuestions();
+    }
+}
+
+class DevelopmentManager extends HiringManager
+{
+    protected function makeInterviewer(): InterviewerInterface
+    {
+        return new Developer();
+    }
+}
+
+class MarketingManager extends HiringManager
+{
+    protected function makeInterviewer(): InterviewerInterface
+    {
+        return new CommunityExecutive();
+    }
+}
+
+
+// Usage
+$devManager = new DevelopmentManager();
+$devManager->takeInterview(); // Output: Asking about design patterns!
+
+$marketingManager = new MarketingManager();
+$marketingManager->takeInterview(); // Output: Asking about community building!
 
 ```
 
@@ -879,6 +992,101 @@ ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+
+interface DoorInterface {
+  public function getDescription();
+}
+
+class WoodenDoor implements DoorInterface {
+  public function getDescription() {
+    echo "I am a wooden door";
+  }
+}
+
+class IronDoor implements DoorInterface {
+  public function getDescription() {
+    echo "I am an iron door";
+  }
+}
+
+interface DoorFittingExpertInterface {
+  public function getDescription();
+}
+
+class Welder implements DoorFittingExpertInterface {
+  public function getDescription() {
+    echo "I can only fit iron doors";
+  }
+}
+
+class Carpenter implements DoorFittingExpertInterface {
+  public function getDescription() {
+    echo "I can only fit wooden doors";
+  }
+}
+
+interface DoorFactoryInterface {
+  public function makeDoor(): DoorInterface;
+  public function makeFittingExpert(): DoorFittingExpertInterface;
+}
+
+// Wooden factory to return carpenter and wooden door
+class WoodenDoorFactory implements DoorFactoryInterface {
+  public function makeDoor(): DoorInterface {
+    return new WoodenDoor();
+  }
+
+  public function makeFittingExpert(): DoorFittingExpertInterface {
+    return new Carpenter();
+  }
+}
+
+// Iron door factory to get iron door and the relevant fitting expert
+class IronDoorFactory implements DoorFactoryInterface {
+  public function makeDoor(): DoorInterface {
+    return new IronDoor();
+  }
+
+  public function makeFittingExpert(): DoorFittingExpertInterface {
+    return new Welder();
+  }
+}
+
+
+// Usage
+$woodenDoorFactory = new WoodenDoorFactory();
+
+$woodenDoor = $woodenDoorFactory->makeDoor();
+$woodenDoorFittingExpert = $woodenDoorFactory->makeFittingExpert();
+
+$woodenDoor->getDescription(); // Output: I am a wooden door
+$woodenDoorFittingExpert->getDescription(); // Output: I can only fit wooden doors
+
+
+$ironDoorFactory = new IronDoorFactory();
+
+$ironDoor = $ironDoorFactory->makeDoor();
+$ironDoorFittingExpert = $ironDoorFactory->makeFittingExpert();
+
+$ironDoor->getDescription(); // Output: I am an iron door
+$ironDoorFittingExpert->getDescription(); // Output: I can only fit iron doors
+
+```
+
+</div>
+
+**همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+درب
+انتخاب نمی‌کنیم.**
+
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -943,6 +1151,21 @@ constructor(size: any, cheese: boolean = true, pepperoni: boolean = true, tomato
 ```C#
 
 public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+
+public function __construct(int $size, bool $cheese, bool $pepperoni, bool $lettuce, bool $tomato)
 
 ```
 
@@ -1199,6 +1422,79 @@ Console.WriteLine(burger.GetDescription());
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class Burger {
+    private $size;
+    private $cheese = false;
+    private $pepperoni = false;
+    private $lettuce = false;
+    private $tomato = false;
+
+    public function __construct($builder) {
+        $this->size = $builder->size;
+        $this->cheese = $builder->cheese;
+        $this->pepperoni = $builder->pepperoni;
+        $this->lettuce = $builder->lettuce;
+        $this->tomato = $builder->tomato;
+    }
+}
+
+class BurgerBuilder {
+    public $size;
+    public $cheese = false;
+    public $pepperoni = false;
+    public $lettuce = false;
+    public $tomato = false;
+
+    public function __construct($size) {
+        $this->size = $size;
+    }
+
+    public function addPepperoni() {
+        $this->pepperoni = true;
+        return $this;
+    }
+
+    public function addLettuce() {
+        $this->lettuce = true;
+        return $this;
+    }
+
+    public function addCheese() {
+        $this->cheese = true;
+        return $this;
+    }
+
+    public function addTomato() {
+        $this->tomato = true;
+        return $this;
+    }
+
+    public function build() {
+        return new Burger($this);
+    }
+}
+
+$burger = (new BurgerBuilder(10))
+            ->addCheese()
+            ->addPepperoni()
+            ->addLettuce()
+            ->addTomato()
+            ->build();
+            
+var_dump(get_object_vars($burger));
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -1382,6 +1678,64 @@ Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+
+class SomeComponent
+{
+    public int $someInt;
+    public ?string $someString;
+
+    public function __clone()
+    {
+        // no need to manually copy fields, PHP's __clone does it automatically for primitive types
+    }
+
+    public function shallowCopy(): SomeComponent
+    {
+        return clone $this;
+    }
+
+    public function deepCopy(): SomeComponent
+    {
+        $clone = clone $this;
+        $clone->someInt = $this->someInt;
+        $clone->someString = $this->someString;
+        return $clone;
+    }
+}
+
+$c1 = new SomeComponent();
+$c1->someInt = 1;
+$c1->someString = "someString1";
+
+// Perform a shallow copy of c1 and assign it to c2.
+$c2 = $c1->shallowCopy();
+
+// Make a deep copy of c1 and assign it to c3.
+$c3 = $c1->deepCopy();
+
+echo $c1->someInt . ":" . $c1->someString . "\n"; // 1:someString1
+echo $c2->someInt . ":" . $c2->someString . "\n"; // 1:someString1
+echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
+
+$c1->someInt = 2;
+$c1->someString = "someString2";
+
+echo $c1->someInt . ":" . $c1->someString . "\n"; // 2:someString2
+echo $c2->someInt . ":" . $c2->someString . "\n"; // 1:someString1
+echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 **تفاوت Shadow Copy و Deep Copy ؟**
@@ -1541,6 +1895,42 @@ President a = President.GetInstance();
 President b = President.GetInstance();
 
 Console.WriteLine(a == b); //Output : true
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+
+class President
+{
+  private static $instance;
+
+  private function __construct()
+  {
+    // Hiding the Constructor
+  }
+
+  public static function getInstance()
+  {
+    if (self::$instance == null) {
+      self::$instance = new President();
+    }
+    return self::$instance;
+  }
+}
+
+$a = President::getInstance();
+$b = President::getInstance();
+
+var_dump($a === $b); // Output: bool(true)
 
 ```
 
@@ -1795,6 +2185,67 @@ var wildDogAdapter = new WildDogAdapter(wildDog);
 
 var hunter = new Hunter();
 hunter.Hunt(wildDogAdapter);
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+
+interface Lion {
+    public function roar();
+}
+
+class AfricanLion implements Lion {
+    public function roar() {
+        // implementation specific to AfricanLion
+    }
+}
+
+class AsianLion implements Lion {
+    public function roar() {
+        // implementation specific to AsianLion
+    }
+}
+
+class Hunter {
+    public function hunt(Lion $lion) {
+        $lion->roar();
+    }
+}
+
+class WildDog {
+    public static function bark() {
+        // implementation specific to WildDog
+    }
+}
+
+// Adapter around wild dog to make it compatible with our game
+class WildDogAdapter implements Lion
+{
+    private $mDog;
+    public function __construct(WildDog $dog)
+    {
+        $this->mDog = $dog;
+    }
+    public function roar()
+    {
+        $this->mDog->bark();
+    }
+}
+
+$wildDog = new WildDog();
+$wildDogAdapter = new WildDogAdapter($wildDog);
+
+$hunter = new Hunter();
+$hunter->hunt($wildDogAdapter);
 
 ```
 
@@ -2058,6 +2509,76 @@ var careers = new Careers(lightTheme);
 
 Console.WriteLine(about.GetContent()); //Output: About page in Dark Black
 Console.WriteLine(careers.GetContent()); //Output: Careers page in Off White
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+<div dir="ltr">
+
+```PHP
+interface WebPageInterface {
+  public function getContent();
+}
+
+class About implements WebPageInterface {
+  protected $theme;
+
+  public function __construct(ThemeInterface $theme) {
+    $this->theme = $theme;
+  }
+
+  public function getContent() {
+    return "About page in " . $this->theme->getColor();
+  }
+}
+
+class Careers implements WebPageInterface {
+  protected $theme;
+
+  public function __construct(ThemeInterface $theme) {
+    $this->theme = $theme;
+  }
+
+  public function getContent() {
+    return "Careers page in " . $this->theme->getColor();
+  }
+}
+
+interface ThemeInterface {
+  public function getColor();
+}
+
+class DarkTheme implements ThemeInterface {
+  public function getColor() {
+    return "Dark Black";
+  }
+}
+
+class LightTheme implements ThemeInterface {
+  public function getColor() {
+    return "Off White";
+  }
+}
+
+class AquaTheme implements ThemeInterface {
+  public function getColor() {
+    return "Light Blue";
+  }
+}
+
+$darkTheme = new DarkTheme();
+$lightTheme = new LightTheme();
+
+$about = new About($darkTheme);
+$careers = new Careers($lightTheme);
+
+echo $about->getColor() . "\n"; //Output: About page in Dark Black
+echo $careers->getColor() . "\n"; //Output: Careers page in Off White
 
 ```
 
@@ -2347,6 +2868,99 @@ organization.AddEmployee(designer);
 
 Console.WriteLine($"Net Salary of Employees in Organization is {organization.GetNetSalaries():c}");
 //Ouptut: Net Salary of Employees in Organization is $10000.00
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface EmployeeInterface {
+  function getSalary(): float;
+  function getRole(): string;
+  function getName(): string;
+}
+
+class Developer implements EmployeeInterface {
+  private string $name;
+  private float $salary;
+
+  public function __construct(string $name, float $salary) {
+    $this->name = $name;
+    $this->salary = $salary;
+  }
+
+  public function getSalary(): float {
+    return $this->salary;
+  }
+
+  public function getRole(): string {
+    return "Developer";
+  }
+
+  public function getName(): string {
+    return $this->name;
+  }
+}
+
+class Designer implements EmployeeInterface {
+  private string $name;
+  private float $salary;
+
+  public function __construct(string $name, float $salary) {
+    $this->name = $name;
+    $this->salary = $salary;
+  }
+
+  public function getSalary(): float {
+    return $this->salary;
+  }
+
+  public function getRole(): string {
+    return "Designer";
+  }
+
+  public function getName(): string {
+    return $this->name;
+  }
+}
+
+class Organization {
+  protected array $employees;
+
+  public function __construct() {
+    $this->employees = array();
+  }
+
+  public function addEmployee(EmployeeInterface $employee): void {
+    $this->employees[] = $employee;
+  }
+
+  public function getNetSalaries(): float {
+    $netSalary = 0;
+    foreach ($this->employees as $e) {
+      $netSalary += $e->getSalary();
+    }
+    return $netSalary;
+  }
+}
+
+// Arrange Employees, Organization, and add employees
+$developer = new Developer("John", 5000);
+$designer = new Designer("Aria", 5000);
+
+$organization = new Organization();
+$organization->addEmployee($developer);
+$organization->addEmployee($designer);
+
+echo "Net Salary of Employees in Organization is " . number_format($organization->getNetSalaries(), 2, '.', ',') . PHP_EOL;
+// Output: Net Salary of Employees in Organization is $10,000.00
 
 ```
 
@@ -2684,6 +3298,97 @@ Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip,
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface CoffeeInterface {
+  public function getCost();
+  public function getDescription();
+}
+
+class SimpleCoffee implements CoffeeInterface {
+  public function getCost() {
+    return 5;
+  }
+
+  public function getDescription() {
+    return "Simple Coffee";
+  }
+}
+
+class MilkCoffee implements CoffeeInterface {
+  private $coffee;
+
+  public function __construct(CoffeeInterface $coffee) {
+    $this->coffee = $coffee ?? throw new Exception("coffee should not be null");
+  }
+
+  public function getCost() {
+    return $this->coffee->getCost() + 1;
+  }
+
+  public function getDescription() {
+    return $this->coffee->getDescription() . ", milk";
+  }
+}
+
+class WhipCoffee implements CoffeeInterface {
+  private $coffee;
+
+  public function __construct(CoffeeInterface $coffee) {
+    $this->coffee = $coffee ?? throw new Exception("coffee should not be null");
+  }
+
+  public function getCost() {
+    return $this->coffee->getCost() + 1;
+  }
+
+  public function getDescription() {
+    return $this->coffee->getDescription() . ", whip";
+  }
+}
+
+class VanillaCoffee implements CoffeeInterface {
+  private $coffee;
+
+  public function __construct(CoffeeInterface $coffee) {
+    $this->coffee = $coffee ?? throw new Exception("coffee should not be null");
+  }
+
+  public function getCost() {
+    return $this->coffee->getCost() + 1;
+  }
+
+  public function getDescription() {
+    return $this->coffee->getDescription() . ", vanilla";
+  }
+}
+
+$myCoffee = new SimpleCoffee();
+echo "$" . number_format($myCoffee->getCost(), 2) . "\n"; // $5.00
+echo $myCoffee->getDescription() . "\n"; // Simple Coffee
+
+$milkCoffee = new MilkCoffee($myCoffee);
+echo "$" . number_format($milkCoffee->getCost(), 2) . "\n"; // $6.00
+echo $milkCoffee->getDescription() . "\n"; // Simple Coffee, milk
+
+$whipCoffee = new WhipCoffee($milkCoffee);
+echo "$" . number_format($whipCoffee->getCost(), 2) . "\n"; // $7.00
+echo $whipCoffee->getDescription() . "\n"; // Simple Coffee, milk, whip
+
+$vanillaCoffee = new VanillaCoffee($whipCoffee);
+echo "$" . number_format($vanillaCoffee->getCost(), 2) . "\n"; // $8.00
+echo $vanillaCoffee->getDescription() . "\n"; // Simple Coffee, milk, whip, vanilla
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -2936,6 +3641,83 @@ Console.ReadLine();
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class Computer
+{
+  public function getElectricShock()
+  {
+    echo "Ouch!";
+  }
+
+  public function makeSound()
+  {
+    echo "Beep beep!";
+  }
+
+  public function showLoadingScreen()
+  {
+    echo "Loading..";
+  }
+
+  public function bam()
+  {
+    echo "Ready to be used!";
+  }
+
+  public function closeEverything()
+  {
+    echo "Bup bup bup buzzzz!";
+  }
+
+  public function sooth()
+  {
+    echo "Zzzzz";
+  }
+
+  public function pullCurrent()
+  {
+    echo "Haaah!";
+  }
+}
+
+class ComputerFacade
+{
+  public function __construct(private Computer $computer)
+  {
+  }
+
+  public function turnOn()
+  {
+    $this->computer->getElectricShock();
+    $this->computer->makeSound();
+    $this->computer->showLoadingScreen();
+    $this->computer->bam();
+  }
+
+  public function turnOff()
+  {
+    $this->computer->closeEverything();
+    $this->computer->pullCurrent();
+    $this->computer->sooth();
+  }
+}
+
+$computerFacade = new ComputerFacade(new Computer());
+$computerFacade->turnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
+echo PHP_EOL;
+$computerFacade->turnOff();  // Bup bup buzzz! Haah! Zzzzz
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -3155,6 +3937,74 @@ teaShop.Serve();
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+// Anything that will be cached is flyweight.
+// Types of tea here will be flyweights.
+class KarakTea
+{
+}
+
+// Acts as a factory and saves the tea
+class TeaMaker
+{
+  private array $mAvailableTea = [];
+
+  public function make(string $preference): KarakTea
+  {
+    if (!array_key_exists($preference, $this->mAvailableTea)) {
+      $this->mAvailableTea[$preference] = new KarakTea();
+    }
+
+    return $this->mAvailableTea[$preference];
+  }
+}
+
+class TeaShop
+{
+  private array $mOrders = [];
+
+  public function __construct(private TeaMaker $teaMaker)
+  {
+  }
+
+  public function takeOrder(string $teaType, int $table): void
+  {
+    $this->mOrders[$table] = $this->teaMaker->make($teaType);
+  }
+
+  public function serve(): void
+  {
+    foreach ($this->mOrders as $table => $tea) {
+      echo "Serving tea to table # $table\n";
+    }
+  }
+}
+
+$teaMaker = new TeaMaker();
+$teaShop = new TeaShop($teaMaker);
+
+$teaShop->takeOrder("less sugar", 1);
+$teaShop->takeOrder("more milk", 2);
+$teaShop->takeOrder("without sugar", 5);
+
+$teaShop->serve();
+// Serving tea to table# 1
+// Serving tea to table# 2
+// Serving tea to table# 5
+?>
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -3366,6 +4216,55 @@ door.Open("invalid"); // Big no! It ain't possible.
 door.Open("$ecr@t"); // Opening lab door
 door.Close(); // Closing lab door
 
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface DoorInterface {
+  public function open();
+  public function close();
+}
+
+class LabDoor implements DoorInterface {
+  public function close() {
+    echo "Closing lab door\n";
+  }
+
+  public function open() {
+    echo "Opening lab door\n";
+  }
+}
+
+class SecuredDoor implements DoorInterface {
+  private $door;
+
+  public function __construct(private DoorInterface $door) {
+  }
+
+  public function open(string $password) {
+    if ($this->authenticate($password)) {
+      $this->door->open();
+    } else {
+      echo "Big no! It ain't possible.\n";
+    }
+  }
+
+  private function authenticate(string $password): bool {
+    return $password === '$ecr@t';
+  }
+
+  public function close() {
+    $this->door->close();
+  }
+}
 ```
 
 </div>
@@ -3701,6 +4600,91 @@ bank.Pay(259);
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+abstract class Account
+{
+    private $successor;
+    protected $balance;
+
+    public function setNext(Account $account)
+    {
+        $this->successor = $account;
+    }
+
+    public function pay($amountToPay)
+    {
+        if ($this->canPay($amountToPay)) {
+            echo "Paid " . number_format($amountToPay, 2) . " using " . get_class($this) . "." . PHP_EOL;
+        } elseif ($this->successor != null) {
+            echo "Cannot pay using " . get_class($this) . ". Proceeding.." . PHP_EOL;
+            $this->successor->pay($amountToPay);
+        } else {
+            throw new Exception("None of the accounts have enough balance");
+        }
+    }
+
+    private function canPay($amount)
+    {
+        return $this->balance >= $amount;
+    }
+}
+
+class Bank extends Account
+{
+    public function __construct($balance)
+    {
+        $this->balance = $balance;
+    }
+}
+
+class Paypal extends Account
+{
+    public function __construct($balance)
+    {
+        $this->balance = $balance;
+    }
+}
+
+class Bitcoin extends Account
+{
+    public function __construct($balance)
+    {
+        $this->balance = $balance;
+    }
+}
+
+// Let's prepare a chain like below
+//      $bank->$paypal->$bitcoin
+//
+// First priority bank
+//      If bank can't pay then PayPal
+//      If PayPal can't pay then bitcoin
+$bank = new Bank(100);          // Bank with balance 100
+$paypal = new Paypal(200);      // PayPal with balance 200
+$bitcoin = new Bitcoin(300);    // Bitcoin with balance 300
+
+$bank->setNext($paypal);
+$paypal->setNext($bitcoin);
+
+// Let's try to pay using the first priority i.e. bank
+$bank->pay(259);
+// Output will be
+// ==============
+// Cannot pay using Bank. Proceeding..
+// Cannot pay using Paypal. Proceeding..
+// Paid 259.00 using Bitcoin.
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -3960,6 +4944,104 @@ class RemoteControl
   remote.Submit(turnOff); // Darkness!
 
   Console.ReadLine();
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+// Receiver
+class Bulb
+{
+    public function turnOn()
+    {
+        echo "Bulb has been lit\n";
+    }
+
+    public function turnOff()
+    {
+        echo "Darkness!\n";
+    }
+}
+
+interface CommandInterface
+{
+    public function execute();
+    public function undo();
+    public function redo();
+}
+
+// Command
+class TurnOn implements CommandInterface
+{
+    public function __construct(private Bulb $bulb)
+    {
+    }
+
+    public function execute()
+    {
+        $this->bulb->turnOn();
+    }
+
+    public function undo()
+    {
+        $this->bulb->turnOff();
+    }
+
+    public function redo()
+    {
+        $this->execute();
+    }
+}
+
+class TurnOff implements CommandInterface
+{
+    public function __construct(private Bulb $bulb)
+    {
+    }
+
+    public function execute()
+    {
+        $this->bulb->turnOff();
+    }
+
+    public function undo()
+    {
+        $this->bulb->turnOn();
+    }
+
+    public function redo()
+    {
+        $this->execute();
+    }
+}
+
+// Invoker
+class RemoteControl
+{
+    public function submit(CommandInterface $command)
+    {
+        $command->execute();
+    }
+}
+
+// Usage
+$bulb = new Bulb();
+
+$turnOn = new TurnOn($bulb);
+$turnOff = new TurnOff($bulb);
+
+$remote = new RemoteControl();
+$remote->submit($turnOn); // Bulb has been lit!
+$remote->submit($turnOff); // Darkness!
+
 
 ```
 
@@ -4229,6 +5311,81 @@ Console.ReadLine();
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class RadioStation
+{
+    private $mFrequency;
+
+    public function __construct($frequency)
+    {
+        $this->mFrequency = $frequency;
+    }
+
+    public function getFrequency()
+    {
+        return $this->mFrequency;
+    }
+}
+
+class StationList implements IteratorAggregate
+{
+    private $mStations = [];
+
+    public function add(RadioStation $station)
+    {
+        array_push($this->mStations, $station);
+    }
+
+    public function remove(RadioStation $station)
+    {
+        $index = array_search($station, $this->mStations, true);
+        if ($index !== false) {
+            array_splice($this->mStations, $index, 1);
+        }
+    }
+
+    public function getIterator()
+    {
+        // Use can switch to this internal collection if you do not want to transform
+        // return new ArrayIterator($this->mStations);
+
+        // Use this if you want to transform the object before rendering
+        foreach ($this->mStations as $x) {
+            yield $x;
+        }
+    }
+}
+
+$stations = new StationList();
+$station1 = new RadioStation(89);
+$stations->add($station1);
+
+$station2 = new RadioStation(101);
+$stations->add($station2);
+
+$station3 = new RadioStation(102);
+$stations->add($station3);
+
+foreach ($stations as $x) {
+    echo $x->getFrequency() . ' ';
+}
+
+$q = array_filter($stations, function ($x) {
+    return $x->getFrequency() == 89;
+});
+echo reset($q)->getFrequency();
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -4428,6 +5585,65 @@ jane.Send("Hey!");
 
 //April 14, 20:05[John]:Hi there!
 //April 14, 20:05[Jane]:Hey!
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface ChatRoomMediator
+{
+    public function showMessage(User $user, string $message): void;
+}
+
+class ChatRoom implements ChatRoomMediator
+{
+    public function showMessage(User $user, string $message): void
+    {
+        echo date('F d, H:i') . " [" . $user->getName() . "]: " . $message . "\n";
+    }
+}
+
+class User
+{
+    private $name;
+    private $chatRoom;
+
+    public function __construct(string $name, ChatRoomMediator $chatRoom)
+    {
+        $this->name = $name;
+        $this->chatRoom = $chatRoom;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function send(string $message): void
+    {
+        $this->chatRoom->showMessage($this, $message);
+    }
+}
+
+$mediator = new ChatRoom();
+
+$john = new User("John", $mediator);
+$jane = new User("Jane", $mediator);
+
+$john->send("Hi there!");
+$jane->send("Hey!");
+
+// Output:
+// February 15, 14:44 [John]: Hi there!
+// February 15, 14:44 [Jane]: Hey!
 
 ```
 
@@ -4664,6 +5880,84 @@ Console.Write(editor.Content); // This is the first sentence. This is second
 </div>
 
 </details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class EditorMemento
+{
+  private $mContent;
+
+  public function __construct($content)
+  {
+    $this->mContent = $content;
+  }
+
+  public function getContent()
+  {
+    return $this->mContent;
+  }
+}
+
+class Editor
+{
+  private $mContent = '';
+  private $memento;
+
+  public function __construct()
+  {
+    $this->memento = new EditorMemento('');
+  }
+
+  public function type($words)
+  {
+    $this->mContent .= ' ' . $words;
+  }
+
+  public function getContent()
+  {
+    return $this->mContent;
+  }
+
+  public function save()
+  {
+    $this->memento = new EditorMemento($this->mContent);
+  }
+
+  public function restore()
+  {
+    $this->mContent = $this->memento->getContent();
+  }
+}
+
+$editor = new Editor();
+
+//Type some stuff
+$editor->type("This is the first sentence.");
+$editor->type("This is second.");
+
+// Save the state to restore to : This is the first sentence. This is second.
+$editor->save();
+
+//Type some more
+$editor->type("This is third.");
+
+//Output the content
+echo $editor->getContent(); // This is the first sentence. This is second. This is third.
+
+//Restoring to last saved state
+$editor->restore();
+
+echo $editor->getContent(); // This is the first sentence. This is second
+```
+
+</div>
+
+</details>
+
 
 <br>
 
@@ -4943,6 +6237,100 @@ jobPostings.AddJob(new JobPost("Software Engineer"));
 
 Console.ReadLine();
 
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class JobPost
+{
+    public function __construct(private string $title)
+    {
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+}
+
+class JobSeeker implements SplObserver
+{
+    public function __construct(private string $name)
+    {
+    }
+
+    public function update(SplSubject $subject)
+    {
+        if ($subject instanceof JobPostings) {
+            $jobPost = $subject->getJobPost();
+            echo "Hi {$this->name} ! New job posted: {$jobPost->getTitle()}\n";
+        }
+    }
+}
+
+class JobPostings implements SplSubject
+{
+    private $observers;
+    private $jobPostings;
+
+    public function __construct()
+    {
+        $this->observers = new SplObjectStorage();
+        $this->jobPostings = [];
+    }
+
+    public function attach(SplObserver $observer)
+    {
+        $this->observers->attach($observer);
+    }
+
+    public function detach(SplObserver $observer)
+    {
+        $this->observers->detach($observer);
+    }
+
+    public function notify()
+    {
+        foreach ($this->observers as $observer) {
+            $observer->update($this);
+        }
+    }
+
+    public function addJob(JobPost $jobPost)
+    {
+        $this->jobPostings[] = $jobPost;
+        $this->notify();
+    }
+
+    public function getJobPost()
+    {
+        return end($this->jobPostings);
+    }
+}
+
+//Create Subscribers
+$johnDoe = new JobSeeker("John Doe");
+$janeDoe = new JobSeeker("Jane Doe");
+
+//Create publisher and attach subscribers
+$jobPostings = new JobPostings();
+$jobPostings->attach($johnDoe);
+$jobPostings->attach($janeDoe);
+
+//Add a new job and see if subscribers get notified
+$jobPostings->addJob(new JobPost("Software Engineer"));
+
+//Output
+// Hi John Doe! New job posted: Software Engineer
+// Hi Jane Doe! New job posted: Software Engineer
 ```
 
 </div>
@@ -5327,6 +6715,128 @@ dolphin.Accept(jump);   // Walked on water a little and disappeared
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+// Visitee
+interface AnimalInterface
+{
+  public function accept(AnimalOperationInterface $operation);
+}
+
+// Visitor
+interface AnimalOperationInterface
+{
+  public function visitMonkey(Monkey $monkey);
+  public function visitLion(Lion $lion);
+  public function visitDolphin(Dolphin $dolphin);
+}
+
+class Monkey implements AnimalInterface
+{
+  public function shout()
+  {
+    echo "Oooh o aa aa!";
+  }
+
+  public function accept(AnimalOperationInterface $operation)
+  {
+    $operation->visitMonkey($this);
+  }
+}
+
+class Lion implements AnimalInterface
+{
+  public function roar()
+  {
+    echo "Roaar!";
+  }
+
+  public function accept(AnimalOperationInterface $operation)
+  {
+    $operation->visitLion($this);
+  }
+}
+
+class Dolphin implements AnimalInterface
+{
+  public function speak()
+  {
+    echo "Tuut tittu tuutt!";
+  }
+
+  public function accept(AnimalOperationInterface $operation)
+  {
+    $operation->visitDolphin($this);
+  }
+}
+
+class Speak implements AnimalOperationInterface
+{
+  public function visitDolphin(Dolphin $dolphin)
+  {
+    $dolphin->speak();
+  }
+
+  public function visitLion(Lion $lion)
+  {
+    $lion->roar();
+  }
+
+  public function visitMonkey(Monkey $monkey)
+  {
+    $monkey->shout();
+  }
+}
+
+$monkey = new Monkey();
+$lion = new Lion();
+$dolphin = new Dolphin();
+
+$speak = new Speak();
+
+$monkey->accept($speak);    // Ooh oo aa aa!
+$lion->accept($speak);      // Roaaar!
+$dolphin->accept($speak);   // Tuut tutt tuutt!
+
+class Jump implements AnimalOperationInterface
+{
+  public function visitDolphin(Dolphin $dolphin)
+  {
+    echo "Walked on water a little and disappeared!";
+  }
+
+  public function visitLion(Lion $lion)
+  {
+    echo "Jumped 7 feet! Back on the ground!";
+  }
+
+  public function visitMonkey(Monkey $monkey)
+  {
+    echo "Jumped 20 feet high! on to the tree!";
+  }
+}
+
+$jump = new Jump();
+
+$monkey->accept($speak);   // Ooh oo aa aa!
+$monkey->accept($jump);    // Jumped 20 feet high! on to the tree!
+
+$lion->accept($speak);     // Roaaar!
+$lion->accept($jump);      // Jumped 7 feet! Back on the ground!
+
+$dolphin->accept($speak);  // Tuut tutt tuutt!
+$dolphin->accept($jump);   // Walked on water a little and disappeared
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -5514,6 +7024,57 @@ sorter.Sort(unSortedList); // // Output : Sorting using Bubble Sort !
 
 sorter = new Sorter(new QuickSortStrategy());
 sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
+
+```
+
+</div>
+
+</details>
+
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface SortStrategyInterface {
+  public function sort($dataset);
+}
+
+class BubbleSortStrategy implements SortStrategyInterface {
+  public function sort($dataset) {
+    echo "Sorting using Bubble Sort !\n";
+    return $dataset;
+  }
+}
+
+class QuickSortStrategy implements SortStrategyInterface {
+  public function sort($dataset) {
+    echo "Sorting using Quick Sort !\n";
+    return $dataset;
+  }
+}
+
+class Sorter {
+  private $mSorter;
+
+  public function __construct(SortStrategyInterface $sorter) {
+    $this->mSorter = $sorter;
+  }
+
+  public function sort($unSortedList) {
+    return $this->mSorter->sort($unSortedList);
+  }
+}
+
+$unSortedList = [1, 10, 2, 16, 19];
+
+$sorter = new Sorter(new BubbleSortStrategy());
+$sorter->sort($unSortedList); // Output : Sorting using Bubble Sort !
+
+$sorter = new Sorter(new QuickSortStrategy());
+$sorter->sort($unSortedList); // Output : Sorting using Quick Sort !
 
 ```
 
@@ -5763,6 +7324,86 @@ editor.SetState(new LowerCase());
 
 editor.Type("Fourth Line");
 editor.Type("Fifthe Line");
+
+// Output:
+// First line
+// SECOND LINE
+// THIRD LINE
+// fourth line
+// fifth line
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface WritingStateInterface {
+  public function write(string $words);
+}
+
+class UpperCase implements WritingStateInterface
+{
+  public function write(string $words)
+  {
+    echo strtoupper($words) . "\n";
+  }
+}
+
+class LowerCase implements WritingStateInterface
+{
+  public function write(string $words)
+  {
+    echo strtolower($words) . "\n";
+  }
+}
+
+class DefaultText implements WritingStateInterface
+{
+  public function write(string $words)
+  {
+    echo $words . "\n";
+  }
+}
+
+class TextEditor {
+  private WritingStateInterface $state;
+
+  public function __construct()
+  {
+    $this->state = new DefaultText();
+  }
+
+  public function setState(WritingStateInterface $state)
+  {
+    $this->state = $state;
+  }
+
+  public function type(string $words)
+  {
+    $this->state->write($words);
+  }
+}
+
+$editor = new TextEditor();
+
+$editor->type("First line");
+
+$editor->setState(new UpperCase());
+
+$editor->type("Second Line");
+$editor->type("Third Line");
+
+$editor->setState(new LowerCase());
+
+$editor->type("Fourth Line");
+$editor->type("Fifth Line");
 
 // Output:
 // First line
@@ -6065,6 +7706,87 @@ androidBuilder.Build();
 
 var iosBuilder = new IosBuilder();
 iosBuilder.Build();
+
+// Output:
+// Running ios tests
+// Linting the ios code
+// Assembling the ios build
+// Deploying ios build to server
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+abstract class Builder {
+  // Template method
+  public function Build() {
+    $this->test();
+    $this->lint();
+    $this->assemble();
+    $this->deploy();
+  }
+
+  abstract public function test();
+  abstract public function lint();
+  abstract public function assemble();
+  abstract public function deploy();
+}
+
+class AndroidBuilder extends Builder {
+  public function assemble() {
+    echo "Assembling the android build\n";
+  }
+
+  public function deploy() {
+    echo "Deploying android build to server\n";
+  }
+
+  public function lnt() {
+    echo "Linting the android code\n";
+  }
+
+  public function test() {
+    echo "Running android tests\n";
+  }
+}
+
+class IosBuilder extends Builder {
+  public function assemble() {
+    echo "Assembling the ios build\n";
+  }
+
+  public function deploy() {
+    echo "Deploying ios build to server\n";
+  }
+
+  public function lint() {
+    echo "Linting the ios code\n";
+  }
+
+  public function test() {
+    echo "Running ios tests\n";
+  }
+}
+
+$androidBuilder = new AndroidBuilder();
+$androidBuilder->build();
+
+// Output:
+// Running android tests
+// Linting the android code
+// Assembling the android build
+// Deploying android build to server
+
+$iosBuilder = new IosBuilder();
+$iosBuilder->build();
 
 // Output:
 // Running ios tests
