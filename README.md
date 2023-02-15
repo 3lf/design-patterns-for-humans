@@ -569,6 +569,75 @@ marketingManager.TakeInterview();//Output : Asking about community building!
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface IInterviewer
+{
+    public function askQuestions();
+}
+
+class Developer implements IInterviewer
+{
+    public function askQuestions()
+    {
+        echo "Asking about design patterns!";
+    }
+}
+
+class CommunityExecutive implements IInterviewer
+{
+    public function askQuestions()
+    {
+        echo "Asking about community building!";
+    }
+}
+
+abstract class HiringManager
+{
+    // Factory method
+    abstract protected function makeInterviewer(): IInterviewer;
+
+    public function takeInterview()
+    {
+        $interviewer = $this->makeInterviewer();
+        $interviewer->askQuestions();
+    }
+}
+
+class DevelopmentManager extends HiringManager
+{
+    protected function makeInterviewer(): IInterviewer
+    {
+        return new Developer();
+    }
+}
+
+class MarketingManager extends HiringManager
+{
+    protected function makeInterviewer(): IInterviewer
+    {
+        return new CommunityExecutive();
+    }
+}
+
+
+// Usage
+$devManager = new DevelopmentManager();
+$devManager->takeInterview(); // Output: Asking about design patterns!
+
+$marketingManager = new MarketingManager();
+$marketingManager->takeInterview(); // Output: Asking about community building!
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
