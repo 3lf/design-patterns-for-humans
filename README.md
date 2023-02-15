@@ -1902,6 +1902,42 @@ Console.WriteLine(a == b); //Output : true
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+
+class President
+{
+  private static $instance;
+
+  private function __construct()
+  {
+    // Hiding the Constructor
+  }
+
+  public static function getInstance()
+  {
+    if (self::$instance == null) {
+      self::$instance = new President();
+    }
+    return self::$instance;
+  }
+}
+
+$a = President::getInstance();
+$b = President::getInstance();
+
+var_dump($a === $b); // Output: bool(true)
+
+```
+
+</div>
+
+</details>
+
 <br>
 <br>
 
