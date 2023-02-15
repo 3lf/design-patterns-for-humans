@@ -4222,6 +4222,55 @@ door.Close(); // Closing lab door
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface DoorInterface {
+  public function open();
+  public function close();
+}
+
+class LabDoor implements DoorInterface {
+  public function close() {
+    echo "Closing lab door\n";
+  }
+
+  public function open() {
+    echo "Opening lab door\n";
+  }
+}
+
+class SecuredDoor implements DoorInterface {
+  private $door;
+
+  public function __construct(private DoorInterface $door) {
+  }
+
+  public function open(string $password) {
+    if ($this->authenticate($password)) {
+      $this->door->open();
+    } else {
+      echo "Big no! It ain't possible.\n";
+    }
+  }
+
+  private function authenticate(string $password): bool {
+    return $password === '$ecr@t';
+  }
+
+  public function close() {
+    $this->door->close();
+  }
+}
+```
+
+</div>
+
+</details>
+
 <br>
 <br>
 
