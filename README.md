@@ -4951,6 +4951,104 @@ class RemoteControl
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+// Receiver
+class Bulb
+{
+    public function turnOn()
+    {
+        echo "Bulb has been lit\n";
+    }
+
+    public function turnOff()
+    {
+        echo "Darkness!\n";
+    }
+}
+
+interface CommandInterface
+{
+    public function execute();
+    public function undo();
+    public function redo();
+}
+
+// Command
+class TurnOn implements CommandInterface
+{
+    public function __construct(private Bulb $bulb)
+    {
+    }
+
+    public function execute()
+    {
+        $this->bulb->turnOn();
+    }
+
+    public function undo()
+    {
+        $this->bulb->turnOff();
+    }
+
+    public function redo()
+    {
+        $this->execute();
+    }
+}
+
+class TurnOff implements CommandInterface
+{
+    public function __construct(private Bulb $bulb)
+    {
+    }
+
+    public function execute()
+    {
+        $this->bulb->turnOff();
+    }
+
+    public function undo()
+    {
+        $this->bulb->turnOn();
+    }
+
+    public function redo()
+    {
+        $this->execute();
+    }
+}
+
+// Invoker
+class RemoteControl
+{
+    public function submit(CommandInterface $command)
+    {
+        $command->execute();
+    }
+}
+
+// Usage
+$bulb = new Bulb();
+
+$turnOn = new TurnOn($bulb);
+$turnOff = new TurnOff($bulb);
+
+$remote = new RemoteControl();
+$remote->submit($turnOn); // Bulb has been lit!
+$remote->submit($turnOff); // Darkness!
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
