@@ -992,6 +992,101 @@ ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
 
 </details>
 
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+
+interface IDoor {
+  public function getDescription();
+}
+
+class WoodenDoor implements IDoor {
+  public function getDescription() {
+    echo "I am a wooden door";
+  }
+}
+
+class IronDoor implements IDoor {
+  public function getDescription() {
+    echo "I am an iron door";
+  }
+}
+
+interface IDoorFittingExpert {
+  public function getDescription();
+}
+
+class Welder implements IDoorFittingExpert {
+  public function getDescription() {
+    echo "I can only fit iron doors";
+  }
+}
+
+class Carpenter implements IDoorFittingExpert {
+  public function getDescription() {
+    echo "I can only fit wooden doors";
+  }
+}
+
+interface IDoorFactory {
+  public function makeDoor(): IDoor;
+  public function makeFittingExpert(): IDoorFittingExpert;
+}
+
+// Wooden factory to return carpenter and wooden door
+class WoodenDoorFactory implements IDoorFactory {
+  public function makeDoor(): IDoor {
+    return new WoodenDoor();
+  }
+
+  public function makeFittingExpert(): IDoorFittingExpert {
+    return new Carpenter();
+  }
+}
+
+// Iron door factory to get iron door and the relevant fitting expert
+class IronDoorFactory implements IDoorFactory {
+  public function makeDoor(): IDoor {
+    return new IronDoor();
+  }
+
+  public function makeFittingExpert(): IDoorFittingExpert {
+    return new Welder();
+  }
+}
+
+
+// Usage
+$woodenDoorFactory = new WoodenDoorFactory();
+
+$woodenDoor = $woodenDoorFactory->makeDoor();
+$woodenDoorFittingExpert = $woodenDoorFactory->makeFittingExpert();
+
+$woodenDoor->getDescription(); // Output: I am a wooden door
+$woodenDoorFittingExpert->getDescription(); // Output: I can only fit wooden doors
+
+
+$ironDoorFactory = new IronDoorFactory();
+
+$ironDoor = $ironDoorFactory->makeDoor();
+$ironDoorFittingExpert = $ironDoorFactory->makeFittingExpert();
+
+$ironDoor->getDescription(); // Output: I am an iron door
+$ironDoorFittingExpert->getDescription(); // Output: I can only fit iron doors
+
+```
+
+</div>
+
+**همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+درب
+انتخاب نمی‌کنیم.**
+
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -1056,6 +1151,21 @@ constructor(size: any, cheese: boolean = true, pepperoni: boolean = true, tomato
 ```C#
 
 public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+
+public function __construct(int $size, bool $cheese, bool $pepperoni, bool $lettuce, bool $tomato)
 
 ```
 
@@ -1305,6 +1415,79 @@ var burger = new BurgerBuilder(4).AddCheese()
                                 .AddTomato()
                                 .Build();
 Console.WriteLine(burger.GetDescription());
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class Burger {
+    private $size;
+    private $cheese = false;
+    private $pepperoni = false;
+    private $lettuce = false;
+    private $tomato = false;
+
+    public function __construct($builder) {
+        $this->size = $builder->size;
+        $this->cheese = $builder->cheese;
+        $this->pepperoni = $builder->pepperoni;
+        $this->lettuce = $builder->lettuce;
+        $this->tomato = $builder->tomato;
+    }
+}
+
+class BurgerBuilder {
+    public $size;
+    public $cheese = false;
+    public $pepperoni = false;
+    public $lettuce = false;
+    public $tomato = false;
+
+    public function __construct($size) {
+        $this->size = $size;
+    }
+
+    public function addPepperoni() {
+        $this->pepperoni = true;
+        return $this;
+    }
+
+    public function addLettuce() {
+        $this->lettuce = true;
+        return $this;
+    }
+
+    public function addCheese() {
+        $this->cheese = true;
+        return $this;
+    }
+
+    public function addTomato() {
+        $this->tomato = true;
+        return $this;
+    }
+
+    public function build() {
+        return new Burger($this);
+    }
+}
+
+$burger = (new BurgerBuilder(10))
+            ->addCheese()
+            ->addPepperoni()
+            ->addLettuce()
+            ->addTomato()
+            ->build();
+            
+var_dump(get_object_vars($burger));
 
 ```
 
