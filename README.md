@@ -1,6 +1,6 @@
 <div dir="rtl">
 
-![Design Patterns For Humans](https://cloud.githubusercontent.com/assets/11269635/23065273/1b7e5938-f515-11e6-8dd3-d0d58de6bb9a.png)
+![Design Patterns For Humans](images/poster.png)
 
 ---
 
@@ -2347,7 +2347,7 @@ $hunter->hunt($wildDogAdapter);
 >
 > الگوی طراحی Bridge به شما کمک میکنه راه حل دوم رو پیاده‌سازی کنید.
 
-![With and without the bridge pattern](https://cloud.githubusercontent.com/assets/11269635/23065293/33b7aea0-f515-11e6-983f-98823c9845ee.png)
+![With and without the bridge pattern](images/without_bridge.png)
 
 به زبون ساده:
 
@@ -2671,7 +2671,7 @@ echo $careers->getColor() . "\n"; //Output: Careers page in Off White
 یک مثال از دنیای واقعی:
 
 > فرض کنید شما یک کلاس ارسال مرسوله طراحی میکنید:
-> <br> > ![](https://refactoring.guru/images/patterns/diagrams/composite/problem-en.png)
+> <br> > ![Composite](images/Composite.png)
 >
 > هر کلاس یک جعبه هست که میتونه شامل چند جعبه دیگه یا شامل چند شیء باشه.
 >
