@@ -1676,6 +1676,80 @@ Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
 
 </div>
 
+
+
+<br>
+
+برای deepCopy میتونیم از  json Deserialize استفاده کنیم :
+
+
+<div dir="ltr">
+
+
+```C#
+
+public abstract class Person
+{
+    public abstract string Name { get; set; }
+
+    public abstract Person Clone(bool deepClone);
+}
+
+public class Manager : Person
+{
+    public override string Name { get; set; }
+
+    public Manager(string name)
+    {
+        Name = name;
+
+    }
+
+    public override Person Clone( bool deepClone=false)
+    {      
+       if (deepClone)
+        {
+            var objectAsJson = JsonConvert.SerializeObject(this);
+            return JsonConvert.DeserializeObject<Manager>(objectAsJson);
+
+        }
+        return (Person)MemberwiseClone();
+    }
+}
+
+public class Employee : Person
+{ 
+    public Manager Manager { get; set; }
+    public override string Name { get; set; }
+    public Employee(string name, Manager manager)
+    {
+
+        Name = name;
+        Manager = manager;
+    }
+    public override Person Clone(bool deepClone = false)
+    {
+           if (deepClone)
+        {
+            var objectAsJson = JsonConvert.SerializeObject(this);
+            return JsonConvert.DeserializeObject<Employee>(objectAsJson);
+
+        }
+        return (Person)MemberwiseClone() ;
+    }
+
+}
+
+var manager = new Manager("Cindey");
+var managerClone = (Manager)manager.Clone(true);
+
+var employee = new Employee("kevin", managerClone);
+var employeeClone = (Employee)employee.Clone(true);
+```
+
+
+</div>
+
 </details>
 
 <details>
@@ -1749,8 +1823,6 @@ echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
 تغییری توی اون یکی به وجود نمیاره.
 
 <br>
-
----
 
 <div align="center">
 
