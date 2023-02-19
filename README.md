@@ -346,6 +346,57 @@ echo "Width of Door : " . $door->getWidth() . "\n";
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+public class Door { 
+    private int width;
+    private int height;
+    
+    public Door(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+    
+    public int getHeight() {
+        return height;
+    }
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public void setWidth(int width) {
+        this.width = width;
+    }
+}
+
+public class WoodenDoor extends Door {
+    
+    WoodenDoor(int width, int height) {
+        super(width, height);
+    }
+}
+
+public class DoorFactory {
+    public static WoodenDoor makeDoor(int width, int height) {
+        return new WoodenDoor(width, height);
+    }
+}
+
+----------------------------
+
+Door door = DoorFactory.makeDoor(10, 10);
+System.out.println(door.getHeight());
+System.out.println(door.getWidth());
+```
+</div>
+</details>
+
 <br>
 
 ---
