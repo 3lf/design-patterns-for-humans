@@ -346,6 +346,57 @@ echo "Width of Door : " . $door->getWidth() . "\n";
 
 </details>
 
+<details>
+<summary >Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type Door interface {
+	getHeight() int
+	getWidth() int
+}
+
+type WoodenDoor struct {
+	height int
+	width  int
+}
+
+func NewWoodenDoor(height, width int) *WoodenDoor {
+	return &WoodenDoor{height: height, width: width}
+}
+
+func (w *WoodenDoor) getHeight() int {
+	return w.height
+}
+
+func (w *WoodenDoor) getWidth() int {
+	return w.width
+}
+
+type DoorFactory struct{}
+
+func (df *DoorFactory) makeDoor(height, width int) Door {
+	return NewWoodenDoor(height, width)
+}
+
+func main() {
+	doorFactory := &DoorFactory{}
+	door := doorFactory.makeDoor(80, 30)
+	fmt.Printf("Height of Door : %d\n", door.getHeight())
+	fmt.Printf("Width of Door : %d\n", door.getWidth())
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -631,6 +682,73 @@ $devManager->takeInterview(); // Output: Asking about design patterns!
 
 $marketingManager = new MarketingManager();
 $marketingManager->takeInterview(); // Output: Asking about community building!
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type Interviewer interface {
+	AskQuestions()
+}
+
+type Developer struct{}
+
+func (d *Developer) AskQuestions() {
+	fmt.Println("Asking about design patterns!")
+}
+
+type CommunityExecutive struct{}
+
+func (ce *CommunityExecutive) AskQuestions() {
+	fmt.Println("Asking about community building!")
+}
+
+type HiringManager interface {
+	MakeInterviewer() Interviewer
+	TakeInterview()
+}
+
+type DevelopmentManager struct{}
+
+func (dm *DevelopmentManager) MakeInterviewer() Interviewer {
+	return &Developer{}
+}
+
+func (dm *DevelopmentManager) TakeInterview() {
+	interviewer := dm.MakeInterviewer()
+	interviewer.AskQuestions()
+}
+
+type MarketingManager struct{}
+
+func (mm *MarketingManager) MakeInterviewer() Interviewer {
+	return &CommunityExecutive{}
+}
+
+func (mm *MarketingManager) TakeInterview() {
+	interviewer := mm.MakeInterviewer()
+	interviewer.AskQuestions()
+}
+
+func main() {
+	devManager := &DevelopmentManager{}
+	devManager.TakeInterview() // Output : Asking about design patterns!
+
+	marketingManager := &MarketingManager{}
+	marketingManager.TakeInterview() // Output : Asking about community building!
+}
 
 ```
 
