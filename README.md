@@ -689,6 +689,73 @@ $marketingManager->takeInterview(); // Output: Asking about community building!
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type Interviewer interface {
+	AskQuestions()
+}
+
+type Developer struct{}
+
+func (d *Developer) AskQuestions() {
+	fmt.Println("Asking about design patterns!")
+}
+
+type CommunityExecutive struct{}
+
+func (ce *CommunityExecutive) AskQuestions() {
+	fmt.Println("Asking about community building!")
+}
+
+type HiringManager interface {
+	MakeInterviewer() Interviewer
+	TakeInterview()
+}
+
+type DevelopmentManager struct{}
+
+func (dm *DevelopmentManager) MakeInterviewer() Interviewer {
+	return &Developer{}
+}
+
+func (dm *DevelopmentManager) TakeInterview() {
+	interviewer := dm.MakeInterviewer()
+	interviewer.AskQuestions()
+}
+
+type MarketingManager struct{}
+
+func (mm *MarketingManager) MakeInterviewer() Interviewer {
+	return &CommunityExecutive{}
+}
+
+func (mm *MarketingManager) TakeInterview() {
+	interviewer := mm.MakeInterviewer()
+	interviewer.AskQuestions()
+}
+
+func main() {
+	devManager := &DevelopmentManager{}
+	devManager.TakeInterview() // Output : Asking about design patterns!
+
+	marketingManager := &MarketingManager{}
+	marketingManager.TakeInterview() // Output : Asking about community building!
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
