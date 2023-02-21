@@ -346,6 +346,57 @@ echo "Width of Door : " . $door->getWidth() . "\n";
 
 </details>
 
+<details>
+<summary >Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type Door interface {
+	getHeight() int
+	getWidth() int
+}
+
+type WoodenDoor struct {
+	height int
+	width  int
+}
+
+func NewWoodenDoor(height, width int) *WoodenDoor {
+	return &WoodenDoor{height: height, width: width}
+}
+
+func (w *WoodenDoor) getHeight() int {
+	return w.height
+}
+
+func (w *WoodenDoor) getWidth() int {
+	return w.width
+}
+
+type DoorFactory struct{}
+
+func (df *DoorFactory) makeDoor(height, width int) Door {
+	return NewWoodenDoor(height, width)
+}
+
+func main() {
+	doorFactory := &DoorFactory{}
+	door := doorFactory.makeDoor(80, 30)
+	fmt.Printf("Height of Door : %d\n", door.getHeight())
+	fmt.Printf("Width of Door : %d\n", door.getWidth())
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
