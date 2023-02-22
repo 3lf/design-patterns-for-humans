@@ -1205,6 +1205,102 @@ $ironDoorFittingExpert->getDescription(); // Output: I can only fit iron doors
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+type IDoor interface {
+	GetDescription()
+}
+
+type WoodenDoor struct{}
+
+func (w *WoodenDoor) GetDescription() {
+	fmt.Println("I am a wooden door")
+}
+
+type IronDoor struct{}
+
+func (i *IronDoor) GetDescription() {
+	fmt.Println("I am an iron door")
+}
+
+type IDoorFittingExpert interface {
+	GetDescription()
+}
+
+type Carpenter struct{}
+
+func (c *Carpenter) GetDescription() {
+	fmt.Println("I can only fit wooden doors")
+}
+
+type Welder struct{}
+
+func (w *Welder) GetDescription() {
+	fmt.Println("I can only fit iron doors")
+}
+
+type IDoorFactory interface {
+	MakeDoor() IDoor
+	MakeFittingExpert() IDoorFittingExpert
+}
+
+type WoodenDoorFactory struct{}
+
+func (w *WoodenDoorFactory) MakeDoor() IDoor {
+	return &WoodenDoor{}
+}
+
+func (w *WoodenDoorFactory) MakeFittingExpert() IDoorFittingExpert {
+	return &Carpenter{}
+}
+
+type IronDoorFactory struct{}
+
+func (i *IronDoorFactory) MakeDoor() IDoor {
+	return &IronDoor{}
+}
+
+func (i *IronDoorFactory) MakeFittingExpert() IDoorFittingExpert {
+	return &Welder{}
+}
+
+func main() {
+	woodenDoorFactory := &WoodenDoorFactory{}
+
+	woodenDoor := woodenDoorFactory.MakeDoor()
+	woodenDoorFittingExpert := woodenDoorFactory.MakeFittingExpert()
+
+	woodenDoor.GetDescription()           // Output: I am a wooden door
+	woodenDoorFittingExpert.GetDescription() // Output: I can only fit wooden doors
+
+	ironDoorFactory := &IronDoorFactory{}
+
+	ironDoor := ironDoorFactory.MakeDoor()
+	ironDoorFittingExpert := ironDoorFactory.MakeFittingExpert()
+
+	ironDoor.GetDescription()           // Output: I am an iron door
+	ironDoorFittingExpert.GetDescription() // Output: I can only fit iron doors
+}
+
+```
+
+</div>
+
+**همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+درب
+انتخاب نمی‌کنیم.**
+
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
