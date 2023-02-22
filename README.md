@@ -1387,6 +1387,21 @@ public function __construct(int $size, bool $cheese, bool $pepperoni, bool $lett
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+func Burger(size int, cheese bool, pepperoni bool, lettuce bool, tomato bool)
+
+```
+
+</div>
+
+</details>
+
 در این شرایط معمولا Builder میتونه به دادمون برسه.
 
 <br>
@@ -1702,6 +1717,93 @@ $burger = (new BurgerBuilder(10))
             ->build();
             
 var_dump(get_object_vars($burger));
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+"fmt"
+"strings"
+)
+
+type Burger struct {
+Size int
+Cheese bool
+Pepperoni bool
+Lettuce bool
+Tomato bool
+}
+
+func NewBurger(builder *BurgerBuilder) *Burger {
+return &Burger{
+Size: builder.Size,
+Cheese: builder.Cheese,
+Pepperoni: builder.Pepperoni,
+Lettuce: builder.Lettuce,
+Tomato: builder.Tomato,
+}
+}
+
+func (b *Burger) GetDescription() string {
+var sb strings.Builder
+sb.WriteString(fmt.Sprintf("This is %d inch Burger. ", b.Size))
+return sb.String()
+}
+
+type BurgerBuilder struct {
+Size int
+Cheese bool
+Pepperoni bool
+Lettuce bool
+Tomato bool
+}
+
+func NewBurgerBuilder(size int) *BurgerBuilder {
+return &BurgerBuilder{Size: size}
+}
+
+func (b *BurgerBuilder) AddCheese() *BurgerBuilder {
+b.Cheese = true
+return b
+}
+
+func (b *BurgerBuilder) AddPepperoni() *BurgerBuilder {
+b.Pepperoni = true
+return b
+}
+
+func (b *BurgerBuilder) AddLettuce() *BurgerBuilder {
+b.Lettuce = true
+return b
+}
+
+func (b *BurgerBuilder) AddTomato() *BurgerBuilder {
+b.Tomato = true
+return b
+}
+
+func (b *BurgerBuilder) Build() *Burger {
+return NewBurger(b)
+}
+
+func main() {
+burger := NewBurgerBuilder(4).AddCheese().AddPepperoni().AddLettuce().AddTomato().Build()
+fmt.Println(burger.GetDescription())
+}
+
+
+
 
 ```
 
