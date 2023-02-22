@@ -2424,6 +2424,36 @@ var_dump($a === $b); // Output: bool(true)
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+type President struct {}
+
+var instance *President
+
+func GetInstance() *President {
+  if instance == nil {
+    instance = &President{}
+  }
+  return instance
+}
+
+-----------------------
+
+a := GetInstance()
+b := GetInstance()
+fmt.Println(a == b) // Output: true
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 <br>
 
