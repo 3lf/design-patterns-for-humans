@@ -2126,6 +2126,104 @@ echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+)
+
+type Person interface {
+    GetName() string
+    SetName(name string)
+    Clone(deepClone bool) Person
+}
+
+type Manager struct {
+    Name string `json:"name"`
+}
+
+func NewManager(name string) *Manager {
+    return &Manager{
+        Name: name,
+    }
+}
+
+func (m *Manager) GetName() string {
+    return m.Name
+}
+
+func (m *Manager) SetName(name string) {
+    m.Name = name
+}
+
+func (m *Manager) Clone(deepClone bool) Person {
+    if deepClone {
+        objectAsJson, _ := json.Marshal(m)
+        clone := &Manager{}
+        json.Unmarshal(objectAsJson, clone)
+        return clone
+    }
+    return &Manager{
+        Name: m.Name,
+    }
+}
+
+type Employee struct {
+    Name    string   `json:"name"`
+    Manager *Manager `json:"manager"`
+}
+
+func NewEmployee(name string, manager *Manager) *Employee {
+    return &Employee{
+        Name:    name,
+        Manager: manager,
+    }
+}
+
+func (e *Employee) GetName() string {
+    return e.Name
+}
+
+func (e *Employee) SetName(name string) {
+    e.Name = name
+}
+
+func (e *Employee) Clone(deepClone bool) Person {
+    if deepClone {
+        objectAsJson, _ := json.Marshal(e)
+        clone := &Employee{}
+        json.Unmarshal(objectAsJson, clone)
+        return clone
+    }
+    return &Employee{
+        Name:    e.Name,
+        Manager: e.Manager.Clone(false).(*Manager),
+    }
+}
+
+func main() {
+    manager := NewManager("Cindey")
+    managerClone := manager.Clone(true).(*Manager)
+    fmt.Println(managerClone.GetName())
+
+    employee := NewEmployee("kevin", managerClone)
+    employeeClone := employee.Clone(true).(*Employee)
+    fmt.Println(employeeClone.GetName(), employeeClone.Manager.GetName())
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 **تفاوت Shadow Copy و Deep Copy ؟**
