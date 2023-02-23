@@ -3614,6 +3614,91 @@ echo "Net Salary of Employees in Organization is " . number_format($organization
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type IEmployee interface {
+    GetSalary() float32
+    GetRole() string
+    GetName() string
+}
+
+type Developer struct {
+    Name   string
+    Salary float32
+}
+
+func (d *Developer) GetSalary() float32 {
+    return d.Salary
+}
+
+func (d *Developer) GetRole() string {
+    return "Developer"
+}
+
+func (d *Developer) GetName() string {
+    return d.Name
+}
+
+type Designer struct {
+    Name   string
+    Salary float32
+}
+
+func (d *Designer) GetSalary() float32 {
+    return d.Salary
+}
+
+func (d *Designer) GetRole() string {
+    return "Designer"
+}
+
+func (d *Designer) GetName() string {
+    return d.Name
+}
+
+type Organization struct {
+    employees []IEmployee
+}
+
+func (o *Organization) AddEmployee(employee IEmployee) {
+    o.employees = append(o.employees, employee)
+}
+
+func (o *Organization) GetNetSalaries() float32 {
+    netSalary := float32(0)
+    for _, e := range o.employees {
+        netSalary += e.GetSalary()
+    }
+    return netSalary
+}
+
+func main() {
+    //Arrange Employees, Organization and add employees
+    developer := &Developer{Name: "John", Salary: 5000}
+    designer := &Designer{Name: "Arya", Salary: 5000}
+
+    organization := &Organization{}
+    organization.AddEmployee(developer)
+    organization.AddEmployee(designer)
+
+    fmt.Printf("Net Salary of Employees in Organization is %v\n", organization.GetNetSalaries())
+    //Output: Net Salary of Employees in Organization is 10000
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
