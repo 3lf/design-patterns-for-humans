@@ -351,6 +351,57 @@ echo "Width of Door : " . $door->getWidth() . "\n";
 
 </details>
 
+<details>
+<summary >Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type Door interface {
+	getHeight() int
+	getWidth() int
+}
+
+type WoodenDoor struct {
+	height int
+	width  int
+}
+
+func NewWoodenDoor(height, width int) *WoodenDoor {
+	return &WoodenDoor{height: height, width: width}
+}
+
+func (w *WoodenDoor) getHeight() int {
+	return w.height
+}
+
+func (w *WoodenDoor) getWidth() int {
+	return w.width
+}
+
+type DoorFactory struct{}
+
+func (df *DoorFactory) makeDoor(height, width int) Door {
+	return NewWoodenDoor(height, width)
+}
+
+func main() {
+	doorFactory := &DoorFactory{}
+	door := doorFactory.makeDoor(80, 30)
+	fmt.Printf("Height of Door : %d\n", door.getHeight())
+	fmt.Printf("Width of Door : %d\n", door.getWidth())
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -636,6 +687,73 @@ $devManager->takeInterview(); // Output: Asking about design patterns!
 
 $marketingManager = new MarketingManager();
 $marketingManager->takeInterview(); // Output: Asking about community building!
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type Interviewer interface {
+	AskQuestions()
+}
+
+type Developer struct{}
+
+func (d *Developer) AskQuestions() {
+	fmt.Println("Asking about design patterns!")
+}
+
+type CommunityExecutive struct{}
+
+func (ce *CommunityExecutive) AskQuestions() {
+	fmt.Println("Asking about community building!")
+}
+
+type HiringManager interface {
+	MakeInterviewer() Interviewer
+	TakeInterview()
+}
+
+type DevelopmentManager struct{}
+
+func (dm *DevelopmentManager) MakeInterviewer() Interviewer {
+	return &Developer{}
+}
+
+func (dm *DevelopmentManager) TakeInterview() {
+	interviewer := dm.MakeInterviewer()
+	interviewer.AskQuestions()
+}
+
+type MarketingManager struct{}
+
+func (mm *MarketingManager) MakeInterviewer() Interviewer {
+	return &CommunityExecutive{}
+}
+
+func (mm *MarketingManager) TakeInterview() {
+	interviewer := mm.MakeInterviewer()
+	interviewer.AskQuestions()
+}
+
+func main() {
+	devManager := &DevelopmentManager{}
+	devManager.TakeInterview() // Output : Asking about design patterns!
+
+	marketingManager := &MarketingManager{}
+	marketingManager.TakeInterview() // Output : Asking about community building!
+}
 
 ```
 
@@ -1094,6 +1212,102 @@ $ironDoorFittingExpert->getDescription(); // Output: I can only fit iron doors
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+type IDoor interface {
+	GetDescription()
+}
+
+type WoodenDoor struct{}
+
+func (w *WoodenDoor) GetDescription() {
+	fmt.Println("I am a wooden door")
+}
+
+type IronDoor struct{}
+
+func (i *IronDoor) GetDescription() {
+	fmt.Println("I am an iron door")
+}
+
+type IDoorFittingExpert interface {
+	GetDescription()
+}
+
+type Carpenter struct{}
+
+func (c *Carpenter) GetDescription() {
+	fmt.Println("I can only fit wooden doors")
+}
+
+type Welder struct{}
+
+func (w *Welder) GetDescription() {
+	fmt.Println("I can only fit iron doors")
+}
+
+type IDoorFactory interface {
+	MakeDoor() IDoor
+	MakeFittingExpert() IDoorFittingExpert
+}
+
+type WoodenDoorFactory struct{}
+
+func (w *WoodenDoorFactory) MakeDoor() IDoor {
+	return &WoodenDoor{}
+}
+
+func (w *WoodenDoorFactory) MakeFittingExpert() IDoorFittingExpert {
+	return &Carpenter{}
+}
+
+type IronDoorFactory struct{}
+
+func (i *IronDoorFactory) MakeDoor() IDoor {
+	return &IronDoor{}
+}
+
+func (i *IronDoorFactory) MakeFittingExpert() IDoorFittingExpert {
+	return &Welder{}
+}
+
+func main() {
+	woodenDoorFactory := &WoodenDoorFactory{}
+
+	woodenDoor := woodenDoorFactory.MakeDoor()
+	woodenDoorFittingExpert := woodenDoorFactory.MakeFittingExpert()
+
+	woodenDoor.GetDescription()           // Output: I am a wooden door
+	woodenDoorFittingExpert.GetDescription() // Output: I can only fit wooden doors
+
+	ironDoorFactory := &IronDoorFactory{}
+
+	ironDoor := ironDoorFactory.MakeDoor()
+	ironDoorFittingExpert := ironDoorFactory.MakeFittingExpert()
+
+	ironDoor.GetDescription()           // Output: I am an iron door
+	ironDoorFittingExpert.GetDescription() // Output: I can only fit iron doors
+}
+
+```
+
+</div>
+
+**همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+درب
+انتخاب نمی‌کنیم.**
+
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -1186,6 +1400,21 @@ public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
 ```PHP
 
 public function __construct(int $size, bool $cheese, bool $pepperoni, bool $lettuce, bool $tomato)
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+func Burger(size int, cheese bool, pepperoni bool, lettuce bool, tomato bool)
 
 ```
 
@@ -1515,6 +1744,93 @@ var_dump(get_object_vars($burger));
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+"fmt"
+"strings"
+)
+
+type Burger struct {
+Size int
+Cheese bool
+Pepperoni bool
+Lettuce bool
+Tomato bool
+}
+
+func NewBurger(builder *BurgerBuilder) *Burger {
+return &Burger{
+Size: builder.Size,
+Cheese: builder.Cheese,
+Pepperoni: builder.Pepperoni,
+Lettuce: builder.Lettuce,
+Tomato: builder.Tomato,
+}
+}
+
+func (b *Burger) GetDescription() string {
+var sb strings.Builder
+sb.WriteString(fmt.Sprintf("This is %d inch Burger. ", b.Size))
+return sb.String()
+}
+
+type BurgerBuilder struct {
+Size int
+Cheese bool
+Pepperoni bool
+Lettuce bool
+Tomato bool
+}
+
+func NewBurgerBuilder(size int) *BurgerBuilder {
+return &BurgerBuilder{Size: size}
+}
+
+func (b *BurgerBuilder) AddCheese() *BurgerBuilder {
+b.Cheese = true
+return b
+}
+
+func (b *BurgerBuilder) AddPepperoni() *BurgerBuilder {
+b.Pepperoni = true
+return b
+}
+
+func (b *BurgerBuilder) AddLettuce() *BurgerBuilder {
+b.Lettuce = true
+return b
+}
+
+func (b *BurgerBuilder) AddTomato() *BurgerBuilder {
+b.Tomato = true
+return b
+}
+
+func (b *BurgerBuilder) Build() *Burger {
+return NewBurger(b)
+}
+
+func main() {
+burger := NewBurgerBuilder(4).AddCheese().AddPepperoni().AddLettuce().AddTomato().Build()
+fmt.Println(burger.GetDescription())
+}
+
+
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -1828,6 +2144,104 @@ echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+)
+
+type Person interface {
+    GetName() string
+    SetName(name string)
+    Clone(deepClone bool) Person
+}
+
+type Manager struct {
+    Name string `json:"name"`
+}
+
+func NewManager(name string) *Manager {
+    return &Manager{
+        Name: name,
+    }
+}
+
+func (m *Manager) GetName() string {
+    return m.Name
+}
+
+func (m *Manager) SetName(name string) {
+    m.Name = name
+}
+
+func (m *Manager) Clone(deepClone bool) Person {
+    if deepClone {
+        objectAsJson, _ := json.Marshal(m)
+        clone := &Manager{}
+        json.Unmarshal(objectAsJson, clone)
+        return clone
+    }
+    return &Manager{
+        Name: m.Name,
+    }
+}
+
+type Employee struct {
+    Name    string   `json:"name"`
+    Manager *Manager `json:"manager"`
+}
+
+func NewEmployee(name string, manager *Manager) *Employee {
+    return &Employee{
+        Name:    name,
+        Manager: manager,
+    }
+}
+
+func (e *Employee) GetName() string {
+    return e.Name
+}
+
+func (e *Employee) SetName(name string) {
+    e.Name = name
+}
+
+func (e *Employee) Clone(deepClone bool) Person {
+    if deepClone {
+        objectAsJson, _ := json.Marshal(e)
+        clone := &Employee{}
+        json.Unmarshal(objectAsJson, clone)
+        return clone
+    }
+    return &Employee{
+        Name:    e.Name,
+        Manager: e.Manager.Clone(false).(*Manager),
+    }
+}
+
+func main() {
+    manager := NewManager("Cindey")
+    managerClone := manager.Clone(true).(*Manager)
+    fmt.Println(managerClone.GetName())
+
+    employee := NewEmployee("kevin", managerClone)
+    employeeClone := employee.Clone(true).(*Employee)
+    fmt.Println(employeeClone.GetName(), employeeClone.Manager.GetName())
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 **تفاوت Shadow Copy و Deep Copy ؟**
@@ -2021,6 +2435,36 @@ $a = President::getInstance();
 $b = President::getInstance();
 
 var_dump($a === $b); // Output: bool(true)
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+type President struct {}
+
+var instance *President
+
+func GetInstance() *President {
+  if instance == nil {
+    instance = &President{}
+  }
+  return instance
+}
+
+-----------------------
+
+a := GetInstance()
+b := GetInstance()
+fmt.Println(a == b) // Output: true
+
 
 ```
 
