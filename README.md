@@ -27,31 +27,31 @@
 <!-- TOC -->
 
 - [Creational Design Patterns](#creational-design-patterns)
-  - [🏠 Simple Factory](#-simple-factory)
-  - [🏭 Factory Method](#-factory-method)
-  - [🔨 Abstract Factory](#-abstract-factory)
-  - [👷 Builder](#-builder)
-  - [🐑 Prototype](#-prototype)
-  - [💍 Singleton](#-singleton)
+    - [🏠 Simple Factory](#-simple-factory)
+    - [🏭 Factory Method](#-factory-method)
+    - [🔨 Abstract Factory](#-abstract-factory)
+    - [👷 Builder](#-builder)
+    - [🐑 Prototype](#-prototype)
+    - [💍 Singleton](#-singleton)
 - [Structural Design Patterns](#structural-design-patterns)
-  - [🔌 Adapter](#-adapter)
-  - [🌉 Bridge](#-bridge)
-  - [🌿 Composite](#-composite)
-  - [☕ Decorator](#-decorator)
-  - [📦 Facade](#-facade)
-  - [🍃 Flyweight](#-flyweight)
-  - [🎱 Proxy](#-proxy)
+    - [🔌 Adapter](#-adapter)
+    - [🌉 Bridge](#-bridge)
+    - [🌿 Composite](#-composite)
+    - [☕ Decorator](#-decorator)
+    - [📦 Facade](#-facade)
+    - [🍃 Flyweight](#-flyweight)
+    - [🎱 Proxy](#-proxy)
 - [Behavioral Design Patterns](#behavioral-design-patterns)
-  - [🔗 Chain of Responsibility](#-chain-of-responsibility)
-  - [👮 Command](#-command)
-  - [➿ Iterator](#-iterator)
-  - [👽 Mediator](#-mediator)
-  - [💾 Memento](#-memento)
-  - [😎 Observer](#-observer)
-  - [🏃 Visitor](#-visitor)
-  - [💡 Strategy](#-strategy)
-  - [💢 State](#-state)
-  - [📒 Template Method](#-template-method)
+    - [🔗 Chain of Responsibility](#-chain-of-responsibility)
+    - [👮 Command](#-command)
+    - [➿ Iterator](#-iterator)
+    - [👽 Mediator](#-mediator)
+    - [💾 Memento](#-memento)
+    - [😎 Observer](#-observer)
+    - [🏃 Visitor](#-visitor)
+    - [💡 Strategy](#-strategy)
+    - [💢 State](#-state)
+    - [📒 Template Method](#-template-method)
 
 <!-- TOC -->
 
@@ -192,6 +192,7 @@ class DoorFactory:
     def makeDoor(width, height):
         return WoodenDoor(width, height)
 
+
 ----------------------------
 door = DoorFactory.makeDoor(10, 10)
 print(door.getHeight())
@@ -209,38 +210,42 @@ print(door.getWidth())
 
 ```typescript
 class Door {
-  getWidth(): void {}
-  getHeight(): void {}
+    getWidth(): void {
+    }
+
+    getHeight(): void {
+    }
 }
 
 class WoodenDoor extends Door {
-  width: number | null;
-  height: number | null;
+    width: number | null;
+    height: number | null;
 
-  constructor(width: number = 5, height: number = 5) {
-    super();
-    this.width = width;
-    this.height = height;
-  }
+    constructor(width: number = 5, height: number = 5) {
+        super();
+        this.width = width;
+        this.height = height;
+    }
 
-  getWidth(): number {
-    return this.width;
-  }
+    getWidth(): number {
+        return this.width;
+    }
 
-  getHeight(): number {
-    return this.height;
-  }
+    getHeight(): number {
+        return this.height;
+    }
 }
 
 class DoorFactory {
-  static makeDoor(width: number, height: number): WoodenDoor {
-    return new WoodenDoor(width, height);
-  }
+    static makeDoor(width: number, height: number): WoodenDoor {
+        return new WoodenDoor(width, height);
+    }
 }
 
 ----------------------------
 
-let door = DoorFactory.makeDoor(10, 10);
+    let
+door = DoorFactory.makeDoor(10, 10);
 console.log(door.getHeight());
 console.log(door.getWidth());
 ```
@@ -419,7 +424,6 @@ class HiringManager:
         interviewer.askQuestions()
 
 
-
 class DevelopmentManager(HiringManager):
     def makeInterviewer(self):
         return Developer()
@@ -450,42 +454,43 @@ marketingManager.takeInterview()
 
 ```typescript
 class Interviewer {
-  askQuestions(): void {}
+    askQuestions(): void {
+    }
 }
 
 class Developer extends Interviewer {
-  askQuestions(): void {
-    console.log("Asking about design patterns");
-  }
+    askQuestions(): void {
+        console.log("Asking about design patterns");
+    }
 }
 
 class CommunityExecutive extends Interviewer {
-  askQuestions(): void {
-    console.log("Asking about community building");
-  }
+    askQuestions(): void {
+        console.log("Asking about community building");
+    }
 }
 
 class HiringManager {
-  makeInterviewer(): Interviewer {
-    return null;
-  }
+    makeInterviewer(): Interviewer {
+        return null;
+    }
 
-  takeInterview(): void {
-    let interviewer = this.makeInterviewer();
-    interviewer.askQuestions();
-  }
+    takeInterview(): void {
+        let interviewer = this.makeInterviewer();
+        interviewer.askQuestions();
+    }
 }
 
 class DevelopmentManager extends HiringManager {
-  makeInterviewer(): Developer {
-    return new Developer();
-  }
+    makeInterviewer(): Developer {
+        return new Developer();
+    }
 }
 
 class MarketingManager extends HiringManager {
-  makeInterviewer(): CommunityExecutive {
-    return new CommunityExecutive();
-  }
+    makeInterviewer(): CommunityExecutive {
+        return new CommunityExecutive();
+    }
 }
 
 let devManager = new DevelopmentManager();
@@ -714,7 +719,6 @@ class IronDoor(Door):
         print('I am an iron door')
 
 
-
 class DoorFittingExpert:
     def getDescription(self):
         pass
@@ -728,7 +732,6 @@ class Welder(DoorFittingExpert):
 class Carpenter(DoorFittingExpert):
     def getDescription(self):
         print('I can only fit wooden doors')
-
 
 
 class DoorFactory:
@@ -791,70 +794,73 @@ expert.getDescription()
 
 ```typescript
 class Door {
-  getDescription(): void {}
+    getDescription(): void {
+    }
 }
 
 class WoodenDoor extends Door {
-  getDescription(): void {
-    console.log("I am a wooden door");
-  }
+    getDescription(): void {
+        console.log("I am a wooden door");
+    }
 }
 
 class IronDoor extends Door {
-  getDescription(): void {
-    console.log("I am an iron door");
-  }
+    getDescription(): void {
+        console.log("I am an iron door");
+    }
 }
 
 class DoorFittingExpert {
-  getDescription(): void {}
+    getDescription(): void {
+    }
 }
 
 class Welder extends DoorFittingExpert {
-  getDescription(): void {
-    console.log("I can only fit iron doors");
-  }
+    getDescription(): void {
+        console.log("I can only fit iron doors");
+    }
 }
 
 class Carpenter extends DoorFittingExpert {
-  getDescription(): void {
-    console.log("I can only fit wooden doors");
-  }
+    getDescription(): void {
+        console.log("I can only fit wooden doors");
+    }
 }
 
 class DoorFactory {
-  makeDoor(): Door {
-    return null;
-  }
+    makeDoor(): Door {
+        return null;
+    }
 
-  makeFittingExpert(): DoorFittingExpert {
-    return null;
-  }
+    makeFittingExpert(): DoorFittingExpert {
+        return null;
+    }
 }
 
 class WoodenDoorFactory extends DoorFactory {
-  makeDoor(): WoodenDoor {
-    return new WoodenDoor();
-  }
+    makeDoor(): WoodenDoor {
+        return new WoodenDoor();
+    }
 
-  makeFittingExpert(): Carpenter {
-    return new Carpenter();
-  }
+    makeFittingExpert(): Carpenter {
+        return new Carpenter();
+    }
 }
 
 class IronDoorFactory extends DoorFactory {
-  makeDoor(): IronDoor {
-    return new IronDoor();
-  }
+    makeDoor(): IronDoor {
+        return new IronDoor();
+    }
 
-  makeFittingExpert(): Welder {
-    return new Welder();
-  }
+    makeFittingExpert(): Welder {
+        return new Welder();
+    }
 }
 
 ----------------------------
 
-let woodenFactory = new WoodenDoorFactory();
+    let
+woodenFactory = new WoodenDoorFactory();
 
 let door = woodenFactory.makeDoor();
 let expert = woodenFactory.makeFittingExpert();
@@ -864,7 +870,8 @@ expert.getDescription();
 
 ----------------------------
 
-let ironFactory = new IronDoorFactory();
+    let
+ironFactory = new IronDoorFactory();
 
 door = ironFactory.makeDoor();
 expert = ironFactory.makeFittingExpert();
@@ -1136,7 +1143,20 @@ def __init__(self, size, cheese=True, pepperoni=True, tomato=False, lettuce=True
 <div dir="ltr">
 
 ```typescript
-constructor(size: any, cheese: boolean = true, pepperoni: boolean = true, tomato: boolean = false, lettuce: boolean = true) {}
+constructor(size
+:
+any, cheese
+:
+boolean = true, pepperoni
+:
+boolean = true, tomato
+:
+boolean = false, lettuce
+:
+boolean = true
+)
+{
+}
 
 ```
 
@@ -1218,7 +1238,6 @@ class Burger:
         self._tomato = builder.tomato
 
 
-
 class BurgerBuilder:
     size = None
 
@@ -1267,66 +1286,67 @@ print(vars(burger))
 
 ```typescript
 class Burger {
-  private size: any;
+    private size: any;
 
-  private cheese: boolean = false;
-  private pepperoni: boolean = false;
-  private lettuce: boolean = false;
-  private tomato: boolean = false;
+    private cheese: boolean = false;
+    private pepperoni: boolean = false;
+    private lettuce: boolean = false;
+    private tomato: boolean = false;
 
-  constructor(builder: any) {
-    this.size = builder.size;
-    this.cheese = builder.cheese;
-    this.pepperoni = builder.pepperoni;
-    this.lettuce = builder.lettuce;
-    this.tomato = builder.tomato;
-  }
+    constructor(builder: any) {
+        this.size = builder.size;
+        this.cheese = builder.cheese;
+        this.pepperoni = builder.pepperoni;
+        this.lettuce = builder.lettuce;
+        this.tomato = builder.tomato;
+    }
 }
 
 class BurgerBuilder {
-  size: number;
+    size: number;
 
-  cheese: boolean = false;
-  pepperoni: boolean = false;
-  lettuce: boolean = false;
-  tomato: boolean = false;
+    cheese: boolean = false;
+    pepperoni: boolean = false;
+    lettuce: boolean = false;
+    tomato: boolean = false;
 
-  constructor(size: number) {
-    this.size = size;
-  }
+    constructor(size: number) {
+        this.size = size;
+    }
 
-  addPepperoni() {
-    this.pepperoni = true;
-    return this;
-  }
+    addPepperoni() {
+        this.pepperoni = true;
+        return this;
+    }
 
-  addLettuce() {
-    this.lettuce = true;
-    return this;
-  }
+    addLettuce() {
+        this.lettuce = true;
+        return this;
+    }
 
-  addCheese() {
-    this.cheese = true;
-    return this;
-  }
+    addCheese() {
+        this.cheese = true;
+        return this;
+    }
 
-  addTomato() {
-    this.tomato = true;
-    return this;
-  }
+    addTomato() {
+        this.tomato = true;
+        return this;
+    }
 
-  build(): Burger {
-    return new Burger(this);
-  }
+    build(): Burger {
+        return new Burger(this);
+    }
 }
 
 ----------------------------
 
-let burger = new BurgerBuilder(10)
-  .addPepperoni()
-  .addLettuce()
-  .addTomato()
-  .build();
+    let
+burger = new BurgerBuilder(10)
+    .addPepperoni()
+    .addLettuce()
+    .addTomato()
+    .build();
 
 console.log(Object.keys(burger));
 ```
@@ -1515,7 +1535,8 @@ var_dump(get_object_vars($burger));
 یک مثال از دنیای واقعی:
 
 > چیزی درمورد دالی شنیدین
-> ؟ ([اگه نه اینجارو بخونید](<https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%84%DB%8C_(%DA%AF%D9%88%D8%B3%D9%81%D9%86%D8%AF)>))
+>
+؟ ([اگه نه اینجارو بخونید](<https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%84%DB%8C_(%DA%AF%D9%88%D8%B3%D9%81%D9%86%D8%AF)>))
 >
 > خیلی اینجا توضیح نمیدم، فقط بدونید همه‌چیز مربوط به شبیه سازیه!
 
@@ -1566,7 +1587,6 @@ class SomeComponent:
         new.__dict__.update(self.__dict__)
         return new
 
-
     def __deepcopy__(self, memo={}):
         some_list_of_objects = copy.deepcopy(self.some_list_of_objects, memo)
         some_circular_ref = copy.deepcopy(self.some_circular_ref, memo)
@@ -1588,35 +1608,35 @@ class SomeComponent:
 
 ```typescript
 class SomeComponent {
-  someInt: number;
-  someListOfObjects: any[];
-  someCircularRef: any;
+    someInt: number;
+    someListOfObjects: any[];
+    someCircularRef: any;
 
-  constructor(someInt: number, someListOfObjects: any[], someCircularRef: any) {
-    this.someInt = someInt;
-    this.someListOfObjects = someListOfObjects;
-    this.someCircularRef = someCircularRef;
-  }
+    constructor(someInt: number, someListOfObjects: any[], someCircularRef: any) {
+        this.someInt = someInt;
+        this.someListOfObjects = someListOfObjects;
+        this.someCircularRef = someCircularRef;
+    }
 
-  copy() {
-    let some_list_of_objects = Object.assign([], this.some_list_of_objects);
-    let some_circular_ref = Object.assign({}, this.some_circular_ref);
-    let new = new this.constructor(
-    this.some_int, some_list_of_objects, some_circular_ref
-    );
-    Object.assign(new, this);
-    return new;
-  }
+    copy() {
+        let some_list_of_objects = Object.assign([], this.some_list_of_objects);
+        let some_circular_ref = Object.assign({}, this.some_circular_ref);
+        let new = new this.constructor(
+            this.some_int, some_list_of_objects, some_circular_ref
+        );
+        Object.assign(new, this);
+        return new;
+    }
 
-  deepcopy(memo: object = {}) {
-    let some_list_of_objects = JSON.parse(JSON.stringify(this.some_list_of_objects));
-    let some_circular_ref = JSON.parse(JSON.stringify(this.some_circular_ref));
-    let new = new this.constructor(
-    this.some_int, some_list_of_objects, some_circular_ref
-    );
-    new = JSON.parse(JSON.stringify(this));
-    return new;
-  }
+    deepcopy(memo: object = {}) {
+        let some_list_of_objects = JSON.parse(JSON.stringify(this.some_list_of_objects));
+        let some_circular_ref = JSON.parse(JSON.stringify(this.some_circular_ref));
+        let new = new this.constructor(
+            this.some_int, some_list_of_objects, some_circular_ref
+        );
+        new = JSON.parse(JSON.stringify(this));
+        return new;
+    }
 }
 ```
 
@@ -1680,11 +1700,10 @@ Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
 
 <br>
 
-برای deepCopy میتونیم از  json Deserialize استفاده کنیم :
+برای deepCopy میتونیم از json Deserialize استفاده کنیم :
 
 
 <div dir="ltr">
-
 
 ```C#
 
@@ -1746,7 +1765,6 @@ var managerClone = (Manager)manager.Clone(true);
 var employee = new Employee("kevin", managerClone);
 var employeeClone = (Employee)employee.Clone(true);
 ```
-
 
 </div>
 
@@ -1902,22 +1920,22 @@ if __name__ == "__main__":
 
 ```typescript
 class SingletonMeta extends Function {
-  static _instances: { [key: string]: any } = {};
+    static _instances: { [key: string]: any } = {};
 
-  constructor(...args: any[]) {
-    const instance = super(...args);
-    const className = this.constructor.name;
-    if (!SingletonMeta._instances[className]) {
-      SingletonMeta._instances[className] = instance;
+    constructor(...args: any[]) {
+        const instance = super(...args);
+        const className = this.constructor.name;
+        if (!SingletonMeta._instances[className]) {
+            SingletonMeta._instances[className] = instance;
+        }
+        return SingletonMeta._instances[className];
     }
-    return SingletonMeta._instances[className];
-  }
 }
 
 class Singleton extends SingletonMeta {
-  someBusinessLogic() {
-    // implementation
-  }
+    someBusinessLogic() {
+        // implementation
+    }
 }
 
 ----------------------------
@@ -1925,9 +1943,9 @@ class Singleton extends SingletonMeta {
 const s1 = Singleton.getInstance();
 const s2 = Singleton.getInstance();
 if (Object.is(s1, s2)) {
-  console.log("Singleton works, both variables contain the same instance.");
+    console.log("Singleton works, both variables contain the same instance.");
 } else {
-  console.log("Singleton failed, variables contain different instances.");
+    console.log("Singleton failed, variables contain different instances.");
 }
 ```
 
@@ -2148,37 +2166,41 @@ hunter.hunt(wildDogAdapter)
 
 ```typescript
 class Lion {
-  roar(): void {}
+    roar(): void {
+    }
 }
 
 class AfricanLion extends Lion {
-  roar(): void {}
+    roar(): void {
+    }
 }
 
 class AsianLion extends Lion {
-  roar(): void {}
+    roar(): void {
+    }
 }
 
 class Hunter {
-  hunt(lion: Lion): void {
-    lion.roar();
-  }
+    hunt(lion: Lion): void {
+        lion.roar();
+    }
 }
 
 class WildDog {
-  static bark(): void {}
+    static bark(): void {
+    }
 }
 
 class WildDogAdapter implements Lion {
-  private dog: WildDog;
+    private dog: WildDog;
 
-  constructor(dog: WildDog) {
-    this.dog = dog;
-  }
+    constructor(dog: WildDog) {
+        this.dog = dog;
+    }
 
-  roar(): void {
-    this.dog.bark();
-  }
+    roar(): void {
+        this.dog.bark();
+    }
 }
 
 ----------------------------
@@ -2437,51 +2459,51 @@ print(careers.getContent())
 
 ```typescript
 class WebPage {
-  protected _theme: any;
+    protected _theme: any;
 
-  constructor(theme: any) {
-    this._theme = theme;
-  }
+    constructor(theme: any) {
+        this._theme = theme;
+    }
 
-  getContent(): string {
-    return "";
-  }
+    getContent(): string {
+        return "";
+    }
 }
 
 class About extends WebPage {
-  getContent(): string {
-    return "About page in " + this._theme.getColor();
-  }
+    getContent(): string {
+        return "About page in " + this._theme.getColor();
+    }
 }
 
 class Careers extends WebPage {
-  getContent(): string {
-    return "Careers page in " + this._theme.getColor();
-  }
+    getContent(): string {
+        return "Careers page in " + this._theme.getColor();
+    }
 }
 
 class Theme {
-  getColor(): string {
-    return "";
-  }
+    getColor(): string {
+        return "";
+    }
 }
 
 class DarkTheme extends Theme {
-  getColor(): string {
-    return "Dark Black";
-  }
+    getColor(): string {
+        return "Dark Black";
+    }
 }
 
 class LightTheme extends Theme {
-  getColor(): string {
-    return "Off White";
-  }
+    getColor(): string {
+        return "Off White";
+    }
 }
 
 class AquaTheme extends Theme {
-  getColor(): string {
-    return "Light Blue";
-  }
+    getColor(): string {
+        return "Light Blue";
+    }
 }
 
 ----------------------------
@@ -2779,36 +2801,38 @@ print(f"RESULT: {tree.operation()}", end="")
 
 ```typescript
 interface Component {
-  add(component: Component): void;
-  remove(component: Component): void;
-  operation(): string;
+    add(component: Component): void;
+
+    remove(component: Component): void;
+
+    operation(): string;
 }
 
 class Leaf implements Component {
-  operation(): string {
-    return "Leaf";
-  }
+    operation(): string {
+        return "Leaf";
+    }
 }
 
 class Composite implements Component {
-  private children: Component[] = [];
+    private children: Component[] = [];
 
-  add(component: Component): void {
-    this.children.push(component);
-  }
-
-  remove(component: Component): void {
-    const index = this.children.indexOf(component);
-    this.children.splice(index, 1);
-  }
-
-  operation(): string {
-    const results: string[] = [];
-    for (const child of this.children) {
-      results.push(child.operation());
+    add(component: Component): void {
+        this.children.push(component);
     }
-    return `Branch(${results.join("+")})`;
-  }
+
+    remove(component: Component): void {
+        const index = this.children.indexOf(component);
+        this.children.splice(index, 1);
+    }
+
+    operation(): string {
+        const results: string[] = [];
+        for (const child of this.children) {
+            results.push(child.operation());
+        }
+        return `Branch(${results.join("+")})`;
+    }
 }
 
 ----------------------------
@@ -3082,7 +3106,8 @@ echo "Net Salary of Employees in Organization is " . number_format($organization
 
 پس بیاید چند دکوریتور براش بسازیم.
 
-همونطور که میبینید خیلی ساده میتونیم هر ابجکت رو به عنوان ورودی تابع بعدی بدیم و اینطوری چندین مرحله افزودنی رو خیلی راحت به ابجکتمون اضافه کردیم!
+همونطور که میبینید خیلی ساده میتونیم هر ابجکت رو به عنوان ورودی تابع بعدی بدیم و اینطوری چندین مرحله افزودنی رو خیلی
+راحت به ابجکتمون اضافه کردیم!
 
 <details>
 <summary>Python</summary>
@@ -3104,7 +3129,6 @@ class SimpleCoffee(Coffee):
 
     def getDescription(self):
         return 'Simple Coffee'
-
 
 
 class MilkCoffee(Coffee):
@@ -3145,6 +3169,7 @@ class VanillaCoffee(Coffee):
     def getDescription(self):
         return self._coffee.getDescription() + ', vanilla'
 
+
 ----------------------------
 
 someCoffee = SimpleCoffee()
@@ -3174,75 +3199,80 @@ print(someCoffee.getDescription())
 
 ```typescript
 class Coffee {
-  getCost(): number {
-    return;
-  }
-  getDescription(): string {
-    return;
-  }
+    getCost(): number {
+        return;
+    }
+
+    getDescription(): string {
+        return;
+    }
 }
 
 class SimpleCoffee extends Coffee {
-  getCost(): number {
-    return 10;
-  }
-  getDescription(): string {
-    return "Simple Coffee";
-  }
+    getCost(): number {
+        return 10;
+    }
+
+    getDescription(): string {
+        return "Simple Coffee";
+    }
 }
 
 class MilkCoffee extends Coffee {
-  private coffee: Coffee;
+    private coffee: Coffee;
 
-  constructor(coffee: Coffee) {
-    super();
-    this.coffee = coffee;
-  }
+    constructor(coffee: Coffee) {
+        super();
+        this.coffee = coffee;
+    }
 
-  getCost(): number {
-    return this.coffee.getCost() + 2;
-  }
+    getCost(): number {
+        return this.coffee.getCost() + 2;
+    }
 
-  getDescription(): string {
-    return this.coffee.getDescription() + ", milk";
-  }
+    getDescription(): string {
+        return this.coffee.getDescription() + ", milk";
+    }
 }
 
 class WhipCoffee extends Coffee {
-  private coffee: Coffee;
-  constructor(coffee: Coffee) {
-    super();
-    this.coffee = coffee;
-  }
+    private coffee: Coffee;
 
-  getCost(): number {
-    return this.coffee.getCost() + 5;
-  }
+    constructor(coffee: Coffee) {
+        super();
+        this.coffee = coffee;
+    }
 
-  getDescription(): string {
-    return this.coffee.getDescription() + ", whip";
-  }
+    getCost(): number {
+        return this.coffee.getCost() + 5;
+    }
+
+    getDescription(): string {
+        return this.coffee.getDescription() + ", whip";
+    }
 }
 
 class VanillaCoffee extends Coffee {
-  private coffee: Coffee;
-  constructor(coffee: Coffee) {
-    super();
-    this.coffee = coffee;
-  }
+    private coffee: Coffee;
 
-  getCost(): number {
-    return this.coffee.getCost() + 3;
-  }
+    constructor(coffee: Coffee) {
+        super();
+        this.coffee = coffee;
+    }
 
-  getDescription(): string {
-    return this.coffee.getDescription() + ", vanilla";
-  }
+    getCost(): number {
+        return this.coffee.getCost() + 3;
+    }
+
+    getDescription(): string {
+        return this.coffee.getDescription() + ", vanilla";
+    }
 }
 
 ----------------------------
 
-let someCoffee = new SimpleCoffee();
+    let
+someCoffee = new SimpleCoffee();
 console.log(someCoffee.getCost());
 console.log(someCoffee.getDescription());
 
@@ -3546,6 +3576,7 @@ class ComputerFacade:
         self.computer.pullCurrent()
         self.computer.sooth()
 
+
 ----------------------------
 
 computer = ComputerFacade(Computer())
@@ -3565,61 +3596,64 @@ computer.turnOff()
 
 ```typescript
 class Computer {
-  getElectricShock() {
-    console.log("Ouch!");
-  }
-  makeSound() {
-    console.log("Beep Beep!");
-  }
+    getElectricShock() {
+        console.log("Ouch!");
+    }
 
-  showLoadingScreen() {
-    console.log("Loading...");
-  }
+    makeSound() {
+        console.log("Beep Beep!");
+    }
 
-  bam() {
-    console.log("Ready to be used...");
-  }
+    showLoadingScreen() {
+        console.log("Loading...");
+    }
 
-  closeEverything() {
-    console.log("Bup bup bup buzzz!");
-  }
+    bam() {
+        console.log("Ready to be used...");
+    }
 
-  sooth() {
-    console.log("Zzzzz");
-  }
+    closeEverything() {
+        console.log("Bup bup bup buzzz!");
+    }
 
-  pullCurrent() {
-    console.log("Haaah!");
-  }
+    sooth() {
+        console.log("Zzzzz");
+    }
+
+    pullCurrent() {
+        console.log("Haaah!");
+    }
 }
 
 class ComputerFacade {
-  private computer: Computer;
-  constructor(computer: Computer) {
-    this.computer = computer;
-  }
+    private computer: Computer;
 
-  set computer(computer: Computer) {
-    this.computer = computer;
-  }
+    constructor(computer: Computer) {
+        this.computer = computer;
+    }
 
-  turnOn() {
-    this.computer.getElectricShock();
-    this.computer.makeSound();
-    this.computer.showLoadingScreen();
-    this.computer.bam();
-  }
+    set computer(computer: Computer) {
+        this.computer = computer;
+    }
 
-  turnOff() {
-    this.computer.closeEverything();
-    this.computer.pullCurrent();
-    this.computer.sooth();
-  }
+    turnOn() {
+        this.computer.getElectricShock();
+        this.computer.makeSound();
+        this.computer.showLoadingScreen();
+        this.computer.bam();
+    }
+
+    turnOff() {
+        this.computer.closeEverything();
+        this.computer.pullCurrent();
+        this.computer.sooth();
+    }
 }
 
 ----------------------------
 
-let computer = new ComputerFacade(new Computer());
+    let
+computer = new ComputerFacade(new Computer());
 computer.turnOn();
 computer.turnOff();
 ```
@@ -3862,6 +3896,7 @@ class TeaShop:
         for table, tea in self._orders.iteritems():
             print("Serving tea to table #" + str(table))
 
+
 ----------------------------
 
 teaMaker = TeaMaker()
@@ -3886,41 +3921,45 @@ shop.serve()
 <div dir="ltr">
 
 ```typescript
-class GreenTea {}
+class GreenTea {
+}
 
 class TeaMaker {
-  private availableTea: { [key: string]: GreenTea } = {};
-  make(preference: string): GreenTea {
-    if (!(preference in this.availableTea)) {
-      this.availableTea[preference] = new GreenTea();
-    }
+    private availableTea: { [key: string]: GreenTea } = {};
 
-    return this.availableTea[preference];
-  }
+    make(preference: string): GreenTea {
+        if (!(preference in this.availableTea)) {
+            this.availableTea[preference] = new GreenTea();
+        }
+
+        return this.availableTea[preference];
+    }
 }
 
 class TeaShop {
-  private orders: { [key: number]: GreenTea } = {};
-  private teaMaker: TeaMaker;
-  constructor(teaMaker: TeaMaker) {
-    this.teaMaker = teaMaker;
-  }
+    private orders: { [key: number]: GreenTea } = {};
+    private teaMaker: TeaMaker;
 
-  takeOrder(teaType: string, table: number) {
-    this.orders[table] = this.teaMaker.make(teaType);
-  }
-
-  serve() {
-    for (const table in this.orders) {
-      const tea = this.orders[table];
-      console.log(`Serving tea to table #${table}`);
+    constructor(teaMaker: TeaMaker) {
+        this.teaMaker = teaMaker;
     }
-  }
+
+    takeOrder(teaType: string, table: number) {
+        this.orders[table] = this.teaMaker.make(teaType);
+    }
+
+    serve() {
+        for (const table in this.orders) {
+            const tea = this.orders[table];
+            console.log(`Serving tea to table #${table}`);
+        }
+    }
 }
 
 ----------------------------
 
-let teaMaker = new TeaMaker();
+    let
+teaMaker = new TeaMaker();
 let shop = new TeaShop(teaMaker);
 
 shop.takeOrder("less sugar", 1);
@@ -4154,6 +4193,7 @@ class SecuredDoor():
     def close(self):
         self.door.close()
 
+
 ----------------------------
 
 door = SecuredDoor(LabDoor())
@@ -4173,40 +4213,45 @@ door.close()  # Closing Lab Door
 
 ```typescript
 class Door {
-  open(): void {}
-  close(): void {}
+    open(): void {
+    }
+
+    close(): void {
+    }
 }
 
 class LabDoor extends Door {
-  open(): void {
-    console.log("Opening lab door");
-  }
-  close(): void {
-    console.log("Closing the lab door");
-  }
+    open(): void {
+        console.log("Opening lab door");
+    }
+
+    close(): void {
+        console.log("Closing the lab door");
+    }
 }
 
 class SecuredDoor {
-  private door: Door;
-  constructor(door: Door) {
-    this.door = door;
-  }
+    private door: Door;
 
-  open(password: string): void {
-    if (this.authenticate(password)) {
-      this.door.open();
-    } else {
-      console.log("Big no! It ain't possible.");
+    constructor(door: Door) {
+        this.door = door;
     }
-  }
 
-  authenticate(password: string): boolean {
-    return password === "$ecr@t";
-  }
+    open(password: string): void {
+        if (this.authenticate(password)) {
+            this.door.open();
+        } else {
+            console.log("Big no! It ain't possible.");
+        }
+    }
 
-  close(): void {
-    this.door.close();
-  }
+    authenticate(password: string): boolean {
+        return password === "$ecr@t";
+    }
+
+    close(): void {
+        this.door.close();
+    }
 }
 
 ----------------------------
@@ -4515,7 +4560,9 @@ class Account {
     pay(amountToPay: number): void {
         const myCaller = (new Error().stack as string).split("at ")[2].split(" ")[0];
         if (this.canPay(amountToPay)) {
-            console.log(‍‍`Paid ${amountToPay} using ${myCaller}`);
+            console.log(‍‍`Paid ${amountToPay} using ${myCaller}`
+        )
+            ;
         } else if (this._successor) {
             console.log(`Cannot pay using ${myCaller}. Proceeding ..`);
             this._successor.pay(amountToPay);
@@ -4567,13 +4614,26 @@ paypal.setNext(bitcoin);
 
 bank.pay(259);
 
-'''
-Output will be
-==============
-Cannot pay using bank. Proceeding ..
-Cannot pay using paypal. Proceeding ..:
-Paid 259 using Bitcoin!
-'''
+''
+'
+Output
+will
+be
+=== === === === ==
+Cannot
+pay
+using
+bank.Proceeding..Cannot
+pay
+using
+paypal.Proceeding..
+:
+Paid
+259
+using
+Bitcoin!
+''
+'
 ```
 
 </div>
@@ -4811,6 +4871,7 @@ class Bulb:
     def turnOff(self):
         print("Darkness!")
 
+
 class Command:
     _bulb = None
 
@@ -4859,41 +4920,42 @@ remote.submit(turnOff)  # Darkness!
 
 ```typescript
 class Bulb {
-  turnOn() {
-    console.log("Bulb has been lit");
-  }
+    turnOn() {
+        console.log("Bulb has been lit");
+    }
 
-  turnOff() {
-    console.log("Darkness!");
-  }
+    turnOff() {
+        console.log("Darkness!");
+    }
 }
 
 class Command {
-  protected _bulb: Bulb | null = null;
+    protected _bulb: Bulb | null = null;
 
-  constructor(bulb: Bulb) {
-    this._bulb = bulb;
-  }
+    constructor(bulb: Bulb) {
+        this._bulb = bulb;
+    }
 
-  execute(): void {}
+    execute(): void {
+    }
 }
 
 class TurnOn extends Command {
-  execute() {
-    this._bulb!.turnOn();
-  }
+    execute() {
+        this._bulb!.turnOn();
+    }
 }
 
 class TurnOff extends Command {
-  execute() {
-    this._bulb!.turnOff();
-  }
+    execute() {
+        this._bulb!.turnOff();
+    }
 }
 
 class RemoteControl {
-  submit(command: { execute: () => void }) {
-    command.execute();
-  }
+    submit(command: { execute: () => void }) {
+        command.execute();
+    }
 }
 
 ----------------------------
@@ -5228,45 +5290,45 @@ if __name__ == "__main__":
 
 ```typescript
 interface Iterator<T> {
-  next(): { value: T; done: boolean };
+    next(): { value: T; done: boolean };
 }
 
 class AlphabeticalOrderIterator implements Iterator<string> {
-  private position: number;
+    private position: number;
 
-  constructor(private collection: WordsCollection, private reverse = false) {
-    this.position = this.reverse ? -1 : 0;
-  }
-
-  next() {
-    try {
-      const value = this.collection.collection[this.position];
-      this.position += this.reverse ? -1 : 1;
-      return { value, done: false };
-    } catch (error) {
-      return { value: undefined, done: true };
+    constructor(private collection: WordsCollection, private reverse = false) {
+        this.position = this.reverse ? -1 : 0;
     }
-  }
+
+    next() {
+        try {
+            const value = this.collection.collection[this.position];
+            this.position += this.reverse ? -1 : 1;
+            return {value, done: false};
+        } catch (error) {
+            return {value: undefined, done: true};
+        }
+    }
 }
 
 class WordsCollection {
-  collection: string[];
+    collection: string[];
 
-  constructor(collection: string[] = []) {
-    this.collection = collection;
-  }
+    constructor(collection: string[] = []) {
+        this.collection = collection;
+    }
 
-  [Symbol.iterator]() {
-    return new AlphabeticalOrderIterator(this);
-  }
+    [Symbol.iterator]() {
+        return new AlphabeticalOrderIterator(this);
+    }
 
-  getReverseIterator() {
-    return new AlphabeticalOrderIterator(this, true);
-  }
+    getReverseIterator() {
+        return new AlphabeticalOrderIterator(this, true);
+    }
 
-  addItem(item: string) {
-    this.collection.push(item);
-  }
+    addItem(item: string) {
+        this.collection.push(item);
+    }
 }
 
 ----------------------------
@@ -5278,12 +5340,12 @@ collection.addItem("Third");
 
 console.log("Straight traversal:");
 for (const item of collection) {
-  console.log(item);
+    console.log(item);
 }
 
 console.log("\nReverse traversal:");
 for (const item of collection.getReverseIterator()) {
-  console.log(item);
+    console.log(item);
 }
 ```
 
@@ -5526,8 +5588,8 @@ class User:
     def send(self, message):
         self._chatMediator.showMessage(self, message)
 
-----------------------------
 
+----------------------------
 
 mediator = ChatRoom()
 
@@ -5552,34 +5614,35 @@ jane.send('Hey!')
 
 ```typescript
 class ChatRoomMediator {
-  showMessage(user: User, message: string): void {}
+    showMessage(user: User, message: string): void {
+    }
 }
 
 class ChatRoom extends ChatRoomMediator {
-  showMessage(user: User, message: string): void {
-    let time = new Date();
-    let sender = user.getName();
+    showMessage(user: User, message: string): void {
+        let time = new Date();
+        let sender = user.getName();
 
-    console.log(`${time.toLocaleString()} [${sender}]: ${message}`);
-  }
+        console.log(`${time.toLocaleString()} [${sender}]: ${message}`);
+    }
 }
 
 class User {
-  private name: string;
-  private chatMediator: ChatRoomMediator;
+    private name: string;
+    private chatMediator: ChatRoomMediator;
 
-  constructor(name: string, chatMediator: ChatRoomMediator) {
-    this.name = name;
-    this.chatMediator = chatMediator;
-  }
+    constructor(name: string, chatMediator: ChatRoomMediator) {
+        this.name = name;
+        this.chatMediator = chatMediator;
+    }
 
-  getName(): string {
-    return this.name;
-  }
+    getName(): string {
+        return this.name;
+    }
 
-  send(message: string): void {
-    this.chatMediator.showMessage(this, message);
-  }
+    send(message: string): void {
+        this.chatMediator.showMessage(this, message);
+    }
 }
 
 ----------------------------
@@ -5789,6 +5852,7 @@ class Editor:
     def restore(self, memento):
         self.content = memento.getContent()
 
+
 ----------------------------
 
 editor = Editor()
@@ -5815,34 +5879,35 @@ print(editor.getContent())  ## This is the first sentence. This is second.
 
 ```typescript
 class EditorMemento {
-  private content: string | null = null;
-  constructor(content: string) {
-    this.content = content;
-  }
+    private content: string | null = null;
 
-  getContent(): string {
-    return this.content;
-  }
+    constructor(content: string) {
+        this.content = content;
+    }
+
+    getContent(): string {
+        return this.content;
+    }
 }
 
 class Editor {
-  private content = "";
+    private content = "";
 
-  type(words: string): void {
-    this.content = this.content + " " + words;
-  }
+    type(words: string): void {
+        this.content = this.content + " " + words;
+    }
 
-  getContent(): string {
-    return this.content;
-  }
+    getContent(): string {
+        return this.content;
+    }
 
-  save(): EditorMemento {
-    return new EditorMemento(this.content);
-  }
+    save(): EditorMemento {
+        return new EditorMemento(this.content);
+    }
 
-  restore(memento: EditorMemento): void {
-    this.content = memento.getContent();
-  }
+    restore(memento: EditorMemento): void {
+        this.content = memento.getContent();
+    }
 }
 
 ----------------------------
@@ -6133,41 +6198,45 @@ jobPostings.addJob(JobPost('Software Engineer at XXX'))
 
 ```typescript
 class JobPost {
-  private title: string | null = null;
-  constructor(title: string) {
-    this.title = title;
-  }
+    private title: string | null = null;
 
-  getTitle(): string {
-    return this.title;
-  }
+    constructor(title: string) {
+        this.title = title;
+    }
+
+    getTitle(): string {
+        return this.title;
+    }
 }
-class JobSeeker {
-  private name: string | null = null;
-  constructor(name: string) {
-    this.name = name;
-  }
 
-  onJobPosted(job: JobPost): void {
-    console.log(`Hi ${this.name}! New job posted: ${job.getTitle()}`);
-  }
+class JobSeeker {
+    private name: string | null = null;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    onJobPosted(job: JobPost): void {
+        console.log(`Hi ${this.name}! New job posted: ${job.getTitle()}`);
+    }
 }
 
 class JobCategory {
-  private observers: JobSeeker[] = [];
-  notify(jobPosting: JobPost): void {
-    for (const observer of this.observers) {
-      observer.onJobPosted(jobPosting);
+    private observers: JobSeeker[] = [];
+
+    notify(jobPosting: JobPost): void {
+        for (const observer of this.observers) {
+            observer.onJobPosted(jobPosting);
+        }
     }
-  }
 
-  attach(observer: JobSeeker): void {
-    this.observers.push(observer);
-  }
+    attach(observer: JobSeeker): void {
+        this.observers.push(observer);
+    }
 
-  addJob(jobPosting: JobPost): void {
-    this.notify(jobPosting);
-  }
+    addJob(jobPosting: JobPost): void {
+        this.notify(jobPosting);
+    }
 }
 
 ----------------------------
@@ -6565,54 +6634,59 @@ dolphin.accept(jump)  # Walked on water a little and disappeared
 
 ```typescript
 interface AnimalOperation {
-  visitMonkey(monkey: Monkey): void;
-  visitLion(lion: Lion): void;
-  visitDolphin(dolphin: Dolphin): void;
+    visitMonkey(monkey: Monkey): void;
+
+    visitLion(lion: Lion): void;
+
+    visitDolphin(dolphin: Dolphin): void;
 }
 
 interface Animal {
-  accept(operation: AnimalOperation): void;
+    accept(operation: AnimalOperation): void;
 }
 
 class Monkey implements Animal {
-  shout() {
-    console.log("Ooh oo aa aa!");
-  }
-  accept(operation: AnimalOperation): void {
-    operation.visitMonkey(this);
-  }
+    shout() {
+        console.log("Ooh oo aa aa!");
+    }
+
+    accept(operation: AnimalOperation): void {
+        operation.visitMonkey(this);
+    }
 }
 
 class Lion implements Animal {
-  roar() {
-    console.log("Roaaar!");
-  }
-  accept(operation: AnimalOperation): void {
-    operation.visitLion(this);
-  }
+    roar() {
+        console.log("Roaaar!");
+    }
+
+    accept(operation: AnimalOperation): void {
+        operation.visitLion(this);
+    }
 }
 
 class Dolphin implements Animal {
-  speak() {
-    console.log("Tuut tuttu tuutt!");
-  }
-  accept(operation: AnimalOperation): void {
-    operation.visitDolphin(this);
-  }
+    speak() {
+        console.log("Tuut tuttu tuutt!");
+    }
+
+    accept(operation: AnimalOperation): void {
+        operation.visitDolphin(this);
+    }
 }
 
 class Speak extends AnimalOperation {
-  visitMonkey(monkey: Monkey) {
-    monkey.shout();
-  }
+    visitMonkey(monkey: Monkey) {
+        monkey.shout();
+    }
 
-  visitLion(lion: Lion) {
-    lion.roar();
-  }
+    visitLion(lion: Lion) {
+        lion.roar();
+    }
 
-  visitDolphin(dolphin: Dolphin) {
-    dolphin.speak();
-  }
+    visitDolphin(dolphin: Dolphin) {
+        dolphin.speak();
+    }
 }
 
 const monkey = new Monkey();
@@ -6625,17 +6699,17 @@ lion.accept(speak); // Roaaar!
 dolphin.accept(speak); //Tuut tutt tuttt!
 
 class Jump implements AnimalOperation {
-  visitMonkey(monkey: Monkey): void {
-    console.log("Jumped 20 feet high! on to the tree!");
-  }
+    visitMonkey(monkey: Monkey): void {
+        console.log("Jumped 20 feet high! on to the tree!");
+    }
 
-  visitLion(lion: Lion): void {
-    console.log("Jumped 7 feet! back on the ground!");
-  }
+    visitLion(lion: Lion): void {
+        console.log("Jumped 7 feet! back on the ground!");
+    }
 
-  visitDolphin(dolphin: Dolphin): void {
-    console.log("Walked on water a little and disappeared");
-  }
+    visitDolphin(dolphin: Dolphin): void {
+        console.log("Walked on water a little and disappeared");
+    }
 }
 
 const jump = new Jump();
@@ -6998,33 +7072,33 @@ sorter.sort(dataset)
 
 ```typescript
 interface SortStrategy {
-  sort(dataset: any[]): any[];
+    sort(dataset: any[]): any[];
 }
 
 class BubbleSortStrategy implements SortStrategy {
-  sort(dataset: any[]): any[] {
-    console.log("Sorting using bubble sort");
-    return dataset;
-  }
+    sort(dataset: any[]): any[] {
+        console.log("Sorting using bubble sort");
+        return dataset;
+    }
 }
 
 class QuickSortStrategy implements SortStrategy {
-  sort(dataset: any[]): any[] {
-    console.log("Sorting using quick sort");
-    return dataset;
-  }
+    sort(dataset: any[]): any[] {
+        console.log("Sorting using quick sort");
+        return dataset;
+    }
 }
 
 class Sorter {
-  private sorter: SortStrategy;
+    private sorter: SortStrategy;
 
-  constructor(sorter: SortStrategy) {
-    this.sorter = sorter;
-  }
+    constructor(sorter: SortStrategy) {
+        this.sorter = sorter;
+    }
 
-  sort(dataset: any[]): any[] {
-    return this.sorter.sort(dataset);
-  }
+    sort(dataset: any[]): any[] {
+        return this.sorter.sort(dataset);
+    }
 }
 
 ----------------------------
@@ -7222,6 +7296,7 @@ class DefaultText(WritingState):
     def write(self, words):
         print(words)
 
+
 class TextEditor():
     _state = None
 
@@ -7264,41 +7339,41 @@ editor.type('Fifth Line')  # fifth line
 
 ```typescript
 interface WritingState {
-  write(words: string): void;
+    write(words: string): void;
 }
 
 class UpperCase implements WritingState {
-  write(words: string): void {
-    console.log(words.toUpperCase());
-  }
+    write(words: string): void {
+        console.log(words.toUpperCase());
+    }
 }
 
 class LowerCase implements WritingState {
-  write(words: string): void {
-    console.log(words.toLowerCase());
-  }
+    write(words: string): void {
+        console.log(words.toLowerCase());
+    }
 }
 
 class DefaultText implements WritingState {
-  write(words: string): void {
-    console.log(words);
-  }
+    write(words: string): void {
+        console.log(words);
+    }
 }
 
 class TextEditor {
-  private state: WritingState;
+    private state: WritingState;
 
-  constructor(state: WritingState) {
-    this.state = state;
-  }
+    constructor(state: WritingState) {
+        this.state = state;
+    }
 
-  setState(state: WritingState) {
-    this.state = state;
-  }
+    setState(state: WritingState) {
+        this.state = state;
+    }
 
-  type(words: string) {
-    this.state.write(words);
-  }
+    type(words: string) {
+        this.state.write(words);
+    }
 }
 
 ----------------------------
@@ -7583,6 +7658,7 @@ class IosBuilder(Builder):
     def deploy(self):
         print('Deploying ios build to server')
 
+
 ----------------------------
 
 androidBuilder = AndroidBuilder()
@@ -7615,55 +7691,60 @@ iosBuilder.build()
 
 ```typescript
 class Builder {
-  build(): void {
-    this.test();
-    this.lint();
-    this.assemble();
-    this.deploy();
-  }
+    build(): void {
+        this.test();
+        this.lint();
+        this.assemble();
+        this.deploy();
+    }
 
-  test(): void {}
+    test(): void {
+    }
 
-  lint(): void {}
+    lint(): void {
+    }
 
-  assemble(): void {}
+    assemble(): void {
+    }
 
-  deploy(): void {}
+    deploy(): void {
+    }
 }
 
 class AndroidBuilder extends Builder {
-  test(): void {
-    console.log("Running android tests");
-  }
+    test(): void {
+        console.log("Running android tests");
+    }
 
-  lint(): void {
-    console.log("Linting the android code");
-  }
+    lint(): void {
+        console.log("Linting the android code");
+    }
 
-  assemble(): void {
-    console.log("Assembling the android build");
-  }
+    assemble(): void {
+        console.log("Assembling the android build");
+    }
 
-  deploy(): void {
-    console.log("Deploying android build to server");
-  }
+    deploy(): void {
+        console.log("Deploying android build to server");
+    }
 }
 
 class IosBuilder extends Builder {
-  test(): void {
-    console.log("Running ios tests");
-  }
-  lint(): void {
-    console.log("Linting the ios code");
-  }
+    test(): void {
+        console.log("Running ios tests");
+    }
 
-  assemble(): void {
-    console.log("Assembling the ios build");
-  }
+    lint(): void {
+        console.log("Linting the ios code");
+    }
 
-  deploy(): void {
-    console.log("Deploying ios build to server");
-  }
+    assemble(): void {
+        console.log("Assembling the ios build");
+    }
+
+    deploy(): void {
+        console.log("Deploying ios build to server");
+    }
 }
 
 ----------------------------
@@ -7905,7 +7986,9 @@ $iosBuilder->build();
 - امیر عزیز که زحمت مثال های TypeScript رو کشید.([amirmalekian](https://github.com/amirmalekian))
 - رضا عزیز که زحمت مثال های #C رو کشید.([RezaMansouri70](https://github.com/RezaMansouri70))
 - صالح عزیز که زحمت مثال های PHP رو کشید.([salehhashemi1992](https://github.com/salehhashemi1992))
-- مهسا و عاطفه عزیز که زحمت رفع اشکالات تایپی و بهبود کد هارو کشیدند. ([Atefe-Komeili](https://github.com/Atefe-Komeili), [MahsaMahdavian](https://github.com/MahsaMahdavian))
+- عاطفه عزیز که زحمت مثال های Golang رو کشید.([Atefe-Komeili](https://github.com/Atefe-Komeili))
+- مهسا عزیز که زحمت بهبود کد هارو کشید.([MahsaMahdavian](https://github.com/MahsaMahdavian))
+
 </div>
 
 </div>
