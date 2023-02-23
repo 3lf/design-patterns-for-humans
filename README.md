@@ -3157,6 +3157,81 @@ echo $careers->getColor() . "\n"; //Output: Careers page in Off White
 
 </details>
 
+<details>
+<summary>PHP</summary>
+<div dir="ltr">
+
+```PHP
+package main
+
+import "fmt"
+
+type IWebPage interface {
+GetContent() string
+}
+
+type About struct {
+theme ITheme
+}
+
+func NewAbout(theme ITheme) *About {
+return &About{theme: theme}
+}
+
+func (a *About) GetContent() string {
+return fmt.Sprintf("About page in %s", a.theme.GetColor())
+}
+
+type Careers struct {
+theme ITheme
+}
+
+func NewCareers(theme ITheme) *Careers {
+return &Careers{theme: theme}
+}
+
+func (c *Careers) GetContent() string {
+return fmt.Sprintf("Careers page in %s", c.theme.GetColor())
+}
+
+type ITheme interface {
+GetColor() string
+}
+
+type DarkTheme struct{}
+
+func (d *DarkTheme) GetColor() string {
+return "Dark Black"
+}
+
+type LightTheme struct{}
+
+func (l *LightTheme) GetColor() string {
+return "Off White"
+}
+
+type AquaTheme struct{}
+
+func (a *AquaTheme) GetColor() string {
+return "Light blue"
+}
+
+func main() {
+darkTheme := &DarkTheme{}
+lightTheme := &LightTheme{}
+
+about := NewAbout(darkTheme)
+careers := NewCareers(lightTheme)
+
+fmt.Println(about.GetContent())   // Output: About page in Dark Black
+fmt.Println(careers.GetContent()) // Output: Careers page in Off White
+}
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
