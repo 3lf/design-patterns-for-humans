@@ -2769,6 +2769,61 @@ $hunter->hunt($wildDogAdapter);
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+type ILion interface {
+Roar()
+}
+
+type AfricanLion struct{}
+
+func (a AfricanLion) Roar() {}
+
+type AsiaLion struct{}
+
+func (a AsiaLion) Roar() {}
+
+type Hunter struct{}
+
+func (h Hunter) Hunt(lion ILion) {}
+
+type WildDog struct{}
+
+func (w WildDog) bark() {}
+
+type WildDogAdapter struct {
+dog WildDog
+}
+
+func (w WildDogAdapter) Roar() {
+w.dog.bark()
+}
+
+func main() {
+wildDog := WildDog{}
+wildDogAdapter := WildDogAdapter{wildDog}
+
+hunter := Hunter{}
+hunter.Hunt(wildDogAdapter)
+
+fmt.Println("Done")
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
