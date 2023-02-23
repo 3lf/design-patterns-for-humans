@@ -2791,6 +2791,61 @@ $hunter->hunt($wildDogAdapter);
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+type ILion interface {
+Roar()
+}
+
+type AfricanLion struct{}
+
+func (a AfricanLion) Roar() {}
+
+type AsiaLion struct{}
+
+func (a AsiaLion) Roar() {}
+
+type Hunter struct{}
+
+func (h Hunter) Hunt(lion ILion) {}
+
+type WildDog struct{}
+
+func (w WildDog) bark() {}
+
+type WildDogAdapter struct {
+dog WildDog
+}
+
+func (w WildDogAdapter) Roar() {
+w.dog.bark()
+}
+
+func main() {
+wildDog := WildDog{}
+wildDogAdapter := WildDogAdapter{wildDog}
+
+hunter := Hunter{}
+hunter.Hunt(wildDogAdapter)
+
+fmt.Println("Done")
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -3118,6 +3173,81 @@ $careers = new Careers($lightTheme);
 echo $about->getColor() . "\n"; //Output: About page in Dark Black
 echo $careers->getColor() . "\n"; //Output: Careers page in Off White
 
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+<div dir="ltr">
+
+```PHP
+package main
+
+import "fmt"
+
+type IWebPage interface {
+GetContent() string
+}
+
+type About struct {
+theme ITheme
+}
+
+func NewAbout(theme ITheme) *About {
+return &About{theme: theme}
+}
+
+func (a *About) GetContent() string {
+return fmt.Sprintf("About page in %s", a.theme.GetColor())
+}
+
+type Careers struct {
+theme ITheme
+}
+
+func NewCareers(theme ITheme) *Careers {
+return &Careers{theme: theme}
+}
+
+func (c *Careers) GetContent() string {
+return fmt.Sprintf("Careers page in %s", c.theme.GetColor())
+}
+
+type ITheme interface {
+GetColor() string
+}
+
+type DarkTheme struct{}
+
+func (d *DarkTheme) GetColor() string {
+return "Dark Black"
+}
+
+type LightTheme struct{}
+
+func (l *LightTheme) GetColor() string {
+return "Off White"
+}
+
+type AquaTheme struct{}
+
+func (a *AquaTheme) GetColor() string {
+return "Light blue"
+}
+
+func main() {
+darkTheme := &DarkTheme{}
+lightTheme := &LightTheme{}
+
+about := NewAbout(darkTheme)
+careers := NewCareers(lightTheme)
+
+fmt.Println(about.GetContent())   // Output: About page in Dark Black
+fmt.Println(careers.GetContent()) // Output: Careers page in Off White
+}
 ```
 
 </div>
@@ -3501,6 +3631,91 @@ $organization->addEmployee($designer);
 
 echo "Net Salary of Employees in Organization is " . number_format($organization->getNetSalaries(), 2, '.', ',') . PHP_EOL;
 // Output: Net Salary of Employees in Organization is $10,000.00
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type IEmployee interface {
+    GetSalary() float32
+    GetRole() string
+    GetName() string
+}
+
+type Developer struct {
+    Name   string
+    Salary float32
+}
+
+func (d *Developer) GetSalary() float32 {
+    return d.Salary
+}
+
+func (d *Developer) GetRole() string {
+    return "Developer"
+}
+
+func (d *Developer) GetName() string {
+    return d.Name
+}
+
+type Designer struct {
+    Name   string
+    Salary float32
+}
+
+func (d *Designer) GetSalary() float32 {
+    return d.Salary
+}
+
+func (d *Designer) GetRole() string {
+    return "Designer"
+}
+
+func (d *Designer) GetName() string {
+    return d.Name
+}
+
+type Organization struct {
+    employees []IEmployee
+}
+
+func (o *Organization) AddEmployee(employee IEmployee) {
+    o.employees = append(o.employees, employee)
+}
+
+func (o *Organization) GetNetSalaries() float32 {
+    netSalary := float32(0)
+    for _, e := range o.employees {
+        netSalary += e.GetSalary()
+    }
+    return netSalary
+}
+
+func main() {
+    //Arrange Employees, Organization and add employees
+    developer := &Developer{Name: "John", Salary: 5000}
+    designer := &Designer{Name: "Arya", Salary: 5000}
+
+    organization := &Organization{}
+    organization.AddEmployee(developer)
+    organization.AddEmployee(designer)
+
+    fmt.Printf("Net Salary of Employees in Organization is %v\n", organization.GetNetSalaries())
+    //Output: Net Salary of Employees in Organization is 10000
+}
 
 ```
 
