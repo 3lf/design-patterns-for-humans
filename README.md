@@ -6179,6 +6179,93 @@ $remote->submit($turnOff); // Darkness!
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+// Receiver
+type Bulb struct{}
+
+func (b *Bulb) TurnOn() {
+    fmt.Println("Bulb has been lit")
+}
+
+func (b *Bulb) TurnOff() {
+    fmt.Println("Darkness!")
+}
+
+// ICommand interface
+type ICommand interface {
+    Execute()
+    Undo()
+    Redo()
+}
+
+// Command
+type TurnOnCommand struct {
+    bulb *Bulb
+}
+
+func (c *TurnOnCommand) Execute() {
+    c.bulb.TurnOn()
+}
+
+func (c *TurnOnCommand) Undo() {
+    c.bulb.TurnOff()
+}
+
+func (c *TurnOnCommand) Redo() {
+    c.Execute()
+}
+
+type TurnOffCommand struct {
+    bulb *Bulb
+}
+
+func (c *TurnOffCommand) Execute() {
+    c.bulb.TurnOff()
+}
+
+func (c *TurnOffCommand) Undo() {
+    c.bulb.TurnOn()
+}
+
+func (c *TurnOffCommand) Redo() {
+    c.Execute()
+}
+
+// Invoker
+type RemoteControl struct{}
+
+func (r *RemoteControl) Submit(command ICommand) {
+    command.Execute()
+}
+
+func main() {
+    bulb := &Bulb{}
+
+    turnOn := &TurnOnCommand{bulb: bulb}
+    turnOff := &TurnOffCommand{bulb: bulb}
+
+    remote := &RemoteControl{}
+    remote.Submit(turnOn)  // Bulb has been lit
+    remote.Submit(turnOff) // Darkness!
+}
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
