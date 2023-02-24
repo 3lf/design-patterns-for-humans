@@ -4924,6 +4924,72 @@ $teaShop->serve();
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+type KarakTea struct {}
+
+type TeaMaker struct {
+    mAvailableTea map[string]*KarakTea
+}
+
+func (tm *TeaMaker) Make(preference string) *KarakTea {
+    if tm.mAvailableTea == nil {
+        tm.mAvailableTea = make(map[string]*KarakTea)
+    }
+    if _, ok := tm.mAvailableTea[preference]; !ok {
+        tm.mAvailableTea[preference] = &KarakTea{}
+    }
+    return tm.mAvailableTea[preference]
+}
+
+type TeaShop struct {
+    mOrders map[int]*KarakTea
+    mTeaMaker *TeaMaker
+}
+
+func NewTeaShop(teaMaker *TeaMaker) *TeaShop {
+    if teaMaker == nil {
+        panic("teaMaker cannot be nil")
+    }
+    return &TeaShop{
+        mOrders: make(map[int]*KarakTea),
+        mTeaMaker: teaMaker,
+    }
+}
+
+func (ts *TeaShop) TakeOrder(teaType string, table int) {
+    ts.mOrders[table] = ts.mTeaMaker.Make(teaType)
+}
+
+func (ts *TeaShop) Serve() {
+    for table := range ts.mOrders {
+        fmt.Printf("Serving Tea to table # %d\n", table)
+    }
+}
+---------------------------
+teaMaker := &TeaMaker{}
+teaShop := NewTeaShop(teaMaker)
+
+teaShop.TakeOrder("less sugar", 1)
+teaShop.TakeOrder("more milk", 2)
+teaShop.TakeOrder("without sugar", 5)
+
+teaShop.Serve()
+// Serving Tea to table # 1
+// Serving Tea to table # 2
+// Serving Tea to table # 5
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
