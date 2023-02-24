@@ -5256,6 +5256,69 @@ class SecuredDoor implements DoorInterface {
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type IDoor interface {
+    Open()
+    Close()
+}
+
+type LabDoor struct {}
+
+func (d LabDoor) Close() {
+    fmt.Println("Closing lab door")
+}
+
+func (d LabDoor) Open() {
+    fmt.Println("Opening lab door")
+}
+
+type SecuredDoor struct {
+    door IDoor
+}
+
+func NewSecuredDoor(door IDoor) *SecuredDoor {
+    return &SecuredDoor{door: door}
+}
+
+func (d *SecuredDoor) Open(password string) {
+    if d.Authenticate(password) {
+        d.door.Open()
+    } else {
+        fmt.Println("Big no! It ain't possible.")
+    }
+}
+
+func (d *SecuredDoor) Authenticate(password string) bool {
+    return password == "$ecr@t"
+}
+
+func (d *SecuredDoor) Close() {
+    d.door.Close()
+}
+
+func main() {
+    door := NewSecuredDoor(LabDoor{})
+    door.Open("invalid") // Big no! It ain't possible.
+
+    door.Open("$ecr@t") // Opening lab door
+    door.Close() // Closing lab door
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 <br>
 
