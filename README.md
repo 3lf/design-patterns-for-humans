@@ -4558,6 +4558,86 @@ $computerFacade->turnOff();  // Bup bup buzzz! Haah! Zzzzz
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import (
+    "fmt"
+)
+
+type computer struct{}
+
+func (c *computer) getElectricShock() {
+    fmt.Print("Ouch!")
+}
+
+func (c *computer) makeSound() {
+    fmt.Print("Beep beep!")
+}
+
+func (c *computer) showLoadingScreen() {
+    fmt.Print("Loading..")
+}
+
+func (c *computer) bam() {
+    fmt.Print("Ready to be used!")
+}
+
+func (c *computer) closeEverything() {
+    fmt.Print("Bup bup bup buzzzz!")
+}
+
+func (c *computer) soothe() {
+    fmt.Print("Zzzzz")
+}
+
+func (c *computer) pullCurrent() {
+    fmt.Print("Haaah!")
+}
+
+type computerFacade struct {
+    computer *computer
+}
+
+func newComputerFacade(c *computer) *computerFacade {
+    if c == nil {
+        panic("computer cannot be nil")
+    }
+    return &computerFacade{computer: c}
+}
+
+func (cf *computerFacade) turnOn() {
+    cf.computer.getElectricShock()
+    cf.computer.makeSound()
+    cf.computer.showLoadingScreen()
+    cf.computer.bam()
+}
+
+func (cf *computerFacade) turnOff() {
+    cf.computer.closeEverything()
+    cf.computer.pullCurrent()
+    cf.computer.soothe()
+}
+
+func main() {
+    c := newComputerFacade(&computer{})
+    c.turnOn() // Ouch! Beep beep! Loading.. Ready to be used!
+    fmt.Println()
+    c.turnOff() // Bup bup buzzz! Haah! Zzzzz
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
