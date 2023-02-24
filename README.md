@@ -5733,6 +5733,88 @@ $bank->pay(259);
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type Account struct {
+	mSuccessor *Account
+	mBalance   float64
+}
+
+func (a *Account) SetNext(account *Account) {
+	a.mSuccessor = account
+}
+
+func (a *Account) Pay(amountTopay float64) {
+	if a.CanPay(amountTopay) {
+		fmt.Printf("Paid %.2f using %T.\n", amountTopay, a)
+	} else if a.mSuccessor != nil {
+		fmt.Printf("Cannot pay using %T. Proceeding..\n", a)
+		a.mSuccessor.Pay(amountTopay)
+	} else {
+		panic("None of the accounts have enough balance")
+	}
+}
+
+func (a *Account) CanPay(amount float64) bool {
+	return a.mBalance >= amount
+}
+
+type Bank struct {
+	Account
+}
+
+func NewBank(balance float64) *Bank {
+	return &Bank{Account{mBalance: balance}}
+}
+
+type Paypal struct {
+	Account
+}
+
+func NewPaypal(balance float64) *Paypal {
+	return &Paypal{Account{mBalance: balance}}
+}
+
+type Bitcoin struct {
+	Account
+}
+
+func NewBitcoin(balance float64) *Bitcoin {
+	return &Bitcoin{Account{mBalance: balance}}
+}
+
+func main() {
+	// Let's prepare a chain like below
+	//      $bank->$paypal->$bitcoin
+	//
+	// First priority bank
+	//      If bank can't pay then paypal
+	//      If paypal can't pay then bit coin
+	bank := NewBank(100)         // Bank with balance 100
+	paypal := NewPaypal(200)     // Paypal with balance 200
+	bitcoin := NewBitcoin(300)   // Bitcoin with balance 300
+
+	bank.SetNext(&paypal.Account)
+	paypal.SetNext(&bitcoin.Account)
+
+	// Let's try to pay using the first priority i.e. bank
+	bank.Pay(259)
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
