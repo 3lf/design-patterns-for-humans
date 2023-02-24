@@ -4436,6 +4436,115 @@ echo $vanillaCoffee->getDescription() . "\n"; // Simple Coffee, milk, whip, vani
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+type ICoffee interface {
+	GetCost() int
+	GetDescription() string
+}
+
+type SimpleCoffee struct{}
+
+func (c *SimpleCoffee) GetCost() int {
+	return 5
+}
+
+func (c *SimpleCoffee) GetDescription() string {
+	return "Simple Coffee"
+}
+
+type MilkCoffee struct {
+	coffee ICoffee
+}
+
+func NewMilkCoffee(coffee ICoffee) *MilkCoffee {
+	if coffee == nil {
+		panic("coffee should not be nil")
+	}
+	return &MilkCoffee{coffee: coffee}
+}
+
+func (c *MilkCoffee) GetCost() int {
+	return c.coffee.GetCost() + 1
+}
+
+func (c *MilkCoffee) GetDescription() string {
+	return fmt.Sprintf("%s, milk", c.coffee.GetDescription())
+}
+
+type WhipCoffee struct {
+	coffee ICoffee
+}
+
+func NewWhipCoffee(coffee ICoffee) *WhipCoffee {
+	if coffee == nil {
+		panic("coffee should not be nil")
+	}
+	return &WhipCoffee{coffee: coffee}
+}
+
+func (c *WhipCoffee) GetCost() int {
+	return c.coffee.GetCost() + 1
+}
+
+func (c *WhipCoffee) GetDescription() string {
+	return fmt.Sprintf("%s, whip", c.coffee.GetDescription())
+}
+
+type VanillaCoffee struct {
+	coffee ICoffee
+}
+
+func NewVanillaCoffee(coffee ICoffee) *VanillaCoffee {
+	if coffee == nil {
+		panic("coffee should not be nil")
+	}
+	return &VanillaCoffee{coffee: coffee}
+}
+
+func (c *VanillaCoffee) GetCost() int {
+	return c.coffee.GetCost() + 1
+}
+
+func (c *VanillaCoffee) GetDescription() string {
+	return fmt.Sprintf("%s, vanilla", c.coffee.GetDescription())
+}
+
+func main() {
+	myCoffee := &SimpleCoffee{}
+	fmt.Printf("%s\n", myCoffee.GetCost())
+	fmt.Printf("%s\n", myCoffee.GetDescription())
+
+	milkCoffee := NewMilkCoffee(myCoffee)
+	fmt.Printf("%s\n", milkCoffee.GetCost())
+	fmt.Printf("%s\n", milkCoffee.GetDescription())
+
+	whipCoffee := NewWhipCoffee(milkCoffee)
+	fmt.Printf("%s\n", whipCoffee.GetCost())
+	fmt.Printf("%s\n", whipCoffee.GetDescription())
+
+	vanillaCoffee := NewVanillaCoffee(whipCoffee)
+	fmt.Printf("%s\n", vanillaCoffee.GetCost())
+	fmt.Printf("%s\n", vanillaCoffee.GetDescription())
+}
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -4769,6 +4878,86 @@ $computerFacade->turnOff();  // Bup bup buzzz! Haah! Zzzzz
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import (
+    "fmt"
+)
+
+type computer struct{}
+
+func (c *computer) getElectricShock() {
+    fmt.Print("Ouch!")
+}
+
+func (c *computer) makeSound() {
+    fmt.Print("Beep beep!")
+}
+
+func (c *computer) showLoadingScreen() {
+    fmt.Print("Loading..")
+}
+
+func (c *computer) bam() {
+    fmt.Print("Ready to be used!")
+}
+
+func (c *computer) closeEverything() {
+    fmt.Print("Bup bup bup buzzzz!")
+}
+
+func (c *computer) soothe() {
+    fmt.Print("Zzzzz")
+}
+
+func (c *computer) pullCurrent() {
+    fmt.Print("Haaah!")
+}
+
+type computerFacade struct {
+    computer *computer
+}
+
+func newComputerFacade(c *computer) *computerFacade {
+    if c == nil {
+        panic("computer cannot be nil")
+    }
+    return &computerFacade{computer: c}
+}
+
+func (cf *computerFacade) turnOn() {
+    cf.computer.getElectricShock()
+    cf.computer.makeSound()
+    cf.computer.showLoadingScreen()
+    cf.computer.bam()
+}
+
+func (cf *computerFacade) turnOff() {
+    cf.computer.closeEverything()
+    cf.computer.pullCurrent()
+    cf.computer.soothe()
+}
+
+func main() {
+    c := newComputerFacade(&computer{})
+    c.turnOn() // Ouch! Beep beep! Loading.. Ready to be used!
+    fmt.Println()
+    c.turnOff() // Bup bup buzzz! Haah! Zzzzz
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -5060,6 +5249,72 @@ $teaShop->serve();
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+type KarakTea struct {}
+
+type TeaMaker struct {
+    mAvailableTea map[string]*KarakTea
+}
+
+func (tm *TeaMaker) Make(preference string) *KarakTea {
+    if tm.mAvailableTea == nil {
+        tm.mAvailableTea = make(map[string]*KarakTea)
+    }
+    if _, ok := tm.mAvailableTea[preference]; !ok {
+        tm.mAvailableTea[preference] = &KarakTea{}
+    }
+    return tm.mAvailableTea[preference]
+}
+
+type TeaShop struct {
+    mOrders map[int]*KarakTea
+    mTeaMaker *TeaMaker
+}
+
+func NewTeaShop(teaMaker *TeaMaker) *TeaShop {
+    if teaMaker == nil {
+        panic("teaMaker cannot be nil")
+    }
+    return &TeaShop{
+        mOrders: make(map[int]*KarakTea),
+        mTeaMaker: teaMaker,
+    }
+}
+
+func (ts *TeaShop) TakeOrder(teaType string, table int) {
+    ts.mOrders[table] = ts.mTeaMaker.Make(teaType)
+}
+
+func (ts *TeaShop) Serve() {
+    for table := range ts.mOrders {
+        fmt.Printf("Serving Tea to table # %d\n", table)
+    }
+}
+---------------------------
+teaMaker := &TeaMaker{}
+teaShop := NewTeaShop(teaMaker)
+
+teaShop.TakeOrder("less sugar", 1)
+teaShop.TakeOrder("more milk", 2)
+teaShop.TakeOrder("without sugar", 5)
+
+teaShop.Serve()
+// Serving Tea to table # 1
+// Serving Tea to table # 2
+// Serving Tea to table # 5
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -5326,6 +5581,69 @@ class SecuredDoor implements DoorInterface {
     $this->door->close();
   }
 }
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type IDoor interface {
+    Open()
+    Close()
+}
+
+type LabDoor struct {}
+
+func (d LabDoor) Close() {
+    fmt.Println("Closing lab door")
+}
+
+func (d LabDoor) Open() {
+    fmt.Println("Opening lab door")
+}
+
+type SecuredDoor struct {
+    door IDoor
+}
+
+func NewSecuredDoor(door IDoor) *SecuredDoor {
+    return &SecuredDoor{door: door}
+}
+
+func (d *SecuredDoor) Open(password string) {
+    if d.Authenticate(password) {
+        d.door.Open()
+    } else {
+        fmt.Println("Big no! It ain't possible.")
+    }
+}
+
+func (d *SecuredDoor) Authenticate(password string) bool {
+    return password == "$ecr@t"
+}
+
+func (d *SecuredDoor) Close() {
+    d.door.Close()
+}
+
+func main() {
+    door := NewSecuredDoor(LabDoor{})
+    door.Open("invalid") // Big no! It ain't possible.
+
+    door.Open("$ecr@t") // Opening lab door
+    door.Close() // Closing lab door
+}
+
 ```
 
 </div>
