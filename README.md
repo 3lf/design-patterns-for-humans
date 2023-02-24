@@ -6603,6 +6603,115 @@ echo reset($q)->getFrequency();
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+    "fmt"
+)
+
+type RadioStation struct {
+    frequency float32
+}
+
+func NewRadioStation(frequency float32) *RadioStation {
+    return &RadioStation{frequency}
+}
+
+func (r *RadioStation) GetFrequency() float32 {
+    return r.frequency
+}
+
+type StationList struct {
+    stations []*RadioStation
+}
+
+func NewStationList() *StationList {
+    return &StationList{}
+}
+
+func (s *StationList) Add(station *RadioStation) {
+    s.stations = append(s.stations, station)
+}
+
+func (s *StationList) Remove(station *RadioStation) {
+    for i, v := range s.stations {
+        if v == station {
+            s.stations = append(s.stations[:i], s.stations[i+1:]...)
+            break
+        }
+    }
+}
+
+func (s *StationList) GetStation(index int) *RadioStation {
+    return s.stations[index]
+}
+
+func (s *StationList) Len() int {
+    return len(s.stations)
+}
+
+func (s *StationList) Less(i, j int) bool {
+    return s.stations[i].GetFrequency() < s.stations[j].GetFrequency()
+}
+
+func (s *StationList) Swap(i, j int) {
+    s.stations[i], s.stations[j] = s.stations[j], s.stations[i]
+}
+
+func (s *StationList) Sort() {
+    sort.Sort(s)
+}
+
+func (s *StationList) Search(station *RadioStation) int {
+    return sort.Search(len(s.stations), func(i int) bool {
+        return s.stations[i].GetFrequency() >= station.GetFrequency()
+    })
+}
+
+func (s *StationList) Iterator() <-chan *RadioStation {
+    ch := make(chan *RadioStation)
+    go func() {
+        for _, station := range s.stations {
+            ch <- station
+        }
+        close(ch)
+    }()
+    return ch
+}
+
+func main() {
+    stations := NewStationList()
+    station1 := NewRadioStation(89)
+    stations.Add(station1)
+
+    station2 := NewRadioStation(101)
+    stations.Add(station2)
+
+    station3 := NewRadioStation(102)
+    stations.Add(station3)
+
+    for station := range stations.Iterator() {
+        fmt.Println(station.GetFrequency())
+    }
+
+    q := sort.Search(stations.Len(), func(i int) bool {
+        return stations.GetStation(i).GetFrequency() >= 89
+    })
+    fmt.Println(stations.GetStation(q).GetFrequency())
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
