@@ -4120,6 +4120,115 @@ echo $vanillaCoffee->getDescription() . "\n"; // Simple Coffee, milk, whip, vani
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+type ICoffee interface {
+	GetCost() int
+	GetDescription() string
+}
+
+type SimpleCoffee struct{}
+
+func (c *SimpleCoffee) GetCost() int {
+	return 5
+}
+
+func (c *SimpleCoffee) GetDescription() string {
+	return "Simple Coffee"
+}
+
+type MilkCoffee struct {
+	coffee ICoffee
+}
+
+func NewMilkCoffee(coffee ICoffee) *MilkCoffee {
+	if coffee == nil {
+		panic("coffee should not be nil")
+	}
+	return &MilkCoffee{coffee: coffee}
+}
+
+func (c *MilkCoffee) GetCost() int {
+	return c.coffee.GetCost() + 1
+}
+
+func (c *MilkCoffee) GetDescription() string {
+	return fmt.Sprintf("%s, milk", c.coffee.GetDescription())
+}
+
+type WhipCoffee struct {
+	coffee ICoffee
+}
+
+func NewWhipCoffee(coffee ICoffee) *WhipCoffee {
+	if coffee == nil {
+		panic("coffee should not be nil")
+	}
+	return &WhipCoffee{coffee: coffee}
+}
+
+func (c *WhipCoffee) GetCost() int {
+	return c.coffee.GetCost() + 1
+}
+
+func (c *WhipCoffee) GetDescription() string {
+	return fmt.Sprintf("%s, whip", c.coffee.GetDescription())
+}
+
+type VanillaCoffee struct {
+	coffee ICoffee
+}
+
+func NewVanillaCoffee(coffee ICoffee) *VanillaCoffee {
+	if coffee == nil {
+		panic("coffee should not be nil")
+	}
+	return &VanillaCoffee{coffee: coffee}
+}
+
+func (c *VanillaCoffee) GetCost() int {
+	return c.coffee.GetCost() + 1
+}
+
+func (c *VanillaCoffee) GetDescription() string {
+	return fmt.Sprintf("%s, vanilla", c.coffee.GetDescription())
+}
+
+func main() {
+	myCoffee := &SimpleCoffee{}
+	fmt.Printf("%s\n", myCoffee.GetCost())
+	fmt.Printf("%s\n", myCoffee.GetDescription())
+
+	milkCoffee := NewMilkCoffee(myCoffee)
+	fmt.Printf("%s\n", milkCoffee.GetCost())
+	fmt.Printf("%s\n", milkCoffee.GetDescription())
+
+	whipCoffee := NewWhipCoffee(milkCoffee)
+	fmt.Printf("%s\n", whipCoffee.GetCost())
+	fmt.Printf("%s\n", whipCoffee.GetDescription())
+
+	vanillaCoffee := NewVanillaCoffee(whipCoffee)
+	fmt.Printf("%s\n", vanillaCoffee.GetCost())
+	fmt.Printf("%s\n", vanillaCoffee.GetDescription())
+}
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
