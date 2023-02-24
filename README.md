@@ -402,6 +402,59 @@ func main() {
 
 </details>
 
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+public class Door { 
+    private int width;
+    private int height;
+    
+    public Door(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+    
+    public int getHeight() {
+        return height;
+    }
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public void setWidth(int width) {
+        this.width = width;
+    }
+}
+
+public class WoodenDoor extends Door {
+    
+    WoodenDoor(int width, int height) {
+        super(width, height);
+    }
+}
+
+public class DoorFactory {
+    public static WoodenDoor makeDoor(int width, int height) {
+        return new WoodenDoor(width, height);
+    }
+}
+
+----------------------------
+
+Door door = DoorFactory.makeDoor(10, 10);
+System.out.println(door.getHeight());
+System.out.println(door.getWidth());
+```
+</div>
+</details>
+
+
 <br>
 
 ---
@@ -760,6 +813,65 @@ func main() {
 </div>
 
 </details>
+
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Interviewer {
+  void askQuestions();
+}
+
+class Developer implements Interviewer {
+
+  @Override
+  public void askQuestions() {
+    System.out.println("Asking about design patterns");
+  }
+}
+
+class CommunityExecutive implements Interviewer {
+
+  @Override
+  public void askQuestions() {
+    System.out.println("Asking about community building");
+  }
+}
+
+abstract class HiringManager {
+  abstract Interviewer makeInterviewer();
+  public void takeInterview() {
+    Interviewer interviewer = this.makeInterviewer();
+    interviewer.askQuestions();
+  }
+}
+
+class DevelopmentManager extends HiringManager {
+  public Developer makeInterviewer() {
+    return new Developer();
+  }
+}
+
+class MarketingManager extends HiringManager {
+  public CommunityExecutive makeInterviewer() {
+    return new CommunityExecutive();
+  }
+}
+
+----------------------------
+
+DevelopmentManager devManager = new DevelopmentManager();
+devManager.takeInterview();
+
+MarketingManager marketingManager = new MarketingManager();
+marketingManager.takeInterview();
+```
+</div>
+</details>
+
 
 <br>
 
@@ -1308,6 +1420,92 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Door {
+    void getDescription();
+}
+
+class WoodenDoor implements Door {
+    @Override
+    public void getDescription() {
+        System.out.println("I am a wooden door");
+    }
+}
+
+class IronDoor implements Door {
+    @Override
+    public void getDescription() {
+        System.out.println("I am an iron door");
+    }
+}
+
+interface DoorFittingExpert {
+    void getDescription();
+}
+
+class Welder implements DoorFittingExpert {
+    @Override
+    public void getDescription() {
+        System.out.println("I can only fit iron doors");
+    }
+}
+
+class Carpenter implements DoorFittingExpert {
+    @Override
+    public void getDescription() {
+        System.out.println("I can only fit wooden doors");
+    }
+}
+
+interface DoorFactory {
+    Door makeDoor();
+    DoorFittingExpert makeFittingExpert();
+}
+
+class WoodenDoorFactory implements DoorFactory {
+    @Override
+    public WoodenDoor makeDoor() {
+        return new WoodenDoor();
+    }
+
+    @Override
+    public Carpenter makeFittingExpert() {
+        return new Carpenter();
+    }
+}
+
+class IronDoorFactory implements DoorFactory {
+    public IronDoor makeDoor() {
+        return new IronDoor();
+    }
+
+    public Welder makeFittingExpert() {
+        return new Welder();
+    }
+}
+
+-----
+
+IronDoorFactory ironDoorFactory = new IronDoorFactory();
+IronDoor ironDoor = ironDoorFactory.MakeDoor();
+IronDoorFittingExpert ironDoorFittingExpert = ironDoorFactory.MakeFittingExpert();
+
+ironDoor.GetDescription(); //Output : I am a iron door
+ironDoorFittingExpert.GetDescription(); //Output : I can only fit iron doors
+```
+</div>
+
+**همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+درب
+انتخاب نمی‌کنیم.**
+
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -1420,6 +1618,17 @@ func Burger(size int, cheese bool, pepperoni bool, lettuce bool, tomato bool)
 
 </div>
 
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+public Burger(int size, boolean cheese, boolean pepperoni, boolean lettuce, boolean tomato)
+```
+</div>
 </details>
 
 در این شرایط معمولا Builder میتونه به دادمون برسه.
@@ -1829,6 +2038,83 @@ fmt.Println(burger.GetDescription())
 
 </div>
 
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class Burger {
+    private int size;
+    private boolean cheese;
+    private boolean pepperoni;
+    private boolean lettuce;
+    private boolean tomato;
+
+    public Burger(BurgerBuilder builder) {
+        this.size = builder.size;
+        this.cheese = builder.cheese;
+        this.pepperoni = builder.pepperoni;
+        this.lettuce = builder.lettuce;
+        this.tomato = builder.tomato;
+    }
+    public String getDescription() {
+        var sb = new StringBuilder();
+        sb.append("This is " + this.size + " inch Burger.");
+        return sb.toString();
+    }
+    public static BurgerBuilder builder() {
+        return new BurgerBuilder();
+    }
+}
+
+class BurgerBuilder {
+    public int size;
+    public boolean cheese;
+    public boolean pepperoni;
+    public boolean lettuce;
+    public boolean tomato;
+    
+    public Burger build() {
+        return new Burger(this);
+    }
+    public BurgerBuilder size(int size) {
+        this.size = size;
+        return this;
+    }
+    public BurgerBuilder cheese(boolean cheese) {
+        this.cheese = cheese;
+        return this;
+    }
+    public BurgerBuilder pepperoni(boolean pepperoni) {
+        this.pepperoni = pepperoni;
+        return this;
+    }
+    public BurgerBuilder lettuce(boolean lettuce) {
+        this.lettuce = lettuce;
+        return this;
+    }
+    public BurgerBuilder tomato(boolean tomato) {
+        this.tomato = tomato;
+        return this;
+    }
+}
+
+----------------------------
+
+Burger burger = Burger.builder()
+        .size(10)
+        .cheese(true)
+        .pepperoni(true)
+        .lettuce(false)
+        .tomato(false)
+        .build();
+
+System.out.println(burger.getDescription());
+```
+</div>
 </details>
 
 <br>
@@ -2791,6 +3077,61 @@ $hunter->hunt($wildDogAdapter);
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+type ILion interface {
+Roar()
+}
+
+type AfricanLion struct{}
+
+func (a AfricanLion) Roar() {}
+
+type AsiaLion struct{}
+
+func (a AsiaLion) Roar() {}
+
+type Hunter struct{}
+
+func (h Hunter) Hunt(lion ILion) {}
+
+type WildDog struct{}
+
+func (w WildDog) bark() {}
+
+type WildDogAdapter struct {
+dog WildDog
+}
+
+func (w WildDogAdapter) Roar() {
+w.dog.bark()
+}
+
+func main() {
+wildDog := WildDog{}
+wildDogAdapter := WildDogAdapter{wildDog}
+
+hunter := Hunter{}
+hunter.Hunt(wildDogAdapter)
+
+fmt.Println("Done")
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -3118,6 +3459,81 @@ $careers = new Careers($lightTheme);
 echo $about->getColor() . "\n"; //Output: About page in Dark Black
 echo $careers->getColor() . "\n"; //Output: Careers page in Off White
 
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+<div dir="ltr">
+
+```PHP
+package main
+
+import "fmt"
+
+type IWebPage interface {
+GetContent() string
+}
+
+type About struct {
+theme ITheme
+}
+
+func NewAbout(theme ITheme) *About {
+return &About{theme: theme}
+}
+
+func (a *About) GetContent() string {
+return fmt.Sprintf("About page in %s", a.theme.GetColor())
+}
+
+type Careers struct {
+theme ITheme
+}
+
+func NewCareers(theme ITheme) *Careers {
+return &Careers{theme: theme}
+}
+
+func (c *Careers) GetContent() string {
+return fmt.Sprintf("Careers page in %s", c.theme.GetColor())
+}
+
+type ITheme interface {
+GetColor() string
+}
+
+type DarkTheme struct{}
+
+func (d *DarkTheme) GetColor() string {
+return "Dark Black"
+}
+
+type LightTheme struct{}
+
+func (l *LightTheme) GetColor() string {
+return "Off White"
+}
+
+type AquaTheme struct{}
+
+func (a *AquaTheme) GetColor() string {
+return "Light blue"
+}
+
+func main() {
+darkTheme := &DarkTheme{}
+lightTheme := &LightTheme{}
+
+about := NewAbout(darkTheme)
+careers := NewCareers(lightTheme)
+
+fmt.Println(about.GetContent())   // Output: About page in Dark Black
+fmt.Println(careers.GetContent()) // Output: Careers page in Off White
+}
 ```
 
 </div>
@@ -3501,6 +3917,91 @@ $organization->addEmployee($designer);
 
 echo "Net Salary of Employees in Organization is " . number_format($organization->getNetSalaries(), 2, '.', ',') . PHP_EOL;
 // Output: Net Salary of Employees in Organization is $10,000.00
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type IEmployee interface {
+    GetSalary() float32
+    GetRole() string
+    GetName() string
+}
+
+type Developer struct {
+    Name   string
+    Salary float32
+}
+
+func (d *Developer) GetSalary() float32 {
+    return d.Salary
+}
+
+func (d *Developer) GetRole() string {
+    return "Developer"
+}
+
+func (d *Developer) GetName() string {
+    return d.Name
+}
+
+type Designer struct {
+    Name   string
+    Salary float32
+}
+
+func (d *Designer) GetSalary() float32 {
+    return d.Salary
+}
+
+func (d *Designer) GetRole() string {
+    return "Designer"
+}
+
+func (d *Designer) GetName() string {
+    return d.Name
+}
+
+type Organization struct {
+    employees []IEmployee
+}
+
+func (o *Organization) AddEmployee(employee IEmployee) {
+    o.employees = append(o.employees, employee)
+}
+
+func (o *Organization) GetNetSalaries() float32 {
+    netSalary := float32(0)
+    for _, e := range o.employees {
+        netSalary += e.GetSalary()
+    }
+    return netSalary
+}
+
+func main() {
+    //Arrange Employees, Organization and add employees
+    developer := &Developer{Name: "John", Salary: 5000}
+    designer := &Designer{Name: "Arya", Salary: 5000}
+
+    organization := &Organization{}
+    organization.AddEmployee(developer)
+    organization.AddEmployee(designer)
+
+    fmt.Printf("Net Salary of Employees in Organization is %v\n", organization.GetNetSalaries())
+    //Output: Net Salary of Employees in Organization is 10000
+}
 
 ```
 
