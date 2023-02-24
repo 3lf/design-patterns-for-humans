@@ -6977,6 +6977,58 @@ $jane->send("Hey!");
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+type ChatRoomMediator interface {
+	ShowMessage(user *User, message string)
+}
+
+type ChatRoom struct{}
+
+func (cr *ChatRoom) ShowMessage(user *User, message string) {
+	fmt.Printf("%s [%s]: %s\n", time.Now().Format("January 02, 15:04"), user.GetName(), message)
+}
+
+type User struct {
+	Name     string
+	ChatRoom ChatRoomMediator
+}
+
+func (u *User) GetName() string {
+	return u.Name
+}
+
+func (u *User) Send(message string) {
+	u.ChatRoom.ShowMessage(u, message)
+}
+
+func main() {
+	mediator := &ChatRoom{}
+
+	john := &User{Name: "John", ChatRoom: mediator}
+	jane := &User{Name: "Jane", ChatRoom: mediator}
+
+	john.Send("Hi there!")
+	jane.Send("Hey!")
+}
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
