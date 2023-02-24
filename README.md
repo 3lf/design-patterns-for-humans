@@ -402,6 +402,59 @@ func main() {
 
 </details>
 
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+public class Door { 
+    private int width;
+    private int height;
+    
+    public Door(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+    
+    public int getHeight() {
+        return height;
+    }
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public void setWidth(int width) {
+        this.width = width;
+    }
+}
+
+public class WoodenDoor extends Door {
+    
+    WoodenDoor(int width, int height) {
+        super(width, height);
+    }
+}
+
+public class DoorFactory {
+    public static WoodenDoor makeDoor(int width, int height) {
+        return new WoodenDoor(width, height);
+    }
+}
+
+----------------------------
+
+Door door = DoorFactory.makeDoor(10, 10);
+System.out.println(door.getHeight());
+System.out.println(door.getWidth());
+```
+</div>
+</details>
+
+
 <br>
 
 ---
@@ -760,6 +813,65 @@ func main() {
 </div>
 
 </details>
+
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Interviewer {
+  void askQuestions();
+}
+
+class Developer implements Interviewer {
+
+  @Override
+  public void askQuestions() {
+    System.out.println("Asking about design patterns");
+  }
+}
+
+class CommunityExecutive implements Interviewer {
+
+  @Override
+  public void askQuestions() {
+    System.out.println("Asking about community building");
+  }
+}
+
+abstract class HiringManager {
+  abstract Interviewer makeInterviewer();
+  public void takeInterview() {
+    Interviewer interviewer = this.makeInterviewer();
+    interviewer.askQuestions();
+  }
+}
+
+class DevelopmentManager extends HiringManager {
+  public Developer makeInterviewer() {
+    return new Developer();
+  }
+}
+
+class MarketingManager extends HiringManager {
+  public CommunityExecutive makeInterviewer() {
+    return new CommunityExecutive();
+  }
+}
+
+----------------------------
+
+DevelopmentManager devManager = new DevelopmentManager();
+devManager.takeInterview();
+
+MarketingManager marketingManager = new MarketingManager();
+marketingManager.takeInterview();
+```
+</div>
+</details>
+
 
 <br>
 
@@ -1308,6 +1420,92 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Door {
+    void getDescription();
+}
+
+class WoodenDoor implements Door {
+    @Override
+    public void getDescription() {
+        System.out.println("I am a wooden door");
+    }
+}
+
+class IronDoor implements Door {
+    @Override
+    public void getDescription() {
+        System.out.println("I am an iron door");
+    }
+}
+
+interface DoorFittingExpert {
+    void getDescription();
+}
+
+class Welder implements DoorFittingExpert {
+    @Override
+    public void getDescription() {
+        System.out.println("I can only fit iron doors");
+    }
+}
+
+class Carpenter implements DoorFittingExpert {
+    @Override
+    public void getDescription() {
+        System.out.println("I can only fit wooden doors");
+    }
+}
+
+interface DoorFactory {
+    Door makeDoor();
+    DoorFittingExpert makeFittingExpert();
+}
+
+class WoodenDoorFactory implements DoorFactory {
+    @Override
+    public WoodenDoor makeDoor() {
+        return new WoodenDoor();
+    }
+
+    @Override
+    public Carpenter makeFittingExpert() {
+        return new Carpenter();
+    }
+}
+
+class IronDoorFactory implements DoorFactory {
+    public IronDoor makeDoor() {
+        return new IronDoor();
+    }
+
+    public Welder makeFittingExpert() {
+        return new Welder();
+    }
+}
+
+-----
+
+IronDoorFactory ironDoorFactory = new IronDoorFactory();
+IronDoor ironDoor = ironDoorFactory.MakeDoor();
+IronDoorFittingExpert ironDoorFittingExpert = ironDoorFactory.MakeFittingExpert();
+
+ironDoor.GetDescription(); //Output : I am a iron door
+ironDoorFittingExpert.GetDescription(); //Output : I can only fit iron doors
+```
+</div>
+
+**همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+درب
+انتخاب نمی‌کنیم.**
+
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -1420,6 +1618,17 @@ func Burger(size int, cheese bool, pepperoni bool, lettuce bool, tomato bool)
 
 </div>
 
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+public Burger(int size, boolean cheese, boolean pepperoni, boolean lettuce, boolean tomato)
+```
+</div>
 </details>
 
 در این شرایط معمولا Builder میتونه به دادمون برسه.
@@ -1829,6 +2038,83 @@ fmt.Println(burger.GetDescription())
 
 </div>
 
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class Burger {
+    private int size;
+    private boolean cheese;
+    private boolean pepperoni;
+    private boolean lettuce;
+    private boolean tomato;
+
+    public Burger(BurgerBuilder builder) {
+        this.size = builder.size;
+        this.cheese = builder.cheese;
+        this.pepperoni = builder.pepperoni;
+        this.lettuce = builder.lettuce;
+        this.tomato = builder.tomato;
+    }
+    public String getDescription() {
+        var sb = new StringBuilder();
+        sb.append("This is " + this.size + " inch Burger.");
+        return sb.toString();
+    }
+    public static BurgerBuilder builder() {
+        return new BurgerBuilder();
+    }
+}
+
+class BurgerBuilder {
+    public int size;
+    public boolean cheese;
+    public boolean pepperoni;
+    public boolean lettuce;
+    public boolean tomato;
+    
+    public Burger build() {
+        return new Burger(this);
+    }
+    public BurgerBuilder size(int size) {
+        this.size = size;
+        return this;
+    }
+    public BurgerBuilder cheese(boolean cheese) {
+        this.cheese = cheese;
+        return this;
+    }
+    public BurgerBuilder pepperoni(boolean pepperoni) {
+        this.pepperoni = pepperoni;
+        return this;
+    }
+    public BurgerBuilder lettuce(boolean lettuce) {
+        this.lettuce = lettuce;
+        return this;
+    }
+    public BurgerBuilder tomato(boolean tomato) {
+        this.tomato = tomato;
+        return this;
+    }
+}
+
+----------------------------
+
+Burger burger = Burger.builder()
+        .size(10)
+        .cheese(true)
+        .pepperoni(true)
+        .lettuce(false)
+        .tomato(false)
+        .build();
+
+System.out.println(burger.getDescription());
+```
+</div>
 </details>
 
 <br>
