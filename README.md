@@ -3466,10 +3466,10 @@ echo $careers->getColor() . "\n"; //Output: Careers page in Off White
 </details>
 
 <details>
-<summary>PHP</summary>
+<summary>Go</summary>
 <div dir="ltr">
 
-```PHP
+```go
 package main
 
 import "fmt"
