@@ -3553,7 +3553,8 @@ fmt.Println(careers.GetContent()) // Output: Careers page in Off White
 یک مثال از دنیای واقعی:
 
 > فرض کنید شما یک کلاس ارسال مرسوله طراحی میکنید:
-> <br> > ![Composite](images/Composite.png)
+> 
+> ![Composite](images/Composite.png)
 >
 > هر کلاس یک جعبه هست که میتونه شامل چند جعبه دیگه یا شامل چند شیء باشه.
 >
