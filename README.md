@@ -2528,6 +2528,61 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Cloneable {
+    Object clone();
+}
+class SomeComponent implements Cloneable {
+    private int someInt;
+    private String someString;
+
+    public int getSomeInt() {return someInt;}
+    public void setSomeInt(int someInt) {this.someInt = someInt;}
+    public String getSomeString() {return someString;}
+    public void setSomeString(String someString) {this.someString = someString;}
+
+    public SomeComponent copy() {
+        return this;
+    }
+
+    public SomeComponent deepCopy() {
+        return this.clone();
+    }
+
+    @Override
+    public SomeComponent clone() {
+        SomeComponent cloned = new SomeComponent();
+        cloned.setSomeInt(this.someInt);
+        cloned.setSomeString(this.someString);
+        return cloned;
+    }
+}
+
+----------------------------
+
+SomeComponent mainComponent = new SomeComponent();
+mainComponent.setSomeInt(1);
+mainComponent.setSomeString("main");
+
+SomeComponent copyComponent = mainComponent.copy();
+SomeComponent clonedComponent = mainComponent.deepCopy();
+
+copyComponent.setSomeString("copy");
+clonedComponent.setSomeString("clone");
+
+System.out.println(mainComponent.getSomeString().equals(copyComponent.getSomeString()));    // True
+System.out.println(mainComponent.getSomeString().equals(clonedComponent.getSomeString()));  // False
+```
+
+</div>
+
+</details>
+
 <br>
 
 **تفاوت Shadow Copy و Deep Copy ؟**
@@ -2752,6 +2807,39 @@ b := GetInstance()
 fmt.Println(a == b) // Output: true
 
 
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class President {
+    private static President instance;
+    // Private constructor
+    private President() {
+        // Hiding the Constructor
+    }
+
+    public static President getInstance() {
+        if (instance == null) {
+            instance = new President();
+        }
+        return instance;
+    }
+}
+
+----------------------------
+
+President a = President.getInstance();
+President b = President.getInstance();
+
+System.out.println(a == b); // True
 ```
 
 </div>
@@ -3126,6 +3214,73 @@ hunter.Hunt(wildDogAdapter)
 fmt.Println("Done")
 }
 
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Lion {
+    
+    void roar();
+}
+
+class AfricanLion implements Lion {
+
+    @Override
+    public void roar() {
+        System.out.println("African lion roaring.");
+    }
+}
+
+class AsianLion implements Lion {
+
+    @Override
+    public void roar() {
+        System.out.println("Asian lion roaring.");
+    }
+}
+
+class Hunter {
+    
+    public void Hunt(Lion lion) {
+        System.out.println("Attacking and listening...🦻");
+        lion.roar();
+    }
+}
+
+class WildDog {
+    
+    public void bark() {
+        System.out.println("Wild dog barking");
+    }
+}
+
+// Adapter around wild dog to make it compatible
+class WildDogAdapter implements Lion {
+    private WildDog wildDog;
+
+    public WildDogAdapter(WildDog wildDog) {
+        this.wildDog = wildDog;
+    }
+    public void roar() {
+        wildDog.bark();
+    }
+}
+
+----------------------------
+
+WildDog wildDog = new WildDog();
+WildDogAdapter wildDogAdapter = new WildDogAdapter(wildDog);
+
+Hunter hunter = new Hunter();
+hunter.Hunt(wildDogAdapter);
 ```
 
 </div>
