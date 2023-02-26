@@ -3695,6 +3695,72 @@ fmt.Println(careers.GetContent()) // Output: Careers page in Off White
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface WebPage {
+    String getContent();
+}
+
+interface Theme {
+    String getColor();
+}
+
+class About implements WebPage {
+    private Theme theme;
+
+    public About(Theme theme) {
+        this.theme = theme;
+    }
+
+    public String getContent() {
+        return "About page in " + theme.getColor();
+    }
+}
+
+class Careers implements WebPage {
+    private Theme theme;
+
+    public Careers(Theme theme) {
+        this.theme = theme;
+    }
+
+    public String getContent(){
+        return "Careers page in "+ theme.getColor();
+    }
+}
+
+class DarkTheme implements Theme {
+    public String getColor() {
+        return "Dark theme";
+    }
+}
+
+class LightTheme implements Theme {
+    public String getColor() {
+        return "Light theme";
+    }
+}
+
+----------------------------
+    
+DarkTheme darkTheme = new DarkTheme();
+LightTheme lightTheme = new LightTheme();
+
+About about= new About(darkTheme);
+Careers careers = new Careers(lightTheme);
+
+System.out.println(about.getContent());     // About page in Dark theme
+System.out.println(careers.getContent());   // Careers page in Light theme
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -4158,6 +4224,97 @@ func main() {
     //Output: Net Salary of Employees in Organization is 10000
 }
 
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Employee {
+
+    float getSalary();
+    String getRole();
+    String getName();
+}
+
+class Developer implements Employee {
+    private String name;
+    private float salary;
+
+    public Developer(String name, float salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public float getSalary() {
+        return this.salary;
+    }
+    public String getRole() {
+        return "Developer";
+    }
+    public String getName() {
+        return this.name;
+    }
+}
+
+class Designer implements Employee {
+    private String name;
+    private float salary;
+
+    public Designer(String name, float salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public float getSalary() {
+        return this.salary;
+    }
+    public String getRole() {
+        return "Designer";
+    }
+    public String getName() {
+        return this.name;
+    }
+}
+
+class Organization {
+    protected List<Employee> employees;
+
+    public Organization() {
+        employees = new ArrayList<>();
+    }
+
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+    }
+
+    public float getNetSalaries() {
+        float netSalary = 0;
+
+        for(Employee employee : employees) {
+            netSalary += employee.getSalary();
+        }
+        return netSalary;
+    }
+}
+
+----------------------------
+
+Developer developer = new Developer("John",5000);
+Designer designer = new Designer("Arya",5000);
+
+Organization organization = new Organization();
+organization.addEmployee(developer);
+organization.addEmployee(designer);
+
+System.out.println("Organization employees salary : " + organization.getNetSalaries());
+// Organization employees salary : 10000.0
 ```
 
 </div>
@@ -4694,6 +4851,106 @@ func main() {
 }
 
 
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Coffee {
+    
+    int getCost();
+    String getDescription();
+}
+
+class SimpleCoffee implements Coffee {
+    
+    public int getCost() {
+        return 5;
+    }
+
+    public String getDescription() {
+        return "Simple Coffee";
+    }
+}
+
+class MilkCoffee implements Coffee {
+    private final Coffee coffee;
+
+    public MilkCoffee(Coffee coffee) {
+        if(coffee == null)
+            throw new IllegalArgumentException("coffee should not be null");
+        this.coffee = coffee;
+    }
+
+    public int getCost() {
+        return coffee.getCost() + 1;
+    }
+
+    public String getDescription() {
+        return coffee.getDescription() + ", Milk";
+    }
+}
+
+class WhipCoffee implements Coffee {
+    private final Coffee coffee;
+
+    public WhipCoffee(Coffee coffee) {
+        if(coffee == null)
+            throw new IllegalArgumentException("coffee should not be null");
+        this.coffee = coffee;
+    }
+
+    public int getCost() {
+        return coffee.getCost() + 1;
+    }
+
+    public String getDescription() {
+        return coffee.getDescription() + ", Whip";
+    }
+}
+
+class VanillaCoffee implements Coffee {
+    private final Coffee coffee;
+
+    public VanillaCoffee(Coffee coffee) {
+        if(coffee == null)
+            throw new IllegalArgumentException("coffee should not be null");
+        this.coffee = coffee;
+    }
+
+    public int getCost() {
+        return coffee.getCost() + 1;
+    }
+
+    public String getDescription() {
+        return coffee.getDescription() + ", Vanilla";
+    }
+}
+
+----------------------------
+
+SimpleCoffee simpleCoffee = new SimpleCoffee();
+System.out.println("$" + simpleCoffee.getCost()); // $5
+System.out.println(simpleCoffee.getDescription()); // Simple Coffee
+
+MilkCoffee milkCoffee = new MilkCoffee(simpleCoffee);
+System.out.println("$" + milkCoffee.getCost()); // $6
+System.out.println(milkCoffee.getDescription()); // Simple Coffee, Milk
+
+WhipCoffee whipCoffee = new WhipCoffee(milkCoffee);
+System.out.println("$" + whipCoffee.getCost()); // $7
+System.out.println(whipCoffee.getDescription()); // Simple Coffee, Milk, Whip
+
+VanillaCoffee vanillaCoffee = new VanillaCoffee(whipCoffee);
+System.out.println("$" + vanillaCoffee.getCost()); // $8
+System.out.println(vanillaCoffee.getDescription()); // Simple Coffee, Milk, Whip, Vanilla
 ```
 
 </div>
