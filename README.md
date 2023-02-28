@@ -5371,6 +5371,78 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class Computer {
+    public void getElectricShock() {
+        System.out.println("Ouch!");
+    }
+
+    public void makeSound() {
+        System.out.println("Beep beep!");
+    }
+
+    public void showLoadingScreen() {
+        System.out.println("Loading..");
+    }
+
+    public void bam() {
+        System.out.println("Ready to be used!");
+    }
+
+    public void closeEverything() {
+        System.out.println("Bup bup bup buzzzz!");
+    }
+
+    public void sooth() {
+        System.out.println("Zzzzz");
+    }
+
+    public void pullCurrent() {
+        System.out.println("Haaah!");
+    }
+}
+
+class ComputerFacade {
+    private Computer computer;
+
+    public ComputerFacade(Computer computer) {
+        if (computer == null)
+            throw new IllegalArgumentException("computer cannot be null");
+        this.computer = computer;
+    }
+
+    public void turnOn() {
+        computer.getElectricShock();
+        computer.makeSound();
+        computer.showLoadingScreen();
+        computer.bam();
+    }
+
+    public void turnOff() {
+        computer.closeEverything();
+        computer.pullCurrent();
+        computer.sooth();
+    }
+}
+
+----------------------------
+
+ComputerFacade computer = new ComputerFacade(new Computer());
+computer.turnOn();      // Ouch! Beep beep! Loading.. Ready to be used!
+System.out.println();
+computer.turnOff();     // Bup bup buzzz! Haah! Zzzzz
+System.out.println();
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -5728,6 +5800,69 @@ teaShop.Serve()
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+// Anything that will be cached is flyweight.
+// Types of tea here will be flyweights.
+class KarakTea {
+}
+
+// Acts as a factory and saves the tea
+class TeaMaker {
+    private Map<String, KarakTea> availableTea = new HashMap<>();
+
+    public KarakTea make(String preference) {
+        if (!availableTea.containsKey(preference)) {
+            availableTea.put(preference, new KarakTea());
+        }
+        return availableTea.get(preference);
+    }
+}
+
+class TeaShop {
+    private Map<Integer, KarakTea> orders = new HashMap<>();
+    private TeaMaker teaMaker;
+
+    public TeaShop(TeaMaker teaMaker) {
+        if(teaMaker == null)
+            throw new IllegalArgumentException("teaMaker cannot be null");
+        this.teaMaker = teaMaker;
+    }
+
+    public void takeOrder(String teaType, int table) {
+        orders.put(table, teaMaker.make(teaType));
+    }
+
+    public void serve() {
+        for(Integer tableNo : orders.keySet()) {
+            System.out.println("Serving Tea to table " + tableNo);
+        }
+    }
+}
+
+----------------------------
+
+TeaMaker teaMaker = new TeaMaker();
+TeaShop teaShop = new TeaShop(teaMaker);
+
+teaShop.takeOrder("less sugar", 1);
+teaShop.takeOrder("more milk", 2);
+teaShop.takeOrder("without sugar", 5);
+
+teaShop.serve();
+// Serving tea to table 1
+// Serving tea to table 2
+// Serving tea to table 5
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -6057,6 +6192,72 @@ func main() {
     door.Close() // Closing lab door
 }
 
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Door {
+    void open();
+    void close();
+}
+
+class LabDoor implements Door {
+    public void close() {
+        System.out.println("Closing lab door");
+    }
+
+    public void open() {
+        System.out.println("Opening lab door");
+    }
+}
+
+class SecuredDoor implements Door {
+    private Door door;
+
+    public SecuredDoor(Door door) {
+        if (door == null)
+            throw new IllegalArgumentException("door can not be null");
+        this.door = door;
+    }
+
+    public void open(String password) {
+        if (authenticate(password)) {
+            door.open();
+        } else {
+            System.out.println("Big no! It ain't possible.");
+        }
+    }
+
+    private boolean authenticate(String password) {
+        return "$ecr@t".equals(password);
+    }
+    
+    @Override
+    public void open() {
+        System.out.println("Big no! It ain't possible.");
+    }
+
+    @Override
+    public void close() {
+        door.close();
+    }
+}
+
+----------------------------
+
+SecuredDoor door = new SecuredDoor(new LabDoor());
+
+door.open("invalid");       // Big no! It ain't possible.
+door.open("$ecr@t");        // Opening lab door
+door.close();               // Closing lab door
 ```
 
 </div>
