@@ -557,27 +557,24 @@ marketingManager.takeInterview()
 <div dir="ltr">
 
 ```typescript
-class Interviewer {
-    askQuestions(): void {
-    }
+interface Interviewer {
+    askQuestions(): void;
 }
 
-class Developer extends Interviewer {
+class Developer implements Interviewer {
     askQuestions(): void {
         console.log("Asking about design patterns");
     }
 }
 
-class CommunityExecutive extends Interviewer {
+class CommunityExecutive implements Interviewer {
     askQuestions(): void {
         console.log("Asking about community building");
     }
 }
 
-class HiringManager {
-    makeInterviewer(): Interviewer {
-        return null;
-    }
+abstract class HiringManager {
+    abstract makeInterviewer(): Interviewer;
 
     takeInterview(): void {
         let interviewer = this.makeInterviewer();
