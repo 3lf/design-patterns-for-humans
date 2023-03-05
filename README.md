@@ -6775,6 +6775,78 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+abstract class Account {
+  private Account successor;
+  protected Integer balance;
+
+  public void setNext(Account account) {
+    successor = account;
+  }
+
+  public void pay(Integer amountToPay) throws Exception {
+    String accountType = this.getClass().getName();
+    if (canPay(amountToPay)) {
+      System.out.println("Successful payment ($" + amountToPay +") by " + accountType + " account" );
+    } else if (this.successor != null) {
+      System.out.println("Cannot pay by " + accountType + " account. Proceeding...");
+      successor.pay(amountToPay);
+    } else {
+      throw new Exception("None of the accounts have enough balance");
+    }
+  }
+
+  private boolean canPay(Integer amount) {
+    return balance >= amount;
+  }
+}
+
+class Bank extends Account {
+  public Bank(Integer balance) {
+    this.balance = balance;
+  }
+}
+
+class Paypal extends Account {
+  public Paypal(Integer balance) {
+    this.balance = balance;
+  }
+}
+
+class Bitcoin extends Account {
+  public Bitcoin(Integer balance) {
+    this.balance = balance;
+  }
+}
+
+----------------------------
+
+// Creating payment accounts
+Bank bank =         new Bank(100);      // Bank     balance 100
+Paypal paypal =     new Paypal(200);    // Paypal   balance 200
+Bitcoin bitcoin =   new Bitcoin(300);   // Bitcoin  balance 300
+
+// Creating payment chain
+// Bank -> Paypal -> Bitcoin
+bank.setNext(paypal);
+paypal.setNext(bitcoin);
+
+// Do pay
+bank.pay(259);
+// Cannot pay by Bank account.   Proceeding...
+// Cannot pay by Paypal account. Proceeding...
+// Successful payment ($259) by Bitcoin account!
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -7228,6 +7300,102 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+// Receiver
+class Bulb {
+    public void turnOn() {
+        System.out.println("Bulb is turned ON");
+    }
+
+    public void turnOff() {
+        System.out.println("Bulb is turned OFF");
+    }
+}
+
+interface Command {
+    void execute();
+    void undo();
+    void redo();
+}
+
+// Command
+class TurnOn implements Command {
+    private Bulb bulb;
+
+    public TurnOn(Bulb bulb) {
+        if (bulb == null)
+            throw new IllegalArgumentException("Bulb cannot be null");
+        this.bulb = bulb;
+    }
+
+    @Override
+    public void execute() {
+        bulb.turnOn();
+    }
+
+    @Override
+    public void undo() {
+        bulb.turnOff();
+    }
+
+    @Override
+    public void redo() {
+        execute();
+    }
+}
+
+class TurnOff implements Command {
+    private Bulb bulb;
+
+    public TurnOff(Bulb bulb) {
+        if (bulb == null)
+            throw new IllegalArgumentException("Bulb cannot be null");
+        this.bulb = bulb;
+    }
+
+    @Override
+    public void execute() {
+        bulb.turnOff();
+    }
+
+    @Override
+    public void undo() {
+        bulb.turnOn();
+    }
+
+    @Override
+    public void redo() {
+        execute();
+    }
+}
+
+// Invoker
+class RemoteControl {
+    public void submit(Command command) {
+        command.execute();
+    }
+}
+
+----------------------------
+
+Bulb bulb = new Bulb();
+TurnOn turnOnCmd = new TurnOn(bulb);
+TurnOff turnOffCmd = new TurnOff(bulb);
+
+RemoteControl remote = new RemoteControl();
+remote.submit(turnOnCmd);       // Bulb is turned ON
+remote.submit(turnOffCmd);      // Bulb is turned OFF
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -7674,6 +7842,75 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class RadioStation {
+    private float frequency;
+
+    public RadioStation(float frequency) {
+        this.frequency = frequency;
+    }
+
+    public float getFrequency() {
+        return frequency;
+    }
+}
+
+class StationList implements Iterable<RadioStation> {
+    private List<RadioStation> stations;
+
+    public StationList() {
+        stations = new ArrayList<>();
+    }
+
+    public List<RadioStation> getStations() {
+        return stations;
+    }
+
+    public void add(RadioStation station) {
+        stations.add(station);
+    }
+
+    public void remove(RadioStation station) {
+        stations.remove(station);
+    }
+
+    @Override
+    public Iterator<RadioStation> iterator() {
+        return this.getStations().iterator();
+    }
+}
+
+----------------------------
+
+StationList stations = new StationList();
+RadioStation station1 = new RadioStation(89);
+stations.add(station1);
+
+RadioStation station2 = new RadioStation(101);
+stations.add(station2);
+
+RadioStation station3 = new RadioStation(102);
+stations.add(station3);
+
+Iterator<RadioStation> stationIterator = stations.iterator();
+while (stationIterator.hasNext()) {
+RadioStation radioStation = stationIterator.next();
+System.out.println(radioStation.getFrequency());
+}
+// 89.0
+// 101.0
+// 102.0
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -7992,6 +8229,60 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface ChatRoomMediator {
+    void showMessage(User user, String message);
+}
+
+//Mediator
+class ChatRoom implements ChatRoomMediator {
+
+    SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, HH:mm");
+
+    @Override
+    public void showMessage(User user, String message) {
+        System.out.println(sdf.format(new Date())+ " [" + user.getName() + "]: " + message);
+    }
+}
+
+class User {
+    private String name;
+    private ChatRoomMediator chatRoom;
+
+    public User(String name, ChatRoomMediator chatroom) {
+        chatRoom = chatroom;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void send(String message) {
+        chatRoom.showMessage(this, message);
+    }
+}
+
+----------------------------
+
+ChatRoom mediator = new ChatRoom();
+
+User john = new User("John", mediator);
+User jane = new User("Jane", mediator);
+
+john.send("Hi there!"); // March 01, 21:38 [John]: Hi there!
+jane.send("Hey!");      // March 01, 21:38 [Jane]: Hey!
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -8301,6 +8592,70 @@ echo $editor->getContent(); // This is the first sentence. This is second
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class EditorMemento {
+    private String content;
+
+    public EditorMemento(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+}
+
+class Editor {
+    private String content = "";
+    private EditorMemento memento;
+
+    public Editor() {
+        this.memento = new EditorMemento("");
+    }
+
+    public void type(String words) {
+        if(!this.content.isEmpty())
+            this.content += " ";
+        this.content += words;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+
+    public void save() {
+        memento = new EditorMemento(content);
+    }
+
+    public void restore() {
+        content = memento.getContent();
+    }
+}
+
+----------------------------
+
+editor.type("This is the first sentence.");
+editor.type("This is second.");
+// Save the state
+editor.save();
+// Type more
+editor.type("This is third.");
+// Print all contents
+System.out.println(editor.getContent()); // This is the first sentence. This is second. This is third.
+// Restoring to last saved state
+editor.restore();
+// Print content
+System.out.println(editor.getContent()); // This is the first sentence. This is second.
+```
+
+</div>
+
+</details>
 
 <br>
 
@@ -8678,6 +9033,72 @@ $jobPostings->addJob(new JobPost("Software Engineer"));
 //Output
 // Hi John Doe! New job posted: Software Engineer
 // Hi Jane Doe! New job posted: Software Engineer
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class JobPost {
+    private String title;
+
+    public JobPost(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+}
+
+class JobSeeker {
+    private String name;
+
+    public JobSeeker(String name) {
+        this.name = name;
+    }
+
+    public void onJobPosted(JobPost job) {
+        System.out.println("Hi " + this.name + "! New job posted: " + job.getTitle());
+    }
+}
+
+class JobCategory {
+    private List<JobSeeker> observers = new ArrayList<>();
+
+    public void notify(JobPost jobPosting) {
+        for (JobSeeker observer : this.observers) {
+            observer.onJobPosted(jobPosting);
+        }
+    }
+
+    public void attach(JobSeeker observer) {
+        this.observers.add(observer);
+    }
+
+    public void addJob(JobPost jobPosting) {
+        this.notify(jobPosting);
+    }
+}
+
+----------------------------
+
+JobSeeker johnDoe = new JobSeeker("John Doe");
+JobSeeker janeDoe = new JobSeeker("Jane Doe");
+
+JobCategory jobPostings = new JobCategory();
+jobPostings.attach(janeDoe);
+jobPostings.attach(johnDoe);
+
+jobPostings.addJob(new JobPost("Software Engineer at IBM"));
+// Hi Jane Doe! New job posted: Software Engineer at IBM
+// Hi John Doe! New job posted: Software Engineer at IBM
 ```
 
 </div>
@@ -9189,6 +9610,125 @@ $dolphin->accept($jump);   // Walked on water a little and disappeared
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface AnimalOperation {
+
+    void visitMonkey(Monkey monkey);
+    void visitLion(Lion lion);
+    void visitDolphin(Dolphin dolphin);
+}
+
+interface Animal {
+    void accept(AnimalOperation operation);
+}
+
+class Monkey implements Animal {
+
+    void shout() {
+        System.out.println("Ooh oo aa aa!");
+    }
+
+    @Override
+    public void accept(AnimalOperation operation) {
+        operation.visitMonkey(this);
+    }
+}
+
+class Lion implements Animal {
+
+    public void roar() {
+        System.out.println("Roaaar!");
+    }
+
+    @Override
+    public void accept(AnimalOperation operation) {
+        operation.visitLion(this);
+    }
+}
+
+class Dolphin implements Animal {
+
+    public void speak() {
+        System.out.println("Tuut tuttu tuutt!");
+    }
+
+    @Override
+    public void accept(AnimalOperation operation) {
+        operation.visitDolphin(this);
+    }
+}
+
+class Speak implements AnimalOperation {
+
+    @Override
+    public void visitMonkey(Monkey monkey) {
+        monkey.shout();
+    }
+
+    @Override
+    public void visitLion(Lion lion) {
+        lion.roar();
+    }
+
+    @Override
+    public void visitDolphin(Dolphin dolphin) {
+        dolphin.speak();
+    }
+}
+
+-----------------------
+
+Monkey monkey = new Monkey();
+Lion lion = new Lion();
+Dolphin dolphin = new Dolphin();
+
+Speak speak = new Speak();
+
+monkey.accept(speak);   // Ooh oo aa aa!
+lion.accept(speak);     // Roaaar!
+dolphin.accept(speak);  // Tuut tutt tuttt!
+
+class Jump implements AnimalOperation {
+
+    @Override
+    public void visitMonkey(Monkey monkey) {
+        System.out.println("Jumped 20 feet high! on to the tree!");
+    }
+
+    @Override
+    public void visitLion(Lion lion) {
+        System.out.println("Jumped 7 feet! back on the ground!");
+    }
+
+    @Override
+    public void visitDolphin(Dolphin dolphin) {
+        System.out.println("Walked on water a little and disappeared");
+    }
+}
+
+-----------------------
+
+Jump jump = new Jump();
+
+monkey.accept(speak);   // Ooh oo aa aa!
+monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
+
+lion.accept(speak);     // Roaaar!
+lion.accept(jump);      // Jumped 7 feet! Back on the ground!
+
+dolphin.accept(speak);  // Tuut tutt tuutt!
+dolphin.accept(jump);   // Walked on water a little and disappeared
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -9428,6 +9968,61 @@ $sorter->sort($unSortedList); // Output : Sorting using Bubble Sort !
 $sorter = new Sorter(new QuickSortStrategy());
 $sorter->sort($unSortedList); // Output : Sorting using Quick Sort !
 
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface SortStrategy {
+    List<Integer> sort(List<Integer> dataset);
+}
+
+class BubbleSortStrategy implements SortStrategy {
+
+    @Override
+    public List<Integer> sort(List<Integer> dataset) {
+        System.out.println("Sorting by Bubble sort!");
+        return dataset;
+    }
+}
+
+class QuickSortStrategy implements SortStrategy {
+
+    @Override
+    public List<Integer> sort(List<Integer> dataset) {
+        System.out.println("Sorting by Quick sort!");
+        return dataset;
+    }
+}
+
+class Sorter {
+    private SortStrategy sorter;
+
+    public Sorter(SortStrategy sorter) {
+        this.sorter = sorter;
+    }
+
+    public List<Integer> sort(List<Integer> unSortedList) {
+        return sorter.sort(unSortedList);
+    }
+}
+
+----------------------------
+
+List<Integer> unSortedList = List.of(1, 10, 2, 16, 19);
+
+Sorter sorter = new Sorter(new BubbleSortStrategy());
+sorter.sort(unSortedList); // Sorting by Bubble sort!
+
+sorter = new Sorter(new QuickSortStrategy());
+sorter.sort(unSortedList); // Sorting by Quick sort!
 ```
 
 </div>
@@ -9765,6 +10360,69 @@ $editor->type("Fifth Line");
 // fourth line
 // fifth line
 
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface WritingState {
+    void write(String words);
+}
+
+class UpperCase implements WritingState {
+    public void write(String words) {
+        System.out.println(words.toUpperCase());
+    }
+}
+
+class LowerCase implements WritingState {
+    public void write(String words) {
+        System.out.println(words.toLowerCase());
+    }
+}
+
+class DefaultText implements WritingState {
+    public void write(String words) {
+        System.out.println(words);
+    }
+}
+
+class TextEditor {
+    private WritingState state;
+
+    public TextEditor() {
+        state = new DefaultText();
+    }
+
+    public void setState(WritingState state) {
+        this.state = state;
+    }
+
+    public void type(String words) {
+        state.write(words);
+    }
+}
+
+----------------------------
+
+TextEditor editor = new TextEditor();
+
+editor.type("First line"); // First line
+
+editor.setState(new UpperCase());
+editor.type("Second line"); // SECOND LINE
+editor.type("Third Line");  // THIRD LINE
+
+editor.setState(new LowerCase());
+editor.type("Fourth line"); // fourth line
+editor.type("FIFTH Line");  // fifth line
 ```
 
 </div>
@@ -10159,6 +10817,94 @@ $iosBuilder->build();
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+abstract class Builder {
+    // Template method
+    public void build() {
+        test();
+        lint();
+        assemble();
+        deploy();
+    }
+
+    abstract public void test();
+    abstract public void lint();
+    abstract public void assemble();
+    abstract public void deploy();
+}
+
+class AndroidBuilder extends Builder {
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling android build");
+    }
+
+    @Override
+    public void deploy() {
+        System.out.println("Deploying android build");
+    }
+
+    @Override
+    public void lint() {
+        System.out.println("Linting android code");
+    }
+
+    @Override
+    public void test() {
+        System.out.println("Running android tests");
+    }
+}
+
+class IOSBuilder extends Builder {
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling iOS build");
+    }
+
+    @Override
+    public void deploy() {
+        System.out.println("Deploying iOS build");
+    }
+
+    @Override
+    public void lint() {
+        System.out.println("Linting iOS code");
+    }
+
+    @Override
+    public void test() {
+        System.out.println("Running iOS tests");
+    }
+}
+
+----------------------------
+
+AndroidBuilder androidBuilder = new AndroidBuilder();
+androidBuilder.build();
+// Running android tests
+// Linting android code
+// Assembling android build
+// Deploying android build
+
+IOSBuilder iOSBuilder = new IOSBuilder();
+iOSBuilder.build();
+// Running iOS tests
+// Linting iOS code
+// Assembling iOS build
+// Deploying iOS build
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -10194,7 +10940,7 @@ $iosBuilder->build();
 - رضا عزیز که زحمت مثال های #C رو کشید.([RezaMansouri70](https://github.com/RezaMansouri70))
 - صالح عزیز که زحمت مثال های PHP رو کشید.([salehhashemi1992](https://github.com/salehhashemi1992))
 - عاطفه عزیز که زحمت مثال های Golang رو کشید.([Atefe-Komeili](https://github.com/Atefe-Komeili))
-- محمد عزیز که زحمت مثال های Java رو کشید.([mohammadmasoomi2](https://github.com/mohammadmasoomi2))
+- محمد عزیز که زحمت مثال های Java رو کشید.([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
 - مهسا عزیز که زحمت بهبود کد هارو کشید.([MahsaMahdavian](https://github.com/MahsaMahdavian))
 
 </div>
