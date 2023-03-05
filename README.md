@@ -244,8 +244,7 @@ class DoorFactory {
 
 ----------------------------
 
-    let
-door = DoorFactory.makeDoor(10, 10);
+let door = DoorFactory.makeDoor(10, 10);
 console.log(door.getHeight());
 console.log(door.getWidth());
 ```
