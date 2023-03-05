@@ -7841,6 +7841,75 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class RadioStation {
+    private float frequency;
+
+    public RadioStation(float frequency) {
+        this.frequency = frequency;
+    }
+
+    public float getFrequency() {
+        return frequency;
+    }
+}
+
+class StationList implements Iterable<RadioStation> {
+    private List<RadioStation> stations;
+
+    public StationList() {
+        stations = new ArrayList<>();
+    }
+
+    public List<RadioStation> getStations() {
+        return stations;
+    }
+
+    public void add(RadioStation station) {
+        stations.add(station);
+    }
+
+    public void remove(RadioStation station) {
+        stations.remove(station);
+    }
+
+    @Override
+    public Iterator<RadioStation> iterator() {
+        return this.getStations().iterator();
+    }
+}
+
+----------------------------
+
+StationList stations = new StationList();
+RadioStation station1 = new RadioStation(89);
+stations.add(station1);
+
+RadioStation station2 = new RadioStation(101);
+stations.add(station2);
+
+RadioStation station3 = new RadioStation(102);
+stations.add(station3);
+
+Iterator<RadioStation> stationIterator = stations.iterator();
+while (stationIterator.hasNext()) {
+RadioStation radioStation = stationIterator.next();
+System.out.println(radioStation.getFrequency());
+}
+// 89.0
+// 101.0
+// 102.0
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -9904,6 +9973,61 @@ $sorter->sort($unSortedList); // Output : Sorting using Quick Sort !
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface SortStrategy {
+    List<Integer> sort(List<Integer> dataset);
+}
+
+class BubbleSortStrategy implements SortStrategy {
+
+    @Override
+    public List<Integer> sort(List<Integer> dataset) {
+        System.out.println("Sorting by Bubble sort!");
+        return dataset;
+    }
+}
+
+class QuickSortStrategy implements SortStrategy {
+
+    @Override
+    public List<Integer> sort(List<Integer> dataset) {
+        System.out.println("Sorting by Quick sort!");
+        return dataset;
+    }
+}
+
+class Sorter {
+    private SortStrategy sorter;
+
+    public Sorter(SortStrategy sorter) {
+        this.sorter = sorter;
+    }
+
+    public List<Integer> sort(List<Integer> unSortedList) {
+        return sorter.sort(unSortedList);
+    }
+}
+
+----------------------------
+
+List<Integer> unSortedList = List.of(1, 10, 2, 16, 19);
+
+Sorter sorter = new Sorter(new BubbleSortStrategy());
+sorter.sort(unSortedList); // Sorting by Bubble sort!
+
+sorter = new Sorter(new QuickSortStrategy());
+sorter.sort(unSortedList); // Sorting by Quick sort!
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -10235,6 +10359,69 @@ $editor->type("Fifth Line");
 // fourth line
 // fifth line
 
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface WritingState {
+    void write(String words);
+}
+
+class UpperCase implements WritingState {
+    public void write(String words) {
+        System.out.println(words.toUpperCase());
+    }
+}
+
+class LowerCase implements WritingState {
+    public void write(String words) {
+        System.out.println(words.toLowerCase());
+    }
+}
+
+class DefaultText implements WritingState {
+    public void write(String words) {
+        System.out.println(words);
+    }
+}
+
+class TextEditor {
+    private WritingState state;
+
+    public TextEditor() {
+        state = new DefaultText();
+    }
+
+    public void setState(WritingState state) {
+        this.state = state;
+    }
+
+    public void type(String words) {
+        state.write(words);
+    }
+}
+
+----------------------------
+
+TextEditor editor = new TextEditor();
+
+editor.type("First line"); // First line
+
+editor.setState(new UpperCase());
+editor.type("Second line"); // SECOND LINE
+editor.type("Third Line");  // THIRD LINE
+
+editor.setState(new LowerCase());
+editor.type("Fourth line"); // fourth line
+editor.type("FIFTH Line");  // fifth line
 ```
 
 </div>
@@ -10629,6 +10816,94 @@ $iosBuilder->build();
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+abstract class Builder {
+    // Template method
+    public void build() {
+        test();
+        lint();
+        assemble();
+        deploy();
+    }
+
+    abstract public void test();
+    abstract public void lint();
+    abstract public void assemble();
+    abstract public void deploy();
+}
+
+class AndroidBuilder extends Builder {
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling android build");
+    }
+
+    @Override
+    public void deploy() {
+        System.out.println("Deploying android build");
+    }
+
+    @Override
+    public void lint() {
+        System.out.println("Linting android code");
+    }
+
+    @Override
+    public void test() {
+        System.out.println("Running android tests");
+    }
+}
+
+class IOSBuilder extends Builder {
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling iOS build");
+    }
+
+    @Override
+    public void deploy() {
+        System.out.println("Deploying iOS build");
+    }
+
+    @Override
+    public void lint() {
+        System.out.println("Linting iOS code");
+    }
+
+    @Override
+    public void test() {
+        System.out.println("Running iOS tests");
+    }
+}
+
+----------------------------
+
+AndroidBuilder androidBuilder = new AndroidBuilder();
+androidBuilder.build();
+// Running android tests
+// Linting android code
+// Assembling android build
+// Deploying android build
+
+IOSBuilder iOSBuilder = new IOSBuilder();
+iOSBuilder.build();
+// Running iOS tests
+// Linting iOS code
+// Assembling iOS build
+// Deploying iOS build
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -10664,7 +10939,7 @@ $iosBuilder->build();
 - رضا عزیز که زحمت مثال های #C رو کشید.([RezaMansouri70](https://github.com/RezaMansouri70))
 - صالح عزیز که زحمت مثال های PHP رو کشید.([salehhashemi1992](https://github.com/salehhashemi1992))
 - عاطفه عزیز که زحمت مثال های Golang رو کشید.([Atefe-Komeili](https://github.com/Atefe-Komeili))
-- محمد عزیز که زحمت مثال های Java رو کشید.([mohammadmasoomi2](https://github.com/mohammadmasoomi2))
+- محمد عزیز که زحمت مثال های Java رو کشید.([Mohammad (Homayoun)](https://github.com/Mohammad-Masoomi-Homayoun))
 - مهسا عزیز که زحمت بهبود کد هارو کشید.([MahsaMahdavian](https://github.com/MahsaMahdavian))
 
 </div>
