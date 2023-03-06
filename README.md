@@ -1019,48 +1019,42 @@ expert.getDescription()
 <div dir="ltr">
 
 ```typescript
-class Door {
-    getDescription(): void {
-    }
+interface Door {
+    getDescription(): void;
 }
 
-class WoodenDoor extends Door {
+class WoodenDoor implements Door {
     getDescription(): void {
         console.log("I am a wooden door");
     }
 }
 
-class IronDoor extends Door {
+class IronDoor implements Door {
     getDescription(): void {
         console.log("I am an iron door");
     }
 }
 
-class DoorFittingExpert {
-    getDescription(): void {
-    }
+interface DoorFittingExpert {
+    getDescription(): void;
 }
 
-class Welder extends DoorFittingExpert {
+class Welder implements DoorFittingExpert {
     getDescription(): void {
         console.log("I can only fit iron doors");
     }
 }
 
-class Carpenter extends DoorFittingExpert {
+class Carpenter implements DoorFittingExpert {
     getDescription(): void {
         console.log("I can only fit wooden doors");
     }
 }
 
-class DoorFactory {
-    makeDoor(): Door {
-        return null;
-    }
+abstract class DoorFactory {
+    abstract makeDoor(): Door;
 
-    makeFittingExpert(): DoorFittingExpert {
-        return null;
-    }
+    abstract makeFittingExpert(): DoorFittingExpert;
 }
 
 class WoodenDoorFactory extends DoorFactory {
@@ -1082,11 +1076,9 @@ class IronDoorFactory extends DoorFactory {
         return new Welder();
     }
 }
-
 ----------------------------
 
-    let
-woodenFactory = new WoodenDoorFactory();
+let woodenFactory = new WoodenDoorFactory();
 
 let door = woodenFactory.makeDoor();
 let expert = woodenFactory.makeFittingExpert();
@@ -1096,8 +1088,7 @@ expert.getDescription();
 
 ----------------------------
 
-    let
-ironFactory = new IronDoorFactory();
+let ironFactory = new IronDoorFactory();
 
 door = ironFactory.makeDoor();
 expert = ironFactory.makeFittingExpert();
