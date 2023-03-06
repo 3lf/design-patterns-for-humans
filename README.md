@@ -1542,20 +1542,7 @@ def __init__(self, size, cheese=True, pepperoni=True, tomato=False, lettuce=True
 <div dir="ltr">
 
 ```typescript
-constructor(size
-:
-any, cheese
-:
-boolean = true, pepperoni
-:
-boolean = true, tomato
-:
-boolean = false, lettuce
-:
-boolean = true
-)
-{
-}
+constructor(size: any, cheese: boolean = true, pepperoni:boolean = true, tomato: boolean = false, lettuce: boolean = true) {}
 
 ```
 
@@ -1718,7 +1705,7 @@ class Burger {
     private lettuce: boolean = false;
     private tomato: boolean = false;
 
-    constructor(builder: any) {
+    constructor(builder: BurgerBuilder) {
         this.size = builder.size;
         this.cheese = builder.cheese;
         this.pepperoni = builder.pepperoni;
@@ -1766,8 +1753,7 @@ class BurgerBuilder {
 
 ----------------------------
 
-    let
-burger = new BurgerBuilder(10)
+let burger = new BurgerBuilder(10)
     .addPepperoni()
     .addLettuce()
     .addTomato()
