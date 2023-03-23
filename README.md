@@ -2194,25 +2194,52 @@ class SomeComponent {
     }
 
     copy() {
-        let some_list_of_objects = Object.assign([], this.some_list_of_objects);
-        let some_circular_ref = Object.assign({}, this.some_circular_ref);
-        let new = new this.constructor(
-            this.some_int, some_list_of_objects, some_circular_ref
+        let someListOfObjects = Object.assign([], this.someListOfObjects);
+        let someCircularRef = Object.assign({}, this.someCircularRef);
+        let newComponent = new SomeComponent(
+            this.someInt, someListOfObjects, someCircularRef
         );
-        Object.assign(new, this);
-        return new;
+        Object.assign(newComponent, this);
+        return newComponent;
     }
 
-    deepcopy(memo: object = {}) {
-        let some_list_of_objects = JSON.parse(JSON.stringify(this.some_list_of_objects));
-        let some_circular_ref = JSON.parse(JSON.stringify(this.some_circular_ref));
-        let new = new this.constructor(
-            this.some_int, some_list_of_objects, some_circular_ref
+    deepCopy(memo: object = {}) {
+        let someListOfObjects = JSON.parse(JSON.stringify(this.someListOfObjects));
+        let someCircularRef = JSON.parse(JSON.stringify(this.someCircularRef));
+        let newComponent = new SomeComponent(
+            this.someInt, someListOfObjects, someCircularRef
         );
-        new = JSON.parse(JSON.stringify(this));
-        return new;
+        newComponent = JSON.parse(JSON.stringify(this));
+        return newComponent;
     }
 }
+
+------------------------------
+
+let component = new SomeComponent(1, [1,2,3], {x : 1});
+let copyComponent = component.copy();
+
+console.log(copyComponent.someListOfObjects);   // [ 1, 2, 3 ]
+console.log(copyComponent.someCircularRef);     // { x: 1 }
+
+component.someListOfObjects.push(4);
+component.someCircularRef.y = 6;
+
+console.log(copyComponent.someListOfObjects)    // [ 1, 2, 3, 4 ]
+console.log(copyComponent.someCircularRef)      // { x: 1, y: 6 }
+
+------------------------------
+let component2 = new SomeComponent(1, [1,2,3], {x : 1});
+let copyComponent2 = component2.deepCopy();
+
+console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
+console.log(copyComponent2.someCircularRef);     // { x: 1 }
+
+component2.someListOfObjects.push(4);
+component2.someCircularRef.y = 6;
+
+console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
+console.log(copyComponent2.someCircularRef);     // { x: 1 }
 ```
 
 </div>
