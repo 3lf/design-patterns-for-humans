@@ -4456,14 +4456,10 @@ print(someCoffee.getDescription())
 <div dir="ltr">
 
 ```typescript
-class Coffee {
-    getCost(): number {
-        return;
-    }
+abstract class Coffee {
+    abstract getCost(): number;
 
-    getDescription(): string {
-        return;
-    }
+    abstract getDescription(): string;
 }
 
 class SimpleCoffee extends Coffee {
@@ -4529,8 +4525,7 @@ class VanillaCoffee extends Coffee {
 
 ----------------------------
 
-    let
-someCoffee = new SimpleCoffee();
+let someCoffee = new SimpleCoffee();
 console.log(someCoffee.getCost());
 console.log(someCoffee.getDescription());
 
