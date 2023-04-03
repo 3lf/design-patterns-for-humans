@@ -5955,15 +5955,13 @@ door.close()  # Closing Lab Door
 <div dir="ltr">
 
 ```typescript
-class Door {
-    open(): void {
-    }
+interface Door {
+    open(): void;
 
-    close(): void {
-    }
+    close(): void;
 }
 
-class LabDoor extends Door {
+class LabDoor implements Door {
     open(): void {
         console.log("Opening lab door");
     }
