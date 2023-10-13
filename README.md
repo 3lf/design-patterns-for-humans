@@ -7337,6 +7337,70 @@ echo $editor->getContent(); // This is the first sentence. This is second
 </details>
 
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+type EditorMemento struct {
+	content string
+}
+
+func NewEditorMemento(content string) *EditorMemento {
+	return &EditorMemento{content: content}
+}
+
+func (e *EditorMemento) GetContent() string {
+	return e.content
+}
+
+type Editor struct {
+	content string
+}
+
+func (e *Editor) Type(words string) {
+	e.content = e.content + " " + words
+}
+
+func (e *Editor) GetContent() string {
+	return e.content
+}
+
+func (e *Editor) Save() *EditorMemento {
+	return NewEditorMemento(e.content)
+}
+
+func (e *Editor) Restore(memento *EditorMemento) {
+	e.content = memento.GetContent()
+}
+
+func main() {
+	editor := &Editor{}
+	editor.Type("This is the first sentence")
+	editor.Type("This is the second.")
+
+	saved := editor.Save()
+	editor.Type("And this is the third")
+
+	fmt.Println(editor.GetContent())  
+
+	editor.Restore(saved)
+	fmt.Println(editor.GetContent()) 
+}
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
