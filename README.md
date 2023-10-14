@@ -9750,6 +9750,93 @@ $dolphin->accept($jump);   // Walked on water a little and disappeared
 
 </details>
 
+
+<details>
+  <summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+// Visitee
+type Animal interface {
+	Accept(operation AnimalOperation)
+}
+
+// Visitor
+type AnimalOperation interface {
+	VisitMonkey(monkey *Monkey)
+	VisitLion(lion *Lion)
+	VisitDolphin(dolphin *Dolphin)
+}
+
+type Monkey struct{}
+
+func (m *Monkey) Shout() {
+	fmt.Println("Ooh oo aa aa!")
+}
+
+func (m *Monkey) Accept(operation AnimalOperation) {
+	operation.VisitMonkey(m)
+}
+
+type Lion struct{}
+
+func (l *Lion) Roar() {
+	fmt.Println("Roaaar!")
+}
+
+func (l *Lion) Accept(operation AnimalOperation) {
+	operation.VisitLion(l)
+}
+
+type Dolphin struct{}
+
+func (d *Dolphin) Speak() {
+	fmt.Println("Tuut tuttu tuutt!")
+}
+
+func (d *Dolphin) Accept(operation AnimalOperation) {
+	operation.VisitDolphin(d)
+}
+
+type Speak struct{}
+
+func (s *Speak) VisitMonkey(monkey *Monkey) {
+	monkey.Shout()
+}
+
+func (s *Speak) VisitLion(lion *Lion) {
+	lion.Roar()
+}
+
+func (s *Speak) VisitDolphin(dolphin *Dolphin) {
+	dolphin.Speak()
+}
+
+func main() {
+	monkey := &Monkey{}
+	lion := &Lion{}
+	dolphin := &Dolphin{}
+
+	speak := &Speak{}
+	monkey.Accept(speak)  // Ooh oo aa aa!
+	lion.Accept(speak)    // Roaaar!
+	dolphin.Accept(speak) // Tuut tuttu tuutt!
+}
+
+
+```
+
+</div>
+
+</details>
+
+
 <details>
   <summary>Java</summary>
 
