@@ -27,31 +27,31 @@
 <!-- TOC -->
 
 - [Creational Design Patterns](#creational-design-patterns)
-  - [🏠 Simple Factory](#-simple-factory)
-  - [🏭 Factory Method](#-factory-method)
-  - [🔨 Abstract Factory](#-abstract-factory)
-  - [👷 Builder](#-builder)
-  - [🐑 Prototype](#-prototype)
-  - [💍 Singleton](#-singleton)
+    - [🏠 Simple Factory](#-simple-factory)
+    - [🏭 Factory Method](#-factory-method)
+    - [🔨 Abstract Factory](#-abstract-factory)
+    - [👷 Builder](#-builder)
+    - [🐑 Prototype](#-prototype)
+    - [💍 Singleton](#-singleton)
 - [Structural Design Patterns](#structural-design-patterns)
-  - [🔌 Adapter](#-adapter)
-  - [🌉 Bridge](#-bridge)
-  - [🌿 Composite](#-composite)
-  - [☕ Decorator](#-decorator)
-  - [📦 Facade](#-facade)
-  - [🍃 Flyweight](#-flyweight)
-  - [🎱 Proxy](#-proxy)
+    - [🔌 Adapter](#-adapter)
+    - [🌉 Bridge](#-bridge)
+    - [🌿 Composite](#-composite)
+    - [☕ Decorator](#-decorator)
+    - [📦 Facade](#-facade)
+    - [🍃 Flyweight](#-flyweight)
+    - [🎱 Proxy](#-proxy)
 - [Behavioral Design Patterns](#behavioral-design-patterns)
-  - [🔗 Chain of Responsibility](#-chain-of-responsibility)
-  - [👮 Command](#-command)
-  - [➿ Iterator](#-iterator)
-  - [👽 Mediator](#-mediator)
-  - [💾 Memento](#-memento)
-  - [😎 Observer](#-observer)
-  - [🏃 Visitor](#-visitor)
-  - [💡 Strategy](#-strategy)
-  - [💢 State](#-state)
-  - [📒 Template Method](#-template-method)
+    - [🔗 Chain of Responsibility](#-chain-of-responsibility)
+    - [👮 Command](#-command)
+    - [➿ Iterator](#-iterator)
+    - [👽 Mediator](#-mediator)
+    - [💾 Memento](#-memento)
+    - [😎 Observer](#-observer)
+    - [🏃 Visitor](#-visitor)
+    - [💡 Strategy](#-strategy)
+    - [💢 State](#-state)
+    - [📒 Template Method](#-template-method)
 
 <!-- TOC -->
 
@@ -192,6 +192,7 @@ class DoorFactory:
     def makeDoor(width, height):
         return WoodenDoor(width, height)
 
+
 ----------------------------
 door = DoorFactory.makeDoor(10, 10)
 print(door.getHeight())
@@ -209,33 +210,36 @@ print(door.getWidth())
 
 ```typescript
 class Door {
-  getWidth(): void {}
-  getHeight(): void {}
+    getWidth(): void {
+    }
+
+    getHeight(): void {
+    }
 }
 
 class WoodenDoor extends Door {
-  width: number | null;
-  height: number | null;
+    width: number | null;
+    height: number | null;
 
-  constructor(width: number = 5, height: number = 5) {
-    super();
-    this.width = width;
-    this.height = height;
-  }
+    constructor(width: number = 5, height: number = 5) {
+        super();
+        this.width = width;
+        this.height = height;
+    }
 
-  getWidth(): number {
-    return this.width;
-  }
+    getWidth(): number {
+        return this.width;
+    }
 
-  getHeight(): number {
-    return this.height;
-  }
+    getHeight(): number {
+        return this.height;
+    }
 }
 
 class DoorFactory {
-  static makeDoor(width: number, height: number): WoodenDoor {
-    return new WoodenDoor(width, height);
-  }
+    static makeDoor(width: number, height: number): WoodenDoor {
+        return new WoodenDoor(width, height);
+    }
 }
 
 ----------------------------
@@ -397,6 +401,59 @@ func main() {
 
 </details>
 
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+public class Door { 
+    private int width;
+    private int height;
+    
+    public Door(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+    
+    public int getHeight() {
+        return height;
+    }
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public void setWidth(int width) {
+        this.width = width;
+    }
+}
+
+public class WoodenDoor extends Door {
+    
+    WoodenDoor(int width, int height) {
+        super(width, height);
+    }
+}
+
+public class DoorFactory {
+    public static WoodenDoor makeDoor(int width, int height) {
+        return new WoodenDoor(width, height);
+    }
+}
+
+----------------------------
+
+Door door = DoorFactory.makeDoor(10, 10);
+System.out.println(door.getHeight());
+System.out.println(door.getWidth());
+```
+</div>
+</details>
+
+
 <br>
 
 ---
@@ -470,7 +527,6 @@ class HiringManager:
         interviewer.askQuestions()
 
 
-
 class DevelopmentManager(HiringManager):
     def makeInterviewer(self):
         return Developer()
@@ -500,43 +556,41 @@ marketingManager.takeInterview()
 <div dir="ltr">
 
 ```typescript
-class Interviewer {
-  askQuestions(): void {}
+interface Interviewer {
+    askQuestions(): void;
 }
 
-class Developer extends Interviewer {
-  askQuestions(): void {
-    console.log("Asking about design patterns");
-  }
+class Developer implements Interviewer {
+    askQuestions(): void {
+        console.log("Asking about design patterns");
+    }
 }
 
-class CommunityExecutive extends Interviewer {
-  askQuestions(): void {
-    console.log("Asking about community building");
-  }
+class CommunityExecutive implements Interviewer {
+    askQuestions(): void {
+        console.log("Asking about community building");
+    }
 }
 
-class HiringManager {
-  makeInterviewer(): Interviewer {
-    return null;
-  }
+abstract class HiringManager {
+    abstract makeInterviewer(): Interviewer;
 
-  takeInterview(): void {
-    let interviewer = this.makeInterviewer();
-    interviewer.askQuestions();
-  }
+    takeInterview(): void {
+        let interviewer = this.makeInterviewer();
+        interviewer.askQuestions();
+    }
 }
 
 class DevelopmentManager extends HiringManager {
-  makeInterviewer(): Developer {
-    return new Developer();
-  }
+    makeInterviewer(): Developer {
+        return new Developer();
+    }
 }
 
 class MarketingManager extends HiringManager {
-  makeInterviewer(): CommunityExecutive {
-    return new CommunityExecutive();
-  }
+    makeInterviewer(): CommunityExecutive {
+        return new CommunityExecutive();
+    }
 }
 
 let devManager = new DevelopmentManager();
@@ -756,6 +810,65 @@ func main() {
 
 </details>
 
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Interviewer {
+  void askQuestions();
+}
+
+class Developer implements Interviewer {
+
+  @Override
+  public void askQuestions() {
+    System.out.println("Asking about design patterns");
+  }
+}
+
+class CommunityExecutive implements Interviewer {
+
+  @Override
+  public void askQuestions() {
+    System.out.println("Asking about community building");
+  }
+}
+
+abstract class HiringManager {
+  abstract Interviewer makeInterviewer();
+  public void takeInterview() {
+    Interviewer interviewer = this.makeInterviewer();
+    interviewer.askQuestions();
+  }
+}
+
+class DevelopmentManager extends HiringManager {
+  public Developer makeInterviewer() {
+    return new Developer();
+  }
+}
+
+class MarketingManager extends HiringManager {
+  public CommunityExecutive makeInterviewer() {
+    return new CommunityExecutive();
+  }
+}
+
+----------------------------
+
+DevelopmentManager devManager = new DevelopmentManager();
+devManager.takeInterview();
+
+MarketingManager marketingManager = new MarketingManager();
+marketingManager.takeInterview();
+```
+</div>
+</details>
+
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -832,7 +945,6 @@ class IronDoor(Door):
         print('I am an iron door')
 
 
-
 class DoorFittingExpert:
     def getDescription(self):
         pass
@@ -846,7 +958,6 @@ class Welder(DoorFittingExpert):
 class Carpenter(DoorFittingExpert):
     def getDescription(self):
         print('I can only fit wooden doors')
-
 
 
 class DoorFactory:
@@ -908,68 +1019,63 @@ expert.getDescription()
 <div dir="ltr">
 
 ```typescript
-class Door {
-  getDescription(): void {}
+interface Door {
+    getDescription(): void;
 }
 
-class WoodenDoor extends Door {
-  getDescription(): void {
-    console.log("I am a wooden door");
-  }
+class WoodenDoor implements Door {
+    getDescription(): void {
+        console.log("I am a wooden door");
+    }
 }
 
-class IronDoor extends Door {
-  getDescription(): void {
-    console.log("I am an iron door");
-  }
+class IronDoor implements Door {
+    getDescription(): void {
+        console.log("I am an iron door");
+    }
 }
 
-class DoorFittingExpert {
-  getDescription(): void {}
+interface DoorFittingExpert {
+    getDescription(): void;
 }
 
-class Welder extends DoorFittingExpert {
-  getDescription(): void {
-    console.log("I can only fit iron doors");
-  }
+class Welder implements DoorFittingExpert {
+    getDescription(): void {
+        console.log("I can only fit iron doors");
+    }
 }
 
-class Carpenter extends DoorFittingExpert {
-  getDescription(): void {
-    console.log("I can only fit wooden doors");
-  }
+class Carpenter implements DoorFittingExpert {
+    getDescription(): void {
+        console.log("I can only fit wooden doors");
+    }
 }
 
-class DoorFactory {
-  makeDoor(): Door {
-    return null;
-  }
+abstract class DoorFactory {
+    abstract makeDoor(): Door;
 
-  makeFittingExpert(): DoorFittingExpert {
-    return null;
-  }
+    abstract makeFittingExpert(): DoorFittingExpert;
 }
 
 class WoodenDoorFactory extends DoorFactory {
-  makeDoor(): WoodenDoor {
-    return new WoodenDoor();
-  }
+    makeDoor(): WoodenDoor {
+        return new WoodenDoor();
+    }
 
-  makeFittingExpert(): Carpenter {
-    return new Carpenter();
-  }
+    makeFittingExpert(): Carpenter {
+        return new Carpenter();
+    }
 }
 
 class IronDoorFactory extends DoorFactory {
-  makeDoor(): IronDoor {
-    return new IronDoor();
-  }
+    makeDoor(): IronDoor {
+        return new IronDoor();
+    }
 
-  makeFittingExpert(): Welder {
-    return new Welder();
-  }
+    makeFittingExpert(): Welder {
+        return new Welder();
+    }
 }
-
 ----------------------------
 
 let woodenFactory = new WoodenDoorFactory();
@@ -1301,6 +1407,92 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Door {
+    void getDescription();
+}
+
+class WoodenDoor implements Door {
+    @Override
+    public void getDescription() {
+        System.out.println("I am a wooden door");
+    }
+}
+
+class IronDoor implements Door {
+    @Override
+    public void getDescription() {
+        System.out.println("I am an iron door");
+    }
+}
+
+interface DoorFittingExpert {
+    void getDescription();
+}
+
+class Welder implements DoorFittingExpert {
+    @Override
+    public void getDescription() {
+        System.out.println("I can only fit iron doors");
+    }
+}
+
+class Carpenter implements DoorFittingExpert {
+    @Override
+    public void getDescription() {
+        System.out.println("I can only fit wooden doors");
+    }
+}
+
+interface DoorFactory {
+    Door makeDoor();
+    DoorFittingExpert makeFittingExpert();
+}
+
+class WoodenDoorFactory implements DoorFactory {
+    @Override
+    public WoodenDoor makeDoor() {
+        return new WoodenDoor();
+    }
+
+    @Override
+    public Carpenter makeFittingExpert() {
+        return new Carpenter();
+    }
+}
+
+class IronDoorFactory implements DoorFactory {
+    public IronDoor makeDoor() {
+        return new IronDoor();
+    }
+
+    public Welder makeFittingExpert() {
+        return new Welder();
+    }
+}
+
+-----
+
+IronDoorFactory ironDoorFactory = new IronDoorFactory();
+IronDoor ironDoor = ironDoorFactory.MakeDoor();
+IronDoorFittingExpert ironDoorFittingExpert = ironDoorFactory.MakeFittingExpert();
+
+ironDoor.GetDescription(); //Output : I am a iron door
+ironDoorFittingExpert.GetDescription(); //Output : I can only fit iron doors
+```
+</div>
+
+**همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+درب
+انتخاب نمی‌کنیم.**
+
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -1350,7 +1542,7 @@ def __init__(self, size, cheese=True, pepperoni=True, tomato=False, lettuce=True
 <div dir="ltr">
 
 ```typescript
-constructor(size: any, cheese: boolean = true, pepperoni: boolean = true, tomato: boolean = false, lettuce: boolean = true) {}
+constructor(size: any, cheese: boolean = true, pepperoni:boolean = true, tomato: boolean = false, lettuce: boolean = true) {}
 
 ```
 
@@ -1402,6 +1594,17 @@ func Burger(size int, cheese bool, pepperoni bool, lettuce bool, tomato bool)
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+public Burger(int size, boolean cheese, boolean pepperoni, boolean lettuce, boolean tomato)
+```
+</div>
+</details>
+
 در این شرایط معمولا Builder میتونه به دادمون برسه.
 
 <br>
@@ -1445,7 +1648,6 @@ class Burger:
         self._pepperoni = builder.pepperoni
         self._lettuce = builder.lettuce
         self._tomato = builder.tomato
-
 
 
 class BurgerBuilder:
@@ -1496,66 +1698,66 @@ print(vars(burger))
 
 ```typescript
 class Burger {
-  private size: any;
+    private size: any;
 
-  private cheese: boolean = false;
-  private pepperoni: boolean = false;
-  private lettuce: boolean = false;
-  private tomato: boolean = false;
+    private cheese: boolean = false;
+    private pepperoni: boolean = false;
+    private lettuce: boolean = false;
+    private tomato: boolean = false;
 
-  constructor(builder: any) {
-    this.size = builder.size;
-    this.cheese = builder.cheese;
-    this.pepperoni = builder.pepperoni;
-    this.lettuce = builder.lettuce;
-    this.tomato = builder.tomato;
-  }
+    constructor(builder: BurgerBuilder) {
+        this.size = builder.size;
+        this.cheese = builder.cheese;
+        this.pepperoni = builder.pepperoni;
+        this.lettuce = builder.lettuce;
+        this.tomato = builder.tomato;
+    }
 }
 
 class BurgerBuilder {
-  size: number;
+    size: number;
 
-  cheese: boolean = false;
-  pepperoni: boolean = false;
-  lettuce: boolean = false;
-  tomato: boolean = false;
+    cheese: boolean = false;
+    pepperoni: boolean = false;
+    lettuce: boolean = false;
+    tomato: boolean = false;
 
-  constructor(size: number) {
-    this.size = size;
-  }
+    constructor(size: number) {
+        this.size = size;
+    }
 
-  addPepperoni() {
-    this.pepperoni = true;
-    return this;
-  }
+    addPepperoni() {
+        this.pepperoni = true;
+        return this;
+    }
 
-  addLettuce() {
-    this.lettuce = true;
-    return this;
-  }
+    addLettuce() {
+        this.lettuce = true;
+        return this;
+    }
 
-  addCheese() {
-    this.cheese = true;
-    return this;
-  }
+    addCheese() {
+        this.cheese = true;
+        return this;
+    }
 
-  addTomato() {
-    this.tomato = true;
-    return this;
-  }
+    addTomato() {
+        this.tomato = true;
+        return this;
+    }
 
-  build(): Burger {
-    return new Burger(this);
-  }
+    build(): Burger {
+        return new Burger(this);
+    }
 }
 
 ----------------------------
 
 let burger = new BurgerBuilder(10)
-  .addPepperoni()
-  .addLettuce()
-  .addTomato()
-  .build();
+    .addPepperoni()
+    .addLettuce()
+    .addTomato()
+    .build();
 
 console.log(Object.keys(burger));
 ```
@@ -1811,6 +2013,83 @@ fmt.Println(burger.GetDescription())
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class Burger {
+    private int size;
+    private boolean cheese;
+    private boolean pepperoni;
+    private boolean lettuce;
+    private boolean tomato;
+
+    public Burger(BurgerBuilder builder) {
+        this.size = builder.size;
+        this.cheese = builder.cheese;
+        this.pepperoni = builder.pepperoni;
+        this.lettuce = builder.lettuce;
+        this.tomato = builder.tomato;
+    }
+    public String getDescription() {
+        var sb = new StringBuilder();
+        sb.append("This is " + this.size + " inch Burger.");
+        return sb.toString();
+    }
+    public static BurgerBuilder builder() {
+        return new BurgerBuilder();
+    }
+}
+
+class BurgerBuilder {
+    public int size;
+    public boolean cheese;
+    public boolean pepperoni;
+    public boolean lettuce;
+    public boolean tomato;
+    
+    public Burger build() {
+        return new Burger(this);
+    }
+    public BurgerBuilder size(int size) {
+        this.size = size;
+        return this;
+    }
+    public BurgerBuilder cheese(boolean cheese) {
+        this.cheese = cheese;
+        return this;
+    }
+    public BurgerBuilder pepperoni(boolean pepperoni) {
+        this.pepperoni = pepperoni;
+        return this;
+    }
+    public BurgerBuilder lettuce(boolean lettuce) {
+        this.lettuce = lettuce;
+        return this;
+    }
+    public BurgerBuilder tomato(boolean tomato) {
+        this.tomato = tomato;
+        return this;
+    }
+}
+
+----------------------------
+
+Burger burger = Burger.builder()
+        .size(10)
+        .cheese(true)
+        .pepperoni(true)
+        .lettuce(false)
+        .tomato(false)
+        .build();
+
+System.out.println(burger.getDescription());
+```
+</div>
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -1831,7 +2110,8 @@ fmt.Println(burger.GetDescription())
 یک مثال از دنیای واقعی:
 
 > چیزی درمورد دالی شنیدین
-> ؟ ([اگه نه اینجارو بخونید](<https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%84%DB%8C_(%DA%AF%D9%88%D8%B3%D9%81%D9%86%D8%AF)>))
+>
+؟ ([اگه نه اینجارو بخونید](<https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%84%DB%8C_(%DA%AF%D9%88%D8%B3%D9%81%D9%86%D8%AF)>))
 >
 > خیلی اینجا توضیح نمیدم، فقط بدونید همه‌چیز مربوط به شبیه سازیه!
 
@@ -1882,7 +2162,6 @@ class SomeComponent:
         new.__dict__.update(self.__dict__)
         return new
 
-
     def __deepcopy__(self, memo={}):
         some_list_of_objects = copy.deepcopy(self.some_list_of_objects, memo)
         some_circular_ref = copy.deepcopy(self.some_circular_ref, memo)
@@ -1904,36 +2183,63 @@ class SomeComponent:
 
 ```typescript
 class SomeComponent {
-  someInt: number;
-  someListOfObjects: any[];
-  someCircularRef: any;
+    someInt: number;
+    someListOfObjects: any[];
+    someCircularRef: any;
 
-  constructor(someInt: number, someListOfObjects: any[], someCircularRef: any) {
-    this.someInt = someInt;
-    this.someListOfObjects = someListOfObjects;
-    this.someCircularRef = someCircularRef;
-  }
+    constructor(someInt: number, someListOfObjects: any[], someCircularRef: any) {
+        this.someInt = someInt;
+        this.someListOfObjects = someListOfObjects;
+        this.someCircularRef = someCircularRef;
+    }
 
-  copy() {
-    let some_list_of_objects = Object.assign([], this.some_list_of_objects);
-    let some_circular_ref = Object.assign({}, this.some_circular_ref);
-    let new = new this.constructor(
-    this.some_int, some_list_of_objects, some_circular_ref
-    );
-    Object.assign(new, this);
-    return new;
-  }
+    copy() {
+        let someListOfObjects = Object.assign([], this.someListOfObjects);
+        let someCircularRef = Object.assign({}, this.someCircularRef);
+        let newComponent = new SomeComponent(
+            this.someInt, someListOfObjects, someCircularRef
+        );
+        Object.assign(newComponent, this);
+        return newComponent;
+    }
 
-  deepcopy(memo: object = {}) {
-    let some_list_of_objects = JSON.parse(JSON.stringify(this.some_list_of_objects));
-    let some_circular_ref = JSON.parse(JSON.stringify(this.some_circular_ref));
-    let new = new this.constructor(
-    this.some_int, some_list_of_objects, some_circular_ref
-    );
-    new = JSON.parse(JSON.stringify(this));
-    return new;
-  }
+    deepCopy(memo: object = {}) {
+        let someListOfObjects = JSON.parse(JSON.stringify(this.someListOfObjects));
+        let someCircularRef = JSON.parse(JSON.stringify(this.someCircularRef));
+        let newComponent = new SomeComponent(
+            this.someInt, someListOfObjects, someCircularRef
+        );
+        newComponent = JSON.parse(JSON.stringify(this));
+        return newComponent;
+    }
 }
+
+------------------------------
+
+let component = new SomeComponent(1, [1,2,3], {x : 1});
+let copyComponent = component.copy();
+
+console.log(copyComponent.someListOfObjects);   // [ 1, 2, 3 ]
+console.log(copyComponent.someCircularRef);     // { x: 1 }
+
+component.someListOfObjects.push(4);
+component.someCircularRef.y = 6;
+
+console.log(copyComponent.someListOfObjects)    // [ 1, 2, 3, 4 ]
+console.log(copyComponent.someCircularRef)      // { x: 1, y: 6 }
+
+------------------------------
+let component2 = new SomeComponent(1, [1,2,3], {x : 1});
+let copyComponent2 = component2.deepCopy();
+
+console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
+console.log(copyComponent2.someCircularRef);     // { x: 1 }
+
+component2.someListOfObjects.push(4);
+component2.someCircularRef.y = 6;
+
+console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
+console.log(copyComponent2.someCircularRef);     // { x: 1 }
 ```
 
 </div>
@@ -1996,11 +2302,10 @@ Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
 
 <br>
 
-برای deepCopy میتونیم از  json Deserialize استفاده کنیم :
+برای deepCopy میتونیم از json Deserialize استفاده کنیم :
 
 
 <div dir="ltr">
-
 
 ```C#
 
@@ -2062,7 +2367,6 @@ var managerClone = (Manager)manager.Clone(true);
 var employee = new Employee("kevin", managerClone);
 var employeeClone = (Employee)employee.Clone(true);
 ```
-
 
 </div>
 
@@ -2224,6 +2528,61 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Cloneable {
+    Object clone();
+}
+class SomeComponent implements Cloneable {
+    private int someInt;
+    private String someString;
+
+    public int getSomeInt() {return someInt;}
+    public void setSomeInt(int someInt) {this.someInt = someInt;}
+    public String getSomeString() {return someString;}
+    public void setSomeString(String someString) {this.someString = someString;}
+
+    public SomeComponent copy() {
+        return this;
+    }
+
+    public SomeComponent deepCopy() {
+        return this.clone();
+    }
+
+    @Override
+    public SomeComponent clone() {
+        SomeComponent cloned = new SomeComponent();
+        cloned.setSomeInt(this.someInt);
+        cloned.setSomeString(this.someString);
+        return cloned;
+    }
+}
+
+----------------------------
+
+SomeComponent mainComponent = new SomeComponent();
+mainComponent.setSomeInt(1);
+mainComponent.setSomeString("main");
+
+SomeComponent copyComponent = mainComponent.copy();
+SomeComponent clonedComponent = mainComponent.deepCopy();
+
+copyComponent.setSomeString("copy");
+clonedComponent.setSomeString("clone");
+
+System.out.println(mainComponent.getSomeString().equals(copyComponent.getSomeString()));    // True
+System.out.println(mainComponent.getSomeString().equals(clonedComponent.getSomeString()));  // False
+```
+
+</div>
+
+</details>
+
 <br>
 
 **تفاوت Shadow Copy و Deep Copy ؟**
@@ -2316,22 +2675,22 @@ if __name__ == "__main__":
 
 ```typescript
 class SingletonMeta extends Function {
-  static _instances: { [key: string]: any } = {};
+    static _instances: { [key: string]: any } = {};
 
-  constructor(...args: any[]) {
-    const instance = super(...args);
-    const className = this.constructor.name;
-    if (!SingletonMeta._instances[className]) {
-      SingletonMeta._instances[className] = instance;
+    constructor(...args: any[]) {
+        const instance = super(...args);
+        const className = this.constructor.name;
+        if (!SingletonMeta._instances[className]) {
+            SingletonMeta._instances[className] = instance;
+        }
+        return SingletonMeta._instances[className];
     }
-    return SingletonMeta._instances[className];
-  }
 }
 
 class Singleton extends SingletonMeta {
-  someBusinessLogic() {
-    // implementation
-  }
+    someBusinessLogic() {
+        // implementation
+    }
 }
 
 ----------------------------
@@ -2339,9 +2698,9 @@ class Singleton extends SingletonMeta {
 const s1 = Singleton.getInstance();
 const s2 = Singleton.getInstance();
 if (Object.is(s1, s2)) {
-  console.log("Singleton works, both variables contain the same instance.");
+    console.log("Singleton works, both variables contain the same instance.");
 } else {
-  console.log("Singleton failed, variables contain different instances.");
+    console.log("Singleton failed, variables contain different instances.");
 }
 ```
 
@@ -2448,6 +2807,39 @@ b := GetInstance()
 fmt.Println(a == b) // Output: true
 
 
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class President {
+    private static President instance;
+    // Private constructor
+    private President() {
+        // Hiding the Constructor
+    }
+
+    public static President getInstance() {
+        if (instance == null) {
+            instance = new President();
+        }
+        return instance;
+    }
+}
+
+----------------------------
+
+President a = President.getInstance();
+President b = President.getInstance();
+
+System.out.println(a == b); // True
 ```
 
 </div>
@@ -2592,37 +2984,41 @@ hunter.hunt(wildDogAdapter)
 
 ```typescript
 class Lion {
-  roar(): void {}
+    roar(): void {
+    }
 }
 
 class AfricanLion extends Lion {
-  roar(): void {}
+    roar(): void {
+    }
 }
 
 class AsianLion extends Lion {
-  roar(): void {}
+    roar(): void {
+    }
 }
 
 class Hunter {
-  hunt(lion: Lion): void {
-    lion.roar();
-  }
+    hunt(lion: Lion): void {
+        lion.roar();
+    }
 }
 
 class WildDog {
-  static bark(): void {}
+    static bark(): void {
+    }
 }
 
 class WildDogAdapter implements Lion {
-  private dog: WildDog;
+    private dog: WildDog;
 
-  constructor(dog: WildDog) {
-    this.dog = dog;
-  }
+    constructor(dog: WildDog) {
+        this.dog = dog;
+    }
 
-  roar(): void {
-    this.dog.bark();
-  }
+    roar(): void {
+        this.dog.bark();
+    }
 }
 
 ----------------------------
@@ -2824,6 +3220,73 @@ fmt.Println("Done")
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Lion {
+    
+    void roar();
+}
+
+class AfricanLion implements Lion {
+
+    @Override
+    public void roar() {
+        System.out.println("African lion roaring.");
+    }
+}
+
+class AsianLion implements Lion {
+
+    @Override
+    public void roar() {
+        System.out.println("Asian lion roaring.");
+    }
+}
+
+class Hunter {
+    
+    public void Hunt(Lion lion) {
+        System.out.println("Attacking and listening...🦻");
+        lion.roar();
+    }
+}
+
+class WildDog {
+    
+    public void bark() {
+        System.out.println("Wild dog barking");
+    }
+}
+
+// Adapter around wild dog to make it compatible
+class WildDogAdapter implements Lion {
+    private WildDog wildDog;
+
+    public WildDogAdapter(WildDog wildDog) {
+        this.wildDog = wildDog;
+    }
+    public void roar() {
+        wildDog.bark();
+    }
+}
+
+----------------------------
+
+WildDog wildDog = new WildDog();
+WildDogAdapter wildDogAdapter = new WildDogAdapter(wildDog);
+
+Hunter hunter = new Hunter();
+hunter.Hunt(wildDogAdapter);
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -2936,51 +3399,51 @@ print(careers.getContent())
 
 ```typescript
 class WebPage {
-  protected _theme: any;
+    protected _theme: any;
 
-  constructor(theme: any) {
-    this._theme = theme;
-  }
+    constructor(theme: any) {
+        this._theme = theme;
+    }
 
-  getContent(): string {
-    return "";
-  }
+    getContent(): string {
+        return "";
+    }
 }
 
 class About extends WebPage {
-  getContent(): string {
-    return "About page in " + this._theme.getColor();
-  }
+    getContent(): string {
+        return "About page in " + this._theme.getColor();
+    }
 }
 
 class Careers extends WebPage {
-  getContent(): string {
-    return "Careers page in " + this._theme.getColor();
-  }
+    getContent(): string {
+        return "Careers page in " + this._theme.getColor();
+    }
 }
 
 class Theme {
-  getColor(): string {
-    return "";
-  }
+    getColor(): string {
+        return "";
+    }
 }
 
 class DarkTheme extends Theme {
-  getColor(): string {
-    return "Dark Black";
-  }
+    getColor(): string {
+        return "Dark Black";
+    }
 }
 
 class LightTheme extends Theme {
-  getColor(): string {
-    return "Off White";
-  }
+    getColor(): string {
+        return "Off White";
+    }
 }
 
 class AquaTheme extends Theme {
-  getColor(): string {
-    return "Light Blue";
-  }
+    getColor(): string {
+        return "Light Blue";
+    }
 }
 
 ----------------------------
@@ -3158,10 +3621,10 @@ echo $careers->getColor() . "\n"; //Output: Careers page in Off White
 </details>
 
 <details>
-<summary>PHP</summary>
+<summary>Go</summary>
 <div dir="ltr">
 
-```PHP
+```go
 package main
 
 import "fmt"
@@ -3232,6 +3695,72 @@ fmt.Println(careers.GetContent()) // Output: Careers page in Off White
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface WebPage {
+    String getContent();
+}
+
+interface Theme {
+    String getColor();
+}
+
+class About implements WebPage {
+    private Theme theme;
+
+    public About(Theme theme) {
+        this.theme = theme;
+    }
+
+    public String getContent() {
+        return "About page in " + theme.getColor();
+    }
+}
+
+class Careers implements WebPage {
+    private Theme theme;
+
+    public Careers(Theme theme) {
+        this.theme = theme;
+    }
+
+    public String getContent(){
+        return "Careers page in "+ theme.getColor();
+    }
+}
+
+class DarkTheme implements Theme {
+    public String getColor() {
+        return "Dark theme";
+    }
+}
+
+class LightTheme implements Theme {
+    public String getColor() {
+        return "Light theme";
+    }
+}
+
+----------------------------
+    
+DarkTheme darkTheme = new DarkTheme();
+LightTheme lightTheme = new LightTheme();
+
+About about= new About(darkTheme);
+Careers careers = new Careers(lightTheme);
+
+System.out.println(about.getContent());     // About page in Dark theme
+System.out.println(careers.getContent());   // Careers page in Light theme
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -3245,7 +3774,8 @@ fmt.Println(careers.GetContent()) // Output: Careers page in Off White
 یک مثال از دنیای واقعی:
 
 > فرض کنید شما یک کلاس ارسال مرسوله طراحی میکنید:
-> <br> > ![Composite](images/Composite.png)
+> 
+> ![Composite](images/Composite.png)
 >
 > هر کلاس یک جعبه هست که میتونه شامل چند جعبه دیگه یا شامل چند شیء باشه.
 >
@@ -3353,36 +3883,38 @@ print(f"RESULT: {tree.operation()}", end="")
 
 ```typescript
 interface Component {
-  add(component: Component): void;
-  remove(component: Component): void;
-  operation(): string;
+    add(component: Component): void;
+
+    remove(component: Component): void;
+
+    operation(): string;
 }
 
 class Leaf implements Component {
-  operation(): string {
-    return "Leaf";
-  }
+    operation(): string {
+        return "Leaf";
+    }
 }
 
 class Composite implements Component {
-  private children: Component[] = [];
+    private children: Component[] = [];
 
-  add(component: Component): void {
-    this.children.push(component);
-  }
-
-  remove(component: Component): void {
-    const index = this.children.indexOf(component);
-    this.children.splice(index, 1);
-  }
-
-  operation(): string {
-    const results: string[] = [];
-    for (const child of this.children) {
-      results.push(child.operation());
+    add(component: Component): void {
+        this.children.push(component);
     }
-    return `Branch(${results.join("+")})`;
-  }
+
+    remove(component: Component): void {
+        const index = this.children.indexOf(component);
+        this.children.splice(index, 1);
+    }
+
+    operation(): string {
+        const results: string[] = [];
+        for (const child of this.children) {
+            results.push(child.operation());
+        }
+        return `Branch(${results.join("+")})`;
+    }
 }
 
 ----------------------------
@@ -3699,6 +4231,97 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Employee {
+
+    float getSalary();
+    String getRole();
+    String getName();
+}
+
+class Developer implements Employee {
+    private String name;
+    private float salary;
+
+    public Developer(String name, float salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public float getSalary() {
+        return this.salary;
+    }
+    public String getRole() {
+        return "Developer";
+    }
+    public String getName() {
+        return this.name;
+    }
+}
+
+class Designer implements Employee {
+    private String name;
+    private float salary;
+
+    public Designer(String name, float salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public float getSalary() {
+        return this.salary;
+    }
+    public String getRole() {
+        return "Designer";
+    }
+    public String getName() {
+        return this.name;
+    }
+}
+
+class Organization {
+    protected List<Employee> employees;
+
+    public Organization() {
+        employees = new ArrayList<>();
+    }
+
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+    }
+
+    public float getNetSalaries() {
+        float netSalary = 0;
+
+        for(Employee employee : employees) {
+            netSalary += employee.getSalary();
+        }
+        return netSalary;
+    }
+}
+
+----------------------------
+
+Developer developer = new Developer("John",5000);
+Designer designer = new Designer("Arya",5000);
+
+Organization organization = new Organization();
+organization.addEmployee(developer);
+organization.addEmployee(designer);
+
+System.out.println("Organization employees salary : " + organization.getNetSalaries());
+// Organization employees salary : 10000.0
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -3741,7 +4364,8 @@ func main() {
 
 پس بیاید چند دکوریتور براش بسازیم.
 
-همونطور که میبینید خیلی ساده میتونیم هر ابجکت رو به عنوان ورودی تابع بعدی بدیم و اینطوری چندین مرحله افزودنی رو خیلی راحت به ابجکتمون اضافه کردیم!
+همونطور که میبینید خیلی ساده میتونیم هر ابجکت رو به عنوان ورودی تابع بعدی بدیم و اینطوری چندین مرحله افزودنی رو خیلی
+راحت به ابجکتمون اضافه کردیم!
 
 <details>
 <summary>Python</summary>
@@ -3763,7 +4387,6 @@ class SimpleCoffee(Coffee):
 
     def getDescription(self):
         return 'Simple Coffee'
-
 
 
 class MilkCoffee(Coffee):
@@ -3804,6 +4427,7 @@ class VanillaCoffee(Coffee):
     def getDescription(self):
         return self._coffee.getDescription() + ', vanilla'
 
+
 ----------------------------
 
 someCoffee = SimpleCoffee()
@@ -3832,71 +4456,71 @@ print(someCoffee.getDescription())
 <div dir="ltr">
 
 ```typescript
-class Coffee {
-  getCost(): number {
-    return;
-  }
-  getDescription(): string {
-    return;
-  }
+abstract class Coffee {
+    abstract getCost(): number;
+
+    abstract getDescription(): string;
 }
 
 class SimpleCoffee extends Coffee {
-  getCost(): number {
-    return 10;
-  }
-  getDescription(): string {
-    return "Simple Coffee";
-  }
+    getCost(): number {
+        return 10;
+    }
+
+    getDescription(): string {
+        return "Simple Coffee";
+    }
 }
 
 class MilkCoffee extends Coffee {
-  private coffee: Coffee;
+    private coffee: Coffee;
 
-  constructor(coffee: Coffee) {
-    super();
-    this.coffee = coffee;
-  }
+    constructor(coffee: Coffee) {
+        super();
+        this.coffee = coffee;
+    }
 
-  getCost(): number {
-    return this.coffee.getCost() + 2;
-  }
+    getCost(): number {
+        return this.coffee.getCost() + 2;
+    }
 
-  getDescription(): string {
-    return this.coffee.getDescription() + ", milk";
-  }
+    getDescription(): string {
+        return this.coffee.getDescription() + ", milk";
+    }
 }
 
 class WhipCoffee extends Coffee {
-  private coffee: Coffee;
-  constructor(coffee: Coffee) {
-    super();
-    this.coffee = coffee;
-  }
+    private coffee: Coffee;
 
-  getCost(): number {
-    return this.coffee.getCost() + 5;
-  }
+    constructor(coffee: Coffee) {
+        super();
+        this.coffee = coffee;
+    }
 
-  getDescription(): string {
-    return this.coffee.getDescription() + ", whip";
-  }
+    getCost(): number {
+        return this.coffee.getCost() + 5;
+    }
+
+    getDescription(): string {
+        return this.coffee.getDescription() + ", whip";
+    }
 }
 
 class VanillaCoffee extends Coffee {
-  private coffee: Coffee;
-  constructor(coffee: Coffee) {
-    super();
-    this.coffee = coffee;
-  }
+    private coffee: Coffee;
 
-  getCost(): number {
-    return this.coffee.getCost() + 3;
-  }
+    constructor(coffee: Coffee) {
+        super();
+        this.coffee = coffee;
+    }
 
-  getDescription(): string {
-    return this.coffee.getDescription() + ", vanilla";
-  }
+    getCost(): number {
+        return this.coffee.getCost() + 3;
+    }
+
+    getDescription(): string {
+        return this.coffee.getDescription() + ", vanilla";
+    }
 }
 
 ----------------------------
@@ -4229,6 +4853,106 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Coffee {
+    
+    int getCost();
+    String getDescription();
+}
+
+class SimpleCoffee implements Coffee {
+    
+    public int getCost() {
+        return 5;
+    }
+
+    public String getDescription() {
+        return "Simple Coffee";
+    }
+}
+
+class MilkCoffee implements Coffee {
+    private final Coffee coffee;
+
+    public MilkCoffee(Coffee coffee) {
+        if(coffee == null)
+            throw new IllegalArgumentException("coffee should not be null");
+        this.coffee = coffee;
+    }
+
+    public int getCost() {
+        return coffee.getCost() + 1;
+    }
+
+    public String getDescription() {
+        return coffee.getDescription() + ", Milk";
+    }
+}
+
+class WhipCoffee implements Coffee {
+    private final Coffee coffee;
+
+    public WhipCoffee(Coffee coffee) {
+        if(coffee == null)
+            throw new IllegalArgumentException("coffee should not be null");
+        this.coffee = coffee;
+    }
+
+    public int getCost() {
+        return coffee.getCost() + 1;
+    }
+
+    public String getDescription() {
+        return coffee.getDescription() + ", Whip";
+    }
+}
+
+class VanillaCoffee implements Coffee {
+    private final Coffee coffee;
+
+    public VanillaCoffee(Coffee coffee) {
+        if(coffee == null)
+            throw new IllegalArgumentException("coffee should not be null");
+        this.coffee = coffee;
+    }
+
+    public int getCost() {
+        return coffee.getCost() + 1;
+    }
+
+    public String getDescription() {
+        return coffee.getDescription() + ", Vanilla";
+    }
+}
+
+----------------------------
+
+SimpleCoffee simpleCoffee = new SimpleCoffee();
+System.out.println("$" + simpleCoffee.getCost()); // $5
+System.out.println(simpleCoffee.getDescription()); // Simple Coffee
+
+MilkCoffee milkCoffee = new MilkCoffee(simpleCoffee);
+System.out.println("$" + milkCoffee.getCost()); // $6
+System.out.println(milkCoffee.getDescription()); // Simple Coffee, Milk
+
+WhipCoffee whipCoffee = new WhipCoffee(milkCoffee);
+System.out.println("$" + whipCoffee.getCost()); // $7
+System.out.println(whipCoffee.getDescription()); // Simple Coffee, Milk, Whip
+
+VanillaCoffee vanillaCoffee = new VanillaCoffee(whipCoffee);
+System.out.println("$" + vanillaCoffee.getCost()); // $8
+System.out.println(vanillaCoffee.getDescription()); // Simple Coffee, Milk, Whip, Vanilla
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -4314,6 +5038,7 @@ class ComputerFacade:
         self.computer.pullCurrent()
         self.computer.sooth()
 
+
 ----------------------------
 
 computer = ComputerFacade(Computer())
@@ -4333,61 +5058,64 @@ computer.turnOff()
 
 ```typescript
 class Computer {
-  getElectricShock() {
-    console.log("Ouch!");
-  }
-  makeSound() {
-    console.log("Beep Beep!");
-  }
+    getElectricShock() {
+        console.log("Ouch!");
+    }
 
-  showLoadingScreen() {
-    console.log("Loading...");
-  }
+    makeSound() {
+        console.log("Beep Beep!");
+    }
 
-  bam() {
-    console.log("Ready to be used...");
-  }
+    showLoadingScreen() {
+        console.log("Loading...");
+    }
 
-  closeEverything() {
-    console.log("Bup bup bup buzzz!");
-  }
+    bam() {
+        console.log("Ready to be used...");
+    }
 
-  sooth() {
-    console.log("Zzzzz");
-  }
+    closeEverything() {
+        console.log("Bup bup bup buzzz!");
+    }
 
-  pullCurrent() {
-    console.log("Haaah!");
-  }
+    sooth() {
+        console.log("Zzzzz");
+    }
+
+    pullCurrent() {
+        console.log("Haaah!");
+    }
 }
 
 class ComputerFacade {
-  private computer: Computer;
-  constructor(computer: Computer) {
-    this.computer = computer;
-  }
+    private computer: Computer;
 
-  set computer(computer: Computer) {
-    this.computer = computer;
-  }
+    constructor(computer: Computer) {
+        this.computer = computer;
+    }
 
-  turnOn() {
-    this.computer.getElectricShock();
-    this.computer.makeSound();
-    this.computer.showLoadingScreen();
-    this.computer.bam();
-  }
+    set computer(computer: Computer) {
+        this.computer = computer;
+    }
 
-  turnOff() {
-    this.computer.closeEverything();
-    this.computer.pullCurrent();
-    this.computer.sooth();
-  }
+    turnOn() {
+        this.computer.getElectricShock();
+        this.computer.makeSound();
+        this.computer.showLoadingScreen();
+        this.computer.bam();
+    }
+
+    turnOff() {
+        this.computer.closeEverything();
+        this.computer.pullCurrent();
+        this.computer.sooth();
+    }
 }
 
 ----------------------------
 
-let computer = new ComputerFacade(new Computer());
+    let
+computer = new ComputerFacade(new Computer());
 computer.turnOn();
 computer.turnOff();
 ```
@@ -4638,6 +5366,78 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class Computer {
+    public void getElectricShock() {
+        System.out.println("Ouch!");
+    }
+
+    public void makeSound() {
+        System.out.println("Beep beep!");
+    }
+
+    public void showLoadingScreen() {
+        System.out.println("Loading..");
+    }
+
+    public void bam() {
+        System.out.println("Ready to be used!");
+    }
+
+    public void closeEverything() {
+        System.out.println("Bup bup bup buzzzz!");
+    }
+
+    public void sooth() {
+        System.out.println("Zzzzz");
+    }
+
+    public void pullCurrent() {
+        System.out.println("Haaah!");
+    }
+}
+
+class ComputerFacade {
+    private Computer computer;
+
+    public ComputerFacade(Computer computer) {
+        if (computer == null)
+            throw new IllegalArgumentException("computer cannot be null");
+        this.computer = computer;
+    }
+
+    public void turnOn() {
+        computer.getElectricShock();
+        computer.makeSound();
+        computer.showLoadingScreen();
+        computer.bam();
+    }
+
+    public void turnOff() {
+        computer.closeEverything();
+        computer.pullCurrent();
+        computer.sooth();
+    }
+}
+
+----------------------------
+
+ComputerFacade computer = new ComputerFacade(new Computer());
+computer.turnOn();      // Ouch! Beep beep! Loading.. Ready to be used!
+System.out.println();
+computer.turnOff();     // Bup bup buzzz! Haah! Zzzzz
+System.out.println();
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -4710,6 +5510,7 @@ class TeaShop:
         for table, tea in self._orders.iteritems():
             print("Serving tea to table #" + str(table))
 
+
 ----------------------------
 
 teaMaker = TeaMaker()
@@ -4734,41 +5535,45 @@ shop.serve()
 <div dir="ltr">
 
 ```typescript
-class GreenTea {}
+class GreenTea {
+}
 
 class TeaMaker {
-  private availableTea: { [key: string]: GreenTea } = {};
-  make(preference: string): GreenTea {
-    if (!(preference in this.availableTea)) {
-      this.availableTea[preference] = new GreenTea();
-    }
+    private availableTea: { [key: string]: GreenTea } = {};
 
-    return this.availableTea[preference];
-  }
+    make(preference: string): GreenTea {
+        if (!(preference in this.availableTea)) {
+            this.availableTea[preference] = new GreenTea();
+        }
+
+        return this.availableTea[preference];
+    }
 }
 
 class TeaShop {
-  private orders: { [key: number]: GreenTea } = {};
-  private teaMaker: TeaMaker;
-  constructor(teaMaker: TeaMaker) {
-    this.teaMaker = teaMaker;
-  }
+    private orders: { [key: number]: GreenTea } = {};
+    private teaMaker: TeaMaker;
 
-  takeOrder(teaType: string, table: number) {
-    this.orders[table] = this.teaMaker.make(teaType);
-  }
-
-  serve() {
-    for (const table in this.orders) {
-      const tea = this.orders[table];
-      console.log(`Serving tea to table #${table}`);
+    constructor(teaMaker: TeaMaker) {
+        this.teaMaker = teaMaker;
     }
-  }
+
+    takeOrder(teaType: string, table: number) {
+        this.orders[table] = this.teaMaker.make(teaType);
+    }
+
+    serve() {
+        for (const table in this.orders) {
+            const tea = this.orders[table];
+            console.log(`Serving tea to table #${table}`);
+        }
+    }
 }
 
 ----------------------------
 
-let teaMaker = new TeaMaker();
+    let
+teaMaker = new TeaMaker();
 let shop = new TeaShop(teaMaker);
 
 shop.takeOrder("less sugar", 1);
@@ -4990,6 +5795,69 @@ teaShop.Serve()
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+// Anything that will be cached is flyweight.
+// Types of tea here will be flyweights.
+class KarakTea {
+}
+
+// Acts as a factory and saves the tea
+class TeaMaker {
+    private Map<String, KarakTea> availableTea = new HashMap<>();
+
+    public KarakTea make(String preference) {
+        if (!availableTea.containsKey(preference)) {
+            availableTea.put(preference, new KarakTea());
+        }
+        return availableTea.get(preference);
+    }
+}
+
+class TeaShop {
+    private Map<Integer, KarakTea> orders = new HashMap<>();
+    private TeaMaker teaMaker;
+
+    public TeaShop(TeaMaker teaMaker) {
+        if(teaMaker == null)
+            throw new IllegalArgumentException("teaMaker cannot be null");
+        this.teaMaker = teaMaker;
+    }
+
+    public void takeOrder(String teaType, int table) {
+        orders.put(table, teaMaker.make(teaType));
+    }
+
+    public void serve() {
+        for(Integer tableNo : orders.keySet()) {
+            System.out.println("Serving Tea to table " + tableNo);
+        }
+    }
+}
+
+----------------------------
+
+TeaMaker teaMaker = new TeaMaker();
+TeaShop teaShop = new TeaShop(teaMaker);
+
+teaShop.takeOrder("less sugar", 1);
+teaShop.takeOrder("more milk", 2);
+teaShop.takeOrder("without sugar", 5);
+
+teaShop.serve();
+// Serving tea to table 1
+// Serving tea to table 2
+// Serving tea to table 5
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -5068,6 +5936,7 @@ class SecuredDoor():
     def close(self):
         self.door.close()
 
+
 ----------------------------
 
 door = SecuredDoor(LabDoor())
@@ -5086,41 +5955,44 @@ door.close()  # Closing Lab Door
 <div dir="ltr">
 
 ```typescript
-class Door {
-  open(): void {}
-  close(): void {}
+interface Door {
+    open(): void;
+
+    close(): void;
 }
 
-class LabDoor extends Door {
-  open(): void {
-    console.log("Opening lab door");
-  }
-  close(): void {
-    console.log("Closing the lab door");
-  }
+class LabDoor implements Door {
+    open(): void {
+        console.log("Opening lab door");
+    }
+
+    close(): void {
+        console.log("Closing the lab door");
+    }
 }
 
 class SecuredDoor {
-  private door: Door;
-  constructor(door: Door) {
-    this.door = door;
-  }
+    private door: Door;
 
-  open(password: string): void {
-    if (this.authenticate(password)) {
-      this.door.open();
-    } else {
-      console.log("Big no! It ain't possible.");
+    constructor(door: Door) {
+        this.door = door;
     }
-  }
 
-  authenticate(password: string): boolean {
-    return password === "$ecr@t";
-  }
+    open(password: string): void {
+        if (this.authenticate(password)) {
+            this.door.open();
+        } else {
+            console.log("Big no! It ain't possible.");
+        }
+    }
 
-  close(): void {
-    this.door.close();
-  }
+    authenticate(password: string): boolean {
+        return password === "$ecr@t";
+    }
+
+    close(): void {
+        this.door.close();
+    }
 }
 
 ----------------------------
@@ -5319,6 +6191,72 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface Door {
+    void open();
+    void close();
+}
+
+class LabDoor implements Door {
+    public void close() {
+        System.out.println("Closing lab door");
+    }
+
+    public void open() {
+        System.out.println("Opening lab door");
+    }
+}
+
+class SecuredDoor implements Door {
+    private Door door;
+
+    public SecuredDoor(Door door) {
+        if (door == null)
+            throw new IllegalArgumentException("door can not be null");
+        this.door = door;
+    }
+
+    public void open(String password) {
+        if (authenticate(password)) {
+            door.open();
+        } else {
+            System.out.println("Big no! It ain't possible.");
+        }
+    }
+
+    private boolean authenticate(String password) {
+        return "$ecr@t".equals(password);
+    }
+    
+    @Override
+    public void open() {
+        System.out.println("Big no! It ain't possible.");
+    }
+
+    @Override
+    public void close() {
+        door.close();
+    }
+}
+
+----------------------------
+
+SecuredDoor door = new SecuredDoor(new LabDoor());
+
+door.open("invalid");       // Big no! It ain't possible.
+door.open("$ecr@t");        // Opening lab door
+door.close();               // Closing lab door
+```
+
+</div>
+
+</details>
+
 <br>
 <br>
 
@@ -5492,7 +6430,9 @@ class Account {
     pay(amountToPay: number): void {
         const myCaller = (new Error().stack as string).split("at ")[2].split(" ")[0];
         if (this.canPay(amountToPay)) {
-            console.log(‍‍`Paid ${amountToPay} using ${myCaller}`);
+            console.log(‍‍`Paid ${amountToPay} using ${myCaller}`
+        )
+            ;
         } else if (this._successor) {
             console.log(`Cannot pay using ${myCaller}. Proceeding ..`);
             this._successor.pay(amountToPay);
@@ -5544,13 +6484,26 @@ paypal.setNext(bitcoin);
 
 bank.pay(259);
 
-'''
-Output will be
-==============
-Cannot pay using bank. Proceeding ..
-Cannot pay using paypal. Proceeding ..:
-Paid 259 using Bitcoin!
-'''
+''
+'
+Output
+will
+be
+=== === === === ==
+Cannot
+pay
+using
+bank.Proceeding..Cannot
+pay
+using
+paypal.Proceeding..
+:
+Paid
+259
+using
+Bitcoin!
+''
+'
 ```
 
 </div>
@@ -5815,6 +6768,78 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+abstract class Account {
+  private Account successor;
+  protected Integer balance;
+
+  public void setNext(Account account) {
+    successor = account;
+  }
+
+  public void pay(Integer amountToPay) throws Exception {
+    String accountType = this.getClass().getName();
+    if (canPay(amountToPay)) {
+      System.out.println("Successful payment ($" + amountToPay +") by " + accountType + " account" );
+    } else if (this.successor != null) {
+      System.out.println("Cannot pay by " + accountType + " account. Proceeding...");
+      successor.pay(amountToPay);
+    } else {
+      throw new Exception("None of the accounts have enough balance");
+    }
+  }
+
+  private boolean canPay(Integer amount) {
+    return balance >= amount;
+  }
+}
+
+class Bank extends Account {
+  public Bank(Integer balance) {
+    this.balance = balance;
+  }
+}
+
+class Paypal extends Account {
+  public Paypal(Integer balance) {
+    this.balance = balance;
+  }
+}
+
+class Bitcoin extends Account {
+  public Bitcoin(Integer balance) {
+    this.balance = balance;
+  }
+}
+
+----------------------------
+
+// Creating payment accounts
+Bank bank =         new Bank(100);      // Bank     balance 100
+Paypal paypal =     new Paypal(200);    // Paypal   balance 200
+Bitcoin bitcoin =   new Bitcoin(300);   // Bitcoin  balance 300
+
+// Creating payment chain
+// Bank -> Paypal -> Bitcoin
+bank.setNext(paypal);
+paypal.setNext(bitcoin);
+
+// Do pay
+bank.pay(259);
+// Cannot pay by Bank account.   Proceeding...
+// Cannot pay by Paypal account. Proceeding...
+// Successful payment ($259) by Bitcoin account!
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -5870,6 +6895,7 @@ class Bulb:
     def turnOff(self):
         print("Darkness!")
 
+
 class Command:
     _bulb = None
 
@@ -5918,41 +6944,42 @@ remote.submit(turnOff)  # Darkness!
 
 ```typescript
 class Bulb {
-  turnOn() {
-    console.log("Bulb has been lit");
-  }
+    turnOn() {
+        console.log("Bulb has been lit");
+    }
 
-  turnOff() {
-    console.log("Darkness!");
-  }
+    turnOff() {
+        console.log("Darkness!");
+    }
 }
 
 class Command {
-  protected _bulb: Bulb | null = null;
+    protected _bulb: Bulb | null = null;
 
-  constructor(bulb: Bulb) {
-    this._bulb = bulb;
-  }
+    constructor(bulb: Bulb) {
+        this._bulb = bulb;
+    }
 
-  execute(): void {}
+    execute(): void {
+    }
 }
 
 class TurnOn extends Command {
-  execute() {
-    this._bulb!.turnOn();
-  }
+    execute() {
+        this._bulb!.turnOn();
+    }
 }
 
 class TurnOff extends Command {
-  execute() {
-    this._bulb!.turnOff();
-  }
+    execute() {
+        this._bulb!.turnOff();
+    }
 }
 
 class RemoteControl {
-  submit(command: { execute: () => void }) {
-    command.execute();
-  }
+    submit(command: { execute: () => void }) {
+        command.execute();
+    }
 }
 
 ----------------------------
@@ -6266,6 +7293,102 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+// Receiver
+class Bulb {
+    public void turnOn() {
+        System.out.println("Bulb is turned ON");
+    }
+
+    public void turnOff() {
+        System.out.println("Bulb is turned OFF");
+    }
+}
+
+interface Command {
+    void execute();
+    void undo();
+    void redo();
+}
+
+// Command
+class TurnOn implements Command {
+    private Bulb bulb;
+
+    public TurnOn(Bulb bulb) {
+        if (bulb == null)
+            throw new IllegalArgumentException("Bulb cannot be null");
+        this.bulb = bulb;
+    }
+
+    @Override
+    public void execute() {
+        bulb.turnOn();
+    }
+
+    @Override
+    public void undo() {
+        bulb.turnOff();
+    }
+
+    @Override
+    public void redo() {
+        execute();
+    }
+}
+
+class TurnOff implements Command {
+    private Bulb bulb;
+
+    public TurnOff(Bulb bulb) {
+        if (bulb == null)
+            throw new IllegalArgumentException("Bulb cannot be null");
+        this.bulb = bulb;
+    }
+
+    @Override
+    public void execute() {
+        bulb.turnOff();
+    }
+
+    @Override
+    public void undo() {
+        bulb.turnOn();
+    }
+
+    @Override
+    public void redo() {
+        execute();
+    }
+}
+
+// Invoker
+class RemoteControl {
+    public void submit(Command command) {
+        command.execute();
+    }
+}
+
+----------------------------
+
+Bulb bulb = new Bulb();
+TurnOn turnOnCmd = new TurnOn(bulb);
+TurnOff turnOffCmd = new TurnOff(bulb);
+
+RemoteControl remote = new RemoteControl();
+remote.submit(turnOnCmd);       // Bulb is turned ON
+remote.submit(turnOffCmd);      // Bulb is turned OFF
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -6374,45 +7497,45 @@ if __name__ == "__main__":
 
 ```typescript
 interface Iterator<T> {
-  next(): { value: T; done: boolean };
+    next(): { value: T; done: boolean };
 }
 
 class AlphabeticalOrderIterator implements Iterator<string> {
-  private position: number;
+    private position: number;
 
-  constructor(private collection: WordsCollection, private reverse = false) {
-    this.position = this.reverse ? -1 : 0;
-  }
-
-  next() {
-    try {
-      const value = this.collection.collection[this.position];
-      this.position += this.reverse ? -1 : 1;
-      return { value, done: false };
-    } catch (error) {
-      return { value: undefined, done: true };
+    constructor(private collection: WordsCollection, private reverse = false) {
+        this.position = this.reverse ? -1 : 0;
     }
-  }
+
+    next() {
+        try {
+            const value = this.collection.collection[this.position];
+            this.position += this.reverse ? -1 : 1;
+            return {value, done: false};
+        } catch (error) {
+            return {value: undefined, done: true};
+        }
+    }
 }
 
 class WordsCollection {
-  collection: string[];
+    collection: string[];
 
-  constructor(collection: string[] = []) {
-    this.collection = collection;
-  }
+    constructor(collection: string[] = []) {
+        this.collection = collection;
+    }
 
-  [Symbol.iterator]() {
-    return new AlphabeticalOrderIterator(this);
-  }
+    [Symbol.iterator]() {
+        return new AlphabeticalOrderIterator(this);
+    }
 
-  getReverseIterator() {
-    return new AlphabeticalOrderIterator(this, true);
-  }
+    getReverseIterator() {
+        return new AlphabeticalOrderIterator(this, true);
+    }
 
-  addItem(item: string) {
-    this.collection.push(item);
-  }
+    addItem(item: string) {
+        this.collection.push(item);
+    }
 }
 
 ----------------------------
@@ -6424,12 +7547,12 @@ collection.addItem("Third");
 
 console.log("Straight traversal:");
 for (const item of collection) {
-  console.log(item);
+    console.log(item);
 }
 
 console.log("\nReverse traversal:");
 for (const item of collection.getReverseIterator()) {
-  console.log(item);
+    console.log(item);
 }
 ```
 
@@ -6712,6 +7835,75 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class RadioStation {
+    private float frequency;
+
+    public RadioStation(float frequency) {
+        this.frequency = frequency;
+    }
+
+    public float getFrequency() {
+        return frequency;
+    }
+}
+
+class StationList implements Iterable<RadioStation> {
+    private List<RadioStation> stations;
+
+    public StationList() {
+        stations = new ArrayList<>();
+    }
+
+    public List<RadioStation> getStations() {
+        return stations;
+    }
+
+    public void add(RadioStation station) {
+        stations.add(station);
+    }
+
+    public void remove(RadioStation station) {
+        stations.remove(station);
+    }
+
+    @Override
+    public Iterator<RadioStation> iterator() {
+        return this.getStations().iterator();
+    }
+}
+
+----------------------------
+
+StationList stations = new StationList();
+RadioStation station1 = new RadioStation(89);
+stations.add(station1);
+
+RadioStation station2 = new RadioStation(101);
+stations.add(station2);
+
+RadioStation station3 = new RadioStation(102);
+stations.add(station3);
+
+Iterator<RadioStation> stationIterator = stations.iterator();
+while (stationIterator.hasNext()) {
+RadioStation radioStation = stationIterator.next();
+System.out.println(radioStation.getFrequency());
+}
+// 89.0
+// 101.0
+// 102.0
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -6781,8 +7973,8 @@ class User:
     def send(self, message):
         self._chatMediator.showMessage(self, message)
 
-----------------------------
 
+----------------------------
 
 mediator = ChatRoom()
 
@@ -6807,34 +7999,35 @@ jane.send('Hey!')
 
 ```typescript
 class ChatRoomMediator {
-  showMessage(user: User, message: string): void {}
+    showMessage(user: User, message: string): void {
+    }
 }
 
 class ChatRoom extends ChatRoomMediator {
-  showMessage(user: User, message: string): void {
-    let time = new Date();
-    let sender = user.getName();
+    showMessage(user: User, message: string): void {
+        let time = new Date();
+        let sender = user.getName();
 
-    console.log(`${time.toLocaleString()} [${sender}]: ${message}`);
-  }
+        console.log(`${time.toLocaleString()} [${sender}]: ${message}`);
+    }
 }
 
 class User {
-  private name: string;
-  private chatMediator: ChatRoomMediator;
+    private name: string;
+    private chatMediator: ChatRoomMediator;
 
-  constructor(name: string, chatMediator: ChatRoomMediator) {
-    this.name = name;
-    this.chatMediator = chatMediator;
-  }
+    constructor(name: string, chatMediator: ChatRoomMediator) {
+        this.name = name;
+        this.chatMediator = chatMediator;
+    }
 
-  getName(): string {
-    return this.name;
-  }
+    getName(): string {
+        return this.name;
+    }
 
-  send(message: string): void {
-    this.chatMediator.showMessage(this, message);
-  }
+    send(message: string): void {
+        this.chatMediator.showMessage(this, message);
+    }
 }
 
 ----------------------------
@@ -7029,6 +8222,60 @@ func main() {
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface ChatRoomMediator {
+    void showMessage(User user, String message);
+}
+
+//Mediator
+class ChatRoom implements ChatRoomMediator {
+
+    SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, HH:mm");
+
+    @Override
+    public void showMessage(User user, String message) {
+        System.out.println(sdf.format(new Date())+ " [" + user.getName() + "]: " + message);
+    }
+}
+
+class User {
+    private String name;
+    private ChatRoomMediator chatRoom;
+
+    public User(String name, ChatRoomMediator chatroom) {
+        chatRoom = chatroom;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void send(String message) {
+        chatRoom.showMessage(this, message);
+    }
+}
+
+----------------------------
+
+ChatRoom mediator = new ChatRoom();
+
+User john = new User("John", mediator);
+User jane = new User("Jane", mediator);
+
+john.send("Hi there!"); // March 01, 21:38 [John]: Hi there!
+jane.send("Hey!");      // March 01, 21:38 [Jane]: Hey!
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -7096,6 +8343,7 @@ class Editor:
     def restore(self, memento):
         self.content = memento.getContent()
 
+
 ----------------------------
 
 editor = Editor()
@@ -7122,34 +8370,35 @@ print(editor.getContent())  ## This is the first sentence. This is second.
 
 ```typescript
 class EditorMemento {
-  private content: string | null = null;
-  constructor(content: string) {
-    this.content = content;
-  }
+    private content: string | null = null;
 
-  getContent(): string {
-    return this.content;
-  }
+    constructor(content: string) {
+        this.content = content;
+    }
+
+    getContent(): string {
+        return this.content;
+    }
 }
 
 class Editor {
-  private content = "";
+    private content = "";
 
-  type(words: string): void {
-    this.content = this.content + " " + words;
-  }
+    type(words: string): void {
+        this.content = this.content + " " + words;
+    }
 
-  getContent(): string {
-    return this.content;
-  }
+    getContent(): string {
+        return this.content;
+    }
 
-  save(): EditorMemento {
-    return new EditorMemento(this.content);
-  }
+    save(): EditorMemento {
+        return new EditorMemento(this.content);
+    }
 
-  restore(memento: EditorMemento): void {
-    this.content = memento.getContent();
-  }
+    restore(memento: EditorMemento): void {
+        this.content = memento.getContent();
+    }
 }
 
 ----------------------------
@@ -7336,6 +8585,134 @@ echo $editor->getContent(); // This is the first sentence. This is second
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class EditorMemento {
+    private String content;
+
+    public EditorMemento(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+}
+
+class Editor {
+    private String content = "";
+    private EditorMemento memento;
+
+    public Editor() {
+        this.memento = new EditorMemento("");
+    }
+
+    public void type(String words) {
+        if(!this.content.isEmpty())
+            this.content += " ";
+        this.content += words;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+
+    public void save() {
+        memento = new EditorMemento(content);
+    }
+
+    public void restore() {
+        content = memento.getContent();
+    }
+}
+
+----------------------------
+
+editor.type("This is the first sentence.");
+editor.type("This is second.");
+// Save the state
+editor.save();
+// Type more
+editor.type("This is third.");
+// Print all contents
+System.out.println(editor.getContent()); // This is the first sentence. This is second. This is third.
+// Restoring to last saved state
+editor.restore();
+// Print content
+System.out.println(editor.getContent()); // This is the first sentence. This is second.
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+type EditorMemento struct {
+	content string
+}
+
+func NewEditorMemento(content string) *EditorMemento {
+	return &EditorMemento{content: content}
+}
+
+func (e *EditorMemento) GetContent() string {
+	return e.content
+}
+
+type Editor struct {
+	content string
+}
+
+func (e *Editor) Type(words string) {
+	e.content = e.content + " " + words
+}
+
+func (e *Editor) GetContent() string {
+	return e.content
+}
+
+func (e *Editor) Save() *EditorMemento {
+	return NewEditorMemento(e.content)
+}
+
+func (e *Editor) Restore(memento *EditorMemento) {
+	e.content = memento.GetContent()
+}
+
+func main() {
+	editor := &Editor{}
+	editor.Type("This is the first sentence")
+	editor.Type("This is the second.")
+
+	saved := editor.Save()
+	editor.Type("And this is the third")
+
+	fmt.Println(editor.GetContent())  
+
+	editor.Restore(saved)
+	fmt.Println(editor.GetContent()) 
+}
+
+
+```
+
+</div>
+
+</details>
 
 <br>
 
@@ -7440,41 +8817,45 @@ jobPostings.addJob(JobPost('Software Engineer at XXX'))
 
 ```typescript
 class JobPost {
-  private title: string | null = null;
-  constructor(title: string) {
-    this.title = title;
-  }
+    private title: string | null = null;
 
-  getTitle(): string {
-    return this.title;
-  }
+    constructor(title: string) {
+        this.title = title;
+    }
+
+    getTitle(): string {
+        return this.title;
+    }
 }
-class JobSeeker {
-  private name: string | null = null;
-  constructor(name: string) {
-    this.name = name;
-  }
 
-  onJobPosted(job: JobPost): void {
-    console.log(`Hi ${this.name}! New job posted: ${job.getTitle()}`);
-  }
+class JobSeeker {
+    private name: string | null = null;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    onJobPosted(job: JobPost): void {
+        console.log(`Hi ${this.name}! New job posted: ${job.getTitle()}`);
+    }
 }
 
 class JobCategory {
-  private observers: JobSeeker[] = [];
-  notify(jobPosting: JobPost): void {
-    for (const observer of this.observers) {
-      observer.onJobPosted(jobPosting);
+    private observers: JobSeeker[] = [];
+
+    notify(jobPosting: JobPost): void {
+        for (const observer of this.observers) {
+            observer.onJobPosted(jobPosting);
+        }
     }
-  }
 
-  attach(observer: JobSeeker): void {
-    this.observers.push(observer);
-  }
+    attach(observer: JobSeeker): void {
+        this.observers.push(observer);
+    }
 
-  addJob(jobPosting: JobPost): void {
-    this.notify(jobPosting);
-  }
+    addJob(jobPosting: JobPost): void {
+        this.notify(jobPosting);
+    }
 }
 
 ----------------------------
@@ -7716,7 +9097,8 @@ $jobPostings->addJob(new JobPost("Software Engineer"));
 </details>
 
 <details>
-<summary>Go</summary>
+
+ <summary>Go</summary>
 
 <div dir="ltr">
 
@@ -7788,6 +9170,66 @@ func main() {
 }
 
 
+
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class JobPost {
+    private String title;
+
+    public JobPost(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+}
+
+class JobSeeker {
+    private String name;
+
+    public JobSeeker(String name) {
+        this.name = name;
+    }
+
+    public void onJobPosted(JobPost job) {
+        System.out.println("Hi " + this.name + "! New job posted: " + job.getTitle());
+    }
+}
+
+class JobCategory {
+    private List<JobSeeker> observers = new ArrayList<>();
+
+    public void notify(JobPost jobPosting) {
+        for (JobSeeker observer : this.observers) {
+            observer.onJobPosted(jobPosting);
+        }
+    }
+
+    public void attach(JobSeeker observer) {
+        this.observers.add(observer);
+    }
+
+    public void addJob(JobPost jobPosting) {
+        this.notify(jobPosting);
+    }
+}
+
+----------------------------
+
+JobSeeker johnDoe = new JobSeeker("John Doe");
+JobSeeker janeDoe = new JobSeeker("Jane Doe");
+
+JobCategory jobPostings = new JobCategory();
+jobPostings.attach(janeDoe);
+jobPostings.attach(johnDoe);
+
+jobPostings.addJob(new JobPost("Software Engineer at IBM"));
+// Hi Jane Doe! New job posted: Software Engineer at IBM
+// Hi John Doe! New job posted: Software Engineer at IBM
 ```
 
 </div>
@@ -7951,54 +9393,59 @@ dolphin.accept(jump)  # Walked on water a little and disappeared
 
 ```typescript
 interface AnimalOperation {
-  visitMonkey(monkey: Monkey): void;
-  visitLion(lion: Lion): void;
-  visitDolphin(dolphin: Dolphin): void;
+    visitMonkey(monkey: Monkey): void;
+
+    visitLion(lion: Lion): void;
+
+    visitDolphin(dolphin: Dolphin): void;
 }
 
 interface Animal {
-  accept(operation: AnimalOperation): void;
+    accept(operation: AnimalOperation): void;
 }
 
 class Monkey implements Animal {
-  shout() {
-    console.log("Ooh oo aa aa!");
-  }
-  accept(operation: AnimalOperation): void {
-    operation.visitMonkey(this);
-  }
+    shout() {
+        console.log("Ooh oo aa aa!");
+    }
+
+    accept(operation: AnimalOperation): void {
+        operation.visitMonkey(this);
+    }
 }
 
 class Lion implements Animal {
-  roar() {
-    console.log("Roaaar!");
-  }
-  accept(operation: AnimalOperation): void {
-    operation.visitLion(this);
-  }
+    roar() {
+        console.log("Roaaar!");
+    }
+
+    accept(operation: AnimalOperation): void {
+        operation.visitLion(this);
+    }
 }
 
 class Dolphin implements Animal {
-  speak() {
-    console.log("Tuut tuttu tuutt!");
-  }
-  accept(operation: AnimalOperation): void {
-    operation.visitDolphin(this);
-  }
+    speak() {
+        console.log("Tuut tuttu tuutt!");
+    }
+
+    accept(operation: AnimalOperation): void {
+        operation.visitDolphin(this);
+    }
 }
 
-class Speak extends AnimalOperation {
-  visitMonkey(monkey: Monkey) {
-    monkey.shout();
-  }
+class Speak implements AnimalOperation {
+    visitMonkey(monkey: Monkey) {
+        monkey.shout();
+    }
 
-  visitLion(lion: Lion) {
-    lion.roar();
-  }
+    visitLion(lion: Lion) {
+        lion.roar();
+    }
 
-  visitDolphin(dolphin: Dolphin) {
-    dolphin.speak();
-  }
+    visitDolphin(dolphin: Dolphin) {
+        dolphin.speak();
+    }
 }
 
 const monkey = new Monkey();
@@ -8011,17 +9458,17 @@ lion.accept(speak); // Roaaar!
 dolphin.accept(speak); //Tuut tutt tuttt!
 
 class Jump implements AnimalOperation {
-  visitMonkey(monkey: Monkey): void {
-    console.log("Jumped 20 feet high! on to the tree!");
-  }
+    visitMonkey(monkey: Monkey): void {
+        console.log("Jumped 20 feet high! on to the tree!");
+    }
 
-  visitLion(lion: Lion): void {
-    console.log("Jumped 7 feet! back on the ground!");
-  }
+    visitLion(lion: Lion): void {
+        console.log("Jumped 7 feet! back on the ground!");
+    }
 
-  visitDolphin(dolphin: Dolphin): void {
-    console.log("Walked on water a little and disappeared");
-  }
+    visitDolphin(dolphin: Dolphin): void {
+        console.log("Walked on water a little and disappeared");
+    }
 }
 
 const jump = new Jump();
@@ -8294,6 +9741,125 @@ $dolphin->accept($jump);   // Walked on water a little and disappeared
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface AnimalOperation {
+
+    void visitMonkey(Monkey monkey);
+    void visitLion(Lion lion);
+    void visitDolphin(Dolphin dolphin);
+}
+
+interface Animal {
+    void accept(AnimalOperation operation);
+}
+
+class Monkey implements Animal {
+
+    void shout() {
+        System.out.println("Ooh oo aa aa!");
+    }
+
+    @Override
+    public void accept(AnimalOperation operation) {
+        operation.visitMonkey(this);
+    }
+}
+
+class Lion implements Animal {
+
+    public void roar() {
+        System.out.println("Roaaar!");
+    }
+
+    @Override
+    public void accept(AnimalOperation operation) {
+        operation.visitLion(this);
+    }
+}
+
+class Dolphin implements Animal {
+
+    public void speak() {
+        System.out.println("Tuut tuttu tuutt!");
+    }
+
+    @Override
+    public void accept(AnimalOperation operation) {
+        operation.visitDolphin(this);
+    }
+}
+
+class Speak implements AnimalOperation {
+
+    @Override
+    public void visitMonkey(Monkey monkey) {
+        monkey.shout();
+    }
+
+    @Override
+    public void visitLion(Lion lion) {
+        lion.roar();
+    }
+
+    @Override
+    public void visitDolphin(Dolphin dolphin) {
+        dolphin.speak();
+    }
+}
+
+-----------------------
+
+Monkey monkey = new Monkey();
+Lion lion = new Lion();
+Dolphin dolphin = new Dolphin();
+
+Speak speak = new Speak();
+
+monkey.accept(speak);   // Ooh oo aa aa!
+lion.accept(speak);     // Roaaar!
+dolphin.accept(speak);  // Tuut tutt tuttt!
+
+class Jump implements AnimalOperation {
+
+    @Override
+    public void visitMonkey(Monkey monkey) {
+        System.out.println("Jumped 20 feet high! on to the tree!");
+    }
+
+    @Override
+    public void visitLion(Lion lion) {
+        System.out.println("Jumped 7 feet! back on the ground!");
+    }
+
+    @Override
+    public void visitDolphin(Dolphin dolphin) {
+        System.out.println("Walked on water a little and disappeared");
+    }
+}
+
+-----------------------
+
+Jump jump = new Jump();
+
+monkey.accept(speak);   // Ooh oo aa aa!
+monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
+
+lion.accept(speak);     // Roaaar!
+lion.accept(jump);      // Jumped 7 feet! Back on the ground!
+
+dolphin.accept(speak);  // Tuut tutt tuutt!
+dolphin.accept(jump);   // Walked on water a little and disappeared
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -8384,33 +9950,33 @@ sorter.sort(dataset)
 
 ```typescript
 interface SortStrategy {
-  sort(dataset: any[]): any[];
+    sort(dataset: any[]): any[];
 }
 
 class BubbleSortStrategy implements SortStrategy {
-  sort(dataset: any[]): any[] {
-    console.log("Sorting using bubble sort");
-    return dataset;
-  }
+    sort(dataset: any[]): any[] {
+        console.log("Sorting using bubble sort");
+        return dataset;
+    }
 }
 
 class QuickSortStrategy implements SortStrategy {
-  sort(dataset: any[]): any[] {
-    console.log("Sorting using quick sort");
-    return dataset;
-  }
+    sort(dataset: any[]): any[] {
+        console.log("Sorting using quick sort");
+        return dataset;
+    }
 }
 
 class Sorter {
-  private sorter: SortStrategy;
+    private sorter: SortStrategy;
 
-  constructor(sorter: SortStrategy) {
-    this.sorter = sorter;
-  }
+    constructor(sorter: SortStrategy) {
+        this.sorter = sorter;
+    }
 
-  sort(dataset: any[]): any[] {
-    return this.sorter.sort(dataset);
-  }
+    sort(dataset: any[]): any[] {
+        return this.sorter.sort(dataset);
+    }
 }
 
 ----------------------------
@@ -8539,6 +10105,61 @@ $sorter->sort($unSortedList); // Output : Sorting using Quick Sort !
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface SortStrategy {
+    List<Integer> sort(List<Integer> dataset);
+}
+
+class BubbleSortStrategy implements SortStrategy {
+
+    @Override
+    public List<Integer> sort(List<Integer> dataset) {
+        System.out.println("Sorting by Bubble sort!");
+        return dataset;
+    }
+}
+
+class QuickSortStrategy implements SortStrategy {
+
+    @Override
+    public List<Integer> sort(List<Integer> dataset) {
+        System.out.println("Sorting by Quick sort!");
+        return dataset;
+    }
+}
+
+class Sorter {
+    private SortStrategy sorter;
+
+    public Sorter(SortStrategy sorter) {
+        this.sorter = sorter;
+    }
+
+    public List<Integer> sort(List<Integer> unSortedList) {
+        return sorter.sort(unSortedList);
+    }
+}
+
+----------------------------
+
+List<Integer> unSortedList = List.of(1, 10, 2, 16, 19);
+
+Sorter sorter = new Sorter(new BubbleSortStrategy());
+sorter.sort(unSortedList); // Sorting by Bubble sort!
+
+sorter = new Sorter(new QuickSortStrategy());
+sorter.sort(unSortedList); // Sorting by Quick sort!
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -8608,6 +10229,7 @@ class DefaultText(WritingState):
     def write(self, words):
         print(words)
 
+
 class TextEditor():
     _state = None
 
@@ -8650,41 +10272,41 @@ editor.type('Fifth Line')  # fifth line
 
 ```typescript
 interface WritingState {
-  write(words: string): void;
+    write(words: string): void;
 }
 
 class UpperCase implements WritingState {
-  write(words: string): void {
-    console.log(words.toUpperCase());
-  }
+    write(words: string): void {
+        console.log(words.toUpperCase());
+    }
 }
 
 class LowerCase implements WritingState {
-  write(words: string): void {
-    console.log(words.toLowerCase());
-  }
+    write(words: string): void {
+        console.log(words.toLowerCase());
+    }
 }
 
 class DefaultText implements WritingState {
-  write(words: string): void {
-    console.log(words);
-  }
+    write(words: string): void {
+        console.log(words);
+    }
 }
 
 class TextEditor {
-  private state: WritingState;
+    private state: WritingState;
 
-  constructor(state: WritingState) {
-    this.state = state;
-  }
+    constructor(state: WritingState) {
+        this.state = state;
+    }
 
-  setState(state: WritingState) {
-    this.state = state;
-  }
+    setState(state: WritingState) {
+        this.state = state;
+    }
 
-  type(words: string) {
-    this.state.write(words);
-  }
+    type(words: string) {
+        this.state.write(words);
+    }
 }
 
 ----------------------------
@@ -8875,6 +10497,69 @@ $editor->type("Fifth Line");
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface WritingState {
+    void write(String words);
+}
+
+class UpperCase implements WritingState {
+    public void write(String words) {
+        System.out.println(words.toUpperCase());
+    }
+}
+
+class LowerCase implements WritingState {
+    public void write(String words) {
+        System.out.println(words.toLowerCase());
+    }
+}
+
+class DefaultText implements WritingState {
+    public void write(String words) {
+        System.out.println(words);
+    }
+}
+
+class TextEditor {
+    private WritingState state;
+
+    public TextEditor() {
+        state = new DefaultText();
+    }
+
+    public void setState(WritingState state) {
+        this.state = state;
+    }
+
+    public void type(String words) {
+        state.write(words);
+    }
+}
+
+----------------------------
+
+TextEditor editor = new TextEditor();
+
+editor.type("First line"); // First line
+
+editor.setState(new UpperCase());
+editor.type("Second line"); // SECOND LINE
+editor.type("Third Line");  // THIRD LINE
+
+editor.setState(new LowerCase());
+editor.type("Fourth line"); // fourth line
+editor.type("FIFTH Line");  // fifth line
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -8969,6 +10654,7 @@ class IosBuilder(Builder):
     def deploy(self):
         print('Deploying ios build to server')
 
+
 ----------------------------
 
 androidBuilder = AndroidBuilder()
@@ -9001,55 +10687,60 @@ iosBuilder.build()
 
 ```typescript
 class Builder {
-  build(): void {
-    this.test();
-    this.lint();
-    this.assemble();
-    this.deploy();
-  }
+    build(): void {
+        this.test();
+        this.lint();
+        this.assemble();
+        this.deploy();
+    }
 
-  test(): void {}
+    test(): void {
+    }
 
-  lint(): void {}
+    lint(): void {
+    }
 
-  assemble(): void {}
+    assemble(): void {
+    }
 
-  deploy(): void {}
+    deploy(): void {
+    }
 }
 
 class AndroidBuilder extends Builder {
-  test(): void {
-    console.log("Running android tests");
-  }
+    test(): void {
+        console.log("Running android tests");
+    }
 
-  lint(): void {
-    console.log("Linting the android code");
-  }
+    lint(): void {
+        console.log("Linting the android code");
+    }
 
-  assemble(): void {
-    console.log("Assembling the android build");
-  }
+    assemble(): void {
+        console.log("Assembling the android build");
+    }
 
-  deploy(): void {
-    console.log("Deploying android build to server");
-  }
+    deploy(): void {
+        console.log("Deploying android build to server");
+    }
 }
 
 class IosBuilder extends Builder {
-  test(): void {
-    console.log("Running ios tests");
-  }
-  lint(): void {
-    console.log("Linting the ios code");
-  }
+    test(): void {
+        console.log("Running ios tests");
+    }
 
-  assemble(): void {
-    console.log("Assembling the ios build");
-  }
+    lint(): void {
+        console.log("Linting the ios code");
+    }
 
-  deploy(): void {
-    console.log("Deploying ios build to server");
-  }
+    assemble(): void {
+        console.log("Assembling the ios build");
+    }
+
+    deploy(): void {
+        console.log("Deploying ios build to server");
+    }
 }
 
 ----------------------------
@@ -9257,6 +10948,94 @@ $iosBuilder->build();
 
 </details>
 
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+abstract class Builder {
+    // Template method
+    public void build() {
+        test();
+        lint();
+        assemble();
+        deploy();
+    }
+
+    abstract public void test();
+    abstract public void lint();
+    abstract public void assemble();
+    abstract public void deploy();
+}
+
+class AndroidBuilder extends Builder {
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling android build");
+    }
+
+    @Override
+    public void deploy() {
+        System.out.println("Deploying android build");
+    }
+
+    @Override
+    public void lint() {
+        System.out.println("Linting android code");
+    }
+
+    @Override
+    public void test() {
+        System.out.println("Running android tests");
+    }
+}
+
+class IOSBuilder extends Builder {
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling iOS build");
+    }
+
+    @Override
+    public void deploy() {
+        System.out.println("Deploying iOS build");
+    }
+
+    @Override
+    public void lint() {
+        System.out.println("Linting iOS code");
+    }
+
+    @Override
+    public void test() {
+        System.out.println("Running iOS tests");
+    }
+}
+
+----------------------------
+
+AndroidBuilder androidBuilder = new AndroidBuilder();
+androidBuilder.build();
+// Running android tests
+// Linting android code
+// Assembling android build
+// Deploying android build
+
+IOSBuilder iOSBuilder = new IOSBuilder();
+iOSBuilder.build();
+// Running iOS tests
+// Linting iOS code
+// Assembling iOS build
+// Deploying iOS build
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -9291,7 +11070,11 @@ $iosBuilder->build();
 - امیر عزیز که زحمت مثال های TypeScript رو کشید.([amirmalekian](https://github.com/amirmalekian))
 - رضا عزیز که زحمت مثال های #C رو کشید.([RezaMansouri70](https://github.com/RezaMansouri70))
 - صالح عزیز که زحمت مثال های PHP رو کشید.([salehhashemi1992](https://github.com/salehhashemi1992))
-- مهسا و عاطفه عزیز که زحمت رفع اشکالات تایپی و بهبود کد هارو کشیدند. ([Atefe-Komeili](https://github.com/Atefe-Komeili), [MahsaMahdavian](https://github.com/MahsaMahdavian))
+- عاطفه عزیز که زحمت مثال های Golang رو کشید.([Atefe-Komeili](https://github.com/Atefe-Komeili))
+- محمد عزیز که زحمت مثال های Java رو کشید.([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
+- مهسا و محمد عزیز که زحمت بهبود کد هارو کشیدند.([MahsaMahdavian](https://github.com/MahsaMahdavian) و [MohammadMMoniri](https://github.com/MohammadMMoniri))
+
+
 </div>
 
 </div>
