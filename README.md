@@ -7715,6 +7715,85 @@ $jobPostings->addJob(new JobPost("Software Engineer"));
 
 </details>
 
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+type JobPost struct {
+	title string
+}
+
+func NewJobPost(title string) *JobPost {
+	return &JobPost{title: title}
+}
+
+func (jp *JobPost) GetTitle() string {
+	return jp.title
+}
+
+type JobSeeker struct {
+	name string
+}
+
+func NewJobSeeker(name string) *JobSeeker {
+	return &JobSeeker{name: name}
+}
+
+func (js *JobSeeker) OnJobPosted(job *JobPost) {
+	fmt.Printf("Hi %s! New job posted: %s\n", js.name, job.GetTitle())
+}
+
+type JobCategory struct {
+	observers []*JobSeeker
+}
+
+func NewJobCategory() *JobCategory {
+	return &JobCategory{}
+}
+
+func (jc *JobCategory) Notify(jobPosting *JobPost) {
+	for _, observer := range jc.observers {
+		observer.OnJobPosted(jobPosting)
+	}
+}
+
+func (jc *JobCategory) Attach(observer *JobSeeker) {
+	jc.observers = append(jc.observers, observer)
+}
+
+func (jc *JobCategory) AddJob(jobPosting *JobPost) {
+	jc.Notify(jobPosting)
+}
+
+func main() {
+	johnDoe := NewJobSeeker("John Doe")
+	janeDoe := NewJobSeeker("Jane Doe")
+
+	jobPostings := NewJobCategory()
+	jobPostings.Attach(janeDoe)
+	jobPostings.Attach(johnDoe)
+
+	jobPostings.AddJob(NewJobPost("Software Engineer at XXX"))
+
+	// Output
+	// Hi Jane Doe! New job posted: Software Engineer at XXX
+	// Hi John Doe! New job posted: Software Engineer at XXX
+}
+
+
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
