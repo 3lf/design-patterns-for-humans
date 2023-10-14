@@ -9360,7 +9360,7 @@ class Dolphin implements Animal {
     }
 }
 
-class Speak extends AnimalOperation {
+class Speak implements AnimalOperation {
     visitMonkey(monkey: Monkey) {
         monkey.shout();
     }
