@@ -10594,6 +10594,89 @@ $editor->type("Fifth Line");
 </details>
 
 <details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+// WritingState interface
+type WritingState interface {
+	Write(words string)
+}
+
+// UpperCase struct
+type UpperCase struct{}
+
+// Write for UpperCase
+func (u *UpperCase) Write(words string) {
+	fmt.Println(strings.ToUpper(words))
+}
+
+// LowerCase struct
+type LowerCase struct{}
+
+// Write for LowerCase
+func (l *LowerCase) Write(words string) {
+	fmt.Println(strings.ToLower(words))
+}
+
+// DefaultText struct
+type DefaultText struct{}
+
+// Write for DefaultText
+func (d *DefaultText) Write(words string) {
+	fmt.Println(words)
+}
+
+// TextEditor struct
+type TextEditor struct {
+	state WritingState
+}
+
+// NewTextEditor constructor
+func NewTextEditor(state WritingState) *TextEditor {
+	return &TextEditor{state: state}
+}
+
+// SetState method for TextEditor
+func (te *TextEditor) SetState(state WritingState) {
+	te.state = state
+}
+
+// Type method for TextEditor
+func (te *TextEditor) Type(words string) {
+	te.state.Write(words)
+}
+
+func main() {
+	editor := NewTextEditor(&DefaultText{})
+	editor.Type("First Line") // First line
+
+	editor.SetState(&UpperCase{})
+	editor.Type("Second Line") // SECOND LINE
+	editor.Type("Third Line")  // THIRD LINE
+
+	editor.SetState(&LowerCase{})
+	editor.Type("Fourth Line") // fourth line
+	editor.Type("Fifth Line")  // fifth line
+}
+
+```
+
+</div>
+
+</details>
+
+
+<details>
   <summary>Java</summary>
 
 <div dir="ltr">
