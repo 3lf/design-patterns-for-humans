@@ -11128,6 +11128,115 @@ $iosBuilder->build();
 </details>
 
 <details>
+  <summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// Builder interface
+type Builder interface {
+	Build()
+	Test()
+	Lint()
+	Assemble()
+	Deploy()
+}
+
+// BaseBuilder provides default implementations
+type BaseBuilder struct{}
+
+// Build for BaseBuilder
+func (b *BaseBuilder) Build() {
+	b.Test()
+	b.Lint()
+	b.Assemble()
+	b.Deploy()
+}
+
+// Test for BaseBuilder
+func (b *BaseBuilder) Test() {}
+
+// Lint for BaseBuilder
+func (b *BaseBuilder) Lint() {}
+
+// Assemble for BaseBuilder
+func (b *BaseBuilder) Assemble() {}
+
+// Deploy for BaseBuilder
+func (b *BaseBuilder) Deploy() {}
+
+// AndroidBuilder struct
+type AndroidBuilder struct {
+	BaseBuilder
+}
+
+// Test for AndroidBuilder
+func (a *AndroidBuilder) Test() {
+	fmt.Println("Running android tests")
+}
+
+// Lint for AndroidBuilder
+func (a *AndroidBuilder) Lint() {
+	fmt.Println("Linting the android code")
+}
+
+// Assemble for AndroidBuilder
+func (a *AndroidBuilder) Assemble() {
+	fmt.Println("Assembling the android build")
+}
+
+// Deploy for AndroidBuilder
+func (a *AndroidBuilder) Deploy() {
+	fmt.Println("Deploying android build to server")
+}
+
+// IosBuilder struct
+type IosBuilder struct {
+	BaseBuilder
+}
+
+// Test for IosBuilder
+func (i *IosBuilder) Test() {
+	fmt.Println("Running ios tests")
+}
+
+// Lint for IosBuilder
+func (i *IosBuilder) Lint() {
+	fmt.Println("Linting the ios code")
+}
+
+// Assemble for IosBuilder
+func (i *IosBuilder) Assemble() {
+	fmt.Println("Assembling the ios build")
+}
+
+// Deploy for IosBuilder
+func (i *IosBuilder) Deploy() {
+	fmt.Println("Deploying ios build to server")
+}
+
+func main() {
+	androidBuilder := &AndroidBuilder{}
+	androidBuilder.Build()
+
+	iosBuilder := &IosBuilder{}
+	iosBuilder.Build()
+}
+
+```
+
+</div>
+
+</details>
+
+
+<details>
   <summary>Java</summary>
 
 <div dir="ltr">
