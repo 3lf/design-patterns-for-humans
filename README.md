@@ -26,7 +26,7 @@
 
 <!-- TOC -->
 
-| Category                   | Pattern (with Link)   |
+| دسته بندی                   | دیزاین پترن   |
 |----------------------------|-----------------------|
 | **Creational Design Patterns** |                     |
 |                            | [🏠 Simple Factory](#-simple-factory)     |
