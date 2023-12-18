@@ -26,32 +26,36 @@
 
 <!-- TOC -->
 
-- [Creational Design Patterns](#creational-design-patterns)
-    - [🏠 Simple Factory](#-simple-factory)
-    - [🏭 Factory Method](#-factory-method)
-    - [🔨 Abstract Factory](#-abstract-factory)
-    - [👷 Builder](#-builder)
-    - [🐑 Prototype](#-prototype)
-    - [💍 Singleton](#-singleton)
-- [Structural Design Patterns](#structural-design-patterns)
-    - [🔌 Adapter](#-adapter)
-    - [🌉 Bridge](#-bridge)
-    - [🌿 Composite](#-composite)
-    - [☕ Decorator](#-decorator)
-    - [📦 Facade](#-facade)
-    - [🍃 Flyweight](#-flyweight)
-    - [🎱 Proxy](#-proxy)
-- [Behavioral Design Patterns](#behavioral-design-patterns)
-    - [🔗 Chain of Responsibility](#-chain-of-responsibility)
-    - [👮 Command](#-command)
-    - [➿ Iterator](#-iterator)
-    - [👽 Mediator](#-mediator)
-    - [💾 Memento](#-memento)
-    - [😎 Observer](#-observer)
-    - [🏃 Visitor](#-visitor)
-    - [💡 Strategy](#-strategy)
-    - [💢 State](#-state)
-    - [📒 Template Method](#-template-method)
+| Category                   | Pattern (with Link)   |
+|----------------------------|-----------------------|
+| **Creational Design Patterns** |                     |
+|                            | [🏠 Simple Factory](#-simple-factory)     |
+|                            | [🏭 Factory Method](#-factory-method)     |
+|                            | [🔨 Abstract Factory](#-abstract-factory)   |
+|                            | [👷 Builder](#-builder)            |
+|                            | [🐑 Prototype](#-prototype)          |
+|                            | [💍 Singleton](#-singleton)          |
+| **Structural Design Patterns** |                   |
+|                            | [🔌 Adapter](#-adapter)            |
+|                            | [🌉 Bridge](#-bridge)             |
+|                            | [🌿 Composite](#-composite)          |
+|                            | [☕ Decorator](#-decorator)           |
+|                            | [📦 Facade](#-facade)             |
+|                            | [🍃 Flyweight](#-flyweight)          |
+|                            | [🎱 Proxy](#-proxy)              |
+| **Behavioral Design Patterns** |                  |
+|                            | [🔗 Chain of Responsibility](#-chain-of-responsibility) |
+|                            | [👮 Command](#-command)            |
+|                            | [➿ Iterator](#-iterator)            |
+|                            | [👽 Mediator](#-mediator)           |
+|                            | [💾 Memento](#-memento)            |
+|                            | [😎 Observer](#-observer)           |
+|                            | [🏃 Visitor](#-visitor)            |
+|                            | [💡 Strategy](#-strategy)           |
+|                            | [💢 State](#-state)              |
+|                            | [📒 Template Method](#-template-method)    |
+
+
 
 <!-- TOC -->
 
