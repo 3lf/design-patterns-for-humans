@@ -513,8 +513,7 @@ class Interviewer:
 
 class Developer(Interviewer):
     def askQuestions(self):
-        print
-        'Asking about design patterns'
+        print('Asking about design patterns')
 
 
 class CommunityExecutive(Interviewer):
