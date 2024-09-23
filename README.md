@@ -7491,6 +7491,7 @@ class WordsCollection(Iterable):
     def add_item(self, item: Any) -> None:
         self._collection.append(item)
 
+#----------------------------
 
 if __name__ == "__main__":
     collection = WordsCollection()
@@ -7504,6 +7505,24 @@ if __name__ == "__main__":
     print("\n")
     print("Reverse traversal:")
     print("\n".join(collection.get_reverse_iterator()), end="")
+
+
+
+
+'''
+Output will be
+==============
+Straight traversal:
+First
+Second
+Third
+
+
+Reverse traversal:
+Third
+Second
+First% 
+'''
 ```
 
 </div>
