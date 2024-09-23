@@ -6420,17 +6420,6 @@ paypal.setNext(bitcoin)
 bank.pay(259)
 
 
-----------------------------
-
-bank = Bank(100)  # Bank with balance 100
-paypal = Paypal(200)  # Paypal with balance 200
-bitcoin = Bitcoin(300)  # Bitcoin with balance 300
-
-bank.setNext(paypal)
-paypal.setNext(bitcoin)
-
-bank.pay(259)
-
 '''
 Output will be
 ==============
