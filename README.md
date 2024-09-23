@@ -7965,6 +7965,9 @@ System.out.println(radioStation.getFrequency());
 <div dir="ltr">
 
 ```python
+import datetime
+
+
 class ChatRoomMediator:
     def showMessage(self, user, message):
         pass
@@ -7993,7 +7996,7 @@ class User:
         self._chatMediator.showMessage(self, message)
 
 
-----------------------------
+#----------------------------
 
 mediator = ChatRoom()
 
@@ -8002,9 +8005,15 @@ jane = User('Jane', mediator)
 
 john.send('Hi There!')
 jane.send('Hey!')
-# Output will be
-# Feb 14, 10:58 [John]: Hi there!
-# Feb 14, 10:58 [Jane]: Hey!
+
+
+'''
+Output will be
+==============
+2024-09-23 21:20:17.284000[John]: Hi There!
+2024-09-23 21:20:17.284023[Jane]: Hey!
+
+'''
 ```
 
 </div>
