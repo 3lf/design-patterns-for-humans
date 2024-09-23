@@ -10255,43 +10255,57 @@ $sorter->sort($unSortedList); // Output : Sorting using Quick Sort !
 <div dir="ltr">
 
 ```go
-class SortStrategy:
-    def sort(self, dataset):
-        pass
+package main
 
+import (
+	"fmt"
+)
 
-class BubbleSortStrategy(SortStrategy):
-    def sort(self, dataset):
-        print('Sorting using bubble sort')
+// SortStrategy is the interface that defines the sorting strategy
+type SortStrategy interface {
+	Sort(dataset []int) []int
+}
 
-        return dataset
+// BubbleSortStrategy implements the SortStrategy interface
+type BubbleSortStrategy struct{}
 
+func (b *BubbleSortStrategy) Sort(dataset []int) []int {
+	fmt.Println("Sorting using bubble sort")
+	// Implement bubble sort logic here (omitted for brevity)
+	return dataset
+}
 
-class QuickSortStrategy(SortStrategy):
-    def sort(self, dataset):
-        print('Sorting using quick sort')
-        return dataset
+// QuickSortStrategy implements the SortStrategy interface
+type QuickSortStrategy struct{}
 
+func (q *QuickSortStrategy) Sort(dataset []int) []int {
+	fmt.Println("Sorting using quick sort")
+	// Implement quick sort logic here (omitted for brevity)
+	return dataset
+}
 
-class Sorter:
-    _sorter = None
+// Sorter is the context that uses a sorting strategy
+type Sorter struct {
+	sorter SortStrategy
+}
 
-    def __init__(self, sorter):
-        self._sorter = sorter
+func NewSorter(sorter SortStrategy) *Sorter {
+	return &Sorter{sorter: sorter}
+}
 
-    def sort(self, dataset):
-        return self._sorter.sort(dataset)
+func (s *Sorter) Sort(dataset []int) []int {
+	return s.sorter.Sort(dataset)
+}
 
+func main() {
+	dataset := []int{1, 5, 4, 3, 2, 8}
 
-----------------------------
+	sorter := NewSorter(&BubbleSortStrategy{})
+	sorter.Sort(dataset)
 
-dataset = [1, 5, 4, 3, 2, 8]
-
-sorter = Sorter(BubbleSortStrategy())
-sorter.sort(dataset)
-
-sorter = Sorter(QuickSortStrategy())
-sorter.sort(dataset)
+	sorter = NewSorter(&QuickSortStrategy{})
+	sorter.Sort(dataset)
+}
 ```
 
 </div>
