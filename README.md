@@ -5047,6 +5047,18 @@ class ComputerFacade:
 computer = ComputerFacade(Computer())
 computer.turnOn()
 computer.turnOff()
+
+'''
+Output will be
+==============
+Ouch!
+Beep Beep!
+Loading...
+Ready to be used...
+Bup bup bup buzzz!
+Haaah!
+Zzzzz
+'''
 ```
 
 </div>
