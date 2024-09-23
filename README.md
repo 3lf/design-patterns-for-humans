@@ -8378,7 +8378,7 @@ class EditorMemento:
 class Editor:
     _content = ''
 
-    def type(self, words):
+    def write(self, words):
         self._content = self._content + ' ' + words
 
     def getContent(self):
@@ -8391,19 +8391,26 @@ class Editor:
         self.content = memento.getContent()
 
 
-----------------------------
+# ----------------------------
 
 editor = Editor()
-editor.type('This is the first sentence')
-editor.type('This is the second.')
+editor.write('This is the first sentence')
+editor.write('This is the second.')
 
 saved = editor.save()
-editor.type('And this is the third')
+editor.write('And this is the third')
 
 print(editor.getContent())  ## This is the first sentence. This is second. And this is third.
 
 editor.restore(saved)
-print(editor.getContent())  ## This is the first sentence. This is second.
+print(editor.getContent())  ## This is the first sentence. This is second
+
+'''
+Output will be
+==============
+ This is the first sentence This is the second. And this is the third
+ This is the first sentence This is the second. And this is the third
+'''
 
 ```
 
