@@ -10453,26 +10453,35 @@ class TextEditor():
     def setState(self, state):
         self._state = state
 
-    def type(self, words):
+    def write(self, words):
         self._state.write(words)
 
 
-----------------------------
+# ----------------------------
 
 editor = TextEditor(DefaultText())
-editor.type('First Line')  # First line
+editor.write('First Line')  # First line
 
 editor.setState(UpperCase())
 
-editor.type('Second Line')  # SECOND LINE
-
-editor.type('Third Line')  # THIRD LINE
+editor.write('Second Line')  # SECOND LINE
+editor.write('Third Line')  # THIRD LINE
 
 editor.setState(LowerCase())
 
-editor.type('Fourth Line')  # fourth line
+editor.write('Fourth Line')  # fourth line
+editor.write('Fifth Line')  # fifth line
 
-editor.type('Fifth Line')  # fifth line
+
+'''
+Output will be
+==============
+First Line
+SECOND LINE
+THIRD LINE
+fourth line
+fifth line
+'''
 
 ```
 
