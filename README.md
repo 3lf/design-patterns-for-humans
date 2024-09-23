@@ -5047,6 +5047,18 @@ class ComputerFacade:
 computer = ComputerFacade(Computer())
 computer.turnOn()
 computer.turnOff()
+
+'''
+Output will be
+==============
+Ouch!
+Beep Beep!
+Loading...
+Ready to be used...
+Bup bup bup buzzz!
+Haaah!
+Zzzzz
+'''
 ```
 
 </div>
@@ -6335,6 +6347,7 @@ door.close();               // Closing lab door
 خب توی کد بالا یک کلاس مرجع ساختیم که اسمش Account هست. این کلاس یک متد داره که اسمش pay هست. این متد یک مقدار رو میگیره
 و سعی میکنه اون مقدار رو از حساب خود پرداخت کنه. اگر موفق نشد، اون مقدار رو به حساب بعدی انتقال میده.
 
+نکته: 
 تابع inspect.stack یک تابعیه که میتونه اطلاعاتی از فراخوانی تابع رو برگردونه. مثلا اگر ما از این تابع در یک تابع دیگه
 استفاده کنیم، این تابع میتونه اسم تابعی که از اون استفاده شده رو برگردونه.
 
@@ -6351,9 +6364,6 @@ door.close();               // Closing lab door
 <div dir="ltr">
 
 ```python
-import inspect
-
-
 class Account:
     _successor = None
     _balance = None
@@ -6362,20 +6372,19 @@ class Account:
         self._successor = account
 
     def pay(self, amountToPay):
-        import inspect
-        myCaller = inspect.stack()[1][3]
+
         if self.canPay(amountToPay):
-            print
-            "Paid " + str(amountToPay) + " using " + myCaller
-        elif (self._successor):
-            print
-            "Cannot pay using " + myCaller + ". Proceeding .."
+            print("Paid " + str(amountToPay) + " using " + self.caller())
+        elif self._successor:
+            print("Cannot pay using " + self.caller() + ". Proceeding ..")
             self._successor.pay(amountToPay)
         else:
-            raise ValueError('None of the accounts have enough balance')
+            raise ValueError("None of the accounts have enough balance")
 
     def canPay(self, amount):
         return self.balance >= amount
+    def caller(self):
+        return str(type(self).__name__)
 
 
 class Bank(Account):
@@ -6399,7 +6408,7 @@ class Bitcoin(Account):
         self.balance = balance
 
 
-----------------------------
+# ----------------------------
 
 bank = Bank(100)  # Bank with balance 100
 paypal = Paypal(200)  # Paypal with balance 200
@@ -6409,6 +6418,7 @@ bank.setNext(paypal)
 paypal.setNext(bitcoin)
 
 bank.pay(259)
+
 
 '''
 Output will be
