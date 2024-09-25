@@ -7491,6 +7491,7 @@ class WordsCollection(Iterable):
     def add_item(self, item: Any) -> None:
         self._collection.append(item)
 
+#----------------------------
 
 if __name__ == "__main__":
     collection = WordsCollection()
@@ -7504,6 +7505,24 @@ if __name__ == "__main__":
     print("\n")
     print("Reverse traversal:")
     print("\n".join(collection.get_reverse_iterator()), end="")
+
+
+
+
+'''
+Output will be
+==============
+Straight traversal:
+First
+Second
+Third
+
+
+Reverse traversal:
+Third
+Second
+First% 
+'''
 ```
 
 </div>
@@ -7965,6 +7984,9 @@ System.out.println(radioStation.getFrequency());
 <div dir="ltr">
 
 ```python
+import datetime
+
+
 class ChatRoomMediator:
     def showMessage(self, user, message):
         pass
@@ -7993,7 +8015,7 @@ class User:
         self._chatMediator.showMessage(self, message)
 
 
-----------------------------
+#----------------------------
 
 mediator = ChatRoom()
 
@@ -8002,9 +8024,15 @@ jane = User('Jane', mediator)
 
 john.send('Hi There!')
 jane.send('Hey!')
-# Output will be
-# Feb 14, 10:58 [John]: Hi there!
-# Feb 14, 10:58 [Jane]: Hey!
+
+
+'''
+Output will be
+==============
+2024-09-23 21:20:17.284000[John]: Hi There!
+2024-09-23 21:20:17.284023[Jane]: Hey!
+
+'''
 ```
 
 </div>
@@ -8350,7 +8378,7 @@ class EditorMemento:
 class Editor:
     _content = ''
 
-    def type(self, words):
+    def write(self, words):
         self._content = self._content + ' ' + words
 
     def getContent(self):
@@ -8360,22 +8388,29 @@ class Editor:
         return EditorMemento(self._content)
 
     def restore(self, memento):
-        self.content = memento.getContent()
+        self._content = memento.getContent()
 
 
-----------------------------
+# ----------------------------
 
 editor = Editor()
-editor.type('This is the first sentence')
-editor.type('This is the second.')
+editor.write('This is the first sentence')
+editor.write('This is the second.')
 
 saved = editor.save()
-editor.type('And this is the third')
+editor.write('And this is the third')
 
-print(editor.getContent())  ## This is the first sentence. This is second. And this is third.
+print(editor.getContent()) 
 
 editor.restore(saved)
-print(editor.getContent())  ## This is the first sentence. This is second.
+print(editor.getContent())  
+
+'''
+Output will be
+==============
+ This is the first sentence This is the second. And this is the third
+ This is the first sentence This is the second.
+'''
 
 ```
 
@@ -10227,43 +10262,57 @@ $sorter->sort($unSortedList); // Output : Sorting using Quick Sort !
 <div dir="ltr">
 
 ```go
-class SortStrategy:
-    def sort(self, dataset):
-        pass
+package main
 
+import (
+	"fmt"
+)
 
-class BubbleSortStrategy(SortStrategy):
-    def sort(self, dataset):
-        print('Sorting using bubble sort')
+// SortStrategy is the interface that defines the sorting strategy
+type SortStrategy interface {
+	Sort(dataset []int) []int
+}
 
-        return dataset
+// BubbleSortStrategy implements the SortStrategy interface
+type BubbleSortStrategy struct{}
 
+func (b *BubbleSortStrategy) Sort(dataset []int) []int {
+	fmt.Println("Sorting using bubble sort")
+	// Implement bubble sort logic here (omitted for brevity)
+	return dataset
+}
 
-class QuickSortStrategy(SortStrategy):
-    def sort(self, dataset):
-        print('Sorting using quick sort')
-        return dataset
+// QuickSortStrategy implements the SortStrategy interface
+type QuickSortStrategy struct{}
 
+func (q *QuickSortStrategy) Sort(dataset []int) []int {
+	fmt.Println("Sorting using quick sort")
+	// Implement quick sort logic here (omitted for brevity)
+	return dataset
+}
 
-class Sorter:
-    _sorter = None
+// Sorter is the context that uses a sorting strategy
+type Sorter struct {
+	sorter SortStrategy
+}
 
-    def __init__(self, sorter):
-        self._sorter = sorter
+func NewSorter(sorter SortStrategy) *Sorter {
+	return &Sorter{sorter: sorter}
+}
 
-    def sort(self, dataset):
-        return self._sorter.sort(dataset)
+func (s *Sorter) Sort(dataset []int) []int {
+	return s.sorter.Sort(dataset)
+}
 
+func main() {
+	dataset := []int{1, 5, 4, 3, 2, 8}
 
-----------------------------
+	sorter := NewSorter(&BubbleSortStrategy{})
+	sorter.Sort(dataset)
 
-dataset = [1, 5, 4, 3, 2, 8]
-
-sorter = Sorter(BubbleSortStrategy())
-sorter.sort(dataset)
-
-sorter = Sorter(QuickSortStrategy())
-sorter.sort(dataset)
+	sorter = NewSorter(&QuickSortStrategy{})
+	sorter.Sort(dataset)
+}
 ```
 
 </div>
@@ -10404,26 +10453,35 @@ class TextEditor():
     def setState(self, state):
         self._state = state
 
-    def type(self, words):
+    def write(self, words):
         self._state.write(words)
 
 
-----------------------------
+# ----------------------------
 
 editor = TextEditor(DefaultText())
-editor.type('First Line')  # First line
+editor.write('First Line') 
 
 editor.setState(UpperCase())
 
-editor.type('Second Line')  # SECOND LINE
-
-editor.type('Third Line')  # THIRD LINE
+editor.write('Second Line') 
+editor.write('Third Line') 
 
 editor.setState(LowerCase())
 
-editor.type('Fourth Line')  # fourth line
+editor.write('Fourth Line') 
+editor.write('Fifth Line')  
 
-editor.type('Fifth Line')  # fifth line
+
+'''
+Output will be
+==============
+First Line
+SECOND LINE
+THIRD LINE
+fourth line
+fifth line
+'''
 
 ```
 
