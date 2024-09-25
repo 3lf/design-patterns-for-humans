@@ -11487,7 +11487,7 @@ iOSBuilder.build();
 - صالح عزیز که زحمت مثال های PHP رو کشید.([salehhashemi1992](https://github.com/salehhashemi1992))
 - عاطفه عزیز که زحمت مثال های Golang رو کشید.([Atefe-Komeili](https://github.com/Atefe-Komeili))
 - محمد عزیز که زحمت مثال های Java رو کشید.([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
-- مهسا و محمد عزیز که زحمت بهبود کد هارو کشیدند.([MahsaMahdavian](https://github.com/MahsaMahdavian) و [MohammadMMoniri](https://github.com/MohammadMMoniri))
+- مهسا، محمد و سجاد عزیز که زحمت بهبود کد هارو کشیدند.([MahsaMahdavian](https://github.com/MahsaMahdavian) / [MohammadMMoniri](https://github.com/MohammadMMoniri) / [ssmns](https://github.com/ssmns))
 
 
 </div>
