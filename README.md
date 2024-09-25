@@ -8388,7 +8388,7 @@ class Editor:
         return EditorMemento(self._content)
 
     def restore(self, memento):
-        self.content = memento.getContent()
+        self._content = memento.getContent()
 
 
 # ----------------------------
