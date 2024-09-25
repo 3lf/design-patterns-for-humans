@@ -10460,17 +10460,17 @@ class TextEditor():
 # ----------------------------
 
 editor = TextEditor(DefaultText())
-editor.write('First Line')  # First line
+editor.write('First Line') 
 
 editor.setState(UpperCase())
 
-editor.write('Second Line')  # SECOND LINE
-editor.write('Third Line')  # THIRD LINE
+editor.write('Second Line') 
+editor.write('Third Line') 
 
 editor.setState(LowerCase())
 
-editor.write('Fourth Line')  # fourth line
-editor.write('Fifth Line')  # fifth line
+editor.write('Fourth Line') 
+editor.write('Fifth Line')  
 
 
 '''
