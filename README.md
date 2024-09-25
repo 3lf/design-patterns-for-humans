@@ -8409,7 +8409,7 @@ print(editor.getContent())
 Output will be
 ==============
  This is the first sentence This is the second. And this is the third
- This is the first sentence This is the second. And this is the third
+ This is the first sentence This is the second.
 '''
 
 ```
