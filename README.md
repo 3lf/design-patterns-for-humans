@@ -8400,10 +8400,10 @@ editor.write('This is the second.')
 saved = editor.save()
 editor.write('And this is the third')
 
-print(editor.getContent())  ## This is the first sentence. This is second. And this is third.
+print(editor.getContent()) 
 
 editor.restore(saved)
-print(editor.getContent())  ## This is the first sentence. This is second
+print(editor.getContent())  
 
 '''
 Output will be
