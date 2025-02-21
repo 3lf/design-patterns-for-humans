@@ -6983,6 +6983,74 @@ Bitcoin!
 </details>
 
 <details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+
+class Account {
+    constructor() {
+        this._successor = null;
+        this._balance = null;
+    }
+
+    setNext(account) {
+        this._successor = account;
+    }
+
+    pay(amountToPay) {
+        const myCaller = (new Error().stack).split("at ")[2].split(" ")[0];
+        if (this.canPay(amountToPay)) {
+            console.log(`Paid ${amountToPay} using ${myCaller}`);
+        } else if (this._successor) {
+            console.log(`Cannot pay using ${myCaller}. Proceeding ..`);
+            this._successor.pay(amountToPay);
+        } else {
+            throw new Error("None of the accounts have enough balance");
+        }
+    }
+
+    canPay(amount) {
+        return this._balance >= amount;
+    }
+}
+
+class Bank extends Account {
+    constructor(balance) {
+        super();
+        this._balance = balance;
+    }
+}
+
+class Paypal extends Account {
+    constructor(balance) {
+        super();
+        this._balance = balance;
+    }
+}
+
+class Bitcoin extends Account {
+    constructor(balance) {
+        super();
+        this._balance = balance;
+    }
+}
+
+
+const bank = new Bank(100);
+const paypal = new Paypal(200);
+const bitcoin = new Bitcoin(300);
+
+bank.setNext(paypal);
+paypal.setNext(bitcoin);
+
+bank.pay(259);
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
