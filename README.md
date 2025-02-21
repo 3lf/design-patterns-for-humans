@@ -9166,6 +9166,60 @@ console.log(editor.getContent()); // This is the first sentence. This is second.
 </details>
 
 <details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class EditorMemento {
+    constructor(content) {
+        this.content = content;
+    }
+
+    getContent() {
+        return this.content;
+    }
+}
+
+class Editor {
+    constructor() {
+        this.content = "";
+    }
+
+    type(words) {
+        this.content = this.content + " " + words;
+    }
+
+    getContent() {
+        return this.content;
+    }
+
+    save() {
+        return new EditorMemento(this.content);
+    }
+
+    restore(memento) {
+        this.content = memento.getContent();
+    }
+}
+
+
+const editor = new Editor();
+editor.type("This is the first sentence");
+editor.type("This is the second.");
+
+const saved = editor.save();
+editor.type("And this is the third");
+
+console.log(editor.getContent()); 
+
+editor.restore(saved);
+console.log(editor.getContent()); 
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
