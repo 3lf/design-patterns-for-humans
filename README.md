@@ -5950,6 +5950,67 @@ shop.serve();
 </details>
 
 <details>
+
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javascript
+
+class GreenTea {
+}
+
+class TeaMaker {
+    constructor() {
+        this.availableTea = {};
+    }
+
+    make(preference) {
+        if (!(preference in this.availableTea)) {
+            this.availableTea[preference] = new GreenTea();
+        }
+
+        return this.availableTea[preference];
+    }
+}
+
+class TeaShop {
+    constructor(teaMaker) {
+        this.orders = {};
+        this.teaMaker = teaMaker;
+    }
+
+    takeOrder(teaType, table) {
+        this.orders[table] = this.teaMaker.make(teaType);
+    }
+
+    serve() {
+        for (const table in this.orders) {
+            const tea = this.orders[table];
+            console.log(`Serving tea to table #${table}`);
+        }
+    }
+}
+
+
+const teaMaker = new TeaMaker();
+const shop = new TeaShop(teaMaker);
+
+shop.takeOrder("less sugar", 1);
+shop.takeOrder("more milk", 2);
+shop.takeOrder("without sugar", 5);
+
+shop.serve();
+// Serving tea to table #1
+// Serving tea to table #2
+// Serving tea to table #5
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
