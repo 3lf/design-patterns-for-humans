@@ -4732,6 +4732,97 @@ console.log(someCoffee.getDescription());
 </details>
 
 <details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class Coffee {
+    getCost() {
+        throw new Error("getCost() must be implemented by subclasses");
+    }
+
+    getDescription() {
+        throw new Error("getDescription() must be implemented by subclasses");
+    }
+}
+
+class SimpleCoffee extends Coffee {
+    getCost() {
+        return 10;
+    }
+
+    getDescription() {
+        return "Simple Coffee";
+    }
+}
+
+class MilkCoffee extends Coffee {
+    constructor(coffee) {
+        super();
+        this.coffee = coffee;
+    }
+
+    getCost() {
+        return this.coffee.getCost() + 2;
+    }
+
+    getDescription() {
+        return this.coffee.getDescription() + ", milk";
+    }
+}
+
+class WhipCoffee extends Coffee {
+    constructor(coffee) {
+        super();
+        this.coffee = coffee;
+    }
+
+    getCost() {
+        return this.coffee.getCost() + 5;
+    }
+
+    getDescription() {
+        return this.coffee.getDescription() + ", whip";
+    }
+}
+
+class VanillaCoffee extends Coffee {
+    constructor(coffee) {
+        super();
+        this.coffee = coffee;
+    }
+
+    getCost() {
+        return this.coffee.getCost() + 3;
+    }
+
+    getDescription() {
+        return this.coffee.getDescription() + ", vanilla";
+    }
+}
+
+
+let someCoffee = new SimpleCoffee();
+console.log(someCoffee.getCost());
+console.log(someCoffee.getDescription());
+
+someCoffee = new MilkCoffee(someCoffee);
+console.log(someCoffee.getCost()); 
+console.log(someCoffee.getDescription()); 
+
+someCoffee = new VanillaCoffee(someCoffee);
+console.log(someCoffee.getCost()); 
+console.log(someCoffee.getDescription()); 
+
+someCoffee = new WhipCoffee(someCoffee);
+console.log(someCoffee.getCost());
+console.log(someCoffee.getDescription());
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
