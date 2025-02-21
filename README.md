@@ -11032,6 +11032,47 @@ sorter2.sort(dataset);
 </details>
 
 <details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class BubbleSortStrategy {
+    sort(dataset) {
+        console.log("Sorting using bubble sort");
+        return dataset;
+    }
+}
+
+class QuickSortStrategy {
+    sort(dataset) {
+        console.log("Sorting using quick sort");
+        return dataset;
+    }
+}
+
+class Sorter {
+    constructor(sorter) {
+        this.sorter = sorter;
+    }
+
+    sort(dataset) {
+        return this.sorter.sort(dataset);
+    }
+}
+
+const dataset = [1, 5, 4, 3, 2, 8];
+
+const sorter = new Sorter(new BubbleSortStrategy());
+sorter.sort(dataset); 
+
+const sorter2 = new Sorter(new QuickSortStrategy());
+sorter2.sort(dataset); 
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
