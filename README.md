@@ -3522,6 +3522,73 @@ console.log(careers.getContent());
 </details>
 
 <details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+
+
+class WebPage {
+    constructor(theme) {
+        this._theme = theme;
+    }
+
+    getContent() {
+        return "";
+    }
+}
+
+class About extends WebPage {
+    getContent() {
+        return `About page in ${this._theme.getColor()}`;
+    }
+}
+
+class Careers extends WebPage {
+    getContent() {
+        return `Careers page in ${this._theme.getColor()}`;
+    }
+}
+
+class Theme {
+    getColor() {
+        return "";
+    }
+}
+
+class DarkTheme extends Theme {
+    getColor() {
+        return "Dark Black";
+    }
+}
+
+class LightTheme extends Theme {
+    getColor() {
+        return "Off White";
+    }
+}
+
+class AquaTheme extends Theme {
+    getColor() {
+        return "Light Blue";
+    }
+}
+
+
+const darkTheme = new DarkTheme();
+
+const about = new About(darkTheme);
+const careers = new Careers(darkTheme);
+
+console.log(about.getContent()); 
+console.log(careers.getContent()); 
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
