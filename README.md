@@ -4067,6 +4067,65 @@ console.log(`RESULT: ${tree.operation()}`);
 </details>
 
 <details>
+
+<summary>Javascript</summary>
+
+<div dir="ltr">
+
+```javascript
+class Leaf {
+    operation() {
+        return "Leaf";
+    }
+}
+
+class Composite {
+    constructor() {
+        this.children = [];
+    }
+
+    add(component) {
+        this.children.push(component);
+    }
+
+    remove(component) {
+        const index = this.children.indexOf(component);
+        if (index !== -1) {
+            this.children.splice(index, 1);
+        }
+    }
+
+    operation() {
+        const results = [];
+        for (const child of this.children) {
+            results.push(child.operation());
+        }
+        return `Branch(${results.join("+")})`;
+    }
+}
+
+
+const tree = new Composite();
+
+const branch1 = new Composite();
+branch1.add(new Leaf());
+branch1.add(new Leaf());
+
+const branch2 = new Composite();
+branch2.add(new Leaf());
+
+tree.add(branch1);
+tree.add(branch2);
+
+console.log(`RESULT: ${tree.operation()}`);
+// Output: RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
