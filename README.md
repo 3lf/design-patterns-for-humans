@@ -8740,6 +8740,54 @@ jane.send("Hey!");
 </details>
 
 <details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class ChatRoomMediator {
+    showMessage(user, message) {
+    
+    }
+}
+
+class ChatRoom extends ChatRoomMediator {
+    showMessage(user, message) {
+        const time = new Date();
+        const sender = user.getName();
+
+        console.log(`${time.toLocaleString()} [${sender}]: ${message}`);
+    }
+}
+
+class User {
+    constructor(name, chatMediator) {
+        this.name = name;
+        this.chatMediator = chatMediator;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    send(message) {
+        this.chatMediator.showMessage(this, message);
+    }
+}
+
+
+const mediator = new ChatRoom();
+
+const john = new User("John", mediator);
+const jane = new User("Jane", mediator);
+
+john.send("Hi there!");
+jane.send("Hey!");
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
