@@ -6428,6 +6428,55 @@ door.close(); // Closing Lab Door
 </details>
 
 <details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+
+class LabDoor {
+    open() {
+        console.log("Opening lab door");
+    }
+
+    close() {
+        console.log("Closing the lab door");
+    }
+}
+
+class SecuredDoor {
+    constructor(door) {
+        this.door = door;
+    }
+
+    open(password) {
+        if (this.authenticate(password)) {
+            this.door.open();
+        } else {
+            console.log("Big no! It ain't possible.");
+        }
+    }
+
+    authenticate(password) {
+        return password === "$ecr@t";
+    }
+
+    close() {
+        this.door.close();
+    }
+}
+
+
+const door = new SecuredDoor(new LabDoor());
+door.open("invalid"); 
+door.open("$ecr@t"); 
+door.close(); 
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
