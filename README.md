@@ -5414,6 +5414,76 @@ computer.turnOff();
 </details>
 
 <details>
+
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javascript
+
+class Computer {
+    getElectricShock() {
+        console.log("Ouch!");
+    }
+
+    makeSound() {
+        console.log("Beep Beep!");
+    }
+
+    showLoadingScreen() {
+        console.log("Loading...");
+    }
+
+    bam() {
+        console.log("Ready to be used...");
+    }
+
+    closeEverything() {
+        console.log("Bup bup bup buzzz!");
+    }
+
+    sooth() {
+        console.log("Zzzzz");
+    }
+
+    pullCurrent() {
+        console.log("Haaah!");
+    }
+}
+
+class ComputerFacade {
+    constructor(computer) {
+        this.computer = computer;
+    }
+
+    set computer(computer) {
+        this.computer = computer;
+    }
+
+    turnOn() {
+        this.computer.getElectricShock();
+        this.computer.makeSound();
+        this.computer.showLoadingScreen();
+        this.computer.bam();
+    }
+
+    turnOff() {
+        this.computer.closeEverything();
+        this.computer.pullCurrent();
+        this.computer.sooth();
+    }
+}
+
+const computer = new ComputerFacade(new Computer());
+computer.turnOn();
+computer.turnOff();
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
