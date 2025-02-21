@@ -7539,6 +7539,64 @@ remote.submit(turnOff); // Darkness!
 </details>
 
 <details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+
+class Bulb {
+    turnOn() {
+        console.log("Bulb has been lit");
+    }
+
+    turnOff() {
+        console.log("Darkness!");
+    }
+}
+
+class Command {
+    constructor(bulb) {
+        this._bulb = bulb;
+    }
+
+    execute() {
+       
+    }
+}
+
+class TurnOn extends Command {
+    execute() {
+        this._bulb.turnOn();
+    }
+}
+
+class TurnOff extends Command {
+    execute() {
+        this._bulb.turnOff();
+    }
+}
+
+class RemoteControl {
+    submit(command) {
+        command.execute();
+    }
+}
+
+
+const bulb = new Bulb();
+
+const turnOn = new TurnOn(bulb);
+const turnOff = new TurnOff(bulb);
+
+const remote = new RemoteControl();
+remote.submit(turnOn); 
+remote.submit(turnOff); 
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
