@@ -9678,6 +9678,65 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 </details>
 
 <details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class JobPost {
+    constructor(title) {
+        this.title = title;
+    }
+
+    getTitle() {
+        return this.title;
+    }
+}
+
+class JobSeeker {
+    constructor(name) {
+        this.name = name;
+    }
+
+    onJobPosted(job) {
+        console.log(`Hi ${this.name}! New job posted: ${job.getTitle()}`);
+    }
+}
+
+class JobCategory {
+    constructor() {
+        this.observers = [];
+    }
+
+    notify(jobPosting) {
+        for (const observer of this.observers) {
+            observer.onJobPosted(jobPosting);
+        }
+    }
+
+    attach(observer) {
+        this.observers.push(observer);
+    }
+
+    addJob(jobPosting) {
+        this.notify(jobPosting);
+    }
+}
+
+
+const johnDoe = new JobSeeker("John Doe");
+const janeDoe = new JobSeeker("Jane Doe");
+
+const jobPostings = new JobCategory();
+jobPostings.attach(janeDoe);
+jobPostings.attach(johnDoe);
+
+jobPostings.addJob(new JobPost("Software Engineer at XXX"));
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
