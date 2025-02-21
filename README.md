@@ -7045,3 +7045,5515 @@ bank.setNext(paypal);
 paypal.setNext(bitcoin);
 
 bank.pay(259);
+```
+
+</div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+abstract class Account
+{
+  private Account mSuccessor;
+  protected decimal mBalance;
+
+  public void SetNext(Account account)
+  {
+    mSuccessor = account;
+  }
+
+  public void Pay(decimal amountTopay)
+  {
+    if (CanPay(amountTopay))
+    {
+      Console.WriteLine($"Paid {amountTopay:c} using {this.GetType().Name}.");
+    }
+    else if (this.mSuccessor != null)
+    {
+      Console.WriteLine($"Cannot pay using {this.GetType().Name}. Proceeding..");
+      mSuccessor.Pay(amountTopay);
+    }
+    else
+    {
+      throw new Exception("None of the accounts have enough balance");
+    }
+  }
+  private bool CanPay(decimal amount)
+  {
+    return mBalance >= amount;
+  }
+}
+
+class Bank : Account
+{
+  public Bank(decimal balance)
+  {
+    this.mBalance = balance;
+  }
+}
+
+class Paypal : Account
+{
+  public Paypal(decimal balance)
+  {
+    this.mBalance = balance;
+  }
+}
+
+class Bitcoin : Account
+{
+  public Bitcoin(decimal balance)
+  {
+    this.mBalance = balance;
+  }
+}
+
+----------------------------
+
+// Let's prepare a chain like below
+//      $bank->$paypal->$bitcoin
+//
+// First priority bank
+//      If bank can't pay then paypal
+//      If paypal can't pay then bit coin
+var bank = new Bank(100);          // Bank with balance 100
+var paypal = new Paypal(200);      // Paypal with balance 200
+var bitcoin = new Bitcoin(300);    // Bitcoin with balance 300
+
+bank.SetNext(paypal);
+paypal.SetNext(bitcoin);
+
+// Let's try to pay using the first priority i.e. bank
+bank.Pay(259);
+// Output will be
+// ==============
+// Cannot pay using bank. Proceeding ..
+// Cannot pay using paypal. Proceeding ..:
+// Paid 259 using Bitcoin!
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+abstract class Account
+{
+    private $successor;
+    protected $balance;
+
+    public function setNext(Account $account)
+    {
+        $this->successor = $account;
+    }
+
+    public function pay($amountToPay)
+    {
+        if ($this->canPay($amountToPay)) {
+            echo "Paid " . number_format($amountToPay, 2) . " using " . get_class($this) . "." . PHP_EOL;
+        } elseif ($this->successor != null) {
+            echo "Cannot pay using " . get_class($this) . ". Proceeding.." . PHP_EOL;
+            $this->successor->pay($amountToPay);
+        } else {
+            throw new Exception("None of the accounts have enough balance");
+        }
+    }
+
+    private function canPay($amount)
+    {
+        return $this->balance >= $amount;
+    }
+}
+
+class Bank extends Account
+{
+    public function __construct($balance)
+    {
+        $this->balance = $balance;
+    }
+}
+
+class Paypal extends Account
+{
+    public function __construct($balance)
+    {
+        $this->balance = $balance;
+    }
+}
+
+class Bitcoin extends Account
+{
+    public function __construct($balance)
+    {
+        $this->balance = $balance;
+    }
+}
+
+// Let's prepare a chain like below
+//      $bank->$paypal->$bitcoin
+//
+// First priority bank
+//      If bank can't pay then PayPal
+//      If PayPal can't pay then bitcoin
+$bank = new Bank(100);          // Bank with balance 100
+$paypal = new Paypal(200);      // PayPal with balance 200
+$bitcoin = new Bitcoin(300);    // Bitcoin with balance 300
+
+$bank->setNext($paypal);
+$paypal->setNext($bitcoin);
+
+// Let's try to pay using the first priority i.e. bank
+$bank->pay(259);
+// Output will be
+// ==============
+// Cannot pay using Bank. Proceeding..
+// Cannot pay using Paypal. Proceeding..
+// Paid 259.00 using Bitcoin.
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type Account struct {
+	mSuccessor *Account
+	mBalance   float64
+}
+
+func (a *Account) SetNext(account *Account) {
+	a.mSuccessor = account
+}
+
+func (a *Account) Pay(amountTopay float64) {
+	if a.CanPay(amountTopay) {
+		fmt.Printf("Paid %.2f using %T.\n", amountTopay, a)
+	} else if a.mSuccessor != nil {
+		fmt.Printf("Cannot pay using %T. Proceeding..\n", a)
+		a.mSuccessor.Pay(amountTopay)
+	} else {
+		panic("None of the accounts have enough balance")
+	}
+}
+
+func (a *Account) CanPay(amount float64) bool {
+	return a.mBalance >= amount
+}
+
+type Bank struct {
+	Account
+}
+
+func NewBank(balance float64) *Bank {
+	return &Bank{Account{mBalance: balance}}
+}
+
+type Paypal struct {
+	Account
+}
+
+func NewPaypal(balance float64) *Paypal {
+	return &Paypal{Account{mBalance: balance}}
+}
+
+type Bitcoin struct {
+	Account
+}
+
+func NewBitcoin(balance float64) *Bitcoin {
+	return &Bitcoin{Account{mBalance: balance}}
+}
+
+func main() {
+	// Let's prepare a chain like below
+	//      $bank->$paypal->$bitcoin
+	//
+	// First priority bank
+	//      If bank can't pay then paypal
+	//      If paypal can't pay then bit coin
+	bank := NewBank(100)         // Bank with balance 100
+	paypal := NewPaypal(200)     // Paypal with balance 200
+	bitcoin := NewBitcoin(300)   // Bitcoin with balance 300
+
+	bank.SetNext(&paypal.Account)
+	paypal.SetNext(&bitcoin.Account)
+
+	// Let's try to pay using the first priority i.e. bank
+	bank.Pay(259)
+}
+
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+abstract class Account {
+  private Account successor;
+  protected Integer balance;
+
+  public void setNext(Account account) {
+    successor = account;
+  }
+
+  public void pay(Integer amountToPay) throws Exception {
+    String accountType = this.getClass().getName();
+    if (canPay(amountToPay)) {
+      System.out.println("Successful payment ($" + amountToPay +") by " + accountType + " account" );
+    } else if (this.successor != null) {
+      System.out.println("Cannot pay by " + accountType + " account. Proceeding...");
+      successor.pay(amountToPay);
+    } else {
+      throw new Exception("None of the accounts have enough balance");
+    }
+  }
+
+  private boolean canPay(Integer amount) {
+    return balance >= amount;
+  }
+}
+
+class Bank extends Account {
+  public Bank(Integer balance) {
+    this.balance = balance;
+  }
+}
+
+class Paypal extends Account {
+  public Paypal(Integer balance) {
+    this.balance = balance;
+  }
+}
+
+class Bitcoin extends Account {
+  public Bitcoin(Integer balance) {
+    this.balance = balance;
+  }
+}
+
+----------------------------
+
+// Creating payment accounts
+Bank bank =         new Bank(100);      // Bank     balance 100
+Paypal paypal =     new Paypal(200);    // Paypal   balance 200
+Bitcoin bitcoin =   new Bitcoin(300);   // Bitcoin  balance 300
+
+// Creating payment chain
+// Bank -> Paypal -> Bitcoin
+bank.setNext(paypal);
+paypal.setNext(bitcoin);
+
+// Do pay
+bank.pay(259);
+// Cannot pay by Bank account.   Proceeding...
+// Cannot pay by Paypal account. Proceeding...
+// Successful payment ($259) by Bitcoin account!
+```
+
+</div>
+
+</details>
+
+<br>
+
+---
+
+<div align="center">
+
+## 👮 Command
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> فرض کنید توی یک رستوران یک غذا سفارش میدید! شما (client) از گارسون (Invoker) میخواید که براتون مقداری غذا
+> بیاره (Command)! گارسون درخواست شمارو به آشپز میرسونه و آشپز اطلاعات و مهارت کافی برای اجرای درخواست شمارو داره!
+
+به زبون ساده:
+
+> ایده اصلی پشت این الگو اینه که مشتری رو از آشپز جدا کنه! یعنی Client یا درخواست کننده از Receiver یا همون اجراکننده
+> کار جدا بشه.
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> In object-oriented programming, the command pattern is a behavioral design pattern in which an object is used to
+> encapsulate all information needed to perform an action or trigger an event at a later time. This information includes
+> the method name, the object that owns the method and values for the method parameters.
+
+</div>
+
+**مثال برنامه نویسی**
+
+میخوایم یک کنترل برای لامپ درست کنیم (Receiver).
+
+اول باید یک ساختار برای دستورات درست کنیم (Command).
+
+و در نهایت باید کنترل رو بسازیم که میتونه دستورات رو اجرا کنه! (Invoker)
+
+توی این کد هم اول یک لامپ میسازیم و بعدش کامند‌های روشن کردن و خاموش کردن رو ایجاد میکنیم!
+
+در نهایت وقتی نیاز به خاموش کردن یا روشن کردن داشته باشیم این کامند‌هارو به کنترلمون میفرستیم و اون اجراشون میکنه!
+
+<details>
+<summary>Python</summary>
+
+<div dir="ltr">
+
+```python
+class Bulb:
+    def turnOn(self):
+        print("Bulb has been lit")
+
+    def turnOff(self):
+        print("Darkness!")
+
+
+class Command:
+    _bulb = None
+
+    def __init__(self, bulb):
+        self._bulb = bulb
+
+    def execute(self):
+        pass
+
+
+class TurnOn(Command):
+    def execute(self):
+        self._bulb.turnOn()
+
+
+class TurnOff(Command):
+    def execute(self):
+        self._bulb.turnOff()
+
+
+class RemoteControl:
+    def submit(self, command):
+        command.execute()
+
+
+----------------------------
+
+bulb = Bulb()
+
+turnOn = TurnOn(bulb)
+turnOff = TurnOff(bulb)
+
+remote = RemoteControl()
+remote.submit(turnOn)  # Bulb has been lit!
+remote.submit(turnOff)  # Darkness!
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Typescript</summary>
+<div dir="ltr">
+
+```typescript
+class Bulb {
+    turnOn() {
+        console.log("Bulb has been lit");
+    }
+
+    turnOff() {
+        console.log("Darkness!");
+    }
+}
+
+class Command {
+    protected _bulb: Bulb | null = null;
+
+    constructor(bulb: Bulb) {
+        this._bulb = bulb;
+    }
+
+    execute(): void {
+    }
+}
+
+class TurnOn extends Command {
+    execute() {
+        this._bulb!.turnOn();
+    }
+}
+
+class TurnOff extends Command {
+    execute() {
+        this._bulb!.turnOff();
+    }
+}
+
+class RemoteControl {
+    submit(command: { execute: () => void }) {
+        command.execute();
+    }
+}
+
+----------------------------
+
+const bulb = new Bulb();
+
+const turnOn = new TurnOn(bulb);
+const turnOff = new TurnOff(bulb);
+
+const remote = new RemoteControl();
+remote.submit(turnOn); // Bulb has been lit!
+remote.submit(turnOff); // Darkness!
+```
+
+</div>
+</details>
+
+<details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+
+class Bulb {
+    turnOn() {
+        console.log("Bulb has been lit");
+    }
+
+    turnOff() {
+        console.log("Darkness!");
+    }
+}
+
+class Command {
+    constructor(bulb) {
+        this._bulb = bulb;
+    }
+
+    execute() {
+       
+    }
+}
+
+class TurnOn extends Command {
+    execute() {
+        this._bulb.turnOn();
+    }
+}
+
+class TurnOff extends Command {
+    execute() {
+        this._bulb.turnOff();
+    }
+}
+
+class RemoteControl {
+    submit(command) {
+        command.execute();
+    }
+}
+
+
+const bulb = new Bulb();
+
+const turnOn = new TurnOn(bulb);
+const turnOff = new TurnOff(bulb);
+
+const remote = new RemoteControl();
+remote.submit(turnOn); 
+remote.submit(turnOff); 
+```
+
+</div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+// Receiver
+class Bulb
+{
+  public void TurnOn()
+  {
+    Console.WriteLine("Bulb has been lit");
+  }
+
+  public void TurnOff()
+  {
+    Console.WriteLine("Darkness!");
+  }
+}
+
+
+
+interface ICommand
+{
+  void Execute();
+  void Undo();
+  void Redo();
+}
+
+// Command
+class TurnOn : ICommand
+{
+  private Bulb mBulb;
+
+  public TurnOn(Bulb bulb)
+  {
+    mBulb = bulb ?? throw new ArgumentNullException("Bulb", "Bulb cannot be null");
+  }
+
+  public void Execute()
+  {
+    mBulb.TurnOn();
+  }
+
+  public void Undo()
+  {
+    mBulb.TurnOff();
+  }
+
+  public void Redo()
+  {
+    Execute();
+  }
+}
+
+class TurnOff : ICommand
+{
+  private Bulb mBulb;
+
+  public TurnOff(Bulb bulb)
+  {
+    mBulb = bulb ?? throw new ArgumentNullException("Bulb", "Bulb cannot be null");
+  }
+
+  public void Execute()
+  {
+    mBulb.TurnOff();
+  }
+
+  public void Undo()
+  {
+    mBulb.TurnOn();
+  }
+
+  public void Redo()
+  {
+    Execute();
+  }
+}
+
+
+// Invoker
+class RemoteControl
+{
+  public void Submit(ICommand command)
+  {
+    command.Execute();
+  }
+}
+
+
+----------------------------
+
+  var bulb = new Bulb();
+
+  var turnOn = new TurnOn(bulb);
+  var turnOff = new TurnOff(bulb);
+
+  var remote = new RemoteControl();
+  remote.Submit(turnOn); // Bulb has been lit!
+  remote.Submit(turnOff); // Darkness!
+
+  Console.ReadLine();
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+// Receiver
+class Bulb
+{
+    public function turnOn()
+    {
+        echo "Bulb has been lit\n";
+    }
+
+    public function turnOff()
+    {
+        echo "Darkness!\n";
+    }
+}
+
+interface CommandInterface
+{
+    public function execute();
+    public function undo();
+    public function redo();
+}
+
+// Command
+class TurnOn implements CommandInterface
+{
+    public function __construct(private Bulb $bulb)
+    {
+    }
+
+    public function execute()
+    {
+        $this->bulb->turnOn();
+    }
+
+    public function undo()
+    {
+        $this->bulb->turnOff();
+    }
+
+    public function redo()
+    {
+        $this->execute();
+    }
+}
+
+class TurnOff implements CommandInterface
+{
+    public function __construct(private Bulb $bulb)
+    {
+    }
+
+    public function execute()
+    {
+        $this->bulb->turnOff();
+    }
+
+    public function undo()
+    {
+        $this->bulb->turnOn();
+    }
+
+    public function redo()
+    {
+        $this->execute();
+    }
+}
+
+// Invoker
+class RemoteControl
+{
+    public function submit(CommandInterface $command)
+    {
+        $command->execute();
+    }
+}
+
+// Usage
+$bulb = new Bulb();
+
+$turnOn = new TurnOn($bulb);
+$turnOff = new TurnOff($bulb);
+
+$remote = new RemoteControl();
+$remote->submit($turnOn); // Bulb has been lit!
+$remote->submit($turnOff); // Darkness!
+
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+// Receiver
+type Bulb struct{}
+
+func (b *Bulb) TurnOn() {
+    fmt.Println("Bulb has been lit")
+}
+
+func (b *Bulb) TurnOff() {
+    fmt.Println("Darkness!")
+}
+
+// ICommand interface
+type ICommand interface {
+    Execute()
+    Undo()
+    Redo()
+}
+
+// Command
+type TurnOnCommand struct {
+    bulb *Bulb
+}
+
+func (c *TurnOnCommand) Execute() {
+    c.bulb.TurnOn()
+}
+
+func (c *TurnOnCommand) Undo() {
+    c.bulb.TurnOff()
+}
+
+func (c *TurnOnCommand) Redo() {
+    c.Execute()
+}
+
+type TurnOffCommand struct {
+    bulb *Bulb
+}
+
+func (c *TurnOffCommand) Execute() {
+    c.bulb.TurnOff()
+}
+
+func (c *TurnOffCommand) Undo() {
+    c.bulb.TurnOn()
+}
+
+func (c *TurnOffCommand) Redo() {
+    c.Execute()
+}
+
+// Invoker
+type RemoteControl struct{}
+
+func (r *RemoteControl) Submit(command ICommand) {
+    command.Execute()
+}
+
+func main() {
+    bulb := &Bulb{}
+
+    turnOn := &TurnOnCommand{bulb: bulb}
+    turnOff := &TurnOffCommand{bulb: bulb}
+
+    remote := &RemoteControl{}
+    remote.Submit(turnOn)  // Bulb has been lit
+    remote.Submit(turnOff) // Darkness!
+}
+
+
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+// Receiver
+class Bulb {
+    public void turnOn() {
+        System.out.println("Bulb is turned ON");
+    }
+
+    public void turnOff() {
+        System.out.println("Bulb is turned OFF");
+    }
+}
+
+interface Command {
+    void execute();
+    void undo();
+    void redo();
+}
+
+// Command
+class TurnOn implements Command {
+    private Bulb bulb;
+
+    public TurnOn(Bulb bulb) {
+        if (bulb == null)
+            throw new IllegalArgumentException("Bulb cannot be null");
+        this.bulb = bulb;
+    }
+
+    @Override
+    public void execute() {
+        bulb.turnOn();
+    }
+
+    @Override
+    public void undo() {
+        bulb.turnOff();
+    }
+
+    @Override
+    public void redo() {
+        execute();
+    }
+}
+
+class TurnOff implements Command {
+    private Bulb bulb;
+
+    public TurnOff(Bulb bulb) {
+        if (bulb == null)
+            throw new IllegalArgumentException("Bulb cannot be null");
+        this.bulb = bulb;
+    }
+
+    @Override
+    public void execute() {
+        bulb.turnOff();
+    }
+
+    @Override
+    public void undo() {
+        bulb.turnOn();
+    }
+
+    @Override
+    public void redo() {
+        execute();
+    }
+}
+
+// Invoker
+class RemoteControl {
+    public void submit(Command command) {
+        command.execute();
+    }
+}
+
+----------------------------
+
+Bulb bulb = new Bulb();
+TurnOn turnOnCmd = new TurnOn(bulb);
+TurnOff turnOffCmd = new TurnOff(bulb);
+
+RemoteControl remote = new RemoteControl();
+remote.submit(turnOnCmd);       // Bulb is turned ON
+remote.submit(turnOffCmd);      // Bulb is turned OFF
+```
+
+</div>
+
+</details>
+
+<br>
+
+---
+
+<div align="center">
+
+## ➿ Iterator
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> یک رادیو رو در نظر بگیرین که میتونین بین فرکانس‌های مختلفش جابجا بشین! در واقع این رادیو یک Iterator هستش!
+>
+> چون میتونین از یک فرکانس به فرکانس دیگه بروید و از اونجا به فرکانس دیگه و ... بدون اینکه درگیر فرکانس قبلی یا بعدی
+> بشین!
+
+به زبون ساده:
+
+> دسترسی پی در پی به عناصر مختلف یک مجموعه هست بدون اینکه نیاز باشه به جزئیات بقیه عناصر نگاه کنیم!
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> In object-oriented programming, the iterator pattern is a design pattern in which an iterator is used to traverse a
+> container and access the container's elements. The iterator pattern decouples algorithms from containers; in some
+> cases,
+> algorithms are necessarily container-specific and thus cannot be decoupled.
+
+</div>
+
+**مثال برنامه نویسی**
+
+این مثال رو میخوایم یکم پایتونیک پیش بریم! میدونید که توی پایتون دو تا مفهوم Iterable و Iterator رو داریم پس میریم ازشون
+استفاده کنیم!
+
+این کلاس یک Iterator هستش که میتونه توی یک WordsCollection جابجا بشه و عناصرش رو برگردونه!
+
+توی این کد هم میتونید ببینید که چطوری میتونیم از Iterator‌ها استفاده کنیم!
+
+<details>
+<summary>Python</summary>
+
+<div dir="ltr">
+
+```python
+from __future__ import annotations
+from collections.abc import Iterable, Iterator
+from typing import Any, List
+
+
+class AlphabeticalOrderIterator(Iterator):
+    _position: int = None
+
+    def __init__(self, collection: WordsCollection, reverse: bool = False) -> None:
+        self._collection = collection
+        self._reverse = reverse
+        self._position = -1 if reverse else 0
+
+    def __next__(self):
+        try:
+            value = self._collection[self._position]
+            self._position += -1 if self._reverse else 1
+        except IndexError:
+            raise StopIteration()
+
+        return value
+
+
+class WordsCollection(Iterable):
+    def __init__(self, collection: List[Any] = []) -> None:
+        self._collection = collection
+
+    def __iter__(self) -> AlphabeticalOrderIterator:
+        return AlphabeticalOrderIterator(self._collection)
+
+    def get_reverse_iterator(self) -> AlphabeticalOrderIterator:
+        return AlphabeticalOrderIterator(self._collection, True)
+
+    def add_item(self, item: Any) -> None:
+        self._collection.append(item)
+
+#----------------------------
+
+if __name__ == "__main__":
+    collection = WordsCollection()
+    collection.add_item("First")
+    collection.add_item("Second")
+    collection.add_item("Third")
+
+    print("Straight traversal:")
+    print("\n".join(collection))
+
+    print("\n")
+    print("Reverse traversal:")
+    print("\n".join(collection.get_reverse_iterator()), end="")
+
+
+
+
+'''
+Output will be
+==============
+Straight traversal:
+First
+Second
+Third
+
+
+Reverse traversal:
+Third
+Second
+First% 
+'''
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Typescript</summary>
+<div dir="ltr">
+
+```typescript
+interface Iterator<T> {
+    next(): { value: T; done: boolean };
+}
+
+class AlphabeticalOrderIterator implements Iterator<string> {
+    private position: number;
+
+    constructor(private collection: WordsCollection, private reverse = false) {
+        this.position = this.reverse ? -1 : 0;
+    }
+
+    next() {
+        try {
+            const value = this.collection.collection[this.position];
+            this.position += this.reverse ? -1 : 1;
+            return {value, done: false};
+        } catch (error) {
+            return {value: undefined, done: true};
+        }
+    }
+}
+
+class WordsCollection {
+    collection: string[];
+
+    constructor(collection: string[] = []) {
+        this.collection = collection;
+    }
+
+    [Symbol.iterator]() {
+        return new AlphabeticalOrderIterator(this);
+    }
+
+    getReverseIterator() {
+        return new AlphabeticalOrderIterator(this, true);
+    }
+
+    addItem(item: string) {
+        this.collection.push(item);
+    }
+}
+
+----------------------------
+
+const collection = new WordsCollection();
+collection.addItem("First");
+collection.addItem("Second");
+collection.addItem("Third");
+
+console.log("Straight traversal:");
+for (const item of collection) {
+    console.log(item);
+}
+
+console.log("\nReverse traversal:");
+for (const item of collection.getReverseIterator()) {
+    console.log(item);
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class AlphabeticalOrderIterator {
+    constructor(collection, reverse = false) {
+        this.collection = collection;
+        this.reverse = reverse;
+        this.position = this.reverse ? collection.collection.length - 1 : 0;
+    }
+
+    next() {
+        if (this.position >= 0 && this.position < this.collection.collection.length) {
+            const value = this.collection.collection[this.position];
+            this.position += this.reverse ? -1 : 1;
+            return { value, done: false };
+        } else {
+            return { value: undefined, done: true };
+        }
+    }
+}
+
+class WordsCollection {
+    constructor(collection = []) {
+        this.collection = collection;
+    }
+
+    [Symbol.iterator]() {
+        return new AlphabeticalOrderIterator(this);
+    }
+
+    getReverseIterator() {
+        return new AlphabeticalOrderIterator(this, true);
+    }
+
+    addItem(item) {
+        this.collection.push(item);
+    }
+}
+
+
+const collection = new WordsCollection();
+collection.addItem("First");
+collection.addItem("Second");
+collection.addItem("Third");
+
+console.log("Straight traversal:");
+for (const item of collection) {
+    console.log(item);
+}
+
+console.log("\nReverse traversal:");
+const reverseIterator = collection.getReverseIterator();
+let result = reverseIterator.next();
+while (!result.done) {
+    console.log(result.value);
+    result = reverseIterator.next();
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+class RadioStation
+{
+  private float mFrequency;
+
+  public RadioStation(float frequency)
+  {
+    mFrequency = frequency;
+  }
+
+  public float GetFrequecy()
+  {
+    return mFrequency;
+  }
+
+}
+
+
+class StationList : IEnumerable<RadioStation>
+{
+  List<RadioStation> mStations = new List<RadioStation>();
+
+  public RadioStation this[int index]
+  {
+    get { return mStations[index]; }
+    set { mStations.Insert(index, value); }
+  }
+
+  public void Add(RadioStation station)
+  {
+    mStations.Add(station);
+  }
+
+  public void Remove(RadioStation station)
+  {
+    mStations.Remove(station);
+  }
+
+  public IEnumerator<RadioStation> GetEnumerator()
+  {
+    return this.GetEnumerator();
+  }
+
+  IEnumerator IEnumerable.GetEnumerator()
+  {
+    //Use can switch to this internal collection if you do not want to transform
+    //return mStations.GetEnumerator();
+
+    //use this if you want to transform the object before rendering
+    foreach (var x in mStations)
+    {
+      yield return x;
+    }
+  }
+}
+
+
+
+----------------------------
+
+var stations = new StationList();
+var station1 = new RadioStation(89);
+stations.Add(station1);
+
+var station2 = new RadioStation(101);
+stations.Add(station2);
+
+var station3 = new RadioStation(102);
+stations.Add(station3);
+
+foreach(var x in stations)
+{
+  Console.Write(x.GetFrequecy());
+}
+
+var q = stations.Where(x => x.GetFrequecy() == 89).FirstOrDefault();
+Console.WriteLine(q.GetFrequecy());
+
+Console.ReadLine();
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class RadioStation
+{
+    private $mFrequency;
+
+    public function __construct($frequency)
+    {
+        $this->mFrequency = $frequency;
+    }
+
+    public function getFrequency()
+    {
+        return $this->mFrequency;
+    }
+}
+
+class StationList implements IteratorAggregate
+{
+    private $mStations = [];
+
+    public function add(RadioStation $station)
+    {
+        array_push($this->mStations, $station);
+    }
+
+    public function remove(RadioStation $station)
+    {
+        $index = array_search($station, $this->mStations, true);
+        if ($index !== false) {
+            array_splice($this->mStations, $index, 1);
+        }
+    }
+
+    public function getIterator()
+    {
+        // Use can switch to this internal collection if you do not want to transform
+        // return new ArrayIterator($this->mStations);
+
+        // Use this if you want to transform the object before rendering
+        foreach ($this->mStations as $x) {
+            yield $x;
+        }
+    }
+}
+
+$stations = new StationList();
+$station1 = new RadioStation(89);
+$stations->add($station1);
+
+$station2 = new RadioStation(101);
+$stations->add($station2);
+
+$station3 = new RadioStation(102);
+$stations->add($station3);
+
+foreach ($stations as $x) {
+    echo $x->getFrequency() . ' ';
+}
+
+$q = array_filter($stations, function ($x) {
+    return $x->getFrequency() == 89;
+});
+echo reset($q)->getFrequency();
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+    "fmt"
+)
+
+type RadioStation struct {
+    frequency float32
+}
+
+func NewRadioStation(frequency float32) *RadioStation {
+    return &RadioStation{frequency}
+}
+
+func (r *RadioStation) GetFrequency() float32 {
+    return r.frequency
+}
+
+type StationList struct {
+    stations []*RadioStation
+}
+
+func NewStationList() *StationList {
+    return &StationList{}
+}
+
+func (s *StationList) Add(station *RadioStation) {
+    s.stations = append(s.stations, station)
+}
+
+func (s *StationList) Remove(station *RadioStation) {
+    for i, v := range s.stations {
+        if v == station {
+            s.stations = append(s.stations[:i], s.stations[i+1:]...)
+            break
+        }
+    }
+}
+
+func (s *StationList) GetStation(index int) *RadioStation {
+    return s.stations[index]
+}
+
+func (s *StationList) Len() int {
+    return len(s.stations)
+}
+
+func (s *StationList) Less(i, j int) bool {
+    return s.stations[i].GetFrequency() < s.stations[j].GetFrequency()
+}
+
+func (s *StationList) Swap(i, j int) {
+    s.stations[i], s.stations[j] = s.stations[j], s.stations[i]
+}
+
+func (s *StationList) Sort() {
+    sort.Sort(s)
+}
+
+func (s *StationList) Search(station *RadioStation) int {
+    return sort.Search(len(s.stations), func(i int) bool {
+        return s.stations[i].GetFrequency() >= station.GetFrequency()
+    })
+}
+
+func (s *StationList) Iterator() <-chan *RadioStation {
+    ch := make(chan *RadioStation)
+    go func() {
+        for _, station := range s.stations {
+            ch <- station
+        }
+        close(ch)
+    }()
+    return ch
+}
+
+func main() {
+    stations := NewStationList()
+    station1 := NewRadioStation(89)
+    stations.Add(station1)
+
+    station2 := NewRadioStation(101)
+    stations.Add(station2)
+
+    station3 := NewRadioStation(102)
+    stations.Add(station3)
+
+    for station := range stations.Iterator() {
+        fmt.Println(station.GetFrequency())
+    }
+
+    q := sort.Search(stations.Len(), func(i int) bool {
+        return stations.GetStation(i).GetFrequency() >= 89
+    })
+    fmt.Println(stations.GetStation(q).GetFrequency())
+}
+
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class RadioStation {
+    private float frequency;
+
+    public RadioStation(float frequency) {
+        this.frequency = frequency;
+    }
+
+    public float getFrequency() {
+        return frequency;
+    }
+}
+
+class StationList implements Iterable<RadioStation> {
+    private List<RadioStation> stations;
+
+    public StationList() {
+        stations = new ArrayList<>();
+    }
+
+    public List<RadioStation> getStations() {
+        return stations;
+    }
+
+    public void add(RadioStation station) {
+        stations.add(station);
+    }
+
+    public void remove(RadioStation station) {
+        stations.remove(station);
+    }
+
+    @Override
+    public Iterator<RadioStation> iterator() {
+        return this.getStations().iterator();
+    }
+}
+
+----------------------------
+
+StationList stations = new StationList();
+RadioStation station1 = new RadioStation(89);
+stations.add(station1);
+
+RadioStation station2 = new RadioStation(101);
+stations.add(station2);
+
+RadioStation station3 = new RadioStation(102);
+stations.add(station3);
+
+Iterator<RadioStation> stationIterator = stations.iterator();
+while (stationIterator.hasNext()) {
+RadioStation radioStation = stationIterator.next();
+System.out.println(radioStation.getFrequency());
+}
+// 89.0
+// 101.0
+// 102.0
+```
+
+</div>
+
+</details>
+
+<br>
+
+---
+
+<div align="center">
+
+## 👽 Mediator
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> وقتی دارین با یک نفر با کمک اینترنت چت میکنید، شبکه اینترنت بین شما و اون فرد قرار داره. این شبکه mediator هست!
+
+به زبون ساده:
+
+> این الگو یک ابجکت که ما mediator بهش میگیم بین دو ابجکت قرار میده که ارتباط بین این دو ابجکت (که بهشون colleagues
+> میگیم) رو مدیریت میکنه! حالا چرا
+> بهش نیاز داریم؟ چون در این صورت دیگه این دوتا نیاز نیست درمورد پیاده سازی طرف دیگه چیزی بدونن و این باعث کاهش coupling
+> بین دو ابجکت میشه!
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> In software engineering, the mediator pattern defines an object that encapsulates how a set of objects interact. This
+> pattern is considered to be a behavioral pattern due to the way it can alter the program's running behavior.
+
+</div>
+
+**مثال برنامه نویسی**
+
+میخوایم یک ساختار چت روم بسازیم! (Mediator)
+
+خب حالا بخش یوزر‌ها: (Colleagues)
+
+<details>
+<summary>Python</summary>
+
+<div dir="ltr">
+
+```python
+import datetime
+
+
+class ChatRoomMediator:
+    def showMessage(self, user, message):
+        pass
+
+
+class ChatRoom(ChatRoomMediator):
+    def showMessage(self, user, message):
+        time = datetime.datetime.now()
+        sender = user.getName()
+
+        print(str(time) + '[' + sender + ']: ' + message)
+
+
+class User:
+    _name = None
+    _chatMediator = None
+
+    def __init__(self, name, chatMediator):
+        self.name = name
+        self._chatMediator = chatMediator
+
+    def getName(self):
+        return self.name
+
+    def send(self, message):
+        self._chatMediator.showMessage(self, message)
+
+
+#----------------------------
+
+mediator = ChatRoom()
+
+john = User('John', mediator)
+jane = User('Jane', mediator)
+
+john.send('Hi There!')
+jane.send('Hey!')
+
+
+'''
+Output will be
+==============
+2024-09-23 21:20:17.284000[John]: Hi There!
+2024-09-23 21:20:17.284023[Jane]: Hey!
+
+'''
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Typescript</summary>
+
+<div dir="ltr">
+
+```typescript
+class ChatRoomMediator {
+    showMessage(user: User, message: string): void {
+    }
+}
+
+class ChatRoom extends ChatRoomMediator {
+    showMessage(user: User, message: string): void {
+        let time = new Date();
+        let sender = user.getName();
+
+        console.log(`${time.toLocaleString()} [${sender}]: ${message}`);
+    }
+}
+
+class User {
+    private name: string;
+    private chatMediator: ChatRoomMediator;
+
+    constructor(name: string, chatMediator: ChatRoomMediator) {
+        this.name = name;
+        this.chatMediator = chatMediator;
+    }
+
+    getName(): string {
+        return this.name;
+    }
+
+    send(message: string): void {
+        this.chatMediator.showMessage(this, message);
+    }
+}
+
+----------------------------
+
+const mediator = new ChatRoom();
+
+const john = new User("John", mediator);
+const jane = new User("Jane", mediator);
+
+john.send("Hi there!");
+jane.send("Hey!");
+
+// Output will be:
+// Feb 14, 10:58 [John]: Hi there!
+// Feb 14, 10:58 [Jane]: Hey!
+```
+
+</div>
+</details>
+
+<details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class ChatRoomMediator {
+    showMessage(user, message) {
+    
+    }
+}
+
+class ChatRoom extends ChatRoomMediator {
+    showMessage(user, message) {
+        const time = new Date();
+        const sender = user.getName();
+
+        console.log(`${time.toLocaleString()} [${sender}]: ${message}`);
+    }
+}
+
+class User {
+    constructor(name, chatMediator) {
+        this.name = name;
+        this.chatMediator = chatMediator;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    send(message) {
+        this.chatMediator.showMessage(this, message);
+    }
+}
+
+
+const mediator = new ChatRoom();
+
+const john = new User("John", mediator);
+const jane = new User("Jane", mediator);
+
+john.send("Hi there!");
+jane.send("Hey!");
+```
+
+</div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IChatRoomMediator
+{
+  void ShowMessage(User user, string message);
+}
+
+//Mediator
+class ChatRoom : IChatRoomMediator
+{
+  public void ShowMessage(User user, string message)
+  {
+    Console.WriteLine($"{DateTime.Now.ToString("MMMM dd, H:mm")} [{user.GetName()}]:{message}");
+  }
+}
+
+
+class User
+{
+  private string mName;
+  private IChatRoomMediator mChatRoom;
+
+  public User(string name, IChatRoomMediator chatroom)
+  {
+    mChatRoom = chatroom;
+    mName = name;
+  }
+
+  public string GetName()
+  {
+    return mName;
+  }
+
+  public void Send(string message)
+  {
+    mChatRoom.ShowMessage(this, message);
+  }
+}
+
+----------------------------
+
+var mediator = new ChatRoom();
+
+var john = new User("John", mediator);
+var jane = new User("Jane", mediator);
+
+john.Send("Hi there!");
+jane.Send("Hey!");
+
+//April 14, 20:05[John]:Hi there!
+//April 14, 20:05[Jane]:Hey!
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface ChatRoomMediator
+{
+    public function showMessage(User $user, string $message): void;
+}
+
+class ChatRoom implements ChatRoomMediator
+{
+    public function showMessage(User $user, string $message): void
+    {
+        echo date('F d, H:i') . " [" . $user->getName() . "]: " . $message . "\n";
+    }
+}
+
+class User
+{
+    private $name;
+    private $chatRoom;
+
+    public function __construct(string $name, ChatRoomMediator $chatRoom)
+    {
+        $this->name = $name;
+        $this->chatRoom = $chatRoom;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function send(string $message): void
+    {
+        $this->chatRoom->showMessage($this, $message);
+    }
+}
+
+$mediator = new ChatRoom();
+
+$john = new User("John", $mediator);
+$jane = new User("Jane", $mediator);
+
+$john->send("Hi there!");
+$jane->send("Hey!");
+
+// Output:
+// February 15, 14:44 [John]: Hi there!
+// February 15, 14:44 [Jane]: Hey!
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+type ChatRoomMediator interface {
+	ShowMessage(user *User, message string)
+}
+
+type ChatRoom struct{}
+
+func (cr *ChatRoom) ShowMessage(user *User, message string) {
+	fmt.Printf("%s [%s]: %s\n", time.Now().Format("January 02, 15:04"), user.GetName(), message)
+}
+
+type User struct {
+	Name     string
+	ChatRoom ChatRoomMediator
+}
+
+func (u *User) GetName() string {
+	return u.Name
+}
+
+func (u *User) Send(message string) {
+	u.ChatRoom.ShowMessage(u, message)
+}
+
+func main() {
+	mediator := &ChatRoom{}
+
+	john := &User{Name: "John", ChatRoom: mediator}
+	jane := &User{Name: "Jane", ChatRoom: mediator}
+
+	john.Send("Hi there!")
+	jane.Send("Hey!")
+}
+
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface ChatRoomMediator {
+    void showMessage(User user, String message);
+}
+
+//Mediator
+class ChatRoom implements ChatRoomMediator {
+
+    SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, HH:mm");
+
+    @Override
+    public void showMessage(User user, String message) {
+        System.out.println(sdf.format(new Date())+ " [" + user.getName() + "]: " + message);
+    }
+}
+
+class User {
+    private String name;
+    private ChatRoomMediator chatRoom;
+
+    public User(String name, ChatRoomMediator chatroom) {
+        chatRoom = chatroom;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void send(String message) {
+        chatRoom.showMessage(this, message);
+    }
+}
+
+----------------------------
+
+ChatRoom mediator = new ChatRoom();
+
+User john = new User("John", mediator);
+User jane = new User("Jane", mediator);
+
+john.send("Hi there!"); // March 01, 21:38 [John]: Hi there!
+jane.send("Hey!");      // March 01, 21:38 [Jane]: Hey!
+```
+
+</div>
+
+</details>
+
+<br>
+
+---
+
+<div align="center">
+
+## 💾 Memento
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> ماشین حساب‌های گوشی رو دیدید؟ وقتی محاسبه‌هاتون پیش میره، یک قسمت حافظه داره که محاسبه‌های قبلی رو بهتون نشون میده و
+> هروقت بخواید میتونید مقدار فعلی رو برگردونید به محاسبه‌های قبلی!
+
+به زبون ساده:
+
+> به زبون ساده این الگو یک حافظه از حالت‌های قبلی داره که قابلیت برگشت بهشون وجود داره!
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> The memento pattern is a software design pattern that provides the ability to restore an object to its previous
+> state (undo via rollback).
+
+</div>
+
+**مثال برنامه نویسی**
+
+میخوایم یک ادیتور متن بسازیم و قابلیت ذخیره کردن و بازگردانی بهش اضافه کنیم!
+
+خب اول یک کلاس به عنوان حافظه ادیتور میسازیم! مشخصه که وظیفه‌اش فقط نگهداری یک مقدار هست!
+
+در ادامه یک کلاس ادیتور میسازیم که قابلیت تایپ کردن، خالی کردن، سیو و برگشت حافظه داره!
+
+<details>
+<summary>Python</summary>
+
+<div dir="ltr">
+
+```python
+class EditorMemento:
+    _content = None
+
+    def __init__(self, content):
+        self._content = content
+
+    def getContent(self):
+        return self._content
+
+
+class Editor:
+    _content = ''
+
+    def write(self, words):
+        self._content = self._content + ' ' + words
+
+    def getContent(self):
+        return self._content
+
+    def save(self):
+        return EditorMemento(self._content)
+
+    def restore(self, memento):
+        self._content = memento.getContent()
+
+
+# ----------------------------
+
+editor = Editor()
+editor.write('This is the first sentence')
+editor.write('This is the second.')
+
+saved = editor.save()
+editor.write('And this is the third')
+
+print(editor.getContent()) 
+
+editor.restore(saved)
+print(editor.getContent())  
+
+'''
+Output will be
+==============
+ This is the first sentence This is the second. And this is the third
+ This is the first sentence This is the second.
+'''
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Typescript</summary>
+<div dir="ltr">
+
+```typescript
+class EditorMemento {
+    private content: string | null = null;
+
+    constructor(content: string) {
+        this.content = content;
+    }
+
+    getContent(): string {
+        return this.content;
+    }
+}
+
+class Editor {
+    private content = "";
+
+    type(words: string): void {
+        this.content = this.content + " " + words;
+    }
+
+    getContent(): string {
+        return this.content;
+    }
+
+    save(): EditorMemento {
+        return new EditorMemento(this.content);
+    }
+
+    restore(memento: EditorMemento): void {
+        this.content = memento.getContent();
+    }
+}
+
+----------------------------
+
+const editor = new Editor();
+editor.type("This is the first sentence");
+editor.type("This is the second.");
+
+const saved = editor.save();
+editor.type("And this is the third");
+
+console.log(editor.getContent()); // This is the first sentence. This is second. And this is third.
+
+editor.restore(saved);
+console.log(editor.getContent()); // This is the first sentence. This is second.
+```
+
+</div>
+</details>
+
+<details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class EditorMemento {
+    constructor(content) {
+        this.content = content;
+    }
+
+    getContent() {
+        return this.content;
+    }
+}
+
+class Editor {
+    constructor() {
+        this.content = "";
+    }
+
+    type(words) {
+        this.content = this.content + " " + words;
+    }
+
+    getContent() {
+        return this.content;
+    }
+
+    save() {
+        return new EditorMemento(this.content);
+    }
+
+    restore(memento) {
+        this.content = memento.getContent();
+    }
+}
+
+
+const editor = new Editor();
+editor.type("This is the first sentence");
+editor.type("This is the second.");
+
+const saved = editor.save();
+editor.type("And this is the third");
+
+console.log(editor.getContent()); 
+
+editor.restore(saved);
+console.log(editor.getContent()); 
+```
+
+</div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+class EditorMemento
+{
+  private string mContent;
+
+  public EditorMemento(string content)
+  {
+    mContent = content;
+  }
+
+  public string Content
+  {
+    get
+    {
+      return mContent;
+    }
+  }
+}
+
+
+class Editor {
+
+  private string mContent = string.Empty;
+  private EditorMemento memento;
+
+  public Editor()
+  {
+    memento = new EditorMemento(string.Empty);
+  }
+
+  public void Type(string words)
+  {
+    mContent = String.Concat(mContent," ", words);
+  }
+
+  public string Content
+  {
+    get
+    {
+      return mContent;
+    }
+  }
+
+  public void Save()
+  {
+    memento = new EditorMemento(mContent);
+  }
+
+  public void Restore()
+  {
+    mContent = memento.Content;
+  }
+}
+
+----------------------------
+
+var editor = new Editor();
+
+//Type some stuff
+editor.Type("This is the first sentence.");
+editor.Type("This is second.");
+
+// Save the state to restore to : This is the first sentence. This is second.
+editor.Save();
+
+//Type some more
+editor.Type("This is third.");
+
+//Output the content
+Console.WriteLine(editor.Content); // This is the first sentence. This is second. This is third.
+
+//Restoring to last saved state
+editor.Restore();
+
+Console.Write(editor.Content); // This is the first sentence. This is second
+
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class EditorMemento
+{
+  private $mContent;
+
+  public function __construct($content)
+  {
+    $this->mContent = $content;
+  }
+
+  public function getContent()
+  {
+    return $this->mContent;
+  }
+}
+
+class Editor
+{
+  private $mContent = '';
+  private $memento;
+
+  public function __construct()
+  {
+    $this->memento = new EditorMemento('');
+  }
+
+  public function type($words)
+  {
+    $this->mContent .= ' ' . $words;
+  }
+
+  public function getContent()
+  {
+    return $this->mContent;
+  }
+
+  public function save()
+  {
+    $this->memento = new EditorMemento($this->mContent);
+  }
+
+  public function restore()
+  {
+    $this->mContent = $this->memento->getContent();
+  }
+}
+
+$editor = new Editor();
+
+//Type some stuff
+$editor->type("This is the first sentence.");
+$editor->type("This is second.");
+
+// Save the state to restore to : This is the first sentence. This is second.
+$editor->save();
+
+//Type some more
+$editor->type("This is third.");
+
+//Output the content
+echo $editor->getContent(); // This is the first sentence. This is second. This is third.
+
+//Restoring to last saved state
+$editor->restore();
+
+echo $editor->getContent(); // This is the first sentence. This is second
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+class EditorMemento {
+    private String content;
+
+    public EditorMemento(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+}
+
+class Editor {
+    private String content = "";
+    private EditorMemento memento;
+
+    public Editor() {
+        this.memento = new EditorMemento("");
+    }
+
+    public void type(String words) {
+        if(!this.content.isEmpty())
+            this.content += " ";
+        this.content += words;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+
+    public void save() {
+        memento = new EditorMemento(content);
+    }
+
+    public void restore() {
+        content = memento.getContent();
+    }
+}
+
+----------------------------
+
+editor.type("This is the first sentence.");
+editor.type("This is second.");
+// Save the state
+editor.save();
+// Type more
+editor.type("This is third.");
+// Print all contents
+System.out.println(editor.getContent()); // This is the first sentence. This is second. This is third.
+// Restoring to last saved state
+editor.restore();
+// Print content
+System.out.println(editor.getContent()); // This is the first sentence. This is second.
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+type EditorMemento struct {
+	content string
+}
+
+func NewEditorMemento(content string) *EditorMemento {
+	return &EditorMemento{content: content}
+}
+
+func (e *EditorMemento) GetContent() string {
+	return e.content
+}
+
+type Editor struct {
+	content string
+}
+
+func (e *Editor) Type(words string) {
+	e.content = e.content + " " + words
+}
+
+func (e *Editor) GetContent() string {
+	return e.content
+}
+
+func (e *Editor) Save() *EditorMemento {
+	return NewEditorMemento(e.content)
+}
+
+func (e *Editor) Restore(memento *EditorMemento) {
+	e.content = memento.GetContent()
+}
+
+func main() {
+	editor := &Editor{}
+	editor.Type("This is the first sentence")
+	editor.Type("This is the second.")
+
+	saved := editor.Save()
+	editor.Type("And this is the third")
+
+	fmt.Println(editor.GetContent())  
+
+	editor.Restore(saved)
+	fmt.Println(editor.GetContent()) 
+}
+
+
+```
+
+</div>
+
+</details>
+
+<br>
+
+---
+
+<div align="center">
+
+## 😎 Observer
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> یک سری سایت کاریابی وجود داره که شما میرید و مهارت‌هاتون رو به پروفایلتون اضافه میکنید تا هروقت شغل مناسبی براتون پیدا
+> بشه، براتون ایمیل اطلاع رسانی ارسال میشه!
+
+به زبون ساده:
+
+> یک سری ارتباط بین ابجکت‌ها ایجاد میکنه و هروقت تغییر در وضعیت اونا رخ بده به ابجکت‌های وابسته‌شون اطلاع داده میشه!
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> The observer pattern is a software design pattern in which an object, called the subject, maintains a list of its
+> dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their
+> methods.
+
+</div>
+
+**مثال برنامه نویسی**
+
+در بخش اول یک کلاس برای ذخیره کردن یک شغل میسازیم و در بخش بعدی یک کلاس برای جویندگان کار میسازیم!
+
+و بعد باید یک کلاس برای دسته بندی‌های مختلف کار ایجاد کنیم و جویندگان کار میتونن بهش اضافه بشن و اگه شغلی توی اون دسته
+بندی ارسال بشه به اونا اطلاع رسانی میشه!
+
+<details>
+<summary>Python</summary>
+
+<div dir="ltr">
+
+```python
+class JobPost:
+    _title = None
+
+    def __init__(self, title):
+        self.title = title
+
+    def getTitle(self):
+        return self.title
+
+
+class JobSeeker:
+    _name = None
+
+    def __init__(self, name):
+        self.name = name
+
+    def onJobPosted(self, job):
+        print('Hi ' + self.name + '! New job posted: ' + job.getTitle())
+
+
+class JobCategory:
+    _observers = []
+
+    def notify(self, jobPosting):
+        for observer in self._observers:
+            observer.onJobPosted(jobPosting)
+
+    def attach(self, observer):
+        self._observers.append(observer)
+
+    def addJob(self, jobPosting):
+        self.notify(jobPosting)
+
+
+----------------------------
+
+johnDoe = JobSeeker('John Doe')
+janeDoe = JobSeeker('Jane Doe')
+
+jobPostings = JobCategory()
+jobPostings.attach(janeDoe)
+jobPostings.attach(johnDoe)
+
+jobPostings.addJob(JobPost('Software Engineer at XXX'))
+
+# Output
+# Hi John Doe! New job posted: Software Engineer
+# Hi Jane Doe! New job posted: Software Engineer
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Typescript</summary>
+<div dir="ltr">
+
+```typescript
+class JobPost {
+    private title: string | null = null;
+
+    constructor(title: string) {
+        this.title = title;
+    }
+
+    getTitle(): string {
+        return this.title;
+    }
+}
+
+class JobSeeker {
+    private name: string | null = null;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    onJobPosted(job: JobPost): void {
+        console.log(`Hi ${this.name}! New job posted: ${job.getTitle()}`);
+    }
+}
+
+class JobCategory {
+    private observers: JobSeeker[] = [];
+
+    notify(jobPosting: JobPost): void {
+        for (const observer of this.observers) {
+            observer.onJobPosted(jobPosting);
+        }
+    }
+
+    attach(observer: JobSeeker): void {
+        this.observers.push(observer);
+    }
+
+    addJob(jobPosting: JobPost): void {
+        this.notify(jobPosting);
+    }
+}
+
+----------------------------
+
+const johnDoe = new JobSeeker("John Doe");
+const janeDoe = new JobSeeker("Jane Doe");
+
+const jobPostings = new JobCategory();
+jobPostings.attach(janeDoe);
+jobPostings.attach(johnDoe);
+
+jobPostings.addJob(new JobPost("Software Engineer at XXX"));
+
+// Output
+// Hi John Doe! New job posted: Software Engineer
+// Hi Jane Doe! New job posted: Software Engineer
+```
+
+</div>
+</details>
+
+<details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class JobPost {
+    constructor(title) {
+        this.title = title;
+    }
+
+    getTitle() {
+        return this.title;
+    }
+}
+
+class JobSeeker {
+    constructor(name) {
+        this.name = name;
+    }
+
+    onJobPosted(job) {
+        console.log(`Hi ${this.name}! New job posted: ${job.getTitle()}`);
+    }
+}
+
+class JobCategory {
+    constructor() {
+        this.observers = [];
+    }
+
+    notify(jobPosting) {
+        for (const observer of this.observers) {
+            observer.onJobPosted(jobPosting);
+        }
+    }
+
+    attach(observer) {
+        this.observers.push(observer);
+    }
+
+    addJob(jobPosting) {
+        this.notify(jobPosting);
+    }
+}
+
+
+const johnDoe = new JobSeeker("John Doe");
+const janeDoe = new JobSeeker("Jane Doe");
+
+const jobPostings = new JobCategory();
+jobPostings.attach(janeDoe);
+jobPostings.attach(johnDoe);
+
+jobPostings.addJob(new JobPost("Software Engineer at XXX"));
+```
+
+</div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+class JobPost
+{
+  public string Title { get; private set; }
+
+  public JobPost(string title)
+  {
+    Title = title;
+  }
+}
+class JobSeeker : IObserver<JobPost>
+{
+  public string Name { get; private set; }
+
+  public JobSeeker(string name)
+  {
+    Name = name;
+  }
+
+  //Method is not being called by JobPostings class currently
+  public void OnCompleted()
+  {
+    //No Implementation
+  }
+
+  //Method is not being called by JobPostings class currently
+  public void OnError(Exception error)
+  {
+    //No Implementation
+  }
+
+  public void OnNext(JobPost value)
+  {
+    Console.WriteLine($"Hi {Name} ! New job posted: {value.Title}");
+  }
+}
+
+
+class JobPostings : IObservable<JobPost>
+{
+  private List<IObserver<JobPost>> mObservers;
+  private List<JobPost> mJobPostings;
+
+  public JobPostings()
+  {
+    mObservers = new List<IObserver<JobPost>>();
+    mJobPostings = new List<JobPost>();
+  }
+
+  public IDisposable Subscribe(IObserver<JobPost> observer)
+  {
+    // Check whether observer is already registered. If not, add it
+    if (!mObservers.Contains(observer))
+    {
+      mObservers.Add(observer);
+    }
+    return new Unsubscriber<JobPost>(mObservers, observer);
+  }
+
+  private void Notify(JobPost jobPost)
+  {
+    foreach(var observer in mObservers)
+    {
+      observer.OnNext(jobPost);
+    }
+  }
+
+  public void AddJob(JobPost jobPost)
+  {
+    mJobPostings.Add(jobPost);
+    Notify(jobPost);
+  }
+
+}
+
+internal class Unsubscriber<JobPost> : IDisposable
+{
+  private List<IObserver<JobPost>> mObservers;
+  private IObserver<JobPost> mObserver;
+
+  internal Unsubscriber(List<IObserver<JobPost>> observers, IObserver<JobPost> observer)
+  {
+    this.mObservers = observers;
+    this.mObserver = observer;
+  }
+
+  public void Dispose()
+  {
+    if (mObservers.Contains(mObserver))
+      mObservers.Remove(mObserver);
+  }
+}
+
+----------------------------
+
+//Create Subscribers
+var johnDoe = new JobSeeker("John Doe");
+var janeDoe = new JobSeeker("Jane Doe");
+
+//Create publisher and attch subscribers
+var jobPostings = new JobPostings();
+jobPostings.Subscribe(johnDoe);
+jobPostings.Subscribe(janeDoe);
+
+//Add a new job and see if subscribers get notified
+jobPostings.AddJob(new JobPost("Software Engineer"));
+
+//Output
+// Hi John Doe! New job posted: Software Engineer
+// Hi Jane Doe! New job posted: Software Engineer
+
+Console.ReadLine();
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+class JobPost
+{
+    public function __construct(private string $title)
+    {
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+}
+
+class JobSeeker implements SplObserver
+{
+    public function __construct(private string $name)
+    {
+    }
+
+    public function update(SplSubject $subject)
+    {
+        if ($subject instanceof JobPostings) {
+            $jobPost = $subject->getJobPost();
+            echo "Hi {$this->name} ! New job posted: {$jobPost->getTitle()}\n";
+        }
+    }
+}
+
+class JobPostings implements SplSubject
+{
+    private $observers;
+    private $jobPostings;
+
+    public function __construct()
+    {
+        $this->observers = new SplObjectStorage();
+        $this->jobPostings = [];
+    }
+
+    public function attach(SplObserver $observer)
+    {
+        $this->observers->attach($observer);
+    }
+
+    public function detach(SplObserver $observer)
+    {
+        $this->observers->detach($observer);
+    }
+
+    public function notify()
+    {
+        foreach ($this->observers as $observer) {
+            $observer->update($this);
+        }
+    }
+
+    public function addJob(JobPost $jobPost)
+    {
+        $this->jobPostings[] = $jobPost;
+        $this->notify();
+    }
+
+    public function getJobPost()
+    {
+        return end($this->jobPostings);
+    }
+}
+
+//Create Subscribers
+$johnDoe = new JobSeeker("John Doe");
+$janeDoe = new JobSeeker("Jane Doe");
+
+//Create publisher and attach subscribers
+$jobPostings = new JobPostings();
+$jobPostings->attach($johnDoe);
+$jobPostings->attach($janeDoe);
+
+//Add a new job and see if subscribers get notified
+$jobPostings->addJob(new JobPost("Software Engineer"));
+
+//Output
+// Hi John Doe! New job posted: Software Engineer
+// Hi Jane Doe! New job posted: Software Engineer
+```
+
+</div>
+
+</details>
+
+
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+type JobPost struct {
+	title string
+}
+
+func NewJobPost(title string) *JobPost {
+	return &JobPost{title: title}
+}
+
+func (jp *JobPost) GetTitle() string {
+	return jp.title
+}
+
+type JobSeeker struct {
+	name string
+}
+
+func NewJobSeeker(name string) *JobSeeker {
+	return &JobSeeker{name: name}
+}
+
+func (js *JobSeeker) OnJobPosted(job *JobPost) {
+	fmt.Printf("Hi %s! New job posted: %s\n", js.name, job.GetTitle())
+}
+
+type JobCategory struct {
+	observers []*JobSeeker
+}
+
+func NewJobCategory() *JobCategory {
+	return &JobCategory{}
+}
+
+func (jc *JobCategory) Notify(jobPosting *JobPost) {
+	for _, observer := range jc.observers {
+		observer.OnJobPosted(jobPosting)
+	}
+}
+
+func (jc *JobCategory) Attach(observer *JobSeeker) {
+	jc.observers = append(jc.observers, observer)
+}
+
+func (jc *JobCategory) AddJob(jobPosting *JobPost) {
+	jc.Notify(jobPosting)
+}
+
+func main() {
+	johnDoe := NewJobSeeker("John Doe")
+	janeDoe := NewJobSeeker("Jane Doe")
+
+	jobPostings := NewJobCategory()
+	jobPostings.Attach(janeDoe)
+	jobPostings.Attach(johnDoe)
+
+	jobPostings.AddJob(NewJobPost("Software Engineer at XXX"))
+
+	// Output
+	// Hi Jane Doe! New job posted: Software Engineer at XXX
+	// Hi John Doe! New job posted: Software Engineer at XXX
+}
+
+
+```
+
+</div>
+
+</details>
+
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+
+```java
+class JobPost {
+    private String title;
+
+    public JobPost(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+}
+
+class JobSeeker {
+    private String name;
+
+    public JobSeeker(String name) {
+        this.name = name;
+    }
+
+    public void onJobPosted(JobPost job) {
+        System.out.println("Hi " + this.name + "! New job posted: " + job.getTitle());
+    }
+}
+
+class JobCategory {
+    private List<JobSeeker> observers = new ArrayList<>();
+
+    public void notify(JobPost jobPosting) {
+        for (JobSeeker observer : this.observers) {
+            observer.onJobPosted(jobPosting);
+        }
+    }
+
+    public void attach(JobSeeker observer) {
+        this.observers.add(observer);
+    }
+
+    public void addJob(JobPost jobPosting) {
+        this.notify(jobPosting);
+    }
+}
+
+----------------------------
+
+JobSeeker johnDoe = new JobSeeker("John Doe");
+JobSeeker janeDoe = new JobSeeker("Jane Doe");
+
+JobCategory jobPostings = new JobCategory();
+jobPostings.attach(janeDoe);
+jobPostings.attach(johnDoe);
+
+jobPostings.addJob(new JobPost("Software Engineer at IBM"));
+// Hi Jane Doe! New job posted: Software Engineer at IBM
+// Hi John Doe! New job posted: Software Engineer at IBM
+```
+
+</div>
+
+</details>
+
+<br>
+
+---
+
+<div align="center">
+
+## 🏃 Visitor
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> شما یک وبسایت فروشگاهی دارید که دسته بندی‌های مختلفی دارید، این الگو به شما کمک میکنه درصد تخفیف متفاوتی روی دسته بندی
+> ‌های مختلف اعمال کنید یا همینکار رو در زمینه دسترسی داشته باشید مثلا یک دسترسی ویژه برای دسته بندی وسایل اداری ایجاد
+> کنید!
+
+به زبون ساده:
+
+> این الگو به شما این امکان میده که بدون نیاز به تغییر ابجکت‌ها عملیات بیشتری را بهشون اضافه کنید.
+>
+> اون ابجکت‌هایی که بهشون امکانات اضافه میشه، Visitee گفته میشن و اون کلاس‌هایی که ویژگی رو به ابجکت‌ها اضافه میکنن
+> Visitor گفته میشن!
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> In object-oriented programming and software engineering, the visitor design pattern is a way of separating an
+> algorithm from an object structure on which it operates. A practical result of this separation is the ability to add
+> new
+> operations to existing object structures without modifying those structures. It is one way to follow the open/closed
+> principle.
+
+</div>
+
+**مثال برنامه نویسی**
+
+فرض کنید یک باغ وحش مجازی داریم و میخوایم یک عالمه امکان رو به حیوون‌های مختلف اضافه کنیم! مثلا صداشون، نحوه پریدنشون و
+...
+
+<details>
+<summary>Python</summary>
+
+<div dir="ltr">
+
+```python
+
+# Visitee
+class Animal:
+    def accept(self, operation):
+        pass
+
+
+# Visitor
+class AnimalOperation:
+    def visitMonkey(self, monkey):
+        pass
+
+    def visitLion(self, lion):
+        pass
+
+    def visitDolphin(self, dolphin):
+        pass
+
+
+class Monkey(Animal):
+    def shout(self):
+        print('Ooh oo aa aa!')
+
+    def accept(self, operation):
+        operation.visitMonkey(self)
+
+
+class Lion(Animal):
+    def roar(self):
+        print('Roaaar!')
+
+    def accept(self, operation):
+        operation.visitLion(self)
+
+
+class Dolphin(Animal):
+    def speak(self):
+        print('Tuut tuttu tuutt!')
+
+    def accept(self, operation):
+        operation.visitDolphin(self)
+
+
+class Speak(AnimalOperation):
+    def visitMonkey(self, monkey):
+        monkey.shout()
+
+    def visitLion(self, lion):
+        lion.roar()
+
+    def visitDolphin(self, dolphin):
+        dolphin.speak()
+
+
+monkey = Monkey()
+lion = Lion()
+dolphin = Dolphin()
+
+speak = Speak()
+monkey.accept(speak)  # Ooh oo aa aa!
+lion.accept(speak)  # Roaaar!
+dolphin.accept(speak)  # Tuut tutt tuttt!
+```
+
+</div>
+
+حالا اگه بخوایم قابلیت پریدن رو به حیوونا اضافه کنیم، کار خیلی راحته ببینید:
+
+<div dir="ltr">
+
+```python
+class Jump(AnimalOperation):
+    def visitMonkey(self, monkey):
+        print('Jumped 20 feet high! on to the tree!')
+
+    def visitLion(self, lion):
+        print('Jumped 7 feet! back on the ground!')
+
+    def visitDolphin(self, dolphin):
+        print('Walked on water a little and disappeared')
+```
+
+</div>
+
+حالا نحوه فراخوانیش رو در کنار صدای حیوونا ببینید:
+
+<div dir="ltr">
+
+```python
+jump = Jump()
+
+monkey.accept(speak)  # Ooh oo aa aa!
+monkey.accept(jump)  # Jumped 20 feet high! on to the tree!
+
+lion.accept(speak)  # Roaaar!
+lion.accept(jump)  # Jumped 7 feet! Back on the ground!
+
+dolphin.accept(speak)  # Tuut tutt tuutt!
+dolphin.accept(jump)  # Walked on water a little and disappeared
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Typescript</summary>
+<div dir="ltr">
+
+```typescript
+interface AnimalOperation {
+    visitMonkey(monkey: Monkey): void;
+
+    visitLion(lion: Lion): void;
+
+    visitDolphin(dolphin: Dolphin): void;
+}
+
+interface Animal {
+    accept(operation: AnimalOperation): void;
+}
+
+class Monkey implements Animal {
+    shout() {
+        console.log("Ooh oo aa aa!");
+    }
+
+    accept(operation: AnimalOperation): void {
+        operation.visitMonkey(this);
+    }
+}
+
+class Lion implements Animal {
+    roar() {
+        console.log("Roaaar!");
+    }
+
+    accept(operation: AnimalOperation): void {
+        operation.visitLion(this);
+    }
+}
+
+class Dolphin implements Animal {
+    speak() {
+        console.log("Tuut tuttu tuutt!");
+    }
+
+    accept(operation: AnimalOperation): void {
+        operation.visitDolphin(this);
+    }
+}
+
+class Speak implements AnimalOperation {
+    visitMonkey(monkey: Monkey) {
+        monkey.shout();
+    }
+
+    visitLion(lion: Lion) {
+        lion.roar();
+    }
+
+    visitDolphin(dolphin: Dolphin) {
+        dolphin.speak();
+    }
+}
+
+const monkey = new Monkey();
+const lion = new Lion();
+const dolphin = new Dolphin();
+const speak = new Speak();
+
+monkey.accept(speak); // Ooh oo aa aa!
+lion.accept(speak); // Roaaar!
+dolphin.accept(speak); //Tuut tutt tuttt!
+
+class Jump implements AnimalOperation {
+    visitMonkey(monkey: Monkey): void {
+        console.log("Jumped 20 feet high! on to the tree!");
+    }
+
+    visitLion(lion: Lion): void {
+        console.log("Jumped 7 feet! back on the ground!");
+    }
+
+    visitDolphin(dolphin: Dolphin): void {
+        console.log("Walked on water a little and disappeared");
+    }
+}
+
+const jump = new Jump();
+
+monkey.accept(speak); // Ooh oo aa aa!
+monkey.accept(jump); // Jumped 20 feet high! on to the tree!
+
+lion.accept(speak); // Roaaar!
+lion.accept(jump); // Jumped 7 feet! Back on the ground!
+
+dolphin.accept(speak); // Tuut tutt tuutt!
+dolphin.accept(jump); // Walked on water a little and disappeared
+```
+
+</div>
+</details>
+
+<details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class Monkey {
+    shout() {
+        console.log("Ooh oo aa aa!");
+    }
+
+    accept(operation) {
+        operation.visitMonkey(this);
+    }
+}
+
+class Lion {
+    roar() {
+        console.log("Roaaar!");
+    }
+
+    accept(operation) {
+        operation.visitLion(this);
+    }
+}
+
+class Dolphin {
+    speak() {
+        console.log("Tuut tuttu tuutt!");
+    }
+
+    accept(operation) {
+        operation.visitDolphin(this);
+    }
+}
+
+class Speak {
+    visitMonkey(monkey) {
+        monkey.shout();
+    }
+
+    visitLion(lion) {
+        lion.roar();
+    }
+
+    visitDolphin(dolphin) {
+        dolphin.speak();
+    }
+}
+
+class Jump {
+    visitMonkey(monkey) {
+        console.log("Jumped 20 feet high! on to the tree!");
+    }
+
+    visitLion(lion) {
+        console.log("Jumped 7 feet! back on the ground!");
+    }
+
+    visitDolphin(dolphin) {
+        console.log("Walked on water a little and disappeared");
+    }
+}
+
+
+const monkey = new Monkey();
+const lion = new Lion();
+const dolphin = new Dolphin();
+
+const speak = new Speak();
+const jump = new Jump();
+
+monkey.accept(speak); 
+lion.accept(speak); 
+dolphin.accept(speak); 
+
+monkey.accept(jump);
+lion.accept(jump); 
+dolphin.accept(jump);
+```
+
+</div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+// Visitee
+interface IAnimal
+{
+  void Accept(IAnimalOperation operation);
+}
+
+// Visitor
+interface IAnimalOperation
+{
+  void VisitMonkey(Monkey monkey);
+  void VisitLion(Lion lion);
+  void VisitDolphin(Dolphin dolphin);
+}
+
+
+
+class Monkey : IAnimal
+{
+  public void Shout()
+  {
+    Console.WriteLine("Oooh o aa aa!");
+  }
+
+  public void Accept(IAnimalOperation operation)
+  {
+      operation.VisitMonkey(this);
+  }
+}
+
+class Lion : IAnimal
+{
+  public void Roar()
+  {
+    Console.WriteLine("Roaar!");
+  }
+
+  public void Accept(IAnimalOperation operation)
+  {
+      operation.VisitLion(this);
+  }
+}
+
+class Dolphin : IAnimal
+{
+  public void Speak()
+  {
+    Console.WriteLine("Tuut tittu tuutt!");
+  }
+
+  public void Accept(IAnimalOperation operation)
+  {
+      operation.VisitDolphin(this);
+  }
+}
+
+
+class Speak : IAnimalOperation
+{
+  public void VisitDolphin(Dolphin dolphin)
+  {
+    dolphin.Speak();
+  }
+
+  public void VisitLion(Lion lion)
+  {
+    lion.Roar();
+  }
+
+  public void VisitMonkey(Monkey monkey)
+  {
+    monkey.Shout();
+  }
+}
+
+----------------------------
+
+var monkey = new Monkey();
+var lion = new Lion();
+var dolphin = new Dolphin();
+
+var speak = new Speak();
+
+monkey.Accept(speak);    // Ooh oo aa aa!
+lion.Accept(speak);      // Roaaar!
+dolphin.Accept(speak);   // Tuut tutt tuutt!
+
+-----------------------------
+
+class Jump : IAnimalOperation
+{
+  public void VisitDolphin(Dolphin dolphin)
+  {
+    Console.WriteLine("Walked on water a little and disappeared!");
+  }
+
+  public void VisitLion(Lion lion)
+  {
+    Console.WriteLine("Jumped 7 feet! Back on the ground!");
+  }
+
+  public void VisitMonkey(Monkey monkey)
+  {
+    Console.WriteLine("Jumped 20 feet high! on to the tree!");
+  }
+}
+
+------------------------------
+
+var jump = new Jump();
+
+monkey.Accept(speak);   // Ooh oo aa aa!
+monkey.Accept(jump);    // Jumped 20 feet high! on to the tree!
+
+lion.Accept(speak);     // Roaaar!
+lion.Accept(jump);      // Jumped 7 feet! Back on the ground!
+
+dolphin.Accept(speak);  // Tuut tutt tuutt!
+dolphin.Accept(jump);   // Walked on water a little and disappeared
+
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+// Visitee
+interface AnimalInterface
+{
+  public function accept(AnimalOperationInterface $operation);
+}
+
+// Visitor
+interface AnimalOperationInterface
+{
+  public function visitMonkey(Monkey $monkey);
+  public function visitLion(Lion $lion);
+  public function visitDolphin(Dolphin $dolphin);
+}
+
+class Monkey implements AnimalInterface
+{
+  public function shout()
+  {
+    echo "Oooh o aa aa!";
+  }
+
+  public function accept(AnimalOperationInterface $operation)
+  {
+    $operation->visitMonkey($this);
+  }
+}
+
+class Lion implements AnimalInterface
+{
+  public function roar()
+  {
+    echo "Roaar!";
+  }
+
+  public function accept(AnimalOperationInterface $operation)
+  {
+    $operation->visitLion($this);
+  }
+}
+
+class Dolphin implements AnimalInterface
+{
+  public function speak()
+  {
+    echo "Tuut tittu tuutt!";
+  }
+
+  public function accept(AnimalOperationInterface $operation)
+  {
+    $operation->visitDolphin($this);
+  }
+}
+
+class Speak implements AnimalOperationInterface
+{
+  public function visitDolphin(Dolphin $dolphin)
+  {
+    $dolphin->speak();
+  }
+
+  public function visitLion(Lion $lion)
+  {
+    $lion->roar();
+  }
+
+  public function visitMonkey(Monkey $monkey)
+  {
+    $monkey->shout();
+  }
+}
+
+$monkey = new Monkey();
+$lion = new Lion();
+$dolphin = new Dolphin();
+
+$speak = new Speak();
+
+$monkey->accept($speak);    // Ooh oo aa aa!
+$lion->accept($speak);      // Roaaar!
+$dolphin->accept($speak);   // Tuut tutt tuutt!
+
+class Jump implements AnimalOperationInterface
+{
+  public function visitDolphin(Dolphin $dolphin)
+  {
+    echo "Walked on water a little and disappeared!";
+  }
+
+  public function visitLion(Lion $lion)
+  {
+    echo "Jumped 7 feet! Back on the ground!";
+  }
+
+  public function visitMonkey(Monkey $monkey)
+  {
+    echo "Jumped 20 feet high! on to the tree!";
+  }
+}
+
+$jump = new Jump();
+
+$monkey->accept($speak);   // Ooh oo aa aa!
+$monkey->accept($jump);    // Jumped 20 feet high! on to the tree!
+
+$lion->accept($speak);     // Roaaar!
+$lion->accept($jump);      // Jumped 7 feet! Back on the ground!
+
+$dolphin->accept($speak);  // Tuut tutt tuutt!
+$dolphin->accept($jump);   // Walked on water a little and disappeared
+
+```
+
+</div>
+
+</details>
+
+
+<details>
+  <summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import "fmt"
+
+// Visitee
+type Animal interface {
+	Accept(operation AnimalOperation)
+}
+
+// Visitor
+type AnimalOperation interface {
+	VisitMonkey(monkey *Monkey)
+	VisitLion(lion *Lion)
+	VisitDolphin(dolphin *Dolphin)
+}
+
+type Monkey struct{}
+
+func (m *Monkey) Shout() {
+	fmt.Println("Ooh oo aa aa!")
+}
+
+func (m *Monkey) Accept(operation AnimalOperation) {
+	operation.VisitMonkey(m)
+}
+
+type Lion struct{}
+
+func (l *Lion) Roar() {
+	fmt.Println("Roaaar!")
+}
+
+func (l *Lion) Accept(operation AnimalOperation) {
+	operation.VisitLion(l)
+}
+
+type Dolphin struct{}
+
+func (d *Dolphin) Speak() {
+	fmt.Println("Tuut tuttu tuutt!")
+}
+
+func (d *Dolphin) Accept(operation AnimalOperation) {
+	operation.VisitDolphin(d)
+}
+
+type Speak struct{}
+
+func (s *Speak) VisitMonkey(monkey *Monkey) {
+	monkey.Shout()
+}
+
+func (s *Speak) VisitLion(lion *Lion) {
+	lion.Roar()
+}
+
+func (s *Speak) VisitDolphin(dolphin *Dolphin) {
+	dolphin.Speak()
+}
+
+func main() {
+	monkey := &Monkey{}
+	lion := &Lion{}
+	dolphin := &Dolphin{}
+
+	speak := &Speak{}
+	monkey.Accept(speak)  // Ooh oo aa aa!
+	lion.Accept(speak)    // Roaaar!
+	dolphin.Accept(speak) // Tuut tuttu tuutt!
+}
+
+
+```
+
+</div>
+
+</details>
+
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface AnimalOperation {
+
+    void visitMonkey(Monkey monkey);
+    void visitLion(Lion lion);
+    void visitDolphin(Dolphin dolphin);
+}
+
+interface Animal {
+    void accept(AnimalOperation operation);
+}
+
+class Monkey implements Animal {
+
+    void shout() {
+        System.out.println("Ooh oo aa aa!");
+    }
+
+    @Override
+    public void accept(AnimalOperation operation) {
+        operation.visitMonkey(this);
+    }
+}
+
+class Lion implements Animal {
+
+    public void roar() {
+        System.out.println("Roaaar!");
+    }
+
+    @Override
+    public void accept(AnimalOperation operation) {
+        operation.visitLion(this);
+    }
+}
+
+class Dolphin implements Animal {
+
+    public void speak() {
+        System.out.println("Tuut tuttu tuutt!");
+    }
+
+    @Override
+    public void accept(AnimalOperation operation) {
+        operation.visitDolphin(this);
+    }
+}
+
+class Speak implements AnimalOperation {
+
+    @Override
+    public void visitMonkey(Monkey monkey) {
+        monkey.shout();
+    }
+
+    @Override
+    public void visitLion(Lion lion) {
+        lion.roar();
+    }
+
+    @Override
+    public void visitDolphin(Dolphin dolphin) {
+        dolphin.speak();
+    }
+}
+
+-----------------------
+
+Monkey monkey = new Monkey();
+Lion lion = new Lion();
+Dolphin dolphin = new Dolphin();
+
+Speak speak = new Speak();
+
+monkey.accept(speak);   // Ooh oo aa aa!
+lion.accept(speak);     // Roaaar!
+dolphin.accept(speak);  // Tuut tutt tuttt!
+
+class Jump implements AnimalOperation {
+
+    @Override
+    public void visitMonkey(Monkey monkey) {
+        System.out.println("Jumped 20 feet high! on to the tree!");
+    }
+
+    @Override
+    public void visitLion(Lion lion) {
+        System.out.println("Jumped 7 feet! back on the ground!");
+    }
+
+    @Override
+    public void visitDolphin(Dolphin dolphin) {
+        System.out.println("Walked on water a little and disappeared");
+    }
+}
+
+-----------------------
+
+Jump jump = new Jump();
+
+monkey.accept(speak);   // Ooh oo aa aa!
+monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
+
+lion.accept(speak);     // Roaaar!
+lion.accept(jump);      // Jumped 7 feet! Back on the ground!
+
+dolphin.accept(speak);  // Tuut tutt tuutt!
+dolphin.accept(jump);   // Walked on water a little and disappeared
+```
+
+</div>
+
+</details>
+
+<br>
+
+---
+
+<div align="center">
+
+## 💡 Strategy
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> فرض کنید که شما یک سرباز درحال جنگ هستید که چندین سلاح همراه خودتون دارید از جمله کلت، کلاش و نارنجک. حالا مشخصه که در
+> شرایط مختلف با توجه به شرایط تصمیم میگیرید که یکی از اونا استفاده کنید! به این انتخاب‌های مختلف با توجه به شرایط
+> استراتژی میگن!
+
+به زبون ساده:
+
+> این الگو به شما امکان میده الگوریتم یا استراتژی را بر اساس موقعیت تغییر بدین.
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> In computer programming, the strategy pattern (also known as the policy pattern) is a behavioural software design
+> pattern that enables an algorithm's behavior to be selected at runtime.
+
+</div>
+
+**مثال برنامه نویسی**
+
+میخوایم یک سرویس پیاده سازی کنیم که با توجه به داده‌هامون تصمیم بگیریم از یک نوع از مرتب سازی استفاده کنیم!
+
+یک کلاس بسازیم که وظیفه‌اش مدیریت این استراتژی‌ها باشه.
+
+<details>
+<summary>Python</summary>
+
+<div dir="ltr">
+
+```python
+class SortStrategy:
+    def sort(self, dataset):
+        pass
+
+
+class BubbleSortStrategy(SortStrategy):
+    def sort(self, dataset):
+        print('Sorting using bubble sort')
+
+        return dataset
+
+
+class QuickSortStrategy(SortStrategy):
+    def sort(self, dataset):
+        print('Sorting using quick sort')
+        return dataset
+
+
+class Sorter:
+    _sorter = None
+
+    def __init__(self, sorter):
+        self._sorter = sorter
+
+    def sort(self, dataset):
+        return self._sorter.sort(dataset)
+
+
+----------------------------
+
+dataset = [1, 5, 4, 3, 2, 8]
+
+sorter = Sorter(BubbleSortStrategy())
+sorter.sort(dataset)
+
+sorter = Sorter(QuickSortStrategy())
+sorter.sort(dataset)
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Typescript</summary>
+<div dir="ltr">
+
+```typescript
+interface SortStrategy {
+    sort(dataset: any[]): any[];
+}
+
+class BubbleSortStrategy implements SortStrategy {
+    sort(dataset: any[]): any[] {
+        console.log("Sorting using bubble sort");
+        return dataset;
+    }
+}
+
+class QuickSortStrategy implements SortStrategy {
+    sort(dataset: any[]): any[] {
+        console.log("Sorting using quick sort");
+        return dataset;
+    }
+}
+
+class Sorter {
+    private sorter: SortStrategy;
+
+    constructor(sorter: SortStrategy) {
+        this.sorter = sorter;
+    }
+
+    sort(dataset: any[]): any[] {
+        return this.sorter.sort(dataset);
+    }
+}
+
+----------------------------
+
+const dataset = [1, 5, 4, 3, 2, 8];
+
+const sorter = new Sorter(new BubbleSortStrategy());
+sorter.sort(dataset);
+
+const sorter2 = new Sorter(new QuickSortStrategy());
+sorter2.sort(dataset);
+```
+
+</div>
+</details>
+
+<details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class BubbleSortStrategy {
+    sort(dataset) {
+        console.log("Sorting using bubble sort");
+        return dataset;
+    }
+}
+
+class QuickSortStrategy {
+    sort(dataset) {
+        console.log("Sorting using quick sort");
+        return dataset;
+    }
+}
+
+class Sorter {
+    constructor(sorter) {
+        this.sorter = sorter;
+    }
+
+    sort(dataset) {
+        return this.sorter.sort(dataset);
+    }
+}
+
+const dataset = [1, 5, 4, 3, 2, 8];
+
+const sorter = new Sorter(new BubbleSortStrategy());
+sorter.sort(dataset); 
+
+const sorter2 = new Sorter(new QuickSortStrategy());
+sorter2.sort(dataset); 
+```
+
+</div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface ISortStrategy
+{
+  List<int> Sort(List<int> dataset);
+}
+
+class BubbleSortStrategy : ISortStrategy
+{
+  public List<int> Sort(List<int> dataset)
+  {
+    Console.WriteLine("Sorting using Bubble Sort !");
+    return dataset;
+  }
+}
+
+class QuickSortStrategy : ISortStrategy
+{
+  public List<int> Sort(List<int> dataset)
+  {
+    Console.WriteLine("Sorting using Quick Sort !");
+    return dataset;
+  }
+}
+
+class Sorter
+{
+  private readonly ISortStrategy mSorter;
+
+  public Sorter(ISortStrategy sorter)
+  {
+    mSorter = sorter;
+  }
+
+  public List<int> Sort(List<int> unSortedList)
+  {
+    return mSorter.Sort(unSortedList);
+  }
+}
+
+----------------------------
+
+var unSortedList = new List<int> { 1, 10, 2, 16, 19 };
+
+var sorter = new Sorter(new BubbleSortStrategy());
+sorter.Sort(unSortedList); // // Output : Sorting using Bubble Sort !
+
+sorter = new Sorter(new QuickSortStrategy());
+sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
+
+```
+
+</div>
+
+</details>
+
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface SortStrategyInterface {
+  public function sort($dataset);
+}
+
+class BubbleSortStrategy implements SortStrategyInterface {
+  public function sort($dataset) {
+    echo "Sorting using Bubble Sort !\n";
+    return $dataset;
+  }
+}
+
+class QuickSortStrategy implements SortStrategyInterface {
+  public function sort($dataset) {
+    echo "Sorting using Quick Sort !\n";
+    return $dataset;
+  }
+}
+
+class Sorter {
+  private $mSorter;
+
+  public function __construct(SortStrategyInterface $sorter) {
+    $this->mSorter = $sorter;
+  }
+
+  public function sort($unSortedList) {
+    return $this->mSorter->sort($unSortedList);
+  }
+}
+
+$unSortedList = [1, 10, 2, 16, 19];
+
+$sorter = new Sorter(new BubbleSortStrategy());
+$sorter->sort($unSortedList); // Output : Sorting using Bubble Sort !
+
+$sorter = new Sorter(new QuickSortStrategy());
+$sorter->sort($unSortedList); // Output : Sorting using Quick Sort !
+
+```
+
+</div>
+
+</details>
+
+
+<details>
+  <summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// SortStrategy is the interface that defines the sorting strategy
+type SortStrategy interface {
+	Sort(dataset []int) []int
+}
+
+// BubbleSortStrategy implements the SortStrategy interface
+type BubbleSortStrategy struct{}
+
+func (b *BubbleSortStrategy) Sort(dataset []int) []int {
+	fmt.Println("Sorting using bubble sort")
+	// Implement bubble sort logic here (omitted for brevity)
+	return dataset
+}
+
+// QuickSortStrategy implements the SortStrategy interface
+type QuickSortStrategy struct{}
+
+func (q *QuickSortStrategy) Sort(dataset []int) []int {
+	fmt.Println("Sorting using quick sort")
+	// Implement quick sort logic here (omitted for brevity)
+	return dataset
+}
+
+// Sorter is the context that uses a sorting strategy
+type Sorter struct {
+	sorter SortStrategy
+}
+
+func NewSorter(sorter SortStrategy) *Sorter {
+	return &Sorter{sorter: sorter}
+}
+
+func (s *Sorter) Sort(dataset []int) []int {
+	return s.sorter.Sort(dataset)
+}
+
+func main() {
+	dataset := []int{1, 5, 4, 3, 2, 8}
+
+	sorter := NewSorter(&BubbleSortStrategy{})
+	sorter.Sort(dataset)
+
+	sorter = NewSorter(&QuickSortStrategy{})
+	sorter.Sort(dataset)
+}
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface SortStrategy {
+    List<Integer> sort(List<Integer> dataset);
+}
+
+class BubbleSortStrategy implements SortStrategy {
+
+    @Override
+    public List<Integer> sort(List<Integer> dataset) {
+        System.out.println("Sorting by Bubble sort!");
+        return dataset;
+    }
+}
+
+class QuickSortStrategy implements SortStrategy {
+
+    @Override
+    public List<Integer> sort(List<Integer> dataset) {
+        System.out.println("Sorting by Quick sort!");
+        return dataset;
+    }
+}
+
+class Sorter {
+    private SortStrategy sorter;
+
+    public Sorter(SortStrategy sorter) {
+        this.sorter = sorter;
+    }
+
+    public List<Integer> sort(List<Integer> unSortedList) {
+        return sorter.sort(unSortedList);
+    }
+}
+
+----------------------------
+
+List<Integer> unSortedList = List.of(1, 10, 2, 16, 19);
+
+Sorter sorter = new Sorter(new BubbleSortStrategy());
+sorter.sort(unSortedList); // Sorting by Bubble sort!
+
+sorter = new Sorter(new QuickSortStrategy());
+sorter.sort(unSortedList); // Sorting by Quick sort!
+```
+
+</div>
+
+</details>
+
+<br>
+
+---
+
+<div align="center">
+
+## 💢 State
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> نرم افزار paint ویندوز رو یادتونه؟ میومدیم خودکار رو انتخاب میکردیم و شروع میکردیم به نقاشی کردن. بعد توی قسمت پالت
+> رنگ قرمز کلیک میکردیم و بعدش خودکارمون قرمز میشد و میتونستیم ادامه بدیم! حتی میتونستیم خودکار رو به قلمو تغییر بدیم!
+> این
+> مفهوم به یاد داشتن حالت و ادامه کار مشابه الگوی State هست!
+
+به زبون ساده:
+
+> به شما اجازه میده یک سری ویژگی رو مشخص کنید و حالت‌شون رو به یاد داشته باشید!
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> The state pattern is a behavioral software design pattern that implements a state machine in an object-oriented way.
+> With the state pattern, a state machine is implemented by implementing each individual state as a derived class of the
+> state pattern interface, and implementing state transitions by invoking methods defined by the pattern's superclass.
+> The
+> state pattern can be interpreted as a strategy pattern which is able to switch the current strategy through
+> invocations
+> of methods defined in the pattern's interface.
+
+</div>
+
+**مثال برنامه نویسی**
+
+میخوایم یک ادیتور بسازیم که قابلیت‌هایی مثل این داشته باشه که متنی که تایپ میشه حروف کوچیک باشه یا همش حروف بزرگ باشه یا
+معمولی باشه!
+
+اول بیاید کلاس‌هامون بر پایه الگوی State رو بسازیم:
+
+بعد ادیتور رو بسازیم و بهش یاد بدیم این کلاس‌ها رو توی خودش نگه داره و ازشون استفاده کنه!
+
+<details>
+<summary>Python</summary>
+
+<div dir="ltr">
+
+```python
+class WritingState:
+    def write(self, words):
+        pass
+
+
+class UpperCase(WritingState):
+    def write(self, words):
+        print(words.upper())
+
+
+class LowerCase(WritingState):
+    def write(self, words):
+        print(words.lower())
+
+
+class DefaultText(WritingState):
+    def write(self, words):
+        print(words)
+
+
+class TextEditor():
+    _state = None
+
+    def __init__(self, state):
+        self._state = state
+
+    def setState(self, state):
+        self._state = state
+
+    def write(self, words):
+        self._state.write(words)
+
+
+# ----------------------------
+
+editor = TextEditor(DefaultText())
+editor.write('First Line') 
+
+editor.setState(UpperCase())
+
+editor.write('Second Line') 
+editor.write('Third Line') 
+
+editor.setState(LowerCase())
+
+editor.write('Fourth Line') 
+editor.write('Fifth Line')  
+
+
+'''
+Output will be
+==============
+First Line
+SECOND LINE
+THIRD LINE
+fourth line
+fifth line
+'''
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Typescript</summary>
+<div dir="ltr">
+
+```typescript
+interface WritingState {
+    write(words: string): void;
+}
+
+class UpperCase implements WritingState {
+    write(words: string): void {
+        console.log(words.toUpperCase());
+    }
+}
+
+class LowerCase implements WritingState {
+    write(words: string): void {
+        console.log(words.toLowerCase());
+    }
+}
+
+class DefaultText implements WritingState {
+    write(words: string): void {
+        console.log(words);
+    }
+}
+
+class TextEditor {
+    private state: WritingState;
+
+    constructor(state: WritingState) {
+        this.state = state;
+    }
+
+    setState(state: WritingState) {
+        this.state = state;
+    }
+
+    type(words: string) {
+        this.state.write(words);
+    }
+}
+
+----------------------------
+
+const editor = new TextEditor(new DefaultText());
+editor.type("First Line"); // First Line
+
+editor.setState(new UpperCase());
+
+editor.type("Second Line"); // SECOND LINE
+editor.type("Third Line"); // THIRD LINE
+
+editor.setState(new LowerCase());
+
+editor.type("Fourth Line"); // fourth line
+editor.type("Fifth Line"); // fifth line
+```
+
+</div>
+</details>
+
+<details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+
+class UpperCase {
+    write(words) {
+        console.log(words.toUpperCase());
+    }
+}
+
+class LowerCase {
+    write(words) {
+        console.log(words.toLowerCase());
+    }
+}
+
+class DefaultText {
+    write(words) {
+        console.log(words);
+    }
+}
+
+class TextEditor {
+    constructor(state) {
+        this.state = state;
+    }
+
+    setState(state) {
+        this.state = state;
+    }
+
+    type(words) {
+        this.state.write(words);
+    }
+}
+
+
+const editor = new TextEditor(new DefaultText());
+editor.type("First Line"); 
+
+editor.setState(new UpperCase());
+editor.type("Second Line"); 
+editor.type("Third Line"); 
+
+editor.setState(new LowerCase());
+editor.type("Fourth Line"); 
+editor.type("Fifth Line")
+```
+
+</div>
+</details>
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+interface IWritingState {
+
+  void Write(string words);
+
+}
+
+class UpperCase : IWritingState
+{
+  public void Write(string words)
+  {
+    Console.WriteLine(words.ToUpper());
+  }
+}
+
+class LowerCase : IWritingState
+{
+  public void Write(string words)
+  {
+    Console.WriteLine(words.ToLower());
+  }
+}
+
+class DefaultText : IWritingState
+{
+  public void Write(string words)
+  {
+    Console.WriteLine(words);
+  }
+}
+
+
+class TextEditor {
+
+  private IWritingState mState;
+
+  public TextEditor()
+  {
+    mState = new DefaultText();
+  }
+
+  public void SetState(IWritingState state)
+  {
+    mState = state;
+  }
+
+  public void Type(string words)
+  {
+    mState.Write(words);
+  }
+
+}
+
+
+----------------------------
+
+var editor = new TextEditor();
+
+editor.Type("First line");
+
+editor.SetState(new UpperCase());
+
+editor.Type("Second Line");
+editor.Type("Third Line");
+
+editor.SetState(new LowerCase());
+
+editor.Type("Fourth Line");
+editor.Type("Fifthe Line");
+
+// Output:
+// First line
+// SECOND LINE
+// THIRD LINE
+// fourth line
+// fifth line
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+interface WritingStateInterface {
+  public function write(string $words);
+}
+
+class UpperCase implements WritingStateInterface
+{
+  public function write(string $words)
+  {
+    echo strtoupper($words) . "\n";
+  }
+}
+
+class LowerCase implements WritingStateInterface
+{
+  public function write(string $words)
+  {
+    echo strtolower($words) . "\n";
+  }
+}
+
+class DefaultText implements WritingStateInterface
+{
+  public function write(string $words)
+  {
+    echo $words . "\n";
+  }
+}
+
+class TextEditor {
+  private WritingStateInterface $state;
+
+  public function __construct()
+  {
+    $this->state = new DefaultText();
+  }
+
+  public function setState(WritingStateInterface $state)
+  {
+    $this->state = $state;
+  }
+
+  public function type(string $words)
+  {
+    $this->state->write($words);
+  }
+}
+
+$editor = new TextEditor();
+
+$editor->type("First line");
+
+$editor->setState(new UpperCase());
+
+$editor->type("Second Line");
+$editor->type("Third Line");
+
+$editor->setState(new LowerCase());
+
+$editor->type("Fourth Line");
+$editor->type("Fifth Line");
+
+// Output:
+// First line
+// SECOND LINE
+// THIRD LINE
+// fourth line
+// fifth line
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+// WritingState interface
+type WritingState interface {
+	Write(words string)
+}
+
+// UpperCase struct
+type UpperCase struct{}
+
+// Write for UpperCase
+func (u *UpperCase) Write(words string) {
+	fmt.Println(strings.ToUpper(words))
+}
+
+// LowerCase struct
+type LowerCase struct{}
+
+// Write for LowerCase
+func (l *LowerCase) Write(words string) {
+	fmt.Println(strings.ToLower(words))
+}
+
+// DefaultText struct
+type DefaultText struct{}
+
+// Write for DefaultText
+func (d *DefaultText) Write(words string) {
+	fmt.Println(words)
+}
+
+// TextEditor struct
+type TextEditor struct {
+	state WritingState
+}
+
+// NewTextEditor constructor
+func NewTextEditor(state WritingState) *TextEditor {
+	return &TextEditor{state: state}
+}
+
+// SetState method for TextEditor
+func (te *TextEditor) SetState(state WritingState) {
+	te.state = state
+}
+
+// Type method for TextEditor
+func (te *TextEditor) Type(words string) {
+	te.state.Write(words)
+}
+
+func main() {
+	editor := NewTextEditor(&DefaultText{})
+	editor.Type("First Line") // First line
+
+	editor.SetState(&UpperCase{})
+	editor.Type("Second Line") // SECOND LINE
+	editor.Type("Third Line")  // THIRD LINE
+
+	editor.SetState(&LowerCase{})
+	editor.Type("Fourth Line") // fourth line
+	editor.Type("Fifth Line")  // fifth line
+}
+
+```
+
+</div>
+
+</details>
+
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+interface WritingState {
+    void write(String words);
+}
+
+class UpperCase implements WritingState {
+    public void write(String words) {
+        System.out.println(words.toUpperCase());
+    }
+}
+
+class LowerCase implements WritingState {
+    public void write(String words) {
+        System.out.println(words.toLowerCase());
+    }
+}
+
+class DefaultText implements WritingState {
+    public void write(String words) {
+        System.out.println(words);
+    }
+}
+
+class TextEditor {
+    private WritingState state;
+
+    public TextEditor() {
+        state = new DefaultText();
+    }
+
+    public void setState(WritingState state) {
+        this.state = state;
+    }
+
+    public void type(String words) {
+        state.write(words);
+    }
+}
+
+----------------------------
+
+TextEditor editor = new TextEditor();
+
+editor.type("First line"); // First line
+
+editor.setState(new UpperCase());
+editor.type("Second line"); // SECOND LINE
+editor.type("Third Line");  // THIRD LINE
+
+editor.setState(new LowerCase());
+editor.type("Fourth line"); // fourth line
+editor.type("FIFTH Line");  // fifth line
+```
+
+</div>
+
+</details>
+
+<br>
+
+---
+
+<div align="center">
+
+## 📒 Template Method
+
+</div>
+
+یک مثال از دنیای واقعی:
+
+> فرض کنید قصد خونه سازی دارید! مراحلش به این صورته که اول باید زیربنا رو درست کنید بعد دیوار بسازید و بعد برید سراغ
+> سقف! مشخصا شما نمیتونید اول سقف بزنید و بعد زیر بنا! پس این قضیه یک ترتیب داره که شما فقط میتونید مثلا جنس دیوار رو
+> عوض
+> کنید یا نحوه ساخت زیربنا رو عوض کنید ولی ترتیب و کلیت قضیه تغییر نمیکنه.
+
+به زبون ساده:
+
+> درواقع توی این الگو ما یک الگوریتم مشخص داریم که از قبل پیاده سازی شده و فقط میتونیم مراحل اون رو ما پیاده سازی کنیم
+> یا تغییر بدیم!
+
+ویکی پدیا:
+
+<div dir="ltr">
+
+> In software engineering, the template method pattern is a behavioral design pattern that defines the program skeleton
+> of an algorithm in an operation, deferring some steps to subclasses. It lets one redefine certain steps of an
+> algorithm
+> without changing the algorithm's structure.
+
+</div>
+
+**مثال برنامه نویسی**
+
+فرض کنید ما یک زیرساخت برای ساخت اپلیکیشن‌های گوشی نیاز داریم!
+
+خب مراحل تقریبا مشخصه و فقط ما باید مراحل build, lint , test و deploy رو پیاده سازی کنیم!
+
+بعد باید پیاده سازی برای اندروید و آی او اس رو بسازیم.
+
+<details>
+<summary>Python</summary>
+
+<div dir="ltr">
+
+```python
+class Builder:
+    def build(self):
+        self.test()
+        self.lint()
+        self.assemble()
+        self.deploy()
+
+    def test(self):
+        pass
+
+    def lint(self):
+        pass
+
+    def assemble(self):
+        pass
+
+    def deploy(self):
+        pass
+
+
+class AndroidBuilder(Builder):
+    def test(self):
+        print('Running android tests')
+
+    def lint(self):
+        print('Linting the android code')
+
+    def assemble(self):
+        print('Assembling the android build')
+
+    def deploy(self):
+        print('Deploying android build to server')
+
+
+class IosBuilder(Builder):
+    def test(self):
+        print('Running ios tests')
+
+    def lint(self):
+        print('Linting the ios code')
+
+    def assemble(self):
+        print('Assembling the ios build')
+
+    def deploy(self):
+        print('Deploying ios build to server')
+
+
+----------------------------
+
+androidBuilder = AndroidBuilder()
+androidBuilder.build()
+
+# Output:
+# Running android tests
+# Linting the android code
+# Assembling the android build
+# Deploying android build to server
+
+
+iosBuilder = IosBuilder()
+iosBuilder.build()
+
+# Output:
+# Running ios tests
+# Linting the ios code
+# Assembling the ios build
+# Deploying ios build to server
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>Typescript</summary>
+<div dir="ltr">
+
+```typescript
+class Builder {
+    build(): void {
+        this.test();
+        this.lint();
+        this.assemble();
+        this.deploy();
+    }
+
+    test(): void {
+    }
+
+    lint(): void {
+    }
+
+    assemble(): void {
+    }
+
+    deploy(): void {
+    }
+}
+
+class AndroidBuilder extends Builder {
+    test(): void {
+        console.log("Running android tests");
+    }
+
+    lint(): void {
+        console.log("Linting the android code");
+    }
+
+    assemble(): void {
+        console.log("Assembling the android build");
+    }
+
+    deploy(): void {
+        console.log("Deploying android build to server");
+    }
+}
+
+class IosBuilder extends Builder {
+    test(): void {
+        console.log("Running ios tests");
+    }
+
+    lint(): void {
+        console.log("Linting the ios code");
+    }
+
+    assemble(): void {
+        console.log("Assembling the ios build");
+    }
+
+    deploy(): void {
+        console.log("Deploying ios build to server");
+    }
+}
+
+----------------------------
+
+const androidBuilder = new AndroidBuilder();
+androidBuilder.build();
+
+// Output:
+// Running android tests
+// Linting the android code
+// Assembling the android build
+// Deploying android build to server
+
+const iosBuilder = new IosBuilder();
+iosBuilder.build();
+
+// Output:
+// Running ios tests
+// Linting the ios code
+// Assembling the ios build
+// Deploying ios build to server
+```
+
+</div>
+</details>
+
+
+<details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class Builder {
+    build() {
+        this.test();
+        this.lint();
+        this.assemble();
+        this.deploy();
+    }
+
+    test() {
+      
+    }
+
+    lint() {
+        
+    }
+
+    assemble() {
+      
+    }
+
+    deploy() {
+      
+    }
+}
+
+class AndroidBuilder extends Builder {
+    test() {
+        console.log("Running android tests");
+    }
+
+    lint() {
+        console.log("Linting the android code");
+    }
+
+    assemble() {
+        console.log("Assembling the android build");
+    }
+
+    deploy() {
+        console.log("Deploying android build to server");
+    }
+}
+
+class IosBuilder extends Builder {
+    test() {
+        console.log("Running ios tests");
+    }
+
+    lint() {
+        console.log("Linting the ios code");
+    }
+
+    assemble() {
+        console.log("Assembling the ios build");
+    }
+
+    deploy() {
+        console.log("Deploying ios build to server");
+    }
+}
+
+
+const androidBuilder = new AndroidBuilder();
+androidBuilder.build();
+
+
+
+const iosBuilder = new IosBuilder();
+iosBuilder.build();
+```
+
+</div>
+</details>
+
+
+<details>
+<summary >#C</summary>
+
+<div dir="ltr">
+
+```C#
+
+abstract class Builder
+{
+    // Template method
+    public void Build()
+    {
+      Test();
+      Lint();
+      Assemble();
+      Deploy();
+    }
+
+    abstract public void Test();
+    abstract public void Lint();
+    abstract public void Assemble();
+    abstract public void Deploy();
+}
+
+
+
+class AndroidBuilder : Builder
+{
+  public override void Assemble()
+  {
+    Console.WriteLine("Assembling the android build");
+  }
+
+  public override void Deploy()
+  {
+    Console.WriteLine("Deploying android build to server");
+  }
+
+  public override void Lint()
+  {
+    Console.WriteLine("Linting the android code");
+  }
+
+  public override void Test()
+  {
+    Console.WriteLine("Running android tests");
+  }
+}
+
+
+class IosBuilder : Builder
+{
+  public override void Assemble()
+  {
+    Console.WriteLine("Assembling the ios build");
+  }
+
+  public override void Deploy()
+  {
+    Console.WriteLine("Deploying ios build to server");
+  }
+
+  public override void Lint()
+  {
+    Console.WriteLine("Linting the ios code");
+  }
+
+  public override void Test()
+  {
+    Console.WriteLine("Running ios tests");
+  }
+}
+
+
+----------------------------
+
+var androidBuilder = new AndroidBuilder();
+androidBuilder.Build();
+
+// Output:
+// Running android tests
+// Linting the android code
+// Assembling the android build
+// Deploying android build to server
+
+var iosBuilder = new IosBuilder();
+iosBuilder.Build();
+
+// Output:
+// Running ios tests
+// Linting the ios code
+// Assembling the ios build
+// Deploying ios build to server
+
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```PHP
+abstract class Builder {
+  // Template method
+  public function Build() {
+    $this->test();
+    $this->lint();
+    $this->assemble();
+    $this->deploy();
+  }
+
+  abstract public function test();
+  abstract public function lint();
+  abstract public function assemble();
+  abstract public function deploy();
+}
+
+class AndroidBuilder extends Builder {
+  public function assemble() {
+    echo "Assembling the android build\n";
+  }
+
+  public function deploy() {
+    echo "Deploying android build to server\n";
+  }
+
+  public function lnt() {
+    echo "Linting the android code\n";
+  }
+
+  public function test() {
+    echo "Running android tests\n";
+  }
+}
+
+class IosBuilder extends Builder {
+  public function assemble() {
+    echo "Assembling the ios build\n";
+  }
+
+  public function deploy() {
+    echo "Deploying ios build to server\n";
+  }
+
+  public function lint() {
+    echo "Linting the ios code\n";
+  }
+
+  public function test() {
+    echo "Running ios tests\n";
+  }
+}
+
+$androidBuilder = new AndroidBuilder();
+$androidBuilder->build();
+
+// Output:
+// Running android tests
+// Linting the android code
+// Assembling the android build
+// Deploying android build to server
+
+$iosBuilder = new IosBuilder();
+$iosBuilder->build();
+
+// Output:
+// Running ios tests
+// Linting the ios code
+// Assembling the ios build
+// Deploying ios build to server
+
+```
+
+</div>
+
+</details>
+
+<details>
+  <summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// Builder interface
+type Builder interface {
+	Build()
+	Test()
+	Lint()
+	Assemble()
+	Deploy()
+}
+
+// BaseBuilder provides default implementations
+type BaseBuilder struct{}
+
+// Build for BaseBuilder
+func (b *BaseBuilder) Build() {
+	b.Test()
+	b.Lint()
+	b.Assemble()
+	b.Deploy()
+}
+
+// Test for BaseBuilder
+func (b *BaseBuilder) Test() {}
+
+// Lint for BaseBuilder
+func (b *BaseBuilder) Lint() {}
+
+// Assemble for BaseBuilder
+func (b *BaseBuilder) Assemble() {}
+
+// Deploy for BaseBuilder
+func (b *BaseBuilder) Deploy() {}
+
+// AndroidBuilder struct
+type AndroidBuilder struct {
+	BaseBuilder
+}
+
+// Test for AndroidBuilder
+func (a *AndroidBuilder) Test() {
+	fmt.Println("Running android tests")
+}
+
+// Lint for AndroidBuilder
+func (a *AndroidBuilder) Lint() {
+	fmt.Println("Linting the android code")
+}
+
+// Assemble for AndroidBuilder
+func (a *AndroidBuilder) Assemble() {
+	fmt.Println("Assembling the android build")
+}
+
+// Deploy for AndroidBuilder
+func (a *AndroidBuilder) Deploy() {
+	fmt.Println("Deploying android build to server")
+}
+
+// IosBuilder struct
+type IosBuilder struct {
+	BaseBuilder
+}
+
+// Test for IosBuilder
+func (i *IosBuilder) Test() {
+	fmt.Println("Running ios tests")
+}
+
+// Lint for IosBuilder
+func (i *IosBuilder) Lint() {
+	fmt.Println("Linting the ios code")
+}
+
+// Assemble for IosBuilder
+func (i *IosBuilder) Assemble() {
+	fmt.Println("Assembling the ios build")
+}
+
+// Deploy for IosBuilder
+func (i *IosBuilder) Deploy() {
+	fmt.Println("Deploying ios build to server")
+}
+
+func main() {
+	androidBuilder := &AndroidBuilder{}
+	androidBuilder.Build()
+
+	iosBuilder := &IosBuilder{}
+	iosBuilder.Build()
+}
+
+```
+
+</div>
+
+</details>
+
+
+<details>
+  <summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+abstract class Builder {
+    // Template method
+    public void build() {
+        test();
+        lint();
+        assemble();
+        deploy();
+    }
+
+    abstract public void test();
+    abstract public void lint();
+    abstract public void assemble();
+    abstract public void deploy();
+}
+
+class AndroidBuilder extends Builder {
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling android build");
+    }
+
+    @Override
+    public void deploy() {
+        System.out.println("Deploying android build");
+    }
+
+    @Override
+    public void lint() {
+        System.out.println("Linting android code");
+    }
+
+    @Override
+    public void test() {
+        System.out.println("Running android tests");
+    }
+}
+
+class IOSBuilder extends Builder {
+
+    @Override
+    public void assemble() {
+        System.out.println("Assembling iOS build");
+    }
+
+    @Override
+    public void deploy() {
+        System.out.println("Deploying iOS build");
+    }
+
+    @Override
+    public void lint() {
+        System.out.println("Linting iOS code");
+    }
+
+    @Override
+    public void test() {
+        System.out.println("Running iOS tests");
+    }
+}
+
+----------------------------
+
+AndroidBuilder androidBuilder = new AndroidBuilder();
+androidBuilder.build();
+// Running android tests
+// Linting android code
+// Assembling android build
+// Deploying android build
+
+IOSBuilder iOSBuilder = new IOSBuilder();
+iOSBuilder.build();
+// Running iOS tests
+// Linting iOS code
+// Assembling iOS build
+// Deploying iOS build
+```
+
+</div>
+
+</details>
+
+<br>
+
+---
+
+<br>
+
+<div align="center">
+
+# 🤝 کمک کردن به این پروژه!
+
+</div>
+
+<div align="right">
+
+- این پروژه رو fork کنید و به زبون‌های برنامه نویسی دیگه توسعه بدید!
+- این ریپو رو برای دوستاتون بفرستید!
+- اشتباهاتی که وجود داره رو با issue و یا pull request فیکس کنید!
+- مثال‌ها رو بهبود ببخشید و با issue و یا pull request به اشتراک بسازید!
+- اگه تجربه عملی ای با هر الگو دارید اون رو به مثال ها اضافه کنید!
+- با ⭐ به پروژه از من و این ریپو حمایت کنید و باعث دیده شدنش بشید!
+
+</div>
+
+<div align="center">
+
+## مشارکت کنندگان
+
+</div>
+
+<div align="right">
+
+- امیر عزیز که زحمت مثال های TypeScript رو کشید.([amirmalekian](https://github.com/amirmalekian))
+- رضا عزیز که زحمت مثال های #C رو کشید.([RezaMansouri70](https://github.com/RezaMansouri70))
+- صالح عزیز که زحمت مثال های PHP رو کشید.([salehhashemi1992](https://github.com/salehhashemi1992))
+- عاطفه عزیز که زحمت مثال های Golang رو کشید.([Atefe-Komeili](https://github.com/Atefe-Komeili))
+- محمد عزیز که زحمت مثال های Java رو کشید.([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
+- مهسا، محمد و سجاد عزیز که زحمت بهبود کد هارو کشیدند.([MahsaMahdavian](https://github.com/MahsaMahdavian) / [MohammadMMoniri](https://github.com/MohammadMMoniri) / [ssmns](https://github.com/ssmns))
+
+
+</div>
+
+</div>
