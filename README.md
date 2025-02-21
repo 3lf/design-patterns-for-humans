@@ -8178,6 +8178,70 @@ for (const item of collection.getReverseIterator()) {
 </details>
 
 <details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class AlphabeticalOrderIterator {
+    constructor(collection, reverse = false) {
+        this.collection = collection;
+        this.reverse = reverse;
+        this.position = this.reverse ? collection.collection.length - 1 : 0;
+    }
+
+    next() {
+        if (this.position >= 0 && this.position < this.collection.collection.length) {
+            const value = this.collection.collection[this.position];
+            this.position += this.reverse ? -1 : 1;
+            return { value, done: false };
+        } else {
+            return { value: undefined, done: true };
+        }
+    }
+}
+
+class WordsCollection {
+    constructor(collection = []) {
+        this.collection = collection;
+    }
+
+    [Symbol.iterator]() {
+        return new AlphabeticalOrderIterator(this);
+    }
+
+    getReverseIterator() {
+        return new AlphabeticalOrderIterator(this, true);
+    }
+
+    addItem(item) {
+        this.collection.push(item);
+    }
+}
+
+
+const collection = new WordsCollection();
+collection.addItem("First");
+collection.addItem("Second");
+collection.addItem("Third");
+
+console.log("Straight traversal:");
+for (const item of collection) {
+    console.log(item);
+}
+
+console.log("\nReverse traversal:");
+const reverseIterator = collection.getReverseIterator();
+let result = reverseIterator.next();
+while (!result.done) {
+    console.log(result.value);
+    result = reverseIterator.next();
+}
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
