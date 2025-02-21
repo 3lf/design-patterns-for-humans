@@ -3037,6 +3037,63 @@ hunter.hunt(wildDogAdapter);
 </details>
 
 <details>
+<summary>Javascript</summary>
+<div dir="ltr">
+
+```javascript
+class Lion {
+    roar() {
+        console.log("Lion roars!");
+    }
+}
+
+class AfricanLion extends Lion {
+    roar() {
+        console.log("African Lion roars!");
+    }
+}
+
+class AsianLion extends Lion {
+    roar() {
+        console.log("Asian Lion roars!");
+    }
+}
+
+class Hunter {
+    hunt(lion) {
+        lion.roar();
+    }
+}
+
+class WildDog {
+    static bark() {
+        console.log("Wild Dog barks!");
+    }
+}
+
+class WildDogAdapter extends Lion {
+    constructor(dog) {
+        super();
+        this.dog = dog;
+    }
+
+    roar() {
+        this.dog.bark();
+    }
+}
+
+
+const wildDog = new WildDog();
+const wildDogAdapter = new WildDogAdapter(wildDog);
+
+const hunter = new Hunter();
+hunter.hunt(wildDogAdapter); 
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
