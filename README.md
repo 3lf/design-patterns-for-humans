@@ -3032,6 +3032,55 @@ if (Object.is(s1, s2)) {
 </details>
 
 <details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class SingletonMeta extends Function {
+    static _instances = {};
+
+    constructor(...args) {
+        const instance = super(...args);
+        const className = this.constructor.name;
+        if (!SingletonMeta._instances[className]) {
+            SingletonMeta._instances[className] = instance;
+        }
+        return SingletonMeta._instances[className];
+    }
+
+    static getInstance() {
+        const className = this.name;
+        if (!SingletonMeta._instances[className]) {
+            SingletonMeta._instances[className] = new this();
+        }
+        return SingletonMeta._instances[className];
+    }
+}
+
+class Singleton extends SingletonMeta {
+    someBusinessLogic() {
+        console.log("Executing some business logic...");
+    }
+}
+
+const s1 = Singleton.getInstance();
+const s2 = Singleton.getInstance();
+
+if (Object.is(s1, s2)) {
+    console.log("Singleton works, both variables contain the same instance.");
+} else {
+    console.log("Singleton failed, variables contain different instances.");
+}
+
+s1.someBusinessLogic();
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
