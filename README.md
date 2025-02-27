@@ -1731,6 +1731,19 @@ constructor(size: any, cheese: boolean = true, pepperoni:boolean = true, tomato:
 </details>
 
 <details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+constructor(size, cheese = true, pepperoni = true, tomato = false, lettuce = true) {}
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -1944,6 +1957,71 @@ console.log(Object.keys(burger));
 ```
 
 </div>
+</details>
+
+<details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class Burger {
+    constructor(builder) {
+        this.size = builder.size;
+        this.cheese = builder.cheese;
+        this.pepperoni = builder.pepperoni;
+        this.lettuce = builder.lettuce;
+        this.tomato = builder.tomato;
+    }
+}
+
+class BurgerBuilder {
+    constructor(size) {
+        this.size = size;
+        this.cheese = false;
+        this.pepperoni = false;
+        this.lettuce = false;
+        this.tomato = false;
+    }
+
+    addPepperoni() {
+        this.pepperoni = true;
+        return this;
+    }
+
+    addLettuce() {
+        this.lettuce = true;
+        return this;
+    }
+
+    addCheese() {
+        this.cheese = true;
+        return this;
+    }
+
+    addTomato() {
+        this.tomato = true;
+        return this;
+    }
+
+    build() {
+        return new Burger(this);
+    }
+}
+
+
+let burger = new BurgerBuilder(10)
+    .addPepperoni()
+    .addLettuce()
+    .addTomato()
+    .build();
+
+console.log(burger); 
+console.log(Object.keys(burger)); 
+```
+
+</div>
+
 </details>
 
 <details>
