@@ -659,7 +659,6 @@ marketingManager.takeInterview();
 <div dir="ltr">
 
 ```javaScript
-
 class Developer {
     askQuestions() {
         console.log("Asking about design patterns");
@@ -3216,10 +3215,10 @@ hunter.hunt(wildDogAdapter);
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
+```javaScript
 class Lion {
     roar() {
         console.log("Lion roars!");
@@ -3701,12 +3700,10 @@ console.log(careers.getContent());
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
-
-
+```javaScript
 class WebPage {
     constructor(theme) {
         this._theme = theme;
@@ -4247,11 +4244,11 @@ console.log(`RESULT: ${tree.operation()}`);
 
 <details>
 
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 
 <div dir="ltr">
 
-```javascript
+```javaScript
 class Leaf {
     operation() {
         return "Leaf";
@@ -4911,10 +4908,10 @@ console.log(someCoffee.getDescription());
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
+```javaScript
 class Coffee {
     getCost() {
         throw new Error("getCost() must be implemented by subclasses");
@@ -5598,8 +5595,7 @@ computer.turnOff();
 
 <div dir="ltr">
 
-```javascript
-
+```javaScript
 class Computer {
     getElectricShock() {
         console.log("Ouch!");
@@ -6134,8 +6130,7 @@ shop.serve();
 
 <div dir="ltr">
 
-```javascript
-
+```javaScript
 class GreenTea {
 }
 
@@ -6607,11 +6602,10 @@ door.close(); // Closing Lab Door
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
-
+```javaScript
 class LabDoor {
     open() {
         console.log("Opening lab door");
@@ -7162,11 +7156,10 @@ Bitcoin!
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
-
+```javaScript
 class Account {
     constructor() {
         this._successor = null;
@@ -7718,11 +7711,10 @@ remote.submit(turnOff); // Darkness!
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
-
+```javaScript
 class Bulb {
     turnOn() {
         console.log("Bulb has been lit");
@@ -8357,10 +8349,10 @@ for (const item of collection.getReverseIterator()) {
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
+```javaScript
 class AlphabeticalOrderIterator {
     constructor(collection, reverse = false) {
         this.collection = collection;
@@ -8919,10 +8911,10 @@ jane.send("Hey!");
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
+```javaScript
 class ChatRoomMediator {
     showMessage(user, message) {
     
@@ -9345,10 +9337,10 @@ console.log(editor.getContent()); // This is the first sentence. This is second.
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
+```javaScript
 class EditorMemento {
     constructor(content) {
         this.content = content;
@@ -9857,10 +9849,10 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
+```javaScript
 class JobPost {
     constructor(title) {
         this.title = title;
@@ -10534,10 +10526,10 @@ dolphin.accept(jump); // Walked on water a little and disappeared
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
+```javaScript
 class Monkey {
     shout() {
         console.log("Ooh oo aa aa!");
@@ -11211,10 +11203,10 @@ sorter2.sort(dataset);
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
+```javaScript
 class BubbleSortStrategy {
     sort(dataset) {
         console.log("Sorting using bubble sort");
@@ -11660,11 +11652,10 @@ editor.type("Fifth Line"); // fifth line
 </details>
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
-
+```javaScript
 class UpperCase {
     write(words) {
         console.log(words.toUpperCase());
@@ -12237,10 +12228,10 @@ iosBuilder.build();
 
 
 <details>
-<summary>Javascript</summary>
+<summary>JavaScript</summary>
 <div dir="ltr">
 
-```javascript
+```javaScript
 class Builder {
     build() {
         this.test();
