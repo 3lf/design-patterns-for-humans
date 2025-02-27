@@ -258,6 +258,52 @@ console.log(door.getWidth());
 </details>
 
 <details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class Door {
+    getWidth() {
+    }
+
+    getHeight() {
+    }
+}
+
+class WoodenDoor extends Door {
+    constructor(width = 5, height = 5) {
+        super();
+        this.width = width;
+        this.height = height;
+    }
+
+    getWidth() {
+        return this.width;
+    }
+
+    getHeight() {
+        return this.height;
+    }
+}
+
+class DoorFactory {
+    static makeDoor(width, height) {
+        return new WoodenDoor(width, height);
+    }
+}
+
+
+let door = DoorFactory.makeDoor(10, 10);
+console.log(door.getHeight()); 
+console.log(door.getWidth());  
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
