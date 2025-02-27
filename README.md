@@ -2505,6 +2505,70 @@ console.log(copyComponent2.someCircularRef);     // { x: 1 }
 </details>
 
 <details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class SomeComponent {
+    constructor(someInt, someListOfObjects, someCircularRef) {
+        this.someInt = someInt;
+        this.someListOfObjects = someListOfObjects;
+        this.someCircularRef = someCircularRef;
+    }
+
+    copy() {
+        let someListOfObjects = Object.assign([], this.someListOfObjects);
+        let someCircularRef = Object.assign({}, this.someCircularRef);
+        let newComponent = new SomeComponent(
+            this.someInt, someListOfObjects, someCircularRef
+        );
+        Object.assign(newComponent, this);
+        return newComponent;
+    }
+
+    deepCopy() {
+     
+        let someListOfObjects = JSON.parse(JSON.stringify(this.someListOfObjects));
+        let someCircularRef = JSON.parse(JSON.stringify(this.someCircularRef));
+        let newComponent = new SomeComponent(
+            this.someInt, someListOfObjects, someCircularRef
+        );
+        newComponent = JSON.parse(JSON.stringify(this));
+        return newComponent;
+    }
+}
+
+let component = new SomeComponent(1, [1, 2, 3], { x: 1 });
+let copyComponent = component.copy();
+
+console.log(copyComponent.someListOfObjects);   // [ 1, 2, 3 ]
+console.log(copyComponent.someCircularRef);     // { x: 1 }
+
+component.someListOfObjects.push(4);
+component.someCircularRef.y = 6;
+
+console.log(copyComponent.someListOfObjects);   // [ 1, 2, 3, 4 ]
+console.log(copyComponent.someCircularRef);     // { x: 1, y: 6 }
+
+let component2 = new SomeComponent(1, [1, 2, 3], { x: 1 });
+let copyComponent2 = component2.deepCopy();
+
+console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
+console.log(copyComponent2.someCircularRef);     // { x: 1 }
+
+component2.someListOfObjects.push(4);
+component2.someCircularRef.y = 6;
+
+console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
+console.log(copyComponent2.someCircularRef);     // { x: 1 }
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
