@@ -1206,6 +1206,89 @@ expert.getDescription();
 </details>
 
 <details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class WoodenDoor {
+    getDescription() {
+        console.log("I am a wooden door");
+    }
+}
+
+class IronDoor {
+    getDescription() {
+        console.log("I am an iron door");
+    }
+}
+
+class Welder {
+    getDescription() {
+        console.log("I can only fit iron doors");
+    }
+}
+
+class Carpenter {
+    getDescription() {
+        console.log("I can only fit wooden doors");
+    }
+}
+
+class DoorFactory {
+    makeDoor() {
+        throw new Error("makeDoor() must be implemented by subclasses");
+    }
+
+    makeFittingExpert() {
+        throw new Error("makeFittingExpert() must be implemented by subclasses");
+    }
+}
+
+class WoodenDoorFactory extends DoorFactory {
+    makeDoor() {
+        return new WoodenDoor();
+    }
+
+    makeFittingExpert() {
+        return new Carpenter();
+    }
+}
+
+class IronDoorFactory extends DoorFactory {
+    makeDoor() {
+        return new IronDoor();
+    }
+
+    makeFittingExpert() {
+        return new Welder();
+    }
+}
+
+
+let woodenFactory = new WoodenDoorFactory();
+
+let door = woodenFactory.makeDoor();
+let expert = woodenFactory.makeFittingExpert();
+
+door.getDescription(); 
+expert.getDescription(); 
+
+let ironFactory = new IronDoorFactory();
+
+door = ironFactory.makeDoor();
+expert = ironFactory.makeFittingExpert();
+
+door.getDescription(); 
+expert.getDescription(); 
+```
+
+</div>
+
+</details>
+
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
