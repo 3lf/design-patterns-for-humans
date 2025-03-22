@@ -258,6 +258,52 @@ console.log(door.getWidth());
 </details>
 
 <details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class Door {
+    getWidth() {
+    }
+
+    getHeight() {
+    }
+}
+
+class WoodenDoor extends Door {
+    constructor(width = 5, height = 5) {
+        super();
+        this.width = width;
+        this.height = height;
+    }
+
+    getWidth() {
+        return this.width;
+    }
+
+    getHeight() {
+        return this.height;
+    }
+}
+
+class DoorFactory {
+    static makeDoor(width, height) {
+        return new WoodenDoor(width, height);
+    }
+}
+
+
+let door = DoorFactory.makeDoor(10, 10);
+console.log(door.getHeight()); 
+console.log(door.getWidth());  
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -601,6 +647,55 @@ devManager.takeInterview();
 
 let marketingManager = new MarketingManager();
 marketingManager.takeInterview();
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class Developer {
+    askQuestions() {
+        console.log("Asking about design patterns");
+    }
+}
+
+class CommunityExecutive {
+    askQuestions() {
+        console.log("Asking about community building");
+    }
+}
+
+class HiringManager {
+    takeInterview() {
+        const interviewer = this.makeInterviewer();
+        interviewer.askQuestions();
+    }
+}
+
+class DevelopmentManager extends HiringManager {
+    makeInterviewer() {
+        return new Developer();
+    }
+}
+
+class MarketingManager extends HiringManager {
+    makeInterviewer() {
+        return new CommunityExecutive();
+    }
+}
+
+const devManager = new DevelopmentManager();
+devManager.takeInterview();
+
+const marketingManager = new MarketingManager();
+marketingManager.takeInterview(); 
+
 ```
 
 </div>
@@ -1110,6 +1205,89 @@ expert.getDescription();
 </details>
 
 <details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class WoodenDoor {
+    getDescription() {
+        console.log("I am a wooden door");
+    }
+}
+
+class IronDoor {
+    getDescription() {
+        console.log("I am an iron door");
+    }
+}
+
+class Welder {
+    getDescription() {
+        console.log("I can only fit iron doors");
+    }
+}
+
+class Carpenter {
+    getDescription() {
+        console.log("I can only fit wooden doors");
+    }
+}
+
+class DoorFactory {
+    makeDoor() {
+        throw new Error("makeDoor() must be implemented by subclasses");
+    }
+
+    makeFittingExpert() {
+        throw new Error("makeFittingExpert() must be implemented by subclasses");
+    }
+}
+
+class WoodenDoorFactory extends DoorFactory {
+    makeDoor() {
+        return new WoodenDoor();
+    }
+
+    makeFittingExpert() {
+        return new Carpenter();
+    }
+}
+
+class IronDoorFactory extends DoorFactory {
+    makeDoor() {
+        return new IronDoor();
+    }
+
+    makeFittingExpert() {
+        return new Welder();
+    }
+}
+
+
+let woodenFactory = new WoodenDoorFactory();
+
+let door = woodenFactory.makeDoor();
+let expert = woodenFactory.makeFittingExpert();
+
+door.getDescription(); 
+expert.getDescription(); 
+
+let ironFactory = new IronDoorFactory();
+
+door = ironFactory.makeDoor();
+expert = ironFactory.makeFittingExpert();
+
+door.getDescription(); 
+expert.getDescription(); 
+```
+
+</div>
+
+</details>
+
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -1553,6 +1731,19 @@ constructor(size: any, cheese: boolean = true, pepperoni:boolean = true, tomato:
 </details>
 
 <details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+constructor(size, cheese = true, pepperoni = true, tomato = false, lettuce = true) {}
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -1766,6 +1957,71 @@ console.log(Object.keys(burger));
 ```
 
 </div>
+</details>
+
+<details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class Burger {
+    constructor(builder) {
+        this.size = builder.size;
+        this.cheese = builder.cheese;
+        this.pepperoni = builder.pepperoni;
+        this.lettuce = builder.lettuce;
+        this.tomato = builder.tomato;
+    }
+}
+
+class BurgerBuilder {
+    constructor(size) {
+        this.size = size;
+        this.cheese = false;
+        this.pepperoni = false;
+        this.lettuce = false;
+        this.tomato = false;
+    }
+
+    addPepperoni() {
+        this.pepperoni = true;
+        return this;
+    }
+
+    addLettuce() {
+        this.lettuce = true;
+        return this;
+    }
+
+    addCheese() {
+        this.cheese = true;
+        return this;
+    }
+
+    addTomato() {
+        this.tomato = true;
+        return this;
+    }
+
+    build() {
+        return new Burger(this);
+    }
+}
+
+
+let burger = new BurgerBuilder(10)
+    .addPepperoni()
+    .addLettuce()
+    .addTomato()
+    .build();
+
+console.log(burger); 
+console.log(Object.keys(burger)); 
+```
+
+</div>
+
 </details>
 
 <details>
@@ -2249,6 +2505,70 @@ console.log(copyComponent2.someCircularRef);     // { x: 1 }
 </details>
 
 <details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class SomeComponent {
+    constructor(someInt, someListOfObjects, someCircularRef) {
+        this.someInt = someInt;
+        this.someListOfObjects = someListOfObjects;
+        this.someCircularRef = someCircularRef;
+    }
+
+    copy() {
+        let someListOfObjects = Object.assign([], this.someListOfObjects);
+        let someCircularRef = Object.assign({}, this.someCircularRef);
+        let newComponent = new SomeComponent(
+            this.someInt, someListOfObjects, someCircularRef
+        );
+        Object.assign(newComponent, this);
+        return newComponent;
+    }
+
+    deepCopy() {
+     
+        let someListOfObjects = JSON.parse(JSON.stringify(this.someListOfObjects));
+        let someCircularRef = JSON.parse(JSON.stringify(this.someCircularRef));
+        let newComponent = new SomeComponent(
+            this.someInt, someListOfObjects, someCircularRef
+        );
+        newComponent = JSON.parse(JSON.stringify(this));
+        return newComponent;
+    }
+}
+
+let component = new SomeComponent(1, [1, 2, 3], { x: 1 });
+let copyComponent = component.copy();
+
+console.log(copyComponent.someListOfObjects);   // [ 1, 2, 3 ]
+console.log(copyComponent.someCircularRef);     // { x: 1 }
+
+component.someListOfObjects.push(4);
+component.someCircularRef.y = 6;
+
+console.log(copyComponent.someListOfObjects);   // [ 1, 2, 3, 4 ]
+console.log(copyComponent.someCircularRef);     // { x: 1, y: 6 }
+
+let component2 = new SomeComponent(1, [1, 2, 3], { x: 1 });
+let copyComponent2 = component2.deepCopy();
+
+console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
+console.log(copyComponent2.someCircularRef);     // { x: 1 }
+
+component2.someListOfObjects.push(4);
+component2.someCircularRef.y = 6;
+
+console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
+console.log(copyComponent2.someCircularRef);     // { x: 1 }
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -2712,6 +3032,55 @@ if (Object.is(s1, s2)) {
 </details>
 
 <details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class SingletonMeta extends Function {
+    static _instances = {};
+
+    constructor(...args) {
+        const instance = super(...args);
+        const className = this.constructor.name;
+        if (!SingletonMeta._instances[className]) {
+            SingletonMeta._instances[className] = instance;
+        }
+        return SingletonMeta._instances[className];
+    }
+
+    static getInstance() {
+        const className = this.name;
+        if (!SingletonMeta._instances[className]) {
+            SingletonMeta._instances[className] = new this();
+        }
+        return SingletonMeta._instances[className];
+    }
+}
+
+class Singleton extends SingletonMeta {
+    someBusinessLogic() {
+        console.log("Executing some business logic...");
+    }
+}
+
+const s1 = Singleton.getInstance();
+const s2 = Singleton.getInstance();
+
+if (Object.is(s1, s2)) {
+    console.log("Singleton works, both variables contain the same instance.");
+} else {
+    console.log("Singleton failed, variables contain different instances.");
+}
+
+s1.someBusinessLogic();
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -3031,6 +3400,63 @@ const wildDogAdapter = new WildDogAdapter(wildDog);
 
 const hunter = new Hunter();
 hunter.hunt(wildDogAdapter);
+```
+
+</div>
+</details>
+
+<details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class Lion {
+    roar() {
+        console.log("Lion roars!");
+    }
+}
+
+class AfricanLion extends Lion {
+    roar() {
+        console.log("African Lion roars!");
+    }
+}
+
+class AsianLion extends Lion {
+    roar() {
+        console.log("Asian Lion roars!");
+    }
+}
+
+class Hunter {
+    hunt(lion) {
+        lion.roar();
+    }
+}
+
+class WildDog {
+    static bark() {
+        console.log("Wild Dog barks!");
+    }
+}
+
+class WildDogAdapter extends Lion {
+    constructor(dog) {
+        super();
+        this.dog = dog;
+    }
+
+    roar() {
+        this.dog.bark();
+    }
+}
+
+
+const wildDog = new WildDog();
+const wildDogAdapter = new WildDogAdapter(wildDog);
+
+const hunter = new Hunter();
+hunter.hunt(wildDogAdapter); 
 ```
 
 </div>
@@ -3458,6 +3884,71 @@ const careers = new Careers(darkTheme);
 
 console.log(about.getContent());
 console.log(careers.getContent());
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class WebPage {
+    constructor(theme) {
+        this._theme = theme;
+    }
+
+    getContent() {
+        return "";
+    }
+}
+
+class About extends WebPage {
+    getContent() {
+        return `About page in ${this._theme.getColor()}`;
+    }
+}
+
+class Careers extends WebPage {
+    getContent() {
+        return `Careers page in ${this._theme.getColor()}`;
+    }
+}
+
+class Theme {
+    getColor() {
+        return "";
+    }
+}
+
+class DarkTheme extends Theme {
+    getColor() {
+        return "Dark Black";
+    }
+}
+
+class LightTheme extends Theme {
+    getColor() {
+        return "Off White";
+    }
+}
+
+class AquaTheme extends Theme {
+    getColor() {
+        return "Light Blue";
+    }
+}
+
+
+const darkTheme = new DarkTheme();
+
+const about = new About(darkTheme);
+const careers = new Careers(darkTheme);
+
+console.log(about.getContent()); 
+console.log(careers.getContent()); 
 ```
 
 </div>
@@ -3936,6 +4427,65 @@ tree.add(branch2);
 
 console.log(`RESULT: ${tree.operation()}`);
 // RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
+```
+
+</div>
+
+</details>
+
+<details>
+
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class Leaf {
+    operation() {
+        return "Leaf";
+    }
+}
+
+class Composite {
+    constructor() {
+        this.children = [];
+    }
+
+    add(component) {
+        this.children.push(component);
+    }
+
+    remove(component) {
+        const index = this.children.indexOf(component);
+        if (index !== -1) {
+            this.children.splice(index, 1);
+        }
+    }
+
+    operation() {
+        const results = [];
+        for (const child of this.children) {
+            results.push(child.operation());
+        }
+        return `Branch(${results.join("+")})`;
+    }
+}
+
+
+const tree = new Composite();
+
+const branch1 = new Composite();
+branch1.add(new Leaf());
+branch1.add(new Leaf());
+
+const branch2 = new Composite();
+branch2.add(new Leaf());
+
+tree.add(branch1);
+tree.add(branch2);
+
+console.log(`RESULT: ${tree.operation()}`);
+// Output: RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
 ```
 
 </div>
@@ -4549,6 +5099,97 @@ console.log(someCoffee.getDescription());
 </details>
 
 <details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class Coffee {
+    getCost() {
+        throw new Error("getCost() must be implemented by subclasses");
+    }
+
+    getDescription() {
+        throw new Error("getDescription() must be implemented by subclasses");
+    }
+}
+
+class SimpleCoffee extends Coffee {
+    getCost() {
+        return 10;
+    }
+
+    getDescription() {
+        return "Simple Coffee";
+    }
+}
+
+class MilkCoffee extends Coffee {
+    constructor(coffee) {
+        super();
+        this.coffee = coffee;
+    }
+
+    getCost() {
+        return this.coffee.getCost() + 2;
+    }
+
+    getDescription() {
+        return this.coffee.getDescription() + ", milk";
+    }
+}
+
+class WhipCoffee extends Coffee {
+    constructor(coffee) {
+        super();
+        this.coffee = coffee;
+    }
+
+    getCost() {
+        return this.coffee.getCost() + 5;
+    }
+
+    getDescription() {
+        return this.coffee.getDescription() + ", whip";
+    }
+}
+
+class VanillaCoffee extends Coffee {
+    constructor(coffee) {
+        super();
+        this.coffee = coffee;
+    }
+
+    getCost() {
+        return this.coffee.getCost() + 3;
+    }
+
+    getDescription() {
+        return this.coffee.getDescription() + ", vanilla";
+    }
+}
+
+
+let someCoffee = new SimpleCoffee();
+console.log(someCoffee.getCost());
+console.log(someCoffee.getDescription());
+
+someCoffee = new MilkCoffee(someCoffee);
+console.log(someCoffee.getCost()); 
+console.log(someCoffee.getDescription()); 
+
+someCoffee = new VanillaCoffee(someCoffee);
+console.log(someCoffee.getCost()); 
+console.log(someCoffee.getDescription()); 
+
+someCoffee = new WhipCoffee(someCoffee);
+console.log(someCoffee.getCost());
+console.log(someCoffee.getDescription());
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -5140,6 +5781,75 @@ computer.turnOff();
 </details>
 
 <details>
+
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class Computer {
+    getElectricShock() {
+        console.log("Ouch!");
+    }
+
+    makeSound() {
+        console.log("Beep Beep!");
+    }
+
+    showLoadingScreen() {
+        console.log("Loading...");
+    }
+
+    bam() {
+        console.log("Ready to be used...");
+    }
+
+    closeEverything() {
+        console.log("Bup bup bup buzzz!");
+    }
+
+    sooth() {
+        console.log("Zzzzz");
+    }
+
+    pullCurrent() {
+        console.log("Haaah!");
+    }
+}
+
+class ComputerFacade {
+    constructor(computer) {
+        this.computer = computer;
+    }
+
+    set computer(computer) {
+        this.computer = computer;
+    }
+
+    turnOn() {
+        this.computer.getElectricShock();
+        this.computer.makeSound();
+        this.computer.showLoadingScreen();
+        this.computer.bam();
+    }
+
+    turnOff() {
+        this.computer.closeEverything();
+        this.computer.pullCurrent();
+        this.computer.sooth();
+    }
+}
+
+const computer = new ComputerFacade(new Computer());
+computer.turnOn();
+computer.turnOff();
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -5606,6 +6316,66 @@ shop.serve();
 </details>
 
 <details>
+
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javaScript
+class GreenTea {
+}
+
+class TeaMaker {
+    constructor() {
+        this.availableTea = {};
+    }
+
+    make(preference) {
+        if (!(preference in this.availableTea)) {
+            this.availableTea[preference] = new GreenTea();
+        }
+
+        return this.availableTea[preference];
+    }
+}
+
+class TeaShop {
+    constructor(teaMaker) {
+        this.orders = {};
+        this.teaMaker = teaMaker;
+    }
+
+    takeOrder(teaType, table) {
+        this.orders[table] = this.teaMaker.make(teaType);
+    }
+
+    serve() {
+        for (const table in this.orders) {
+            const tea = this.orders[table];
+            console.log(`Serving tea to table #${table}`);
+        }
+    }
+}
+
+
+const teaMaker = new TeaMaker();
+const shop = new TeaShop(teaMaker);
+
+shop.takeOrder("less sugar", 1);
+shop.takeOrder("more milk", 2);
+shop.takeOrder("without sugar", 5);
+
+shop.serve();
+// Serving tea to table #1
+// Serving tea to table #2
+// Serving tea to table #5
+```
+
+</div>
+
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -6016,6 +6786,54 @@ const door = new SecuredDoor(new LabDoor());
 door.open("invalid"); // Big no! It ain't possible
 door.open("$ecr@t"); // Opening lab door
 door.close(); // Closing Lab Door
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class LabDoor {
+    open() {
+        console.log("Opening lab door");
+    }
+
+    close() {
+        console.log("Closing the lab door");
+    }
+}
+
+class SecuredDoor {
+    constructor(door) {
+        this.door = door;
+    }
+
+    open(password) {
+        if (this.authenticate(password)) {
+            this.door.open();
+        } else {
+            console.log("Big no! It ain't possible.");
+        }
+    }
+
+    authenticate(password) {
+        return password === "$ecr@t";
+    }
+
+    close() {
+        this.door.close();
+    }
+}
+
+
+const door = new SecuredDoor(new LabDoor());
+door.open("invalid"); 
+door.open("$ecr@t"); 
+door.close(); 
 ```
 
 </div>
@@ -6529,6 +7347,73 @@ Bitcoin!
 </details>
 
 <details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class Account {
+    constructor() {
+        this._successor = null;
+        this._balance = null;
+    }
+
+    setNext(account) {
+        this._successor = account;
+    }
+
+    pay(amountToPay) {
+        const myCaller = (new Error().stack).split("at ")[2].split(" ")[0];
+        if (this.canPay(amountToPay)) {
+            console.log(`Paid ${amountToPay} using ${myCaller}`);
+        } else if (this._successor) {
+            console.log(`Cannot pay using ${myCaller}. Proceeding ..`);
+            this._successor.pay(amountToPay);
+        } else {
+            throw new Error("None of the accounts have enough balance");
+        }
+    }
+
+    canPay(amount) {
+        return this._balance >= amount;
+    }
+}
+
+class Bank extends Account {
+    constructor(balance) {
+        super();
+        this._balance = balance;
+    }
+}
+
+class Paypal extends Account {
+    constructor(balance) {
+        super();
+        this._balance = balance;
+    }
+}
+
+class Bitcoin extends Account {
+    constructor(balance) {
+        super();
+        this._balance = balance;
+    }
+}
+
+
+const bank = new Bank(100);
+const paypal = new Paypal(200);
+const bitcoin = new Bitcoin(300);
+
+bank.setNext(paypal);
+paypal.setNext(bitcoin);
+
+bank.pay(259);
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -7011,6 +7896,63 @@ const turnOff = new TurnOff(bulb);
 const remote = new RemoteControl();
 remote.submit(turnOn); // Bulb has been lit!
 remote.submit(turnOff); // Darkness!
+```
+
+</div>
+</details>
+
+<details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class Bulb {
+    turnOn() {
+        console.log("Bulb has been lit");
+    }
+
+    turnOff() {
+        console.log("Darkness!");
+    }
+}
+
+class Command {
+    constructor(bulb) {
+        this._bulb = bulb;
+    }
+
+    execute() {
+       
+    }
+}
+
+class TurnOn extends Command {
+    execute() {
+        this._bulb.turnOn();
+    }
+}
+
+class TurnOff extends Command {
+    execute() {
+        this._bulb.turnOff();
+    }
+}
+
+class RemoteControl {
+    submit(command) {
+        command.execute();
+    }
+}
+
+
+const bulb = new Bulb();
+
+const turnOn = new TurnOn(bulb);
+const turnOff = new TurnOff(bulb);
+
+const remote = new RemoteControl();
+remote.submit(turnOn); 
+remote.submit(turnOff); 
 ```
 
 </div>
@@ -7598,6 +8540,70 @@ for (const item of collection.getReverseIterator()) {
 </details>
 
 <details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class AlphabeticalOrderIterator {
+    constructor(collection, reverse = false) {
+        this.collection = collection;
+        this.reverse = reverse;
+        this.position = this.reverse ? collection.collection.length - 1 : 0;
+    }
+
+    next() {
+        if (this.position >= 0 && this.position < this.collection.collection.length) {
+            const value = this.collection.collection[this.position];
+            this.position += this.reverse ? -1 : 1;
+            return { value, done: false };
+        } else {
+            return { value: undefined, done: true };
+        }
+    }
+}
+
+class WordsCollection {
+    constructor(collection = []) {
+        this.collection = collection;
+    }
+
+    [Symbol.iterator]() {
+        return new AlphabeticalOrderIterator(this);
+    }
+
+    getReverseIterator() {
+        return new AlphabeticalOrderIterator(this, true);
+    }
+
+    addItem(item) {
+        this.collection.push(item);
+    }
+}
+
+
+const collection = new WordsCollection();
+collection.addItem("First");
+collection.addItem("Second");
+collection.addItem("Third");
+
+console.log("Straight traversal:");
+for (const item of collection) {
+    console.log(item);
+}
+
+console.log("\nReverse traversal:");
+const reverseIterator = collection.getReverseIterator();
+let result = reverseIterator.next();
+while (!result.done) {
+    console.log(result.value);
+    result = reverseIterator.next();
+}
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -8096,6 +9102,54 @@ jane.send("Hey!");
 </details>
 
 <details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class ChatRoomMediator {
+    showMessage(user, message) {
+    
+    }
+}
+
+class ChatRoom extends ChatRoomMediator {
+    showMessage(user, message) {
+        const time = new Date();
+        const sender = user.getName();
+
+        console.log(`${time.toLocaleString()} [${sender}]: ${message}`);
+    }
+}
+
+class User {
+    constructor(name, chatMediator) {
+        this.name = name;
+        this.chatMediator = chatMediator;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    send(message) {
+        this.chatMediator.showMessage(this, message);
+    }
+}
+
+
+const mediator = new ChatRoom();
+
+const john = new User("John", mediator);
+const jane = new User("Jane", mediator);
+
+john.send("Hi there!");
+jane.send("Hey!");
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -8468,6 +9522,60 @@ console.log(editor.getContent()); // This is the first sentence. This is second.
 
 editor.restore(saved);
 console.log(editor.getContent()); // This is the first sentence. This is second.
+```
+
+</div>
+</details>
+
+<details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class EditorMemento {
+    constructor(content) {
+        this.content = content;
+    }
+
+    getContent() {
+        return this.content;
+    }
+}
+
+class Editor {
+    constructor() {
+        this.content = "";
+    }
+
+    type(words) {
+        this.content = this.content + " " + words;
+    }
+
+    getContent() {
+        return this.content;
+    }
+
+    save() {
+        return new EditorMemento(this.content);
+    }
+
+    restore(memento) {
+        this.content = memento.getContent();
+    }
+}
+
+
+const editor = new Editor();
+editor.type("This is the first sentence");
+editor.type("This is the second.");
+
+const saved = editor.save();
+editor.type("And this is the third");
+
+console.log(editor.getContent()); 
+
+editor.restore(saved);
+console.log(editor.getContent()); 
 ```
 
 </div>
@@ -8926,6 +10034,65 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 // Output
 // Hi John Doe! New job posted: Software Engineer
 // Hi Jane Doe! New job posted: Software Engineer
+```
+
+</div>
+</details>
+
+<details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class JobPost {
+    constructor(title) {
+        this.title = title;
+    }
+
+    getTitle() {
+        return this.title;
+    }
+}
+
+class JobSeeker {
+    constructor(name) {
+        this.name = name;
+    }
+
+    onJobPosted(job) {
+        console.log(`Hi ${this.name}! New job posted: ${job.getTitle()}`);
+    }
+}
+
+class JobCategory {
+    constructor() {
+        this.observers = [];
+    }
+
+    notify(jobPosting) {
+        for (const observer of this.observers) {
+            observer.onJobPosted(jobPosting);
+        }
+    }
+
+    attach(observer) {
+        this.observers.push(observer);
+    }
+
+    addJob(jobPosting) {
+        this.notify(jobPosting);
+    }
+}
+
+
+const johnDoe = new JobSeeker("John Doe");
+const janeDoe = new JobSeeker("Jane Doe");
+
+const jobPostings = new JobCategory();
+jobPostings.attach(janeDoe);
+jobPostings.attach(johnDoe);
+
+jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 ```
 
 </div>
@@ -9550,6 +10717,89 @@ dolphin.accept(jump); // Walked on water a little and disappeared
 </details>
 
 <details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class Monkey {
+    shout() {
+        console.log("Ooh oo aa aa!");
+    }
+
+    accept(operation) {
+        operation.visitMonkey(this);
+    }
+}
+
+class Lion {
+    roar() {
+        console.log("Roaaar!");
+    }
+
+    accept(operation) {
+        operation.visitLion(this);
+    }
+}
+
+class Dolphin {
+    speak() {
+        console.log("Tuut tuttu tuutt!");
+    }
+
+    accept(operation) {
+        operation.visitDolphin(this);
+    }
+}
+
+class Speak {
+    visitMonkey(monkey) {
+        monkey.shout();
+    }
+
+    visitLion(lion) {
+        lion.roar();
+    }
+
+    visitDolphin(dolphin) {
+        dolphin.speak();
+    }
+}
+
+class Jump {
+    visitMonkey(monkey) {
+        console.log("Jumped 20 feet high! on to the tree!");
+    }
+
+    visitLion(lion) {
+        console.log("Jumped 7 feet! back on the ground!");
+    }
+
+    visitDolphin(dolphin) {
+        console.log("Walked on water a little and disappeared");
+    }
+}
+
+
+const monkey = new Monkey();
+const lion = new Lion();
+const dolphin = new Dolphin();
+
+const speak = new Speak();
+const jump = new Jump();
+
+monkey.accept(speak); 
+lion.accept(speak); 
+dolphin.accept(speak); 
+
+monkey.accept(jump);
+lion.accept(jump); 
+dolphin.accept(jump);
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -10144,6 +11394,47 @@ sorter2.sort(dataset);
 </details>
 
 <details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class BubbleSortStrategy {
+    sort(dataset) {
+        console.log("Sorting using bubble sort");
+        return dataset;
+    }
+}
+
+class QuickSortStrategy {
+    sort(dataset) {
+        console.log("Sorting using quick sort");
+        return dataset;
+    }
+}
+
+class Sorter {
+    constructor(sorter) {
+        this.sorter = sorter;
+    }
+
+    sort(dataset) {
+        return this.sorter.sort(dataset);
+    }
+}
+
+const dataset = [1, 5, 4, 3, 2, 8];
+
+const sorter = new Sorter(new BubbleSortStrategy());
+sorter.sort(dataset); 
+
+const sorter2 = new Sorter(new QuickSortStrategy());
+sorter2.sort(dataset); 
+```
+
+</div>
+</details>
+
+<details>
 <summary >#C</summary>
 
 <div dir="ltr">
@@ -10546,6 +11837,59 @@ editor.setState(new LowerCase());
 
 editor.type("Fourth Line"); // fourth line
 editor.type("Fifth Line"); // fifth line
+```
+
+</div>
+</details>
+
+<details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class UpperCase {
+    write(words) {
+        console.log(words.toUpperCase());
+    }
+}
+
+class LowerCase {
+    write(words) {
+        console.log(words.toLowerCase());
+    }
+}
+
+class DefaultText {
+    write(words) {
+        console.log(words);
+    }
+}
+
+class TextEditor {
+    constructor(state) {
+        this.state = state;
+    }
+
+    setState(state) {
+        this.state = state;
+    }
+
+    type(words) {
+        this.state.write(words);
+    }
+}
+
+
+const editor = new TextEditor(new DefaultText());
+editor.type("First Line"); 
+
+editor.setState(new UpperCase());
+editor.type("Second Line"); 
+editor.type("Third Line"); 
+
+editor.setState(new LowerCase());
+editor.type("Fourth Line"); 
+editor.type("Fifth Line")
 ```
 
 </div>
@@ -11072,6 +12416,87 @@ iosBuilder.build();
 
 </div>
 </details>
+
+
+<details>
+<summary>JavaScript</summary>
+<div dir="ltr">
+
+```javaScript
+class Builder {
+    build() {
+        this.test();
+        this.lint();
+        this.assemble();
+        this.deploy();
+    }
+
+    test() {
+      
+    }
+
+    lint() {
+        
+    }
+
+    assemble() {
+      
+    }
+
+    deploy() {
+      
+    }
+}
+
+class AndroidBuilder extends Builder {
+    test() {
+        console.log("Running android tests");
+    }
+
+    lint() {
+        console.log("Linting the android code");
+    }
+
+    assemble() {
+        console.log("Assembling the android build");
+    }
+
+    deploy() {
+        console.log("Deploying android build to server");
+    }
+}
+
+class IosBuilder extends Builder {
+    test() {
+        console.log("Running ios tests");
+    }
+
+    lint() {
+        console.log("Linting the ios code");
+    }
+
+    assemble() {
+        console.log("Assembling the ios build");
+    }
+
+    deploy() {
+        console.log("Deploying ios build to server");
+    }
+}
+
+
+const androidBuilder = new AndroidBuilder();
+androidBuilder.build();
+
+
+
+const iosBuilder = new IosBuilder();
+iosBuilder.build();
+```
+
+</div>
+</details>
+
 
 <details>
 <summary >#C</summary>
