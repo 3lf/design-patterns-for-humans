@@ -12910,8 +12910,9 @@ iOSBuilder.build();
 - امیر عزیز که زحمت مثال های TypeScript رو کشید.([amirmalekian](https://github.com/amirmalekian))
 - رضا عزیز که زحمت مثال های #C رو کشید.([RezaMansouri70](https://github.com/RezaMansouri70))
 - صالح عزیز که زحمت مثال های PHP رو کشید.([salehhashemi1992](https://github.com/salehhashemi1992))
-- عاطفه عزیز که زحمت مثال های Golang رو کشید.([Atefe-Komeili](https://github.com/Atefe-Komeili))
+- عاطفه عزیز که زحمت مثال های Golang رو کشید.([atefeh-komeyli](https://github.com/atefeh-komeyli))
 - محمد عزیز که زحمت مثال های Java رو کشید.([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
+- سما عزیز که زحمت مثال های JavaScript رو کشید.([samazzz](https://github.com/samazzz))
 - مهسا، محمد و سجاد عزیز که زحمت بهبود کد هارو کشیدند.([MahsaMahdavian](https://github.com/MahsaMahdavian) / [MohammadMMoniri](https://github.com/MohammadMMoniri) / [ssmns](https://github.com/ssmns))
 
 
