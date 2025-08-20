@@ -26,36 +26,34 @@
 
 <!-- TOC -->
 
-| دسته بندی                   | دیزاین پترن   |
-|----------------------------|-----------------------|
-| **Creational Design Patterns** |                     |
-|                            | [🏠 Simple Factory](#-simple-factory)     |
-|                            | [🏭 Factory Method](#-factory-method)     |
-|                            | [🔨 Abstract Factory](#-abstract-factory)   |
-|                            | [👷 Builder](#-builder)            |
-|                            | [🐑 Prototype](#-prototype)          |
-|                            | [💍 Singleton](#-singleton)          |
-| **Structural Design Patterns** |                   |
-|                            | [🔌 Adapter](#-adapter)            |
-|                            | [🌉 Bridge](#-bridge)             |
-|                            | [🌿 Composite](#-composite)          |
-|                            | [☕ Decorator](#-decorator)           |
-|                            | [📦 Facade](#-facade)             |
-|                            | [🍃 Flyweight](#-flyweight)          |
-|                            | [🎱 Proxy](#-proxy)              |
-| **Behavioral Design Patterns** |                  |
-|                            | [🔗 Chain of Responsibility](#-chain-of-responsibility) |
-|                            | [👮 Command](#-command)            |
-|                            | [➿ Iterator](#-iterator)            |
-|                            | [👽 Mediator](#-mediator)           |
-|                            | [💾 Memento](#-memento)            |
-|                            | [😎 Observer](#-observer)           |
-|                            | [🏃 Visitor](#-visitor)            |
-|                            | [💡 Strategy](#-strategy)           |
-|                            | [💢 State](#-state)              |
-|                            | [📒 Template Method](#-template-method)    |
-
-
+| دسته بندی                      | دیزاین پترن                                             |
+| ------------------------------ | ------------------------------------------------------- |
+| **Creational Design Patterns** |                                                         |
+|                                | [🏠 Simple Factory](#-simple-factory)                   |
+|                                | [🏭 Factory Method](#-factory-method)                   |
+|                                | [🔨 Abstract Factory](#-abstract-factory)               |
+|                                | [👷 Builder](#-builder)                                 |
+|                                | [🐑 Prototype](#-prototype)                             |
+|                                | [💍 Singleton](#-singleton)                             |
+| **Structural Design Patterns** |                                                         |
+|                                | [🔌 Adapter](#-adapter)                                 |
+|                                | [🌉 Bridge](#-bridge)                                   |
+|                                | [🌿 Composite](#-composite)                             |
+|                                | [☕ Decorator](#-decorator)                             |
+|                                | [📦 Facade](#-facade)                                   |
+|                                | [🍃 Flyweight](#-flyweight)                             |
+|                                | [🎱 Proxy](#-proxy)                                     |
+| **Behavioral Design Patterns** |                                                         |
+|                                | [🔗 Chain of Responsibility](#-chain-of-responsibility) |
+|                                | [👮 Command](#-command)                                 |
+|                                | [➿ Iterator](#-iterator)                               |
+|                                | [👽 Mediator](#-mediator)                               |
+|                                | [💾 Memento](#-memento)                                 |
+|                                | [😎 Observer](#-observer)                               |
+|                                | [🏃 Visitor](#-visitor)                                 |
+|                                | [💡 Strategy](#-strategy)                               |
+|                                | [💢 State](#-state)                                     |
+|                                | [📒 Template Method](#-template-method)                 |
 
 <!-- TOC -->
 
@@ -295,8 +293,8 @@ class DoorFactory {
 
 
 let door = DoorFactory.makeDoor(10, 10);
-console.log(door.getHeight()); 
-console.log(door.getWidth());  
+console.log(door.getHeight());
+console.log(door.getWidth());
 ```
 
 </div>
@@ -451,22 +449,21 @@ func main() {
 
 </details>
 
-
 <details>
   <summary>Java</summary>
 
 <div dir="ltr">
 
 ```java
-public class Door { 
+public class Door {
     private int width;
     private int height;
-    
+
     public Door(int width, int height) {
         this.width = width;
         this.height = height;
     }
-    
+
     public int getHeight() {
         return height;
     }
@@ -482,7 +479,7 @@ public class Door {
 }
 
 public class WoodenDoor extends Door {
-    
+
     WoodenDoor(int width, int height) {
         super(width, height);
     }
@@ -500,9 +497,9 @@ Door door = DoorFactory.makeDoor(10, 10);
 System.out.println(door.getHeight());
 System.out.println(door.getWidth());
 ```
+
 </div>
 </details>
-
 
 <br>
 
@@ -606,40 +603,40 @@ marketingManager.takeInterview()
 
 ```typescript
 interface Interviewer {
-    askQuestions(): void;
+  askQuestions(): void;
 }
 
 class Developer implements Interviewer {
-    askQuestions(): void {
-        console.log("Asking about design patterns");
-    }
+  askQuestions(): void {
+    console.log("Asking about design patterns");
+  }
 }
 
 class CommunityExecutive implements Interviewer {
-    askQuestions(): void {
-        console.log("Asking about community building");
-    }
+  askQuestions(): void {
+    console.log("Asking about community building");
+  }
 }
 
 abstract class HiringManager {
-    abstract makeInterviewer(): Interviewer;
+  abstract makeInterviewer(): Interviewer;
 
-    takeInterview(): void {
-        let interviewer = this.makeInterviewer();
-        interviewer.askQuestions();
-    }
+  takeInterview(): void {
+    let interviewer = this.makeInterviewer();
+    interviewer.askQuestions();
+  }
 }
 
 class DevelopmentManager extends HiringManager {
-    makeInterviewer(): Developer {
-        return new Developer();
-    }
+  makeInterviewer(): Developer {
+    return new Developer();
+  }
 }
 
 class MarketingManager extends HiringManager {
-    makeInterviewer(): CommunityExecutive {
-        return new CommunityExecutive();
-    }
+  makeInterviewer(): CommunityExecutive {
+    return new CommunityExecutive();
+  }
 }
 
 let devManager = new DevelopmentManager();
@@ -694,7 +691,7 @@ const devManager = new DevelopmentManager();
 devManager.takeInterview();
 
 const marketingManager = new MarketingManager();
-marketingManager.takeInterview(); 
+marketingManager.takeInterview();
 
 ```
 
@@ -908,7 +905,6 @@ func main() {
 
 </details>
 
-
 <details>
   <summary>Java</summary>
 
@@ -963,9 +959,9 @@ devManager.takeInterview();
 MarketingManager marketingManager = new MarketingManager();
 marketingManager.takeInterview();
 ```
+
 </div>
 </details>
-
 
 <br>
 
@@ -1270,22 +1266,21 @@ let woodenFactory = new WoodenDoorFactory();
 let door = woodenFactory.makeDoor();
 let expert = woodenFactory.makeFittingExpert();
 
-door.getDescription(); 
-expert.getDescription(); 
+door.getDescription();
+expert.getDescription();
 
 let ironFactory = new IronDoorFactory();
 
 door = ironFactory.makeDoor();
 expert = ironFactory.makeFittingExpert();
 
-door.getDescription(); 
-expert.getDescription(); 
+door.getDescription();
+expert.getDescription();
 ```
 
 </div>
 
 </details>
-
 
 <details>
 <summary >#C</summary>
@@ -1666,6 +1661,7 @@ IronDoorFittingExpert ironDoorFittingExpert = ironDoorFactory.MakeFittingExpert(
 ironDoor.GetDescription(); //Output : I am a iron door
 ironDoorFittingExpert.GetDescription(); //Output : I can only fit iron doors
 ```
+
 </div>
 
 **همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
@@ -1796,6 +1792,7 @@ func Burger(size int, cheese bool, pepperoni bool, lettuce bool, tomato bool)
 ```java
 public Burger(int size, boolean cheese, boolean pepperoni, boolean lettuce, boolean tomato)
 ```
+
 </div>
 </details>
 
@@ -2016,8 +2013,8 @@ let burger = new BurgerBuilder(10)
     .addTomato()
     .build();
 
-console.log(burger); 
-console.log(Object.keys(burger)); 
+console.log(burger);
+console.log(Object.keys(burger));
 ```
 
 </div>
@@ -2176,7 +2173,7 @@ $burger = (new BurgerBuilder(10))
             ->addLettuce()
             ->addTomato()
             ->build();
-            
+
 var_dump(get_object_vars($burger));
 
 ```
@@ -2308,7 +2305,7 @@ class BurgerBuilder {
     public boolean pepperoni;
     public boolean lettuce;
     public boolean tomato;
-    
+
     public Burger build() {
         return new Burger(this);
     }
@@ -2346,6 +2343,7 @@ Burger burger = Burger.builder()
 
 System.out.println(burger.getDescription());
 ```
+
 </div>
 </details>
 
@@ -2370,7 +2368,7 @@ System.out.println(burger.getDescription());
 
 > چیزی درمورد دالی شنیدین
 >
-؟ ([اگه نه اینجارو بخونید](<https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%84%DB%8C_(%DA%AF%D9%88%D8%B3%D9%81%D9%86%D8%AF)>))
+> ؟ ([اگه نه اینجارو بخونید](<https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%D9%84%DB%8C_(%DA%AF%D9%88%D8%B3%D9%81%D9%86%D8%AF)>))
 >
 > خیلی اینجا توضیح نمیدم، فقط بدونید همه‌چیز مربوط به شبیه سازیه!
 
@@ -2528,7 +2526,7 @@ class SomeComponent {
     }
 
     deepCopy() {
-     
+
         let someListOfObjects = JSON.parse(JSON.stringify(this.someListOfObjects));
         let someCircularRef = JSON.parse(JSON.stringify(this.someCircularRef));
         let newComponent = new SomeComponent(
@@ -2621,12 +2619,9 @@ Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
 
 </div>
 
-
-
 <br>
 
 برای deepCopy میتونیم از json Deserialize استفاده کنیم :
-
 
 <div dir="ltr">
 
@@ -2650,7 +2645,7 @@ public class Manager : Person
     }
 
     public override Person Clone( bool deepClone=false)
-    {      
+    {
        if (deepClone)
         {
             var objectAsJson = JsonConvert.SerializeObject(this);
@@ -2662,7 +2657,7 @@ public class Manager : Person
 }
 
 public class Employee : Person
-{ 
+{
     public Manager Manager { get; set; }
     public override string Name { get; set; }
     public Employee(string name, Manager manager)
@@ -3456,7 +3451,7 @@ const wildDog = new WildDog();
 const wildDogAdapter = new WildDogAdapter(wildDog);
 
 const hunter = new Hunter();
-hunter.hunt(wildDogAdapter); 
+hunter.hunt(wildDogAdapter);
 ```
 
 </div>
@@ -3656,7 +3651,7 @@ fmt.Println("Done")
 
 ```java
 interface Lion {
-    
+
     void roar();
 }
 
@@ -3677,7 +3672,7 @@ class AsianLion implements Lion {
 }
 
 class Hunter {
-    
+
     public void Hunt(Lion lion) {
         System.out.println("Attacking and listening...🦻");
         lion.roar();
@@ -3685,7 +3680,7 @@ class Hunter {
 }
 
 class WildDog {
-    
+
     public void bark() {
         System.out.println("Wild dog barking");
     }
@@ -3947,8 +3942,8 @@ const darkTheme = new DarkTheme();
 const about = new About(darkTheme);
 const careers = new Careers(darkTheme);
 
-console.log(about.getContent()); 
-console.log(careers.getContent()); 
+console.log(about.getContent());
+console.log(careers.getContent());
 ```
 
 </div>
@@ -4240,7 +4235,7 @@ class LightTheme implements Theme {
 }
 
 ----------------------------
-    
+
 DarkTheme darkTheme = new DarkTheme();
 LightTheme lightTheme = new LightTheme();
 
@@ -4268,7 +4263,7 @@ System.out.println(careers.getContent());   // Careers page in Light theme
 یک مثال از دنیای واقعی:
 
 > فرض کنید شما یک کلاس ارسال مرسوله طراحی میکنید:
-> 
+>
 > ![Composite](images/Composite.png)
 >
 > هر کلاس یک جعبه هست که میتونه شامل چند جعبه دیگه یا شامل چند شیء باشه.
@@ -5174,12 +5169,12 @@ console.log(someCoffee.getCost());
 console.log(someCoffee.getDescription());
 
 someCoffee = new MilkCoffee(someCoffee);
-console.log(someCoffee.getCost()); 
-console.log(someCoffee.getDescription()); 
+console.log(someCoffee.getCost());
+console.log(someCoffee.getDescription());
 
 someCoffee = new VanillaCoffee(someCoffee);
-console.log(someCoffee.getCost()); 
-console.log(someCoffee.getDescription()); 
+console.log(someCoffee.getCost());
+console.log(someCoffee.getDescription());
 
 someCoffee = new WhipCoffee(someCoffee);
 console.log(someCoffee.getCost());
@@ -5504,13 +5499,13 @@ func main() {
 
 ```java
 interface Coffee {
-    
+
     int getCost();
     String getDescription();
 }
 
 class SimpleCoffee implements Coffee {
-    
+
     public int getCost() {
         return 5;
     }
@@ -6831,9 +6826,9 @@ class SecuredDoor {
 
 
 const door = new SecuredDoor(new LabDoor());
-door.open("invalid"); 
-door.open("$ecr@t"); 
-door.close(); 
+door.open("invalid");
+door.open("$ecr@t");
+door.close();
 ```
 
 </div>
@@ -7071,7 +7066,7 @@ class SecuredDoor implements Door {
     private boolean authenticate(String password) {
         return "$ecr@t".equals(password);
     }
-    
+
     @Override
     public void open() {
         System.out.println("Big no! It ain't possible.");
@@ -7165,7 +7160,7 @@ door.close();               // Closing lab door
 خب توی کد بالا یک کلاس مرجع ساختیم که اسمش Account هست. این کلاس یک متد داره که اسمش pay هست. این متد یک مقدار رو میگیره
 و سعی میکنه اون مقدار رو از حساب خود پرداخت کنه. اگر موفق نشد، اون مقدار رو به حساب بعدی انتقال میده.
 
-نکته: 
+نکته:
 تابع inspect.stack یک تابعیه که میتونه اطلاعاتی از فراخوانی تابع رو برگردونه. مثلا اگر ما از این تابع در یک تابع دیگه
 استفاده کنیم، این تابع میتونه اسم تابعی که از اون استفاده شده رو برگردونه.
 
@@ -7922,7 +7917,7 @@ class Command {
     }
 
     execute() {
-       
+
     }
 }
 
@@ -7951,8 +7946,8 @@ const turnOn = new TurnOn(bulb);
 const turnOff = new TurnOff(bulb);
 
 const remote = new RemoteControl();
-remote.submit(turnOn); 
-remote.submit(turnOff); 
+remote.submit(turnOn);
+remote.submit(turnOff);
 ```
 
 </div>
@@ -8463,7 +8458,7 @@ Third
 Reverse traversal:
 Third
 Second
-First% 
+First%
 '''
 ```
 
@@ -9108,7 +9103,7 @@ jane.send("Hey!");
 ```javaScript
 class ChatRoomMediator {
     showMessage(user, message) {
-    
+
     }
 }
 
@@ -9454,10 +9449,10 @@ editor.write('This is the second.')
 saved = editor.save()
 editor.write('And this is the third')
 
-print(editor.getContent()) 
+print(editor.getContent())
 
 editor.restore(saved)
-print(editor.getContent())  
+print(editor.getContent())
 
 '''
 Output will be
@@ -9572,10 +9567,10 @@ editor.type("This is the second.");
 const saved = editor.save();
 editor.type("And this is the third");
 
-console.log(editor.getContent()); 
+console.log(editor.getContent());
 
 editor.restore(saved);
-console.log(editor.getContent()); 
+console.log(editor.getContent());
 ```
 
 </div>
@@ -9863,10 +9858,10 @@ func main() {
 	saved := editor.Save()
 	editor.Type("And this is the third")
 
-	fmt.Println(editor.GetContent())  
+	fmt.Println(editor.GetContent())
 
 	editor.Restore(saved)
-	fmt.Println(editor.GetContent()) 
+	fmt.Println(editor.GetContent())
 }
 
 
@@ -10317,8 +10312,6 @@ $jobPostings->addJob(new JobPost("Software Engineer"));
 
 </details>
 
-
-
 <details>
 <summary>Go</summary>
 
@@ -10398,12 +10391,10 @@ func main() {
 
 </details>
 
-
 <details>
   <summary>Java</summary>
 
 <div dir="ltr">
-
 
 ```java
 class JobPost {
@@ -10623,59 +10614,59 @@ dolphin.accept(jump)  # Walked on water a little and disappeared
 
 ```typescript
 interface AnimalOperation {
-    visitMonkey(monkey: Monkey): void;
+  visitMonkey(monkey: Monkey): void;
 
-    visitLion(lion: Lion): void;
+  visitLion(lion: Lion): void;
 
-    visitDolphin(dolphin: Dolphin): void;
+  visitDolphin(dolphin: Dolphin): void;
 }
 
 interface Animal {
-    accept(operation: AnimalOperation): void;
+  accept(operation: AnimalOperation): void;
 }
 
 class Monkey implements Animal {
-    shout() {
-        console.log("Ooh oo aa aa!");
-    }
+  shout() {
+    console.log("Ooh oo aa aa!");
+  }
 
-    accept(operation: AnimalOperation): void {
-        operation.visitMonkey(this);
-    }
+  accept(operation: AnimalOperation): void {
+    operation.visitMonkey(this);
+  }
 }
 
 class Lion implements Animal {
-    roar() {
-        console.log("Roaaar!");
-    }
+  roar() {
+    console.log("Roaaar!");
+  }
 
-    accept(operation: AnimalOperation): void {
-        operation.visitLion(this);
-    }
+  accept(operation: AnimalOperation): void {
+    operation.visitLion(this);
+  }
 }
 
 class Dolphin implements Animal {
-    speak() {
-        console.log("Tuut tuttu tuutt!");
-    }
+  speak() {
+    console.log("Tuut tuttu tuutt!");
+  }
 
-    accept(operation: AnimalOperation): void {
-        operation.visitDolphin(this);
-    }
+  accept(operation: AnimalOperation): void {
+    operation.visitDolphin(this);
+  }
 }
 
 class Speak implements AnimalOperation {
-    visitMonkey(monkey: Monkey) {
-        monkey.shout();
-    }
+  visitMonkey(monkey: Monkey) {
+    monkey.shout();
+  }
 
-    visitLion(lion: Lion) {
-        lion.roar();
-    }
+  visitLion(lion: Lion) {
+    lion.roar();
+  }
 
-    visitDolphin(dolphin: Dolphin) {
-        dolphin.speak();
-    }
+  visitDolphin(dolphin: Dolphin) {
+    dolphin.speak();
+  }
 }
 
 const monkey = new Monkey();
@@ -10688,17 +10679,17 @@ lion.accept(speak); // Roaaar!
 dolphin.accept(speak); //Tuut tutt tuttt!
 
 class Jump implements AnimalOperation {
-    visitMonkey(monkey: Monkey): void {
-        console.log("Jumped 20 feet high! on to the tree!");
-    }
+  visitMonkey(monkey: Monkey): void {
+    console.log("Jumped 20 feet high! on to the tree!");
+  }
 
-    visitLion(lion: Lion): void {
-        console.log("Jumped 7 feet! back on the ground!");
-    }
+  visitLion(lion: Lion): void {
+    console.log("Jumped 7 feet! back on the ground!");
+  }
 
-    visitDolphin(dolphin: Dolphin): void {
-        console.log("Walked on water a little and disappeared");
-    }
+  visitDolphin(dolphin: Dolphin): void {
+    console.log("Walked on water a little and disappeared");
+  }
 }
 
 const jump = new Jump();
@@ -10787,12 +10778,12 @@ const dolphin = new Dolphin();
 const speak = new Speak();
 const jump = new Jump();
 
-monkey.accept(speak); 
-lion.accept(speak); 
-dolphin.accept(speak); 
+monkey.accept(speak);
+lion.accept(speak);
+dolphin.accept(speak);
 
 monkey.accept(jump);
-lion.accept(jump); 
+lion.accept(jump);
 dolphin.accept(jump);
 ```
 
@@ -11054,7 +11045,6 @@ $dolphin->accept($jump);   // Walked on water a little and disappeared
 
 </details>
 
-
 <details>
   <summary>Go</summary>
 
@@ -11139,7 +11129,6 @@ func main() {
 </div>
 
 </details>
-
 
 <details>
   <summary>Java</summary>
@@ -11425,10 +11414,10 @@ class Sorter {
 const dataset = [1, 5, 4, 3, 2, 8];
 
 const sorter = new Sorter(new BubbleSortStrategy());
-sorter.sort(dataset); 
+sorter.sort(dataset);
 
 const sorter2 = new Sorter(new QuickSortStrategy());
-sorter2.sort(dataset); 
+sorter2.sort(dataset);
 ```
 
 </div>
@@ -11495,7 +11484,6 @@ sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
 
 </details>
 
-
 <details>
 <summary>PHP</summary>
 
@@ -11545,7 +11533,6 @@ $sorter->sort($unSortedList); // Output : Sorting using Quick Sort !
 </div>
 
 </details>
-
 
 <details>
   <summary>Go</summary>
@@ -11751,17 +11738,17 @@ class TextEditor():
 # ----------------------------
 
 editor = TextEditor(DefaultText())
-editor.write('First Line') 
+editor.write('First Line')
 
 editor.setState(UpperCase())
 
-editor.write('Second Line') 
-editor.write('Third Line') 
+editor.write('Second Line')
+editor.write('Third Line')
 
 editor.setState(LowerCase())
 
-editor.write('Fourth Line') 
-editor.write('Fifth Line')  
+editor.write('Fourth Line')
+editor.write('Fifth Line')
 
 
 '''
@@ -11881,14 +11868,14 @@ class TextEditor {
 
 
 const editor = new TextEditor(new DefaultText());
-editor.type("First Line"); 
+editor.type("First Line");
 
 editor.setState(new UpperCase());
-editor.type("Second Line"); 
-editor.type("Third Line"); 
+editor.type("Second Line");
+editor.type("Third Line");
 
 editor.setState(new LowerCase());
-editor.type("Fourth Line"); 
+editor.type("Fourth Line");
 editor.type("Fifth Line")
 ```
 
@@ -12145,7 +12132,6 @@ func main() {
 </div>
 
 </details>
-
 
 <details>
   <summary>Java</summary>
@@ -12417,7 +12403,6 @@ iosBuilder.build();
 </div>
 </details>
 
-
 <details>
 <summary>JavaScript</summary>
 <div dir="ltr">
@@ -12432,19 +12417,19 @@ class Builder {
     }
 
     test() {
-      
+
     }
 
     lint() {
-        
+
     }
 
     assemble() {
-      
+
     }
 
     deploy() {
-      
+
     }
 }
 
@@ -12496,7 +12481,6 @@ iosBuilder.build();
 
 </div>
 </details>
-
 
 <details>
 <summary >#C</summary>
@@ -12691,9 +12675,8 @@ import (
 	"fmt"
 )
 
-// Builder interface
-type Builder interface {
-	Build()
+// Steps interface
+type Steps interface {
 	Test()
 	Lint()
 	Assemble()
@@ -12701,31 +12684,31 @@ type Builder interface {
 }
 
 // BaseBuilder provides default implementations
-type BaseBuilder struct{}
+type BaseBuilder struct{
+    self Steps
+}
+func (b *BaseBuilder) init(self Steps) {
+	b.self = self
+}
 
 // Build for BaseBuilder
 func (b *BaseBuilder) Build() {
-	b.Test()
-	b.Lint()
-	b.Assemble()
-	b.Deploy()
+	b.self.Test()
+	b.self.Lint()
+	b.self.Assemble()
+	b.self.Deploy()
 }
 
-// Test for BaseBuilder
-func (b *BaseBuilder) Test() {}
-
-// Lint for BaseBuilder
-func (b *BaseBuilder) Lint() {}
-
-// Assemble for BaseBuilder
-func (b *BaseBuilder) Assemble() {}
-
-// Deploy for BaseBuilder
-func (b *BaseBuilder) Deploy() {}
 
 // AndroidBuilder struct
 type AndroidBuilder struct {
 	BaseBuilder
+}
+
+func NewAndroidBuilder() *AndroidBuilder {
+	a := &AndroidBuilder{}
+	a.init(a)
+	return a
 }
 
 // Test for AndroidBuilder
@@ -12752,7 +12735,11 @@ func (a *AndroidBuilder) Deploy() {
 type IosBuilder struct {
 	BaseBuilder
 }
-
+func NewIosBuilder() *IosBuilder {
+	i := &IosBuilder{}
+	i.init(i)
+	return i
+}
 // Test for IosBuilder
 func (i *IosBuilder) Test() {
 	fmt.Println("Running ios tests")
@@ -12774,11 +12761,9 @@ func (i *IosBuilder) Deploy() {
 }
 
 func main() {
-	androidBuilder := &AndroidBuilder{}
-	androidBuilder.Build()
-
-	iosBuilder := &IosBuilder{}
-	iosBuilder.Build()
+	NewAndroidBuilder().Build()
+	fmt.Println("------")
+	NewIosBuilder().Build()
 }
 
 ```
@@ -12786,7 +12771,6 @@ func main() {
 </div>
 
 </details>
-
 
 <details>
   <summary>Java</summary>
@@ -12914,7 +12898,6 @@ iOSBuilder.build();
 - محمد عزیز که زحمت مثال های Java رو کشید.([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
 - سما عزیز که زحمت مثال های JavaScript رو کشید.([samazzz](https://github.com/samazzz))
 - مهسا، محمد و سجاد عزیز که زحمت بهبود کد هارو کشیدند.([MahsaMahdavian](https://github.com/MahsaMahdavian) / [MohammadMMoniri](https://github.com/MohammadMMoniri) / [ssmns](https://github.com/ssmns))
-
 
 </div>
 
