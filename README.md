@@ -503,6 +503,63 @@ System.out.println(door.getWidth());
 </div>
 </details>
 
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+
+// Door interface
+class Door {
+public:
+    virtual ~Door() = default;
+    virtual double getWidth() const = 0;
+    virtual double getHeight() const = 0;
+};
+
+// Wooden door implementation
+class WoodenDoor : public Door {
+private:
+    double width;
+    double height;
+
+public:
+    WoodenDoor(double width = 5.0, double height = 5.0) 
+        : width(width), height(height) {}
+    
+    double getWidth() const override {
+        return width;
+    }
+    
+    double getHeight() const override {
+        return height;
+    }
+};
+
+// Door factory
+class DoorFactory {
+public:
+    static Door* makeDoor(double width, double height) {
+        return new WoodenDoor(width, height);
+    }
+};
+
+// Usage
+int main() {
+    Door* door = DoorFactory::makeDoor(100, 200);
+    std::cout << "Width: " << door->getWidth() << std::endl;
+    std::cout << "Height: " << door->getHeight() << std::endl;
+    
+    delete door;
+    return 0;
+}
+```
+</div>
+</details>
+
 
 <br>
 
@@ -962,6 +1019,80 @@ devManager.takeInterview();
 
 MarketingManager marketingManager = new MarketingManager();
 marketingManager.takeInterview();
+```
+</div>
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <memory>
+
+// Interviewer interface
+class Interviewer {
+public:
+    virtual ~Interviewer() = default;
+    virtual void askQuestions() = 0;
+};
+
+// Developer interviewer
+class Developer : public Interviewer {
+public:
+    void askQuestions() override {
+        std::cout << "Asking about design patterns" << std::endl;
+    }
+};
+
+// Community executive interviewer
+class CommunityExecutive : public Interviewer {
+public:
+    void askQuestions() override {
+        std::cout << "Asking about community building" << std::endl;
+    }
+};
+
+// Abstract hiring manager
+class HiringManager {
+public:
+    virtual ~HiringManager() = default;
+    virtual std::unique_ptr<Interviewer> makeInterviewer() = 0;
+    
+    void takeInterview() {
+        auto interviewer = makeInterviewer();
+        interviewer->askQuestions();
+    }
+};
+
+// Development manager
+class DevelopmentManager : public HiringManager {
+public:
+    std::unique_ptr<Interviewer> makeInterviewer() override {
+        return std::make_unique<Developer>();
+    }
+};
+
+// Marketing manager
+class MarketingManager : public HiringManager {
+public:
+    std::unique_ptr<Interviewer> makeInterviewer() override {
+        return std::make_unique<CommunityExecutive>();
+    }
+};
+
+// Usage
+int main() {
+    DevelopmentManager devManager;
+    devManager.takeInterview(); // Output: Asking about design patterns
+    
+    MarketingManager marketingManager;
+    marketingManager.takeInterview(); // Output: Asking about community building
+    
+    return 0;
+}
 ```
 </div>
 </details>
@@ -1667,6 +1798,109 @@ ironDoor.GetDescription(); //Output : I am a iron door
 ironDoorFittingExpert.GetDescription(); //Output : I can only fit iron doors
 ```
 </div>
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <memory>
+
+// Door interface
+class Door {
+public:
+    virtual ~Door() = default;
+    virtual void getDescription() = 0;
+};
+
+// Wooden door
+class WoodenDoor : public Door {
+public:
+    void getDescription() override {
+        std::cout << "I am a wooden door" << std::endl;
+    }
+};
+
+// Iron door
+class IronDoor : public Door {
+public:
+    void getDescription() override {
+        std::cout << "I am an iron door" << std::endl;
+    }
+};
+
+// Door fitting expert interface
+class DoorFittingExpert {
+public:
+    virtual ~DoorFittingExpert() = default;
+    virtual void getDescription() = 0;
+};
+
+// Welder
+class Welder : public DoorFittingExpert {
+public:
+    void getDescription() override {
+        std::cout << "I can only fit iron doors" << std::endl;
+    }
+};
+
+// Carpenter
+class Carpenter : public DoorFittingExpert {
+public:
+    void getDescription() override {
+        std::cout << "I can only fit wooden doors" << std::endl;
+    }
+};
+
+// Door factory interface
+class DoorFactory {
+public:
+    virtual ~DoorFactory() = default;
+    virtual std::unique_ptr<Door> makeDoor() = 0;
+    virtual std::unique_ptr<DoorFittingExpert> makeFittingExpert() = 0;
+};
+
+// Wooden door factory
+class WoodenDoorFactory : public DoorFactory {
+public:
+    std::unique_ptr<Door> makeDoor() override {
+        return std::make_unique<WoodenDoor>();
+    }
+    
+    std::unique_ptr<DoorFittingExpert> makeFittingExpert() override {
+        return std::make_unique<Carpenter>();
+    }
+};
+
+// Iron door factory
+class IronDoorFactory : public DoorFactory {
+public:
+    std::unique_ptr<Door> makeDoor() override {
+        return std::make_unique<IronDoor>();
+    }
+    
+    std::unique_ptr<DoorFittingExpert> makeFittingExpert() override {
+        return std::make_unique<Welder>();
+    }
+};
+
+// Usage
+int main() {
+    IronDoorFactory ironDoorFactory;
+    auto ironDoor = ironDoorFactory.makeDoor();
+    auto ironDoorFittingExpert = ironDoorFactory.makeFittingExpert();
+    
+    ironDoor->getDescription(); // Output: I am an iron door
+    ironDoorFittingExpert->getDescription(); // Output: I can only fit iron doors
+    
+    return 0;
+}
+```
+</div>
+</details>
 
 **همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
@@ -2349,6 +2583,90 @@ System.out.println(burger.getDescription());
 </div>
 </details>
 
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+#include <memory>
+
+class Burger {
+private:
+    int size;
+    bool cheese;
+    bool pepperoni;
+    bool lettuce;
+    bool tomato;
+
+public:
+    Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
+        : size(size), cheese(cheese), pepperoni(pepperoni), lettuce(lettuce), tomato(tomato) {}
+    
+    std::string getDescription() const {
+        return "This is " + std::to_string(size) + " inch Burger.";
+    }
+};
+
+class BurgerBuilder {
+private:
+    int size = 0;
+    bool cheese = false;
+    bool pepperoni = false;
+    bool lettuce = false;
+    bool tomato = false;
+
+public:
+    BurgerBuilder& setSize(int size) {
+        this->size = size;
+        return *this;
+    }
+    
+    BurgerBuilder& addCheese(bool cheese = true) {
+        this->cheese = cheese;
+        return *this;
+    }
+    
+    BurgerBuilder& addPepperoni(bool pepperoni = true) {
+        this->pepperoni = pepperoni;
+        return *this;
+    }
+    
+    BurgerBuilder& addLettuce(bool lettuce = true) {
+        this->lettuce = lettuce;
+        return *this;
+    }
+    
+    BurgerBuilder& addTomato(bool tomato = true) {
+        this->tomato = tomato;
+        return *this;
+    }
+    
+    std::unique_ptr<Burger> build() {
+        return std::make_unique<Burger>(size, cheese, pepperoni, lettuce, tomato);
+    }
+};
+
+// Usage
+int main() {
+    auto burger = BurgerBuilder()
+        .setSize(10)
+        .addCheese(true)
+        .addPepperoni(true)
+        .addLettuce(false)
+        .addTomato(false)
+        .build();
+    
+    std::cout << burger->getDescription() << std::endl;
+    
+    return 0;
+}
+```
+</div>
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -2903,7 +3221,71 @@ System.out.println(mainComponent.getSomeString().equals(clonedComponent.getSomeS
 ```
 
 </div>
+</details>
 
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+#include <memory>
+
+class SomeComponent {
+private:
+    int someInt;
+    std::string someString;
+
+public:
+    SomeComponent() : someInt(0), someString("") {}
+    
+    SomeComponent(int someInt, const std::string& someString) 
+        : someInt(someInt), someString(someString) {}
+    
+    // Copy constructor for shallow copy
+    SomeComponent(const SomeComponent& other) 
+        : someInt(other.someInt), someString(other.someString) {}
+    
+    void setSomeInt(int value) { someInt = value; }
+    void setSomeString(const std::string& value) { someString = value; }
+    int getSomeInt() const { return someInt; }
+    const std::string& getSomeString() const { return someString; }
+    
+    // Shallow copy
+    SomeComponent copy() const {
+        return SomeComponent(*this);
+    }
+    
+    // Deep copy
+    SomeComponent deepCopy() const {
+        SomeComponent cloned;
+        cloned.setSomeInt(this->someInt);
+        cloned.setSomeString(this->someString);
+        return cloned;
+    }
+};
+
+// Usage
+int main() {
+    SomeComponent mainComponent;
+    mainComponent.setSomeInt(1);
+    mainComponent.setSomeString("main");
+    
+    SomeComponent copyComponent = mainComponent.copy();
+    SomeComponent clonedComponent = mainComponent.deepCopy();
+    
+    copyComponent.setSomeString("copy");
+    clonedComponent.setSomeString("clone");
+    
+    std::cout << (mainComponent.getSomeString() == copyComponent.getSomeString()) << std::endl;    // True
+    std::cout << (mainComponent.getSomeString() == clonedComponent.getSomeString()) << std::endl;  // False
+    
+    return 0;
+}
+```
+</div>
 </details>
 
 <br>
@@ -3215,7 +3597,62 @@ System.out.println(a == b); // True
 ```
 
 </div>
+</details>
 
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <mutex>
+
+class President {
+private:
+    static std::unique_ptr<President> instance;
+    static std::mutex mtx;
+    
+    // Private constructor
+    President() = default;
+    
+    // Delete copy constructor and assignment operator
+    President(const President&) = delete;
+    President& operator=(const President&) = delete;
+
+public:
+    static President& getInstance() {
+        std::lock_guard<std::mutex> lock(mtx);
+        if (!instance) {
+            instance = std::unique_ptr<President>(new President());
+        }
+        return *instance;
+    }
+    
+    void doSomething() {
+        std::cout << "President is doing something" << std::endl;
+    }
+};
+
+// Static member definitions
+std::unique_ptr<President> President::instance = nullptr;
+std::mutex President::mtx;
+
+// Usage
+int main() {
+    President& a = President::getInstance();
+    President& b = President::getInstance();
+    
+    std::cout << (&a == &b) << std::endl; // True
+    
+    a.doSomething();
+    b.doSomething();
+    
+    return 0;
+}
+```
+</div>
 </details>
 
 <br>
@@ -3713,7 +4150,81 @@ hunter.Hunt(wildDogAdapter);
 ```
 
 </div>
+</details>
 
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+
+// Lion interface
+class Lion {
+public:
+    virtual ~Lion() = default;
+    virtual void roar() = 0;
+};
+
+// African lion
+class AfricanLion : public Lion {
+public:
+    void roar() override {
+        std::cout << "African Lion: Roar!" << std::endl;
+    }
+};
+
+// Asian lion
+class AsianLion : public Lion {
+public:
+    void roar() override {
+        std::cout << "Asian Lion: Roar!" << std::endl;
+    }
+};
+
+// Wild dog (incompatible interface)
+class WildDog {
+public:
+    void bark() {
+        std::cout << "Wild Dog: Bark!" << std::endl;
+    }
+};
+
+// Adapter to make WildDog compatible with Lion interface
+class WildDogAdapter : public Lion {
+private:
+    WildDog* dog;
+
+public:
+    WildDogAdapter(WildDog* dog) : dog(dog) {}
+    
+    void roar() override {
+        dog->bark();
+    }
+};
+
+// Hunter class
+class Hunter {
+public:
+    void hunt(Lion* lion) {
+        lion->roar();
+    }
+};
+
+// Usage
+int main() {
+    WildDog wildDog;
+    WildDogAdapter wildDogAdapter(&wildDog);
+    
+    Hunter hunter;
+    hunter.hunt(&wildDogAdapter);
+    
+    return 0;
+}
+```
+</div>
 </details>
 
 <br>
@@ -4252,7 +4763,95 @@ System.out.println(careers.getContent());   // Careers page in Light theme
 ```
 
 </div>
+</details>
 
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+#include <memory>
+
+// Theme interface (Implementor)
+class Theme {
+public:
+    virtual ~Theme() = default;
+    virtual std::string getColor() = 0;
+};
+
+// Dark theme implementation
+class DarkTheme : public Theme {
+public:
+    std::string getColor() override {
+        return "Dark Black";
+    }
+};
+
+// Light theme implementation
+class LightTheme : public Theme {
+public:
+    std::string getColor() override {
+        return "Off White";
+    }
+};
+
+// Aqua theme implementation
+class AquaTheme : public Theme {
+public:
+    std::string getColor() override {
+        return "Light Blue";
+    }
+};
+
+// Web page abstraction
+class WebPage {
+protected:
+    std::unique_ptr<Theme> theme;
+
+public:
+    WebPage(std::unique_ptr<Theme> theme) : theme(std::move(theme)) {}
+    virtual ~WebPage() = default;
+    virtual std::string getContent() = 0;
+};
+
+// About page
+class About : public WebPage {
+public:
+    About(std::unique_ptr<Theme> theme) : WebPage(std::move(theme)) {}
+    
+    std::string getContent() override {
+        return "About page in " + theme->getColor() + " theme";
+    }
+};
+
+// Careers page
+class Careers : public WebPage {
+public:
+    Careers(std::unique_ptr<Theme> theme) : WebPage(std::move(theme)) {}
+    
+    std::string getContent() override {
+        return "Careers page in " + theme->getColor() + " theme";
+    }
+};
+
+// Usage
+int main() {
+    auto darkTheme = std::make_unique<DarkTheme>();
+    auto lightTheme = std::make_unique<LightTheme>();
+    
+    About about(std::make_unique<DarkTheme>());
+    Careers careers(std::make_unique<LightTheme>());
+    
+    std::cout << about.getContent() << std::endl;     // About page in Dark Black theme
+    std::cout << careers.getContent() << std::endl;   // Careers page in Off White theme
+    
+    return 0;
+}
+```
+</div>
 </details>
 
 <br>
@@ -4872,7 +5471,98 @@ System.out.println("Organization employees salary : " + organization.getNetSalar
 ```
 
 </div>
+</details>
 
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+#include <memory>
+
+// Employee interface
+class Employee {
+public:
+    virtual ~Employee() = default;
+    virtual std::string getName() const = 0;
+    virtual double getSalary() const = 0;
+};
+
+// Developer class
+class Developer : public Employee {
+private:
+    std::string name;
+    double salary;
+
+public:
+    Developer(const std::string& name, double salary) : name(name), salary(salary) {}
+    
+    std::string getName() const override {
+        return name;
+    }
+    
+    double getSalary() const override {
+        return salary;
+    }
+};
+
+// Designer class
+class Designer : public Employee {
+private:
+    std::string name;
+    double salary;
+
+public:
+    Designer(const std::string& name, double salary) : name(name), salary(salary) {}
+    
+    std::string getName() const override {
+        return name;
+    }
+    
+    double getSalary() const override {
+        return salary;
+    }
+};
+
+// Organization class (Composite)
+class Organization {
+private:
+    std::vector<std::unique_ptr<Employee>> employees;
+
+public:
+    void addEmployee(std::unique_ptr<Employee> employee) {
+        employees.push_back(std::move(employee));
+    }
+    
+    double getNetSalaries() const {
+        double total = 0.0;
+        for (const auto& employee : employees) {
+            total += employee->getSalary();
+        }
+        return total;
+    }
+};
+
+// Usage
+int main() {
+    auto developer = std::make_unique<Developer>("John", 5000);
+    auto designer = std::make_unique<Designer>("Arya", 5000);
+    
+    Organization organization;
+    organization.addEmployee(std::move(developer));
+    organization.addEmployee(std::move(designer));
+    
+    std::cout << "Organization employees salary : " << organization.getNetSalaries() << std::endl;
+    // Organization employees salary : 10000.0
+    
+    return 0;
+}
+```
+</div>
 </details>
 
 <br>
@@ -5594,7 +6284,103 @@ System.out.println(vanillaCoffee.getDescription()); // Simple Coffee, Milk, Whip
 ```
 
 </div>
+</details>
 
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+#include <memory>
+
+// Coffee interface
+class Coffee {
+public:
+    virtual ~Coffee() = default;
+    virtual double getCost() const = 0;
+    virtual std::string getDescription() const = 0;
+};
+
+// Simple coffee
+class SimpleCoffee : public Coffee {
+public:
+    double getCost() const override {
+        return 10.0;
+    }
+    
+    std::string getDescription() const override {
+        return "Simple Coffee";
+    }
+};
+
+// Coffee decorator base class
+class CoffeeDecorator : public Coffee {
+protected:
+    std::unique_ptr<Coffee> coffee;
+
+public:
+    CoffeeDecorator(std::unique_ptr<Coffee> coffee) : coffee(std::move(coffee)) {}
+};
+
+// Milk decorator
+class MilkCoffee : public CoffeeDecorator {
+public:
+    MilkCoffee(std::unique_ptr<Coffee> coffee) : CoffeeDecorator(std::move(coffee)) {}
+    
+    double getCost() const override {
+        return coffee->getCost() + 2.0;
+    }
+    
+    std::string getDescription() const override {
+        return coffee->getDescription() + ", Milk";
+    }
+};
+
+// Whip decorator
+class WhipCoffee : public CoffeeDecorator {
+public:
+    WhipCoffee(std::unique_ptr<Coffee> coffee) : CoffeeDecorator(std::move(coffee)) {}
+    
+    double getCost() const override {
+        return coffee->getCost() + 5.0;
+    }
+    
+    std::string getDescription() const override {
+        return coffee->getDescription() + ", Whip";
+    }
+};
+
+// Vanilla decorator
+class VanillaCoffee : public CoffeeDecorator {
+public:
+    VanillaCoffee(std::unique_ptr<Coffee> coffee) : CoffeeDecorator(std::move(coffee)) {}
+    
+    double getCost() const override {
+        return coffee->getCost() + 3.0;
+    }
+    
+    std::string getDescription() const override {
+        return coffee->getDescription() + ", Vanilla";
+    }
+};
+
+// Usage
+int main() {
+    auto someCoffee = std::make_unique<SimpleCoffee>();
+    auto milkCoffee = std::make_unique<MilkCoffee>(std::move(someCoffee));
+    auto whipCoffee = std::make_unique<WhipCoffee>(std::move(milkCoffee));
+    auto vanillaCoffee = std::make_unique<VanillaCoffee>(std::move(whipCoffee));
+    
+    std::cout << "$" << vanillaCoffee->getCost() << std::endl; // $20
+    std::cout << vanillaCoffee->getDescription() << std::endl; // Simple Coffee, Milk, Whip, Vanilla
+    
+    return 0;
+}
+```
+</div>
 </details>
 
 <br>
@@ -10463,7 +11249,95 @@ jobPostings.addJob(new JobPost("Software Engineer at IBM"));
 ```
 
 </div>
+</details>
 
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+#include <memory>
+#include <algorithm>
+
+// Job post class
+class JobPost {
+private:
+    std::string title;
+
+public:
+    JobPost(const std::string& title) : title(title) {}
+    
+    std::string getTitle() const {
+        return title;
+    }
+};
+
+// Observer interface
+class JobSeeker {
+private:
+    std::string name;
+
+public:
+    JobSeeker(const std::string& name) : name(name) {}
+    
+    void onJobPosted(const JobPost& job) {
+        std::cout << "Hi " << name << "! New job posted: " << job.getTitle() << std::endl;
+    }
+    
+    std::string getName() const {
+        return name;
+    }
+};
+
+// Subject class
+class JobCategory {
+private:
+    std::vector<std::shared_ptr<JobSeeker>> observers;
+
+public:
+    void attach(std::shared_ptr<JobSeeker> observer) {
+        observers.push_back(observer);
+    }
+    
+    void detach(std::shared_ptr<JobSeeker> observer) {
+        observers.erase(
+            std::remove(observers.begin(), observers.end(), observer),
+            observers.end()
+        );
+    }
+    
+    void notify(const JobPost& jobPosting) {
+        for (auto& observer : observers) {
+            observer->onJobPosted(jobPosting);
+        }
+    }
+    
+    void addJob(const JobPost& jobPosting) {
+        notify(jobPosting);
+    }
+};
+
+// Usage
+int main() {
+    auto johnDoe = std::make_shared<JobSeeker>("John Doe");
+    auto janeDoe = std::make_shared<JobSeeker>("Jane Doe");
+    
+    JobCategory jobPostings;
+    jobPostings.attach(janeDoe);
+    jobPostings.attach(johnDoe);
+    
+    jobPostings.addJob(JobPost("Software Engineer at IBM"));
+    // Hi Jane Doe! New job posted: Software Engineer at IBM
+    // Hi John Doe! New job posted: Software Engineer at IBM
+    
+    return 0;
+}
+```
+</div>
 </details>
 
 <br>
