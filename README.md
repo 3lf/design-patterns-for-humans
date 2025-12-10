@@ -510,7 +510,6 @@ System.out.println(door.getWidth());
 
 ```cpp
 #include <iostream>
-#include <string>
 
 // Door interface
 class Door {
@@ -3279,8 +3278,8 @@ int main() {
     copyComponent.setSomeString("copy");
     clonedComponent.setSomeString("clone");
     
-    std::cout << (mainComponent.getSomeString() == copyComponent.getSomeString()) << std::endl;    // True
-    std::cout << (mainComponent.getSomeString() == clonedComponent.getSomeString()) << std::endl;  // False
+    std::cout << (mainComponent.getSomeString() == copyComponent.getSomeString()) << std::endl;    // 0
+    std::cout << (mainComponent.getSomeString() == clonedComponent.getSomeString()) << std::endl;  // 0
     
     return 0;
 }
@@ -4159,7 +4158,6 @@ hunter.Hunt(wildDogAdapter);
 
 ```cpp
 #include <iostream>
-#include <string>
 
 // Lion interface
 class Lion {
@@ -4839,9 +4837,6 @@ public:
 
 // Usage
 int main() {
-    auto darkTheme = std::make_unique<DarkTheme>();
-    auto lightTheme = std::make_unique<LightTheme>();
-    
     About about(std::make_unique<DarkTheme>());
     Careers careers(std::make_unique<LightTheme>());
     
@@ -13787,6 +13782,7 @@ iOSBuilder.build();
 - عاطفه عزیز که زحمت مثال های Golang رو کشید.([atefeh-komeyli](https://github.com/atefeh-komeyli))
 - محمد عزیز که زحمت مثال های Java رو کشید.([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
 - سما عزیز که زحمت مثال های JavaScript رو کشید.([samazzz](https://github.com/samazzz))
+- محسن عزیز که زحمت مثال های C++ رو کشید.([Serajian](https://github.com/Serajian))
 - مهسا، محمد و سجاد عزیز که زحمت بهبود کد هارو کشیدند.([MahsaMahdavian](https://github.com/MahsaMahdavian) / [MohammadMMoniri](https://github.com/MohammadMMoniri) / [ssmns](https://github.com/ssmns))
 
 
