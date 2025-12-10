@@ -197,7 +197,7 @@ class DoorFactory:
         return WoodenDoor(width, height)
 
 
-----------------------------
+# ----------------------------
 door = DoorFactory.makeDoor(10, 10)
 print(door.getHeight())
 print(door.getWidth())
@@ -246,7 +246,7 @@ class DoorFactory {
     }
 }
 
-----------------------------
+// ----------------------------
 
 let door = DoorFactory.makeDoor(10, 10);
 console.log(door.getHeight());
@@ -304,7 +304,7 @@ console.log(door.getWidth());
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -320,10 +320,10 @@ public class WoodenDoor : IDoor
     private int Height { get; set; }
     private int Width { get; set; }
 
-    public WoodenDoor(int height, int width)
+    public WoodenDoor(int width, int height)
     {
-        this.Height = height;
         this.Width = width;
+        this.Height = height;
     }
 
     public int GetHeight()
@@ -338,14 +338,14 @@ public class WoodenDoor : IDoor
 
 public static class DoorFactory
 {
-    public static IDoor MakeDoor(int height, int width)
+    public static IDoor MakeDoor(int width, int height)
     {
-        return new WoodenDoor(height, width);
+        return new WoodenDoor(width, height);
     }
 }
 
 
-----------------------------
+// ----------------------------
 
 var door = DoorFactory.MakeDoor(80, 30);
 Console.WriteLine($"Height of Door : {door.GetHeight()}");
@@ -357,7 +357,7 @@ Console.WriteLine($"Width of Door : {door.GetWidth()}");
 </details>
 
 <details>
-<summary >PHP</summary>
+<summary>PHP</summary>
 
 <div dir="ltr">
 
@@ -368,12 +368,12 @@ interface DoorInterface {
 }
 
 class WoodenDoor implements DoorInterface {
-    private $height;
     private $width;
+    private $height;
 
-    public function __construct($height, $width) {
-        $this->height = $height;
+    public function __construct($width, $height) {
         $this->width = $width;
+        $this->height = $height;
     }
 
     public function getHeight() {
@@ -385,8 +385,8 @@ class WoodenDoor implements DoorInterface {
 }
 
 class DoorFactory {
-    public static function makeDoor($height, $width) {
-        return new woodenDoor($height, $width);
+    public static function makeDoor($width, $height) {
+        return new WoodenDoor($width, $height);
     }
 }
 
@@ -401,7 +401,7 @@ echo "Width of Door : " . $door->getWidth() . "\n";
 </details>
 
 <details>
-<summary >Go</summary>
+<summary>Go</summary>
 
 <div dir="ltr">
 
@@ -416,12 +416,12 @@ type Door interface {
 }
 
 type WoodenDoor struct {
-	height int
 	width  int
+	height int
 }
 
-func NewWoodenDoor(height, width int) *WoodenDoor {
-	return &WoodenDoor{height: height, width: width}
+func NewWoodenDoor(width, height int) *WoodenDoor {
+	return &WoodenDoor{width: width, height: height}
 }
 
 func (w *WoodenDoor) getHeight() int {
@@ -434,8 +434,8 @@ func (w *WoodenDoor) getWidth() int {
 
 type DoorFactory struct{}
 
-func (df *DoorFactory) makeDoor(height, width int) Door {
-	return NewWoodenDoor(height, width)
+func (df *DoorFactory) makeDoor(width, height int) Door {
+	return NewWoodenDoor(width, height)
 }
 
 func main() {
@@ -494,7 +494,7 @@ public class DoorFactory {
     }
 }
 
-----------------------------
+// ----------------------------
 
 Door door = DoorFactory.makeDoor(10, 10);
 System.out.println(door.getHeight());
@@ -642,7 +642,7 @@ class MarketingManager(HiringManager):
         return CommunityExecutive()
 
 
-----------------------------
+# ----------------------------
 
 devManager = DevelopmentManager()
 devManager.takeInterview()
@@ -759,7 +759,7 @@ marketingManager.takeInterview();
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -814,7 +814,7 @@ class MarketingManager : HiringManager
 }
 
 
-----------------------------
+// ----------------------------
 
 var devManager = new DevelopmentManager();
 devManager.TakeInterview(); //Output : Asking about design patterns!
@@ -1011,7 +1011,7 @@ class MarketingManager extends HiringManager {
   }
 }
 
-----------------------------
+// ----------------------------
 
 DevelopmentManager devManager = new DevelopmentManager();
 devManager.takeInterview();
@@ -1212,7 +1212,7 @@ class IronDoorFactory(DoorFactory):
         return Welder()
 
 
-----------------------------
+# ----------------------------
 
 woodenFactory = WoodenDoorFactory()
 
@@ -1222,7 +1222,7 @@ expert = woodenFactory.makeFittingExpert()
 door.getDescription()
 expert.getDescription()
 
-----------------------------
+# ----------------------------
 
 ironFactory = IronDoorFactory()
 
@@ -1304,7 +1304,7 @@ class IronDoorFactory extends DoorFactory {
         return new Welder();
     }
 }
-----------------------------
+// ----------------------------
 
 let woodenFactory = new WoodenDoorFactory();
 
@@ -1314,7 +1314,7 @@ let expert = woodenFactory.makeFittingExpert();
 door.getDescription();
 expert.getDescription();
 
-----------------------------
+// ----------------------------
 
 let ironFactory = new IronDoorFactory();
 
@@ -1418,7 +1418,7 @@ expert.getDescription();
 
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -1498,7 +1498,7 @@ class IronDoorFactory : IDoorFactory
     return new Welder();
   }
 }
-----------------------------
+// ----------------------------
 var woodenDoorFactory = new WoodenDoorFactory();
 
 var woodenDoor = woodenDoorFactory.MakeDoor();
@@ -1507,7 +1507,7 @@ var woodenDoorFittingExpert = woodenDoorFactory.MakeFittingExpert();
 woodenDoor.GetDescription(); //Output : I am a wooden door
 woodenDoorFittingExpert.GetDescription();//Output : I can only fit woooden doors
 
-----------------------------
+// ----------------------------
 
 var ironDoorFactory = new IronDoorFactory();
 
@@ -1787,14 +1787,21 @@ class IronDoorFactory implements DoorFactory {
     }
 }
 
------
+// ----------------------------
+
+WoodenDoorFactory woodenDoorFactory = new WoodenDoorFactory();
+WoodenDoor woodenDoor = woodenDoorFactory.makeDoor();
+Carpenter carpenter = woodenDoorFactory.makeFittingExpert();
+
+woodenDoor.getDescription(); // Output: I am a wooden door
+carpenter.getDescription(); // Output: I can only fit wooden doors
 
 IronDoorFactory ironDoorFactory = new IronDoorFactory();
-IronDoor ironDoor = ironDoorFactory.MakeDoor();
-IronDoorFittingExpert ironDoorFittingExpert = ironDoorFactory.MakeFittingExpert();
+IronDoor ironDoor = ironDoorFactory.makeDoor();
+Welder welder = ironDoorFactory.makeFittingExpert();
 
-ironDoor.GetDescription(); //Output : I am a iron door
-ironDoorFittingExpert.GetDescription(); //Output : I can only fit iron doors
+ironDoor.getDescription(); // Output: I am an iron door
+welder.getDescription(); // Output: I can only fit iron doors
 ```
 </div>
 </details>
@@ -1905,8 +1912,6 @@ int main() {
 درب
 انتخاب نمی‌کنیم.**
 
-</details>
-
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -1977,7 +1982,7 @@ constructor(size, cheese = true, pepperoni = true, tomato = false, lettuce = tru
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -2108,7 +2113,7 @@ class BurgerBuilder:
         return Burger(self)
 
 
-----------------------------
+# ----------------------------
 
 burger = BurgerBuilder(10).addPepperoni().addLettuce().addTomato().build()
 
@@ -2178,7 +2183,7 @@ class BurgerBuilder {
     }
 }
 
-----------------------------
+// ----------------------------
 
 let burger = new BurgerBuilder(10)
     .addPepperoni()
@@ -2258,7 +2263,7 @@ console.log(Object.keys(burger));
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -2330,7 +2335,7 @@ class BurgerBuilder {
   }
 }
 
-----------------------------
+// ----------------------------
 
 var burger = new BurgerBuilder(4).AddCheese()
                                 .AddPepperoni()
@@ -2567,7 +2572,7 @@ class BurgerBuilder {
     }
 }
 
-----------------------------
+// ----------------------------
 
 Burger burger = Burger.builder()
         .size(10)
@@ -2790,7 +2795,7 @@ class SomeComponent {
     }
 }
 
-------------------------------
+// ------------------------------
 
 let component = new SomeComponent(1, [1,2,3], {x : 1});
 let copyComponent = component.copy();
@@ -2804,7 +2809,7 @@ component.someCircularRef.y = 6;
 console.log(copyComponent.someListOfObjects)    // [ 1, 2, 3, 4 ]
 console.log(copyComponent.someCircularRef)      // { x: 1, y: 6 }
 
-------------------------------
+// ------------------------------
 let component2 = new SomeComponent(1, [1,2,3], {x : 1});
 let copyComponent2 = component2.deepCopy();
 
@@ -2886,7 +2891,7 @@ console.log(copyComponent2.someCircularRef);     // { x: 1 }
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -2911,7 +2916,7 @@ public class SomeComponent
     }
 }
 
-----------------------------
+// ----------------------------
 
 SomeComponent c1 = new SomeComponent();
 c1.someInt = 1;
@@ -3203,7 +3208,7 @@ class SomeComponent implements Cloneable {
     }
 }
 
-----------------------------
+// ----------------------------
 
 SomeComponent mainComponent = new SomeComponent();
 mainComponent.setSomeInt(1);
@@ -3378,29 +3383,30 @@ if __name__ == "__main__":
 <div dir="ltr">
 
 ```typescript
-class SingletonMeta extends Function {
-    static _instances: { [key: string]: any } = {};
+class Singleton {
+    private static instance: Singleton;
 
-    constructor(...args: any[]) {
-        const instance = super(...args);
-        const className = this.constructor.name;
-        if (!SingletonMeta._instances[className]) {
-            SingletonMeta._instances[className] = instance;
+    private constructor() {
+        // Private constructor prevents direct instantiation
+    }
+
+    public static getInstance(): Singleton {
+        if (!Singleton.instance) {
+            Singleton.instance = new Singleton();
         }
-        return SingletonMeta._instances[className];
+        return Singleton.instance;
     }
-}
 
-class Singleton extends SingletonMeta {
     someBusinessLogic() {
-        // implementation
+        console.log("Executing some business logic...");
     }
 }
 
-----------------------------
+// ----------------------------
 
 const s1 = Singleton.getInstance();
 const s2 = Singleton.getInstance();
+
 if (Object.is(s1, s2)) {
     console.log("Singleton works, both variables contain the same instance.");
 } else {
@@ -3462,7 +3468,7 @@ s1.someBusinessLogic();
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -3487,7 +3493,7 @@ public class President
   }
 }
 
-----------------------------
+// ----------------------------
 
 President a = President.GetInstance();
 President b = President.GetInstance();
@@ -3553,7 +3559,7 @@ func GetInstance() *President {
   return instance
 }
 
------------------------
+// -----------------------
 
 a := GetInstance()
 b := GetInstance()
@@ -3587,7 +3593,7 @@ class President {
     }
 }
 
-----------------------------
+// ----------------------------
 
 President a = President.getInstance();
 President b = President.getInstance();
@@ -3772,7 +3778,7 @@ class WildDogAdapter(Lion):
         self._dog.bark()
 
 
-----------------------------
+# ----------------------------
 
 wildDog = WildDog()
 wildDogAdapter = WildDogAdapter(wildDog)
@@ -3829,7 +3835,7 @@ class WildDogAdapter implements Lion {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const wildDog = new WildDog();
 const wildDogAdapter = new WildDogAdapter(wildDog);
@@ -3899,7 +3905,7 @@ hunter.hunt(wildDogAdapter);
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -3955,7 +3961,7 @@ class WildDogAdapter : ILion
   }
 }
 
-----------------------------
+// ----------------------------
 
 var wildDog = new WildDog();
 var wildDogAdapter = new WildDogAdapter(wildDog);
@@ -4139,7 +4145,7 @@ class WildDogAdapter implements Lion {
     }
 }
 
-----------------------------
+// ----------------------------
 
 WildDog wildDog = new WildDog();
 WildDogAdapter wildDogAdapter = new WildDogAdapter(wildDog);
@@ -4316,7 +4322,7 @@ class AquaTheme(Theme):
         return 'Light Blue'
 
 
-----------------------------
+# ----------------------------
 
 darkTheme = DarkTheme()
 
@@ -4384,7 +4390,7 @@ class AquaTheme extends Theme {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const darkTheme = new DarkTheme();
 
@@ -4465,7 +4471,7 @@ console.log(careers.getContent());
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -4536,7 +4542,7 @@ class AquaTheme : ITheme
   }
 }
 
-----------------------------
+// ----------------------------
 
 var darkTheme = new DarkTheme();
 var lightTheme = new LightTheme();
@@ -4544,8 +4550,8 @@ var lightTheme = new LightTheme();
 var about= new About(darkTheme);
 var careers = new Careers(lightTheme);
 
-Console.WriteLine(about.GetContent()); //Output: About page in Dark Black
-Console.WriteLine(careers.GetContent()); //Output: Careers page in Off White
+Console.WriteLine(about.GetContent()); // Output: About page in Dark Black
+Console.WriteLine(careers.GetContent()); // Output: Careers page in Off White
 
 ```
 
@@ -4614,8 +4620,8 @@ $lightTheme = new LightTheme();
 $about = new About($darkTheme);
 $careers = new Careers($lightTheme);
 
-echo $about->getColor() . "\n"; //Output: About page in Dark Black
-echo $careers->getColor() . "\n"; //Output: Careers page in Off White
+echo $about->getColor() . "\n"; // Output: About page in Dark Black
+echo $careers->getColor() . "\n"; // Output: Careers page in Off White
 
 ```
 
@@ -4748,7 +4754,7 @@ class LightTheme implements Theme {
     }
 }
 
-----------------------------
+// ----------------------------
     
 DarkTheme darkTheme = new DarkTheme();
 LightTheme lightTheme = new LightTheme();
@@ -4940,7 +4946,7 @@ class Composite(Component):
         return f"Branch({'+'.join(results)})"
 
 
-----------------------------
+# ----------------------------
 
 tree = Composite()
 
@@ -5005,7 +5011,7 @@ class Composite implements Component {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const tree = new Composite();
 
@@ -5087,7 +5093,7 @@ console.log(`RESULT: ${tree.operation()}`);
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -5181,7 +5187,7 @@ class Organization
   }
 }
 
-----------------------------
+// ----------------------------
 
 //Arrange Employees, Organization and add employees
 var developer = new Developer("John", 5000);
@@ -5369,7 +5375,7 @@ func main() {
     organization.AddEmployee(designer)
 
     fmt.Printf("Net Salary of Employees in Organization is %v\n", organization.GetNetSalaries())
-    //Output: Net Salary of Employees in Organization is 10000
+    // Output: Net Salary of Employees in Organization is 10000
 }
 
 ```
@@ -5452,7 +5458,7 @@ class Organization {
     }
 }
 
-----------------------------
+// ----------------------------
 
 Developer developer = new Developer("John",5000);
 Designer designer = new Designer("Arya",5000);
@@ -5666,7 +5672,7 @@ class VanillaCoffee(Coffee):
         return self._coffee.getDescription() + ', vanilla'
 
 
-----------------------------
+# ----------------------------
 
 someCoffee = SimpleCoffee()
 print(someCoffee.getCost())
@@ -5761,7 +5767,7 @@ class VanillaCoffee extends Coffee {
     }
 }
 
-----------------------------
+// ----------------------------
 
 let someCoffee = new SimpleCoffee();
 console.log(someCoffee.getCost());
@@ -5875,7 +5881,7 @@ console.log(someCoffee.getDescription());
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -5958,7 +5964,7 @@ class VanillaCoffee : ICoffee
 }
 
 
-----------------------------
+// ----------------------------
 
 var myCoffee = new SimpleCoffee();
 Console.WriteLine($"{myCoffee.GetCost():c}"); // $ 5.00
@@ -6259,7 +6265,7 @@ class VanillaCoffee implements Coffee {
     }
 }
 
-----------------------------
+// ----------------------------
 
 SimpleCoffee simpleCoffee = new SimpleCoffee();
 System.out.println("$" + simpleCoffee.getCost()); // $5
@@ -6464,7 +6470,7 @@ class ComputerFacade:
         self.computer.sooth()
 
 
-----------------------------
+# ----------------------------
 
 computer = ComputerFacade(Computer())
 computer.turnOn()
@@ -6489,7 +6495,7 @@ Zzzzz
 
 <details>
 
-<summary>TypeScript</summary>
+<summary>Typescript</summary>
 
 <div dir="ltr">
 
@@ -6549,7 +6555,7 @@ class ComputerFacade {
     }
 }
 
-----------------------------
+// ----------------------------
 
     let
 computer = new ComputerFacade(new Computer());
@@ -6631,7 +6637,7 @@ computer.turnOff();
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -6701,7 +6707,7 @@ class ComputerFacade
   }
 }
 
-----------------------------
+// ----------------------------
 
 var computer = new ComputerFacade(new Computer());
 computer.TurnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
@@ -6931,13 +6937,89 @@ class ComputerFacade {
     }
 }
 
-----------------------------
+// ----------------------------
 
 ComputerFacade computer = new ComputerFacade(new Computer());
 computer.turnOn();      // Ouch! Beep beep! Loading.. Ready to be used!
 System.out.println();
 computer.turnOff();     // Bup bup buzzz! Haah! Zzzzz
 System.out.println();
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+
+class Computer {
+public:
+    void getElectricShock() {
+        std::cout << "Ouch!" << std::endl;
+    }
+
+    void makeSound() {
+        std::cout << "Beep beep!" << std::endl;
+    }
+
+    void showLoadingScreen() {
+        std::cout << "Loading.." << std::endl;
+    }
+
+    void bam() {
+        std::cout << "Ready to be used!" << std::endl;
+    }
+
+    void closeEverything() {
+        std::cout << "Bup bup bup buzzzz!" << std::endl;
+    }
+
+    void sooth() {
+        std::cout << "Zzzzz" << std::endl;
+    }
+
+    void pullCurrent() {
+        std::cout << "Haaah!" << std::endl;
+    }
+};
+
+class ComputerFacade {
+private:
+    Computer& computer;
+
+public:
+    ComputerFacade(Computer& comp) : computer(comp) {}
+
+    void turnOn() {
+        computer.getElectricShock();
+        computer.makeSound();
+        computer.showLoadingScreen();
+        computer.bam();
+    }
+
+    void turnOff() {
+        computer.closeEverything();
+        computer.pullCurrent();
+        computer.sooth();
+    }
+};
+
+// ----------------------------
+
+int main() {
+    Computer comp;
+    ComputerFacade computer(comp);
+    computer.turnOn();      // Ouch! Beep beep! Loading.. Ready to be used!
+    std::cout << std::endl;
+    computer.turnOff();     // Bup bup buzzz! Haah! Zzzzz
+    return 0;
+}
 ```
 
 </div>
@@ -7017,7 +7099,7 @@ class TeaShop:
             print("Serving tea to table #" + str(table))
 
 
-----------------------------
+# ----------------------------
 
 teaMaker = TeaMaker()
 shop = TeaShop(teaMaker)
@@ -7076,7 +7158,7 @@ class TeaShop {
     }
 }
 
-----------------------------
+// ----------------------------
 
     let
 teaMaker = new TeaMaker();
@@ -7157,7 +7239,7 @@ shop.serve();
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -7208,7 +7290,7 @@ class TeaShop
   }
 }
 
-----------------------------
+// ----------------------------
 
 var teaMaker = new TeaMaker();
 var teaShop = new TeaShop(teaMaker);
@@ -7342,7 +7424,7 @@ func (ts *TeaShop) Serve() {
         fmt.Printf("Serving Tea to table # %d\n", table)
     }
 }
----------------------------
+// ---------------------------
 teaMaker := &TeaMaker{}
 teaShop := NewTeaShop(teaMaker)
 
@@ -7405,7 +7487,7 @@ class TeaShop {
     }
 }
 
-----------------------------
+// ----------------------------
 
 TeaMaker teaMaker = new TeaMaker();
 TeaShop teaShop = new TeaShop(teaMaker);
@@ -7418,6 +7500,74 @@ teaShop.serve();
 // Serving tea to table 1
 // Serving tea to table 2
 // Serving tea to table 5
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <unordered_map>
+#include <string>
+
+class KarakTea {
+    // Tea implementation
+};
+
+class TeaMaker {
+private:
+    std::unordered_map<std::string, KarakTea*> availableTea;
+
+public:
+    KarakTea* make(const std::string& preference) {
+        if (availableTea.find(preference) == availableTea.end()) {
+            availableTea[preference] = new KarakTea();
+        }
+        return availableTea[preference];
+    }
+};
+
+class TeaShop {
+private:
+    std::unordered_map<int, KarakTea*> orders;
+    TeaMaker& teaMaker;
+
+public:
+    TeaShop(TeaMaker& maker) : teaMaker(maker) {}
+
+    void takeOrder(const std::string& teaType, int table) {
+        orders[table] = teaMaker.make(teaType);
+    }
+
+    void serve() {
+        for (const auto& order : orders) {
+            std::cout << "Serving tea to table " << order.first << std::endl;
+        }
+    }
+};
+
+// ----------------------------
+
+int main() {
+    TeaMaker teaMaker;
+    TeaShop teaShop(teaMaker);
+
+    teaShop.takeOrder("less sugar", 1);
+    teaShop.takeOrder("more milk", 2);
+    teaShop.takeOrder("without sugar", 5);
+
+    teaShop.serve();
+    // Serving tea to table 1
+    // Serving tea to table 2
+    // Serving tea to table 5
+    return 0;
+}
 ```
 
 </div>
@@ -7503,7 +7653,7 @@ class SecuredDoor():
         self.door.close()
 
 
-----------------------------
+# ----------------------------
 
 door = SecuredDoor(LabDoor())
 door.open('invalid')  # Big no! It ain't possible
@@ -7561,7 +7711,7 @@ class SecuredDoor {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const door = new SecuredDoor(new LabDoor());
 door.open("invalid"); // Big no! It ain't possible
@@ -7622,7 +7772,7 @@ door.close();
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -7679,7 +7829,7 @@ class SecuredDoor : IDoor
   }
 }
 
-----------------------------
+// ----------------------------
 
 var door = new SecuredDoor(new LabDoor());
 door.Open("invalid"); // Big no! It ain't possible.
@@ -7864,13 +8014,85 @@ class SecuredDoor implements Door {
     }
 }
 
-----------------------------
+// ----------------------------
 
 SecuredDoor door = new SecuredDoor(new LabDoor());
 
 door.open("invalid");       // Big no! It ain't possible.
 door.open("$ecr@t");        // Opening lab door
 door.close();               // Closing lab door
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+
+class Door {
+public:
+    virtual ~Door() = default;
+    virtual void open() = 0;
+    virtual void close() = 0;
+};
+
+class LabDoor : public Door {
+public:
+    void open() override {
+        std::cout << "Opening lab door" << std::endl;
+    }
+
+    void close() override {
+        std::cout << "Closing lab door" << std::endl;
+    }
+};
+
+class SecuredDoor : public Door {
+private:
+    Door& door;
+
+    bool authenticate(const std::string& password) {
+        return password == "$ecr@t";
+    }
+
+public:
+    SecuredDoor(Door& d) : door(d) {}
+
+    void open() override {
+        std::cout << "Big no! It ain't possible." << std::endl;
+    }
+
+    void open(const std::string& password) {
+        if (authenticate(password)) {
+            door.open();
+        } else {
+            std::cout << "Big no! It ain't possible." << std::endl;
+        }
+    }
+
+    void close() override {
+        door.close();
+    }
+};
+
+// ----------------------------
+
+int main() {
+    LabDoor labDoor;
+    SecuredDoor door(labDoor);
+
+    door.open("invalid");       // Big no! It ain't possible.
+    door.open("$ecr@t");        // Opening lab door
+    door.close();               // Closing lab door
+    return 0;
+}
 ```
 
 </div>
@@ -8091,7 +8313,7 @@ class Bitcoin extends Account {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const bank = new Bank(100);
 const paypal = new Paypal(200);
@@ -8195,7 +8417,7 @@ bank.pay(259);
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -8257,7 +8479,7 @@ class Bitcoin : Account
   }
 }
 
-----------------------------
+// ----------------------------
 
 // Let's prepare a chain like below
 //      $bank->$paypal->$bitcoin
@@ -8502,7 +8724,7 @@ class Bitcoin extends Account {
   }
 }
 
-----------------------------
+// ----------------------------
 
 // Creating payment accounts
 Bank bank =         new Bank(100);      // Bank     balance 100
@@ -8519,6 +8741,84 @@ bank.pay(259);
 // Cannot pay by Bank account.   Proceeding...
 // Cannot pay by Paypal account. Proceeding...
 // Successful payment ($259) by Bitcoin account!
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+
+class Account {
+protected:
+    Account* successor = nullptr;
+    int balance;
+
+public:
+    void setNext(Account* account) {
+        successor = account;
+    }
+
+    void pay(int amountToPay) {
+        if (canPay(amountToPay)) {
+            std::cout << "Paid " << amountToPay << " using " << getName() << std::endl;
+        } else if (successor != nullptr) {
+            std::cout << "Cannot pay using " << getName() << ". Proceeding..." << std::endl;
+            successor->pay(amountToPay);
+        } else {
+            std::cout << "None of the accounts have enough balance" << std::endl;
+        }
+    }
+
+    virtual std::string getName() = 0;
+
+private:
+    bool canPay(int amount) {
+        return balance >= amount;
+    }
+};
+
+class Bank : public Account {
+public:
+    Bank(int bal) { balance = bal; }
+    std::string getName() override { return "Bank"; }
+};
+
+class Paypal : public Account {
+public:
+    Paypal(int bal) { balance = bal; }
+    std::string getName() override { return "Paypal"; }
+};
+
+class Bitcoin : public Account {
+public:
+    Bitcoin(int bal) { balance = bal; }
+    std::string getName() override { return "Bitcoin"; }
+};
+
+// ----------------------------
+
+int main() {
+    Bank bank(100);
+    Paypal paypal(200);
+    Bitcoin bitcoin(300);
+
+    bank.setNext(&paypal);
+    paypal.setNext(&bitcoin);
+
+    bank.pay(259);
+    // Cannot pay using Bank. Proceeding...
+    // Cannot pay using Paypal. Proceeding...
+    // Paid 259 using Bitcoin
+    return 0;
+}
 ```
 
 </div>
@@ -8606,7 +8906,7 @@ class RemoteControl:
         command.execute()
 
 
-----------------------------
+# ----------------------------
 
 bulb = Bulb()
 
@@ -8667,7 +8967,7 @@ class RemoteControl {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const bulb = new Bulb();
 
@@ -8740,7 +9040,7 @@ remote.submit(turnOff);
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -8831,7 +9131,7 @@ class RemoteControl
 }
 
 
-----------------------------
+// ----------------------------
 
   var bulb = new Bulb();
 
@@ -9116,7 +9416,7 @@ class RemoteControl {
     }
 }
 
-----------------------------
+// ----------------------------
 
 Bulb bulb = new Bulb();
 TurnOn turnOnCmd = new TurnOn(bulb);
@@ -9125,6 +9425,102 @@ TurnOff turnOffCmd = new TurnOff(bulb);
 RemoteControl remote = new RemoteControl();
 remote.submit(turnOnCmd);       // Bulb is turned ON
 remote.submit(turnOffCmd);      // Bulb is turned OFF
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+
+// Receiver
+class Bulb {
+public:
+    void turnOn() {
+        std::cout << "Bulb has been lit!" << std::endl;
+    }
+
+    void turnOff() {
+        std::cout << "Darkness!" << std::endl;
+    }
+};
+
+// Command interface
+class Command {
+public:
+    virtual ~Command() = default;
+    virtual void execute() = 0;
+    virtual void undo() = 0;
+    virtual void redo() = 0;
+};
+
+class TurnOn : public Command {
+private:
+    Bulb& bulb;
+
+public:
+    TurnOn(Bulb& b) : bulb(b) {}
+
+    void execute() override {
+        bulb.turnOn();
+    }
+
+    void undo() override {
+        bulb.turnOff();
+    }
+
+    void redo() override {
+        execute();
+    }
+};
+
+class TurnOff : public Command {
+private:
+    Bulb& bulb;
+
+public:
+    TurnOff(Bulb& b) : bulb(b) {}
+
+    void execute() override {
+        bulb.turnOff();
+    }
+
+    void undo() override {
+        bulb.turnOn();
+    }
+
+    void redo() override {
+        execute();
+    }
+};
+
+// Invoker
+class RemoteControl {
+public:
+    void submit(Command& command) {
+        command.execute();
+    }
+};
+
+// ----------------------------
+
+int main() {
+    Bulb bulb;
+
+    TurnOn turnOn(bulb);
+    TurnOff turnOff(bulb);
+
+    RemoteControl remote;
+    remote.submit(turnOn);   // Bulb has been lit!
+    remote.submit(turnOff);  // Darkness!
+    return 0;
+}
 ```
 
 </div>
@@ -9299,7 +9695,7 @@ class WordsCollection {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const collection = new WordsCollection();
 collection.addItem("First");
@@ -9385,7 +9781,7 @@ while (!result.done) {
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -9448,7 +9844,7 @@ class StationList : IEnumerable<RadioStation>
 
 
 
-----------------------------
+// ----------------------------
 
 var stations = new StationList();
 var station1 = new RadioStation(89);
@@ -9703,7 +10099,7 @@ class StationList implements Iterable<RadioStation> {
     }
 }
 
-----------------------------
+// ----------------------------
 
 StationList stations = new StationList();
 RadioStation station1 = new RadioStation(89);
@@ -9723,6 +10119,76 @@ System.out.println(radioStation.getFrequency());
 // 89.0
 // 101.0
 // 102.0
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <vector>
+
+class RadioStation {
+private:
+    float frequency;
+
+public:
+    RadioStation(float freq) : frequency(freq) {}
+
+    float getFrequency() const {
+        return frequency;
+    }
+};
+
+class StationList {
+private:
+    std::vector<RadioStation> stations;
+
+public:
+    void add(const RadioStation& station) {
+        stations.push_back(station);
+    }
+
+    void remove(const RadioStation& station) {
+        for (auto it = stations.begin(); it != stations.end(); ++it) {
+            if (it->getFrequency() == station.getFrequency()) {
+                stations.erase(it);
+                break;
+            }
+        }
+    }
+
+    std::vector<RadioStation>::iterator begin() {
+        return stations.begin();
+    }
+
+    std::vector<RadioStation>::iterator end() {
+        return stations.end();
+    }
+};
+
+// ----------------------------
+
+int main() {
+    StationList stations;
+    stations.add(RadioStation(89));
+    stations.add(RadioStation(101));
+    stations.add(RadioStation(102));
+
+    for (auto& station : stations) {
+        std::cout << station.getFrequency() << std::endl;
+    }
+    // 89
+    // 101
+    // 102
+    return 0;
+}
 ```
 
 </div>
@@ -9864,7 +10330,7 @@ class User {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const mediator = new ChatRoom();
 
@@ -9931,7 +10397,7 @@ jane.send("Hey!");
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -9974,7 +10440,7 @@ class User
   }
 }
 
-----------------------------
+// ----------------------------
 
 var mediator = new ChatRoom();
 
@@ -10143,7 +10609,7 @@ class User {
     }
 }
 
-----------------------------
+// ----------------------------
 
 ChatRoom mediator = new ChatRoom();
 
@@ -10152,6 +10618,69 @@ User jane = new User("Jane", mediator);
 
 john.send("Hi there!"); // March 01, 21:38 [John]: Hi there!
 jane.send("Hey!");      // March 01, 21:38 [Jane]: Hey!
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+#include <ctime>
+
+class User;
+
+class ChatRoomMediator {
+public:
+    virtual ~ChatRoomMediator() = default;
+    virtual void showMessage(User* user, const std::string& message) = 0;
+};
+
+class User {
+private:
+    std::string name;
+    ChatRoomMediator* chatRoom;
+
+public:
+    User(const std::string& n, ChatRoomMediator* room) 
+        : name(n), chatRoom(room) {}
+
+    std::string getName() const {
+        return name;
+    }
+
+    void send(const std::string& message) {
+        chatRoom->showMessage(this, message);
+    }
+};
+
+class ChatRoom : public ChatRoomMediator {
+public:
+    void showMessage(User* user, const std::string& message) override {
+        time_t now = time(0);
+        char* dt = ctime(&now);
+        std::cout << dt << " [" << user->getName() << "]: " << message << std::endl;
+    }
+};
+
+// ----------------------------
+
+int main() {
+    ChatRoom mediator;
+
+    User john("John", &mediator);
+    User jane("Jane", &mediator);
+
+    john.send("Hi there!");
+    jane.send("Hey!");
+    return 0;
+}
 ```
 
 </div>
@@ -10213,7 +10742,7 @@ class EditorMemento:
 class Editor:
     _content = ''
 
-    def write(self, words):
+    def type(self, words):
         self._content = self._content + ' ' + words
 
     def getContent(self):
@@ -10229,11 +10758,11 @@ class Editor:
 # ----------------------------
 
 editor = Editor()
-editor.write('This is the first sentence')
-editor.write('This is the second.')
+editor.type('This is the first sentence')
+editor.type('This is the second.')
 
 saved = editor.save()
-editor.write('And this is the third')
+editor.type('And this is the third')
 
 print(editor.getContent()) 
 
@@ -10290,7 +10819,7 @@ class Editor {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const editor = new Editor();
 editor.type("This is the first sentence");
@@ -10363,7 +10892,7 @@ console.log(editor.getContent());
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -10422,7 +10951,7 @@ class Editor {
   }
 }
 
-----------------------------
+// ----------------------------
 
 var editor = new Editor();
 
@@ -10573,7 +11102,7 @@ class Editor {
     }
 }
 
-----------------------------
+// ----------------------------
 
 editor.type("This is the first sentence.");
 editor.type("This is second.");
@@ -10657,6 +11186,71 @@ func main() {
 
 </details>
 
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+
+class EditorMemento {
+private:
+    std::string content;
+
+public:
+    EditorMemento(const std::string& c) : content(c) {}
+
+    std::string getContent() const {
+        return content;
+    }
+};
+
+class Editor {
+private:
+    std::string content;
+
+public:
+    void type(const std::string& words) {
+        content = content + " " + words;
+    }
+
+    std::string getContent() const {
+        return content;
+    }
+
+    EditorMemento save() {
+        return EditorMemento(content);
+    }
+
+    void restore(const EditorMemento& memento) {
+        content = memento.getContent();
+    }
+};
+
+// ----------------------------
+
+int main() {
+    Editor editor;
+    editor.type("This is the first sentence");
+    editor.type("This is the second.");
+
+    EditorMemento saved = editor.save();
+    editor.type("And this is the third");
+
+    std::cout << editor.getContent() << std::endl;
+
+    editor.restore(saved);
+    std::cout << editor.getContent() << std::endl;
+    return 0;
+}
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -10733,7 +11327,7 @@ class JobCategory:
         self.notify(jobPosting)
 
 
-----------------------------
+# ----------------------------
 
 johnDoe = JobSeeker('John Doe')
 janeDoe = JobSeeker('Jane Doe')
@@ -10801,7 +11395,7 @@ class JobCategory {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const johnDoe = new JobSeeker("John Doe");
 const janeDoe = new JobSeeker("Jane Doe");
@@ -10880,7 +11474,7 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -10978,7 +11572,7 @@ internal class Unsubscriber<JobPost> : IDisposable
   }
 }
 
-----------------------------
+// ----------------------------
 
 //Create Subscribers
 var johnDoe = new JobSeeker("John Doe");
@@ -11229,7 +11823,7 @@ class JobCategory {
     }
 }
 
-----------------------------
+// ----------------------------
 
 JobSeeker johnDoe = new JobSeeker("John Doe");
 JobSeeker janeDoe = new JobSeeker("Jane Doe");
@@ -11669,7 +12263,7 @@ dolphin.accept(jump);
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -11749,7 +12343,7 @@ class Speak : IAnimalOperation
   }
 }
 
-----------------------------
+// ----------------------------
 
 var monkey = new Monkey();
 var lion = new Lion();
@@ -11761,7 +12355,7 @@ monkey.Accept(speak);    // Ooh oo aa aa!
 lion.Accept(speak);      // Roaaar!
 dolphin.Accept(speak);   // Tuut tutt tuutt!
 
------------------------------
+// -----------------------------
 
 class Jump : IAnimalOperation
 {
@@ -11781,7 +12375,7 @@ class Jump : IAnimalOperation
   }
 }
 
-------------------------------
+// ------------------------------
 
 var jump = new Jump();
 
@@ -12081,7 +12675,7 @@ class Speak implements AnimalOperation {
     }
 }
 
------------------------
+// -----------------------
 
 Monkey monkey = new Monkey();
 Lion lion = new Lion();
@@ -12111,7 +12705,7 @@ class Jump implements AnimalOperation {
     }
 }
 
------------------------
+// -----------------------
 
 Jump jump = new Jump();
 
@@ -12123,6 +12717,105 @@ lion.accept(jump);      // Jumped 7 feet! Back on the ground!
 
 dolphin.accept(speak);  // Tuut tutt tuutt!
 dolphin.accept(jump);   // Walked on water a little and disappeared
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+
+// Forward declarations
+class Monkey;
+class Lion;
+class Dolphin;
+
+// Visitor interface
+class AnimalOperation {
+public:
+    virtual ~AnimalOperation() = default;
+    virtual void visitMonkey(Monkey& monkey) = 0;
+    virtual void visitLion(Lion& lion) = 0;
+    virtual void visitDolphin(Dolphin& dolphin) = 0;
+};
+
+// Animal interface
+class Animal {
+public:
+    virtual ~Animal() = default;
+    virtual void accept(AnimalOperation& operation) = 0;
+};
+
+// Concrete animals
+class Monkey : public Animal {
+public:
+    void shout() {
+        std::cout << "Ooh oo aa aa!" << std::endl;
+    }
+
+    void accept(AnimalOperation& operation) override {
+        operation.visitMonkey(*this);
+    }
+};
+
+class Lion : public Animal {
+public:
+    void roar() {
+        std::cout << "Roaaar!" << std::endl;
+    }
+
+    void accept(AnimalOperation& operation) override {
+        operation.visitLion(*this);
+    }
+};
+
+class Dolphin : public Animal {
+public:
+    void speak() {
+        std::cout << "Tuut tutt tuttt!" << std::endl;
+    }
+
+    void accept(AnimalOperation& operation) override {
+        operation.visitDolphin(*this);
+    }
+};
+
+// Concrete visitor
+class Speak : public AnimalOperation {
+public:
+    void visitMonkey(Monkey& monkey) override {
+        monkey.shout();
+    }
+
+    void visitLion(Lion& lion) override {
+        lion.roar();
+    }
+
+    void visitDolphin(Dolphin& dolphin) override {
+        dolphin.speak();
+    }
+};
+
+// ----------------------------
+
+int main() {
+    Monkey monkey;
+    Lion lion;
+    Dolphin dolphin;
+
+    Speak speak;
+
+    monkey.accept(speak);   // Ooh oo aa aa!
+    lion.accept(speak);     // Roaaar!
+    dolphin.accept(speak);  // Tuut tutt tuttt!
+    return 0;
+}
 ```
 
 </div>
@@ -12198,7 +12891,7 @@ class Sorter:
         return self._sorter.sort(dataset)
 
 
-----------------------------
+# ----------------------------
 
 dataset = [1, 5, 4, 3, 2, 8]
 
@@ -12248,7 +12941,7 @@ class Sorter {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const dataset = [1, 5, 4, 3, 2, 8];
 
@@ -12304,7 +12997,7 @@ sorter2.sort(dataset);
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -12348,7 +13041,7 @@ class Sorter
   }
 }
 
-----------------------------
+// ----------------------------
 
 var unSortedList = new List<int> { 1, 10, 2, 16, 19 };
 
@@ -12519,7 +13212,7 @@ class Sorter {
     }
 }
 
-----------------------------
+// ----------------------------
 
 List<Integer> unSortedList = List.of(1, 10, 2, 16, 19);
 
@@ -12528,6 +13221,69 @@ sorter.sort(unSortedList); // Sorting by Bubble sort!
 
 sorter = new Sorter(new QuickSortStrategy());
 sorter.sort(unSortedList); // Sorting by Quick sort!
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <vector>
+
+class SortStrategy {
+public:
+    virtual ~SortStrategy() = default;
+    virtual std::vector<int> sort(std::vector<int>& dataset) = 0;
+};
+
+class BubbleSortStrategy : public SortStrategy {
+public:
+    std::vector<int> sort(std::vector<int>& dataset) override {
+        std::cout << "Sorting using bubble sort" << std::endl;
+        return dataset;
+    }
+};
+
+class QuickSortStrategy : public SortStrategy {
+public:
+    std::vector<int> sort(std::vector<int>& dataset) override {
+        std::cout << "Sorting using quick sort" << std::endl;
+        return dataset;
+    }
+};
+
+class Sorter {
+private:
+    SortStrategy* strategy;
+
+public:
+    Sorter(SortStrategy* s) : strategy(s) {}
+
+    std::vector<int> sort(std::vector<int>& dataset) {
+        return strategy->sort(dataset);
+    }
+};
+
+// ----------------------------
+
+int main() {
+    std::vector<int> dataset = {1, 5, 4, 3, 2, 8};
+
+    BubbleSortStrategy bubbleSort;
+    Sorter sorter(&bubbleSort);
+    sorter.sort(dataset);
+
+    QuickSortStrategy quickSort;
+    Sorter sorter2(&quickSort);
+    sorter2.sort(dataset);
+    return 0;
+}
 ```
 
 </div>
@@ -12692,7 +13448,7 @@ class TextEditor {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const editor = new TextEditor(new DefaultText());
 editor.type("First Line"); // First Line
@@ -12765,7 +13521,7 @@ editor.type("Fifth Line")
 </details>
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -12824,7 +13580,7 @@ class TextEditor {
 }
 
 
-----------------------------
+// ----------------------------
 
 var editor = new TextEditor();
 
@@ -13060,7 +13816,7 @@ class TextEditor {
     }
 }
 
-----------------------------
+// ----------------------------
 
 TextEditor editor = new TextEditor();
 
@@ -13073,6 +13829,87 @@ editor.type("Third Line");  // THIRD LINE
 editor.setState(new LowerCase());
 editor.type("Fourth line"); // fourth line
 editor.type("FIFTH Line");  // fifth line
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+class WritingState {
+public:
+    virtual ~WritingState() = default;
+    virtual void write(const std::string& words) = 0;
+};
+
+class UpperCase : public WritingState {
+public:
+    void write(const std::string& words) override {
+        std::string upper = words;
+        std::transform(upper.begin(), upper.end(), upper.begin(), ::toupper);
+        std::cout << upper << std::endl;
+    }
+};
+
+class LowerCase : public WritingState {
+public:
+    void write(const std::string& words) override {
+        std::string lower = words;
+        std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+        std::cout << lower << std::endl;
+    }
+};
+
+class DefaultText : public WritingState {
+public:
+    void write(const std::string& words) override {
+        std::cout << words << std::endl;
+    }
+};
+
+class TextEditor {
+private:
+    WritingState* state;
+
+public:
+    TextEditor() : state(new DefaultText()) {}
+    ~TextEditor() { delete state; }
+
+    void setState(WritingState* newState) {
+        delete state;
+        state = newState;
+    }
+
+    void type(const std::string& words) {
+        state->write(words);
+    }
+};
+
+// ----------------------------
+
+int main() {
+    TextEditor editor;
+
+    editor.type("First line");  // First line
+
+    editor.setState(new UpperCase());
+    editor.type("Second line"); // SECOND LINE
+    editor.type("Third line");  // THIRD LINE
+
+    editor.setState(new LowerCase());
+    editor.type("Fourth line"); // fourth line
+    editor.type("Fifth line");  // fifth line
+    return 0;
+}
 ```
 
 </div>
@@ -13174,7 +14011,7 @@ class IosBuilder(Builder):
         print('Deploying ios build to server')
 
 
-----------------------------
+# ----------------------------
 
 androidBuilder = AndroidBuilder()
 androidBuilder.build()
@@ -13262,7 +14099,7 @@ class IosBuilder extends Builder {
     }
 }
 
-----------------------------
+// ----------------------------
 
 const androidBuilder = new AndroidBuilder();
 androidBuilder.build();
@@ -13368,7 +14205,7 @@ iosBuilder.build();
 
 
 <details>
-<summary >#C</summary>
+<summary>C#</summary>
 
 <div dir="ltr">
 
@@ -13441,7 +14278,7 @@ class IosBuilder : Builder
 }
 
 
-----------------------------
+// ----------------------------
 
 var androidBuilder = new AndroidBuilder();
 androidBuilder.Build();
@@ -13724,7 +14561,7 @@ class IOSBuilder extends Builder {
     }
 }
 
-----------------------------
+// ----------------------------
 
 AndroidBuilder androidBuilder = new AndroidBuilder();
 androidBuilder.build();
@@ -13739,6 +14576,96 @@ iOSBuilder.build();
 // Linting iOS code
 // Assembling iOS build
 // Deploying iOS build
+```
+
+</div>
+
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+
+class Builder {
+public:
+    virtual ~Builder() = default;
+    
+    // Template method
+    void build() {
+        test();
+        lint();
+        assemble();
+        deploy();
+    }
+
+    virtual void test() = 0;
+    virtual void lint() = 0;
+    virtual void assemble() = 0;
+    virtual void deploy() = 0;
+};
+
+class AndroidBuilder : public Builder {
+public:
+    void test() override {
+        std::cout << "Running android tests" << std::endl;
+    }
+
+    void lint() override {
+        std::cout << "Linting the android code" << std::endl;
+    }
+
+    void assemble() override {
+        std::cout << "Assembling the android build" << std::endl;
+    }
+
+    void deploy() override {
+        std::cout << "Deploying android build to server" << std::endl;
+    }
+};
+
+class IosBuilder : public Builder {
+public:
+    void test() override {
+        std::cout << "Running ios tests" << std::endl;
+    }
+
+    void lint() override {
+        std::cout << "Linting the ios code" << std::endl;
+    }
+
+    void assemble() override {
+        std::cout << "Assembling the ios build" << std::endl;
+    }
+
+    void deploy() override {
+        std::cout << "Deploying ios build to server" << std::endl;
+    }
+};
+
+// ----------------------------
+
+int main() {
+    AndroidBuilder androidBuilder;
+    androidBuilder.build();
+    // Running android tests
+    // Linting the android code
+    // Assembling the android build
+    // Deploying android build to server
+
+    std::cout << std::endl;
+
+    IosBuilder iosBuilder;
+    iosBuilder.build();
+    // Running ios tests
+    // Linting the ios code
+    // Assembling the ios build
+    // Deploying ios build to server
+    return 0;
+}
 ```
 
 </div>
