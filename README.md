@@ -12675,8 +12675,8 @@ import (
 	"fmt"
 )
 
-// Steps interface
-type Steps interface {
+// Builder interface
+type Builder interface {
 	Test()
 	Lint()
 	Assemble()
@@ -12685,9 +12685,9 @@ type Steps interface {
 
 // BaseBuilder provides default implementations
 type BaseBuilder struct{
-    self Steps
+    self Builder
 }
-func (b *BaseBuilder) init(self Steps) {
+func (b *BaseBuilder) init(self Builder) {
 	b.self = self
 }
 
@@ -12762,7 +12762,6 @@ func (i *IosBuilder) Deploy() {
 
 func main() {
 	NewAndroidBuilder().Build()
-	fmt.Println("------")
 	NewIosBuilder().Build()
 }
 
