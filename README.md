@@ -657,6 +657,48 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Door {
+  int getWidth();
+  int getHeight();
+}
+
+class WoodenDoor implements Door {
+  final int _width;
+  final int _height;
+
+  WoodenDoor(this._width, this._height);
+
+  @override
+  int getWidth() => _width;
+
+  @override
+  int getHeight() => _height;
+}
+
+class DoorFactory {
+  static WoodenDoor makeDoor(int width, int height) {
+    return WoodenDoor(width, height);
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var door = DoorFactory.makeDoor(10, 10);
+  print(door.getHeight()); // 10
+  print(door.getWidth());  // 10
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -1196,6 +1238,63 @@ int main() {
     marketingManager.takeInterview(); // Output: Asking about community building
     
     return 0;
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Interviewer {
+  void askQuestions();
+}
+
+class Developer implements Interviewer {
+  @override
+  void askQuestions() {
+    print('Asking about design patterns');
+  }
+}
+
+class CommunityExecutive implements Interviewer {
+  @override
+  void askQuestions() {
+    print('Asking about community building');
+  }
+}
+
+abstract class HiringManager {
+  Interviewer makeInterviewer();
+
+  void takeInterview() {
+    var interviewer = makeInterviewer();
+    interviewer.askQuestions();
+  }
+}
+
+class DevelopmentManager extends HiringManager {
+  @override
+  Interviewer makeInterviewer() => Developer();
+}
+
+class MarketingManager extends HiringManager {
+  @override
+  Interviewer makeInterviewer() => CommunityExecutive();
+}
+
+// ----------------------------
+
+void main() {
+  var devManager = DevelopmentManager();
+  devManager.takeInterview(); // Asking about design patterns
+
+  var marketingManager = MarketingManager();
+  marketingManager.takeInterview(); // Asking about community building
 }
 ```
 
@@ -2018,6 +2117,81 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Door {
+  void getDescription();
+}
+
+class WoodenDoor implements Door {
+  @override
+  void getDescription() => print('I am a wooden door');
+}
+
+class IronDoor implements Door {
+  @override
+  void getDescription() => print('I am an iron door');
+}
+
+abstract class DoorFittingExpert {
+  void getDescription();
+}
+
+class Welder implements DoorFittingExpert {
+  @override
+  void getDescription() => print('I can only fit iron doors');
+}
+
+class Carpenter implements DoorFittingExpert {
+  @override
+  void getDescription() => print('I can only fit wooden doors');
+}
+
+abstract class DoorFactory {
+  Door makeDoor();
+  DoorFittingExpert makeFittingExpert();
+}
+
+class WoodenDoorFactory implements DoorFactory {
+  @override
+  Door makeDoor() => WoodenDoor();
+
+  @override
+  DoorFittingExpert makeFittingExpert() => Carpenter();
+}
+
+class IronDoorFactory implements DoorFactory {
+  @override
+  Door makeDoor() => IronDoor();
+
+  @override
+  DoorFittingExpert makeFittingExpert() => Welder();
+}
+
+// ----------------------------
+
+void main() {
+  var woodenFactory = WoodenDoorFactory();
+  var door = woodenFactory.makeDoor();
+  var expert = woodenFactory.makeFittingExpert();
+  door.getDescription();   // I am a wooden door
+  expert.getDescription(); // I can only fit wooden doors
+
+  var ironFactory = IronDoorFactory();
+  var ironDoor = ironFactory.makeDoor();
+  var welder = ironFactory.makeFittingExpert();
+  ironDoor.getDescription();  // I am an iron door
+  welder.getDescription();    // I can only fit iron doors
+}
+```
+
+</div>
+</details>
+
 **همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
 انتخاب نمی‌کنیم.**
@@ -2151,6 +2325,17 @@ func Burger(size int, cheese bool, pepperoni bool, lettuce bool, tomato bool)
 
 ```java
 public Burger(int size, boolean cheese, boolean pepperoni, boolean lettuce, boolean tomato)
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+<div dir="ltr">
+
+```dart
+Burger(int size, {bool cheese = true, bool pepperoni = true, bool tomato = false, bool lettuce = true})
 ```
 
 </div>
@@ -2791,6 +2976,77 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class Burger {
+  final int _size;
+  final bool _cheese;
+  final bool _pepperoni;
+  final bool _lettuce;
+  final bool _tomato;
+
+  Burger(BurgerBuilder builder)
+      : _size = builder.size,
+        _cheese = builder.cheese,
+        _pepperoni = builder.pepperoni,
+        _lettuce = builder.lettuce,
+        _tomato = builder.tomato;
+
+  String getDescription() => 'This is $_size inch Burger.';
+}
+
+class BurgerBuilder {
+  int size;
+  bool cheese = false;
+  bool pepperoni = false;
+  bool lettuce = false;
+  bool tomato = false;
+
+  BurgerBuilder(this.size);
+
+  BurgerBuilder addPepperoni() {
+    pepperoni = true;
+    return this;
+  }
+
+  BurgerBuilder addLettuce() {
+    lettuce = true;
+    return this;
+  }
+
+  BurgerBuilder addCheese() {
+    cheese = true;
+    return this;
+  }
+
+  BurgerBuilder addTomato() {
+    tomato = true;
+    return this;
+  }
+
+  Burger build() => Burger(this);
+}
+
+// ----------------------------
+
+void main() {
+  var burger = (BurgerBuilder(10)
+        ..addPepperoni()
+        ..addLettuce()
+        ..addTomato())
+      .build();
+
+  print(burger.getDescription()); // This is 10 inch Burger.
+}
+```
+
+</div>
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -3405,6 +3661,42 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class SomeComponent {
+  int someInt;
+  List<Object> someListOfObjects;
+  SomeComponent? someCircularRef;
+
+  SomeComponent(this.someInt, this.someListOfObjects, this.someCircularRef);
+
+  SomeComponent clone() {
+    return SomeComponent(
+      someInt,
+      List.from(someListOfObjects),
+      someCircularRef?.clone(),
+    );
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var original = SomeComponent(42, [1, 2, 3], null);
+  var copy = original.clone();
+
+  print(original.someInt == copy.someInt); // true
+  print(identical(original.someListOfObjects, copy.someListOfObjects)); // false
+}
+```
+
+</div>
+</details>
+
 <br>
 
 **تفاوت Shadow Copy و Deep Copy ؟**
@@ -3773,6 +4065,42 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class Singleton {
+  static Singleton? _instance;
+
+  Singleton._internal();
+
+  factory Singleton() {
+    _instance ??= Singleton._internal();
+    return _instance!;
+  }
+
+  void someBusinessLogic() {}
+}
+
+// ----------------------------
+
+void main() {
+  var s1 = Singleton();
+  var s2 = Singleton();
+
+  if (identical(s1, s2)) {
+    print('Singleton works, both variables contain the same instance.');
+  } else {
+    print('Singleton failed, variables contain different instances.');
+  }
+}
+```
+
 </div>
 </details>
 
@@ -4343,6 +4671,61 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Lion {
+  void roar();
+}
+
+class AfricanLion implements Lion {
+  @override
+  void roar() {}
+}
+
+class AsianLion implements Lion {
+  @override
+  void roar() {}
+}
+
+class Hunter {
+  void hunt(Lion lion) {
+    lion.roar();
+  }
+}
+
+class WildDog {
+  void bark() {}
+}
+
+class WildDogAdapter implements Lion {
+  final WildDog _dog;
+
+  WildDogAdapter(this._dog);
+
+  @override
+  void roar() {
+    _dog.bark();
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var wildDog = WildDog();
+  var wildDogAdapter = WildDogAdapter(wildDog);
+
+  var hunter = Hunter();
+  hunter.hunt(wildDogAdapter);
+}
+```
+
 </div>
 </details>
 
@@ -4976,6 +5359,67 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Theme {
+  String getColor();
+}
+
+class DarkTheme implements Theme {
+  @override
+  String getColor() => 'Dark Black';
+}
+
+class LightTheme implements Theme {
+  @override
+  String getColor() => 'Off White';
+}
+
+class AquaTheme implements Theme {
+  @override
+  String getColor() => 'Light Blue';
+}
+
+abstract class WebPage {
+  final Theme theme;
+  WebPage(this.theme);
+  String getContent();
+}
+
+class About extends WebPage {
+  About(Theme theme) : super(theme);
+
+  @override
+  String getContent() => 'About page in ${theme.getColor()}';
+}
+
+class Careers extends WebPage {
+  Careers(Theme theme) : super(theme);
+
+  @override
+  String getContent() => 'Careers page in ${theme.getColor()}';
+}
+
+// ----------------------------
+
+void main() {
+  var darkTheme = DarkTheme();
+
+  var about = About(darkTheme);
+  var careers = Careers(darkTheme);
+
+  print(about.getContent());   // About page in Dark Black
+  print(careers.getContent()); // Careers page in Dark Black
+}
+```
+
 </div>
 </details>
 
@@ -5687,6 +6131,66 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Component {
+  void add(Component component) {}
+  void remove(Component component) {}
+  String operation();
+}
+
+class Leaf extends Component {
+  @override
+  String operation() => 'Leaf';
+}
+
+class Composite extends Component {
+  final List<Component> _children = [];
+
+  @override
+  void add(Component component) {
+    _children.add(component);
+  }
+
+  @override
+  void remove(Component component) {
+    _children.remove(component);
+  }
+
+  @override
+  String operation() {
+    var results = _children.map((c) => c.operation()).join('+');
+    return 'Branch($results)';
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var tree = Composite();
+
+  var branch1 = Composite();
+  branch1.add(Leaf());
+  branch1.add(Leaf());
+
+  var branch2 = Composite();
+  branch2.add(Leaf());
+
+  tree.add(branch1);
+  tree.add(branch2);
+
+  print('RESULT: ${tree.operation()}');
+  // RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
+}
+```
+
 </div>
 </details>
 
@@ -6517,6 +7021,85 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Coffee {
+  double getCost();
+  String getDescription();
+}
+
+class SimpleCoffee implements Coffee {
+  @override
+  double getCost() => 10;
+
+  @override
+  String getDescription() => 'Simple Coffee';
+}
+
+class MilkCoffee implements Coffee {
+  final Coffee _coffee;
+
+  MilkCoffee(this._coffee);
+
+  @override
+  double getCost() => _coffee.getCost() + 2;
+
+  @override
+  String getDescription() => '${_coffee.getDescription()}, milk';
+}
+
+class WhipCoffee implements Coffee {
+  final Coffee _coffee;
+
+  WhipCoffee(this._coffee);
+
+  @override
+  double getCost() => _coffee.getCost() + 5;
+
+  @override
+  String getDescription() => '${_coffee.getDescription()}, whip';
+}
+
+class VanillaCoffee implements Coffee {
+  final Coffee _coffee;
+
+  VanillaCoffee(this._coffee);
+
+  @override
+  double getCost() => _coffee.getCost() + 3;
+
+  @override
+  String getDescription() => '${_coffee.getDescription()}, vanilla';
+}
+
+// ----------------------------
+
+void main() {
+  Coffee someCoffee = SimpleCoffee();
+  print(someCoffee.getCost());         // 10
+  print(someCoffee.getDescription());  // Simple Coffee
+
+  someCoffee = MilkCoffee(someCoffee);
+  print(someCoffee.getCost());         // 12
+  print(someCoffee.getDescription());  // Simple Coffee, milk
+
+  someCoffee = VanillaCoffee(someCoffee);
+  print(someCoffee.getCost());         // 15
+  print(someCoffee.getDescription());  // Simple Coffee, milk, vanilla
+
+  someCoffee = WhipCoffee(someCoffee);
+  print(someCoffee.getCost());         // 20
+  print(someCoffee.getDescription());  // Simple Coffee, milk, vanilla, whip
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -7161,6 +7744,53 @@ int main() {
 
 </details>
 
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class Computer {
+  void getElectricShock() => print('Ouch!');
+  void makeSound() => print('Beep Beep!');
+  void showLoadingScreen() => print('Loading...');
+  void bam() => print('Ready to be used...');
+  void closeEverything() => print('Bup bup bup buzzz!');
+  void sooth() => print('Zzzzz');
+  void pullCurrent() => print('Haaah!');
+}
+
+class ComputerFacade {
+  final Computer _computer;
+
+  ComputerFacade(this._computer);
+
+  void turnOn() {
+    _computer.getElectricShock();
+    _computer.makeSound();
+    _computer.showLoadingScreen();
+    _computer.bam();
+  }
+
+  void turnOff() {
+    _computer.closeEverything();
+    _computer.pullCurrent();
+    _computer.sooth();
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var computer = ComputerFacade(Computer());
+  computer.turnOn();
+  computer.turnOff();
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -7708,6 +8338,60 @@ int main() {
 
 </details>
 
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class GreenTea {}
+
+class TeaMaker {
+  final Map<String, GreenTea> _availableTea = {};
+
+  GreenTea make(String preference) {
+    _availableTea.putIfAbsent(preference, () => GreenTea());
+    return _availableTea[preference]!;
+  }
+}
+
+class TeaShop {
+  final Map<int, GreenTea> _orders = {};
+  final TeaMaker _teaMaker;
+
+  TeaShop(this._teaMaker);
+
+  void takeOrder(String teaType, int table) {
+    _orders[table] = _teaMaker.make(teaType);
+  }
+
+  void serve() {
+    _orders.forEach((table, tea) {
+      print('Serving tea to table #$table');
+    });
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var teaMaker = TeaMaker();
+  var shop = TeaShop(teaMaker);
+
+  shop.takeOrder('less sugar', 1);
+  shop.takeOrder('more milk', 2);
+  shop.takeOrder('without sugar', 5);
+
+  shop.serve();
+  // Serving tea to table #1
+  // Serving tea to table #2
+  // Serving tea to table #5
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -8235,6 +8919,56 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Door {
+  void open();
+  void close();
+}
+
+class LabDoor implements Door {
+  @override
+  void open() => print('Opening lab door');
+
+  @override
+  void close() => print('Closing the lab door');
+}
+
+class SecuredDoor {
+  final Door _door;
+
+  SecuredDoor(this._door);
+
+  void open(String password) {
+    if (authenticate(password)) {
+      _door.open();
+    } else {
+      print("Big no! It ain't possible.");
+    }
+  }
+
+  bool authenticate(String password) => password == r'$ecr@t';
+
+  void close() => _door.close();
+}
+
+// ----------------------------
+
+void main() {
+  var door = SecuredDoor(LabDoor());
+  door.open('invalid');   // Big no! It ain't possible.
+  door.open(r'$ecr@t');   // Opening lab door
+  door.close();           // Closing the lab door
+}
+```
+
+</div>
 </details>
 
 <br>
@@ -8955,11 +9689,78 @@ int main() {
     // Cannot pay using Paypal. Proceeding...
     // Paid 259 using Bitcoin
     return 0;
+    return 0;
 }
 ```
 
 </div>
 
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Account {
+  Account? _successor;
+  late double balance;
+
+  void setNext(Account account) {
+    _successor = account;
+  }
+
+  void pay(double amountToPay) {
+    if (canPay(amountToPay)) {
+      print('Paid $amountToPay using $runtimeType');
+    } else if (_successor != null) {
+      print('Cannot pay using $runtimeType. Proceeding ..');
+      _successor!.pay(amountToPay);
+    } else {
+      throw Exception('None of the accounts have enough balance');
+    }
+  }
+
+  bool canPay(double amount) => balance >= amount;
+}
+
+class Bank extends Account {
+  Bank(double balance) {
+    this.balance = balance;
+  }
+}
+
+class Paypal extends Account {
+  Paypal(double balance) {
+    this.balance = balance;
+  }
+}
+
+class Bitcoin extends Account {
+  Bitcoin(double balance) {
+    this.balance = balance;
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var bank = Bank(100);
+  var paypal = Paypal(200);
+  var bitcoin = Bitcoin(300);
+
+  bank.setNext(paypal);
+  paypal.setNext(bitcoin);
+
+  bank.pay(259);
+  // Cannot pay using Bank. Proceeding ..
+  // Cannot pay using Paypal. Proceeding ..
+  // Paid 259 using Bitcoin
+}
+```
+
+</div>
 </details>
 
 <br>
@@ -9669,6 +10470,60 @@ int main() {
 
 </details>
 
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class Bulb {
+  void turnOn() => print('Bulb has been lit');
+  void turnOff() => print('Darkness!');
+}
+
+abstract class Command {
+  void execute();
+}
+
+class TurnOn extends Command {
+  final Bulb _bulb;
+  TurnOn(this._bulb);
+
+  @override
+  void execute() => _bulb.turnOn();
+}
+
+class TurnOff extends Command {
+  final Bulb _bulb;
+  TurnOff(this._bulb);
+
+  @override
+  void execute() => _bulb.turnOff();
+}
+
+class RemoteControl {
+  void submit(Command command) {
+    command.execute();
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var bulb = Bulb();
+
+  var turnOn = TurnOn(bulb);
+  var turnOff = TurnOff(bulb);
+
+  var remote = RemoteControl();
+  remote.submit(turnOn);  // Bulb has been lit
+  remote.submit(turnOff); // Darkness!
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -10337,6 +11192,48 @@ int main() {
 
 </details>
 
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class WordsCollection extends Iterable<String> {
+  final List<String> _collection = [];
+
+  void addItem(String item) {
+    _collection.add(item);
+  }
+
+  @override
+  Iterator<String> get iterator => _collection.iterator;
+
+  Iterable<String> get reversed => _collection.reversed;
+}
+
+// ----------------------------
+
+void main() {
+  var collection = WordsCollection();
+  collection.addItem('First');
+  collection.addItem('Second');
+  collection.addItem('Third');
+
+  print('Straight traversal:');
+  for (var item in collection) {
+    print(item);
+  }
+
+  print('\nReverse traversal:');
+  for (var item in collection.reversed) {
+    print(item);
+  }
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -10828,6 +11725,54 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class ChatRoomMediator {
+  void showMessage(User user, String message);
+}
+
+class ChatRoom implements ChatRoomMediator {
+  @override
+  void showMessage(User user, String message) {
+    var time = DateTime.now();
+    var sender = user.getName();
+    print('$time[$sender]: $message');
+  }
+}
+
+class User {
+  final String _name;
+  final ChatRoomMediator _chatMediator;
+
+  User(this._name, this._chatMediator);
+
+  String getName() => _name;
+
+  void send(String message) {
+    _chatMediator.showMessage(this, message);
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var mediator = ChatRoom();
+
+  var john = User('John', mediator);
+  var jane = User('Jane', mediator);
+
+  john.send('Hi There!');
+  jane.send('Hey!');
+}
+```
+
+</div>
 </details>
 
 <br>
@@ -11396,6 +12341,58 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class EditorMemento {
+  final String _content;
+
+  EditorMemento(this._content);
+
+  String getContent() => _content;
+}
+
+class Editor {
+  String _content = '';
+
+  void type(String words) {
+    _content = '$_content $words';
+  }
+
+  String getContent() => _content;
+
+  EditorMemento save() => EditorMemento(_content);
+
+  void restore(EditorMemento memento) {
+    _content = memento.getContent();
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var editor = Editor();
+  editor.type('This is the first sentence');
+  editor.type('This is the second.');
+
+  var saved = editor.save();
+  editor.type('And this is the third');
+
+  print(editor.getContent());
+  //  This is the first sentence This is the second. And this is the third
+
+  editor.restore(saved);
+  print(editor.getContent());
+  //  This is the first sentence This is the second.
+}
+```
+
+</div>
 </details>
 
 <br>
@@ -12072,6 +13069,67 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class JobPost {
+  final String _title;
+
+  JobPost(this._title);
+
+  String getTitle() => _title;
+}
+
+class JobSeeker {
+  final String _name;
+
+  JobSeeker(this._name);
+
+  void onJobPosted(JobPost job) {
+    print('Hi $_name! New job posted: ${job.getTitle()}');
+  }
+}
+
+class JobCategory {
+  final List<JobSeeker> _observers = [];
+
+  void notify(JobPost jobPosting) {
+    for (var observer in _observers) {
+      observer.onJobPosted(jobPosting);
+    }
+  }
+
+  void attach(JobSeeker observer) {
+    _observers.add(observer);
+  }
+
+  void addJob(JobPost jobPosting) {
+    notify(jobPosting);
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var johnDoe = JobSeeker('John Doe');
+  var janeDoe = JobSeeker('Jane Doe');
+
+  var jobPostings = JobCategory();
+  jobPostings.attach(janeDoe);
+  jobPostings.attach(johnDoe);
+
+  jobPostings.addJob(JobPost('Software Engineer at XXX'));
+  // Hi Jane Doe! New job posted: Software Engineer at XXX
+  // Hi John Doe! New job posted: Software Engineer at XXX
+}
+```
+
 </div>
 </details>
 
@@ -12969,6 +14027,87 @@ int main() {
 
 </details>
 
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class AnimalOperation {
+  void visitMonkey(Monkey monkey);
+  void visitLion(Lion lion);
+  void visitDolphin(Dolphin dolphin);
+}
+
+abstract class Animal {
+  void accept(AnimalOperation operation);
+}
+
+class Monkey extends Animal {
+  void shout() => print('Ooh oo aa aa!');
+
+  @override
+  void accept(AnimalOperation operation) => operation.visitMonkey(this);
+}
+
+class Lion extends Animal {
+  void roar() => print('Roaaar!');
+
+  @override
+  void accept(AnimalOperation operation) => operation.visitLion(this);
+}
+
+class Dolphin extends Animal {
+  void speak() => print('Tuut tuttu tuutt!');
+
+  @override
+  void accept(AnimalOperation operation) => operation.visitDolphin(this);
+}
+
+class Speak implements AnimalOperation {
+  @override
+  void visitMonkey(Monkey monkey) => monkey.shout();
+
+  @override
+  void visitLion(Lion lion) => lion.roar();
+
+  @override
+  void visitDolphin(Dolphin dolphin) => dolphin.speak();
+}
+
+class Jump implements AnimalOperation {
+  @override
+  void visitMonkey(Monkey monkey) => print('Jumped 20 feet high! on to the tree!');
+
+  @override
+  void visitLion(Lion lion) => print('Jumped 7 feet! back on the ground!');
+
+  @override
+  void visitDolphin(Dolphin dolphin) => print('Walked on water a little and disappeared');
+}
+
+// ----------------------------
+
+void main() {
+  var monkey = Monkey();
+  var lion = Lion();
+  var dolphin = Dolphin();
+
+  var speak = Speak();
+  monkey.accept(speak);  // Ooh oo aa aa!
+  lion.accept(speak);    // Roaaar!
+  dolphin.accept(speak); // Tuut tuttu tuutt!
+
+  var jump = Jump();
+  monkey.accept(jump);   // Jumped 20 feet high! on to the tree!
+  lion.accept(jump);     // Jumped 7 feet! back on the ground!
+  dolphin.accept(jump);  // Walked on water a little and disappeared
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -13438,6 +14577,56 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class SortStrategy {
+  List<int> sort(List<int> dataset);
+}
+
+class BubbleSortStrategy implements SortStrategy {
+  @override
+  List<int> sort(List<int> dataset) {
+    print('Sorting using bubble sort');
+    return dataset;
+  }
+}
+
+class QuickSortStrategy implements SortStrategy {
+  @override
+  List<int> sort(List<int> dataset) {
+    print('Sorting using quick sort');
+    return dataset;
+  }
+}
+
+class Sorter {
+  final SortStrategy _sorter;
+
+  Sorter(this._sorter);
+
+  List<int> sort(List<int> dataset) => _sorter.sort(dataset);
+}
+
+// ----------------------------
+
+void main() {
+  var dataset = [1, 5, 4, 3, 2, 8];
+
+  var sorter = Sorter(BubbleSortStrategy());
+  sorter.sort(dataset); // Sorting using bubble sort
+
+  sorter = Sorter(QuickSortStrategy());
+  sorter.sort(dataset); // Sorting using quick sort
+}
+```
+
+</div>
 </details>
 
 <br>
@@ -14065,6 +15254,71 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class WritingState {
+  void write(String words);
+}
+
+class UpperCase implements WritingState {
+  @override
+  void write(String words) => print(words.toUpperCase());
+}
+
+class LowerCase implements WritingState {
+  @override
+  void write(String words) => print(words.toLowerCase());
+}
+
+class DefaultText implements WritingState {
+  @override
+  void write(String words) => print(words);
+}
+
+class TextEditor {
+  WritingState _state;
+
+  TextEditor(this._state);
+
+  void setState(WritingState state) {
+    _state = state;
+  }
+
+  void write(String words) {
+    _state.write(words);
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var editor = TextEditor(DefaultText());
+  editor.write('First Line');
+
+  editor.setState(UpperCase());
+  editor.write('Second Line');
+  editor.write('Third Line');
+
+  editor.setState(LowerCase());
+  editor.write('Fourth Line');
+  editor.write('Fifth Line');
+
+  // Output:
+  // First Line
+  // SECOND LINE
+  // THIRD LINE
+  // fourth line
+  // fifth line
+}
+```
+
+</div>
 </details>
 
 <br>
@@ -14822,6 +16076,76 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Builder {
+  void build() {
+    test();
+    lint();
+    assemble();
+    deploy();
+  }
+
+  void test();
+  void lint();
+  void assemble();
+  void deploy();
+}
+
+class AndroidBuilder extends Builder {
+  @override
+  void test() => print('Running android tests');
+
+  @override
+  void lint() => print('Linting the android code');
+
+  @override
+  void assemble() => print('Assembling the android build');
+
+  @override
+  void deploy() => print('Deploying android build to server');
+}
+
+class IosBuilder extends Builder {
+  @override
+  void test() => print('Running ios tests');
+
+  @override
+  void lint() => print('Linting the ios code');
+
+  @override
+  void assemble() => print('Assembling the ios build');
+
+  @override
+  void deploy() => print('Deploying ios build to server');
+}
+
+// ----------------------------
+
+void main() {
+  var androidBuilder = AndroidBuilder();
+  androidBuilder.build();
+  // Running android tests
+  // Linting the android code
+  // Assembling the android build
+  // Deploying android build to server
+
+  var iosBuilder = IosBuilder();
+  iosBuilder.build();
+  // Running ios tests
+  // Linting the ios code
+  // Assembling the ios build
+  // Deploying ios build to server
+}
+```
+
+</div>
 </details>
 
 <br>
