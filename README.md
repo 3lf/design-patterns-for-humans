@@ -657,6 +657,40 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Door {
+    fun getHeight(): Int
+    fun getWidth(): Int
+}
+
+class WoodenDoor(private val width: Int, private val height: Int) : Door {
+    override fun getHeight(): Int = height
+    override fun getWidth(): Int = width
+}
+
+object DoorFactory {
+    fun makeDoor(width: Int, height: Int): Door {
+        return WoodenDoor(width, height)
+    }
+}
+
+// Usage
+fun main() {
+    val door = DoorFactory.makeDoor(100, 200)
+    println("Width: ${door.getWidth()}")
+    println("Height: ${door.getHeight()}")
+}
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -1200,6 +1234,59 @@ int main() {
 ```
 
 </div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Interviewer {
+    fun askQuestions()
+}
+
+class Developer : Interviewer {
+    override fun askQuestions() {
+        println("Asking about design patterns")
+    }
+}
+
+class CommunityExecutive : Interviewer {
+    override fun askQuestions() {
+        println("Asking about community building")
+    }
+}
+
+abstract class HiringManager {
+    abstract fun makeInterviewer(): Interviewer
+    
+    fun takeInterview() {
+        val interviewer = makeInterviewer()
+        interviewer.askQuestions()
+    }
+}
+
+class DevelopmentManager : HiringManager() {
+    override fun makeInterviewer(): Interviewer = Developer()
+}
+
+class MarketingManager : HiringManager() {
+    override fun makeInterviewer(): Interviewer = CommunityExecutive()
+}
+
+// Usage
+fun main() {
+    val devManager = DevelopmentManager()
+    devManager.takeInterview() // Output: Asking about design patterns
+    
+    val marketingManager = MarketingManager()
+    marketingManager.takeInterview() // Output: Asking about community building
+}
+```
+
+</div>
+
 </details>
 
 <br>
@@ -2018,11 +2105,86 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Door {
+    fun getDescription()
+}
+
+class WoodenDoor : Door {
+    override fun getDescription() {
+        println("I am a wooden door")
+    }
+}
+
+class IronDoor : Door {
+    override fun getDescription() {
+        println("I am an iron door")
+    }
+}
+
+interface DoorFittingExpert {
+    fun getDescription()
+}
+
+class Welder : DoorFittingExpert {
+    override fun getDescription() {
+        println("I can only fit iron doors")
+    }
+}
+
+class Carpenter : DoorFittingExpert {
+    override fun getDescription() {
+        println("I can only fit wooden doors")
+    }
+}
+
+interface DoorFactory {
+    fun makeDoor(): Door
+    fun makeFittingExpert(): DoorFittingExpert
+}
+
+class WoodenDoorFactory : DoorFactory {
+    override fun makeDoor(): Door = WoodenDoor()
+    override fun makeFittingExpert(): DoorFittingExpert = Carpenter()
+}
+
+class IronDoorFactory : DoorFactory {
+    override fun makeDoor(): Door = IronDoor()
+    override fun makeFittingExpert(): DoorFittingExpert = Welder()
+}
+
+// Usage
+fun main() {
+    val woodenFactory = WoodenDoorFactory()
+    val woodenDoor = woodenFactory.makeDoor()
+    val carpenter = woodenFactory.makeFittingExpert()
+
+    woodenDoor.getDescription() // Output: I am a wooden door
+    carpenter.getDescription() // Output: I can only fit wooden doors
+
+    val ironFactory = IronDoorFactory()
+    val ironDoor = ironFactory.makeDoor()
+    val welder = ironFactory.makeFittingExpert()
+
+    ironDoor.getDescription() // Output: I am an iron door
+    welder.getDescription() // Output: I can only fit iron doors
+}
+```
+
+</div>
+
+</details>
+
+<br>
+
 **همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
 انتخاب نمی‌کنیم.**
-
-<br>
 
 **چه موقع باید ازش استفاده کنیم؟**
 
@@ -2155,6 +2317,26 @@ public Burger(int size, boolean cheese, boolean pepperoni, boolean lettuce, bool
 
 </div>
 </details>
+
+<details>
+  <summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+class Burger(
+    val size: Int,
+    val cheese: Boolean,
+    val pepperoni: Boolean,
+    val lettuce: Boolean,
+    val tomato: Boolean
+)
+```
+
+</div>
+</details>
+
+<br>
 
 در این شرایط معمولا Builder میتونه به دادمون برسه.
 
@@ -2791,6 +2973,64 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+data class Burger(
+    var size: Int = 0,
+    var cheese: Boolean = false,
+    var pepperoni: Boolean = false,
+    var lettuce: Boolean = false,
+    var tomato: Boolean = false
+) {
+    fun getDescription(): String {
+        val toppings = mutableListOf<String>()
+
+        if (cheese) toppings.add("Cheese")
+        if (pepperoni) toppings.add("Pepperoni")
+        if (lettuce) toppings.add("Lettuce")
+        if (tomato) toppings.add("Tomato")
+
+        return "This is $size inch Burger with ${toppings.joinToString(", ")}."
+    }
+}
+
+class BurgerBuilder {
+    private var size: Int = 0
+    private var cheese: Boolean = false
+    private var pepperoni: Boolean = false
+    private var lettuce: Boolean = false
+    private var tomato: Boolean = false
+
+    fun size(size: Int) = apply { this.size = size }
+    fun cheese(cheese: Boolean = true) = apply { this.cheese = cheese }
+    fun pepperoni(pepperoni: Boolean = true) = apply { this.pepperoni = pepperoni }
+    fun lettuce(lettuce: Boolean = true) = apply { this.lettuce = lettuce }
+    fun tomato(tomato: Boolean = true) = apply { this.tomato = tomato }
+    fun build() = Burger(size, cheese, pepperoni, lettuce, tomato)
+}
+
+// Usage
+fun main() {
+    val burger = BurgerBuilder()
+        .size(10)
+        .cheese(true)
+        .pepperoni(true)
+        .lettuce(false)
+        .tomato(false)
+        .build()
+
+    println(burger.getDescription())
+}
+```
+
+</div>
+
+</details>
+
 <br>
 
 **چه موقع باید ازش استفاده کنیم؟**
@@ -3405,6 +3645,50 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+class SomeComponent {
+    var someInt: Int = 0
+    var someString: String = ""
+
+    fun copy(): SomeComponent {
+        return this
+    }
+
+    fun deepCopy(): SomeComponent {
+        return SomeComponent().apply {
+            this.someInt = this@SomeComponent.someInt
+            this.someString = this@SomeComponent.someString
+        }
+    }
+}
+
+// Usage
+fun main() {
+    val mainComponent = SomeComponent().apply {
+        someInt = 1
+        someString = "main"
+    }
+
+    val copyComponent = mainComponent.copy()
+    val clonedComponent = mainComponent.deepCopy()
+
+    copyComponent.someString = "copy"
+    clonedComponent.someString = "clone"
+
+    println(mainComponent.someString == copyComponent.someString)    // True
+    println(mainComponent.someString == clonedComponent.someString)  // False
+}
+```
+
+</div>
+
+</details>
+
 <br>
 
 **تفاوت Shadow Copy و Deep Copy ؟**
@@ -3776,7 +4060,46 @@ int main() {
 </div>
 </details>
 
-<br>
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+class President private constructor() {
+    fun doSomething() {
+        println("President is doing something")
+    }
+
+    companion object {
+        private var instance: President? = null
+
+        @Synchronized
+        fun getInstance(): President {
+            if (instance == null) {
+                instance = President()
+            }
+            return instance!!
+        }
+    }
+}
+
+// Usage
+fun main() {
+    val a = President.getInstance()
+    val b = President.getInstance()
+
+    println(a === b) // true
+
+    a.doSomething()
+    b.doSomething()
+}
+```
+
+</div>
+
+</details>
+
 <br>
 
 ---
@@ -4344,6 +4667,60 @@ int main() {
 }
 ```
 </div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Lion {
+    fun roar()
+}
+
+class AfricanLion : Lion {
+    override fun roar() {
+        println("African Lion: Roar!")
+    }
+}
+
+class AsianLion : Lion {
+    override fun roar() {
+        println("Asian Lion: Roar!")
+    }
+}
+
+class WildDog {
+    fun bark() {
+        println("Wild Dog: Bark!")
+    }
+}
+
+class WildDogAdapter(private val dog: WildDog) : Lion {
+    override fun roar() {
+        dog.bark()
+    }
+}
+
+class Hunter {
+    fun hunt(lion: Lion) {
+        lion.roar()
+    }
+}
+
+// Usage
+fun main() {
+    val wildDog = WildDog()
+    val wildDogAdapter = WildDogAdapter(wildDog)
+    
+    val hunter = Hunter()
+    hunter.hunt(wildDogAdapter)
+}
+```
+
+</div>
+
 </details>
 
 <br>
@@ -4974,6 +5351,55 @@ int main() {
     std::cout << careers.getContent() << std::endl;   // Careers page in Off White theme
     
     return 0;
+}
+```
+</div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Theme {
+    fun getColor(): String
+}
+
+class DarkTheme : Theme {
+    override fun getColor() = "Dark Black"
+}
+
+class LightTheme : Theme {
+    override fun getColor() = "Off White"
+}
+
+class AquaTheme : Theme {
+    override fun getColor() = "Light Blue"
+}
+
+abstract class WebPage(protected val theme: Theme) {
+    abstract fun getContent(): String
+}
+
+class About(theme: Theme) : WebPage(theme) {
+    override fun getContent() = "About page in ${theme.getColor()} theme"
+}
+
+class Careers(theme: Theme) : WebPage(theme) {
+    override fun getContent() = "Careers page in ${theme.getColor()} theme"
+}
+
+// Usage
+fun main() {
+    val darkTheme = DarkTheme()
+    val lightTheme = LightTheme()
+
+    val about = About(darkTheme)
+    val careers = Careers(lightTheme)
+
+    println(about.getContent())     // Output: About page in Dark Black theme
+    println(careers.getContent())   // Output: Careers page in Off White theme
 }
 ```
 </div>
@@ -5687,6 +6113,54 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Employee {
+    fun getName(): String
+    fun getSalary(): Double
+}
+
+class Developer(private val name: String, private val salary: Double) : Employee {
+    override fun getName() = name
+    override fun getSalary() = salary
+}
+
+class Designer(private val name: String, private val salary: Double) : Employee {
+    override fun getName() = name
+    override fun getSalary() = salary
+}
+
+class Organization {
+    private val employees = mutableListOf<Employee>()
+
+    fun addEmployee(employee: Employee) {
+        employees += employee
+    }
+
+    fun getNetSalaries(): Double = employees.sumOf { it.getSalary() }
+}
+
+// Usage
+fun main() {
+    val developer = Developer("John", 5000.0)
+    val designer = Designer("Arya", 5000.0)
+
+    val organization = Organization()
+    organization.addEmployee(developer)
+    organization.addEmployee(designer)
+
+    println("Organization employees salary : ${organization.getNetSalaries()}")
+    // Organization employees salary : 10000.0
+}
+```
+
 </div>
 </details>
 
@@ -6517,6 +6991,57 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Coffee {
+    fun getCost(): Double
+    fun getDescription(): String
+}
+
+class SimpleCoffee : Coffee {
+    override fun getCost() = 10.0
+    override fun getDescription() = "Simple Coffee"
+}
+
+abstract class CoffeeDecorator(protected val coffee: Coffee) : Coffee {
+    override fun getCost() = coffee.getCost()
+    override fun getDescription() = coffee.getDescription()
+}
+
+class MilkCoffee(coffee: Coffee) : CoffeeDecorator(coffee) {
+    override fun getCost() = coffee.getCost() + 2.0
+    override fun getDescription() = "${coffee.getDescription()}, Milk"
+}
+
+class WhipCoffee(coffee: Coffee) : CoffeeDecorator(coffee) {
+    override fun getCost() = coffee.getCost() + 5.0
+    override fun getDescription() = "${coffee.getDescription()}, Whip"
+}
+
+class VanillaCoffee(coffee: Coffee) : CoffeeDecorator(coffee) {
+    override fun getCost() = coffee.getCost() + 3.0
+    override fun getDescription() = "${coffee.getDescription()}, Vanilla"
+}
+
+// Usage
+fun main() {
+    val someCoffee: Coffee = SimpleCoffee()
+    val milkCoffee: Coffee = MilkCoffee(someCoffee)
+    val whipCoffee: Coffee = WhipCoffee(milkCoffee)
+    val vanillaCoffee: Coffee = VanillaCoffee(whipCoffee)
+
+    println("$${vanillaCoffee.getCost().toInt()}") // $20
+    println(vanillaCoffee.getDescription()) // Simple Coffee, Milk, Whip, Vanilla
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -7161,6 +7686,50 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+class Computer {
+    fun getElectricShock() = println("Ouch!")
+    fun makeSound() = println("Beep beep!")
+    fun showLoadingScreen() = println("Loading...")
+    fun bam() = println("Ready to be used!")
+
+    fun closeEverything() = println("Bup bup bup buzzzz!")
+    fun pullCurrent() = println("Haaah!")
+    fun sooth() = println("Zzzzz")
+}
+
+class ComputerFacade(private val computer: Computer) {
+    fun turnOn() {
+        computer.getElectricShock()
+        computer.makeSound()
+        computer.showLoadingScreen()
+        computer.bam()
+    }
+
+    fun turnOff() {
+        computer.closeEverything()
+        computer.pullCurrent()
+        computer.sooth()
+    }
+}
+
+// Usage
+fun main() {
+    val computer = ComputerFacade(Computer())
+    computer.turnOn()  // Ouch! Beep beep! Loading... Ready to be used!
+    println()
+    computer.turnOff() // Bup bup bup buzzzz! Haaah! Zzzzz
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -7708,6 +8277,54 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+class KarakTea
+
+class TeaMaker {
+    private val availableTea = mutableMapOf<String, KarakTea>()
+
+    fun make(preference: String): KarakTea =
+        availableTea.getOrPut(preference) { KarakTea() }
+}
+
+class TeaShop(private val teaMaker: TeaMaker) {
+    private val orders = mutableMapOf<Int, KarakTea>()
+
+    fun takeOrder(teaType: String, table: Int) {
+        orders[table] = teaMaker.make(teaType)
+    }
+
+    fun serve() {
+        for (table in orders.keys.sorted()) {
+            println("Serving tea to table $table")
+        }
+    }
+}
+
+// Usage
+fun main() {
+    val teaMaker = TeaMaker()
+    val teaShop = TeaShop(teaMaker)
+
+    teaShop.takeOrder("less sugar", 1)
+    teaShop.takeOrder("more milk", 2)
+    teaShop.takeOrder("without sugar", 5)
+
+    teaShop.serve()
+    // Serving tea to table 1
+    // Serving tea to table 2
+    // Serving tea to table 5
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -8235,6 +8852,55 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Door {
+    fun open()
+    fun close()
+}
+
+class LabDoor : Door {
+    override fun open() = println("Opening lab door")
+    override fun close() = println("Closing lab door")
+}
+
+class SecuredDoor(private val door: Door) : Door {
+    private fun authenticate(password: String) = password == "\$ecr@t"
+
+    override fun open() {
+        println("Big no! It ain't possible.")
+    }
+
+    fun open(password: String) {
+        if (authenticate(password)) {
+            door.open()
+        } else {
+            open()
+        }
+    }
+
+    override fun close() {
+        door.close()
+    }
+}
+
+// Usage
+fun main() {
+    val door = SecuredDoor(LabDoor())
+
+    door.open()  // Big no! It ain't possible.
+    door.open("\$ecr@t")  // Opening lab door
+    door.close()          // Closing lab door
+}
+```
+
+</div>
 </details>
 
 <br>
@@ -8962,6 +9628,66 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+abstract class Account(protected var balance: Int) {
+    private var successor: Account? = null
+
+    fun setNext(account: Account) {
+        successor = account
+    }
+
+    fun pay(amountToPay: Int) {
+        if (canPay(amountToPay)) {
+            println("Paid $amountToPay using ${getName()}")
+        } else if (successor != null) {
+            println("Cannot pay using ${getName()}. Proceeding...")
+            successor!!.pay(amountToPay)
+        } else {
+            println("None of the accounts have enough balance")
+        }
+    }
+
+    protected abstract fun getName(): String
+
+    private fun canPay(amount: Int) = balance >= amount
+}
+
+class Bank(balance: Int) : Account(balance) {
+    override fun getName() = "Bank"
+}
+
+class Paypal(balance: Int) : Account(balance) {
+    override fun getName() = "Paypal"
+}
+
+class Bitcoin(balance: Int) : Account(balance) {
+    override fun getName() = "Bitcoin"
+}
+
+// Usage
+fun main() {
+    val bank = Bank(100)
+    val paypal = Paypal(200)
+    val bitcoin = Bitcoin(300)
+
+    bank.setNext(paypal)
+    paypal.setNext(bitcoin)
+
+    bank.pay(259)
+    // Cannot pay using Bank. Proceeding...
+    // Cannot pay using Paypal. Proceeding...
+    // Paid 259 using Bitcoin
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -9669,6 +10395,58 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+// Receiver
+class Bulb {
+    fun turnOn() = println("Bulb has been lit!")
+    fun turnOff() = println("Darkness!")
+}
+
+interface Command {
+    fun execute()
+    fun undo()
+    fun redo()
+}
+
+class TurnOn(private val bulb: Bulb) : Command {
+    override fun execute() = bulb.turnOn()
+    override fun undo() = bulb.turnOff()
+    override fun redo() = execute()
+}
+
+class TurnOff(private val bulb: Bulb) : Command {
+    override fun execute() = bulb.turnOff()
+    override fun undo() = bulb.turnOn()
+    override fun redo() = execute()
+}
+
+// Invoker
+class RemoteControl {
+    fun submit(command: Command) {
+        command.execute()
+    }
+}
+
+// Usage
+fun main() {
+    val bulb = Bulb()
+    val turnOn = TurnOn(bulb)
+    val turnOff = TurnOff(bulb)
+
+    val remote = RemoteControl()
+    remote.submit(turnOn)   // Bulb has been lit!
+    remote.submit(turnOff)  // Darkness!
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -10337,6 +11115,49 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+data class RadioStation(private val frequency: Float) {
+    fun getFrequency() = frequency
+}
+
+class StationList : Iterable<RadioStation> {
+    private val stations = mutableListOf<RadioStation>()
+
+    fun add(station: RadioStation) {
+        stations += station
+    }
+
+    fun remove(station: RadioStation) {
+        stations.removeIf { it.getFrequency() == station.getFrequency() }
+    }
+
+    override fun iterator(): Iterator<RadioStation> = stations.iterator()
+}
+
+// Usage
+fun main() {
+    val stations = StationList()
+    stations.add(RadioStation(89f))
+    stations.add(RadioStation(101f))
+    stations.add(RadioStation(102f))
+
+    for (station in stations) {
+        println(station.getFrequency())
+    }
+    // 89.0
+    // 101.0
+    // 102.0
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -10828,6 +11649,51 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
+interface ChatRoomMediator {
+    fun showMessage(user: User, message: String)
+}
+
+class ChatRoom : ChatRoomMediator {
+    private val formatter = DateTimeFormatter.ofPattern("MMMM dd, H:mm")
+
+    override fun showMessage(user: User, message: String) {
+        val time = LocalDateTime.now().format(formatter)
+        println("$time [${user.getName()}]: $message")
+    }
+}
+
+class User(private val name: String, private val chatRoom: ChatRoomMediator) {
+    fun getName() = name
+
+    fun send(message: String) {
+        chatRoom.showMessage(this, message)
+    }
+}
+
+// Usage
+fun main() {
+    val mediator = ChatRoom()
+
+    val john = User("John", mediator)
+    val jane = User("Jane", mediator)
+
+    john.send("Hi there!")
+    jane.send("Hey!")
+}
+```
+
+</div>
 </details>
 
 <br>
@@ -11396,6 +12262,50 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+data class EditorMemento(val content: String)
+
+class Editor {
+    private var content: String = ""
+
+    fun type(words: String) {
+        content = if (content.isEmpty()) words else "$content $words"
+    }
+
+    fun getContent(): String = content
+
+    fun save(): EditorMemento = EditorMemento(content)
+
+    fun restore(memento: EditorMemento) {
+        content = memento.content
+    }
+}
+
+// Usage
+fun main() {
+    val editor = Editor()
+
+    editor.type("This is the first sentence.")
+    editor.type("This is the second.")
+
+    val saved = editor.save()
+    editor.type("And this is the third.")
+
+    println(editor.getContent())
+
+    editor.restore(saved)
+    println(editor.getContent())
+}
+```
+
+</div>
 </details>
 
 <br>
@@ -12072,6 +12982,58 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+data class JobPost(private val title: String) {
+    fun getTitle() = title
+}
+
+class JobSeeker(private val name: String) {
+    fun onJobPosted(job: JobPost) {
+        println("Hi $name! New job posted: ${job.getTitle()}")
+    }
+}
+
+class JobCategory {
+    private val observers = mutableListOf<JobSeeker>()
+
+    fun attach(observer: JobSeeker) {
+        observers += observer
+    }
+
+    fun detach(observer: JobSeeker) {
+        observers -= observer
+    }
+
+    private fun notify(jobPosting: JobPost) {
+        observers.forEach { it.onJobPosted(jobPosting) }
+    }
+
+    fun addJob(jobPosting: JobPost) {
+        notify(jobPosting)
+    }
+}
+
+// Usage
+fun main() {
+    val johnDoe = JobSeeker("John Doe")
+    val janeDoe = JobSeeker("Jane Doe")
+
+    val jobPostings = JobCategory()
+    jobPostings.attach(janeDoe)
+    jobPostings.attach(johnDoe)
+
+    jobPostings.addJob(JobPost("Software Engineer at IBM"))
+}
+```
+
 </div>
 </details>
 
@@ -12969,6 +13931,71 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+// Visitee
+interface Animal {
+    fun accept(operation: AnimalOperation)
+}
+
+// Visitor
+interface AnimalOperation {
+    fun visitMonkey(monkey: Monkey)
+    fun visitLion(lion: Lion)
+    fun visitDolphin(dolphin: Dolphin)
+}
+
+class Monkey : Animal {
+    fun shout() = println("Ooh oo aa aa!")
+
+    override fun accept(operation: AnimalOperation) {
+        operation.visitMonkey(this)
+    }
+}
+
+class Lion : Animal {
+    fun roar() = println("Roaaar!")
+
+    override fun accept(operation: AnimalOperation) {
+        operation.visitLion(this)
+    }
+}
+
+class Dolphin : Animal {
+    fun speak() = println("Tuut tutt tuttt!")
+
+    override fun accept(operation: AnimalOperation) {
+        operation.visitDolphin(this)
+    }
+}
+
+class Speak : AnimalOperation {
+    override fun visitMonkey(monkey: Monkey) = monkey.shout()
+    override fun visitLion(lion: Lion) = lion.roar()
+    override fun visitDolphin(dolphin: Dolphin) = dolphin.speak()
+}
+
+// Usage
+fun main() {
+    val monkey = Monkey()
+    val lion = Lion()
+    val dolphin = Dolphin()
+
+    val speak = Speak()
+
+    monkey.accept(speak)   // Ooh oo aa aa!
+    lion.accept(speak)     // Roaaar!
+    dolphin.accept(speak)  // Tuut tutt tuttt!
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -13438,6 +14465,49 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface SortStrategy {
+    fun sort(dataset: List<Int>): List<Int>
+}
+
+class BubbleSortStrategy : SortStrategy {
+    override fun sort(dataset: List<Int>): List<Int> {
+        println("Sorting using bubble sort")
+        return dataset
+    }
+}
+
+class QuickSortStrategy : SortStrategy {
+    override fun sort(dataset: List<Int>): List<Int> {
+        println("Sorting using quick sort")
+        return dataset
+    }
+}
+
+class Sorter(private val sorter: SortStrategy) {
+    fun sort(dataset: List<Int>): List<Int> = sorter.sort(dataset)
+}
+
+// Usage
+fun main() {
+    val dataset = listOf(1, 5, 4, 3, 2, 8)
+
+    val sorter = Sorter(BubbleSortStrategy())
+    sorter.sort(dataset)
+
+    val sorter2 = Sorter(QuickSortStrategy())
+    sorter2.sort(dataset)
+}
+```
+
+</div>
 </details>
 
 <br>
@@ -14067,6 +15137,61 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+<div dir="ltr">
+
+```kotlin
+interface WritingState {
+    fun write(words: String)
+}
+
+class UpperCase : WritingState {
+    override fun write(words: String) {
+        println(words.uppercase())
+    }
+}
+
+class LowerCase : WritingState {
+    override fun write(words: String) {
+        println(words.lowercase())
+    }
+}
+
+class DefaultText : WritingState {
+    override fun write(words: String) {
+        println(words)
+    }
+}
+
+class TextEditor(private var state: WritingState) {
+    fun setState(state: WritingState) {
+        this.state = state
+    }
+
+    fun type(words: String) {
+        state.write(words)
+    }
+}
+
+// Usage
+fun main() {
+    val editor = TextEditor(DefaultText())
+    editor.type("First Line")
+
+    editor.setState(UpperCase())
+    editor.type("Second Line")
+    editor.type("Third Line")
+
+    editor.setState(LowerCase())
+    editor.type("Fourth Line")
+    editor.type("Fifth Line")
+}
+```
+
+</div>
+</details>
+
 <br>
 
 ---
@@ -14277,6 +15402,7 @@ iosBuilder.build();
 
 </div>
 </details>
+
 
 <details>
 <summary>JavaScript</summary>
@@ -14822,6 +15948,75 @@ int main() {
 
 </div>
 
+</details>
+
+
+<details>
+<summary>Kotlin</summary>
+<div dir="ltr">
+
+```kotlin
+abstract class Builder {
+    fun build() {
+        test()
+        lint()
+        assemble()
+        deploy()
+    }
+
+    abstract fun test()
+    abstract fun lint()
+    abstract fun assemble()
+    abstract fun deploy()
+}
+
+class AndroidBuilder : Builder() {
+    override fun test() {
+        println("Running android tests")
+    }
+
+    override fun lint() {
+        println("Linting the android code")
+    }
+
+    override fun assemble() {
+        println("Assembling the android build")
+    }
+
+    override fun deploy() {
+        println("Deploying android build to server")
+    }
+}
+
+class IosBuilder : Builder() {
+    override fun test() {
+        println("Running ios tests")
+    }
+
+    override fun lint() {
+        println("Linting the ios code")
+    }
+
+    override fun assemble() {
+        println("Assembling the ios build")
+    }
+
+    override fun deploy() {
+        println("Deploying ios build to server")
+    }
+}
+
+// Usage
+fun main() {
+    val androidBuilder = AndroidBuilder()
+    androidBuilder.build()
+
+    val iosBuilder = IosBuilder()
+    iosBuilder.build()
+}
+```
+
+</div>
 </details>
 
 <br>
