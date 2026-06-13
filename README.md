@@ -10086,6 +10086,9 @@ int main() {
 
 </div>
 
+خلاصه‌ش این می‌شه که الگوی میانجی (Mediator) یه آبجکت تعریف می‌کنه که چم‌وخمِ گفت‌وگوی یه دسته آبجکت با همدیگه رو توی خودش جمع می‌کنه.
+چون این الگو می‌تونه روی رفتار برنامه موقع اجرا اثر بذاره، یه الگوی رفتاری (Behavioral) حساب می‌شه.
+
 **مثال برنامه‌نویسی**
 
 می‌خوایم یک ساختار چت روم بسازیم! (Mediator)
@@ -10098,55 +10101,41 @@ int main() {
 <div dir="ltr">
 
 ```python
-import datetime
-
-
 class ChatRoomMediator:
-    def showMessage(self, user, message):
-        pass
+    def show_message(self, user, message):
+        raise NotImplementedError
 
 
 class ChatRoom(ChatRoomMediator):
-    def showMessage(self, user, message):
-        time = datetime.datetime.now()
-        sender = user.getName()
-
-        print(str(time) + '[' + sender + ']: ' + message)
+    def show_message(self, user, message):
+        print(user.get_name() + ': ' + message)
 
 
 class User:
-    _name = None
-    _chatMediator = None
+    def __init__(self, name, chat_room):
+        self._name = name
+        self._chat_room = chat_room
 
-    def __init__(self, name, chatMediator):
-        self.name = name
-        self._chatMediator = chatMediator
-
-    def getName(self):
-        return self.name
+    def get_name(self):
+        return self._name
 
     def send(self, message):
-        self._chatMediator.showMessage(self, message)
+        self._chat_room.show_message(self, message)
 
 
-#----------------------------
+# ----------------------------
 
 mediator = ChatRoom()
 
 john = User('John', mediator)
 jane = User('Jane', mediator)
 
-john.send('Hi There!')
+john.send('Hi there!')
 jane.send('Hey!')
 
-
-'''
-Output will be
-==============
-2024-09-23 21:20:17.284000[John]: Hi There!
-2024-09-23 21:20:17.284023[Jane]: Hey!
-
-'''
+# Output:
+# John: Hi there!
+# Jane: Hey!
 ```
 
 </div>
@@ -10159,27 +10148,23 @@ Output will be
 <div dir="ltr">
 
 ```typescript
-class ChatRoomMediator {
-    showMessage(user: User, message: string): void {
-    }
+interface ChatRoomMediator {
+    showMessage(user: User, message: string): void;
 }
 
-class ChatRoom extends ChatRoomMediator {
+class ChatRoom implements ChatRoomMediator {
     showMessage(user: User, message: string): void {
-        let time = new Date();
-        let sender = user.getName();
-
-        console.log(`${time.toLocaleString()} [${sender}]: ${message}`);
+        console.log(`${user.getName()}: ${message}`);
     }
 }
 
 class User {
     private name: string;
-    private chatMediator: ChatRoomMediator;
+    private chatRoom: ChatRoomMediator;
 
-    constructor(name: string, chatMediator: ChatRoomMediator) {
+    constructor(name: string, chatRoom: ChatRoomMediator) {
         this.name = name;
-        this.chatMediator = chatMediator;
+        this.chatRoom = chatRoom;
     }
 
     getName(): string {
@@ -10187,7 +10172,7 @@ class User {
     }
 
     send(message: string): void {
-        this.chatMediator.showMessage(this, message);
+        this.chatRoom.showMessage(this, message);
     }
 }
 
@@ -10201,9 +10186,9 @@ const jane = new User("Jane", mediator);
 john.send("Hi there!");
 jane.send("Hey!");
 
-// Output will be:
-// Feb 14, 10:58 [John]: Hi there!
-// Feb 14, 10:58 [Jane]: Hey!
+// Output:
+// John: Hi there!
+// Jane: Hey!
 ```
 
 </div>
@@ -10216,23 +10201,19 @@ jane.send("Hey!");
 ```javascript
 class ChatRoomMediator {
     showMessage(user, message) {
-
     }
 }
 
 class ChatRoom extends ChatRoomMediator {
     showMessage(user, message) {
-        const time = new Date();
-        const sender = user.getName();
-
-        console.log(`${time.toLocaleString()} [${sender}]: ${message}`);
+        console.log(`${user.getName()}: ${message}`);
     }
 }
 
 class User {
-    constructor(name, chatMediator) {
+    constructor(name, chatRoom) {
         this.name = name;
-        this.chatMediator = chatMediator;
+        this.chatRoom = chatRoom;
     }
 
     getName() {
@@ -10240,10 +10221,9 @@ class User {
     }
 
     send(message) {
-        this.chatMediator.showMessage(this, message);
+        this.chatRoom.showMessage(this, message);
     }
 }
-
 
 const mediator = new ChatRoom();
 
@@ -10252,6 +10232,10 @@ const jane = new User("Jane", mediator);
 
 john.send("Hi there!");
 jane.send("Hey!");
+
+// Output:
+// John: Hi there!
+// Jane: Hey!
 ```
 
 </div>
@@ -10269,12 +10253,12 @@ interface IChatRoomMediator
   void ShowMessage(User user, string message);
 }
 
-//Mediator
+// Mediator
 class ChatRoom : IChatRoomMediator
 {
   public void ShowMessage(User user, string message)
   {
-    Console.WriteLine($"{DateTime.Now.ToString("MMMM dd, H:mm")} [{user.GetName()}]:{message}");
+    Console.WriteLine($"{user.GetName()}: {message}");
   }
 }
 
@@ -10284,9 +10268,9 @@ class User
   private string mName;
   private IChatRoomMediator mChatRoom;
 
-  public User(string name, IChatRoomMediator chatroom)
+  public User(string name, IChatRoomMediator chatRoom)
   {
-    mChatRoom = chatroom;
+    mChatRoom = chatRoom;
     mName = name;
   }
 
@@ -10311,8 +10295,9 @@ var jane = new User("Jane", mediator);
 john.Send("Hi there!");
 jane.Send("Hey!");
 
-//April 14, 20:05[John]:Hi there!
-//April 14, 20:05[Jane]:Hey!
+// Output:
+// John: Hi there!
+// Jane: Hey!
 
 ```
 
@@ -10335,7 +10320,7 @@ class ChatRoom implements ChatRoomMediator
 {
     public function showMessage(User $user, string $message): void
     {
-        echo date('F d, H:i') . " [" . $user->getName() . "]: " . $message . "\n";
+        echo $user->getName() . ": " . $message . "\n";
     }
 }
 
@@ -10370,8 +10355,8 @@ $john->send("Hi there!");
 $jane->send("Hey!");
 
 // Output:
-// February 15, 14:44 [John]: Hi there!
-// February 15, 14:44 [Jane]: Hey!
+// John: Hi there!
+// Jane: Hey!
 
 ```
 
@@ -10387,10 +10372,7 @@ $jane->send("Hey!");
 ```go
 package main
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
 type ChatRoomMediator interface {
 	ShowMessage(user *User, message string)
@@ -10399,7 +10381,7 @@ type ChatRoomMediator interface {
 type ChatRoom struct{}
 
 func (cr *ChatRoom) ShowMessage(user *User, message string) {
-	fmt.Printf("%s [%s]: %s\n", time.Now().Format("January 02, 15:04"), user.GetName(), message)
+	fmt.Printf("%s: %s\n", user.GetName(), message)
 }
 
 type User struct {
@@ -10423,6 +10405,10 @@ func main() {
 
 	john.Send("Hi there!")
 	jane.Send("Hey!")
+
+	// Output:
+	// John: Hi there!
+	// Jane: Hey!
 }
 
 ```
@@ -10441,14 +10427,12 @@ interface ChatRoomMediator {
     void showMessage(User user, String message);
 }
 
-//Mediator
+// Mediator
 class ChatRoom implements ChatRoomMediator {
-
-    SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, HH:mm");
 
     @Override
     public void showMessage(User user, String message) {
-        System.out.println(sdf.format(new Date())+ " [" + user.getName() + "]: " + message);
+        System.out.println(user.getName() + ": " + message);
     }
 }
 
@@ -10456,8 +10440,8 @@ class User {
     private String name;
     private ChatRoomMediator chatRoom;
 
-    public User(String name, ChatRoomMediator chatroom) {
-        chatRoom = chatroom;
+    public User(String name, ChatRoomMediator chatRoom) {
+        this.chatRoom = chatRoom;
         this.name = name;
     }
 
@@ -10477,8 +10461,8 @@ ChatRoom mediator = new ChatRoom();
 User john = new User("John", mediator);
 User jane = new User("Jane", mediator);
 
-john.send("Hi there!"); // March 01, 21:38 [John]: Hi there!
-jane.send("Hey!");      // March 01, 21:38 [Jane]: Hey!
+john.send("Hi there!"); // John: Hi there!
+jane.send("Hey!");      // Jane: Hey!
 ```
 
 </div>
@@ -10493,7 +10477,6 @@ jane.send("Hey!");      // March 01, 21:38 [Jane]: Hey!
 ```cpp
 #include <iostream>
 #include <string>
-#include <ctime>
 
 class User;
 
@@ -10509,8 +10492,8 @@ private:
     ChatRoomMediator* chatRoom;
 
 public:
-    User(const std::string& n, ChatRoomMediator* room) 
-        : name(n), chatRoom(room) {}
+    User(const std::string& name, ChatRoomMediator* chatRoom)
+        : name(name), chatRoom(chatRoom) {}
 
     std::string getName() const {
         return name;
@@ -10524,9 +10507,7 @@ public:
 class ChatRoom : public ChatRoomMediator {
 public:
     void showMessage(User* user, const std::string& message) override {
-        time_t now = time(0);
-        char* dt = ctime(&now);
-        std::cout << dt << " [" << user->getName() << "]: " << message << std::endl;
+        std::cout << user->getName() << ": " << message << std::endl;
     }
 };
 
@@ -10547,6 +10528,12 @@ int main() {
 </div>
 
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی چند آبجکت جوری تو هم گره خوردن که هرکی با همه بقیه مستقیم حرف می‌زنه و این تار عنکبوتِ وابستگی داره خفه‌ت می‌کنه»؛ ❌ «وقتی فقط دو سه آبجکت ساده داری که ارتباط مستقیمشون اصلاً پیچیده نیست».
+> 🪤 **دام رایج:** «خودِ میانجی کم‌کم همه منطق رو می‌بلعه و تبدیل می‌شه به یه «آبجکت خدا (God Object)» که هیچ‌کس جرئت دست‌زدن بهش رو نداره».
+> 🔗 **فرقش با [ناظر (Observer)](#ناظر-observer-):** «اونجا یه سوژه به چند ناظری که خودشون اشتراک گرفتن خبر می‌ده؛ اینجا یه مرکز رفت‌وآمدِ دوطرفه پیام‌ها رو بین آبجکت‌ها میزون می‌کنه».
+
 
 <br>
 
