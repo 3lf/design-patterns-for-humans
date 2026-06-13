@@ -8865,6 +8865,10 @@ int main() {
 
 </div>
 
+خلاصه‌اش این می‌شه: توی برنامه‌نویسی شیءگرا، الگوی فرمان (Command) یه الگوی رفتاریه که یه درخواست رو می‌بنده توی یه آبجکت.
+این آبجکت همه‌چیزی که برای انجام اون کار لازمه رو نگه می‌داره: اسم متد، آبجکتی که متد مال اونه و مقدار پارامترها.
+این‌جوری می‌تونی همون درخواست رو نگه داری و هر وقت خواستی بعداً اجراش کنی.
+
 **مثال برنامه‌نویسی**
 
 می‌خوایم یک کنترل برای لامپ درست کنیم (Receiver).
@@ -8892,12 +8896,13 @@ class Bulb:
 
 
 class Command:
-    _bulb = None
-
     def __init__(self, bulb):
         self._bulb = bulb
 
     def execute(self):
+        pass
+
+    def undo(self):
         pass
 
 
@@ -8905,10 +8910,16 @@ class TurnOn(Command):
     def execute(self):
         self._bulb.turnOn()
 
+    def undo(self):
+        self._bulb.turnOff()
+
 
 class TurnOff(Command):
     def execute(self):
         self._bulb.turnOff()
+
+    def undo(self):
+        self._bulb.turnOn()
 
 
 class RemoteControl:
@@ -8924,7 +8935,7 @@ turnOn = TurnOn(bulb)
 turnOff = TurnOff(bulb)
 
 remote = RemoteControl()
-remote.submit(turnOn)  # Bulb has been lit!
+remote.submit(turnOn)   # Bulb has been lit
 remote.submit(turnOff)  # Darkness!
 
 ```
@@ -8939,40 +8950,46 @@ remote.submit(turnOff)  # Darkness!
 
 ```typescript
 class Bulb {
-    turnOn() {
+    turnOn(): void {
         console.log("Bulb has been lit");
     }
 
-    turnOff() {
+    turnOff(): void {
         console.log("Darkness!");
     }
 }
 
-class Command {
-    protected _bulb: Bulb | null = null;
+interface Command {
+    execute(): void;
+    undo(): void;
+}
 
-    constructor(bulb: Bulb) {
-        this._bulb = bulb;
-    }
+class TurnOn implements Command {
+    constructor(private bulb: Bulb) {}
 
     execute(): void {
+        this.bulb.turnOn();
+    }
+
+    undo(): void {
+        this.bulb.turnOff();
     }
 }
 
-class TurnOn extends Command {
-    execute() {
-        this._bulb!.turnOn();
-    }
-}
+class TurnOff implements Command {
+    constructor(private bulb: Bulb) {}
 
-class TurnOff extends Command {
-    execute() {
-        this._bulb!.turnOff();
+    execute(): void {
+        this.bulb.turnOff();
+    }
+
+    undo(): void {
+        this.bulb.turnOn();
     }
 }
 
 class RemoteControl {
-    submit(command: { execute: () => void }) {
+    submit(command: Command): void {
         command.execute();
     }
 }
@@ -8985,7 +9002,7 @@ const turnOn = new TurnOn(bulb);
 const turnOff = new TurnOff(bulb);
 
 const remote = new RemoteControl();
-remote.submit(turnOn); // Bulb has been lit!
+remote.submit(turnOn);  // Bulb has been lit
 remote.submit(turnOff); // Darkness!
 ```
 
@@ -9013,7 +9030,9 @@ class Command {
     }
 
     execute() {
+    }
 
+    undo() {
     }
 }
 
@@ -9021,11 +9040,19 @@ class TurnOn extends Command {
     execute() {
         this._bulb.turnOn();
     }
+
+    undo() {
+        this._bulb.turnOff();
+    }
 }
 
 class TurnOff extends Command {
     execute() {
         this._bulb.turnOff();
+    }
+
+    undo() {
+        this._bulb.turnOn();
     }
 }
 
@@ -9035,6 +9062,7 @@ class RemoteControl {
     }
 }
 
+// ----------------------------
 
 const bulb = new Bulb();
 
@@ -9042,8 +9070,8 @@ const turnOn = new TurnOn(bulb);
 const turnOff = new TurnOff(bulb);
 
 const remote = new RemoteControl();
-remote.submit(turnOn);
-remote.submit(turnOff);
+remote.submit(turnOn);  // Bulb has been lit
+remote.submit(turnOff); // Darkness!
 ```
 
 </div>
@@ -9070,13 +9098,10 @@ class Bulb
   }
 }
 
-
-
 interface ICommand
 {
   void Execute();
   void Undo();
-  void Redo();
 }
 
 // Command
@@ -9086,7 +9111,7 @@ class TurnOn : ICommand
 
   public TurnOn(Bulb bulb)
   {
-    mBulb = bulb ?? throw new ArgumentNullException("Bulb", "Bulb cannot be null");
+    mBulb = bulb;
   }
 
   public void Execute()
@@ -9097,11 +9122,6 @@ class TurnOn : ICommand
   public void Undo()
   {
     mBulb.TurnOff();
-  }
-
-  public void Redo()
-  {
-    Execute();
   }
 }
 
@@ -9111,7 +9131,7 @@ class TurnOff : ICommand
 
   public TurnOff(Bulb bulb)
   {
-    mBulb = bulb ?? throw new ArgumentNullException("Bulb", "Bulb cannot be null");
+    mBulb = bulb;
   }
 
   public void Execute()
@@ -9123,13 +9143,7 @@ class TurnOff : ICommand
   {
     mBulb.TurnOn();
   }
-
-  public void Redo()
-  {
-    Execute();
-  }
 }
-
 
 // Invoker
 class RemoteControl
@@ -9140,19 +9154,16 @@ class RemoteControl
   }
 }
 
-
 // ----------------------------
 
-  var bulb = new Bulb();
+var bulb = new Bulb();
 
-  var turnOn = new TurnOn(bulb);
-  var turnOff = new TurnOff(bulb);
+var turnOn = new TurnOn(bulb);
+var turnOff = new TurnOff(bulb);
 
-  var remote = new RemoteControl();
-  remote.Submit(turnOn); // Bulb has been lit!
-  remote.Submit(turnOff); // Darkness!
-
-  Console.ReadLine();
+var remote = new RemoteControl();
+remote.Submit(turnOn);  // Bulb has been lit
+remote.Submit(turnOff); // Darkness!
 
 ```
 
@@ -9184,7 +9195,6 @@ interface CommandInterface
 {
     public function execute();
     public function undo();
-    public function redo();
 }
 
 // Command
@@ -9203,11 +9213,6 @@ class TurnOn implements CommandInterface
     {
         $this->bulb->turnOff();
     }
-
-    public function redo()
-    {
-        $this->execute();
-    }
 }
 
 class TurnOff implements CommandInterface
@@ -9224,11 +9229,6 @@ class TurnOff implements CommandInterface
     public function undo()
     {
         $this->bulb->turnOn();
-    }
-
-    public function redo()
-    {
-        $this->execute();
     }
 }
 
@@ -9248,9 +9248,8 @@ $turnOn = new TurnOn($bulb);
 $turnOff = new TurnOff($bulb);
 
 $remote = new RemoteControl();
-$remote->submit($turnOn); // Bulb has been lit!
+$remote->submit($turnOn);  // Bulb has been lit
 $remote->submit($turnOff); // Darkness!
-
 
 ```
 
@@ -9280,11 +9279,10 @@ func (b *Bulb) TurnOff() {
     fmt.Println("Darkness!")
 }
 
-// ICommand interface
-type ICommand interface {
+// Command interface
+type Command interface {
     Execute()
     Undo()
-    Redo()
 }
 
 // Command
@@ -9300,10 +9298,6 @@ func (c *TurnOnCommand) Undo() {
     c.bulb.TurnOff()
 }
 
-func (c *TurnOnCommand) Redo() {
-    c.Execute()
-}
-
 type TurnOffCommand struct {
     bulb *Bulb
 }
@@ -9316,14 +9310,10 @@ func (c *TurnOffCommand) Undo() {
     c.bulb.TurnOn()
 }
 
-func (c *TurnOffCommand) Redo() {
-    c.Execute()
-}
-
 // Invoker
 type RemoteControl struct{}
 
-func (r *RemoteControl) Submit(command ICommand) {
+func (r *RemoteControl) Submit(command Command) {
     command.Execute()
 }
 
@@ -9337,7 +9327,6 @@ func main() {
     remote.Submit(turnOn)  // Bulb has been lit
     remote.Submit(turnOff) // Darkness!
 }
-
 
 ```
 
@@ -9354,18 +9343,17 @@ func main() {
 // Receiver
 class Bulb {
     public void turnOn() {
-        System.out.println("Bulb is turned ON");
+        System.out.println("Bulb has been lit");
     }
 
     public void turnOff() {
-        System.out.println("Bulb is turned OFF");
+        System.out.println("Darkness!");
     }
 }
 
 interface Command {
     void execute();
     void undo();
-    void redo();
 }
 
 // Command
@@ -9373,8 +9361,6 @@ class TurnOn implements Command {
     private Bulb bulb;
 
     public TurnOn(Bulb bulb) {
-        if (bulb == null)
-            throw new IllegalArgumentException("Bulb cannot be null");
         this.bulb = bulb;
     }
 
@@ -9386,11 +9372,6 @@ class TurnOn implements Command {
     @Override
     public void undo() {
         bulb.turnOff();
-    }
-
-    @Override
-    public void redo() {
-        execute();
     }
 }
 
@@ -9398,8 +9379,6 @@ class TurnOff implements Command {
     private Bulb bulb;
 
     public TurnOff(Bulb bulb) {
-        if (bulb == null)
-            throw new IllegalArgumentException("Bulb cannot be null");
         this.bulb = bulb;
     }
 
@@ -9411,11 +9390,6 @@ class TurnOff implements Command {
     @Override
     public void undo() {
         bulb.turnOn();
-    }
-
-    @Override
-    public void redo() {
-        execute();
     }
 }
 
@@ -9433,8 +9407,8 @@ TurnOn turnOnCmd = new TurnOn(bulb);
 TurnOff turnOffCmd = new TurnOff(bulb);
 
 RemoteControl remote = new RemoteControl();
-remote.submit(turnOnCmd);       // Bulb is turned ON
-remote.submit(turnOffCmd);      // Bulb is turned OFF
+remote.submit(turnOnCmd);  // Bulb has been lit
+remote.submit(turnOffCmd); // Darkness!
 ```
 
 </div>
@@ -9453,7 +9427,7 @@ remote.submit(turnOffCmd);      // Bulb is turned OFF
 class Bulb {
 public:
     void turnOn() {
-        std::cout << "Bulb has been lit!" << std::endl;
+        std::cout << "Bulb has been lit" << std::endl;
     }
 
     void turnOff() {
@@ -9467,7 +9441,6 @@ public:
     virtual ~Command() = default;
     virtual void execute() = 0;
     virtual void undo() = 0;
-    virtual void redo() = 0;
 };
 
 class TurnOn : public Command {
@@ -9484,10 +9457,6 @@ public:
     void undo() override {
         bulb.turnOff();
     }
-
-    void redo() override {
-        execute();
-    }
 };
 
 class TurnOff : public Command {
@@ -9503,10 +9472,6 @@ public:
 
     void undo() override {
         bulb.turnOn();
-    }
-
-    void redo() override {
-        execute();
     }
 };
 
@@ -9527,8 +9492,8 @@ int main() {
     TurnOff turnOff(bulb);
 
     RemoteControl remote;
-    remote.submit(turnOn);   // Bulb has been lit!
-    remote.submit(turnOff);  // Darkness!
+    remote.submit(turnOn);  // Bulb has been lit
+    remote.submit(turnOff); // Darkness!
     return 0;
 }
 ```
@@ -9536,6 +9501,11 @@ int main() {
 </div>
 
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ وقتی می‌خوای درخواست‌ها رو به آبجکت تبدیل کنی تا بشه صف‌شون کرد، لاگ گرفت یا undo/redo اضافه کرد؛ ❌ وقتی فقط یه متد ساده رو صدا می‌زنی و قرار نیست درخواست رو نگه داری یا برگردونی.
+> 🪤 **دام رایج:** برای هر کار کوچیکی یه کلاس Command جدا می‌سازی و کد بی‌دلیل پر از کلاس‌های یه‌خطی می‌شه.
+
 
 <br>
 
