@@ -5680,6 +5680,8 @@ int main() {
 
 </div>
 
+به زبون خودمون: الگوی تزئین‌گر می‌گه که می‌تونی بدون دست زدن به خود کلاس، رفتار و قابلیت‌های تازه رو به یه آبجکت مشخص اضافه کنی؛ اونم به‌صورت لایه‌لایه و حتی همون لحظه که برنامه داره اجرا می‌شه. اینطوری هر کلاس مسئول یه کار می‌مونه و آبجکت‌های دیگه از همون کلاس دست‌نخورده باقی می‌مونن.
+
 **مثال برنامه‌نویسی**
 
 برای مثال قهوه را در نظر بگیر. اول از همه ما یک قهوه ساده داریم که رابط قهوه را پیاده‌سازی می کند.
@@ -5698,77 +5700,53 @@ int main() {
 
 ```python
 class Coffee:
-    def getCost(self):
+    def cost(self):
         pass
 
-    def getDescription(self):
+    def description(self):
         pass
 
 
 class SimpleCoffee(Coffee):
-    def getCost(self):
+    def cost(self):
         return 10
 
-    def getDescription(self):
-        return 'Simple Coffee'
+    def description(self):
+        return 'Simple coffee'
 
 
-class MilkCoffee(Coffee):
-    _coffee = None
-
+class MilkDecorator(Coffee):
     def __init__(self, coffee):
         self._coffee = coffee
 
-    def getCost(self):
-        return self._coffee.getCost() + 2
+    def cost(self):
+        return self._coffee.cost() + 2
 
-    def getDescription(self):
-        return self._coffee.getDescription() + ', milk'
+    def description(self):
+        return self._coffee.description() + ', milk'
 
 
-class WhipCoffee(Coffee):
-    _coffee = None
-
+class SugarDecorator(Coffee):
     def __init__(self, coffee):
         self._coffee = coffee
 
-    def getCost(self):
-        return self._coffee.getCost() + 5
+    def cost(self):
+        return self._coffee.cost() + 1
 
-    def getDescription(self):
-        return self._coffee.getDescription() + ', whip'
-
-
-class VanillaCoffee(Coffee):
-    _coffee = None
-
-    def __init__(self, coffee):
-        self._coffee = coffee
-
-    def getCost(self):
-        return self._coffee.getCost() + 3
-
-    def getDescription(self):
-        return self._coffee.getDescription() + ', vanilla'
+    def description(self):
+        return self._coffee.description() + ', sugar'
 
 
 # ----------------------------
 
-someCoffee = SimpleCoffee()
-print(someCoffee.getCost())
-print(someCoffee.getDescription())
+coffee = SimpleCoffee()
+print(f"{coffee.description()}: {coffee.cost()}")  # Simple coffee: 10
 
-someCoffee = MilkCoffee(someCoffee)
-print(someCoffee.getCost())
-print(someCoffee.getDescription())
+coffee = MilkDecorator(coffee)
+print(f"{coffee.description()}: {coffee.cost()}")  # Simple coffee, milk: 12
 
-someCoffee = VanillaCoffee(someCoffee)
-print(someCoffee.getCost())
-print(someCoffee.getDescription())
-
-someCoffee = WhipCoffee(someCoffee)
-print(someCoffee.getCost())
-print(someCoffee.getDescription())
+coffee = SugarDecorator(coffee)
+print(f"{coffee.description()}: {coffee.cost()}")  # Simple coffee, milk, sugar: 13
 ```
 
 </div>
@@ -5780,90 +5758,63 @@ print(someCoffee.getDescription())
 <div dir="ltr">
 
 ```typescript
-abstract class Coffee {
-    abstract getCost(): number;
-
-    abstract getDescription(): string;
+interface Coffee {
+    cost(): number;
+    description(): string;
 }
 
-class SimpleCoffee extends Coffee {
-    getCost(): number {
+class SimpleCoffee implements Coffee {
+    cost(): number {
         return 10;
     }
 
-    getDescription(): string {
-        return "Simple Coffee";
+    description(): string {
+        return "Simple coffee";
     }
 }
 
-class MilkCoffee extends Coffee {
+class MilkDecorator implements Coffee {
     private coffee: Coffee;
 
     constructor(coffee: Coffee) {
-        super();
         this.coffee = coffee;
     }
 
-    getCost(): number {
-        return this.coffee.getCost() + 2;
+    cost(): number {
+        return this.coffee.cost() + 2;
     }
 
-    getDescription(): string {
-        return this.coffee.getDescription() + ", milk";
+    description(): string {
+        return this.coffee.description() + ", milk";
     }
 }
 
-class WhipCoffee extends Coffee {
+class SugarDecorator implements Coffee {
     private coffee: Coffee;
 
     constructor(coffee: Coffee) {
-        super();
         this.coffee = coffee;
     }
 
-    getCost(): number {
-        return this.coffee.getCost() + 5;
+    cost(): number {
+        return this.coffee.cost() + 1;
     }
 
-    getDescription(): string {
-        return this.coffee.getDescription() + ", whip";
-    }
-}
-
-class VanillaCoffee extends Coffee {
-    private coffee: Coffee;
-
-    constructor(coffee: Coffee) {
-        super();
-        this.coffee = coffee;
-    }
-
-    getCost(): number {
-        return this.coffee.getCost() + 3;
-    }
-
-    getDescription(): string {
-        return this.coffee.getDescription() + ", vanilla";
+    description(): string {
+        return this.coffee.description() + ", sugar";
     }
 }
 
 // ----------------------------
 
-let someCoffee = new SimpleCoffee();
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
+let coffee: Coffee = new SimpleCoffee();
+console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee: 10
 
-someCoffee = new MilkCoffee(someCoffee);
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
+coffee = new MilkDecorator(coffee);
+console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee, milk: 12
 
-someCoffee = new VanillaCoffee(someCoffee);
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
-
-someCoffee = new WhipCoffee(someCoffee);
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
+coffee = new SugarDecorator(coffee);
+console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee, milk, sugar: 13
 ```
 
 </div>
@@ -5875,86 +5826,64 @@ console.log(someCoffee.getDescription());
 
 ```javascript
 class Coffee {
-    getCost() {
-        throw new Error("getCost() must be implemented by subclasses");
+    cost() {
+        throw new Error("cost() must be implemented by subclasses");
     }
 
-    getDescription() {
-        throw new Error("getDescription() must be implemented by subclasses");
+    description() {
+        throw new Error("description() must be implemented by subclasses");
     }
 }
 
 class SimpleCoffee extends Coffee {
-    getCost() {
+    cost() {
         return 10;
     }
 
-    getDescription() {
-        return "Simple Coffee";
+    description() {
+        return "Simple coffee";
     }
 }
 
-class MilkCoffee extends Coffee {
+class MilkDecorator extends Coffee {
     constructor(coffee) {
         super();
         this.coffee = coffee;
     }
 
-    getCost() {
-        return this.coffee.getCost() + 2;
+    cost() {
+        return this.coffee.cost() + 2;
     }
 
-    getDescription() {
-        return this.coffee.getDescription() + ", milk";
+    description() {
+        return this.coffee.description() + ", milk";
     }
 }
 
-class WhipCoffee extends Coffee {
+class SugarDecorator extends Coffee {
     constructor(coffee) {
         super();
         this.coffee = coffee;
     }
 
-    getCost() {
-        return this.coffee.getCost() + 5;
+    cost() {
+        return this.coffee.cost() + 1;
     }
 
-    getDescription() {
-        return this.coffee.getDescription() + ", whip";
-    }
-}
-
-class VanillaCoffee extends Coffee {
-    constructor(coffee) {
-        super();
-        this.coffee = coffee;
-    }
-
-    getCost() {
-        return this.coffee.getCost() + 3;
-    }
-
-    getDescription() {
-        return this.coffee.getDescription() + ", vanilla";
+    description() {
+        return this.coffee.description() + ", sugar";
     }
 }
 
 
-let someCoffee = new SimpleCoffee();
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
+let coffee = new SimpleCoffee();
+console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee: 10
 
-someCoffee = new MilkCoffee(someCoffee);
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
+coffee = new MilkDecorator(coffee);
+console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee, milk: 12
 
-someCoffee = new VanillaCoffee(someCoffee);
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
-
-someCoffee = new WhipCoffee(someCoffee);
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
+coffee = new SugarDecorator(coffee);
+console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee, milk, sugar: 13
 ```
 
 </div>
@@ -5969,98 +5898,74 @@ console.log(someCoffee.getDescription());
 
 interface ICoffee
 {
-  int GetCost();
-  string GetDescription();
+  int Cost();
+  string Description();
 }
 
 class SimpleCoffee : ICoffee
 {
-  public int GetCost()
+  public int Cost()
   {
-    return 5;
+    return 10;
   }
 
-  public string GetDescription()
+  public string Description()
   {
-    return "Simple Coffee";
-  }
-}
-
-class MilkCoffee : ICoffee
-{
-  private readonly ICoffee mCoffee;
-
-  public MilkCoffee(ICoffee coffee)
-  {
-    mCoffee = coffee ?? throw new ArgumentNullException("coffee", "coffee should not be null");
-  }
-  public int GetCost()
-  {
-    return mCoffee.GetCost() + 1;
-  }
-
-  public string GetDescription()
-  {
-    return String.Concat(mCoffee.GetDescription(), ", milk");
+    return "Simple coffee";
   }
 }
 
-class WhipCoffee : ICoffee
+class MilkDecorator : ICoffee
 {
   private readonly ICoffee mCoffee;
 
-  public WhipCoffee(ICoffee coffee)
+  public MilkDecorator(ICoffee coffee)
   {
     mCoffee = coffee ?? throw new ArgumentNullException("coffee", "coffee should not be null");
   }
-  public int GetCost()
+
+  public int Cost()
   {
-    return mCoffee.GetCost() + 1;
+    return mCoffee.Cost() + 2;
   }
 
-  public string GetDescription()
+  public string Description()
   {
-    return String.Concat(mCoffee.GetDescription(), ", whip");
+    return String.Concat(mCoffee.Description(), ", milk");
   }
 }
 
-class VanillaCoffee : ICoffee
+class SugarDecorator : ICoffee
 {
   private readonly ICoffee mCoffee;
 
-  public VanillaCoffee(ICoffee coffee)
+  public SugarDecorator(ICoffee coffee)
   {
     mCoffee = coffee ?? throw new ArgumentNullException("coffee", "coffee should not be null");
   }
-  public int GetCost()
+
+  public int Cost()
   {
-    return mCoffee.GetCost() + 1;
+    return mCoffee.Cost() + 1;
   }
 
-  public string GetDescription()
+  public string Description()
   {
-    return String.Concat(mCoffee.GetDescription(), ", vanilla");
+    return String.Concat(mCoffee.Description(), ", sugar");
   }
 }
 
 
 // ----------------------------
 
-var myCoffee = new SimpleCoffee();
-Console.WriteLine($"{myCoffee.GetCost():c}"); // $ 5.00
-Console.WriteLine(myCoffee.GetDescription()); // Simple Coffee
+ICoffee coffee = new SimpleCoffee();
+Console.WriteLine($"{coffee.Description()}: {coffee.Cost()}"); // Simple coffee: 10
 
-var milkCoffee = new MilkCoffee(myCoffee);
-Console.WriteLine($"{milkCoffee.GetCost():c}"); // $ 6.00
-Console.WriteLine(milkCoffee.GetDescription()); // Simple Coffee, milk
+coffee = new MilkDecorator(coffee);
+Console.WriteLine($"{coffee.Description()}: {coffee.Cost()}"); // Simple coffee, milk: 12
 
-var whipCoffee = new WhipCoffee(milkCoffee);
-Console.WriteLine($"{whipCoffee.GetCost():c}"); // $ 7.00
-Console.WriteLine(whipCoffee.GetDescription()); // Simple Coffee, milk, whip
-
-var vanillaCoffee = new VanillaCoffee(whipCoffee);
-Console.WriteLine($"{vanillaCoffee.GetCost():c}"); // $ 8.00
-Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip, vanilla
+coffee = new SugarDecorator(coffee);
+Console.WriteLine($"{coffee.Description()}: {coffee.Cost()}"); // Simple coffee, milk, sugar: 13
 
 ```
 
@@ -6075,83 +5980,60 @@ Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip,
 
 ```php
 interface CoffeeInterface {
-  public function getCost();
-  public function getDescription();
+  public function cost();
+  public function description();
 }
 
 class SimpleCoffee implements CoffeeInterface {
-  public function getCost() {
-    return 5;
+  public function cost() {
+    return 10;
   }
 
-  public function getDescription() {
-    return "Simple Coffee";
+  public function description() {
+    return "Simple coffee";
   }
 }
 
-class MilkCoffee implements CoffeeInterface {
+class MilkDecorator implements CoffeeInterface {
   private $coffee;
 
   public function __construct(CoffeeInterface $coffee) {
     $this->coffee = $coffee ?? throw new Exception("coffee should not be null");
   }
 
-  public function getCost() {
-    return $this->coffee->getCost() + 1;
+  public function cost() {
+    return $this->coffee->cost() + 2;
   }
 
-  public function getDescription() {
-    return $this->coffee->getDescription() . ", milk";
+  public function description() {
+    return $this->coffee->description() . ", milk";
   }
 }
 
-class WhipCoffee implements CoffeeInterface {
+class SugarDecorator implements CoffeeInterface {
   private $coffee;
 
   public function __construct(CoffeeInterface $coffee) {
     $this->coffee = $coffee ?? throw new Exception("coffee should not be null");
   }
 
-  public function getCost() {
-    return $this->coffee->getCost() + 1;
+  public function cost() {
+    return $this->coffee->cost() + 1;
   }
 
-  public function getDescription() {
-    return $this->coffee->getDescription() . ", whip";
-  }
-}
-
-class VanillaCoffee implements CoffeeInterface {
-  private $coffee;
-
-  public function __construct(CoffeeInterface $coffee) {
-    $this->coffee = $coffee ?? throw new Exception("coffee should not be null");
-  }
-
-  public function getCost() {
-    return $this->coffee->getCost() + 1;
-  }
-
-  public function getDescription() {
-    return $this->coffee->getDescription() . ", vanilla";
+  public function description() {
+    return $this->coffee->description() . ", sugar";
   }
 }
 
-$myCoffee = new SimpleCoffee();
-echo "$" . number_format($myCoffee->getCost(), 2) . "\n"; // $5.00
-echo $myCoffee->getDescription() . "\n"; // Simple Coffee
+$coffee = new SimpleCoffee();
+echo $coffee->description() . ": " . $coffee->cost() . "\n"; // Simple coffee: 10
 
-$milkCoffee = new MilkCoffee($myCoffee);
-echo "$" . number_format($milkCoffee->getCost(), 2) . "\n"; // $6.00
-echo $milkCoffee->getDescription() . "\n"; // Simple Coffee, milk
+$coffee = new MilkDecorator($coffee);
+echo $coffee->description() . ": " . $coffee->cost() . "\n"; // Simple coffee, milk: 12
 
-$whipCoffee = new WhipCoffee($milkCoffee);
-echo "$" . number_format($whipCoffee->getCost(), 2) . "\n"; // $7.00
-echo $whipCoffee->getDescription() . "\n"; // Simple Coffee, milk, whip
-
-$vanillaCoffee = new VanillaCoffee($whipCoffee);
-echo "$" . number_format($vanillaCoffee->getCost(), 2) . "\n"; // $8.00
-echo $vanillaCoffee->getDescription() . "\n"; // Simple Coffee, milk, whip, vanilla
+$coffee = new SugarDecorator($coffee);
+echo $coffee->description() . ": " . $coffee->cost() . "\n"; // Simple coffee, milk, sugar: 13
 
 ```
 
@@ -6171,97 +6053,69 @@ import (
 	"fmt"
 )
 
-type ICoffee interface {
-	GetCost() int
-	GetDescription() string
+type Coffee interface {
+	Cost() int
+	Description() string
 }
 
 type SimpleCoffee struct{}
 
-func (c *SimpleCoffee) GetCost() int {
-	return 5
+func (c *SimpleCoffee) Cost() int {
+	return 10
 }
 
-func (c *SimpleCoffee) GetDescription() string {
-	return "Simple Coffee"
+func (c *SimpleCoffee) Description() string {
+	return "Simple coffee"
 }
 
-type MilkCoffee struct {
-	coffee ICoffee
+type MilkDecorator struct {
+	coffee Coffee
 }
 
-func NewMilkCoffee(coffee ICoffee) *MilkCoffee {
+func NewMilkDecorator(coffee Coffee) *MilkDecorator {
 	if coffee == nil {
 		panic("coffee should not be nil")
 	}
-	return &MilkCoffee{coffee: coffee}
+	return &MilkDecorator{coffee: coffee}
 }
 
-func (c *MilkCoffee) GetCost() int {
-	return c.coffee.GetCost() + 1
+func (c *MilkDecorator) Cost() int {
+	return c.coffee.Cost() + 2
 }
 
-func (c *MilkCoffee) GetDescription() string {
-	return fmt.Sprintf("%s, milk", c.coffee.GetDescription())
+func (c *MilkDecorator) Description() string {
+	return fmt.Sprintf("%s, milk", c.coffee.Description())
 }
 
-type WhipCoffee struct {
-	coffee ICoffee
+type SugarDecorator struct {
+	coffee Coffee
 }
 
-func NewWhipCoffee(coffee ICoffee) *WhipCoffee {
+func NewSugarDecorator(coffee Coffee) *SugarDecorator {
 	if coffee == nil {
 		panic("coffee should not be nil")
 	}
-	return &WhipCoffee{coffee: coffee}
+	return &SugarDecorator{coffee: coffee}
 }
 
-func (c *WhipCoffee) GetCost() int {
-	return c.coffee.GetCost() + 1
+func (c *SugarDecorator) Cost() int {
+	return c.coffee.Cost() + 1
 }
 
-func (c *WhipCoffee) GetDescription() string {
-	return fmt.Sprintf("%s, whip", c.coffee.GetDescription())
-}
-
-type VanillaCoffee struct {
-	coffee ICoffee
-}
-
-func NewVanillaCoffee(coffee ICoffee) *VanillaCoffee {
-	if coffee == nil {
-		panic("coffee should not be nil")
-	}
-	return &VanillaCoffee{coffee: coffee}
-}
-
-func (c *VanillaCoffee) GetCost() int {
-	return c.coffee.GetCost() + 1
-}
-
-func (c *VanillaCoffee) GetDescription() string {
-	return fmt.Sprintf("%s, vanilla", c.coffee.GetDescription())
+func (c *SugarDecorator) Description() string {
+	return fmt.Sprintf("%s, sugar", c.coffee.Description())
 }
 
 func main() {
-	myCoffee := &SimpleCoffee{}
-	fmt.Printf("%s\n", myCoffee.GetCost())
-	fmt.Printf("%s\n", myCoffee.GetDescription())
+	var coffee Coffee = &SimpleCoffee{}
+	fmt.Printf("%s: %d\n", coffee.Description(), coffee.Cost()) // Simple coffee: 10
 
-	milkCoffee := NewMilkCoffee(myCoffee)
-	fmt.Printf("%s\n", milkCoffee.GetCost())
-	fmt.Printf("%s\n", milkCoffee.GetDescription())
+	coffee = NewMilkDecorator(coffee)
+	fmt.Printf("%s: %d\n", coffee.Description(), coffee.Cost()) // Simple coffee, milk: 12
 
-	whipCoffee := NewWhipCoffee(milkCoffee)
-	fmt.Printf("%s\n", whipCoffee.GetCost())
-	fmt.Printf("%s\n", whipCoffee.GetDescription())
-
-	vanillaCoffee := NewVanillaCoffee(whipCoffee)
-	fmt.Printf("%s\n", vanillaCoffee.GetCost())
-	fmt.Printf("%s\n", vanillaCoffee.GetDescription())
+	coffee = NewSugarDecorator(coffee)
+	fmt.Printf("%s: %d\n", coffee.Description(), coffee.Cost()) // Simple coffee, milk, sugar: 13
 }
-
-
 ```
 
 </div>
@@ -6276,92 +6130,67 @@ func main() {
 ```java
 interface Coffee {
 
-    int getCost();
-    String getDescription();
+    int cost();
+    String description();
 }
 
 class SimpleCoffee implements Coffee {
 
-    public int getCost() {
-        return 5;
+    public int cost() {
+        return 10;
     }
 
-    public String getDescription() {
-        return "Simple Coffee";
+    public String description() {
+        return "Simple coffee";
     }
 }
 
-class MilkCoffee implements Coffee {
+class MilkDecorator implements Coffee {
     private final Coffee coffee;
 
-    public MilkCoffee(Coffee coffee) {
+    public MilkDecorator(Coffee coffee) {
         if(coffee == null)
             throw new IllegalArgumentException("coffee should not be null");
         this.coffee = coffee;
     }
 
-    public int getCost() {
-        return coffee.getCost() + 1;
+    public int cost() {
+        return coffee.cost() + 2;
     }
 
-    public String getDescription() {
-        return coffee.getDescription() + ", Milk";
+    public String description() {
+        return coffee.description() + ", milk";
     }
 }
 
-class WhipCoffee implements Coffee {
+class SugarDecorator implements Coffee {
     private final Coffee coffee;
 
-    public WhipCoffee(Coffee coffee) {
+    public SugarDecorator(Coffee coffee) {
         if(coffee == null)
             throw new IllegalArgumentException("coffee should not be null");
         this.coffee = coffee;
     }
 
-    public int getCost() {
-        return coffee.getCost() + 1;
+    public int cost() {
+        return coffee.cost() + 1;
     }
 
-    public String getDescription() {
-        return coffee.getDescription() + ", Whip";
-    }
-}
-
-class VanillaCoffee implements Coffee {
-    private final Coffee coffee;
-
-    public VanillaCoffee(Coffee coffee) {
-        if(coffee == null)
-            throw new IllegalArgumentException("coffee should not be null");
-        this.coffee = coffee;
-    }
-
-    public int getCost() {
-        return coffee.getCost() + 1;
-    }
-
-    public String getDescription() {
-        return coffee.getDescription() + ", Vanilla";
+    public String description() {
+        return coffee.description() + ", sugar";
     }
 }
 
 // ----------------------------
 
-SimpleCoffee simpleCoffee = new SimpleCoffee();
-System.out.println("$" + simpleCoffee.getCost()); // $5
-System.out.println(simpleCoffee.getDescription()); // Simple Coffee
+Coffee coffee = new SimpleCoffee();
+System.out.println(coffee.description() + ": " + coffee.cost()); // Simple coffee: 10
 
-MilkCoffee milkCoffee = new MilkCoffee(simpleCoffee);
-System.out.println("$" + milkCoffee.getCost()); // $6
-System.out.println(milkCoffee.getDescription()); // Simple Coffee, Milk
+coffee = new MilkDecorator(coffee);
+System.out.println(coffee.description() + ": " + coffee.cost()); // Simple coffee, milk: 12
 
-WhipCoffee whipCoffee = new WhipCoffee(milkCoffee);
-System.out.println("$" + whipCoffee.getCost()); // $7
-System.out.println(whipCoffee.getDescription()); // Simple Coffee, Milk, Whip
-
-VanillaCoffee vanillaCoffee = new VanillaCoffee(whipCoffee);
-System.out.println("$" + vanillaCoffee.getCost()); // $8
-System.out.println(vanillaCoffee.getDescription()); // Simple Coffee, Milk, Whip, Vanilla
+coffee = new SugarDecorator(coffee);
+System.out.println(coffee.description() + ": " + coffee.cost()); // Simple coffee, milk, sugar: 13
 ```
 
 </div>
@@ -6381,88 +6210,76 @@ System.out.println(vanillaCoffee.getDescription()); // Simple Coffee, Milk, Whip
 class Coffee {
 public:
     virtual ~Coffee() = default;
-    virtual double getCost() const = 0;
-    virtual std::string getDescription() const = 0;
+    virtual int cost() const = 0;
+    virtual std::string description() const = 0;
 };
 
 // Simple coffee
 class SimpleCoffee : public Coffee {
 public:
-    double getCost() const override {
-        return 10.0;
+    int cost() const override {
+        return 10;
     }
-    
-    std::string getDescription() const override {
-        return "Simple Coffee";
+
+    std::string description() const override {
+        return "Simple coffee";
     }
-};
-
-// Coffee decorator base class
-class CoffeeDecorator : public Coffee {
-protected:
-    std::unique_ptr<Coffee> coffee;
-
-public:
-    CoffeeDecorator(std::unique_ptr<Coffee> coffee) : coffee(std::move(coffee)) {}
 };
 
 // Milk decorator
-class MilkCoffee : public CoffeeDecorator {
+class MilkDecorator : public Coffee {
+    std::unique_ptr<Coffee> coffee;
+
 public:
-    MilkCoffee(std::unique_ptr<Coffee> coffee) : CoffeeDecorator(std::move(coffee)) {}
-    
-    double getCost() const override {
-        return coffee->getCost() + 2.0;
+    MilkDecorator(std::unique_ptr<Coffee> coffee) : coffee(std::move(coffee)) {}
+
+    int cost() const override {
+        return coffee->cost() + 2;
     }
-    
-    std::string getDescription() const override {
-        return coffee->getDescription() + ", Milk";
+
+    std::string description() const override {
+        return coffee->description() + ", milk";
     }
 };
 
-// Whip decorator
-class WhipCoffee : public CoffeeDecorator {
-public:
-    WhipCoffee(std::unique_ptr<Coffee> coffee) : CoffeeDecorator(std::move(coffee)) {}
-    
-    double getCost() const override {
-        return coffee->getCost() + 5.0;
-    }
-    
-    std::string getDescription() const override {
-        return coffee->getDescription() + ", Whip";
-    }
-};
+// Sugar decorator
+class SugarDecorator : public Coffee {
+    std::unique_ptr<Coffee> coffee;
 
-// Vanilla decorator
-class VanillaCoffee : public CoffeeDecorator {
 public:
-    VanillaCoffee(std::unique_ptr<Coffee> coffee) : CoffeeDecorator(std::move(coffee)) {}
-    
-    double getCost() const override {
-        return coffee->getCost() + 3.0;
+    SugarDecorator(std::unique_ptr<Coffee> coffee) : coffee(std::move(coffee)) {}
+
+    int cost() const override {
+        return coffee->cost() + 1;
     }
-    
-    std::string getDescription() const override {
-        return coffee->getDescription() + ", Vanilla";
+
+    std::string description() const override {
+        return coffee->description() + ", sugar";
     }
 };
 
 // Usage
 int main() {
-    auto someCoffee = std::make_unique<SimpleCoffee>();
-    auto milkCoffee = std::make_unique<MilkCoffee>(std::move(someCoffee));
-    auto whipCoffee = std::make_unique<WhipCoffee>(std::move(milkCoffee));
-    auto vanillaCoffee = std::make_unique<VanillaCoffee>(std::move(whipCoffee));
-    
-    std::cout << "$" << vanillaCoffee->getCost() << std::endl; // $20
-    std::cout << vanillaCoffee->getDescription() << std::endl; // Simple Coffee, Milk, Whip, Vanilla
-    
+    std::unique_ptr<Coffee> coffee = std::make_unique<SimpleCoffee>();
+    std::cout << coffee->description() << ": " << coffee->cost() << std::endl; // Simple coffee: 10
+
+    coffee = std::make_unique<MilkDecorator>(std::move(coffee));
+    std::cout << coffee->description() << ": " << coffee->cost() << std::endl; // Simple coffee, milk: 12
+
+    coffee = std::make_unique<SugarDecorator>(std::move(coffee));
+    std::cout << coffee->description() << ": " << coffee->cost() << std::endl; // Simple coffee, milk, sugar: 13
+
     return 0;
 }
 ```
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی می‌خوای قابلیت‌ها رو لایه‌لایه و موقع اجرا به یه آبجکت اضافه کنی، بدون اینکه کلاسش رو دست بزنی»؛ ❌ «وقتی فقط یکی دو حالت ثابت داری و یه ساب‌کلاس ساده کافیه».
+> 🪤 **دام رایج:** «وقتی ده‌ها لایه روی هم می‌پیچی، دنبال کردن مسیر و دیباگ کردنش سخت و گیج‌کننده می‌شه».
+> 🔗 **فرقش با [پراکسی (Proxy)](#پراکسی-proxy-):** «تزئین‌گر قابلیت تازه به آبجکت اضافه می‌کنه؛ پراکسی همون رفتار رو نگه می‌داره ولی دسترسی بهش رو کنترل می‌کنه».
+
 
 <br>
 
