@@ -13333,14 +13333,14 @@ int main() {
 </div>
 
 <div align="center">
-⌨️ <b>مثال دنیای واقعی: حالت تایپ (عادی/حروف بزرگ/حروف کوچک)</b>
+🚦 <b>مثال دنیای واقعی: چراغ راهنمایی</b>
 </div>
 
-فرض کن داری تایپ می‌کنی.
-یه وقت می‌خوای همه‌چی حروف بزرگ باشه (مثل وقتی `Caps Lock` رو روشن می‌کنی)، یه وقت می‌خوای همه‌چی حروف کوچک باشه، یه وقت هم حالت معمولی.
+یه چراغ راهنمایی رو در نظر بگیر.
+قرمزه؛ بعد سبز می‌شه؛ بعد زرد می‌شه؛ بعد دوباره قرمز. هر رنگ، خودش می‌دونه نوبت بعدی باید بره سراغ کدوم رنگ.
 
-نکته اینه که «کاری که انجام می‌دید» یکیه (داری متن می‌نویسی) ولی **رفتار خروجی** با توجه به حالت فعلی عوض می‌شه.
-این دقیقاً همون چیزیه که State می‌گه: به جای اینکه توی یک کلاس بزرگ پر از شرط بنویسی، حالت‌ها رو به شکل آبجکت‌های جدا نگه داری و هر وقت لازم شد state رو عوض کنی. 🧩
+نکته اینه که خود چراغ یه دکمه «برو حالت بعدی» بیشتر نداره؛ ولی **اینکه بعدش چی می‌شه** به حالت فعلیش بستگی داره.
+این دقیقاً همون چیزیه که State می‌گه: به جای اینکه توی یک کلاس بزرگ پر از شرط بنویسی، هر حالت رو به شکل یه آبجکت جدا نگه می‌داری و خود حالت تصمیم می‌گیره گذار (Transition) بعدی به کجاست. 🧩
 
 💡 **به زبون ساده:**
 > این پترن می‌گه: **«رفتار شیء رو به state فعلیش بسپر؛ با عوض شدن state، رفتار هم عوض می‌شه.»**
@@ -13359,14 +13359,16 @@ int main() {
 
 </div>
 
+خلاصه‌اش این می‌شه که الگوی State یه ماشین حالت (State Machine) رو شیءگرا پیاده می‌کنه؛ هر حالت رو یه کلاس جدا می‌گیری و خود حالت تصمیم می‌گیره بعدیش چی باشه.
+از این زاویه، خیلی شبیه استراتژی (Strategy) ‌ه، با این فرق که اینجا خود شیء می‌تونه استراتژی فعلیش رو از داخل عوض کنه.
+
 **مثال برنامه‌نویسی**
 
-می‌خوایم یک ادیتور بسازیم که قابلیت‌هایی مثل این داشته باشه که متنی که تایپ می‌شه حروف کوچیک باشه یا همش حروف بزرگ باشه یا
-معمولی باشه!
+می‌خوایم یک چراغ راهنمایی بسازیم که سه حالت داشته باشه؛ قرمز، سبز و زرد. هر حالت بدونه اسمش چیه و نوبت بعدی باید بره سراغ کدوم حالت، یعنی از قرمز به سبز، از سبز به زرد و از زرد دوباره به قرمز.
 
-اول بیاید کلاس‌هامون بر پایه الگوی State رو بسازیم:
+اول بیاید کلاس‌های حالت رو بر پایه الگوی State بسازیم:
 
-بعد ادیتور رو بسازیم و بهش یاد بدیم این کلاس‌ها رو توی خودش نگه داره و ازشون استفاده کنه!
+بعد خود چراغ رو بسازیم و بهش یاد بدیم حالت فعلیش رو نگه داره و موقع گذار، تصمیم رو به خود حالت بسپره!
 
 <details>
 <summary>Python</summary>
@@ -13374,63 +13376,67 @@ int main() {
 <div dir="ltr">
 
 ```python
-class WritingState:
-    def write(self, words):
-        pass
+from abc import ABC, abstractmethod
 
 
-class UpperCase(WritingState):
-    def write(self, words):
-        print(words.upper())
+class TrafficLightState(ABC):
+    @abstractmethod
+    def name(self):
+        ...
+
+    @abstractmethod
+    def next(self):
+        ...
 
 
-class LowerCase(WritingState):
-    def write(self, words):
-        print(words.lower())
+class RedLight(TrafficLightState):
+    def name(self):
+        return "Red"
+
+    def next(self):
+        return GreenLight()
 
 
-class DefaultText(WritingState):
-    def write(self, words):
-        print(words)
+class GreenLight(TrafficLightState):
+    def name(self):
+        return "Green"
+
+    def next(self):
+        return YellowLight()
 
 
-class TextEditor():
-    _state = None
+class YellowLight(TrafficLightState):
+    def name(self):
+        return "Yellow"
 
+    def next(self):
+        return RedLight()
+
+
+class TrafficLight:
     def __init__(self, state):
         self._state = state
 
-    def setState(self, state):
-        self._state = state
+    def name(self):
+        return self._state.name()
 
-    def write(self, words):
-        self._state.write(words)
+    def next(self):
+        self._state = self._state.next()
 
 
 # ----------------------------
 
-editor = TextEditor(DefaultText())
-editor.write('First Line')
-
-editor.setState(UpperCase())
-
-editor.write('Second Line')
-editor.write('Third Line')
-
-editor.setState(LowerCase())
-
-editor.write('Fourth Line')
-editor.write('Fifth Line')
-
+light = TrafficLight(RedLight())
+for _ in range(4):
+    print(light.name())
+    light.next()
 
 '''
-Output will be
-==============
-First Line
-SECOND LINE
-THIRD LINE
-fourth line
-fifth line
+Output:
+Red
+Green
+Yellow
+Red
 '''
 
 ```
@@ -13444,58 +13450,70 @@ fifth line
 <div dir="ltr">
 
 ```typescript
-interface WritingState {
-    write(words: string): void;
+interface TrafficLightState {
+    name(): string;
+    next(): TrafficLightState;
 }
 
-class UpperCase implements WritingState {
-    write(words: string): void {
-        console.log(words.toUpperCase());
+class RedLight implements TrafficLightState {
+    name(): string {
+        return "Red";
+    }
+
+    next(): TrafficLightState {
+        return new GreenLight();
     }
 }
 
-class LowerCase implements WritingState {
-    write(words: string): void {
-        console.log(words.toLowerCase());
+class GreenLight implements TrafficLightState {
+    name(): string {
+        return "Green";
+    }
+
+    next(): TrafficLightState {
+        return new YellowLight();
     }
 }
 
-class DefaultText implements WritingState {
-    write(words: string): void {
-        console.log(words);
+class YellowLight implements TrafficLightState {
+    name(): string {
+        return "Yellow";
+    }
+
+    next(): TrafficLightState {
+        return new RedLight();
     }
 }
 
-class TextEditor {
-    private state: WritingState;
+class TrafficLight {
+    private state: TrafficLightState;
 
-    constructor(state: WritingState) {
+    constructor(state: TrafficLightState) {
         this.state = state;
     }
 
-    setState(state: WritingState) {
-        this.state = state;
+    name(): string {
+        return this.state.name();
     }
 
-    type(words: string) {
-        this.state.write(words);
+    next(): void {
+        this.state = this.state.next();
     }
 }
 
 // ----------------------------
 
-const editor = new TextEditor(new DefaultText());
-editor.type("First Line"); // First Line
+const light = new TrafficLight(new RedLight());
+for (let i = 0; i < 4; i++) {
+    console.log(light.name());
+    light.next();
+}
 
-editor.setState(new UpperCase());
-
-editor.type("Second Line"); // SECOND LINE
-editor.type("Third Line"); // THIRD LINE
-
-editor.setState(new LowerCase());
-
-editor.type("Fourth Line"); // fourth line
-editor.type("Fifth Line"); // fifth line
+// Output:
+// Red
+// Green
+// Yellow
+// Red
 ```
 
 </div>
@@ -13506,49 +13524,63 @@ editor.type("Fifth Line"); // fifth line
 <div dir="ltr">
 
 ```javascript
-class UpperCase {
-    write(words) {
-        console.log(words.toUpperCase());
+class RedLight {
+    name() {
+        return "Red";
+    }
+
+    next() {
+        return new GreenLight();
     }
 }
 
-class LowerCase {
-    write(words) {
-        console.log(words.toLowerCase());
+class GreenLight {
+    name() {
+        return "Green";
+    }
+
+    next() {
+        return new YellowLight();
     }
 }
 
-class DefaultText {
-    write(words) {
-        console.log(words);
+class YellowLight {
+    name() {
+        return "Yellow";
+    }
+
+    next() {
+        return new RedLight();
     }
 }
 
-class TextEditor {
+class TrafficLight {
     constructor(state) {
         this.state = state;
     }
 
-    setState(state) {
-        this.state = state;
+    name() {
+        return this.state.name();
     }
 
-    type(words) {
-        this.state.write(words);
+    next() {
+        this.state = this.state.next();
     }
 }
 
+// ----------------------------
 
-const editor = new TextEditor(new DefaultText());
-editor.type("First Line");
+const light = new TrafficLight(new RedLight());
+for (let i = 0; i < 4; i++) {
+    console.log(light.name());
+    light.next();
+}
 
-editor.setState(new UpperCase());
-editor.type("Second Line");
-editor.type("Third Line");
-
-editor.setState(new LowerCase());
-editor.type("Fourth Line");
-editor.type("Fifth Line")
+// Output:
+// Red
+// Green
+// Yellow
+// Red
 ```
 
 </div>
@@ -13561,54 +13593,43 @@ editor.type("Fifth Line")
 
 ```csharp
 
-interface IWritingState {
-
-  void Write(string words);
-
+interface ITrafficLightState {
+  string Name();
+  ITrafficLightState Next();
 }
 
-class UpperCase : IWritingState
+class RedLight : ITrafficLightState
 {
-  public void Write(string words)
-  {
-    Console.WriteLine(words.ToUpper());
-  }
+  public string Name() => "Red";
+  public ITrafficLightState Next() => new GreenLight();
 }
 
-class LowerCase : IWritingState
+class GreenLight : ITrafficLightState
 {
-  public void Write(string words)
-  {
-    Console.WriteLine(words.ToLower());
-  }
+  public string Name() => "Green";
+  public ITrafficLightState Next() => new YellowLight();
 }
 
-class DefaultText : IWritingState
+class YellowLight : ITrafficLightState
 {
-  public void Write(string words)
-  {
-    Console.WriteLine(words);
-  }
+  public string Name() => "Yellow";
+  public ITrafficLightState Next() => new RedLight();
 }
 
+class TrafficLight {
 
-class TextEditor {
+  private ITrafficLightState mState;
 
-  private IWritingState mState;
-
-  public TextEditor()
-  {
-    mState = new DefaultText();
-  }
-
-  public void SetState(IWritingState state)
+  public TrafficLight(ITrafficLightState state)
   {
     mState = state;
   }
 
-  public void Type(string words)
+  public string Name() => mState.Name();
+
+  public void Next()
   {
-    mState.Write(words);
+    mState = mState.Next();
   }
 
 }
@@ -13616,26 +13637,19 @@ class TextEditor {
 
 // ----------------------------
 
-var editor = new TextEditor();
+var light = new TrafficLight(new RedLight());
 
-editor.Type("First line");
-
-editor.SetState(new UpperCase());
-
-editor.Type("Second Line");
-editor.Type("Third Line");
-
-editor.SetState(new LowerCase());
-
-editor.Type("Fourth Line");
-editor.Type("Fifthe Line");
+for (int i = 0; i < 4; i++)
+{
+  Console.WriteLine(light.Name());
+  light.Next();
+}
 
 // Output:
-// First line
-// SECOND LINE
-// THIRD LINE
-// fourth line
-// fifth line
+// Red
+// Green
+// Yellow
+// Red
 
 ```
 
@@ -13649,73 +13663,81 @@ editor.Type("Fifthe Line");
 <div dir="ltr">
 
 ```php
-interface WritingStateInterface {
-  public function write(string $words);
+interface TrafficLightStateInterface {
+  public function name(): string;
+  public function next(): TrafficLightStateInterface;
 }
 
-class UpperCase implements WritingStateInterface
+class RedLight implements TrafficLightStateInterface
 {
-  public function write(string $words)
+  public function name(): string
   {
-    echo strtoupper($words) . "\n";
+    return "Red";
+  }
+
+  public function next(): TrafficLightStateInterface
+  {
+    return new GreenLight();
   }
 }
 
-class LowerCase implements WritingStateInterface
+class GreenLight implements TrafficLightStateInterface
 {
-  public function write(string $words)
+  public function name(): string
   {
-    echo strtolower($words) . "\n";
+    return "Green";
+  }
+
+  public function next(): TrafficLightStateInterface
+  {
+    return new YellowLight();
   }
 }
 
-class DefaultText implements WritingStateInterface
+class YellowLight implements TrafficLightStateInterface
 {
-  public function write(string $words)
+  public function name(): string
   {
-    echo $words . "\n";
+    return "Yellow";
+  }
+
+  public function next(): TrafficLightStateInterface
+  {
+    return new RedLight();
   }
 }
 
-class TextEditor {
-  private WritingStateInterface $state;
+class TrafficLight {
+  private TrafficLightStateInterface $state;
 
-  public function __construct()
-  {
-    $this->state = new DefaultText();
-  }
-
-  public function setState(WritingStateInterface $state)
+  public function __construct(TrafficLightStateInterface $state)
   {
     $this->state = $state;
   }
 
-  public function type(string $words)
+  public function name(): string
   {
-    $this->state->write($words);
+    return $this->state->name();
+  }
+
+  public function next(): void
+  {
+    $this->state = $this->state->next();
   }
 }
 
-$editor = new TextEditor();
+$light = new TrafficLight(new RedLight());
 
-$editor->type("First line");
-
-$editor->setState(new UpperCase());
-
-$editor->type("Second Line");
-$editor->type("Third Line");
-
-$editor->setState(new LowerCase());
-
-$editor->type("Fourth Line");
-$editor->type("Fifth Line");
+for ($i = 0; $i < 4; $i++) {
+  echo $light->name() . "\n";
+  $light->next();
+}
 
 // Output:
-// First line
-// SECOND LINE
-// THIRD LINE
-// fourth line
-// fifth line
+// Red
+// Green
+// Yellow
+// Red
 
 ```
 
@@ -13732,71 +13754,73 @@ $editor->type("Fifth Line");
 
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-// WritingState interface
-type WritingState interface {
-	Write(words string)
+// TrafficLightState interface
+type TrafficLightState interface {
+	Name() string
+	Next() TrafficLightState
 }
 
-// UpperCase struct
-type UpperCase struct{}
+// RedLight struct
+type RedLight struct{}
 
-// Write for UpperCase
-func (u *UpperCase) Write(words string) {
-	fmt.Println(strings.ToUpper(words))
+func (r *RedLight) Name() string {
+	return "Red"
 }
 
-// LowerCase struct
-type LowerCase struct{}
-
-// Write for LowerCase
-func (l *LowerCase) Write(words string) {
-	fmt.Println(strings.ToLower(words))
+func (r *RedLight) Next() TrafficLightState {
+	return &GreenLight{}
 }
 
-// DefaultText struct
-type DefaultText struct{}
+// GreenLight struct
+type GreenLight struct{}
 
-// Write for DefaultText
-func (d *DefaultText) Write(words string) {
-	fmt.Println(words)
+func (g *GreenLight) Name() string {
+	return "Green"
 }
 
-// TextEditor struct
-type TextEditor struct {
-	state WritingState
+func (g *GreenLight) Next() TrafficLightState {
+	return &YellowLight{}
 }
 
-// NewTextEditor constructor
-func NewTextEditor(state WritingState) *TextEditor {
-	return &TextEditor{state: state}
+// YellowLight struct
+type YellowLight struct{}
+
+func (y *YellowLight) Name() string {
+	return "Yellow"
 }
 
-// SetState method for TextEditor
-func (te *TextEditor) SetState(state WritingState) {
-	te.state = state
+func (y *YellowLight) Next() TrafficLightState {
+	return &RedLight{}
 }
 
-// Type method for TextEditor
-func (te *TextEditor) Type(words string) {
-	te.state.Write(words)
+// TrafficLight holds the current state
+type TrafficLight struct {
+	state TrafficLightState
+}
+
+// NewTrafficLight constructor
+func NewTrafficLight(state TrafficLightState) *TrafficLight {
+	return &TrafficLight{state: state}
+}
+
+// Name delegates to the current state
+func (t *TrafficLight) Name() string {
+	return t.state.Name()
+}
+
+// Next asks the current state for the next one
+func (t *TrafficLight) Next() {
+	t.state = t.state.Next()
 }
 
 func main() {
-	editor := NewTextEditor(&DefaultText{})
-	editor.Type("First Line") // First line
-
-	editor.SetState(&UpperCase{})
-	editor.Type("Second Line") // SECOND LINE
-	editor.Type("Third Line")  // THIRD LINE
-
-	editor.SetState(&LowerCase{})
-	editor.Type("Fourth Line") // fourth line
-	editor.Type("Fifth Line")  // fifth line
+	light := NewTrafficLight(&RedLight{})
+	for i := 0; i < 4; i++ {
+		fmt.Println(light.Name())
+		light.Next()
+	}
 }
 
 ```
@@ -13811,57 +13835,71 @@ func main() {
 <div dir="ltr">
 
 ```java
-interface WritingState {
-    void write(String words);
+interface TrafficLightState {
+    String name();
+    TrafficLightState next();
 }
 
-class UpperCase implements WritingState {
-    public void write(String words) {
-        System.out.println(words.toUpperCase());
+class RedLight implements TrafficLightState {
+    public String name() {
+        return "Red";
+    }
+
+    public TrafficLightState next() {
+        return new GreenLight();
     }
 }
 
-class LowerCase implements WritingState {
-    public void write(String words) {
-        System.out.println(words.toLowerCase());
+class GreenLight implements TrafficLightState {
+    public String name() {
+        return "Green";
+    }
+
+    public TrafficLightState next() {
+        return new YellowLight();
     }
 }
 
-class DefaultText implements WritingState {
-    public void write(String words) {
-        System.out.println(words);
+class YellowLight implements TrafficLightState {
+    public String name() {
+        return "Yellow";
+    }
+
+    public TrafficLightState next() {
+        return new RedLight();
     }
 }
 
-class TextEditor {
-    private WritingState state;
+class TrafficLight {
+    private TrafficLightState state;
 
-    public TextEditor() {
-        state = new DefaultText();
-    }
-
-    public void setState(WritingState state) {
+    public TrafficLight(TrafficLightState state) {
         this.state = state;
     }
 
-    public void type(String words) {
-        state.write(words);
+    public String name() {
+        return state.name();
+    }
+
+    public void next() {
+        state = state.next();
     }
 }
 
 // ----------------------------
 
-TextEditor editor = new TextEditor();
+TrafficLight light = new TrafficLight(new RedLight());
 
-editor.type("First line"); // First line
+for (int i = 0; i < 4; i++) {
+    System.out.println(light.name());
+    light.next();
+}
 
-editor.setState(new UpperCase());
-editor.type("Second line"); // SECOND LINE
-editor.type("Third Line");  // THIRD LINE
-
-editor.setState(new LowerCase());
-editor.type("Fourth line"); // fourth line
-editor.type("FIFTH Line");  // fifth line
+// Output:
+// Red
+// Green
+// Yellow
+// Red
 ```
 
 </div>
@@ -13875,72 +13913,70 @@ editor.type("FIFTH Line");  // fifth line
 
 ```cpp
 #include <iostream>
+#include <memory>
 #include <string>
-#include <algorithm>
 
-class WritingState {
+class TrafficLightState {
 public:
-    virtual ~WritingState() = default;
-    virtual void write(const std::string& words) = 0;
+    virtual ~TrafficLightState() = default;
+    virtual std::string name() const = 0;
+    virtual std::unique_ptr<TrafficLightState> next() const = 0;
 };
 
-class UpperCase : public WritingState {
+class GreenLight;
+class YellowLight;
+
+class RedLight : public TrafficLightState {
 public:
-    void write(const std::string& words) override {
-        std::string upper = words;
-        std::transform(upper.begin(), upper.end(), upper.begin(), ::toupper);
-        std::cout << upper << std::endl;
-    }
+    std::string name() const override { return "Red"; }
+    std::unique_ptr<TrafficLightState> next() const override;
 };
 
-class LowerCase : public WritingState {
+class GreenLight : public TrafficLightState {
 public:
-    void write(const std::string& words) override {
-        std::string lower = words;
-        std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
-        std::cout << lower << std::endl;
-    }
+    std::string name() const override { return "Green"; }
+    std::unique_ptr<TrafficLightState> next() const override;
 };
 
-class DefaultText : public WritingState {
+class YellowLight : public TrafficLightState {
 public:
-    void write(const std::string& words) override {
-        std::cout << words << std::endl;
-    }
+    std::string name() const override { return "Yellow"; }
+    std::unique_ptr<TrafficLightState> next() const override;
 };
 
-class TextEditor {
+std::unique_ptr<TrafficLightState> RedLight::next() const {
+    return std::make_unique<GreenLight>();
+}
+
+std::unique_ptr<TrafficLightState> GreenLight::next() const {
+    return std::make_unique<YellowLight>();
+}
+
+std::unique_ptr<TrafficLightState> YellowLight::next() const {
+    return std::make_unique<RedLight>();
+}
+
+class TrafficLight {
 private:
-    WritingState* state;
+    std::unique_ptr<TrafficLightState> state;
 
 public:
-    TextEditor() : state(new DefaultText()) {}
-    ~TextEditor() { delete state; }
+    explicit TrafficLight(std::unique_ptr<TrafficLightState> initial)
+        : state(std::move(initial)) {}
 
-    void setState(WritingState* newState) {
-        delete state;
-        state = newState;
-    }
+    std::string name() const { return state->name(); }
 
-    void type(const std::string& words) {
-        state->write(words);
-    }
+    void next() { state = state->next(); }
 };
 
 // ----------------------------
 
 int main() {
-    TextEditor editor;
-
-    editor.type("First line");  // First line
-
-    editor.setState(new UpperCase());
-    editor.type("Second line"); // SECOND LINE
-    editor.type("Third line");  // THIRD LINE
-
-    editor.setState(new LowerCase());
-    editor.type("Fourth line"); // fourth line
-    editor.type("Fifth line");  // fifth line
+    TrafficLight light(std::make_unique<RedLight>());
+    for (int i = 0; i < 4; ++i) {
+        std::cout << light.name() << std::endl;
+        light.next();
+    }
     return 0;
 }
 ```
@@ -13948,6 +13984,12 @@ int main() {
 </div>
 
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی رفتار یه شیء به یه «حالت» داخلی بستگی داره و خود حالت‌ها هم با شرط مشخص از یکی به اون یکی گذار می‌کنن، مثل چراغ راهنمایی یا چرخه سفارش»؛ ❌ «وقتی فقط می‌خوای یه رفتار رو از بیرون عوض کنی و خبری از گذار خودکار بین حالت‌ها نیست».
+> 🪤 **دام رایج:** «اگه گذار بین حالت‌ها رو از بیرون با setState دستی انجام بدی، عملاً به استراتژی (Strategy) رسیدی؛ جذابیت State اینه که خود حالت، حالت بعدی رو انتخاب کنه».
+> 🔗 **فرقش با [استراتژی (Strategy)](#استراتژی-strategy-):** «توی Strategy تو از بیرون الگوریتم رو دستی می‌چینی؛ توی State خود شیء با عوض شدن حالتش، رفتارش رو خودکار عوض می‌کنه».
+
 
 <br>
 
