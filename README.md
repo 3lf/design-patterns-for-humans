@@ -6312,6 +6312,8 @@ int main() {
 
 </div>
 
+نما یه آبجکته که یه رابط ساده‌شده جلوی یه تیکه کدِ بزرگ‌تر می‌ذاره، مثل یه کتابخونه کلاس‌ها. تو با همون رابط ساده کار می‌کنی و درگیر پیچیدگی پشتش نمی‌شی.
+
 **مثال برنامه‌نویسی**
 
 بیا همون مثال مربوط به کامپیوتر رو پیاده‌سازی کنیم!
@@ -6333,27 +6335,25 @@ class Computer:
         print("Ouch!")
 
     def makeSound(self):
-        print("Beep Beep!")
+        print("Beep beep!")
 
     def showLoadingScreen(self):
-        print("Loading...")
+        print("Loading..")
 
     def bam(self):
-        print("Ready to be used...")
+        print("Ready to be used!")
 
     def closeEverything(self):
-        print("Bup bup bup buzzz!")
-
-    def sooth(self):
-        print("Zzzzz")
+        print("Bup bup..")
 
     def pullCurrent(self):
         print("Haaah!")
 
+    def sooth(self):
+        print("Zzzzz")
+
 
 class ComputerFacade:
-    _computer = None
-
     def __init__(self, computer):
         self.computer = computer
 
@@ -6376,13 +6376,12 @@ computer.turnOn()
 computer.turnOff()
 
 '''
-Output will be
-==============
+Output:
 Ouch!
-Beep Beep!
-Loading...
-Ready to be used...
-Bup bup bup buzzz!
+Beep beep!
+Loading..
+Ready to be used!
+Bup bup..
 Haaah!
 Zzzzz
 '''
@@ -6405,27 +6404,27 @@ class Computer {
     }
 
     makeSound() {
-        console.log("Beep Beep!");
+        console.log("Beep beep!");
     }
 
     showLoadingScreen() {
-        console.log("Loading...");
+        console.log("Loading..");
     }
 
     bam() {
-        console.log("Ready to be used...");
+        console.log("Ready to be used!");
     }
 
     closeEverything() {
-        console.log("Bup bup bup buzzz!");
-    }
-
-    sooth() {
-        console.log("Zzzzz");
+        console.log("Bup bup..");
     }
 
     pullCurrent() {
         console.log("Haaah!");
+    }
+
+    sooth() {
+        console.log("Zzzzz");
     }
 }
 
@@ -6433,10 +6432,6 @@ class ComputerFacade {
     private computer: Computer;
 
     constructor(computer: Computer) {
-        this.computer = computer;
-    }
-
-    set computer(computer: Computer) {
         this.computer = computer;
     }
 
@@ -6456,10 +6451,18 @@ class ComputerFacade {
 
 // ----------------------------
 
-    let
-computer = new ComputerFacade(new Computer());
+const computer = new ComputerFacade(new Computer());
 computer.turnOn();
 computer.turnOff();
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 ```
 
 </div>
@@ -6479,36 +6482,32 @@ class Computer {
     }
 
     makeSound() {
-        console.log("Beep Beep!");
+        console.log("Beep beep!");
     }
 
     showLoadingScreen() {
-        console.log("Loading...");
+        console.log("Loading..");
     }
 
     bam() {
-        console.log("Ready to be used...");
+        console.log("Ready to be used!");
     }
 
     closeEverything() {
-        console.log("Bup bup bup buzzz!");
-    }
-
-    sooth() {
-        console.log("Zzzzz");
+        console.log("Bup bup..");
     }
 
     pullCurrent() {
         console.log("Haaah!");
     }
+
+    sooth() {
+        console.log("Zzzzz");
+    }
 }
 
 class ComputerFacade {
     constructor(computer) {
-        this.computer = computer;
-    }
-
-    set computer(computer) {
         this.computer = computer;
     }
 
@@ -6529,6 +6528,15 @@ class ComputerFacade {
 const computer = new ComputerFacade(new Computer());
 computer.turnOn();
 computer.turnOff();
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 ```
 
 </div>
@@ -6546,37 +6554,37 @@ class Computer
 {
   public void GetElectricShock()
   {
-    Console.Write("Ouch!");
+    Console.WriteLine("Ouch!");
   }
 
   public void MakeSound()
   {
-    Console.Write("Beep beep!");
+    Console.WriteLine("Beep beep!");
   }
 
   public void ShowLoadingScreen()
   {
-    Console.Write("Loading..");
+    Console.WriteLine("Loading..");
   }
 
   public void Bam()
   {
-    Console.Write("Ready to be used!");
+    Console.WriteLine("Ready to be used!");
   }
 
   public void CloseEverything()
   {
-    Console.Write("Bup bup bup buzzzz!");
-  }
-
-  public void Sooth()
-  {
-    Console.Write("Zzzzz");
+    Console.WriteLine("Bup bup..");
   }
 
   public void PullCurrent()
   {
-    Console.Write("Haaah!");
+    Console.WriteLine("Haaah!");
+  }
+
+  public void Sooth()
+  {
+    Console.WriteLine("Zzzzz");
   }
 }
 
@@ -6609,10 +6617,17 @@ class ComputerFacade
 // ----------------------------
 
 var computer = new ComputerFacade(new Computer());
-computer.TurnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
-Console.WriteLine();
-computer.TurnOff();  // Bup bup buzzz! Haah! Zzzzz
-Console.ReadLine();
+computer.TurnOn();
+computer.TurnOff();
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 
 ```
 
@@ -6630,37 +6645,37 @@ class Computer
 {
   public function getElectricShock()
   {
-    echo "Ouch!";
+    echo "Ouch!" . PHP_EOL;
   }
 
   public function makeSound()
   {
-    echo "Beep beep!";
+    echo "Beep beep!" . PHP_EOL;
   }
 
   public function showLoadingScreen()
   {
-    echo "Loading..";
+    echo "Loading.." . PHP_EOL;
   }
 
   public function bam()
   {
-    echo "Ready to be used!";
+    echo "Ready to be used!" . PHP_EOL;
   }
 
   public function closeEverything()
   {
-    echo "Bup bup bup buzzzz!";
-  }
-
-  public function sooth()
-  {
-    echo "Zzzzz";
+    echo "Bup bup.." . PHP_EOL;
   }
 
   public function pullCurrent()
   {
-    echo "Haaah!";
+    echo "Haaah!" . PHP_EOL;
+  }
+
+  public function sooth()
+  {
+    echo "Zzzzz" . PHP_EOL;
   }
 }
 
@@ -6687,9 +6702,17 @@ class ComputerFacade
 }
 
 $computerFacade = new ComputerFacade(new Computer());
-$computerFacade->turnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
-echo PHP_EOL;
-$computerFacade->turnOff();  // Bup bup buzzz! Haah! Zzzzz
+$computerFacade->turnOn();
+$computerFacade->turnOff();
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 
 ```
 
@@ -6713,31 +6736,31 @@ import (
 type computer struct{}
 
 func (c *computer) getElectricShock() {
-    fmt.Print("Ouch!")
+    fmt.Println("Ouch!")
 }
 
 func (c *computer) makeSound() {
-    fmt.Print("Beep beep!")
+    fmt.Println("Beep beep!")
 }
 
 func (c *computer) showLoadingScreen() {
-    fmt.Print("Loading..")
+    fmt.Println("Loading..")
 }
 
 func (c *computer) bam() {
-    fmt.Print("Ready to be used!")
+    fmt.Println("Ready to be used!")
 }
 
 func (c *computer) closeEverything() {
-    fmt.Print("Bup bup bup buzzzz!")
-}
-
-func (c *computer) soothe() {
-    fmt.Print("Zzzzz")
+    fmt.Println("Bup bup..")
 }
 
 func (c *computer) pullCurrent() {
-    fmt.Print("Haaah!")
+    fmt.Println("Haaah!")
+}
+
+func (c *computer) sooth() {
+    fmt.Println("Zzzzz")
 }
 
 type computerFacade struct {
@@ -6761,15 +6784,23 @@ func (cf *computerFacade) turnOn() {
 func (cf *computerFacade) turnOff() {
     cf.computer.closeEverything()
     cf.computer.pullCurrent()
-    cf.computer.soothe()
+    cf.computer.sooth()
 }
 
 func main() {
     c := newComputerFacade(&computer{})
-    c.turnOn() // Ouch! Beep beep! Loading.. Ready to be used!
-    fmt.Println()
-    c.turnOff() // Bup bup buzzz! Haah! Zzzzz
+    c.turnOn()
+    c.turnOff()
 }
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 
 ```
 
@@ -6801,15 +6832,15 @@ class Computer {
     }
 
     public void closeEverything() {
-        System.out.println("Bup bup bup buzzzz!");
-    }
-
-    public void sooth() {
-        System.out.println("Zzzzz");
+        System.out.println("Bup bup..");
     }
 
     public void pullCurrent() {
         System.out.println("Haaah!");
+    }
+
+    public void sooth() {
+        System.out.println("Zzzzz");
     }
 }
 
@@ -6839,10 +6870,17 @@ class ComputerFacade {
 // ----------------------------
 
 ComputerFacade computer = new ComputerFacade(new Computer());
-computer.turnOn();      // Ouch! Beep beep! Loading.. Ready to be used!
-System.out.println();
-computer.turnOff();     // Bup bup buzzz! Haah! Zzzzz
-System.out.println();
+computer.turnOn();
+computer.turnOff();
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 ```
 
 </div>
@@ -6876,15 +6914,15 @@ public:
     }
 
     void closeEverything() {
-        std::cout << "Bup bup bup buzzzz!" << std::endl;
-    }
-
-    void sooth() {
-        std::cout << "Zzzzz" << std::endl;
+        std::cout << "Bup bup.." << std::endl;
     }
 
     void pullCurrent() {
         std::cout << "Haaah!" << std::endl;
+    }
+
+    void sooth() {
+        std::cout << "Zzzzz" << std::endl;
     }
 };
 
@@ -6914,16 +6952,29 @@ public:
 int main() {
     Computer comp;
     ComputerFacade computer(comp);
-    computer.turnOn();      // Ouch! Beep beep! Loading.. Ready to be used!
-    std::cout << std::endl;
-    computer.turnOff();     // Bup bup buzzz! Haah! Zzzzz
+    computer.turnOn();
+    computer.turnOff();
     return 0;
 }
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 ```
 
 </div>
 
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی یه زیرسیستم شلوغ و چندمرحله‌ای داری و می‌خوای یه ورودی ساده و خوش‌دست جلوش بذاری»؛ ❌ «وقتی فقط یه کلاس ساده داری که اصلاً پیچیدگی‌ای برای قایم کردن نداره».
+> 🪤 **دام رایج:** «نما رو نکن یه کلاس خدا (God Object) که خودش همه‌کاره‌ست؛ نما فقط هماهنگ‌کننده‌ست، نه انجام‌دهنده همه‌چی».
+
 
 <br>
 
