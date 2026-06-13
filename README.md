@@ -2805,10 +2805,10 @@ int main() {
 </div>
 
 <div align="center">
-🧬 <b>مثال دنیای واقعی: گوسفند دالی (شبیه‌سازی)</b>
+🧬 <b>مثال دنیای واقعی: کپی گرفتن از یه سند آماده</b>
 </div>
 
-ماجرای گوسفند دالی رو شنیدی؟ 🐑 دالی اولین گوسفندی بود که «متولد» نشد، بلکه از روی یه گوسفند دیگه **کپی** (Clone) شد.
+فرض کن یه فایل ورد داری که کلی روش وقت گذاشتی؛ حاشیه، فونت، استایل، همه چی تنظیم شده. حالا برای یه سند جدید، از صفر شروع نمی‌کنی. همون فایل رو **Copy/Paste** می‌کنی و فقط متنش رو عوض می‌کنی. این دقیقاً کاری‌ه که این پترن می‌کنه؛ به جای ساختن از صفر، از روی یه نمونه آماده یه **کپی** (Clone) می‌گیری.
 
 توی دنیای کامپیوتر هم خیلی وقتا پیش میاد که ساختن یه آبجکت از صفر خیلی هزینه داره (مثلاً باید کلی دیتابیس رو کوئری بزنه تا ساخته بشه).
 به جای اینکه هر دفعه این مسیر سخت رو بریم، میایم از روی یه نمونه آماده (Prototype) یه کپی می‌گیریم. مثل دستور **Copy/Paste**.
@@ -2826,11 +2826,13 @@ int main() {
 
 </div>
 
+به زبون خودمون: پترن نمونه اولیه (Prototype) یه پترن سازنده (Creational) هست. وقتی به دردت می‌خوره که نوع آبجکتی که می‌خوای بسازی رو یه نمونه آماده مشخص می‌کنه؛ پس به جای ساختن از صفر، از روی همون نمونه یه کپی (Clone) می‌گیری و آبجکت جدیدت آماده‌ست.
+
 **مثال برنامه‌نویسی**
 
-فرض کن کلاس SomeComponent رو به صورتی که در کد می‌بینی داریم.
+فرض کن یه کلاس Person داریم که یه اسم داره و یه آبجکت تو در توی Address، که توش شهر طرف نگه‌داری می‌شه.
 
-باید دو کلاس copy و deep کپی ایجاد کنیم.
+می‌خوایم دو جور کپی ازش بگیریم؛ یه کپی سطحی (Shallow Copy) و یه کپی عمیق (Deep Copy)، تا فرقشون رو زنده ببینی.
 
 <details>
 <summary>Python</summary>
@@ -2840,30 +2842,41 @@ int main() {
 <div dir="ltr">
 
 ```python
-class SomeComponent:
-    def __init__(self, some_int, some_list_of_objects, some_circular_ref):
-        self.some_int = some_int
-        self.some_list_of_objects = some_list_of_objects
-        self.some_circular_ref = some_circular_ref
+import copy
+
+
+class Address:
+    def __init__(self, city):
+        self.city = city
+
+
+class Person:
+    def __init__(self, name, address):
+        self.name = name
+        self.address = address  # nested mutable object
 
     def __copy__(self):
-        some_list_of_objects = copy.copy(self.some_list_of_objects)
-        some_circular_ref = copy.copy(self.some_circular_ref)
-        new = self.__class__(
-            self.some_int, some_list_of_objects, some_circular_ref
-        )
-        new.__dict__.update(self.__dict__)
-        return new
+        # Shallow copy: new Person, but the SAME Address object is shared
+        return Person(self.name, self.address)
 
-    def __deepcopy__(self, memo={}):
-        some_list_of_objects = copy.deepcopy(self.some_list_of_objects, memo)
-        some_circular_ref = copy.deepcopy(self.some_circular_ref, memo)
-        new = self.__class__(
-            self.some_int, some_list_of_objects, some_circular_ref
-        )
-        new.__dict__ = copy.deepcopy(self.__dict__, memo)
+    def __deepcopy__(self, memo):
+        # Deep copy: the nested Address is copied too, so it is independent
+        return Person(self.name, copy.deepcopy(self.address, memo))
 
-        return new
+
+# Shallow clone: shares the nested Address
+original = Person("Sara", Address("Tehran"))
+shallow = copy.copy(original)
+shallow.address.city = "Shiraz"
+print(shallow.address.city)    # Shiraz
+print(original.address.city)   # Shiraz  -> the original changed too (shared Address)
+
+# Deep clone: gets its own Address
+original = Person("Sara", Address("Tehran"))
+deep = copy.deepcopy(original)
+deep.address.city = "Shiraz"
+print(deep.address.city)       # Shiraz
+print(original.address.city)   # Tehran  -> the original stayed the same
 ```
 
 </div>
@@ -2875,64 +2888,47 @@ class SomeComponent:
 <div dir="ltr">
 
 ```typescript
-class SomeComponent {
-    someInt: number;
-    someListOfObjects: any[];
-    someCircularRef: any;
+class Address {
+    city: string;
 
-    constructor(someInt: number, someListOfObjects: any[], someCircularRef: any) {
-        this.someInt = someInt;
-        this.someListOfObjects = someListOfObjects;
-        this.someCircularRef = someCircularRef;
-    }
-
-    copy() {
-        let someListOfObjects = Object.assign([], this.someListOfObjects);
-        let someCircularRef = Object.assign({}, this.someCircularRef);
-        let newComponent = new SomeComponent(
-            this.someInt, someListOfObjects, someCircularRef
-        );
-        Object.assign(newComponent, this);
-        return newComponent;
-    }
-
-    deepCopy(memo: object = {}) {
-        let someListOfObjects = JSON.parse(JSON.stringify(this.someListOfObjects));
-        let someCircularRef = JSON.parse(JSON.stringify(this.someCircularRef));
-        let newComponent = new SomeComponent(
-            this.someInt, someListOfObjects, someCircularRef
-        );
-        newComponent = JSON.parse(JSON.stringify(this));
-        return newComponent;
+    constructor(city: string) {
+        this.city = city;
     }
 }
 
-// ------------------------------
+class Person {
+    name: string;
+    address: Address; // nested mutable object
 
-let component = new SomeComponent(1, [1,2,3], {x : 1});
-let copyComponent = component.copy();
+    constructor(name: string, address: Address) {
+        this.name = name;
+        this.address = address;
+    }
 
-console.log(copyComponent.someListOfObjects);   // [ 1, 2, 3 ]
-console.log(copyComponent.someCircularRef);     // { x: 1 }
+    // Shallow copy: new Person, but the SAME Address object is shared
+    shallowCopy(): Person {
+        return new Person(this.name, this.address);
+    }
 
-component.someListOfObjects.push(4);
-component.someCircularRef.y = 6;
+    // Deep copy: the nested Address is copied too, so it is independent
+    deepCopy(): Person {
+        return new Person(this.name, new Address(this.address.city));
+    }
+}
 
-console.log(copyComponent.someListOfObjects)    // [ 1, 2, 3, 4 ]
-console.log(copyComponent.someCircularRef)      // { x: 1, y: 6 }
+// Shallow clone: shares the nested Address
+let original = new Person("Sara", new Address("Tehran"));
+let shallow = original.shallowCopy();
+shallow.address.city = "Shiraz";
+console.log(shallow.address.city);    // Shiraz
+console.log(original.address.city);   // Shiraz  -> the original changed too (shared Address)
 
-// ------------------------------
-let component2 = new SomeComponent(1, [1,2,3], {x : 1});
-let copyComponent2 = component2.deepCopy();
-
-console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
-console.log(copyComponent2.someCircularRef);     // { x: 1 }
-
-component2.someListOfObjects.push(4);
-component2.someCircularRef.y = 6;
-
-console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
-console.log(copyComponent2.someCircularRef);     // { x: 1 }
+// Deep clone: gets its own Address
+original = new Person("Sara", new Address("Tehran"));
+let deep = original.deepCopy();
+deep.address.city = "Shiraz";
+console.log(deep.address.city);       // Shiraz
+console.log(original.address.city);   // Tehran  -> the original stayed the same
 ```
 
 </div>
@@ -2944,58 +2940,42 @@ console.log(copyComponent2.someCircularRef);     // { x: 1 }
 <div dir="ltr">
 
 ```javascript
-class SomeComponent {
-    constructor(someInt, someListOfObjects, someCircularRef) {
-        this.someInt = someInt;
-        this.someListOfObjects = someListOfObjects;
-        this.someCircularRef = someCircularRef;
-    }
-
-    copy() {
-        let someListOfObjects = Object.assign([], this.someListOfObjects);
-        let someCircularRef = Object.assign({}, this.someCircularRef);
-        let newComponent = new SomeComponent(
-            this.someInt, someListOfObjects, someCircularRef
-        );
-        Object.assign(newComponent, this);
-        return newComponent;
-    }
-
-    deepCopy() {
-
-        let someListOfObjects = JSON.parse(JSON.stringify(this.someListOfObjects));
-        let someCircularRef = JSON.parse(JSON.stringify(this.someCircularRef));
-        let newComponent = new SomeComponent(
-            this.someInt, someListOfObjects, someCircularRef
-        );
-        newComponent = JSON.parse(JSON.stringify(this));
-        return newComponent;
+class Address {
+    constructor(city) {
+        this.city = city;
     }
 }
 
-let component = new SomeComponent(1, [1, 2, 3], { x: 1 });
-let copyComponent = component.copy();
+class Person {
+    constructor(name, address) {
+        this.name = name;
+        this.address = address; // nested mutable object
+    }
 
-console.log(copyComponent.someListOfObjects);   // [ 1, 2, 3 ]
-console.log(copyComponent.someCircularRef);     // { x: 1 }
+    // Shallow copy: new Person, but the SAME Address object is shared
+    shallowCopy() {
+        return new Person(this.name, this.address);
+    }
 
-component.someListOfObjects.push(4);
-component.someCircularRef.y = 6;
+    // Deep copy: the nested Address is copied too, so it is independent
+    deepCopy() {
+        return new Person(this.name, new Address(this.address.city));
+    }
+}
 
-console.log(copyComponent.someListOfObjects);   // [ 1, 2, 3, 4 ]
-console.log(copyComponent.someCircularRef);     // { x: 1, y: 6 }
+// Shallow clone: shares the nested Address
+let original = new Person("Sara", new Address("Tehran"));
+let shallow = original.shallowCopy();
+shallow.address.city = "Shiraz";
+console.log(shallow.address.city);    // Shiraz
+console.log(original.address.city);   // Shiraz  -> the original changed too (shared Address)
 
-let component2 = new SomeComponent(1, [1, 2, 3], { x: 1 });
-let copyComponent2 = component2.deepCopy();
-
-console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
-console.log(copyComponent2.someCircularRef);     // { x: 1 }
-
-component2.someListOfObjects.push(4);
-component2.someCircularRef.y = 6;
-
-console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
-console.log(copyComponent2.someCircularRef);     // { x: 1 }
+// Deep clone: gets its own Address
+original = new Person("Sara", new Address("Tehran"));
+let deep = original.deepCopy();
+deep.address.city = "Shiraz";
+console.log(deep.address.city);       // Shiraz
+console.log(original.address.city);   // Tehran  -> the original stayed the same
 ```
 
 </div>
@@ -3009,117 +2989,64 @@ console.log(copyComponent2.someCircularRef);     // { x: 1 }
 
 ```csharp
 
-public class SomeComponent
-{
-    public int someInt;
-    public string? someString;
+using System;
 
-    public SomeComponent ShallowCopy()
+public class Address
+{
+    public string City;
+
+    public Address(string city)
     {
-        return (SomeComponent)this.MemberwiseClone();
+        City = city;
+    }
+}
+
+public class Person
+{
+    public string Name;
+    public Address Address; // nested mutable object
+
+    public Person(string name, Address address)
+    {
+        Name = name;
+        Address = address;
     }
 
-    public SomeComponent DeepCopy()
+    // Shallow copy: MemberwiseClone keeps the SAME Address reference (shared)
+    public Person ShallowCopy()
     {
-        SomeComponent clone = (SomeComponent)this.MemberwiseClone();
-        clone.someInt = someInt;
-        clone.someString = someString;
+        return (Person)this.MemberwiseClone();
+    }
+
+    // Deep copy: also copy the nested Address, so it is independent
+    public Person DeepCopy()
+    {
+        Person clone = (Person)this.MemberwiseClone();
+        clone.Address = new Address(this.Address.City);
         return clone;
     }
 }
 
-// ----------------------------
-
-SomeComponent c1 = new SomeComponent();
-c1.someInt = 1;
-c1.someString = "someString1";
-
-// Perform a shallow copy of c1 and assign it to c2.
-SomeComponent c2 = c1.ShallowCopy();
-
-// Make a deep copy of c1 and assign it to c3.
-SomeComponent c3 = c1.DeepCopy();
-
-Console.WriteLine(c1.someInt + ":" + c1.someString); // 1:someString1
-Console.WriteLine(c2.someInt + ":" + c2.someString); // 1:someString1
-Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
-
-c1.someInt = 2;
-c1.someString = "someString2";
-
-Console.WriteLine(c1.someInt + ":" + c1.someString); // 2:someString2
-Console.WriteLine(c2.someInt + ":" + c2.someString); // 1:someString1
-Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
-
-```
-
-</div>
-
-<br>
-
-برای deepCopy می‌تونیم از json Deserialize استفاده کنیم :
-
-<div dir="ltr">
-
-```csharp
-
-public abstract class Person
+public class Program
 {
-    public abstract string Name { get; set; }
-
-    public abstract Person Clone(bool deepClone);
-}
-
-public class Manager : Person
-{
-    public override string Name { get; set; }
-
-    public Manager(string name)
+    public static void Main()
     {
-        Name = name;
+        // Shallow clone: shares the nested Address
+        Person original = new Person("Sara", new Address("Tehran"));
+        Person shallow = original.ShallowCopy();
+        shallow.Address.City = "Shiraz";
+        Console.WriteLine(shallow.Address.City);    // Shiraz
+        Console.WriteLine(original.Address.City);   // Shiraz  -> the original changed too (shared Address)
 
-    }
-
-    public override Person Clone( bool deepClone=false)
-    {
-       if (deepClone)
-        {
-            var objectAsJson = JsonConvert.SerializeObject(this);
-            return JsonConvert.DeserializeObject<Manager>(objectAsJson);
-
-        }
-        return (Person)MemberwiseClone();
+        // Deep clone: gets its own Address
+        original = new Person("Sara", new Address("Tehran"));
+        Person deep = original.DeepCopy();
+        deep.Address.City = "Shiraz";
+        Console.WriteLine(deep.Address.City);       // Shiraz
+        Console.WriteLine(original.Address.City);   // Tehran  -> the original stayed the same
     }
 }
 
-public class Employee : Person
-{
-    public Manager Manager { get; set; }
-    public override string Name { get; set; }
-    public Employee(string name, Manager manager)
-    {
-
-        Name = name;
-        Manager = manager;
-    }
-    public override Person Clone(bool deepClone = false)
-    {
-           if (deepClone)
-        {
-            var objectAsJson = JsonConvert.SerializeObject(this);
-            return JsonConvert.DeserializeObject<Employee>(objectAsJson);
-
-        }
-        return (Person)MemberwiseClone() ;
-    }
-
-}
-
-var manager = new Manager("Cindey");
-var managerClone = (Manager)manager.Clone(true);
-
-var employee = new Employee("kevin", managerClone);
-var employeeClone = (Employee)employee.Clone(true);
 ```
 
 </div>
@@ -3133,50 +3060,57 @@ var employeeClone = (Employee)employee.Clone(true);
 
 ```php
 
-class SomeComponent
-{
-    public int $someInt;
-    public ?string $someString;
+<?php
 
-    public function __clone()
+class Address
+{
+    public string $city;
+
+    public function __construct(string $city)
     {
-        // no need to manually copy fields, PHP's __clone does it automatically for primitive types
+        $this->city = $city;
+    }
+}
+
+class Person
+{
+    public string $name;
+    public Address $address; // nested mutable object
+
+    public function __construct(string $name, Address $address)
+    {
+        $this->name = $name;
+        $this->address = $address;
     }
 
-    public function shallowCopy(): SomeComponent
+    // Shallow copy: clone keeps the SAME Address object (shared)
+    public function shallowCopy(): Person
     {
         return clone $this;
     }
 
-    public function deepCopy(): SomeComponent
+    // Deep copy: also copy the nested Address, so it is independent
+    public function deepCopy(): Person
     {
         $clone = clone $this;
-        $clone->someInt = $this->someInt;
-        $clone->someString = $this->someString;
+        $clone->address = new Address($this->address->city);
         return $clone;
     }
 }
 
-$c1 = new SomeComponent();
-$c1->someInt = 1;
-$c1->someString = "someString1";
+// Shallow clone: shares the nested Address
+$original = new Person("Sara", new Address("Tehran"));
+$shallow = $original->shallowCopy();
+$shallow->address->city = "Shiraz";
+echo $shallow->address->city . "\n";    // Shiraz
+echo $original->address->city . "\n";   // Shiraz  -> the original changed too (shared Address)
 
-// Perform a shallow copy of c1 and assign it to c2.
-$c2 = $c1->shallowCopy();
-
-// Make a deep copy of c1 and assign it to c3.
-$c3 = $c1->deepCopy();
-
-echo $c1->someInt . ":" . $c1->someString . "\n"; // 1:someString1
-echo $c2->someInt . ":" . $c2->someString . "\n"; // 1:someString1
-echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
-
-$c1->someInt = 2;
-$c1->someString = "someString2";
-
-echo $c1->someInt . ":" . $c1->someString . "\n"; // 2:someString2
-echo $c2->someInt . ":" . $c2->someString . "\n"; // 1:someString1
-echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
+// Deep clone: gets its own Address
+$original = new Person("Sara", new Address("Tehran"));
+$deep = $original->deepCopy();
+$deep->address->city = "Shiraz";
+echo $deep->address->city . "\n";       // Shiraz
+echo $original->address->city . "\n";   // Tehran  -> the original stayed the same
 
 ```
 
@@ -3192,88 +3126,41 @@ echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
 ```go
 package main
 
-import (
-    "encoding/json"
-    "fmt"
-)
+import "fmt"
 
-type Person interface {
-    GetName() string
-    SetName(name string)
-    Clone(deepClone bool) Person
+type Address struct {
+	City string
 }
 
-type Manager struct {
-    Name string `json:"name"`
+type Person struct {
+	Name    string
+	Address *Address // nested mutable object
 }
 
-func NewManager(name string) *Manager {
-    return &Manager{
-        Name: name,
-    }
+// Shallow copy: new Person, but the SAME Address pointer is shared
+func (p *Person) ShallowCopy() *Person {
+	return &Person{Name: p.Name, Address: p.Address}
 }
 
-func (m *Manager) GetName() string {
-    return m.Name
-}
-
-func (m *Manager) SetName(name string) {
-    m.Name = name
-}
-
-func (m *Manager) Clone(deepClone bool) Person {
-    if deepClone {
-        objectAsJson, _ := json.Marshal(m)
-        clone := &Manager{}
-        json.Unmarshal(objectAsJson, clone)
-        return clone
-    }
-    return &Manager{
-        Name: m.Name,
-    }
-}
-
-type Employee struct {
-    Name    string   `json:"name"`
-    Manager *Manager `json:"manager"`
-}
-
-func NewEmployee(name string, manager *Manager) *Employee {
-    return &Employee{
-        Name:    name,
-        Manager: manager,
-    }
-}
-
-func (e *Employee) GetName() string {
-    return e.Name
-}
-
-func (e *Employee) SetName(name string) {
-    e.Name = name
-}
-
-func (e *Employee) Clone(deepClone bool) Person {
-    if deepClone {
-        objectAsJson, _ := json.Marshal(e)
-        clone := &Employee{}
-        json.Unmarshal(objectAsJson, clone)
-        return clone
-    }
-    return &Employee{
-        Name:    e.Name,
-        Manager: e.Manager.Clone(false).(*Manager),
-    }
+// Deep copy: the nested Address is copied too, so it is independent
+func (p *Person) DeepCopy() *Person {
+	return &Person{Name: p.Name, Address: &Address{City: p.Address.City}}
 }
 
 func main() {
-    manager := NewManager("Cindey")
-    managerClone := manager.Clone(true).(*Manager)
-    fmt.Println(managerClone.GetName())
+	// Shallow clone: shares the nested Address
+	original := &Person{Name: "Sara", Address: &Address{City: "Tehran"}}
+	shallow := original.ShallowCopy()
+	shallow.Address.City = "Shiraz"
+	fmt.Println(shallow.Address.City)  // Shiraz
+	fmt.Println(original.Address.City) // Shiraz  -> the original changed too (shared Address)
 
-    employee := NewEmployee("kevin", managerClone)
-    employeeClone := employee.Clone(true).(*Employee)
-    fmt.Println(employeeClone.GetName(), employeeClone.Manager.GetName())
+	// Deep clone: gets its own Address
+	original = &Person{Name: "Sara", Address: &Address{City: "Tehran"}}
+	deep := original.DeepCopy()
+	deep.Address.City = "Shiraz"
+	fmt.Println(deep.Address.City)     // Shiraz
+	fmt.Println(original.Address.City) // Tehran  -> the original stayed the same
 }
 
 ```
@@ -3288,49 +3175,51 @@ func main() {
 <div dir="ltr">
 
 ```java
-interface Cloneable {
-    Object clone();
-}
-class SomeComponent implements Cloneable {
-    private int someInt;
-    private String someString;
+class Address {
+    String city;
 
-    public int getSomeInt() {return someInt;}
-    public void setSomeInt(int someInt) {this.someInt = someInt;}
-    public String getSomeString() {return someString;}
-    public void setSomeString(String someString) {this.someString = someString;}
-
-    public SomeComponent copy() {
-        return this;
-    }
-
-    public SomeComponent deepCopy() {
-        return this.clone();
-    }
-
-    @Override
-    public SomeComponent clone() {
-        SomeComponent cloned = new SomeComponent();
-        cloned.setSomeInt(this.someInt);
-        cloned.setSomeString(this.someString);
-        return cloned;
+    Address(String city) {
+        this.city = city;
     }
 }
 
-// ----------------------------
+class Person {
+    String name;
+    Address address; // nested mutable object
 
-SomeComponent mainComponent = new SomeComponent();
-mainComponent.setSomeInt(1);
-mainComponent.setSomeString("main");
+    Person(String name, Address address) {
+        this.name = name;
+        this.address = address;
+    }
 
-SomeComponent copyComponent = mainComponent.copy();
-SomeComponent clonedComponent = mainComponent.deepCopy();
+    // Shallow copy: new Person, but the SAME Address object is shared
+    Person shallowCopy() {
+        return new Person(this.name, this.address);
+    }
 
-copyComponent.setSomeString("copy");
-clonedComponent.setSomeString("clone");
+    // Deep copy: the nested Address is copied too, so it is independent
+    Person deepCopy() {
+        return new Person(this.name, new Address(this.address.city));
+    }
+}
 
-System.out.println(mainComponent.getSomeString().equals(copyComponent.getSomeString()));    // True
-System.out.println(mainComponent.getSomeString().equals(clonedComponent.getSomeString()));  // False
+public class Proto {
+    public static void main(String[] args) {
+        // Shallow clone: shares the nested Address
+        Person original = new Person("Sara", new Address("Tehran"));
+        Person shallow = original.shallowCopy();
+        shallow.address.city = "Shiraz";
+        System.out.println(shallow.address.city);    // Shiraz
+        System.out.println(original.address.city);   // Shiraz  -> the original changed too (shared Address)
+
+        // Deep clone: gets its own Address
+        original = new Person("Sara", new Address("Tehran"));
+        Person deep = original.deepCopy();
+        deep.address.city = "Shiraz";
+        System.out.println(deep.address.city);       // Shiraz
+        System.out.println(original.address.city);   // Tehran  -> the original stayed the same
+    }
+}
 ```
 
 </div>
@@ -3346,72 +3235,65 @@ System.out.println(mainComponent.getSomeString().equals(clonedComponent.getSomeS
 #include <string>
 #include <memory>
 
-class SomeComponent {
-private:
-    int someInt;
-    std::string someString;
-
+class Address {
 public:
-    SomeComponent() : someInt(0), someString("") {}
-    
-    SomeComponent(int someInt, const std::string& someString) 
-        : someInt(someInt), someString(someString) {}
-    
-    // Copy constructor for shallow copy
-    SomeComponent(const SomeComponent& other) 
-        : someInt(other.someInt), someString(other.someString) {}
-    
-    void setSomeInt(int value) { someInt = value; }
-    void setSomeString(const std::string& value) { someString = value; }
-    int getSomeInt() const { return someInt; }
-    const std::string& getSomeString() const { return someString; }
-    
-    // Shallow copy
-    SomeComponent copy() const {
-        return SomeComponent(*this);
+    std::string city;
+    Address(const std::string& city) : city(city) {}
+};
+
+class Person {
+public:
+    std::string name;
+    std::shared_ptr<Address> address; // nested mutable object
+
+    Person(const std::string& name, std::shared_ptr<Address> address)
+        : name(name), address(address) {}
+
+    // Shallow copy: new Person, but the SAME Address object is shared
+    Person shallowCopy() const {
+        return Person(name, address);
     }
-    
-    // Deep copy
-    SomeComponent deepCopy() const {
-        SomeComponent cloned;
-        cloned.setSomeInt(this->someInt);
-        cloned.setSomeString(this->someString);
-        return cloned;
+
+    // Deep copy: the nested Address is copied too, so it is independent
+    Person deepCopy() const {
+        return Person(name, std::make_shared<Address>(address->city));
     }
 };
 
-// Usage
 int main() {
-    SomeComponent mainComponent;
-    mainComponent.setSomeInt(1);
-    mainComponent.setSomeString("main");
-    
-    SomeComponent copyComponent = mainComponent.copy();
-    SomeComponent clonedComponent = mainComponent.deepCopy();
-    
-    copyComponent.setSomeString("copy");
-    clonedComponent.setSomeString("clone");
-    
-    std::cout << (mainComponent.getSomeString() == copyComponent.getSomeString()) << std::endl;    // 0
-    std::cout << (mainComponent.getSomeString() == clonedComponent.getSomeString()) << std::endl;  // 0
-    
+    // Shallow clone: shares the nested Address
+    Person original("Sara", std::make_shared<Address>("Tehran"));
+    Person shallow = original.shallowCopy();
+    shallow.address->city = "Shiraz";
+    std::cout << shallow.address->city << std::endl;   // Shiraz
+    std::cout << original.address->city << std::endl;  // Shiraz  -> the original changed too (shared Address)
+
+    // Deep clone: gets its own Address
+    original = Person("Sara", std::make_shared<Address>("Tehran"));
+    Person deep = original.deepCopy();
+    deep.address->city = "Shiraz";
+    std::cout << deep.address->city << std::endl;      // Shiraz
+    std::cout << original.address->city << std::endl;  // Tehran  -> the original stayed the same
+
     return 0;
 }
 ```
 </div>
 </details>
 
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی ساختن آبجکت از صفر گرونه، و یه نمونه آماده داری که فقط می‌خوای ازش کپی بگیری»؛ ❌ «وقتی آبجکت ساده‌ست و ساختن دوباره‌ش هیچ هزینه‌ای نداره».
+> 🪤 **دام رایج:** «کپی سطحی می‌گیری و یادت می‌ره فیلدهای تو در توش هنوز مشترکن؛ بعد تغییر کپی، اصلی رو هم خراب می‌کنه».
+> 🔗 **فرقش با کارخانه:** نمونه اولیه از روی یه آبجکت موجود کپی می‌گیره، ولی کارخانه هر بار یه آبجکت تازه از صفر می‌سازه.
+
+
 <br>
 
-**تفاوت Shadow Copy و Deep Copy ؟**
+**تفاوت کپی سطحی (Shallow Copy) و کپی عمیق (Deep Copy) چیه؟**
 <br>
-توی Shadow Copy، یک متغیر ساخته می‌شود و به مکانی توی حافظه، که مقدار متغیر قبلی توش قرار گرفته، اشاره می‌کنه. پس اگر
-تو مقدار
-متغیر اول رو تغییر بدی، متغیر دوم هم تغییر می‌کنه. و همین‌طور اگر مقدار متغیر دوم رو تغییر بدی، مقدار متغیر اول هم
-تغییر می‌کنه.
+توی کپی سطحی (Shallow Copy)، یه آبجکت جدید ساخته می‌شه، ولی فیلدهای تو در توش (مثل همون Address توی مثال) کپی نمی‌شن؛ هر دو آبجکت به یه آدرس مشترک توی حافظه اشاره می‌کنن. پس اگه شهرِ اون Address رو از روی کپی عوض کنی، چون آبجکت Address یکی‌ه، آبجکت اصلی هم تغییر می‌کنه.
 
-ولی توی deep copy، یک متغیر ساخته می‌شه و مقدار متغیر قبلی توی اون کپی می‌شه. در نتیجه تغییر آبجکت اول یا آبجکت کپی
-تغییری توی اون یکی به وجود نمیاره.
+ولی توی کپی عمیق (Deep Copy)، اون آبجکت تو در تو هم جدا کپی می‌شه. در نتیجه هر کدوم Address خودشون رو دارن و تغییر یکی هیچ اثری روی اون یکی نمی‌ذاره.
 
 <br>
 
