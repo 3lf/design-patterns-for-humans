@@ -3907,37 +3907,21 @@ int main() {
 <div dir="ltr">
 
 ```kotlin
-class SomeComponent {
-    var someInt: Int = 0
+data class SomeComponent(
+    var someInt: Int = 0,
     var someString: String = ""
-
-    fun copy(): SomeComponent {
-        return this
-    }
-
-    fun deepCopy(): SomeComponent {
-        return SomeComponent().apply {
-            this.someInt = this@SomeComponent.someInt
-            this.someString = this@SomeComponent.someString
-        }
-    }
-}
+)
 
 // Usage
 fun main() {
-    val mainComponent = SomeComponent().apply {
-        someInt = 1
-        someString = "main"
-    }
+    val mainComponent = SomeComponent(someInt = 1, someString = "main")
 
-    val copyComponent = mainComponent.copy()
-    val clonedComponent = mainComponent.deepCopy()
-
-    copyComponent.someString = "copy"
+    // copy() returns an independent clone
+    val clonedComponent = mainComponent.copy()
     clonedComponent.someString = "clone"
 
-    println(mainComponent.someString == copyComponent.someString)    // True
-    println(mainComponent.someString == clonedComponent.someString)  // False
+    println(mainComponent.someString)    // main
+    println(clonedComponent.someString)  // clone
 }
 ```
 
@@ -17380,6 +17364,8 @@ void main() {
 - محمد عزیز که زحمت مثال های Java رو کشید.([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
 - سما عزیز که زحمت مثال های JavaScript رو کشید.([samazzz](https://github.com/samazzz))
 - حمیدرضا عزیز که زحمت مثال های C++ رو کشید.([hamiikalhor](https://github.com/hamiikalhor))
+- آریا عزیز که زحمت مثال های Kotlin رو کشید.([ariaramin](https://github.com/ariaramin))
+- مجید عزیز که زحمت مثال های Dart رو کشید.([majidrigizadeh](https://github.com/majidrigizadeh))
 - مهسا، محمد، سجاد و محسن عزیز که زحمت بهبود کد هارو کشیدند.([MahsaMahdavian](https://github.com/MahsaMahdavian) / [MohammadMMoniri](https://github.com/MohammadMMoniri) / [ssmns](https://github.com/ssmns) / [Serajian](https://github.com/Serajian))
 
 </div>
