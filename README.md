@@ -253,6 +253,9 @@
 
 </div>
 
+خلاصه‌ش به زبون خودمون: «کارخانه» یه آبجکته که کارش ساختن آبجکت‌های دیگه‌ست.
+یعنی به‌جای اینکه خودت مستقیم `new` بزنی، یه متد صدا می‌زنی و اون برات نمونه‌ی آماده رو تحویل می‌ده.
+
 **مثال برنامه‌نویسی**
 
 توی این مثال دقیقاً همون سناریوی در و کارگاه رو پیاده‌سازی می‌کنیم.
@@ -264,19 +267,21 @@
 <div dir="ltr">
 
 ```python
-class Door:
-    def getWidth(self):
-        pass
+from abc import ABC, abstractmethod
 
+
+class Door(ABC):
+    @abstractmethod
+    def getWidth(self):
+        ...
+
+    @abstractmethod
     def getHeight(self):
-        pass
+        ...
 
 
 class WoodenDoor(Door):
-    width = None
-    height = None
-
-    def __init__(self, width=5, height=5):
+    def __init__(self, width, height):
         self.width = width
         self.height = height
 
@@ -294,7 +299,7 @@ class DoorFactory:
 
 
 # ----------------------------
-door = DoorFactory.makeDoor(10, 10)
+door = DoorFactory.makeDoor(90, 210)
 print(door.getHeight())
 print(door.getWidth())
 ```
@@ -309,20 +314,16 @@ print(door.getWidth())
 <div dir="ltr">
 
 ```typescript
-class Door {
-    getWidth(): void {
-    }
-
-    getHeight(): void {
-    }
+interface Door {
+    getWidth(): number;
+    getHeight(): number;
 }
 
-class WoodenDoor extends Door {
-    width: number | null;
-    height: number | null;
+class WoodenDoor implements Door {
+    private width: number;
+    private height: number;
 
-    constructor(width: number = 5, height: number = 5) {
-        super();
+    constructor(width: number, height: number) {
         this.width = width;
         this.height = height;
     }
@@ -337,14 +338,14 @@ class WoodenDoor extends Door {
 }
 
 class DoorFactory {
-    static makeDoor(width: number, height: number): WoodenDoor {
+    static makeDoor(width: number, height: number): Door {
         return new WoodenDoor(width, height);
     }
 }
 
 // ----------------------------
 
-let door = DoorFactory.makeDoor(10, 10);
+const door: Door = DoorFactory.makeDoor(90, 210);
 console.log(door.getHeight());
 console.log(door.getWidth());
 ```
@@ -361,14 +362,16 @@ console.log(door.getWidth());
 ```javascript
 class Door {
     getWidth() {
+        throw new Error("not implemented");
     }
 
     getHeight() {
+        throw new Error("not implemented");
     }
 }
 
 class WoodenDoor extends Door {
-    constructor(width = 5, height = 5) {
+    constructor(width, height) {
         super();
         this.width = width;
         this.height = height;
@@ -390,7 +393,7 @@ class DoorFactory {
 }
 
 
-let door = DoorFactory.makeDoor(10, 10);
+const door = DoorFactory.makeDoor(90, 210);
 console.log(door.getHeight());
 console.log(door.getWidth());
 ```
@@ -443,9 +446,9 @@ public static class DoorFactory
 
 // ----------------------------
 
-var door = DoorFactory.MakeDoor(80, 30);
-Console.WriteLine($"Height of Door : {door.GetHeight()}");
-Console.WriteLine($"Width of Door : {door.GetWidth()}");
+var door = DoorFactory.MakeDoor(90, 210);
+Console.WriteLine(door.GetHeight());
+Console.WriteLine(door.GetWidth());
 ```
 
 </div>
@@ -486,9 +489,9 @@ class DoorFactory {
     }
 }
 
-$door = DoorFactory::makeDoor(80, 30);
-echo "Height of Door : " . $door->getHeight() . "\n";
-echo "Width of Door : " . $door->getWidth() . "\n";
+$door = DoorFactory::makeDoor(90, 210);
+echo $door->getHeight() . "\n";
+echo $door->getWidth() . "\n";
 
 ```
 
@@ -536,9 +539,9 @@ func (df *DoorFactory) makeDoor(width, height int) Door {
 
 func main() {
 	doorFactory := &DoorFactory{}
-	door := doorFactory.makeDoor(80, 30)
-	fmt.Printf("Height of Door : %d\n", door.getHeight())
-	fmt.Printf("Width of Door : %d\n", door.getWidth())
+	door := doorFactory.makeDoor(90, 210)
+	fmt.Println(door.getHeight())
+	fmt.Println(door.getWidth())
 }
 
 ```
@@ -553,11 +556,16 @@ func main() {
 <div dir="ltr">
 
 ```java
-public class Door {
+public interface Door {
+    int getHeight();
+    int getWidth();
+}
+
+public class WoodenDoor implements Door {
     private int width;
     private int height;
 
-    public Door(int width, int height) {
+    public WoodenDoor(int width, int height) {
         this.width = width;
         this.height = height;
     }
@@ -565,33 +573,20 @@ public class Door {
     public int getHeight() {
         return height;
     }
-    public void setHeight(int height) {
-        this.height = height;
-    }
     public int getWidth() {
         return width;
-    }
-    public void setWidth(int width) {
-        this.width = width;
-    }
-}
-
-public class WoodenDoor extends Door {
-
-    WoodenDoor(int width, int height) {
-        super(width, height);
     }
 }
 
 public class DoorFactory {
-    public static WoodenDoor makeDoor(int width, int height) {
+    public static Door makeDoor(int width, int height) {
         return new WoodenDoor(width, height);
     }
 }
 
 // ----------------------------
 
-Door door = DoorFactory.makeDoor(10, 10);
+Door door = DoorFactory.makeDoor(90, 210);
 System.out.println(door.getHeight());
 System.out.println(door.getWidth());
 ```
@@ -611,25 +606,25 @@ System.out.println(door.getWidth());
 class Door {
 public:
     virtual ~Door() = default;
-    virtual double getWidth() const = 0;
-    virtual double getHeight() const = 0;
+    virtual int getWidth() const = 0;
+    virtual int getHeight() const = 0;
 };
 
 // Wooden door implementation
 class WoodenDoor : public Door {
 private:
-    double width;
-    double height;
+    int width;
+    int height;
 
 public:
-    WoodenDoor(double width = 5.0, double height = 5.0) 
+    WoodenDoor(int width, int height)
         : width(width), height(height) {}
-    
-    double getWidth() const override {
+
+    int getWidth() const override {
         return width;
     }
-    
-    double getHeight() const override {
+
+    int getHeight() const override {
         return height;
     }
 };
@@ -637,17 +632,17 @@ public:
 // Door factory
 class DoorFactory {
 public:
-    static Door* makeDoor(double width, double height) {
+    static Door* makeDoor(int width, int height) {
         return new WoodenDoor(width, height);
     }
 };
 
 // Usage
 int main() {
-    Door* door = DoorFactory::makeDoor(100, 200);
-    std::cout << "Width: " << door->getWidth() << std::endl;
-    std::cout << "Height: " << door->getHeight() << std::endl;
-    
+    Door* door = DoorFactory::makeDoor(90, 210);
+    std::cout << door->getHeight() << std::endl;
+    std::cout << door->getWidth() << std::endl;
+
     delete door;
     return 0;
 }
@@ -655,6 +650,12 @@ int main() {
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ وقتی ساختن یه آبجکت چند خط مقدمه‌چینی داره و نمی‌خوای این شلوغی همه‌جای کدت پخش شه، بسپارش به یه متد کارخانه؛ ❌ اگه فقط یه `new` ساده‌ست، الکی پیچیده‌ش نکن.
+> 🪤 **دام رایج:** کم‌کم همه‌چی رو می‌ریزی توی یه `makeDoor` غول‌پیکر پر از `if`/`else`؛ همون‌جاست که باید بری سراغ الگوهای جدی‌تر.
+> 🔗 **فرقش با [متد کارخانه](#متد-کارخانه-factory-method-):** اینجا یه متد ساده‌ی (معمولاً static) خودش تصمیم می‌گیره چی بسازه؛ توی متد کارخانه، تصمیمِ ساخت رو به زیرکلاس‌ها واگذار می‌کنی.
+
 
 <br>
 
