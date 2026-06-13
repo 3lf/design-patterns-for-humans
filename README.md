@@ -4912,6 +4912,9 @@ int main() {
 
 </div>
 
+خلاصه‌اش این می‌شه که الگوی مرکب بهت اجازه می‌ده آبجکت‌ها رو توی یه ساختار درختی بچینی و بعد کل اون درخت رو درست مثل یه آبجکت تکی صدا بزنی.
+فرقی نمی‌کنه طرفت یه «برگ» تنهاست یا یه «شاخه» پر از زیرمجموعه؛ با هردوشون عین هم رفتار می‌کنی و خود ساختار، ته‌توش رو در میاره.
+
 **مثال برنامه‌نویسی**
 
 بطور کلی توی دیزاین پترن composite ما دو مدل دیتا داریم:
@@ -4929,56 +4932,73 @@ int main() {
 <div dir="ltr">
 
 ```python
-class Component():
-    def add(self, component: Component) -> None:
-        pass
-
-    def remove(self, component: Component) -> None:
-        pass
-
-    def operation(self) -> str:
-        pass
+from abc import ABC, abstractmethod
+from typing import List
 
 
-class Leaf(Component):
-    def operation(self) -> str:
-        return "Leaf"
+class Employee(ABC):
+    @abstractmethod
+    def get_name(self) -> str: ...
+
+    @abstractmethod
+    def get_salary(self) -> float: ...
 
 
-class Composite(Component):
-    def __init__(self) -> None:
-        self._children: List[Component] = []
+class Developer(Employee):
+    def __init__(self, name: str, salary: float) -> None:
+        self._name = name
+        self._salary = salary
 
-    def add(self, component: Component) -> None:
-        self._children.append(component)
+    def get_name(self) -> str:
+        return self._name
 
-    def remove(self, component: Component) -> None:
-        self._children.remove(component)
+    def get_salary(self) -> float:
+        return self._salary
 
-    def operation(self) -> str:
-        results = []
-        for child in self._children:
-            results.append(child.operation())
-        return f"Branch({'+'.join(results)})"
+
+class Designer(Employee):
+    def __init__(self, name: str, salary: float) -> None:
+        self._name = name
+        self._salary = salary
+
+    def get_name(self) -> str:
+        return self._name
+
+    def get_salary(self) -> float:
+        return self._salary
+
+
+# Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization(Employee):
+    def __init__(self, name: str) -> None:
+        self._name = name
+        self._members: List[Employee] = []
+
+    def add(self, employee: Employee) -> None:
+        self._members.append(employee)
+
+    def get_name(self) -> str:
+        return self._name
+
+    def get_salary(self) -> float:
+        total = 0.0
+        for member in self._members:
+            total += member.get_salary()  # recurses into sub-organizations
+        return total
 
 
 # ----------------------------
 
-tree = Composite()
+design_team = Organization("Design Team")
+design_team.add(Designer("Arya", 4000))
 
-branch1 = Composite()
-branch1.add(Leaf())
-branch1.add(Leaf())
+company = Organization("Acme")
+company.add(Developer("John", 5000))
+company.add(Developer("Jane", 6000))
+company.add(design_team)
 
-branch2 = Composite()
-branch2.add(Leaf())
-
-tree.add(branch1)
-tree.add(branch2)
-
-print(f"RESULT: {tree.operation()}", end="")
-# RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
-
+print(f"Total salary: {company.get_salary():g}")
+# Total salary: 15000
 ```
 
 </div>
@@ -4992,57 +5012,74 @@ print(f"RESULT: {tree.operation()}", end="")
 <div dir="ltr">
 
 ```typescript
-interface Component {
-    add(component: Component): void;
+interface Employee {
+    getName(): string;
 
-    remove(component: Component): void;
-
-    operation(): string;
+    getSalary(): number;
 }
 
-class Leaf implements Component {
-    operation(): string {
-        return "Leaf";
+class Developer implements Employee {
+    constructor(private name: string, private salary: number) {
+    }
+
+    getName(): string {
+        return this.name;
+    }
+
+    getSalary(): number {
+        return this.salary;
     }
 }
 
-class Composite implements Component {
-    private children: Component[] = [];
-
-    add(component: Component): void {
-        this.children.push(component);
+class Designer implements Employee {
+    constructor(private name: string, private salary: number) {
     }
 
-    remove(component: Component): void {
-        const index = this.children.indexOf(component);
-        this.children.splice(index, 1);
+    getName(): string {
+        return this.name;
     }
 
-    operation(): string {
-        const results: string[] = [];
-        for (const child of this.children) {
-            results.push(child.operation());
+    getSalary(): number {
+        return this.salary;
+    }
+}
+
+// Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization implements Employee {
+    private members: Employee[] = [];
+
+    constructor(private name: string) {
+    }
+
+    add(employee: Employee): void {
+        this.members.push(employee);
+    }
+
+    getName(): string {
+        return this.name;
+    }
+
+    getSalary(): number {
+        let total = 0;
+        for (const member of this.members) {
+            total += member.getSalary(); // recurses into sub-organizations
         }
-        return `Branch(${results.join("+")})`;
+        return total;
     }
 }
 
 // ----------------------------
 
-const tree = new Composite();
+const designTeam = new Organization("Design Team");
+designTeam.add(new Designer("Arya", 4000));
 
-const branch1 = new Composite();
-branch1.add(new Leaf());
-branch1.add(new Leaf());
+const company = new Organization("Acme");
+company.add(new Developer("John", 5000));
+company.add(new Developer("Jane", 6000));
+company.add(designTeam);
 
-const branch2 = new Composite();
-branch2.add(new Leaf());
-
-tree.add(branch1);
-tree.add(branch2);
-
-console.log(`RESULT: ${tree.operation()}`);
-// RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
+console.log(`Total salary: ${company.getSalary()}`);
+// Total salary: 15000
 ```
 
 </div>
@@ -5056,52 +5093,72 @@ console.log(`RESULT: ${tree.operation()}`);
 <div dir="ltr">
 
 ```javascript
-class Leaf {
-    operation() {
-        return "Leaf";
+class Developer {
+    constructor(name, salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    getSalary() {
+        return this.salary;
     }
 }
 
-class Composite {
-    constructor() {
-        this.children = [];
+class Designer {
+    constructor(name, salary) {
+        this.name = name;
+        this.salary = salary;
     }
 
-    add(component) {
-        this.children.push(component);
+    getName() {
+        return this.name;
     }
 
-    remove(component) {
-        const index = this.children.indexOf(component);
-        if (index !== -1) {
-            this.children.splice(index, 1);
-        }
-    }
-
-    operation() {
-        const results = [];
-        for (const child of this.children) {
-            results.push(child.operation());
-        }
-        return `Branch(${results.join("+")})`;
+    getSalary() {
+        return this.salary;
     }
 }
 
+// Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization {
+    constructor(name) {
+        this.name = name;
+        this.members = [];
+    }
 
-const tree = new Composite();
+    add(employee) {
+        this.members.push(employee);
+    }
 
-const branch1 = new Composite();
-branch1.add(new Leaf());
-branch1.add(new Leaf());
+    getName() {
+        return this.name;
+    }
 
-const branch2 = new Composite();
-branch2.add(new Leaf());
+    getSalary() {
+        let total = 0;
+        for (const member of this.members) {
+            total += member.getSalary(); // recurses into sub-organizations
+        }
+        return total;
+    }
+}
 
-tree.add(branch1);
-tree.add(branch2);
+// ----------------------------
 
-console.log(`RESULT: ${tree.operation()}`);
-// Output: RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
+const designTeam = new Organization("Design Team");
+designTeam.add(new Designer("Arya", 4000));
+
+const company = new Organization("Acme");
+company.add(new Developer("John", 5000));
+company.add(new Developer("Jane", 6000));
+company.add(designTeam);
+
+console.log(`Total salary: ${company.getSalary()}`);
+// Total salary: 15000
 ```
 
 </div>
@@ -5114,14 +5171,11 @@ console.log(`RESULT: ${tree.operation()}`);
 <div dir="ltr">
 
 ```csharp
-
 interface IEmployee
 {
-  float GetSalary();
-  string GetRole();
   string GetName();
+  float GetSalary();
 }
-
 
 class Developer : IEmployee
 {
@@ -5134,19 +5188,14 @@ class Developer : IEmployee
     this.mSalary = salary;
   }
 
-  public float GetSalary()
-  {
-    return this.mSalary;
-  }
-
-  public string GetRole()
-  {
-    return "Developer";
-  }
-
   public string GetName()
   {
     return this.mName;
+  }
+
+  public float GetSalary()
+  {
+    return this.mSalary;
   }
 }
 
@@ -5161,61 +5210,61 @@ class Designer : IEmployee
     this.mSalary = salary;
   }
 
+  public string GetName()
+  {
+    return this.mName;
+  }
+
   public float GetSalary()
   {
     return this.mSalary;
   }
+}
 
-  public string GetRole()
+// Organization is itself an IEmployee (the Composite); it can hold sub-members
+class Organization : IEmployee
+{
+  private string mName;
+  private List<IEmployee> mMembers = new List<IEmployee>();
+
+  public Organization(string name)
   {
-    return "Designer";
+    this.mName = name;
+  }
+
+  public void Add(IEmployee employee)
+  {
+    mMembers.Add(employee);
   }
 
   public string GetName()
   {
     return this.mName;
   }
-}
 
-
-class Organization
-{
-  protected List<IEmployee> employees;
-
-  public Organization()
+  public float GetSalary()
   {
-    employees = new List<IEmployee>();
-  }
-
-  public void AddEmployee(IEmployee employee)
-  {
-    employees.Add(employee);
-  }
-
-  public float GetNetSalaries()
-  {
-    float netSalary = 0;
-
-    foreach (var e in employees) {
-      netSalary += e.GetSalary();
+    float total = 0;
+    foreach (var member in mMembers)
+    {
+      total += member.GetSalary(); // recurses into sub-organizations
     }
-    return netSalary;
+    return total;
   }
 }
 
 // ----------------------------
 
-//Arrange Employees, Organization and add employees
-var developer = new Developer("John", 5000);
-var designer = new Designer("Arya", 5000);
+var designTeam = new Organization("Design Team");
+designTeam.Add(new Designer("Arya", 4000));
 
-var organization = new Organization();
-organization.AddEmployee(developer);
-organization.AddEmployee(designer);
+var company = new Organization("Acme");
+company.Add(new Developer("John", 5000));
+company.Add(new Developer("Jane", 6000));
+company.Add(designTeam);
 
-Console.WriteLine($"Net Salary of Employees in Organization is {organization.GetNetSalaries():c}");
-//Ouptut: Net Salary of Employees in Organization is $10000.00
-
+Console.WriteLine($"Total salary: {company.GetSalary()}");
+// Total salary: 15000
 ```
 
 </div>
@@ -5229,9 +5278,8 @@ Console.WriteLine($"Net Salary of Employees in Organization is {organization.Get
 
 ```php
 interface EmployeeInterface {
-  function getSalary(): float;
-  function getRole(): string;
   function getName(): string;
+  function getSalary(): float;
 }
 
 class Developer implements EmployeeInterface {
@@ -5243,16 +5291,12 @@ class Developer implements EmployeeInterface {
     $this->salary = $salary;
   }
 
-  public function getSalary(): float {
-    return $this->salary;
-  }
-
-  public function getRole(): string {
-    return "Developer";
-  }
-
   public function getName(): string {
     return $this->name;
+  }
+
+  public function getSalary(): float {
+    return $this->salary;
   }
 }
 
@@ -5265,50 +5309,53 @@ class Designer implements EmployeeInterface {
     $this->salary = $salary;
   }
 
+  public function getName(): string {
+    return $this->name;
+  }
+
   public function getSalary(): float {
     return $this->salary;
   }
+}
 
-  public function getRole(): string {
-    return "Designer";
+// Organization is itself an EmployeeInterface (the Composite); it can hold sub-members
+class Organization implements EmployeeInterface {
+  private string $name;
+  private array $members = array();
+
+  public function __construct(string $name) {
+    $this->name = $name;
+  }
+
+  public function add(EmployeeInterface $employee): void {
+    $this->members[] = $employee;
   }
 
   public function getName(): string {
     return $this->name;
   }
-}
 
-class Organization {
-  protected array $employees;
-
-  public function __construct() {
-    $this->employees = array();
-  }
-
-  public function addEmployee(EmployeeInterface $employee): void {
-    $this->employees[] = $employee;
-  }
-
-  public function getNetSalaries(): float {
-    $netSalary = 0;
-    foreach ($this->employees as $e) {
-      $netSalary += $e->getSalary();
+  public function getSalary(): float {
+    $total = 0;
+    foreach ($this->members as $member) {
+      $total += $member->getSalary(); // recurses into sub-organizations
     }
-    return $netSalary;
+    return $total;
   }
 }
 
-// Arrange Employees, Organization, and add employees
-$developer = new Developer("John", 5000);
-$designer = new Designer("Aria", 5000);
+// ----------------------------
 
-$organization = new Organization();
-$organization->addEmployee($developer);
-$organization->addEmployee($designer);
+$designTeam = new Organization("Design Team");
+$designTeam->add(new Designer("Arya", 4000));
 
-echo "Net Salary of Employees in Organization is " . number_format($organization->getNetSalaries(), 2, '.', ',') . PHP_EOL;
-// Output: Net Salary of Employees in Organization is $10,000.00
+$company = new Organization("Acme");
+$company->add(new Developer("John", 5000));
+$company->add(new Developer("Jane", 6000));
+$company->add($designTeam);
 
+echo "Total salary: " . $company->getSalary() . PHP_EOL;
+// Total salary: 15000
 ```
 
 </div>
@@ -5325,75 +5372,71 @@ package main
 
 import "fmt"
 
-type IEmployee interface {
-    GetSalary() float32
-    GetRole() string
+type Employee interface {
     GetName() string
+    GetSalary() float64
 }
 
 type Developer struct {
     Name   string
-    Salary float32
-}
-
-func (d *Developer) GetSalary() float32 {
-    return d.Salary
-}
-
-func (d *Developer) GetRole() string {
-    return "Developer"
+    Salary float64
 }
 
 func (d *Developer) GetName() string {
     return d.Name
 }
 
-type Designer struct {
-    Name   string
-    Salary float32
-}
-
-func (d *Designer) GetSalary() float32 {
+func (d *Developer) GetSalary() float64 {
     return d.Salary
 }
 
-func (d *Designer) GetRole() string {
-    return "Designer"
+type Designer struct {
+    Name   string
+    Salary float64
 }
 
 func (d *Designer) GetName() string {
     return d.Name
 }
 
+func (d *Designer) GetSalary() float64 {
+    return d.Salary
+}
+
+// Organization is itself an Employee (the Composite); it can hold sub-members
 type Organization struct {
-    employees []IEmployee
+    Name    string
+    members []Employee
 }
 
-func (o *Organization) AddEmployee(employee IEmployee) {
-    o.employees = append(o.employees, employee)
+func (o *Organization) Add(employee Employee) {
+    o.members = append(o.members, employee)
 }
 
-func (o *Organization) GetNetSalaries() float32 {
-    netSalary := float32(0)
-    for _, e := range o.employees {
-        netSalary += e.GetSalary()
+func (o *Organization) GetName() string {
+    return o.Name
+}
+
+func (o *Organization) GetSalary() float64 {
+    total := float64(0)
+    for _, member := range o.members {
+        total += member.GetSalary() // recurses into sub-organizations
     }
-    return netSalary
+    return total
 }
 
 func main() {
-    //Arrange Employees, Organization and add employees
-    developer := &Developer{Name: "John", Salary: 5000}
-    designer := &Designer{Name: "Arya", Salary: 5000}
+    designTeam := &Organization{Name: "Design Team"}
+    designTeam.Add(&Designer{Name: "Arya", Salary: 4000})
 
-    organization := &Organization{}
-    organization.AddEmployee(developer)
-    organization.AddEmployee(designer)
+    company := &Organization{Name: "Acme"}
+    company.Add(&Developer{Name: "John", Salary: 5000})
+    company.Add(&Developer{Name: "Jane", Salary: 6000})
+    company.Add(designTeam)
 
-    fmt.Printf("Net Salary of Employees in Organization is %v\n", organization.GetNetSalaries())
-    // Output: Net Salary of Employees in Organization is 10000
+    fmt.Printf("Total salary: %g\n", company.GetSalary())
+    // Total salary: 15000
 }
-
 ```
 
 </div>
@@ -5408,9 +5451,8 @@ func main() {
 ```java
 interface Employee {
 
-    float getSalary();
-    String getRole();
     String getName();
+    float getSalary();
 }
 
 class Developer implements Employee {
@@ -5422,14 +5464,11 @@ class Developer implements Employee {
         this.salary = salary;
     }
 
-    public float getSalary() {
-        return this.salary;
-    }
-    public String getRole() {
-        return "Developer";
-    }
     public String getName() {
         return this.name;
+    }
+    public float getSalary() {
+        return this.salary;
     }
 }
 
@@ -5442,49 +5481,52 @@ class Designer implements Employee {
         this.salary = salary;
     }
 
-    public float getSalary() {
-        return this.salary;
-    }
-    public String getRole() {
-        return "Designer";
-    }
     public String getName() {
         return this.name;
     }
+    public float getSalary() {
+        return this.salary;
+    }
 }
 
-class Organization {
-    protected List<Employee> employees;
+// Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization implements Employee {
+    private String name;
+    private List<Employee> members = new ArrayList<>();
 
-    public Organization() {
-        employees = new ArrayList<>();
+    public Organization(String name) {
+        this.name = name;
     }
 
-    public void addEmployee(Employee employee) {
-        employees.add(employee);
+    public void add(Employee employee) {
+        members.add(employee);
     }
 
-    public float getNetSalaries() {
-        float netSalary = 0;
+    public String getName() {
+        return this.name;
+    }
 
-        for(Employee employee : employees) {
-            netSalary += employee.getSalary();
+    public float getSalary() {
+        float total = 0;
+        for (Employee member : members) {
+            total += member.getSalary(); // recurses into sub-organizations
         }
-        return netSalary;
+        return total;
     }
 }
 
 // ----------------------------
 
-Developer developer = new Developer("John",5000);
-Designer designer = new Designer("Arya",5000);
+Organization designTeam = new Organization("Design Team");
+designTeam.add(new Designer("Arya", 4000));
 
-Organization organization = new Organization();
-organization.addEmployee(developer);
-organization.addEmployee(designer);
+Organization company = new Organization("Acme");
+company.add(new Developer("John", 5000));
+company.add(new Developer("Jane", 6000));
+company.add(designTeam);
 
-System.out.println("Organization employees salary : " + organization.getNetSalaries());
-// Organization employees salary : 10000.0
+System.out.printf("Total salary: %.0f%n", company.getSalary());
+// Total salary: 15000
 ```
 
 </div>
@@ -5509,7 +5551,7 @@ public:
     virtual double getSalary() const = 0;
 };
 
-// Developer class
+// Developer leaf
 class Developer : public Employee {
 private:
     std::string name;
@@ -5517,17 +5559,17 @@ private:
 
 public:
     Developer(const std::string& name, double salary) : name(name), salary(salary) {}
-    
+
     std::string getName() const override {
         return name;
     }
-    
+
     double getSalary() const override {
         return salary;
     }
 };
 
-// Designer class
+// Designer leaf
 class Designer : public Employee {
 private:
     std::string name;
@@ -5535,30 +5577,37 @@ private:
 
 public:
     Designer(const std::string& name, double salary) : name(name), salary(salary) {}
-    
+
     std::string getName() const override {
         return name;
     }
-    
+
     double getSalary() const override {
         return salary;
     }
 };
 
-// Organization class (Composite)
-class Organization {
+// Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization : public Employee {
 private:
-    std::vector<std::unique_ptr<Employee>> employees;
+    std::string name;
+    std::vector<std::shared_ptr<Employee>> members;
 
 public:
-    void addEmployee(std::unique_ptr<Employee> employee) {
-        employees.push_back(std::move(employee));
+    explicit Organization(const std::string& name) : name(name) {}
+
+    void add(std::shared_ptr<Employee> employee) {
+        members.push_back(std::move(employee));
     }
-    
-    double getNetSalaries() const {
+
+    std::string getName() const override {
+        return name;
+    }
+
+    double getSalary() const override {
         double total = 0.0;
-        for (const auto& employee : employees) {
-            total += employee->getSalary();
+        for (const auto& member : members) {
+            total += member->getSalary(); // recurses into sub-organizations
         }
         return total;
     }
@@ -5566,21 +5615,27 @@ public:
 
 // Usage
 int main() {
-    auto developer = std::make_unique<Developer>("John", 5000);
-    auto designer = std::make_unique<Designer>("Arya", 5000);
-    
-    Organization organization;
-    organization.addEmployee(std::move(developer));
-    organization.addEmployee(std::move(designer));
-    
-    std::cout << "Organization employees salary : " << organization.getNetSalaries() << std::endl;
-    // Organization employees salary : 10000.0
-    
+    auto designTeam = std::make_shared<Organization>("Design Team");
+    designTeam->add(std::make_shared<Designer>("Arya", 4000));
+
+    auto company = std::make_shared<Organization>("Acme");
+    company->add(std::make_shared<Developer>("John", 5000));
+    company->add(std::make_shared<Developer>("Jane", 6000));
+    company->add(designTeam);
+
+    std::cout << "Total salary: " << company->getSalary() << std::endl;
+    // Total salary: 15000
+
     return 0;
 }
 ```
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی داده‌هات یه ساختار درختی دارن (بخش‌ها و کل‌ها) و می‌خوای با تک‌آبجکت و گروه یه‌جور رفتار کنی»؛ ❌ «وقتی آبجکت‌هات سلسله‌مراتب ندارن و صاف کنار هم‌ان؛ اون‌جا مرکب فقط پیچیدگی الکی اضافه می‌کنه».
+> 🪤 **دام رایج:** «این‌قدر هوس می‌کنی همه‌چی رو یکدست کنی که متدهای بی‌معنی مثل add روی «برگ» هم می‌ذاری و در زمان اجرا می‌ترکه».
+
 
 <br>
 
