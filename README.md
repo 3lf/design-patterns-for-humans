@@ -8224,6 +8224,8 @@ int main() {
 
 </div>
 
+به زبون خودمون: یک منبعِ درخواست داریم و یک رشته پردازنده که پشت سر هم چیده شدن. هر پردازنده می‌دونه چه نوع درخواستی رو خودش می‌تونه جواب بده؛ هرچی از پسش برنمیاد رو دست‌نخورده پاس می‌ده به پردازنده بعدیِ توی زنجیره.
+
 **مثال برنامه‌نویسی**
 
 می‌خوایم همون مثال پرداخت رو باهم پیاده‌سازی کنیم.
@@ -8232,15 +8234,13 @@ int main() {
 و سعی می‌کنه اون مقدار رو از حساب خود پرداخت کنه. اگر موفق نشد، اون مقدار رو به حساب بعدی انتقال می‌ده.
 
 نکته:
-تابع inspect.stack یک تابعیه که می‌تونه اطلاعاتی از فراخوانی تابع رو برگردونه. مثلا اگر ما از این تابع در یک تابع دیگه
-استفاده کنیم، این تابع می‌تونه اسم تابعی که از اون استفاده شده رو برگردونه.
+متد getName هر حساب با کمک type(self).__name__ اسم کلاس خودش رو برمی‌گردونه؛ یعنی Bank یا Paypal یا Bitcoin. این‌جوری توی پیام پرداخت دقیقاً معلوم می‌شه کدوم حساب جواب داده.
 
 خب حالا می‌خوایم یک حساب بانکی، یک حساب پی پال و یک حساب بیت کوین بسازیم.
 
 همونطور که می‌بینی اومدیم و بعد از ساختن این حساب‌ها اونارو به هم متصل کردیم!
 
-سیستم اول سعی کرده با حساب بانکی پرداخت کنه ولی موجودی کافی نداشت، بعدش سعی کرده با حساب پی پال پرداخت کنه ولی موجودی
-کافی نداشت، و در نهایت با حساب بیت کوین پرداخت می‌کنه!
+سیستم اول سعی کرده با حساب بانکی پرداخت کنه ولی موجودی کافی نداشت، برای همین درخواست رو پاس داده به حساب پی پال و این بار پرداخت با موفقیت انجام شده!
 
 <details>
 <summary>Python</summary>
@@ -8250,53 +8250,46 @@ int main() {
 ```python
 class Account:
     _successor = None
-    _balance = None
 
     def setNext(self, account):
         self._successor = account
 
     def pay(self, amountToPay):
-
         if self.canPay(amountToPay):
-            print("Paid " + str(amountToPay) + " using " + self.caller())
+            print("Paid " + str(amountToPay) + " using " + self.getName())
         elif self._successor:
-            print("Cannot pay using " + self.caller() + ". Proceeding ..")
+            print("Cannot pay using " + self.getName() + ". Proceeding ..")
             self._successor.pay(amountToPay)
         else:
-            raise ValueError("None of the accounts have enough balance")
+            print("None of the accounts have enough balance")
 
     def canPay(self, amount):
         return self.balance >= amount
-    def caller(self):
-        return str(type(self).__name__)
+
+    def getName(self):
+        return type(self).__name__
 
 
 class Bank(Account):
-    _balance = None
-
     def __init__(self, balance):
         self.balance = balance
 
 
 class Paypal(Account):
-    _balance = None
-
     def __init__(self, balance):
         self.balance = balance
 
 
 class Bitcoin(Account):
-    _balance = None
-
     def __init__(self, balance):
         self.balance = balance
 
 
 # ----------------------------
 
-bank = Bank(100)  # Bank with balance 100
-paypal = Paypal(200)  # Paypal with balance 200
-bitcoin = Bitcoin(300)  # Bitcoin with balance 300
+bank = Bank(100)        # Bank with balance 100
+paypal = Paypal(300)    # Paypal with balance 300
+bitcoin = Bitcoin(1000) # Bitcoin with balance 1000
 
 bank.setNext(paypal)
 paypal.setNext(bitcoin)
@@ -8307,9 +8300,8 @@ bank.pay(259)
 '''
 Output will be
 ==============
-Cannot pay using bank. Proceeding ..
-Cannot pay using paypal. Proceeding ..:
-Paid 259 using Bitcoin!
+Cannot pay using Bank. Proceeding ..
+Paid 259 using Paypal
 '''
 ```
 
@@ -8324,34 +8316,33 @@ Paid 259 using Bitcoin!
 ```typescript
 class Account {
     protected _successor: Account | null = null;
-    protected _balance: number | null = null;
+    protected _balance: number = 0;
 
     setNext(account: Account): void {
         this._successor = account;
     }
 
     pay(amountToPay: number): void {
-        const myCaller = (new Error().stack as string).split("at ")[2].split(" ")[0];
         if (this.canPay(amountToPay)) {
-            console.log(‍‍`Paid ${amountToPay} using ${myCaller}`
-        )
-            ;
+            console.log(`Paid ${amountToPay} using ${this.getName()}`);
         } else if (this._successor) {
-            console.log(`Cannot pay using ${myCaller}. Proceeding ..`);
+            console.log(`Cannot pay using ${this.getName()}. Proceeding ..`);
             this._successor.pay(amountToPay);
         } else {
-            throw new Error("None of the accounts have enough balance");
+            console.log("None of the accounts have enough balance");
         }
     }
 
     canPay(amount: number): boolean {
         return this._balance >= amount;
     }
+
+    getName(): string {
+        return this.constructor.name;
+    }
 }
 
 class Bank extends Account {
-    protected _balance: number | null = null;
-
     constructor(balance: number) {
         super();
         this._balance = balance;
@@ -8359,8 +8350,6 @@ class Bank extends Account {
 }
 
 class Paypal extends Account {
-    protected _balance: number | null = null;
-
     constructor(balance: number) {
         super();
         this._balance = balance;
@@ -8368,8 +8357,6 @@ class Paypal extends Account {
 }
 
 class Bitcoin extends Account {
-    protected _balance: number | null = null;
-
     constructor(balance: number) {
         super();
         this._balance = balance;
@@ -8378,35 +8365,14 @@ class Bitcoin extends Account {
 
 // ----------------------------
 
-const bank = new Bank(100);
-const paypal = new Paypal(200);
-const bitcoin = new Bitcoin(300);
+const bank = new Bank(100);        // Bank with balance 100
+const paypal = new Paypal(300);    // Paypal with balance 300
+const bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
 
 bank.setNext(paypal);
 paypal.setNext(bitcoin);
 
 bank.pay(259);
-
-''
-'
-Output
-will
-be
-=== === === === ==
-Cannot
-pay
-using
-bank.Proceeding..Cannot
-pay
-using
-paypal.Proceeding..
-:
-Paid
-259
-using
-Bitcoin!
-''
-'
 ```
 
 </div>
@@ -8428,19 +8394,22 @@ class Account {
     }
 
     pay(amountToPay) {
-        const myCaller = (new Error().stack).split("at ")[2].split(" ")[0];
         if (this.canPay(amountToPay)) {
-            console.log(`Paid ${amountToPay} using ${myCaller}`);
+            console.log(`Paid ${amountToPay} using ${this.getName()}`);
         } else if (this._successor) {
-            console.log(`Cannot pay using ${myCaller}. Proceeding ..`);
+            console.log(`Cannot pay using ${this.getName()}. Proceeding ..`);
             this._successor.pay(amountToPay);
         } else {
-            throw new Error("None of the accounts have enough balance");
+            console.log("None of the accounts have enough balance");
         }
     }
 
     canPay(amount) {
         return this._balance >= amount;
+    }
+
+    getName() {
+        return this.constructor.name;
     }
 }
 
@@ -8465,10 +8434,11 @@ class Bitcoin extends Account {
     }
 }
 
+// ----------------------------
 
-const bank = new Bank(100);
-const paypal = new Paypal(200);
-const bitcoin = new Bitcoin(300);
+const bank = new Bank(100);        // Bank with balance 100
+const paypal = new Paypal(300);    // Paypal with balance 300
+const bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
 
 bank.setNext(paypal);
 paypal.setNext(bitcoin);
@@ -8485,34 +8455,34 @@ bank.pay(259);
 <div dir="ltr">
 
 ```csharp
-
 abstract class Account
 {
   private Account mSuccessor;
-  protected decimal mBalance;
+  protected int mBalance;
 
   public void SetNext(Account account)
   {
     mSuccessor = account;
   }
 
-  public void Pay(decimal amountTopay)
+  public void Pay(int amountToPay)
   {
-    if (CanPay(amountTopay))
+    if (CanPay(amountToPay))
     {
-      Console.WriteLine($"Paid {amountTopay:c} using {this.GetType().Name}.");
+      Console.WriteLine($"Paid {amountToPay} using {this.GetType().Name}");
     }
     else if (this.mSuccessor != null)
     {
-      Console.WriteLine($"Cannot pay using {this.GetType().Name}. Proceeding..");
-      mSuccessor.Pay(amountTopay);
+      Console.WriteLine($"Cannot pay using {this.GetType().Name}. Proceeding ..");
+      mSuccessor.Pay(amountToPay);
     }
     else
     {
-      throw new Exception("None of the accounts have enough balance");
+      Console.WriteLine("None of the accounts have enough balance");
     }
   }
-  private bool CanPay(decimal amount)
+
+  private bool CanPay(int amount)
   {
     return mBalance >= amount;
   }
@@ -8520,7 +8490,7 @@ abstract class Account
 
 class Bank : Account
 {
-  public Bank(decimal balance)
+  public Bank(int balance)
   {
     this.mBalance = balance;
   }
@@ -8528,7 +8498,7 @@ class Bank : Account
 
 class Paypal : Account
 {
-  public Paypal(decimal balance)
+  public Paypal(int balance)
   {
     this.mBalance = balance;
   }
@@ -8536,7 +8506,7 @@ class Paypal : Account
 
 class Bitcoin : Account
 {
-  public Bitcoin(decimal balance)
+  public Bitcoin(int balance)
   {
     this.mBalance = balance;
   }
@@ -8544,27 +8514,18 @@ class Bitcoin : Account
 
 // ----------------------------
 
-// Let's prepare a chain like below
-//      $bank->$paypal->$bitcoin
-//
-// First priority bank
-//      If bank can't pay then paypal
-//      If paypal can't pay then bit coin
-var bank = new Bank(100);          // Bank with balance 100
-var paypal = new Paypal(200);      // Paypal with balance 200
-var bitcoin = new Bitcoin(300);    // Bitcoin with balance 300
+var bank = new Bank(100);        // Bank with balance 100
+var paypal = new Paypal(300);    // Paypal with balance 300
+var bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
 
 bank.SetNext(paypal);
 paypal.SetNext(bitcoin);
 
-// Let's try to pay using the first priority i.e. bank
 bank.Pay(259);
 // Output will be
 // ==============
-// Cannot pay using bank. Proceeding ..
-// Cannot pay using paypal. Proceeding ..:
-// Paid 259 using Bitcoin!
-
+// Cannot pay using Bank. Proceeding ..
+// Paid 259 using Paypal
 ```
 
 </div>
@@ -8590,12 +8551,12 @@ abstract class Account
     public function pay($amountToPay)
     {
         if ($this->canPay($amountToPay)) {
-            echo "Paid " . number_format($amountToPay, 2) . " using " . get_class($this) . "." . PHP_EOL;
+            echo "Paid " . $amountToPay . " using " . get_class($this) . PHP_EOL;
         } elseif ($this->successor != null) {
-            echo "Cannot pay using " . get_class($this) . ". Proceeding.." . PHP_EOL;
+            echo "Cannot pay using " . get_class($this) . ". Proceeding .." . PHP_EOL;
             $this->successor->pay($amountToPay);
         } else {
-            throw new Exception("None of the accounts have enough balance");
+            echo "None of the accounts have enough balance" . PHP_EOL;
         }
     }
 
@@ -8629,27 +8590,20 @@ class Bitcoin extends Account
     }
 }
 
-// Let's prepare a chain like below
-//      $bank->$paypal->$bitcoin
-//
-// First priority bank
-//      If bank can't pay then PayPal
-//      If PayPal can't pay then bitcoin
-$bank = new Bank(100);          // Bank with balance 100
-$paypal = new Paypal(200);      // PayPal with balance 200
-$bitcoin = new Bitcoin(300);    // Bitcoin with balance 300
+// ----------------------------
+
+$bank = new Bank(100);        // Bank with balance 100
+$paypal = new Paypal(300);    // Paypal with balance 300
+$bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
 
 $bank->setNext($paypal);
 $paypal->setNext($bitcoin);
 
-// Let's try to pay using the first priority i.e. bank
 $bank->pay(259);
 // Output will be
 // ==============
-// Cannot pay using Bank. Proceeding..
-// Cannot pay using Paypal. Proceeding..
-// Paid 259.00 using Bitcoin.
-
+// Cannot pay using Bank. Proceeding ..
+// Paid 259 using Paypal
 ```
 
 </div>
@@ -8666,72 +8620,57 @@ package main
 
 import "fmt"
 
+type payer interface {
+	Pay(amountToPay int)
+}
+
 type Account struct {
-	mSuccessor *Account
-	mBalance   float64
+	successor payer
+	balance   int
+	name      string
 }
 
-func (a *Account) SetNext(account *Account) {
-	a.mSuccessor = account
+func (a *Account) SetNext(account payer) {
+	a.successor = account
 }
 
-func (a *Account) Pay(amountTopay float64) {
-	if a.CanPay(amountTopay) {
-		fmt.Printf("Paid %.2f using %T.\n", amountTopay, a)
-	} else if a.mSuccessor != nil {
-		fmt.Printf("Cannot pay using %T. Proceeding..\n", a)
-		a.mSuccessor.Pay(amountTopay)
+func (a *Account) Pay(amountToPay int) {
+	if a.canPay(amountToPay) {
+		fmt.Printf("Paid %d using %s\n", amountToPay, a.name)
+	} else if a.successor != nil {
+		fmt.Printf("Cannot pay using %s. Proceeding ..\n", a.name)
+		a.successor.Pay(amountToPay)
 	} else {
-		panic("None of the accounts have enough balance")
+		fmt.Println("None of the accounts have enough balance")
 	}
 }
 
-func (a *Account) CanPay(amount float64) bool {
-	return a.mBalance >= amount
+func (a *Account) canPay(amount int) bool {
+	return a.balance >= amount
 }
 
-type Bank struct {
-	Account
+func NewBank(balance int) *Account {
+	return &Account{balance: balance, name: "Bank"}
 }
 
-func NewBank(balance float64) *Bank {
-	return &Bank{Account{mBalance: balance}}
+func NewPaypal(balance int) *Account {
+	return &Account{balance: balance, name: "Paypal"}
 }
 
-type Paypal struct {
-	Account
-}
-
-func NewPaypal(balance float64) *Paypal {
-	return &Paypal{Account{mBalance: balance}}
-}
-
-type Bitcoin struct {
-	Account
-}
-
-func NewBitcoin(balance float64) *Bitcoin {
-	return &Bitcoin{Account{mBalance: balance}}
+func NewBitcoin(balance int) *Account {
+	return &Account{balance: balance, name: "Bitcoin"}
 }
 
 func main() {
-	// Let's prepare a chain like below
-	//      $bank->$paypal->$bitcoin
-	//
-	// First priority bank
-	//      If bank can't pay then paypal
-	//      If paypal can't pay then bit coin
-	bank := NewBank(100)         // Bank with balance 100
-	paypal := NewPaypal(200)     // Paypal with balance 200
-	bitcoin := NewBitcoin(300)   // Bitcoin with balance 300
+	bank := NewBank(100)        // Bank with balance 100
+	paypal := NewPaypal(300)    // Paypal with balance 300
+	bitcoin := NewBitcoin(1000) // Bitcoin with balance 1000
 
-	bank.SetNext(&paypal.Account)
-	paypal.SetNext(&bitcoin.Account)
+	bank.SetNext(paypal)
+	paypal.SetNext(bitcoin)
 
-	// Let's try to pay using the first priority i.e. bank
 	bank.Pay(259)
 }
-
 ```
 
 </div>
@@ -8752,15 +8691,15 @@ abstract class Account {
     successor = account;
   }
 
-  public void pay(Integer amountToPay) throws Exception {
-    String accountType = this.getClass().getName();
+  public void pay(Integer amountToPay) {
+    String accountType = this.getClass().getSimpleName();
     if (canPay(amountToPay)) {
-      System.out.println("Successful payment ($" + amountToPay +") by " + accountType + " account" );
+      System.out.println("Paid " + amountToPay + " using " + accountType);
     } else if (this.successor != null) {
-      System.out.println("Cannot pay by " + accountType + " account. Proceeding...");
+      System.out.println("Cannot pay using " + accountType + ". Proceeding ..");
       successor.pay(amountToPay);
     } else {
-      throw new Exception("None of the accounts have enough balance");
+      System.out.println("None of the accounts have enough balance");
     }
   }
 
@@ -8789,21 +8728,18 @@ class Bitcoin extends Account {
 
 // ----------------------------
 
-// Creating payment accounts
-Bank bank =         new Bank(100);      // Bank     balance 100
-Paypal paypal =     new Paypal(200);    // Paypal   balance 200
-Bitcoin bitcoin =   new Bitcoin(300);   // Bitcoin  balance 300
+Bank bank = new Bank(100);           // Bank with balance 100
+Paypal paypal = new Paypal(300);     // Paypal with balance 300
+Bitcoin bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
 
-// Creating payment chain
-// Bank -> Paypal -> Bitcoin
 bank.setNext(paypal);
 paypal.setNext(bitcoin);
 
-// Do pay
 bank.pay(259);
-// Cannot pay by Bank account.   Proceeding...
-// Cannot pay by Paypal account. Proceeding...
-// Successful payment ($259) by Bitcoin account!
+// Output will be
+// ==============
+// Cannot pay using Bank. Proceeding ..
+// Paid 259 using Paypal
 ```
 
 </div>
@@ -8822,9 +8758,11 @@ bank.pay(259);
 class Account {
 protected:
     Account* successor = nullptr;
-    int balance;
+    int balance = 0;
 
 public:
+    virtual ~Account() = default;
+
     void setNext(Account* account) {
         successor = account;
     }
@@ -8833,7 +8771,7 @@ public:
         if (canPay(amountToPay)) {
             std::cout << "Paid " << amountToPay << " using " << getName() << std::endl;
         } else if (successor != nullptr) {
-            std::cout << "Cannot pay using " << getName() << ". Proceeding..." << std::endl;
+            std::cout << "Cannot pay using " << getName() << ". Proceeding .." << std::endl;
             successor->pay(amountToPay);
         } else {
             std::cout << "None of the accounts have enough balance" << std::endl;
@@ -8869,17 +8807,16 @@ public:
 // ----------------------------
 
 int main() {
-    Bank bank(100);
-    Paypal paypal(200);
-    Bitcoin bitcoin(300);
+    Bank bank(100);        // Bank with balance 100
+    Paypal paypal(300);    // Paypal with balance 300
+    Bitcoin bitcoin(1000); // Bitcoin with balance 1000
 
     bank.setNext(&paypal);
     paypal.setNext(&bitcoin);
 
     bank.pay(259);
-    // Cannot pay using Bank. Proceeding...
-    // Cannot pay using Paypal. Proceeding...
-    // Paid 259 using Bitcoin
+    // Cannot pay using Bank. Proceeding ..
+    // Paid 259 using Paypal
     return 0;
 }
 ```
@@ -8887,6 +8824,11 @@ int main() {
 </div>
 
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی یک درخواست چند تا handler احتمالی داره و نمی‌دونی کدوم بالاخره جوابش رو می‌ده، بسپارش به زنجیره»؛ ❌ «وقتی همیشه دقیقاً یک نفر مسئوله و مقصد از اول معلومه، زنجیره فقط شلوغش می‌کنه».
+> 🪤 **دام رایج:** «اگه هیچ حلقه‌ای درخواست رو برنداره و ته زنجیره رو خالی بذاری، درخواست بی‌صدا گم می‌شه؛ همیشه حالت آخر رو مدیریت کن».
+
 
 <br>
 
