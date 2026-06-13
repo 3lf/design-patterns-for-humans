@@ -11969,6 +11969,10 @@ int main() {
 
 </div>
 
+ترجمه‌ی آزاد: الگوی Visitor راهیه برای جدا کردن یه عملیات از ساختار اشیائی که روش کار می‌کنه. سودِ عملی این جداسازی اینه که می‌تونی عملیات جدید رو به اشیای موجود اضافه کنی، بدون اینکه خود اون اشیا رو دست بزنی؛ یعنی همون اصل باز/بسته (Open/Closed) رو رعایت کردی.
+
+ به این ترفندِ دوصدایی (Double Dispatch) می‌گن: حیوون با `accept` خودش رو به بازدیدکننده معرفی می‌کنه و بازدیدکننده هم متد `visit` مخصوص همون نوع رو صدا می‌زنه، پس کار درست بر اساس «نوع حیوون» و «نوع عملیات» با هم انتخاب می‌شه.
+
 **مثال برنامه‌نویسی**
 
 فرض کن یک باغ وحش مجازی داریم و می‌خوایم یک عالمه امکان رو به حیوون‌های مختلف اضافه کنیم! مثلا صداشون، نحوه پریدنشون و
@@ -11980,7 +11984,6 @@ int main() {
 <div dir="ltr">
 
 ```python
-
 # Visitee
 class Animal:
     def accept(self, operation):
@@ -12034,23 +12037,6 @@ class Speak(AnimalOperation):
         dolphin.speak()
 
 
-monkey = Monkey()
-lion = Lion()
-dolphin = Dolphin()
-
-speak = Speak()
-monkey.accept(speak)  # Ooh oo aa aa!
-lion.accept(speak)  # Roaaar!
-dolphin.accept(speak)  # Tuut tutt tuttt!
-```
-
-</div>
-
-حالا اگه بخوایم قابلیت پریدن رو به حیوونا اضافه کنیم، کار خیلی راحته ببین:
-
-<div dir="ltr">
-
-```python
 class Jump(AnimalOperation):
     def visitMonkey(self, monkey):
         print('Jumped 20 feet high! on to the tree!')
@@ -12060,25 +12046,22 @@ class Jump(AnimalOperation):
 
     def visitDolphin(self, dolphin):
         print('Walked on water a little and disappeared')
-```
 
-</div>
 
-حالا نحوه فراخوانیش رو در کنار صدای حیوونا ببین:
+monkey = Monkey()
+lion = Lion()
+dolphin = Dolphin()
 
-<div dir="ltr">
-
-```python
+speak = Speak()
 jump = Jump()
 
-monkey.accept(speak)  # Ooh oo aa aa!
-monkey.accept(jump)  # Jumped 20 feet high! on to the tree!
+monkey.accept(speak)   # Ooh oo aa aa!
+lion.accept(speak)     # Roaaar!
+dolphin.accept(speak)  # Tuut tuttu tuutt!
 
-lion.accept(speak)  # Roaaar!
-lion.accept(jump)  # Jumped 7 feet! Back on the ground!
-
-dolphin.accept(speak)  # Tuut tutt tuutt!
-dolphin.accept(jump)  # Walked on water a little and disappeared
+monkey.accept(jump)    # Jumped 20 feet high! on to the tree!
+lion.accept(jump)      # Jumped 7 feet! back on the ground!
+dolphin.accept(jump)   # Walked on water a little and disappeared
 ```
 
 </div>
@@ -12092,9 +12075,7 @@ dolphin.accept(jump)  # Walked on water a little and disappeared
 ```typescript
 interface AnimalOperation {
   visitMonkey(monkey: Monkey): void;
-
   visitLion(lion: Lion): void;
-
   visitDolphin(dolphin: Dolphin): void;
 }
 
@@ -12133,27 +12114,18 @@ class Dolphin implements Animal {
 }
 
 class Speak implements AnimalOperation {
-  visitMonkey(monkey: Monkey) {
+  visitMonkey(monkey: Monkey): void {
     monkey.shout();
   }
 
-  visitLion(lion: Lion) {
+  visitLion(lion: Lion): void {
     lion.roar();
   }
 
-  visitDolphin(dolphin: Dolphin) {
+  visitDolphin(dolphin: Dolphin): void {
     dolphin.speak();
   }
 }
-
-const monkey = new Monkey();
-const lion = new Lion();
-const dolphin = new Dolphin();
-const speak = new Speak();
-
-monkey.accept(speak); // Ooh oo aa aa!
-lion.accept(speak); // Roaaar!
-dolphin.accept(speak); //Tuut tutt tuttt!
 
 class Jump implements AnimalOperation {
   visitMonkey(monkey: Monkey): void {
@@ -12169,16 +12141,20 @@ class Jump implements AnimalOperation {
   }
 }
 
+const monkey = new Monkey();
+const lion = new Lion();
+const dolphin = new Dolphin();
+
+const speak = new Speak();
 const jump = new Jump();
 
-monkey.accept(speak); // Ooh oo aa aa!
-monkey.accept(jump); // Jumped 20 feet high! on to the tree!
+monkey.accept(speak);   // Ooh oo aa aa!
+lion.accept(speak);     // Roaaar!
+dolphin.accept(speak);  // Tuut tuttu tuutt!
 
-lion.accept(speak); // Roaaar!
-lion.accept(jump); // Jumped 7 feet! Back on the ground!
-
-dolphin.accept(speak); // Tuut tutt tuutt!
-dolphin.accept(jump); // Walked on water a little and disappeared
+monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
+lion.accept(jump);      // Jumped 7 feet! back on the ground!
+dolphin.accept(jump);   // Walked on water a little and disappeared
 ```
 
 </div>
@@ -12247,7 +12223,6 @@ class Jump {
     }
 }
 
-
 const monkey = new Monkey();
 const lion = new Lion();
 const dolphin = new Dolphin();
@@ -12255,13 +12230,13 @@ const dolphin = new Dolphin();
 const speak = new Speak();
 const jump = new Jump();
 
-monkey.accept(speak);
-lion.accept(speak);
-dolphin.accept(speak);
+monkey.accept(speak);   // Ooh oo aa aa!
+lion.accept(speak);     // Roaaar!
+dolphin.accept(speak);  // Tuut tuttu tuutt!
 
-monkey.accept(jump);
-lion.accept(jump);
-dolphin.accept(jump);
+monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
+lion.accept(jump);      // Jumped 7 feet! back on the ground!
+dolphin.accept(jump);   // Walked on water a little and disappeared
 ```
 
 </div>
@@ -12273,7 +12248,6 @@ dolphin.accept(jump);
 <div dir="ltr">
 
 ```csharp
-
 // Visitee
 interface IAnimal
 {
@@ -12288,18 +12262,16 @@ interface IAnimalOperation
   void VisitDolphin(Dolphin dolphin);
 }
 
-
-
 class Monkey : IAnimal
 {
   public void Shout()
   {
-    Console.WriteLine("Oooh o aa aa!");
+    Console.WriteLine("Ooh oo aa aa!");
   }
 
   public void Accept(IAnimalOperation operation)
   {
-      operation.VisitMonkey(this);
+    operation.VisitMonkey(this);
   }
 }
 
@@ -12307,12 +12279,12 @@ class Lion : IAnimal
 {
   public void Roar()
   {
-    Console.WriteLine("Roaar!");
+    Console.WriteLine("Roaaar!");
   }
 
   public void Accept(IAnimalOperation operation)
   {
-      operation.VisitLion(this);
+    operation.VisitLion(this);
   }
 }
 
@@ -12320,21 +12292,20 @@ class Dolphin : IAnimal
 {
   public void Speak()
   {
-    Console.WriteLine("Tuut tittu tuutt!");
+    Console.WriteLine("Tuut tuttu tuutt!");
   }
 
   public void Accept(IAnimalOperation operation)
   {
-      operation.VisitDolphin(this);
+    operation.VisitDolphin(this);
   }
 }
 
-
 class Speak : IAnimalOperation
 {
-  public void VisitDolphin(Dolphin dolphin)
+  public void VisitMonkey(Monkey monkey)
   {
-    dolphin.Speak();
+    monkey.Shout();
   }
 
   public void VisitLion(Lion lion)
@@ -12342,9 +12313,27 @@ class Speak : IAnimalOperation
     lion.Roar();
   }
 
+  public void VisitDolphin(Dolphin dolphin)
+  {
+    dolphin.Speak();
+  }
+}
+
+class Jump : IAnimalOperation
+{
   public void VisitMonkey(Monkey monkey)
   {
-    monkey.Shout();
+    Console.WriteLine("Jumped 20 feet high! on to the tree!");
+  }
+
+  public void VisitLion(Lion lion)
+  {
+    Console.WriteLine("Jumped 7 feet! back on the ground!");
+  }
+
+  public void VisitDolphin(Dolphin dolphin)
+  {
+    Console.WriteLine("Walked on water a little and disappeared");
   }
 }
 
@@ -12355,45 +12344,15 @@ var lion = new Lion();
 var dolphin = new Dolphin();
 
 var speak = new Speak();
+var jump = new Jump();
 
 monkey.Accept(speak);    // Ooh oo aa aa!
 lion.Accept(speak);      // Roaaar!
-dolphin.Accept(speak);   // Tuut tutt tuutt!
+dolphin.Accept(speak);   // Tuut tuttu tuutt!
 
-// -----------------------------
-
-class Jump : IAnimalOperation
-{
-  public void VisitDolphin(Dolphin dolphin)
-  {
-    Console.WriteLine("Walked on water a little and disappeared!");
-  }
-
-  public void VisitLion(Lion lion)
-  {
-    Console.WriteLine("Jumped 7 feet! Back on the ground!");
-  }
-
-  public void VisitMonkey(Monkey monkey)
-  {
-    Console.WriteLine("Jumped 20 feet high! on to the tree!");
-  }
-}
-
-// ------------------------------
-
-var jump = new Jump();
-
-monkey.Accept(speak);   // Ooh oo aa aa!
-monkey.Accept(jump);    // Jumped 20 feet high! on to the tree!
-
-lion.Accept(speak);     // Roaaar!
-lion.Accept(jump);      // Jumped 7 feet! Back on the ground!
-
-dolphin.Accept(speak);  // Tuut tutt tuutt!
-dolphin.Accept(jump);   // Walked on water a little and disappeared
-
-
+monkey.Accept(jump);     // Jumped 20 feet high! on to the tree!
+lion.Accept(jump);       // Jumped 7 feet! back on the ground!
+dolphin.Accept(jump);    // Walked on water a little and disappeared
 ```
 
 </div>
@@ -12424,7 +12383,7 @@ class Monkey implements AnimalInterface
 {
   public function shout()
   {
-    echo "Oooh o aa aa!";
+    echo "Ooh oo aa aa!\n";
   }
 
   public function accept(AnimalOperationInterface $operation)
@@ -12437,7 +12396,7 @@ class Lion implements AnimalInterface
 {
   public function roar()
   {
-    echo "Roaar!";
+    echo "Roaaar!\n";
   }
 
   public function accept(AnimalOperationInterface $operation)
@@ -12450,7 +12409,7 @@ class Dolphin implements AnimalInterface
 {
   public function speak()
   {
-    echo "Tuut tittu tuutt!";
+    echo "Tuut tuttu tuutt!\n";
   }
 
   public function accept(AnimalOperationInterface $operation)
@@ -12461,9 +12420,9 @@ class Dolphin implements AnimalInterface
 
 class Speak implements AnimalOperationInterface
 {
-  public function visitDolphin(Dolphin $dolphin)
+  public function visitMonkey(Monkey $monkey)
   {
-    $dolphin->speak();
+    $monkey->shout();
   }
 
   public function visitLion(Lion $lion)
@@ -12471,9 +12430,27 @@ class Speak implements AnimalOperationInterface
     $lion->roar();
   }
 
+  public function visitDolphin(Dolphin $dolphin)
+  {
+    $dolphin->speak();
+  }
+}
+
+class Jump implements AnimalOperationInterface
+{
   public function visitMonkey(Monkey $monkey)
   {
-    $monkey->shout();
+    echo "Jumped 20 feet high! on to the tree!\n";
+  }
+
+  public function visitLion(Lion $lion)
+  {
+    echo "Jumped 7 feet! back on the ground!\n";
+  }
+
+  public function visitDolphin(Dolphin $dolphin)
+  {
+    echo "Walked on water a little and disappeared\n";
   }
 }
 
@@ -12482,40 +12459,15 @@ $lion = new Lion();
 $dolphin = new Dolphin();
 
 $speak = new Speak();
+$jump = new Jump();
 
 $monkey->accept($speak);    // Ooh oo aa aa!
 $lion->accept($speak);      // Roaaar!
-$dolphin->accept($speak);   // Tuut tutt tuutt!
+$dolphin->accept($speak);   // Tuut tuttu tuutt!
 
-class Jump implements AnimalOperationInterface
-{
-  public function visitDolphin(Dolphin $dolphin)
-  {
-    echo "Walked on water a little and disappeared!";
-  }
-
-  public function visitLion(Lion $lion)
-  {
-    echo "Jumped 7 feet! Back on the ground!";
-  }
-
-  public function visitMonkey(Monkey $monkey)
-  {
-    echo "Jumped 20 feet high! on to the tree!";
-  }
-}
-
-$jump = new Jump();
-
-$monkey->accept($speak);   // Ooh oo aa aa!
-$monkey->accept($jump);    // Jumped 20 feet high! on to the tree!
-
-$lion->accept($speak);     // Roaaar!
-$lion->accept($jump);      // Jumped 7 feet! Back on the ground!
-
-$dolphin->accept($speak);  // Tuut tutt tuutt!
-$dolphin->accept($jump);   // Walked on water a little and disappeared
-
+$monkey->accept($jump);     // Jumped 20 feet high! on to the tree!
+$lion->accept($jump);       // Jumped 7 feet! back on the ground!
+$dolphin->accept($jump);    // Walked on water a little and disappeared
 ```
 
 </div>
@@ -12528,7 +12480,6 @@ $dolphin->accept($jump);   // Walked on water a little and disappeared
 <div dir="ltr">
 
 ```go
-
 package main
 
 import "fmt"
@@ -12589,18 +12540,36 @@ func (s *Speak) VisitDolphin(dolphin *Dolphin) {
 	dolphin.Speak()
 }
 
+type Jump struct{}
+
+func (j *Jump) VisitMonkey(monkey *Monkey) {
+	fmt.Println("Jumped 20 feet high! on to the tree!")
+}
+
+func (j *Jump) VisitLion(lion *Lion) {
+	fmt.Println("Jumped 7 feet! back on the ground!")
+}
+
+func (j *Jump) VisitDolphin(dolphin *Dolphin) {
+	fmt.Println("Walked on water a little and disappeared")
+}
+
 func main() {
 	monkey := &Monkey{}
 	lion := &Lion{}
 	dolphin := &Dolphin{}
 
 	speak := &Speak{}
+	jump := &Jump{}
+
 	monkey.Accept(speak)  // Ooh oo aa aa!
 	lion.Accept(speak)    // Roaaar!
 	dolphin.Accept(speak) // Tuut tuttu tuutt!
+
+	monkey.Accept(jump)  // Jumped 20 feet high! on to the tree!
+	lion.Accept(jump)    // Jumped 7 feet! back on the ground!
+	dolphin.Accept(jump) // Walked on water a little and disappeared
 }
-
-
 ```
 
 </div>
@@ -12614,7 +12583,6 @@ func main() {
 
 ```java
 interface AnimalOperation {
-
     void visitMonkey(Monkey monkey);
     void visitLion(Lion lion);
     void visitDolphin(Dolphin dolphin);
@@ -12625,8 +12593,7 @@ interface Animal {
 }
 
 class Monkey implements Animal {
-
-    void shout() {
+    public void shout() {
         System.out.println("Ooh oo aa aa!");
     }
 
@@ -12637,7 +12604,6 @@ class Monkey implements Animal {
 }
 
 class Lion implements Animal {
-
     public void roar() {
         System.out.println("Roaaar!");
     }
@@ -12649,7 +12615,6 @@ class Lion implements Animal {
 }
 
 class Dolphin implements Animal {
-
     public void speak() {
         System.out.println("Tuut tuttu tuutt!");
     }
@@ -12661,7 +12626,6 @@ class Dolphin implements Animal {
 }
 
 class Speak implements AnimalOperation {
-
     @Override
     public void visitMonkey(Monkey monkey) {
         monkey.shout();
@@ -12678,20 +12642,7 @@ class Speak implements AnimalOperation {
     }
 }
 
-// -----------------------
-
-Monkey monkey = new Monkey();
-Lion lion = new Lion();
-Dolphin dolphin = new Dolphin();
-
-Speak speak = new Speak();
-
-monkey.accept(speak);   // Ooh oo aa aa!
-lion.accept(speak);     // Roaaar!
-dolphin.accept(speak);  // Tuut tutt tuttt!
-
 class Jump implements AnimalOperation {
-
     @Override
     public void visitMonkey(Monkey monkey) {
         System.out.println("Jumped 20 feet high! on to the tree!");
@@ -12710,15 +12661,19 @@ class Jump implements AnimalOperation {
 
 // -----------------------
 
+Monkey monkey = new Monkey();
+Lion lion = new Lion();
+Dolphin dolphin = new Dolphin();
+
+Speak speak = new Speak();
 Jump jump = new Jump();
 
 monkey.accept(speak);   // Ooh oo aa aa!
-monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
-
 lion.accept(speak);     // Roaaar!
-lion.accept(jump);      // Jumped 7 feet! Back on the ground!
+dolphin.accept(speak);  // Tuut tuttu tuutt!
 
-dolphin.accept(speak);  // Tuut tutt tuutt!
+monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
+lion.accept(jump);      // Jumped 7 feet! back on the ground!
 dolphin.accept(jump);   // Walked on water a little and disappeared
 ```
 
@@ -12781,7 +12736,7 @@ public:
 class Dolphin : public Animal {
 public:
     void speak() {
-        std::cout << "Tuut tutt tuttt!" << std::endl;
+        std::cout << "Tuut tuttu tuutt!" << std::endl;
     }
 
     void accept(AnimalOperation& operation) override {
@@ -12789,7 +12744,7 @@ public:
     }
 };
 
-// Concrete visitor
+// Concrete visitor: Speak
 class Speak : public AnimalOperation {
 public:
     void visitMonkey(Monkey& monkey) override {
@@ -12805,6 +12760,22 @@ public:
     }
 };
 
+// Concrete visitor: Jump
+class Jump : public AnimalOperation {
+public:
+    void visitMonkey(Monkey& monkey) override {
+        std::cout << "Jumped 20 feet high! on to the tree!" << std::endl;
+    }
+
+    void visitLion(Lion& lion) override {
+        std::cout << "Jumped 7 feet! back on the ground!" << std::endl;
+    }
+
+    void visitDolphin(Dolphin& dolphin) override {
+        std::cout << "Walked on water a little and disappeared" << std::endl;
+    }
+};
+
 // ----------------------------
 
 int main() {
@@ -12813,10 +12784,15 @@ int main() {
     Dolphin dolphin;
 
     Speak speak;
+    Jump jump;
 
     monkey.accept(speak);   // Ooh oo aa aa!
     lion.accept(speak);     // Roaaar!
-    dolphin.accept(speak);  // Tuut tutt tuttt!
+    dolphin.accept(speak);  // Tuut tuttu tuutt!
+
+    monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
+    lion.accept(jump);      // Jumped 7 feet! back on the ground!
+    dolphin.accept(jump);   // Walked on water a little and disappeared
     return 0;
 }
 ```
@@ -12824,6 +12800,12 @@ int main() {
 </div>
 
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ وقتی یه ساختار از اشیای ثابت داری و مدام می‌خوای عملیات‌های تازه روشون اضافه کنی، مثل گزارش‌گیری، اعتبارسنجی یا صادر کردن خروجی؛ ❌ وقتی برعکس، خودِ نوع‌های اشیا مدام عوض و زیاد می‌شن ولی عملیات‌ها تقریباً ثابتن.
+> 🪤 **دام رایج:** هر بار که یه نوع حیوون جدید اضافه می‌کنی، مجبوری برِی توی تک‌تک Visitorها یه متد `visit` جدید بنویسی؛ پس اضافه کردن «نوع» اینجا گرونه.
+> 🔗 **فرقش با الگوهای دیگه:** یک جمله: عملیات‌ها ارزون اضافه می‌شن ولی نوع جدید گرونه.
+
 
 <br>
 
