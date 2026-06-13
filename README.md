@@ -3325,6 +3325,8 @@ int main() {
 
 </div>
 
+خلاصه‌اش این می‌شه که الگوی تک‌نمونه (Singleton) ساختن آبجکت از یه کلاس رو به فقط یه دونه محدود می‌کنه. این وقتی به درد می‌خوره که دقیقاً یه آبجکت لازم داری تا کارهای کل سیستم رو هماهنگ کنه.
+
 <br>
 
 **مثال برنامه‌نویسی**
@@ -3345,26 +3347,22 @@ class SingletonMeta(type):
 
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
-            instance = super().__call__(*args, **kwargs)
-            cls._instances[cls] = instance
+            cls._instances[cls] = super().__call__(*args, **kwargs)
         return cls._instances[cls]
 
 
-class Singleton(metaclass=SingletonMeta):
-    def some_business_logic(self):
-        pass
+class President(metaclass=SingletonMeta):
+    pass
 
 
 if __name__ == "__main__":
     # The client code.
 
-    s1 = Singleton()
-    s2 = Singleton()
+    a = President()
+    b = President()
 
-    if id(s1) == id(s2):
-        print("Singleton works, both variables contain the same instance.")
-    else:
-        print("Singleton failed, variables contain different instances.")
+    print("Same instance?", "True" if a is b else "False")
+    # Output: Same instance? True
 ```
 
 </div>
@@ -3377,35 +3375,28 @@ if __name__ == "__main__":
 <div dir="ltr">
 
 ```typescript
-class Singleton {
-    private static instance: Singleton;
+class President {
+    private static instance: President;
 
     private constructor() {
         // Private constructor prevents direct instantiation
     }
 
-    public static getInstance(): Singleton {
-        if (!Singleton.instance) {
-            Singleton.instance = new Singleton();
+    public static getInstance(): President {
+        if (!President.instance) {
+            President.instance = new President();
         }
-        return Singleton.instance;
-    }
-
-    someBusinessLogic() {
-        console.log("Executing some business logic...");
+        return President.instance;
     }
 }
 
 // ----------------------------
 
-const s1 = Singleton.getInstance();
-const s2 = Singleton.getInstance();
+const a = President.getInstance();
+const b = President.getInstance();
 
-if (Object.is(s1, s2)) {
-    console.log("Singleton works, both variables contain the same instance.");
-} else {
-    console.log("Singleton failed, variables contain different instances.");
-}
+console.log("Same instance?", Object.is(a, b) ? "True" : "False");
+// Output: Same instance? True
 ```
 
 </div>
@@ -3418,43 +3409,22 @@ if (Object.is(s1, s2)) {
 <div dir="ltr">
 
 ```javascript
-class SingletonMeta extends Function {
-    static _instances = {};
-
-    constructor(...args) {
-        const instance = super(...args);
-        const className = this.constructor.name;
-        if (!SingletonMeta._instances[className]) {
-            SingletonMeta._instances[className] = instance;
-        }
-        return SingletonMeta._instances[className];
-    }
+class President {
+    static #instance;
 
     static getInstance() {
-        const className = this.name;
-        if (!SingletonMeta._instances[className]) {
-            SingletonMeta._instances[className] = new this();
+        if (!President.#instance) {
+            President.#instance = new President();
         }
-        return SingletonMeta._instances[className];
+        return President.#instance;
     }
 }
 
-class Singleton extends SingletonMeta {
-    someBusinessLogic() {
-        console.log("Executing some business logic...");
-    }
-}
+const a = President.getInstance();
+const b = President.getInstance();
 
-const s1 = Singleton.getInstance();
-const s2 = Singleton.getInstance();
-
-if (Object.is(s1, s2)) {
-    console.log("Singleton works, both variables contain the same instance.");
-} else {
-    console.log("Singleton failed, variables contain different instances.");
-}
-
-s1.someBusinessLogic();
+console.log("Same instance?", Object.is(a, b) ? "True" : "False");
+// Output: Same instance? True
 ```
 
 </div>
@@ -3471,13 +3441,12 @@ s1.someBusinessLogic();
 public class President
 {
   static President instance;
-  // Private constructor
+
+  // Private constructor hides direct instantiation
   private President()
   {
-    //Hiding the Constructor
   }
 
-  // Public constructor
   public static President GetInstance()
   {
     if (instance == null) {
@@ -3492,7 +3461,8 @@ public class President
 President a = President.GetInstance();
 President b = President.GetInstance();
 
-Console.WriteLine(a == b); //Output : true
+Console.WriteLine($"Same instance? {(a == b ? "True" : "False")}");
+// Output: Same instance? True
 
 ```
 
@@ -3528,7 +3498,8 @@ class President
 $a = President::getInstance();
 $b = President::getInstance();
 
-var_dump($a === $b); // Output: bool(true)
+echo "Same instance? " . ($a === $b ? "True" : "False") . "\n";
+// Output: Same instance? True
 
 ```
 
@@ -3542,7 +3513,7 @@ var_dump($a === $b); // Output: bool(true)
 <div dir="ltr">
 
 ```go
-type President struct {}
+type President struct{}
 
 var instance *President
 
@@ -3557,7 +3528,13 @@ func GetInstance() *President {
 
 a := GetInstance()
 b := GetInstance()
-fmt.Println(a == b) // Output: true
+
+same := "False"
+if a == b {
+  same = "True"
+}
+fmt.Println("Same instance?", same)
+// Output: Same instance? True
 
 
 ```
@@ -3592,7 +3569,8 @@ class President {
 President a = President.getInstance();
 President b = President.getInstance();
 
-System.out.println(a == b); // True
+System.out.println("Same instance? " + (a == b ? "True" : "False"));
+// Output: Same instance? True
 ```
 
 </div>
@@ -3605,54 +3583,40 @@ System.out.println(a == b); // True
 
 ```cpp
 #include <iostream>
-#include <memory>
-#include <mutex>
 
 class President {
 private:
-    static std::unique_ptr<President> instance;
-    static std::mutex mtx;
-    
     // Private constructor
     President() = default;
-    
+
     // Delete copy constructor and assignment operator
     President(const President&) = delete;
     President& operator=(const President&) = delete;
 
 public:
+    // Thread-safe in C++11 and later (Meyers singleton)
     static President& getInstance() {
-        std::lock_guard<std::mutex> lock(mtx);
-        if (!instance) {
-            instance = std::unique_ptr<President>(new President());
-        }
-        return *instance;
-    }
-    
-    void doSomething() {
-        std::cout << "President is doing something" << std::endl;
+        static President instance;
+        return instance;
     }
 };
 
-// Static member definitions
-std::unique_ptr<President> President::instance = nullptr;
-std::mutex President::mtx;
-
-// Usage
 int main() {
     President& a = President::getInstance();
     President& b = President::getInstance();
-    
-    std::cout << (&a == &b) << std::endl; // True
-    
-    a.doSomething();
-    b.doSomething();
-    
+
+    std::cout << "Same instance? " << (&a == &b ? "True" : "False") << std::endl;
+    // Output: Same instance? True
     return 0;
 }
 ```
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی واقعاً باید توی کل برنامه فقط یه نمونه از یه چیز وجود داشته باشه، مثل تنظیمات سراسری یا یه استخر کانکشن (Connection Pool)»؛ ❌ «وقتی فقط برای راحتیِ دسترسی می‌خوای همه‌جا بهش برسی، که اون‌وقت داری متغیر عمومی (Global Variable) می‌سازی».
+> 🪤 **دام رایج:** «حالت مشترک و قابل‌تغییرِ تک‌نمونه، تست‌ها رو به هم وابسته می‌کنه و توی برنامه‌های چندنخی (Multithreaded) دردسر می‌سازه».
+
 
 <br>
 <br>
