@@ -3678,6 +3678,9 @@ int main() {
 
 </div>
 
+خلاصه‌ش این می‌شه: آداپتور به تو اجازه می‌ده از یه کلاسِ موجود، انگار که یه اینترفیس دیگه‌ست استفاده کنی.
+بیشتر وقتی به کارت میاد که بخوای کلاس‌های آماده رو کنار بقیه به کار بگیری، بدون اینکه کد اصلیشون رو دست بزنی.
+
 **مثال برنامه‌نویسی**
 
 فرض کن یه بازی داریم که توش یه «شکارچی» (`Hunter`) هست که عادت داره «شیر» (`Lion`) شکار کنه.
@@ -3700,48 +3703,49 @@ int main() {
 
 ```python
 class Lion:
-    def roar(self):
-        pass
+    def roar(self) -> str:
+        raise NotImplementedError
 
 
 class AfricanLion(Lion):
-    def roar(self):
-        pass
-
-
-class AsianLion(Lion):
-    def roar(self):
-        pass
+    def roar(self) -> str:
+        return "Roaaar"
 
 
 class Hunter:
-    def hunt(self, lion):
-        lion.roar()
+    def hunt(self, lion: Lion) -> None:
+        print("The hunter is hunting...")
+        print(lion.roar())
 
 
 class WildDog:
-    @staticmethod
-    def bark():
-        pass
+    def bark(self) -> str:
+        return "Woof"
 
 
 class WildDogAdapter(Lion):
-    _dog = None
+    def __init__(self, dog: WildDog):
+        self.dog = dog
 
-    def __init__(self, dog):
-        self._dog = dog
-
-    def roar(self):
-        self._dog.bark()
+    def roar(self) -> str:
+        return self.dog.bark()
 
 
 # ----------------------------
 
-wildDog = WildDog()
-wildDogAdapter = WildDogAdapter(wildDog)
+african_lion = AfricanLion()
+wild_dog = WildDog()
+wild_dog_adapter = WildDogAdapter(wild_dog)
 
 hunter = Hunter()
-hunter.hunt(wildDogAdapter)
+hunter.hunt(african_lion)       # The hunter is hunting... -> Roaaar
+hunter.hunt(wild_dog_adapter)   # The hunter is hunting... -> Woof
+
+# Output:
+# The hunter is hunting...
+# Roaaar
+# The hunter is hunting...
+# Woof
 ```
 
 </div>
@@ -3754,29 +3758,26 @@ hunter.hunt(wildDogAdapter)
 <div dir="ltr">
 
 ```typescript
-class Lion {
-    roar(): void {
-    }
+interface Lion {
+    roar(): string;
 }
 
-class AfricanLion extends Lion {
-    roar(): void {
-    }
-}
-
-class AsianLion extends Lion {
-    roar(): void {
+class AfricanLion implements Lion {
+    roar(): string {
+        return "Roaaar";
     }
 }
 
 class Hunter {
     hunt(lion: Lion): void {
-        lion.roar();
+        console.log("The hunter is hunting...");
+        console.log(lion.roar());
     }
 }
 
 class WildDog {
-    static bark(): void {
+    bark(): string {
+        return "Woof";
     }
 }
 
@@ -3787,18 +3788,26 @@ class WildDogAdapter implements Lion {
         this.dog = dog;
     }
 
-    roar(): void {
-        this.dog.bark();
+    roar(): string {
+        return this.dog.bark();
     }
 }
 
 // ----------------------------
 
+const africanLion = new AfricanLion();
 const wildDog = new WildDog();
 const wildDogAdapter = new WildDogAdapter(wildDog);
 
 const hunter = new Hunter();
-hunter.hunt(wildDogAdapter);
+hunter.hunt(africanLion);      // The hunter is hunting... -> Roaaar
+hunter.hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 ```
 
 </div>
@@ -3811,31 +3820,26 @@ hunter.hunt(wildDogAdapter);
 ```javascript
 class Lion {
     roar() {
-        console.log("Lion roars!");
+        return "";
     }
 }
 
 class AfricanLion extends Lion {
     roar() {
-        console.log("African Lion roars!");
-    }
-}
-
-class AsianLion extends Lion {
-    roar() {
-        console.log("Asian Lion roars!");
+        return "Roaaar";
     }
 }
 
 class Hunter {
     hunt(lion) {
-        lion.roar();
+        console.log("The hunter is hunting...");
+        console.log(lion.roar());
     }
 }
 
 class WildDog {
-    static bark() {
-        console.log("Wild Dog barks!");
+    bark() {
+        return "Woof";
     }
 }
 
@@ -3846,16 +3850,25 @@ class WildDogAdapter extends Lion {
     }
 
     roar() {
-        this.dog.bark();
+        return this.dog.bark();
     }
 }
 
+// ----------------------------
 
+const africanLion = new AfricanLion();
 const wildDog = new WildDog();
 const wildDogAdapter = new WildDogAdapter(wildDog);
 
 const hunter = new Hunter();
-hunter.hunt(wildDogAdapter);
+hunter.hunt(africanLion);      // The hunter is hunting... -> Roaaar
+hunter.hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 ```
 
 </div>
@@ -3869,22 +3882,14 @@ hunter.hunt(wildDogAdapter);
 ```csharp
 interface ILion
 {
-  void Roar();
+  string Roar();
 }
 
 class AfricanLion : ILion
 {
-  public void Roar()
+  public string Roar()
   {
-
-  }
-}
-
-class AsiaLion : ILion
-{
-  public void Roar()
-  {
-
+    return "Roaaar";
   }
 }
 
@@ -3892,15 +3897,17 @@ class Hunter
 {
   public void Hunt(ILion lion)
   {
-
+    Console.WriteLine("The hunter is hunting...");
+    Console.WriteLine(lion.Roar());
   }
 }
 
 // This needs to be added to the game
 class WildDog
 {
-  public void bark()
+  public string Bark()
   {
+    return "Woof";
   }
 }
 
@@ -3912,19 +3919,27 @@ class WildDogAdapter : ILion
   {
     this.mDog = dog;
   }
-  public void Roar()
+  public string Roar()
   {
-    mDog.bark();
+    return mDog.Bark();
   }
 }
 
 // ----------------------------
 
+var africanLion = new AfricanLion();
 var wildDog = new WildDog();
 var wildDogAdapter = new WildDogAdapter(wildDog);
 
 var hunter = new Hunter();
-hunter.Hunt(wildDogAdapter);
+hunter.Hunt(africanLion);      // The hunter is hunting... -> Roaaar
+hunter.Hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 
 ```
 
@@ -3940,30 +3955,25 @@ hunter.Hunt(wildDogAdapter);
 ```php
 
 interface Lion {
-    public function roar();
+    public function roar(): string;
 }
 
 class AfricanLion implements Lion {
-    public function roar() {
-        // implementation specific to AfricanLion
-    }
-}
-
-class AsianLion implements Lion {
-    public function roar() {
-        // implementation specific to AsianLion
+    public function roar(): string {
+        return "Roaaar";
     }
 }
 
 class Hunter {
-    public function hunt(Lion $lion) {
-        $lion->roar();
+    public function hunt(Lion $lion): void {
+        echo "The hunter is hunting...\n";
+        echo $lion->roar() . "\n";
     }
 }
 
 class WildDog {
-    public static function bark() {
-        // implementation specific to WildDog
+    public function bark(): string {
+        return "Woof";
     }
 }
 
@@ -3975,17 +3985,25 @@ class WildDogAdapter implements Lion
     {
         $this->mDog = $dog;
     }
-    public function roar()
+    public function roar(): string
     {
-        $this->mDog->bark();
+        return $this->mDog->bark();
     }
 }
 
+$africanLion = new AfricanLion();
 $wildDog = new WildDog();
 $wildDogAdapter = new WildDogAdapter($wildDog);
 
 $hunter = new Hunter();
-$hunter->hunt($wildDogAdapter);
+$hunter->hunt($africanLion);      // The hunter is hunting... -> Roaaar
+$hunter->hunt($wildDogAdapter);   // The hunter is hunting... -> Woof
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 
 ```
 
@@ -4004,43 +4022,52 @@ package main
 
 import "fmt"
 
-type ILion interface {
-Roar()
+type Lion interface {
+	Roar() string
 }
 
 type AfricanLion struct{}
 
-func (a AfricanLion) Roar() {}
-
-type AsiaLion struct{}
-
-func (a AsiaLion) Roar() {}
+func (a AfricanLion) Roar() string {
+	return "Roaaar"
+}
 
 type Hunter struct{}
 
-func (h Hunter) Hunt(lion ILion) {}
+func (h Hunter) Hunt(lion Lion) {
+	fmt.Println("The hunter is hunting...")
+	fmt.Println(lion.Roar())
+}
 
 type WildDog struct{}
 
-func (w WildDog) bark() {}
-
-type WildDogAdapter struct {
-dog WildDog
+func (w WildDog) Bark() string {
+	return "Woof"
 }
 
-func (w WildDogAdapter) Roar() {
-w.dog.bark()
+type WildDogAdapter struct {
+	dog WildDog
+}
+
+func (w WildDogAdapter) Roar() string {
+	return w.dog.Bark()
 }
 
 func main() {
-wildDog := WildDog{}
-wildDogAdapter := WildDogAdapter{wildDog}
+	africanLion := AfricanLion{}
+	wildDog := WildDog{}
+	wildDogAdapter := WildDogAdapter{dog: wildDog}
 
-hunter := Hunter{}
-hunter.Hunt(wildDogAdapter)
-
-fmt.Println("Done")
+	hunter := Hunter{}
+	hunter.Hunt(africanLion)    // The hunter is hunting... -> Roaaar
+	hunter.Hunt(wildDogAdapter) // The hunter is hunting... -> Woof
 }
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 
 ```
 
@@ -4056,37 +4083,29 @@ fmt.Println("Done")
 ```java
 interface Lion {
 
-    void roar();
+    String roar();
 }
 
 class AfricanLion implements Lion {
 
     @Override
-    public void roar() {
-        System.out.println("African lion roaring.");
-    }
-}
-
-class AsianLion implements Lion {
-
-    @Override
-    public void roar() {
-        System.out.println("Asian lion roaring.");
+    public String roar() {
+        return "Roaaar";
     }
 }
 
 class Hunter {
 
-    public void Hunt(Lion lion) {
-        System.out.println("Attacking and listening...🦻");
-        lion.roar();
+    public void hunt(Lion lion) {
+        System.out.println("The hunter is hunting...");
+        System.out.println(lion.roar());
     }
 }
 
 class WildDog {
 
-    public void bark() {
-        System.out.println("Wild dog barking");
+    public String bark() {
+        return "Woof";
     }
 }
 
@@ -4097,18 +4116,28 @@ class WildDogAdapter implements Lion {
     public WildDogAdapter(WildDog wildDog) {
         this.wildDog = wildDog;
     }
-    public void roar() {
-        wildDog.bark();
+
+    @Override
+    public String roar() {
+        return wildDog.bark();
     }
 }
 
 // ----------------------------
 
+AfricanLion africanLion = new AfricanLion();
 WildDog wildDog = new WildDog();
 WildDogAdapter wildDogAdapter = new WildDogAdapter(wildDog);
 
 Hunter hunter = new Hunter();
-hunter.Hunt(wildDogAdapter);
+hunter.hunt(africanLion);      // The hunter is hunting... -> Roaaar
+hunter.hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 ```
 
 </div>
@@ -4121,72 +4150,80 @@ hunter.Hunt(wildDogAdapter);
 
 ```cpp
 #include <iostream>
+#include <string>
 
 // Lion interface
 class Lion {
 public:
     virtual ~Lion() = default;
-    virtual void roar() = 0;
+    virtual std::string roar() = 0;
 };
 
 // African lion
 class AfricanLion : public Lion {
 public:
-    void roar() override {
-        std::cout << "African Lion: Roar!" << std::endl;
+    std::string roar() override {
+        return "Roaaar";
     }
 };
 
-// Asian lion
-class AsianLion : public Lion {
+// Hunter
+class Hunter {
 public:
-    void roar() override {
-        std::cout << "Asian Lion: Roar!" << std::endl;
+    void hunt(Lion* lion) {
+        std::cout << "The hunter is hunting..." << std::endl;
+        std::cout << lion->roar() << std::endl;
     }
 };
 
 // Wild dog (incompatible interface)
 class WildDog {
 public:
-    void bark() {
-        std::cout << "Wild Dog: Bark!" << std::endl;
+    std::string bark() {
+        return "Woof";
     }
 };
 
-// Adapter to make WildDog compatible with Lion interface
+// Adapter to make WildDog compatible with the Lion interface
 class WildDogAdapter : public Lion {
 private:
     WildDog* dog;
 
 public:
     WildDogAdapter(WildDog* dog) : dog(dog) {}
-    
-    void roar() override {
-        dog->bark();
-    }
-};
 
-// Hunter class
-class Hunter {
-public:
-    void hunt(Lion* lion) {
-        lion->roar();
+    std::string roar() override {
+        return dog->bark();
     }
 };
 
 // Usage
 int main() {
+    AfricanLion africanLion;
     WildDog wildDog;
     WildDogAdapter wildDogAdapter(&wildDog);
-    
+
     Hunter hunter;
-    hunter.hunt(&wildDogAdapter);
-    
+    hunter.hunt(&africanLion);      // The hunter is hunting... -> Roaaar
+    hunter.hunt(&wildDogAdapter);   // The hunter is hunting... -> Woof
+
     return 0;
 }
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 ```
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی یه کلاس کارِتو راه می‌اندازه ولی امضای متدهاش با چیزی که کدت انتظار داره جور نیست»؛ ❌ «وقتی خودت کنترل هر دو طرف رو داری و می‌تونی همون اول اینترفیس رو درست طراحی کنی».
+> 🪤 **دام رایج:** «آداپتور رو کم‌کم پر از منطق اضافه می‌کنی تا جایی که از یه واسطه ساده تبدیل می‌شه به یه لایه‌ی شلوغ که فهمیدنش سخته».
+> 🔗 **فرقش با [پل (Bridge)](#پل-bridge-):** «پل رو از اول طراحی می‌کنی تا انتزاع و پیاده‌سازی مستقل از هم رشد کنن؛ آداپتور بعد از ماجرا میاد که دو تا چیزِ ناسازگارِ موجود رو به هم برسونه. (نزدیک به [پراکسی (Proxy)](#پراکسی-proxy-) و [تزئین‌گر (Decorator)](#تزئین‌گر-decorator-) هم هست؛ ولی اون‌ها اینترفیس رو عوض نمی‌کنن)».
+
 
 <br>
 
