@@ -14028,6 +14028,9 @@ int main() {
 
 </div>
 
+خلاصه‌اش این می‌شه که الگوریتم اصلی، یه اسکلت ثابت داره که توی کلاس والد تعریف می‌شه و ترتیب قدم‌ها رو مشخص می‌کنه.
+بعد می‌تونی بعضی از این قدم‌ها رو توی کلاس‌های فرزند جور دیگه‌ای پیاده‌سازی کنی، بدون این‌که به ساختار کلی الگوریتم دست بزنی.
+
 **مثال برنامه‌نویسی**
 
 فرض کن ما یک زیرساخت برای ساخت اپلیکیشن‌های گوشی نیاز داریم!
@@ -14272,10 +14275,20 @@ class IosBuilder extends Builder {
 const androidBuilder = new AndroidBuilder();
 androidBuilder.build();
 
-
+// Output:
+// Running android tests
+// Linting the android code
+// Assembling the android build
+// Deploying android build to server
 
 const iosBuilder = new IosBuilder();
 iosBuilder.build();
+
+// Output:
+// Running ios tests
+// Linting the ios code
+// Assembling the ios build
+// Deploying ios build to server
 ```
 
 </div>
@@ -14411,7 +14424,7 @@ class AndroidBuilder extends Builder {
     echo "Deploying android build to server\n";
   }
 
-  public function lnt() {
+  public function lint() {
     echo "Linting the android code\n";
   }
 
@@ -14594,46 +14607,46 @@ abstract class Builder {
 class AndroidBuilder extends Builder {
 
     @Override
-    public void assemble() {
-        System.out.println("Assembling android build");
-    }
-
-    @Override
-    public void deploy() {
-        System.out.println("Deploying android build");
-    }
-
-    @Override
-    public void lint() {
-        System.out.println("Linting android code");
-    }
-
-    @Override
     public void test() {
         System.out.println("Running android tests");
     }
-}
 
-class IOSBuilder extends Builder {
+    @Override
+    public void lint() {
+        System.out.println("Linting the android code");
+    }
 
     @Override
     public void assemble() {
-        System.out.println("Assembling iOS build");
+        System.out.println("Assembling the android build");
     }
 
     @Override
     public void deploy() {
-        System.out.println("Deploying iOS build");
+        System.out.println("Deploying android build to server");
+    }
+}
+
+class IosBuilder extends Builder {
+
+    @Override
+    public void test() {
+        System.out.println("Running ios tests");
     }
 
     @Override
     public void lint() {
-        System.out.println("Linting iOS code");
+        System.out.println("Linting the ios code");
     }
 
     @Override
-    public void test() {
-        System.out.println("Running iOS tests");
+    public void assemble() {
+        System.out.println("Assembling the ios build");
+    }
+
+    @Override
+    public void deploy() {
+        System.out.println("Deploying ios build to server");
     }
 }
 
@@ -14642,16 +14655,16 @@ class IOSBuilder extends Builder {
 AndroidBuilder androidBuilder = new AndroidBuilder();
 androidBuilder.build();
 // Running android tests
-// Linting android code
-// Assembling android build
-// Deploying android build
+// Linting the android code
+// Assembling the android build
+// Deploying android build to server
 
-IOSBuilder iOSBuilder = new IOSBuilder();
-iOSBuilder.build();
-// Running iOS tests
-// Linting iOS code
-// Assembling iOS build
-// Deploying iOS build
+IosBuilder iosBuilder = new IosBuilder();
+iosBuilder.build();
+// Running ios tests
+// Linting the ios code
+// Assembling the ios build
+// Deploying ios build to server
 ```
 
 </div>
@@ -14747,6 +14760,12 @@ int main() {
 </div>
 
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی چند تا کار، ترتیب و اسکلت یکسانی دارن و فقط چند قدمشون فرق می‌کنه»؛ ❌ «وقتی کل روند کار از این‌رو به اون‌رو فرق می‌کنه و قدم مشترکی بینشون نیست».
+> 🪤 **دام رایج:** «این‌قدر قدم‌ها رو قابل‌بازنویسی می‌کنی که دیگه اسکلت ثابتی نمی‌مونه و کنترل از دستت در می‌ره».
+> 🔗 **فرقش با [استراتژی (Strategy)](#استراتژی-strategy-):** «اینجا با ارث‌بری فقط چند قدمِ یه روندِ ثابت رو عوض می‌کنی؛ توی استراتژی کلِ الگوریتم رو به‌صورت یه شیء جدا تزریق و تعویض می‌کنی».
+
 
 <br>
 
