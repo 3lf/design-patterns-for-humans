@@ -37,10 +37,10 @@
 
 | دسته‌بندی | دیزاین پترن‌ها |
 | --- | --- |
-| 🧱 **SOLID Principles** | [🧱 SOLID Principles](#-solid-principles) |
-| 🏗️ **Creational** | [🏠 Simple Factory](#-simple-factory)<br>[🏭 Factory Method](#-factory-method)<br>[🔨 Abstract Factory](#-abstract-factory)<br>[👷 Builder](#-builder)<br>[🐑 Prototype](#-prototype)<br>[💍 Singleton](#-singleton) |
-| 🧩 **Structural** | [🔌 Adapter](#-adapter)<br>[🌉 Bridge](#-bridge)<br>[🌿 Composite](#-composite)<br>[☕ Decorator](#-decorator)<br>[📦 Facade](#-facade)<br>[🍃 Flyweight](#-flyweight)<br>[🎱 Proxy](#-proxy) |
-| 🎭 **Behavioral** | [🔗 Chain of Responsibility](#-chain-of-responsibility)<br>[👮 Command](#-command)<br>[➿ Iterator](#-iterator)<br>[👽 Mediator](#-mediator)<br>[💾 Memento](#-memento)<br>[😎 Observer](#-observer)<br>[🏃 Visitor](#-visitor)<br>[💡 Strategy](#-strategy)<br>[💢 State](#-state)<br>[📒 Template Method](#-template-method) |
+| 🧱 **اصول SOLID** | [🧱 اصول SOLID (SOLID Principles)](#اصول-solid-solid-principles-)<br>[تک‌وظیفگی (SRP)](#۱-اصل-تک‌وظیفگی-single-responsibility-principle---srp-)<br>[باز/بسته (OCP)](#۲-اصل-بازبسته-openclosed-principle---ocp-)<br>[جایگزینی لیسکوف (LSP)](#۳-اصل-جایگزینی-لیسکوف-liskov-substitution-principle---lsp-)<br>[جداسازی اینترفیس (ISP)](#۴-اصل-جداسازی-اینترفیس-interface-segregation-principle---isp-)<br>[وارونگی وابستگی (DIP)](#۵-اصل-وارونگی-وابستگی-dependency-inversion-principle---dip-) |
+| 🏗️ **سازنده (Creational)** | [🏠 کارخانه ساده (Simple Factory)](#کارخانه-ساده-simple-factory-)<br>[🏭 متد کارخانه (Factory Method)](#متد-کارخانه-factory-method-)<br>[🔨 کارخانه انتزاعی (Abstract Factory)](#کارخانه-انتزاعی-abstract-factory-)<br>[👷 سازنده (Builder)](#سازنده-builder-)<br>[🐑 نمونه اولیه (Prototype)](#نمونه-اولیه-prototype-)<br>[💍 تک‌نمونه (Singleton)](#تک‌نمونه-singleton-) |
+| 🧩 **ساختاری (Structural)** | [🔌 مبدل (Adapter)](#مبدل-adapter-)<br>[🌉 پل (Bridge)](#پل-bridge-)<br>[🌿 مرکب (Composite)](#مرکب-composite-)<br>[☕ تزئین‌گر (Decorator)](#تزئین‌گر-decorator-)<br>[📦 نما (Facade)](#نما-facade-)<br>[🍃 وزن‌سبک (Flyweight)](#وزن‌سبک-flyweight-)<br>[🎱 پراکسی (Proxy)](#پراکسی-proxy-) |
+| 🎭 **رفتاری (Behavioral)** | [🔗 زنجیره مسئولیت (Chain of Responsibility)](#زنجیره-مسئولیت-chain-of-responsibility-)<br>[👮 فرمان (Command)](#فرمان-command-)<br>[➿ پیمایش‌گر (Iterator)](#پیمایش‌گر-iterator-)<br>[👽 میانجی (Mediator)](#میانجی-mediator-)<br>[💾 یادبود (Memento)](#یادبود-memento-)<br>[😎 ناظر (Observer)](#ناظر-observer-)<br>[🏃 بازدیدکننده (Visitor)](#بازدیدکننده-visitor-)<br>[💡 استراتژی (Strategy)](#استراتژی-strategy-)<br>[💢 حالت (State)](#حالت-state-)<br>[📒 متد قالب (Template Method)](#متد-قالب-template-method-) |
 
 </details>
 
@@ -52,7 +52,7 @@
 
 <div dir="rtl" align="center">
 
-# 🚀 مقدمه
+# مقدمه 🚀
 
 </div>
 
@@ -81,7 +81,7 @@
 <br>
 <div dir="rtl" align="right">
 
-## ⚠ هشدار
+## هشدار ⚠
 
 </div>
 
@@ -97,7 +97,7 @@
 
 <div align="center">
 
-## 🧱 اصول SOLID (SOLID Principles)
+## اصول SOLID (SOLID Principles) 🧱
 
 </div>
 
@@ -202,7 +202,7 @@
 
 <div align="center">
 
-# 🧱 الگوهای سازنده (Creational Design Patterns)
+# الگوهای سازنده (Creational Design Patterns) 🧱
 
 </div>
 
@@ -225,7 +225,7 @@
 
 <div align="center">
 
-## 🏠 Simple Factory
+## کارخانه ساده (Simple Factory) 🏠
 
 </div>
 
@@ -663,7 +663,7 @@ int main() {
 
 <div align="center">
 
-## 🏭 Factory Method
+## متد کارخانه (Factory Method) 🏭
 
 </div>
 
@@ -1215,7 +1215,7 @@ int main() {
 
 <div align="center">
 
-## 🔨 Abstract Factory
+## کارخانه انتزاعی (Abstract Factory) 🔨
 
 </div>
 
@@ -2034,7 +2034,7 @@ int main() {
 
 <div align="center">
 
-## 👷 Builder
+## سازنده (Builder) 👷
 
 </div>
 
@@ -2804,7 +2804,7 @@ int main() {
 
 <div align="center">
 
-## 🐑 Prototype
+## نمونه اولیه (Prototype) 🐑
 
 </div>
 
@@ -3421,7 +3421,7 @@ int main() {
 
 <div align="center">
 
-## 💍 Singleton
+## تک‌نمونه (Singleton) 💍
 
 </div>
 
@@ -3785,7 +3785,7 @@ int main() {
 
 <div align="center">
 
-# 🧰 الگوهای ساختاری (Structural Design Patterns)
+# الگوهای ساختاری (Structural Design Patterns) 🧰
 
 </div>
 
@@ -3808,7 +3808,7 @@ int main() {
 
 <div align="center">
 
-## 🔌 Adapter
+## مبدل (Adapter) 🔌
 
 </div>
 
@@ -4352,7 +4352,7 @@ int main() {
 
 <div align="center">
 
-## 🌉 Bridge
+## پل (Bridge) 🌉
 
 </div>
 
@@ -4985,7 +4985,7 @@ int main() {
 
 <div align="center">
 
-## 🌿 Composite
+## مرکب (Composite) 🌿
 
 </div>
 
@@ -5696,7 +5696,7 @@ int main() {
 
 <div align="center">
 
-## ☕ Decorator
+## تزئین‌گر (Decorator) ☕
 
 </div>
 
@@ -6523,7 +6523,7 @@ int main() {
 
 <div align="center">
 
-## 📦 Facade
+## نما (Facade) 📦
 
 </div>
 
@@ -7167,7 +7167,7 @@ int main() {
 
 <div align="center">
 
-## 🍃 Flyweight
+## وزن‌سبک (Flyweight) 🍃
 
 </div>
 
@@ -7714,7 +7714,7 @@ int main() {
 
 <div align="center">
 
-## 🎱 Proxy
+## پراکسی (Proxy) 🎱
 
 </div>
 
@@ -8246,7 +8246,7 @@ int main() {
 
 <div align="center">
 
-# 🎭 الگو‌های رفتاری (Behavioral Design Patterns)
+# الگوهای رفتاری (Behavioral Design Patterns) 🎭
 
 </div>
 
@@ -8269,7 +8269,7 @@ int main() {
 
 <div align="center">
 
-## 🔗 Chain of Responsibility
+## زنجیره مسئولیت (Chain of Responsibility) 🔗
 
 </div>
 
@@ -8968,7 +8968,7 @@ int main() {
 
 <div align="center">
 
-## 👮 Command
+## فرمان (Command) 👮
 
 </div>
 
@@ -9675,7 +9675,7 @@ int main() {
 
 <div align="center">
 
-## ➿ Iterator
+## پیمایش‌گر (Iterator) ➿
 
 </div>
 
@@ -10343,7 +10343,7 @@ int main() {
 
 <div align="center">
 
-## 👽 Mediator
+## میانجی (Mediator) 👽
 
 </div>
 
@@ -10836,7 +10836,7 @@ int main() {
 
 <div align="center">
 
-## 💾 Memento
+## یادبود (Memento) 💾
 
 </div>
 
@@ -11404,7 +11404,7 @@ int main() {
 
 <div align="center">
 
-## 😎 Observer
+## ناظر (Observer) 😎
 
 </div>
 
@@ -12081,7 +12081,7 @@ int main() {
 
 <div align="center">
 
-## 🏃 Visitor
+## بازدیدکننده (Visitor) 🏃
 
 </div>
 
@@ -12975,7 +12975,7 @@ int main() {
 
 <div align="center">
 
-## 💡 Strategy
+## استراتژی (Strategy) 💡
 
 </div>
 
@@ -13446,7 +13446,7 @@ int main() {
 
 <div align="center">
 
-## 💢 State
+## حالت (State) 💢
 
 </div>
 
@@ -14073,7 +14073,7 @@ int main() {
 
 <div align="center">
 
-## 📒 Template Method
+## متد قالب (Template Method) 📒
 
 </div>
 
@@ -14832,7 +14832,7 @@ int main() {
 
 <div align="center">
 
-# 🤝 کمک کردن به این پروژه!
+# کمک کردن به این پروژه! 🤝
 
 </div>
 
