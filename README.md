@@ -4816,7 +4816,7 @@ public:
 class AquaTheme : public Theme {
 public:
     std::string getColor() override {
-        return "Light Blue";
+        return "Light blue";
     }
 };
 
