@@ -359,7 +359,7 @@ console.log(door.getWidth());
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Door {
     getWidth() {
     }
@@ -405,7 +405,7 @@ console.log(door.getWidth());
 
 <div dir="ltr">
 
-```C#
+```csharp
 public interface IDoor
 {
     int GetHeight();
@@ -458,7 +458,7 @@ Console.WriteLine($"Width of Door : {door.GetWidth()}");
 
 <div dir="ltr">
 
-```PHP
+```php
 interface DoorInterface {
     public function getHeight();
     public function getWidth();
@@ -819,7 +819,7 @@ marketingManager.takeInterview();
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Developer {
     askQuestions() {
         console.log("Asking about design patterns");
@@ -868,7 +868,7 @@ marketingManager.takeInterview();
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 interface IInterviewer
 {
@@ -938,7 +938,7 @@ marketingManager.TakeInterview();//Output : Asking about community building!
 
 <div dir="ltr">
 
-```PHP
+```php
 interface InterviewerInterface
 {
     public function askQuestions();
@@ -1449,7 +1449,7 @@ expert.getDescription();
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class WoodenDoor {
     getDescription() {
         console.log("I am a wooden door");
@@ -1531,7 +1531,7 @@ expert.getDescription();
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 interface IDoor {
 
@@ -1641,7 +1641,7 @@ ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
 
 <div dir="ltr">
 
-```PHP
+```php
 
 interface DoorInterface {
   public function getDescription();
@@ -2091,7 +2091,7 @@ constructor(size: any, cheese: boolean = true, pepperoni:boolean = true, tomato:
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 constructor(size, cheese = true, pepperoni = true, tomato = false, lettuce = true) {}
 ```
 
@@ -2104,7 +2104,7 @@ constructor(size, cheese = true, pepperoni = true, tomato = false, lettuce = tru
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
 
@@ -2119,7 +2119,7 @@ public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
 
 <div dir="ltr">
 
-```PHP
+```php
 
 public function __construct(int $size, bool $cheese, bool $pepperoni, bool $lettuce, bool $tomato)
 
@@ -2321,7 +2321,7 @@ console.log(Object.keys(burger));
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Burger {
     constructor(builder) {
         this.size = builder.size;
@@ -2386,7 +2386,7 @@ console.log(Object.keys(burger));
 
 <div dir="ltr">
 
-```C#
+```csharp
 class Burger
 {
   private int mSize;
@@ -2474,7 +2474,7 @@ Console.WriteLine(burger.GetDescription());
 
 <div dir="ltr">
 
-```PHP
+```php
 class Burger {
     private $size;
     private $cheese = false;
@@ -2947,7 +2947,7 @@ console.log(copyComponent2.someCircularRef);     // { x: 1 }
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class SomeComponent {
     constructor(someInt, someListOfObjects, someCircularRef) {
         this.someInt = someInt;
@@ -3011,7 +3011,7 @@ console.log(copyComponent2.someCircularRef);     // { x: 1 }
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 public class SomeComponent
 {
@@ -3065,7 +3065,7 @@ Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 public abstract class Person
 {
@@ -3135,7 +3135,7 @@ var employeeClone = (Employee)employee.Clone(true);
 
 <div dir="ltr">
 
-```PHP
+```php
 
 class SomeComponent
 {
@@ -3539,7 +3539,7 @@ if (Object.is(s1, s2)) {
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class SingletonMeta extends Function {
     static _instances = {};
 
@@ -3588,7 +3588,7 @@ s1.someBusinessLogic();
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 public class President
 {
@@ -3627,7 +3627,7 @@ Console.WriteLine(a == b); //Output : true
 
 <div dir="ltr">
 
-```PHP
+```php
 
 class President
 {
@@ -3966,7 +3966,7 @@ hunter.hunt(wildDogAdapter);
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Lion {
     roar() {
         console.log("Lion roars!");
@@ -4024,7 +4024,7 @@ hunter.hunt(wildDogAdapter);
 
 <div dir="ltr">
 
-```C#
+```csharp
 interface ILion
 {
   void Roar();
@@ -4095,7 +4095,7 @@ hunter.Hunt(wildDogAdapter);
 
 <div dir="ltr">
 
-```PHP
+```php
 
 interface Lion {
     public function roar();
@@ -4532,7 +4532,7 @@ console.log(careers.getContent());
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class WebPage {
     constructor(theme) {
         this._theme = theme;
@@ -4598,7 +4598,7 @@ console.log(careers.getContent());
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 interface IWebPage
 {
@@ -4686,7 +4686,7 @@ Console.WriteLine(careers.GetContent()); // Output: Careers page in Off White
 <summary>PHP</summary>
 <div dir="ltr">
 
-```PHP
+```php
 interface WebPageInterface {
   public function getContent();
 }
@@ -5163,7 +5163,7 @@ console.log(`RESULT: ${tree.operation()}`);
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Leaf {
     operation() {
         return "Leaf";
@@ -5221,7 +5221,7 @@ console.log(`RESULT: ${tree.operation()}`);
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 interface IEmployee
 {
@@ -5335,7 +5335,7 @@ Console.WriteLine($"Net Salary of Employees in Organization is {organization.Get
 
 <div dir="ltr">
 
-```PHP
+```php
 interface EmployeeInterface {
   function getSalary(): float;
   function getRole(): string;
@@ -5926,7 +5926,7 @@ console.log(someCoffee.getDescription());
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Coffee {
     getCost() {
         throw new Error("getCost() must be implemented by subclasses");
@@ -6018,7 +6018,7 @@ console.log(someCoffee.getDescription());
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 interface ICoffee
 {
@@ -6126,7 +6126,7 @@ Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip,
 
 <div dir="ltr">
 
-```PHP
+```php
 interface CoffeeInterface {
   public function getCost();
   public function getDescription();
@@ -6708,7 +6708,7 @@ computer.turnOff();
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Computer {
     getElectricShock() {
         console.log("Ouch!");
@@ -6776,7 +6776,7 @@ computer.turnOff();
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 class Computer
 {
@@ -6861,7 +6861,7 @@ Console.ReadLine();
 
 <div dir="ltr">
 
-```PHP
+```php
 class Computer
 {
   public function getElectricShock()
@@ -7318,7 +7318,7 @@ shop.serve();
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class GreenTea {
 }
 
@@ -7377,7 +7377,7 @@ shop.serve();
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 // Anything that will be cached is flyweight.
 // Types of tea here will be flyweights.
@@ -7449,7 +7449,7 @@ teaShop.Serve();
 
 <div dir="ltr">
 
-```PHP
+```php
 // Anything that will be cached is flyweight.
 // Types of tea here will be flyweights.
 class KarakTea
@@ -7865,7 +7865,7 @@ door.close(); // Closing Lab Door
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class LabDoor {
     open() {
         console.log("Opening lab door");
@@ -7914,7 +7914,7 @@ door.close();
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 interface IDoor
 {
@@ -7986,7 +7986,7 @@ door.Close(); // Closing lab door
 
 <div dir="ltr">
 
-```PHP
+```php
 interface DoorInterface {
   public function open();
   public function close();
@@ -8490,7 +8490,7 @@ Bitcoin!
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Account {
     constructor() {
         this._successor = null;
@@ -8558,7 +8558,7 @@ bank.pay(259);
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 abstract class Account
 {
@@ -8650,7 +8650,7 @@ bank.Pay(259);
 
 <div dir="ltr">
 
-```PHP
+```php
 abstract class Account
 {
     private $successor;
@@ -9128,7 +9128,7 @@ remote.submit(turnOff); // Darkness!
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Bulb {
     turnOn() {
         console.log("Bulb has been lit");
@@ -9186,7 +9186,7 @@ remote.submit(turnOff);
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 // Receiver
 class Bulb
@@ -9297,7 +9297,7 @@ class RemoteControl
 
 <div dir="ltr">
 
-```PHP
+```php
 // Receiver
 class Bulb
 {
@@ -9862,7 +9862,7 @@ for (const item of collection.getReverseIterator()) {
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class AlphabeticalOrderIterator {
     constructor(collection, reverse = false) {
         this.collection = collection;
@@ -9927,7 +9927,7 @@ while (!result.done) {
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 class RadioStation
 {
@@ -10019,7 +10019,7 @@ Console.ReadLine();
 
 <div dir="ltr">
 
-```PHP
+```php
 class RadioStation
 {
     private $mFrequency;
@@ -10495,7 +10495,7 @@ jane.send("Hey!");
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class ChatRoomMediator {
     showMessage(user, message) {
 
@@ -10544,7 +10544,7 @@ jane.send("Hey!");
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 interface IChatRoomMediator
 {
@@ -10607,7 +10607,7 @@ jane.Send("Hey!");
 
 <div dir="ltr">
 
-```PHP
+```php
 interface ChatRoomMediator
 {
     public function showMessage(User $user, string $message): void;
@@ -10988,7 +10988,7 @@ console.log(editor.getContent()); // This is the first sentence. This is second.
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class EditorMemento {
     constructor(content) {
         this.content = content;
@@ -11043,7 +11043,7 @@ console.log(editor.getContent());
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 class EditorMemento
 {
@@ -11132,7 +11132,7 @@ Console.Write(editor.Content); // This is the first sentence. This is second
 
 <div dir="ltr">
 
-```PHP
+```php
 class EditorMemento
 {
   private $mContent;
@@ -11568,7 +11568,7 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class JobPost {
     constructor(title) {
         this.title = title;
@@ -11628,7 +11628,7 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 class JobPost
 {
@@ -11753,7 +11753,7 @@ Console.ReadLine();
 
 <div dir="ltr">
 
-```PHP
+```php
 class JobPost
 {
     public function __construct(private string $title)
@@ -12332,7 +12332,7 @@ dolphin.accept(jump); // Walked on water a little and disappeared
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Monkey {
     shout() {
         console.log("Ooh oo aa aa!");
@@ -12416,7 +12416,7 @@ dolphin.accept(jump);
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 // Visitee
 interface IAnimal
@@ -12549,7 +12549,7 @@ dolphin.Accept(jump);   // Walked on water a little and disappeared
 
 <div dir="ltr">
 
-```PHP
+```php
 // Visitee
 interface AnimalInterface
 {
@@ -13111,7 +13111,7 @@ sorter2.sort(dataset);
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class BubbleSortStrategy {
     sort(dataset) {
         console.log("Sorting using bubble sort");
@@ -13153,7 +13153,7 @@ sorter2.sort(dataset);
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 interface ISortStrategy
 {
@@ -13214,7 +13214,7 @@ sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
 
 <div dir="ltr">
 
-```PHP
+```php
 interface SortStrategyInterface {
   public function sort($dataset);
 }
@@ -13623,7 +13623,7 @@ editor.type("Fifth Line"); // fifth line
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class UpperCase {
     write(words) {
         console.log(words.toUpperCase());
@@ -13677,7 +13677,7 @@ editor.type("Fifth Line")
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 interface IWritingState {
 
@@ -13766,7 +13766,7 @@ editor.Type("Fifthe Line");
 
 <div dir="ltr">
 
-```PHP
+```php
 interface WritingStateInterface {
   public function write(string $words);
 }
@@ -14282,7 +14282,7 @@ iosBuilder.build();
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Builder {
     build() {
         this.test();
@@ -14362,7 +14362,7 @@ iosBuilder.build();
 
 <div dir="ltr">
 
-```C#
+```csharp
 
 abstract class Builder
 {
@@ -14462,7 +14462,7 @@ iosBuilder.Build();
 
 <div dir="ltr">
 
-```PHP
+```php
 abstract class Builder {
   // Template method
   public function Build() {
