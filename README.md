@@ -10567,6 +10567,8 @@ int main() {
 
 </div>
 
+یعنی این الگو به یک شیء این امکان رو می‌ده که بدون اینکه جزئیات درونیش لو بره، یک snapshot از حالتش بگیره و بعداً بهش برگرده؛ همون کاری که موقع undo اتفاق می‌افته.
+
 **مثال برنامه‌نویسی**
 
 می‌خوایم یک ادیتور متن بسازیم و قابلیت ذخیره کردن و بازگردانی بهش اضافه کنیم!
@@ -10575,59 +10577,71 @@ int main() {
 
 در ادامه یک کلاس ادیتور می‌سازیم که قابلیت تایپ کردن، خالی کردن، سیو و برگشت حافظه داره!
 
+یک نقش سوم هم داریم به اسم نگهبان (Caretaker)؛ این همون چیزیه که snapshot ها رو نگه می‌داره و ترتیبشون رو می‌سپره، ولی هیچ‌وقت داخلشون رو دستکاری نمی‌کنه. به‌خاطر همینه که حالت داخلی ادیتور همچنان پیش خودش محرمانه می‌مونه. ما اینجا نگهبان رو یک کلاس `History` می‌سازیم که یک stack از memento ها رو نگه می‌داره.
+
 <details>
 <summary>Python</summary>
 
 <div dir="ltr">
 
 ```python
-class EditorMemento:
-    _content = None
+# Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
+class Editor:
+    def __init__(self):
+        self._content = ""
 
-    def __init__(self, content):
+    def type(self, content):
         self._content = content
 
-    def getContent(self):
-        return self._content
-
-
-class Editor:
-    _content = ''
-
-    def type(self, words):
-        self._content = self._content + ' ' + words
-
-    def getContent(self):
+    def get_content(self):
         return self._content
 
     def save(self):
         return EditorMemento(self._content)
 
     def restore(self, memento):
-        self._content = memento.getContent()
+        self._content = memento.get_content()
+
+
+# Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
+class EditorMemento:
+    def __init__(self, content):
+        self._content = content
+
+    def get_content(self):
+        return self._content
+
+
+# Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History:
+    def __init__(self):
+        self._mementos = []
+
+    def push(self, memento):
+        self._mementos.append(memento)
+
+    def pop(self):
+        return self._mementos.pop()
 
 
 # ----------------------------
 
 editor = Editor()
-editor.type('This is the first sentence')
-editor.type('This is the second.')
+history = History()
 
-saved = editor.save()
-editor.type('And this is the third')
+editor.type("a")
+history.push(editor.save())
 
-print(editor.getContent())
+editor.type("ab")
+history.push(editor.save())
 
-editor.restore(saved)
-print(editor.getContent())
+editor.type("abc")
 
-'''
-Output will be
-==============
- This is the first sentence This is the second. And this is the third
- This is the first sentence This is the second.
-'''
+editor.restore(history.pop())
+print(editor.get_content())  # ab
 
+editor.restore(history.pop())
+print(editor.get_content())  # a
 ```
 
 </div>
@@ -10639,8 +10653,9 @@ Output will be
 <div dir="ltr">
 
 ```typescript
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento {
-    private content: string | null = null;
+    private content: string;
 
     constructor(content: string) {
         this.content = content;
@@ -10651,11 +10666,12 @@ class EditorMemento {
     }
 }
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor {
     private content = "";
 
-    type(words: string): void {
-        this.content = this.content + " " + words;
+    type(content: string): void {
+        this.content = content;
     }
 
     getContent(): string {
@@ -10671,19 +10687,37 @@ class Editor {
     }
 }
 
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History {
+    private mementos: EditorMemento[] = [];
+
+    push(memento: EditorMemento): void {
+        this.mementos.push(memento);
+    }
+
+    pop(): EditorMemento {
+        return this.mementos.pop()!;
+    }
+}
+
 // ----------------------------
 
 const editor = new Editor();
-editor.type("This is the first sentence");
-editor.type("This is the second.");
+const history = new History();
 
-const saved = editor.save();
-editor.type("And this is the third");
+editor.type("a");
+history.push(editor.save());
 
-console.log(editor.getContent()); // This is the first sentence. This is second. And this is third.
+editor.type("ab");
+history.push(editor.save());
 
-editor.restore(saved);
-console.log(editor.getContent()); // This is the first sentence. This is second.
+editor.type("abc");
+
+editor.restore(history.pop());
+console.log(editor.getContent()); // ab
+
+editor.restore(history.pop());
+console.log(editor.getContent()); // a
 ```
 
 </div>
@@ -10694,6 +10728,7 @@ console.log(editor.getContent()); // This is the first sentence. This is second.
 <div dir="ltr">
 
 ```javascript
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento {
     constructor(content) {
         this.content = content;
@@ -10704,13 +10739,14 @@ class EditorMemento {
     }
 }
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor {
     constructor() {
         this.content = "";
     }
 
-    type(words) {
-        this.content = this.content + " " + words;
+    type(content) {
+        this.content = content;
     }
 
     getContent() {
@@ -10726,18 +10762,39 @@ class Editor {
     }
 }
 
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History {
+    constructor() {
+        this.mementos = [];
+    }
+
+    push(memento) {
+        this.mementos.push(memento);
+    }
+
+    pop() {
+        return this.mementos.pop();
+    }
+}
+
+// ----------------------------
 
 const editor = new Editor();
-editor.type("This is the first sentence");
-editor.type("This is the second.");
+const history = new History();
 
-const saved = editor.save();
-editor.type("And this is the third");
+editor.type("a");
+history.push(editor.save());
 
-console.log(editor.getContent());
+editor.type("ab");
+history.push(editor.save());
 
-editor.restore(saved);
-console.log(editor.getContent());
+editor.type("abc");
+
+editor.restore(history.pop());
+console.log(editor.getContent()); // ab
+
+editor.restore(history.pop());
+console.log(editor.getContent()); // a
 ```
 
 </div>
@@ -10749,83 +10806,85 @@ console.log(editor.getContent());
 <div dir="ltr">
 
 ```csharp
+using System;
+using System.Collections.Generic;
 
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento
 {
-  private string mContent;
+    private readonly string mContent;
 
-  public EditorMemento(string content)
-  {
-    mContent = content;
-  }
-
-  public string Content
-  {
-    get
+    public EditorMemento(string content)
     {
-      return mContent;
+        mContent = content;
     }
-  }
+
+    public string Content
+    {
+        get { return mContent; }
+    }
 }
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
+class Editor
+{
+    private string mContent = string.Empty;
 
-class Editor {
-
-  private string mContent = string.Empty;
-  private EditorMemento memento;
-
-  public Editor()
-  {
-    memento = new EditorMemento(string.Empty);
-  }
-
-  public void Type(string words)
-  {
-    mContent = String.Concat(mContent," ", words);
-  }
-
-  public string Content
-  {
-    get
+    public void Type(string words)
     {
-      return mContent;
+        mContent = words;
     }
-  }
 
-  public void Save()
-  {
-    memento = new EditorMemento(mContent);
-  }
+    public string Content
+    {
+        get { return mContent; }
+    }
 
-  public void Restore()
-  {
-    mContent = memento.Content;
-  }
+    public EditorMemento Save()
+    {
+        return new EditorMemento(mContent);
+    }
+
+    public void Restore(EditorMemento memento)
+    {
+        mContent = memento.Content;
+    }
+}
+
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History
+{
+    private readonly Stack<EditorMemento> mementos = new Stack<EditorMemento>();
+
+    public void Push(EditorMemento memento)
+    {
+        mementos.Push(memento);
+    }
+
+    public EditorMemento Pop()
+    {
+        return mementos.Pop();
+    }
 }
 
 // ----------------------------
 
 var editor = new Editor();
+var history = new History();
 
-//Type some stuff
-editor.Type("This is the first sentence.");
-editor.Type("This is second.");
+editor.Type("a");
+history.Push(editor.Save());
 
-// Save the state to restore to : This is the first sentence. This is second.
-editor.Save();
+editor.Type("ab");
+history.Push(editor.Save());
 
-//Type some more
-editor.Type("This is third.");
+editor.Type("abc");
 
-//Output the content
-Console.WriteLine(editor.Content); // This is the first sentence. This is second. This is third.
+editor.Restore(history.Pop());
+Console.WriteLine(editor.Content); // ab
 
-//Restoring to last saved state
-editor.Restore();
-
-Console.Write(editor.Content); // This is the first sentence. This is second
-
-
+editor.Restore(history.Pop());
+Console.WriteLine(editor.Content); // a
 ```
 
 </div>
@@ -10838,71 +10897,83 @@ Console.Write(editor.Content); // This is the first sentence. This is second
 <div dir="ltr">
 
 ```php
+<?php
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento
 {
-  private $mContent;
+    private $content;
 
-  public function __construct($content)
-  {
-    $this->mContent = $content;
-  }
+    public function __construct($content)
+    {
+        $this->content = $content;
+    }
 
-  public function getContent()
-  {
-    return $this->mContent;
-  }
+    public function getContent()
+    {
+        return $this->content;
+    }
 }
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor
 {
-  private $mContent = '';
-  private $memento;
+    private $content = '';
 
-  public function __construct()
-  {
-    $this->memento = new EditorMemento('');
-  }
+    public function type($words)
+    {
+        $this->content = $words;
+    }
 
-  public function type($words)
-  {
-    $this->mContent .= ' ' . $words;
-  }
+    public function getContent()
+    {
+        return $this->content;
+    }
 
-  public function getContent()
-  {
-    return $this->mContent;
-  }
+    public function save()
+    {
+        return new EditorMemento($this->content);
+    }
 
-  public function save()
-  {
-    $this->memento = new EditorMemento($this->mContent);
-  }
-
-  public function restore()
-  {
-    $this->mContent = $this->memento->getContent();
-  }
+    public function restore($memento)
+    {
+        $this->content = $memento->getContent();
+    }
 }
 
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History
+{
+    private $mementos = [];
+
+    public function push($memento)
+    {
+        $this->mementos[] = $memento;
+    }
+
+    public function pop()
+    {
+        return array_pop($this->mementos);
+    }
+}
+
+// ----------------------------
+
 $editor = new Editor();
+$history = new History();
 
-//Type some stuff
-$editor->type("This is the first sentence.");
-$editor->type("This is second.");
+$editor->type("a");
+$history->push($editor->save());
 
-// Save the state to restore to : This is the first sentence. This is second.
-$editor->save();
+$editor->type("ab");
+$history->push($editor->save());
 
-//Type some more
-$editor->type("This is third.");
+$editor->type("abc");
 
-//Output the content
-echo $editor->getContent(); // This is the first sentence. This is second. This is third.
+$editor->restore($history->pop());
+echo $editor->getContent() . "\n"; // ab
 
-//Restoring to last saved state
-$editor->restore();
-
-echo $editor->getContent(); // This is the first sentence. This is second
+$editor->restore($history->pop());
+echo $editor->getContent() . "\n"; // a
 ```
 
 </div>
@@ -10915,8 +10986,12 @@ echo $editor->getContent(); // This is the first sentence. This is second
 <div dir="ltr">
 
 ```java
+import java.util.Deque;
+import java.util.ArrayDeque;
+
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento {
-    private String content;
+    private final String content;
 
     public EditorMemento(String content) {
         this.content = content;
@@ -10927,47 +11002,60 @@ class EditorMemento {
     }
 }
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor {
     private String content = "";
-    private EditorMemento memento;
-
-    public Editor() {
-        this.memento = new EditorMemento("");
-    }
 
     public void type(String words) {
-        if(!this.content.isEmpty())
-            this.content += " ";
-        this.content += words;
+        this.content = words;
     }
 
     public String getContent() {
         return this.content;
     }
 
-    public void save() {
-        memento = new EditorMemento(content);
+    public EditorMemento save() {
+        return new EditorMemento(this.content);
     }
 
-    public void restore() {
-        content = memento.getContent();
+    public void restore(EditorMemento memento) {
+        this.content = memento.getContent();
     }
 }
 
-// ----------------------------
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History {
+    private final Deque<EditorMemento> mementos = new ArrayDeque<>();
 
-editor.type("This is the first sentence.");
-editor.type("This is second.");
-// Save the state
-editor.save();
-// Type more
-editor.type("This is third.");
-// Print all contents
-System.out.println(editor.getContent()); // This is the first sentence. This is second. This is third.
-// Restoring to last saved state
-editor.restore();
-// Print content
-System.out.println(editor.getContent()); // This is the first sentence. This is second.
+    public void push(EditorMemento memento) {
+        mementos.push(memento);
+    }
+
+    public EditorMemento pop() {
+        return mementos.pop();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Editor editor = new Editor();
+        History history = new History();
+
+        editor.type("a");
+        history.push(editor.save());
+
+        editor.type("ab");
+        history.push(editor.save());
+
+        editor.type("abc");
+
+        editor.restore(history.pop());
+        System.out.println(editor.getContent()); // ab
+
+        editor.restore(history.pop());
+        System.out.println(editor.getContent()); // a
+    }
+}
 ```
 
 </div>
@@ -10980,11 +11068,11 @@ System.out.println(editor.getContent()); // This is the first sentence. This is 
 <div dir="ltr">
 
 ```go
-
 package main
 
 import "fmt"
 
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 type EditorMemento struct {
 	content string
 }
@@ -10993,16 +11081,17 @@ func NewEditorMemento(content string) *EditorMemento {
 	return &EditorMemento{content: content}
 }
 
-func (e *EditorMemento) GetContent() string {
-	return e.content
+func (m *EditorMemento) GetContent() string {
+	return m.content
 }
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 type Editor struct {
 	content string
 }
 
-func (e *Editor) Type(words string) {
-	e.content = e.content + " " + words
+func (e *Editor) Type(content string) {
+	e.content = content
 }
 
 func (e *Editor) GetContent() string {
@@ -11017,21 +11106,42 @@ func (e *Editor) Restore(memento *EditorMemento) {
 	e.content = memento.GetContent()
 }
 
-func main() {
-	editor := &Editor{}
-	editor.Type("This is the first sentence")
-	editor.Type("This is the second.")
-
-	saved := editor.Save()
-	editor.Type("And this is the third")
-
-	fmt.Println(editor.GetContent())
-
-	editor.Restore(saved)
-	fmt.Println(editor.GetContent())
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+type History struct {
+	mementos []*EditorMemento
 }
 
+func (h *History) Push(memento *EditorMemento) {
+	h.mementos = append(h.mementos, memento)
+}
 
+func (h *History) Pop() *EditorMemento {
+	last := len(h.mementos) - 1
+	memento := h.mementos[last]
+	h.mementos = h.mementos[:last]
+	return memento
+}
+
+// ----------------------------
+
+func main() {
+	editor := &Editor{}
+	history := &History{}
+
+	editor.Type("a")
+	history.Push(editor.Save())
+
+	editor.Type("ab")
+	history.Push(editor.Save())
+
+	editor.Type("abc")
+
+	editor.Restore(history.Pop())
+	fmt.Println(editor.GetContent()) // ab
+
+	editor.Restore(history.Pop())
+	fmt.Println(editor.GetContent()) // a
+}
 ```
 
 </div>
@@ -11046,7 +11156,9 @@ func main() {
 ```cpp
 #include <iostream>
 #include <string>
+#include <vector>
 
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento {
 private:
     std::string content;
@@ -11059,20 +11171,21 @@ public:
     }
 };
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor {
 private:
     std::string content;
 
 public:
     void type(const std::string& words) {
-        content = content + " " + words;
+        content = words;
     }
 
     std::string getContent() const {
         return content;
     }
 
-    EditorMemento save() {
+    EditorMemento save() const {
         return EditorMemento(content);
     }
 
@@ -11081,20 +11194,42 @@ public:
     }
 };
 
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History {
+private:
+    std::vector<EditorMemento> mementos;
+
+public:
+    void push(const EditorMemento& memento) {
+        mementos.push_back(memento);
+    }
+
+    EditorMemento pop() {
+        EditorMemento memento = mementos.back();
+        mementos.pop_back();
+        return memento;
+    }
+};
+
 // ----------------------------
 
 int main() {
     Editor editor;
-    editor.type("This is the first sentence");
-    editor.type("This is the second.");
+    History history;
 
-    EditorMemento saved = editor.save();
-    editor.type("And this is the third");
+    editor.type("a");
+    history.push(editor.save());
 
-    std::cout << editor.getContent() << std::endl;
+    editor.type("ab");
+    history.push(editor.save());
 
-    editor.restore(saved);
-    std::cout << editor.getContent() << std::endl;
+    editor.type("abc");
+
+    editor.restore(history.pop());
+    std::cout << editor.getContent() << std::endl; // ab
+
+    editor.restore(history.pop());
+    std::cout << editor.getContent() << std::endl; // a
     return 0;
 }
 ```
@@ -11102,6 +11237,12 @@ int main() {
 </div>
 
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی می‌خوای حالت یک شیء رو ذخیره کنی و بعداً بهش برگردی، بدون اینکه کپسوله‌بودنش رو بشکنی»؛ ❌ «وقتی حالت سنگینه یا snapshot ها زیاد می‌شن و حافظه‌ت رو می‌خورن».
+> 🪤 **دام رایج:** «نگه‌داشتن بی‌حساب‌وکتاب همه‌ی snapshot ها؛ یک سقف یا سیاست پاک‌سازی براش بذار».
+
+
 
 <br>
 
