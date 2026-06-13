@@ -7676,6 +7676,10 @@ int main() {
 
 </div>
 
+خلاصه‌اش این می‌شه که پراکسی یه کلاسه که نقش رابط رو برای یه شیء دیگه بازی می‌کنه.
+کلاینت به جای اینکه مستقیم سراغ شیء اصلی بره، با همین پراکسی حرف می‌زنه و اون پشت‌صحنه درخواست رو به شیء واقعی می‌رسونه.
+پراکسی می‌تونه فقط درخواست رو پاس بده، یا قبلش یه کار اضافه هم انجام بده؛ مثل کش کردن وقتی کار روی شیء اصلی سنگینه، یا چک کردن شرط‌ها قبل از اینکه به شیء اصلی دست بزنیم.
+
 **مثال برنامه‌نویسی**
 
 خب بیاید مثال درب رو پیاده‌سازی کنیم.
@@ -7690,35 +7694,33 @@ int main() {
 
 ```python
 class Door:
-    def open(self):
-        pass
+    def open(self, password):
+        raise NotImplementedError
 
     def close(self):
-        pass
+        raise NotImplementedError
 
 
 class LabDoor(Door):
-    def open(self):
+    def open(self, password):
         print("Opening lab door")
 
     def close(self):
-        print("Closing the lab door")
+        print("Closing lab door")
 
 
-class SecuredDoor():
-    _door = None
-
+class SecurityProxy(Door):
     def __init__(self, door):
         self.door = door
 
     def open(self, password):
         if self.authenticate(password):
-            self.door.open()
+            self.door.open(password)
         else:
-            print("Big no! It ain't possible.")
+            print("Big no! It is not possible.")
 
     def authenticate(self, password):
-        return password == '$ecr@t'
+        return password == "$ecr@t"
 
     def close(self):
         self.door.close()
@@ -7726,11 +7728,10 @@ class SecuredDoor():
 
 # ----------------------------
 
-door = SecuredDoor(LabDoor())
-door.open('invalid')  # Big no! It ain't possible
-
-door.open('$ecr@t')  # Opening lab door
-door.close()  # Closing Lab Door
+door = SecurityProxy(LabDoor())
+door.open("invalid")   # Big no! It is not possible.
+door.open("$ecr@t")    # Opening lab door
+door.close()           # Closing lab door
 ```
 
 </div>
@@ -7743,22 +7744,21 @@ door.close()  # Closing Lab Door
 
 ```typescript
 interface Door {
-    open(): void;
-
+    open(password: string): void;
     close(): void;
 }
 
 class LabDoor implements Door {
-    open(): void {
+    open(password: string): void {
         console.log("Opening lab door");
     }
 
     close(): void {
-        console.log("Closing the lab door");
+        console.log("Closing lab door");
     }
 }
 
-class SecuredDoor {
+class SecurityProxy implements Door {
     private door: Door;
 
     constructor(door: Door) {
@@ -7767,13 +7767,13 @@ class SecuredDoor {
 
     open(password: string): void {
         if (this.authenticate(password)) {
-            this.door.open();
+            this.door.open(password);
         } else {
-            console.log("Big no! It ain't possible.");
+            console.log("Big no! It is not possible.");
         }
     }
 
-    authenticate(password: string): boolean {
+    private authenticate(password: string): boolean {
         return password === "$ecr@t";
     }
 
@@ -7784,10 +7784,10 @@ class SecuredDoor {
 
 // ----------------------------
 
-const door = new SecuredDoor(new LabDoor());
-door.open("invalid"); // Big no! It ain't possible
-door.open("$ecr@t"); // Opening lab door
-door.close(); // Closing Lab Door
+const door = new SecurityProxy(new LabDoor());
+door.open("invalid");   // Big no! It is not possible.
+door.open("$ecr@t");    // Opening lab door
+door.close();           // Closing lab door
 ```
 
 </div>
@@ -7800,25 +7800,25 @@ door.close(); // Closing Lab Door
 
 ```javascript
 class LabDoor {
-    open() {
+    open(password) {
         console.log("Opening lab door");
     }
 
     close() {
-        console.log("Closing the lab door");
+        console.log("Closing lab door");
     }
 }
 
-class SecuredDoor {
+class SecurityProxy {
     constructor(door) {
         this.door = door;
     }
 
     open(password) {
         if (this.authenticate(password)) {
-            this.door.open();
+            this.door.open(password);
         } else {
-            console.log("Big no! It ain't possible.");
+            console.log("Big no! It is not possible.");
         }
     }
 
@@ -7832,10 +7832,10 @@ class SecuredDoor {
 }
 
 
-const door = new SecuredDoor(new LabDoor());
-door.open("invalid");
-door.open("$ecr@t");
-door.close();
+const door = new SecurityProxy(new LabDoor());
+door.open("invalid");   // Big no! It is not possible.
+door.open("$ecr@t");    // Opening lab door
+door.close();           // Closing lab door
 ```
 
 </div>
@@ -7851,28 +7851,28 @@ door.close();
 
 interface IDoor
 {
-  void Open();
+  void Open(string password);
   void Close();
 }
 
 class LabDoor : IDoor
 {
+  public void Open(string password)
+  {
+    Console.WriteLine("Opening lab door");
+  }
+
   public void Close()
   {
     Console.WriteLine("Closing lab door");
   }
-
-  public void Open()
-  {
-    Console.WriteLine("Opening lab door");
-  }
 }
 
-class SecuredDoor : IDoor
+class SecurityProxy : IDoor
 {
   private IDoor mDoor;
 
-  public SecuredDoor(IDoor door)
+  public SecurityProxy(IDoor door)
   {
     mDoor = door ?? throw new ArgumentNullException("door", "door can not be null");
   }
@@ -7881,11 +7881,11 @@ class SecuredDoor : IDoor
   {
     if (Authenticate(password))
     {
-      mDoor.Open();
+      mDoor.Open(password);
     }
     else
     {
-      Console.WriteLine("Big no! It ain't possible.");
+      Console.WriteLine("Big no! It is not possible.");
     }
   }
 
@@ -7902,11 +7902,10 @@ class SecuredDoor : IDoor
 
 // ----------------------------
 
-var door = new SecuredDoor(new LabDoor());
-door.Open("invalid"); // Big no! It ain't possible.
-
-door.Open("$ecr@t"); // Opening lab door
-door.Close(); // Closing lab door
+IDoor door = new SecurityProxy(new LabDoor());
+door.Open("invalid"); // Big no! It is not possible.
+door.Open("$ecr@t");  // Opening lab door
+door.Close();         // Closing lab door
 
 ```
 
@@ -7921,31 +7920,29 @@ door.Close(); // Closing lab door
 
 ```php
 interface DoorInterface {
-  public function open();
+  public function open(string $password);
   public function close();
 }
 
 class LabDoor implements DoorInterface {
+  public function open(string $password) {
+    echo "Opening lab door\n";
+  }
+
   public function close() {
     echo "Closing lab door\n";
   }
-
-  public function open() {
-    echo "Opening lab door\n";
-  }
 }
 
-class SecuredDoor implements DoorInterface {
-  private $door;
-
+class SecurityProxy implements DoorInterface {
   public function __construct(private DoorInterface $door) {
   }
 
   public function open(string $password) {
     if ($this->authenticate($password)) {
-      $this->door->open();
+      $this->door->open($password);
     } else {
-      echo "Big no! It ain't possible.\n";
+      echo "Big no! It is not possible.\n";
     }
   }
 
@@ -7958,11 +7955,10 @@ class SecuredDoor implements DoorInterface {
   }
 }
 
-$door = new SecuredDoor(new LabDoor());
-$door->open('invalid');  // Big no! It ain't possible
-
-$door->open('$ecr@t');  // Opening lab door
-$door->close();  // Closing lab door
+$door = new SecurityProxy(new LabDoor());
+$door->open('invalid');  // Big no! It is not possible.
+$door->open('$ecr@t');   // Opening lab door
+$door->close();          // Closing lab door
 ```
 
 </div>
@@ -7979,51 +7975,50 @@ package main
 
 import "fmt"
 
-type IDoor interface {
-    Open()
+type Door interface {
+    Open(password string)
     Close()
 }
 
-type LabDoor struct {}
+type LabDoor struct{}
+
+func (d LabDoor) Open(password string) {
+    fmt.Println("Opening lab door")
+}
 
 func (d LabDoor) Close() {
     fmt.Println("Closing lab door")
 }
 
-func (d LabDoor) Open() {
-    fmt.Println("Opening lab door")
+type SecurityProxy struct {
+    door Door
 }
 
-type SecuredDoor struct {
-    door IDoor
+func NewSecurityProxy(door Door) *SecurityProxy {
+    return &SecurityProxy{door: door}
 }
 
-func NewSecuredDoor(door IDoor) *SecuredDoor {
-    return &SecuredDoor{door: door}
-}
-
-func (d *SecuredDoor) Open(password string) {
-    if d.Authenticate(password) {
-        d.door.Open()
+func (d *SecurityProxy) Open(password string) {
+    if d.authenticate(password) {
+        d.door.Open(password)
     } else {
-        fmt.Println("Big no! It ain't possible.")
+        fmt.Println("Big no! It is not possible.")
     }
 }
 
-func (d *SecuredDoor) Authenticate(password string) bool {
+func (d *SecurityProxy) authenticate(password string) bool {
     return password == "$ecr@t"
 }
 
-func (d *SecuredDoor) Close() {
+func (d *SecurityProxy) Close() {
     d.door.Close()
 }
 
 func main() {
-    door := NewSecuredDoor(LabDoor{})
-    door.Open("invalid") // Big no! It ain't possible.
-
-    door.Open("$ecr@t") // Opening lab door
-    door.Close() // Closing lab door
+    door := NewSecurityProxy(LabDoor{})
+    door.Open("invalid") // Big no! It is not possible.
+    door.Open("$ecr@t")  // Opening lab door
+    door.Close()         // Closing lab door
 }
 
 ```
@@ -8039,44 +8034,40 @@ func main() {
 
 ```java
 interface Door {
-    void open();
+    void open(String password);
     void close();
 }
 
 class LabDoor implements Door {
+    public void open(String password) {
+        System.out.println("Opening lab door");
+    }
+
     public void close() {
         System.out.println("Closing lab door");
     }
-
-    public void open() {
-        System.out.println("Opening lab door");
-    }
 }
 
-class SecuredDoor implements Door {
+class SecurityProxy implements Door {
     private Door door;
 
-    public SecuredDoor(Door door) {
+    public SecurityProxy(Door door) {
         if (door == null)
             throw new IllegalArgumentException("door can not be null");
         this.door = door;
     }
 
+    @Override
     public void open(String password) {
         if (authenticate(password)) {
-            door.open();
+            door.open(password);
         } else {
-            System.out.println("Big no! It ain't possible.");
+            System.out.println("Big no! It is not possible.");
         }
     }
 
     private boolean authenticate(String password) {
         return "$ecr@t".equals(password);
-    }
-
-    @Override
-    public void open() {
-        System.out.println("Big no! It ain't possible.");
     }
 
     @Override
@@ -8087,9 +8078,9 @@ class SecuredDoor implements Door {
 
 // ----------------------------
 
-SecuredDoor door = new SecuredDoor(new LabDoor());
+Door door = new SecurityProxy(new LabDoor());
 
-door.open("invalid");       // Big no! It ain't possible.
+door.open("invalid");       // Big no! It is not possible.
 door.open("$ecr@t");        // Opening lab door
 door.close();               // Closing lab door
 ```
@@ -8110,13 +8101,13 @@ door.close();               // Closing lab door
 class Door {
 public:
     virtual ~Door() = default;
-    virtual void open() = 0;
+    virtual void open(const std::string& password) = 0;
     virtual void close() = 0;
 };
 
 class LabDoor : public Door {
 public:
-    void open() override {
+    void open(const std::string& password) override {
         std::cout << "Opening lab door" << std::endl;
     }
 
@@ -8125,7 +8116,7 @@ public:
     }
 };
 
-class SecuredDoor : public Door {
+class SecurityProxy : public Door {
 private:
     Door& door;
 
@@ -8134,17 +8125,13 @@ private:
     }
 
 public:
-    SecuredDoor(Door& d) : door(d) {}
+    SecurityProxy(Door& d) : door(d) {}
 
-    void open() override {
-        std::cout << "Big no! It ain't possible." << std::endl;
-    }
-
-    void open(const std::string& password) {
+    void open(const std::string& password) override {
         if (authenticate(password)) {
-            door.open();
+            door.open(password);
         } else {
-            std::cout << "Big no! It ain't possible." << std::endl;
+            std::cout << "Big no! It is not possible." << std::endl;
         }
     }
 
@@ -8157,9 +8144,9 @@ public:
 
 int main() {
     LabDoor labDoor;
-    SecuredDoor door(labDoor);
+    SecurityProxy door(labDoor);
 
-    door.open("invalid");       // Big no! It ain't possible.
+    door.open("invalid");       // Big no! It is not possible.
     door.open("$ecr@t");        // Opening lab door
     door.close();               // Closing lab door
     return 0;
@@ -8169,6 +8156,12 @@ int main() {
 </div>
 
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ وقتی می‌خوای دسترسی به یه شیء رو کنترل کنی یا قبل و بعدش یه کار اضافه (امنیت، کش، لاگ) بچسبونی، بی‌اینکه خودِ شیء اصلی عوض بشه؛ ❌ وقتی فقط می‌خوای رفتارش رو گسترش بدی نه کنترلش، که اون‌وقت کار تزئین‌گره.
+> 🪤 **دام رایج:** پراکسی رو این‌قدر چاق نکن که کم‌کم منطق اصلی بره توش و دیگه معلوم نباشه شیء واقعی کیه.
+> 🔗 **فرقش با [تزئین‌گر (Decorator)](#تزئین‌گر-decorator-):** تزئین‌گر قابلیت اضافه می‌کنه و شفافه، پراکسی دسترسی رو واسطه‌گری و کنترل می‌کنه؛ و فرقش با [مبدل (Adapter)](#مبدل-adapter-) اینه که مبدل اینترفیس رو عوض می‌کنه، ولی پراکسی همون اینترفیس رو نگه می‌داره.
+
 
 <br>
 <br>
