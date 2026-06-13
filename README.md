@@ -2132,7 +2132,7 @@ int main() {
 <div dir="ltr">
 
 ```python
-def __init__(self, size, cheese=True, mushrooms=True, tomato=False)
+def __init__(self, size, cheese=True, mushrooms=True, tomato=False): ...
 ```
 
 </div>
