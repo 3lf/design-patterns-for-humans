@@ -4256,8 +4256,8 @@ int main() {
 حالا توی هر صفحه، یه «پل» (Bridge) می‌زنیم به تم مورد نظر. اینطوری فقط ۱۰ + ۵ کلاس داریم، نه ۱۰ × ۵.
 
 💡 **به زبون ساده:**
-> این پترن می‌گه: **«ارث‌بری رو ول کن، از ترکیب (Composition) استفاده کن.»**
-> به جای اینکه بگی «من یه صفحه درباره ما هستم که سیاهه»، بگو «من یه صفحه درباره ما هستم که یه تم (حالا هر چی) دارم.»
+> دوتا چیزی که دارن جدا جدا تغییر می‌کنن، مثلاً «صفحه» و «تم»، رو به دوتا سلسله‌مراتب مستقل بشکن و با یه «پل» به هم وصلشون کن؛ اینطوری به جای ضرب کردن حالت‌ها در هم، فقط جمعشون می‌کنی.
+> به جای اینکه بگی «من یه صفحه درباره ما هستم که سیاهه»، بگو «من یه صفحه درباره ما هستم که یه تم، حالا هر چی، دارم.»
 
 ![With and without the bridge pattern](images/without_bridge.png)
 
@@ -4269,6 +4269,8 @@ int main() {
 > implementation so that the two can vary independently"
 
 </div>
+
+خلاصه‌اش این می‌شه: «انتزاع» (Abstraction) رو، یعنی همون چیزی که داری باهاش کار می‌کنی، از «پیاده‌سازی» (Implementation) جدا نگه دار؛ اونوقت هر کدوم می‌تونن مستقل از اون یکی تغییر کنن و رشد کنن، بدون اینکه به هم گره بخورن.
 
 **مثال برنامه‌نویسی**
 
@@ -4284,9 +4286,27 @@ int main() {
 <div dir="ltr">
 
 ```python
-class WebPage:
-    _theme = None
+class Theme:
+    def getColor(self):
+        pass
 
+
+class DarkTheme(Theme):
+    def getColor(self):
+        return "Dark Black"
+
+
+class LightTheme(Theme):
+    def getColor(self):
+        return "Off white"
+
+
+class AquaTheme(Theme):
+    def getColor(self):
+        return "Light blue"
+
+
+class WebPage:
     def __init__(self, theme):
         self.theme = theme
 
@@ -4304,35 +4324,16 @@ class Careers(WebPage):
         return "Careers page in " + self.theme.getColor()
 
 
-class Theme:
-    def getColor(self):
-        pass
-
-
-class DarkTheme(Theme):
-    def getColor(self):
-        return 'Dark Black'
-
-
-class LightTheme(Theme):
-    def getColor(self):
-        return 'Off White'
-
-
-class AquaTheme(Theme):
-    def getColor(self):
-        return 'Light Blue'
-
-
 # ----------------------------
 
 darkTheme = DarkTheme()
+aquaTheme = AquaTheme()
 
 about = About(darkTheme)
-careers = Careers(darkTheme)
+careers = Careers(aquaTheme)
 
-print(about.getContent())
-print(careers.getContent())
+print(about.getContent())    # About page in Dark Black
+print(careers.getContent())  # Careers page in Light blue
 ```
 
 </div>
@@ -4344,63 +4345,60 @@ print(careers.getContent())
 <div dir="ltr">
 
 ```typescript
-class WebPage {
-    protected _theme: any;
-
-    constructor(theme: any) {
-        this._theme = theme;
-    }
-
-    getContent(): string {
-        return "";
-    }
+interface Theme {
+    getColor(): string;
 }
 
-class About extends WebPage {
-    getContent(): string {
-        return "About page in " + this._theme.getColor();
-    }
-}
-
-class Careers extends WebPage {
-    getContent(): string {
-        return "Careers page in " + this._theme.getColor();
-    }
-}
-
-class Theme {
-    getColor(): string {
-        return "";
-    }
-}
-
-class DarkTheme extends Theme {
+class DarkTheme implements Theme {
     getColor(): string {
         return "Dark Black";
     }
 }
 
-class LightTheme extends Theme {
+class LightTheme implements Theme {
     getColor(): string {
-        return "Off White";
+        return "Off white";
     }
 }
 
-class AquaTheme extends Theme {
+class AquaTheme implements Theme {
     getColor(): string {
-        return "Light Blue";
+        return "Light blue";
+    }
+}
+
+abstract class WebPage {
+    protected theme: Theme;
+
+    constructor(theme: Theme) {
+        this.theme = theme;
+    }
+
+    abstract getContent(): string;
+}
+
+class About extends WebPage {
+    getContent(): string {
+        return "About page in " + this.theme.getColor();
+    }
+}
+
+class Careers extends WebPage {
+    getContent(): string {
+        return "Careers page in " + this.theme.getColor();
     }
 }
 
 // ----------------------------
 
 const darkTheme = new DarkTheme();
+const aquaTheme = new AquaTheme();
 
 const about = new About(darkTheme);
-const careers = new Careers(darkTheme);
+const careers = new Careers(aquaTheme);
 
-console.log(about.getContent());
-console.log(careers.getContent());
+console.log(about.getContent());    // About page in Dark Black
+console.log(careers.getContent());  // Careers page in Light blue
 ```
 
 </div>
@@ -4412,6 +4410,30 @@ console.log(careers.getContent());
 <div dir="ltr">
 
 ```javascript
+class Theme {
+    getColor() {
+        return "";
+    }
+}
+
+class DarkTheme extends Theme {
+    getColor() {
+        return "Dark Black";
+    }
+}
+
+class LightTheme extends Theme {
+    getColor() {
+        return "Off white";
+    }
+}
+
+class AquaTheme extends Theme {
+    getColor() {
+        return "Light blue";
+    }
+}
+
 class WebPage {
     constructor(theme) {
         this._theme = theme;
@@ -4434,38 +4456,15 @@ class Careers extends WebPage {
     }
 }
 
-class Theme {
-    getColor() {
-        return "";
-    }
-}
-
-class DarkTheme extends Theme {
-    getColor() {
-        return "Dark Black";
-    }
-}
-
-class LightTheme extends Theme {
-    getColor() {
-        return "Off White";
-    }
-}
-
-class AquaTheme extends Theme {
-    getColor() {
-        return "Light Blue";
-    }
-}
-
 
 const darkTheme = new DarkTheme();
+const aquaTheme = new AquaTheme();
 
 const about = new About(darkTheme);
-const careers = new Careers(darkTheme);
+const careers = new Careers(aquaTheme);
 
-console.log(about.getContent());
-console.log(careers.getContent());
+console.log(about.getContent());    // About page in Dark Black
+console.log(careers.getContent());  // Careers page in Light blue
 ```
 
 </div>
@@ -4532,7 +4531,7 @@ class LightTheme : ITheme
 {
   public string GetColor()
   {
-    return "Off White";
+    return "Off white";
   }
 }
 
@@ -4547,13 +4546,13 @@ class AquaTheme : ITheme
 // ----------------------------
 
 var darkTheme = new DarkTheme();
-var lightTheme = new LightTheme();
+var aquaTheme = new AquaTheme();
 
-var about= new About(darkTheme);
-var careers = new Careers(lightTheme);
+var about = new About(darkTheme);
+var careers = new Careers(aquaTheme);
 
-Console.WriteLine(about.GetContent()); // Output: About page in Dark Black
-Console.WriteLine(careers.GetContent()); // Output: Careers page in Off White
+Console.WriteLine(about.GetContent());   // About page in Dark Black
+Console.WriteLine(careers.GetContent()); // Careers page in Light blue
 
 ```
 
@@ -4606,24 +4605,24 @@ class DarkTheme implements ThemeInterface {
 
 class LightTheme implements ThemeInterface {
   public function getColor() {
-    return "Off White";
+    return "Off white";
   }
 }
 
 class AquaTheme implements ThemeInterface {
   public function getColor() {
-    return "Light Blue";
+    return "Light blue";
   }
 }
 
 $darkTheme = new DarkTheme();
-$lightTheme = new LightTheme();
+$aquaTheme = new AquaTheme();
 
 $about = new About($darkTheme);
-$careers = new Careers($lightTheme);
+$careers = new Careers($aquaTheme);
 
-echo $about->getColor() . "\n"; // Output: About page in Dark Black
-echo $careers->getColor() . "\n"; // Output: Careers page in Off White
+echo $about->getContent() . "\n";   // About page in Dark Black
+echo $careers->getContent() . "\n"; // Careers page in Light blue
 
 ```
 
@@ -4681,7 +4680,7 @@ return "Dark Black"
 type LightTheme struct{}
 
 func (l *LightTheme) GetColor() string {
-return "Off White"
+return "Off white"
 }
 
 type AquaTheme struct{}
@@ -4692,13 +4691,13 @@ return "Light blue"
 
 func main() {
 darkTheme := &DarkTheme{}
-lightTheme := &LightTheme{}
+aquaTheme := &AquaTheme{}
 
 about := NewAbout(darkTheme)
-careers := NewCareers(lightTheme)
+careers := NewCareers(aquaTheme)
 
-fmt.Println(about.GetContent())   // Output: About page in Dark Black
-fmt.Println(careers.GetContent()) // Output: Careers page in Off White
+fmt.Println(about.GetContent())   // About page in Dark Black
+fmt.Println(careers.GetContent()) // Careers page in Light blue
 }
 ```
 
@@ -4746,13 +4745,19 @@ class Careers implements WebPage {
 
 class DarkTheme implements Theme {
     public String getColor() {
-        return "Dark theme";
+        return "Dark Black";
     }
 }
 
 class LightTheme implements Theme {
     public String getColor() {
-        return "Light theme";
+        return "Off white";
+    }
+}
+
+class AquaTheme implements Theme {
+    public String getColor() {
+        return "Light blue";
     }
 }
 
@@ -4760,13 +4765,13 @@ class LightTheme implements Theme {
 
 
 DarkTheme darkTheme = new DarkTheme();
-LightTheme lightTheme = new LightTheme();
+AquaTheme aquaTheme = new AquaTheme();
 
-About about= new About(darkTheme);
-Careers careers = new Careers(lightTheme);
+About about = new About(darkTheme);
+Careers careers = new Careers(aquaTheme);
 
-System.out.println(about.getContent());     // About page in Dark theme
-System.out.println(careers.getContent());   // Careers page in Light theme
+System.out.println(about.getContent());     // About page in Dark Black
+System.out.println(careers.getContent());   // Careers page in Light blue
 ```
 
 </div>
@@ -4801,7 +4806,7 @@ public:
 class LightTheme : public Theme {
 public:
     std::string getColor() override {
-        return "Off White";
+        return "Off white";
     }
 };
 
@@ -4830,7 +4835,7 @@ public:
     About(std::unique_ptr<Theme> theme) : WebPage(std::move(theme)) {}
     
     std::string getContent() override {
-        return "About page in " + theme->getColor() + " theme";
+        return "About page in " + theme->getColor();
     }
 };
 
@@ -4840,23 +4845,29 @@ public:
     Careers(std::unique_ptr<Theme> theme) : WebPage(std::move(theme)) {}
     
     std::string getContent() override {
-        return "Careers page in " + theme->getColor() + " theme";
+        return "Careers page in " + theme->getColor();
     }
 };
 
 // Usage
 int main() {
     About about(std::make_unique<DarkTheme>());
-    Careers careers(std::make_unique<LightTheme>());
-    
-    std::cout << about.getContent() << std::endl;     // About page in Dark Black theme
-    std::cout << careers.getContent() << std::endl;   // Careers page in Off White theme
-    
+    Careers careers(std::make_unique<AquaTheme>());
+
+    std::cout << about.getContent() << std::endl;     // About page in Dark Black
+    std::cout << careers.getContent() << std::endl;   // Careers page in Light blue
+
     return 0;
 }
 ```
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی دوتا بُعد مستقل داری که جدا جدا زیاد می‌شن، مثل صفحه × تم، و نمی‌خوای ضربشون کنی در هم»؛ ❌ «وقتی فقط یه بُعد داری یا حالت‌ها هیچ‌وقت قرار نیست زیاد بشن».
+> 🪤 **دام رایج:** «از همون اول همه‌چی رو با پل می‌سازی و کد رو الکی پیچیده می‌کنی، در حالی که هنوز انفجار کلاس‌ها اتفاق نیفتاده».
+> 🔗 **فرقش با [مبدل (Adapter)](#مبدل-adapter-):** «مبدل بعد از ساخته‌شدن کد، دوتا چیز ناسازگار رو به هم می‌چسبونه؛ پل از اول طراحی می‌شه تا دو بُعد جدا بمونن».
+
 
 <br>
 
