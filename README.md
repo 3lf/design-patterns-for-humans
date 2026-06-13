@@ -12840,12 +12840,14 @@ int main() {
 </div>
 
 فرض کن می‌خوای یه کار رو انجام بدی، ولی چند راه مختلف برای انجام دادنش داری.
-مثلاً توی مرتب‌سازی داده‌ها:
-*   وقتی دیتاست کوچیکه، یه روش ساده مثل `Bubble Sort` شاید کافی باشه.
-*   وقتی دیتاست بزرگه، یه روش سریع‌تر مثل `Quick Sort` بهتره.
+مثلاً موقع پرداخت توی صندوق فروشگاه:
+*   یکی پول نقد می‌ده.
+*   یکی کارت می‌کشه.
+*   یکی هم از کیف‌پول دیجیتالش (Wallet) پرداخت می‌کنه.
 
-تو نمی‌خوای کل برنامه‌ت رو به `if/else`‌های طولانی تبدیل کنی که هر بار یکی گفت «روش جدید هم اضافه کن»، همه‌جا رو دستکاری کنی.
-پس الگوریتم‌ها رو جدا می‌کنی و هر لحظه هر کدوم رو خواستی می‌ذاری داخل سیستم. ✅
+صندوق همیشه یه کار ساده می‌کنه: «این مبلغ رو بگیر». این که پول چطوری گرفته می‌شه، کار خود روش پرداخته، نه صندوق.
+تو نمی‌خوای کل کد صندوق رو پر کنی از `if/else`‌های طولانی که هر بار یه روش پرداخت جدید اومد، همه‌جا رو دستکاری کنی.
+پس هر روش پرداخت رو جدا می‌کنی و هر لحظه هر کدوم رو خواستی می‌ذاری داخل صندوق. ✅
 
 💡 **به زبون ساده:**
 > این پترن می‌گه: **«چند تا الگوریتم قابل تعویض داشته باش و انتخابشون رو بنداز به زمان اجرا.»**
@@ -12859,11 +12861,14 @@ int main() {
 
 </div>
 
+خلاصه‌اش این می‌شه: چند تا روش انجام یک کار رو جدا از هم نگه می‌داری و هر کدوم رو که خواستی، همون لحظه‌ی اجرا (Runtime) انتخاب می‌کنی.
+این‌طوری بدنه‌ی اصلی برنامه دست‌نخورده می‌مونه و فقط روشی که بهش می‌دی عوض می‌شه.
+
 **مثال برنامه‌نویسی**
 
-می‌خوایم یک سرویس پیاده‌سازی کنیم که با توجه به داده‌هامون تصمیم بگیریم از یک نوع از مرتب سازی استفاده کنیم!
+می‌خوایم یه صندوق پرداخت بسازیم که موقع تسویه‌حساب، بسته به این که مشتری چه روشی رو انتخاب کرده، از همون روش پرداخت استفاده کنه!
 
-یک کلاس بسازیم که وظیفه‌اش مدیریت این استراتژی‌ها باشه.
+اول یه قرارداد مشترک («پرداخت کن») تعریف می‌کنیم، بعد یه کلاس صندوق می‌سازیم که وظیفه‌اش فقط نگه‌داشتن روش پرداخت و سپردن کار به اونه.
 
 <details>
 <summary>Python</summary>
@@ -12871,43 +12876,41 @@ int main() {
 <div dir="ltr">
 
 ```python
-class SortStrategy:
-    def sort(self, dataset):
+class PaymentStrategy:
+    def pay(self, amount):
         pass
 
 
-class BubbleSortStrategy(SortStrategy):
-    def sort(self, dataset):
-        print('Sorting using bubble sort')
-
-        return dataset
+class CashPayment(PaymentStrategy):
+    def pay(self, amount):
+        print(f'Paid {amount} in cash')
 
 
-class QuickSortStrategy(SortStrategy):
-    def sort(self, dataset):
-        print('Sorting using quick sort')
-        return dataset
+class CardPayment(PaymentStrategy):
+    def pay(self, amount):
+        print(f'Paid {amount} by card')
 
 
-class Sorter:
-    _sorter = None
+class WalletPayment(PaymentStrategy):
+    def pay(self, amount):
+        print(f'Paid {amount} from wallet')
 
-    def __init__(self, sorter):
-        self._sorter = sorter
 
-    def sort(self, dataset):
-        return self._sorter.sort(dataset)
+class Checkout:
+    def __init__(self, strategy):
+        self._strategy = strategy
+
+    def checkout(self, amount):
+        self._strategy.pay(amount)
 
 
 # ----------------------------
 
-dataset = [1, 5, 4, 3, 2, 8]
+checkout = Checkout(CashPayment())
+checkout.checkout(100)  # Output: Paid 100 in cash
 
-sorter = Sorter(BubbleSortStrategy())
-sorter.sort(dataset)
-
-sorter = Sorter(QuickSortStrategy())
-sorter.sort(dataset)
+checkout = Checkout(CardPayment())
+checkout.checkout(250)  # Output: Paid 250 by card
 ```
 
 </div>
@@ -12919,45 +12922,47 @@ sorter.sort(dataset)
 <div dir="ltr">
 
 ```typescript
-interface SortStrategy {
-    sort(dataset: any[]): any[];
+interface PaymentStrategy {
+    pay(amount: number): void;
 }
 
-class BubbleSortStrategy implements SortStrategy {
-    sort(dataset: any[]): any[] {
-        console.log("Sorting using bubble sort");
-        return dataset;
+class CashPayment implements PaymentStrategy {
+    pay(amount: number): void {
+        console.log(`Paid ${amount} in cash`);
     }
 }
 
-class QuickSortStrategy implements SortStrategy {
-    sort(dataset: any[]): any[] {
-        console.log("Sorting using quick sort");
-        return dataset;
+class CardPayment implements PaymentStrategy {
+    pay(amount: number): void {
+        console.log(`Paid ${amount} by card`);
     }
 }
 
-class Sorter {
-    private sorter: SortStrategy;
+class WalletPayment implements PaymentStrategy {
+    pay(amount: number): void {
+        console.log(`Paid ${amount} from wallet`);
+    }
+}
 
-    constructor(sorter: SortStrategy) {
-        this.sorter = sorter;
+class Checkout {
+    private strategy: PaymentStrategy;
+
+    constructor(strategy: PaymentStrategy) {
+        this.strategy = strategy;
     }
 
-    sort(dataset: any[]): any[] {
-        return this.sorter.sort(dataset);
+    checkout(amount: number): void {
+        this.strategy.pay(amount);
     }
 }
 
 // ----------------------------
 
-const dataset = [1, 5, 4, 3, 2, 8];
+let checkout = new Checkout(new CashPayment());
+checkout.checkout(100); // Output: Paid 100 in cash
 
-const sorter = new Sorter(new BubbleSortStrategy());
-sorter.sort(dataset);
-
-const sorter2 = new Sorter(new QuickSortStrategy());
-sorter2.sort(dataset);
+checkout = new Checkout(new CardPayment());
+checkout.checkout(250); // Output: Paid 250 by card
 ```
 
 </div>
@@ -12968,37 +12973,39 @@ sorter2.sort(dataset);
 <div dir="ltr">
 
 ```javascript
-class BubbleSortStrategy {
-    sort(dataset) {
-        console.log("Sorting using bubble sort");
-        return dataset;
+class CashPayment {
+    pay(amount) {
+        console.log(`Paid ${amount} in cash`);
     }
 }
 
-class QuickSortStrategy {
-    sort(dataset) {
-        console.log("Sorting using quick sort");
-        return dataset;
+class CardPayment {
+    pay(amount) {
+        console.log(`Paid ${amount} by card`);
     }
 }
 
-class Sorter {
-    constructor(sorter) {
-        this.sorter = sorter;
-    }
-
-    sort(dataset) {
-        return this.sorter.sort(dataset);
+class WalletPayment {
+    pay(amount) {
+        console.log(`Paid ${amount} from wallet`);
     }
 }
 
-const dataset = [1, 5, 4, 3, 2, 8];
+class Checkout {
+    constructor(strategy) {
+        this.strategy = strategy;
+    }
 
-const sorter = new Sorter(new BubbleSortStrategy());
-sorter.sort(dataset);
+    checkout(amount) {
+        this.strategy.pay(amount);
+    }
+}
 
-const sorter2 = new Sorter(new QuickSortStrategy());
-sorter2.sort(dataset);
+let checkout = new Checkout(new CashPayment());
+checkout.checkout(100); // Output: Paid 100 in cash
+
+checkout = new Checkout(new CardPayment());
+checkout.checkout(250); // Output: Paid 250 by card
 ```
 
 </div>
@@ -13011,53 +13018,57 @@ sorter2.sort(dataset);
 
 ```csharp
 
-interface ISortStrategy
+interface IPaymentStrategy
 {
-  List<int> Sort(List<int> dataset);
+  void Pay(int amount);
 }
 
-class BubbleSortStrategy : ISortStrategy
+class CashPayment : IPaymentStrategy
 {
-  public List<int> Sort(List<int> dataset)
+  public void Pay(int amount)
   {
-    Console.WriteLine("Sorting using Bubble Sort !");
-    return dataset;
+    Console.WriteLine($"Paid {amount} in cash");
   }
 }
 
-class QuickSortStrategy : ISortStrategy
+class CardPayment : IPaymentStrategy
 {
-  public List<int> Sort(List<int> dataset)
+  public void Pay(int amount)
   {
-    Console.WriteLine("Sorting using Quick Sort !");
-    return dataset;
+    Console.WriteLine($"Paid {amount} by card");
   }
 }
 
-class Sorter
+class WalletPayment : IPaymentStrategy
 {
-  private readonly ISortStrategy mSorter;
-
-  public Sorter(ISortStrategy sorter)
+  public void Pay(int amount)
   {
-    mSorter = sorter;
+    Console.WriteLine($"Paid {amount} from wallet");
+  }
+}
+
+class Checkout
+{
+  private readonly IPaymentStrategy mStrategy;
+
+  public Checkout(IPaymentStrategy strategy)
+  {
+    mStrategy = strategy;
   }
 
-  public List<int> Sort(List<int> unSortedList)
+  public void DoCheckout(int amount)
   {
-    return mSorter.Sort(unSortedList);
+    mStrategy.Pay(amount);
   }
 }
 
 // ----------------------------
 
-var unSortedList = new List<int> { 1, 10, 2, 16, 19 };
+var checkout = new Checkout(new CashPayment());
+checkout.DoCheckout(100); // Output: Paid 100 in cash
 
-var sorter = new Sorter(new BubbleSortStrategy());
-sorter.Sort(unSortedList); // // Output : Sorting using Bubble Sort !
-
-sorter = new Sorter(new QuickSortStrategy());
-sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
+checkout = new Checkout(new CardPayment());
+checkout.DoCheckout(250); // Output: Paid 250 by card
 
 ```
 
@@ -13071,43 +13082,45 @@ sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
 <div dir="ltr">
 
 ```php
-interface SortStrategyInterface {
-  public function sort($dataset);
+interface PaymentStrategyInterface {
+  public function pay($amount);
 }
 
-class BubbleSortStrategy implements SortStrategyInterface {
-  public function sort($dataset) {
-    echo "Sorting using Bubble Sort !\n";
-    return $dataset;
+class CashPayment implements PaymentStrategyInterface {
+  public function pay($amount) {
+    echo "Paid $amount in cash\n";
   }
 }
 
-class QuickSortStrategy implements SortStrategyInterface {
-  public function sort($dataset) {
-    echo "Sorting using Quick Sort !\n";
-    return $dataset;
+class CardPayment implements PaymentStrategyInterface {
+  public function pay($amount) {
+    echo "Paid $amount by card\n";
   }
 }
 
-class Sorter {
-  private $mSorter;
-
-  public function __construct(SortStrategyInterface $sorter) {
-    $this->mSorter = $sorter;
-  }
-
-  public function sort($unSortedList) {
-    return $this->mSorter->sort($unSortedList);
+class WalletPayment implements PaymentStrategyInterface {
+  public function pay($amount) {
+    echo "Paid $amount from wallet\n";
   }
 }
 
-$unSortedList = [1, 10, 2, 16, 19];
+class Checkout {
+  private $mStrategy;
 
-$sorter = new Sorter(new BubbleSortStrategy());
-$sorter->sort($unSortedList); // Output : Sorting using Bubble Sort !
+  public function __construct(PaymentStrategyInterface $strategy) {
+    $this->mStrategy = $strategy;
+  }
 
-$sorter = new Sorter(new QuickSortStrategy());
-$sorter->sort($unSortedList); // Output : Sorting using Quick Sort !
+  public function checkout($amount) {
+    $this->mStrategy->pay($amount);
+  }
+}
+
+$checkout = new Checkout(new CashPayment());
+$checkout->checkout(100); // Output: Paid 100 in cash
+
+$checkout = new Checkout(new CardPayment());
+$checkout->checkout(250); // Output: Paid 250 by card
 
 ```
 
@@ -13127,50 +13140,51 @@ import (
 	"fmt"
 )
 
-// SortStrategy is the interface that defines the sorting strategy
-type SortStrategy interface {
-	Sort(dataset []int) []int
+// PaymentStrategy is the interface that defines a payment method
+type PaymentStrategy interface {
+	Pay(amount int)
 }
 
-// BubbleSortStrategy implements the SortStrategy interface
-type BubbleSortStrategy struct{}
+// CashPayment implements the PaymentStrategy interface
+type CashPayment struct{}
 
-func (b *BubbleSortStrategy) Sort(dataset []int) []int {
-	fmt.Println("Sorting using bubble sort")
-	// Implement bubble sort logic here (omitted for brevity)
-	return dataset
+func (c *CashPayment) Pay(amount int) {
+	fmt.Printf("Paid %d in cash\n", amount)
 }
 
-// QuickSortStrategy implements the SortStrategy interface
-type QuickSortStrategy struct{}
+// CardPayment implements the PaymentStrategy interface
+type CardPayment struct{}
 
-func (q *QuickSortStrategy) Sort(dataset []int) []int {
-	fmt.Println("Sorting using quick sort")
-	// Implement quick sort logic here (omitted for brevity)
-	return dataset
+func (c *CardPayment) Pay(amount int) {
+	fmt.Printf("Paid %d by card\n", amount)
 }
 
-// Sorter is the context that uses a sorting strategy
-type Sorter struct {
-	sorter SortStrategy
+// WalletPayment implements the PaymentStrategy interface
+type WalletPayment struct{}
+
+func (w *WalletPayment) Pay(amount int) {
+	fmt.Printf("Paid %d from wallet\n", amount)
 }
 
-func NewSorter(sorter SortStrategy) *Sorter {
-	return &Sorter{sorter: sorter}
+// Checkout is the context that uses a payment strategy
+type Checkout struct {
+	strategy PaymentStrategy
 }
 
-func (s *Sorter) Sort(dataset []int) []int {
-	return s.sorter.Sort(dataset)
+func NewCheckout(strategy PaymentStrategy) *Checkout {
+	return &Checkout{strategy: strategy}
+}
+
+func (c *Checkout) Checkout(amount int) {
+	c.strategy.Pay(amount)
 }
 
 func main() {
-	dataset := []int{1, 5, 4, 3, 2, 8}
+	checkout := NewCheckout(&CashPayment{})
+	checkout.Checkout(100) // Output: Paid 100 in cash
 
-	sorter := NewSorter(&BubbleSortStrategy{})
-	sorter.Sort(dataset)
-
-	sorter = NewSorter(&QuickSortStrategy{})
-	sorter.Sort(dataset)
+	checkout = NewCheckout(&CardPayment{})
+	checkout.Checkout(250) // Output: Paid 250 by card
 }
 ```
 
@@ -13184,49 +13198,53 @@ func main() {
 <div dir="ltr">
 
 ```java
-interface SortStrategy {
-    List<Integer> sort(List<Integer> dataset);
+interface PaymentStrategy {
+    void pay(int amount);
 }
 
-class BubbleSortStrategy implements SortStrategy {
+class CashPayment implements PaymentStrategy {
 
     @Override
-    public List<Integer> sort(List<Integer> dataset) {
-        System.out.println("Sorting by Bubble sort!");
-        return dataset;
+    public void pay(int amount) {
+        System.out.println("Paid " + amount + " in cash");
     }
 }
 
-class QuickSortStrategy implements SortStrategy {
+class CardPayment implements PaymentStrategy {
 
     @Override
-    public List<Integer> sort(List<Integer> dataset) {
-        System.out.println("Sorting by Quick sort!");
-        return dataset;
+    public void pay(int amount) {
+        System.out.println("Paid " + amount + " by card");
     }
 }
 
-class Sorter {
-    private SortStrategy sorter;
+class WalletPayment implements PaymentStrategy {
 
-    public Sorter(SortStrategy sorter) {
-        this.sorter = sorter;
+    @Override
+    public void pay(int amount) {
+        System.out.println("Paid " + amount + " from wallet");
+    }
+}
+
+class Checkout {
+    private PaymentStrategy strategy;
+
+    public Checkout(PaymentStrategy strategy) {
+        this.strategy = strategy;
     }
 
-    public List<Integer> sort(List<Integer> unSortedList) {
-        return sorter.sort(unSortedList);
+    public void checkout(int amount) {
+        strategy.pay(amount);
     }
 }
 
 // ----------------------------
 
-List<Integer> unSortedList = List.of(1, 10, 2, 16, 19);
+Checkout checkout = new Checkout(new CashPayment());
+checkout.checkout(100); // Paid 100 in cash
 
-Sorter sorter = new Sorter(new BubbleSortStrategy());
-sorter.sort(unSortedList); // Sorting by Bubble sort!
-
-sorter = new Sorter(new QuickSortStrategy());
-sorter.sort(unSortedList); // Sorting by Quick sort!
+checkout = new Checkout(new CardPayment());
+checkout.checkout(250); // Paid 250 by card
 ```
 
 </div>
@@ -13240,54 +13258,56 @@ sorter.sort(unSortedList); // Sorting by Quick sort!
 
 ```cpp
 #include <iostream>
-#include <vector>
 
-class SortStrategy {
+class PaymentStrategy {
 public:
-    virtual ~SortStrategy() = default;
-    virtual std::vector<int> sort(std::vector<int>& dataset) = 0;
+    virtual ~PaymentStrategy() = default;
+    virtual void pay(int amount) = 0;
 };
 
-class BubbleSortStrategy : public SortStrategy {
+class CashPayment : public PaymentStrategy {
 public:
-    std::vector<int> sort(std::vector<int>& dataset) override {
-        std::cout << "Sorting using bubble sort" << std::endl;
-        return dataset;
+    void pay(int amount) override {
+        std::cout << "Paid " << amount << " in cash" << std::endl;
     }
 };
 
-class QuickSortStrategy : public SortStrategy {
+class CardPayment : public PaymentStrategy {
 public:
-    std::vector<int> sort(std::vector<int>& dataset) override {
-        std::cout << "Sorting using quick sort" << std::endl;
-        return dataset;
+    void pay(int amount) override {
+        std::cout << "Paid " << amount << " by card" << std::endl;
     }
 };
 
-class Sorter {
+class WalletPayment : public PaymentStrategy {
+public:
+    void pay(int amount) override {
+        std::cout << "Paid " << amount << " from wallet" << std::endl;
+    }
+};
+
+class Checkout {
 private:
-    SortStrategy* strategy;
+    PaymentStrategy* strategy;
 
 public:
-    Sorter(SortStrategy* s) : strategy(s) {}
+    Checkout(PaymentStrategy* s) : strategy(s) {}
 
-    std::vector<int> sort(std::vector<int>& dataset) {
-        return strategy->sort(dataset);
+    void checkout(int amount) {
+        strategy->pay(amount);
     }
 };
 
 // ----------------------------
 
 int main() {
-    std::vector<int> dataset = {1, 5, 4, 3, 2, 8};
+    CashPayment cash;
+    Checkout checkout(&cash);
+    checkout.checkout(100); // Output: Paid 100 in cash
 
-    BubbleSortStrategy bubbleSort;
-    Sorter sorter(&bubbleSort);
-    sorter.sort(dataset);
-
-    QuickSortStrategy quickSort;
-    Sorter sorter2(&quickSort);
-    sorter2.sort(dataset);
+    CardPayment card;
+    Checkout checkout2(&card);
+    checkout2.checkout(250); // Output: Paid 250 by card
     return 0;
 }
 ```
@@ -13295,6 +13315,12 @@ int main() {
 </div>
 
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی چند تا روش هم‌خانواده برای یه کار داری و می‌خوای موقع اجرا بینشون سوییچ کنی»؛ ❌ «وقتی فقط یه روش داری و قرار نیست هیچ‌وقت عوض بشه».
+> 🪤 **دام رایج:** «جداکردن هر `if` کوچیک به یه کلاس استراتژی جدا؛ این کار رو فقط وقتی بکن که روش‌ها واقعاً مستقل و قابل تعویض‌ان».
+> 🔗 **فرقش با [حالت (State)](#حالت-state-):** «استراتژی روشِ انجام یه کار رو از بیرون بهش می‌دی و خودش عوضش نمی‌کنه؛ ولی حالت بر اساس وضعیت داخلی شیء، خودبه‌خود رفتارش رو تغییر می‌ده».
+
 
 <br>
 
