@@ -96,6 +96,32 @@
 
 <div align="center">
 
+## این راهنما رو چطوری بخونیم؟ 🧭
+
+</div>
+
+<div dir="rtl">
+
+این راهنما برای کسیه که یه کم با **شیءگرایی (OOP)** آشناست (کلاس، آبجکت، ارث‌بری، اینترفیس) و می‌خواد دیزاین پترن‌ها رو بدون خشکیِ کتاب‌های دانشگاهی یاد بگیره؛ از مبتدی تا کسی که فقط دنبال یه مرور سریعه.
+
+هر الگو رو با یه قالب ثابت پیش می‌بریم تا راحت دنبالش کنی:
+
+*   🌍 **یه مثال از دنیای واقعی** تا حسش کنی.
+*   💡 **به زبون ساده** که ته‌نشین بشه.
+*   📖 **تعریف ویکی‌پدیا** (به‌همراه ترجمه فارسی) تا دقیق هم بدونی.
+*   💻 **کد، توی ۸ زبان** (Python، JavaScript، TypeScript، Java، C#، PHP، Go، C++)؛ روی زبون خودت کلیک کن و بازش کن.
+*   🤔 **کی به کارش ببریم؟** یه جعبه کوتاه که می‌گه کجا به دردت می‌خوره، کجا نه، و فرقش با الگوهای شبیهش چیه.
+
+الگوها هم سه دسته‌ان: **سازنده (Creational)** درباره‌ی ساختن آبجکت‌هاست، **ساختاری (Structural)** درباره‌ی کنار هم چیدنِ کلاس‌ها و آبجکت‌ها، و **رفتاری (Behavioral)** درباره‌ی اینکه آبجکت‌ها چطور با هم حرف می‌زنن و کار رو بین خودشون تقسیم می‌کنن.
+
+> 💡 لازم نیست همه رو یه‌جا حفظ کنی! اینجا رو مثل یه فرهنگِ لغت ببین؛ هر وقت سرِ مشکلی گیر کردی، برگرد و الگوی مناسبش رو پیدا کن.
+
+</div>
+
+---
+
+<div align="center">
+
 ## اصول SOLID (SOLID Principles) 🧱
 
 </div>
@@ -691,9 +717,9 @@ int main() {
 
 > In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with
 > the problem of creating objects without having to specify the exact class of the object that will be created. This is
-> done by creating objects by calling a factory method—either specified in an interface and implemented by child
+> done by creating objects by calling a factory method, either specified in an interface and implemented by child
 > classes,
-> or implemented in a base class and optionally overridden by derived classes—rather than by calling a constructor.
+> or implemented in a base class and optionally overridden by derived classes, rather than by calling a constructor.
 
 </div>
 
@@ -3368,7 +3394,7 @@ if __name__ == "__main__":
 ```
 
 </div>
-این روش Thread Safe نیست. برای اطلاعات بیشتر سرچ کنی :)
+این روش لزوماً Thread Safe نیست؛ یعنی اگه چند نخ (Thread) هم‌زمان اولین بار `getInstance` رو صدا بزنن، شاید بیشتر از یه نمونه ساخته بشه. تو محیط چندنخی باید با یه قفل (Lock) جلوش رو بگیری.
 
 </details>
 
@@ -3751,7 +3777,7 @@ hunter.hunt(wild_dog_adapter)   # The hunter is hunting... -> Woof
 ```
 
 </div>
-در واقع مثال واقعی و قابل حس نیست ولی مفهوم رو به خوبی منتقل می‌کنه.
+این مثال یه‌کم انتزاعیه، ولی مفهوم رو خیلی خوب می‌رسونه.
 
 </details>
 
@@ -14780,14 +14806,14 @@ int main() {
 
 <div align="right">
 
-- امیر عزیز که زحمت مثال‌های TypeScript رو کشید.([amirmalekian](https://github.com/amirmalekian))
-- رضا عزیز که زحمت مثال‌های #C رو کشید.([RezaMansouri70](https://github.com/RezaMansouri70))
-- صالح عزیز که زحمت مثال‌های PHP رو کشید.([salehhashemi1992](https://github.com/salehhashemi1992))
-- عاطفه عزیز که زحمت مثال‌های Golang رو کشید.([atefeh-komeyli](https://github.com/atefeh-komeyli))
-- محمد عزیز که زحمت مثال‌های Java رو کشید.([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
-- سما عزیز که زحمت مثال‌های JavaScript رو کشید.([samazzz](https://github.com/samazzz))
-- حمیدرضا عزیز که زحمت مثال‌های C++ رو کشید.([hamiikalhor](https://github.com/hamiikalhor))
-- مهسا، محمد، سجاد و محسن عزیز که زحمت بهبود کد هارو کشیدند.([MahsaMahdavian](https://github.com/MahsaMahdavian) / [MohammadMMoniri](https://github.com/MohammadMMoniri) / [ssmns](https://github.com/ssmns) / [Serajian](https://github.com/Serajian))
+- امیر عزیز که زحمت مثال‌های TypeScript رو کشید. ([amirmalekian](https://github.com/amirmalekian))
+- رضا عزیز که زحمت مثال‌های C# رو کشید. ([RezaMansouri70](https://github.com/RezaMansouri70))
+- صالح عزیز که زحمت مثال‌های PHP رو کشید. ([salehhashemi1992](https://github.com/salehhashemi1992))
+- عاطفه عزیز که زحمت مثال‌های Golang رو کشید. ([atefeh-komeyli](https://github.com/atefeh-komeyli))
+- محمد عزیز که زحمت مثال‌های Java رو کشید. ([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
+- سما عزیز که زحمت مثال‌های JavaScript رو کشید. ([samazzz](https://github.com/samazzz))
+- حمیدرضا عزیز که زحمت مثال‌های C++ رو کشید. ([hamiikalhor](https://github.com/hamiikalhor))
+- مهسا، محمد، سجاد و محسن عزیز که زحمت بهبود کد هارو کشیدند. ([MahsaMahdavian](https://github.com/MahsaMahdavian) / [MohammadMMoniri](https://github.com/MohammadMMoniri) / [ssmns](https://github.com/ssmns) / [Serajian](https://github.com/Serajian))
 
 </div>
 
