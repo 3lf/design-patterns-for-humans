@@ -2080,7 +2080,7 @@ int main() {
 🍔 <b>مثال دنیای واقعی: ساخت ساندویچ سفارشی</b>
 </div>
 
-فرض کن رفتی ساندویچ‌فروشی که خودت مواد رو انتخاب می‌کنی (مثل Subway یا هایدا).
+فرض کن رفتی ساندویچ‌فروشی که خودت مواد رو انتخاب می‌کنی (مثل Subway).
 تو نمی‌گید «یه ساندویچ بده!» (چون ممکنه توش پیاز باشه و تو متنفر باشی).
 
 بلکه مرحله به مرحله می‌گید:
@@ -2096,7 +2096,7 @@ int main() {
 > دیدی بعضی وقت‌ها یه تابع سازنده (Constructor) داریم که ۱۰ تا ورودی داره و آدم گیج می‌شه کدوم به کدومه؟ 😵‍💫
 > (به این مشکل می‌گن "Telescoping Constructor Anti-pattern")
 >
-> الگوی Builder می‌گه: **«به جای اینکه همه چیز رو یه هو بریزی تو حلق تابع، بیا مرحله به مرحله و تمیز آبجکت رو بسازیم.»**
+> الگوی Builder می‌گه: **«به جای اینکه همه چیز رو یه‌جا بدی دست تابع سازنده، بیا مرحله به مرحله و تمیز آبجکت رو بسازیم.»**
 
 برای همه ما پیش اومده که یک تابع سازنده ترسناک به این شکل ببینیم که آدم رو فراری می‌ده:
 
@@ -2106,7 +2106,7 @@ int main() {
 <div dir="ltr">
 
 ```python
-def __init__(self, size, cheese=True, pepperoni=True, tomato=False, lettuce=True)
+def __init__(self, size, cheese=True, mushrooms=True, tomato=False)
 ```
 
 </div>
@@ -2117,8 +2117,7 @@ def __init__(self, size, cheese=True, pepperoni=True, tomato=False, lettuce=True
 <div dir="ltr">
 
 ```typescript
-constructor(size: any, cheese: boolean = true, pepperoni:boolean = true, tomato: boolean = false, lettuce: boolean = true) {}
-
+constructor(size: number, cheese: boolean = true, mushrooms: boolean = true, tomato: boolean = false) {}
 ```
 
 </div>
@@ -2130,7 +2129,7 @@ constructor(size: any, cheese: boolean = true, pepperoni:boolean = true, tomato:
 <div dir="ltr">
 
 ```javascript
-constructor(size, cheese = true, pepperoni = true, tomato = false, lettuce = true) {}
+constructor(size, cheese = true, mushrooms = true, tomato = false) {}
 ```
 
 </div>
@@ -2144,7 +2143,7 @@ constructor(size, cheese = true, pepperoni = true, tomato = false, lettuce = tru
 
 ```csharp
 
-public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
+public Burger(int size, bool cheese, bool mushrooms, bool tomato)
 
 ```
 
@@ -2159,7 +2158,7 @@ public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
 
 ```php
 
-public function __construct(int $size, bool $cheese, bool $pepperoni, bool $lettuce, bool $tomato)
+public function __construct(int $size, bool $cheese, bool $mushrooms, bool $tomato)
 
 ```
 
@@ -2174,7 +2173,7 @@ public function __construct(int $size, bool $cheese, bool $pepperoni, bool $lett
 
 ```go
 
-func Burger(size int, cheese bool, pepperoni bool, lettuce bool, tomato bool)
+func Burger(size int, cheese bool, mushrooms bool, tomato bool)
 
 ```
 
@@ -2188,7 +2187,7 @@ func Burger(size int, cheese bool, pepperoni bool, lettuce bool, tomato bool)
 <div dir="ltr">
 
 ```java
-public Burger(int size, boolean cheese, boolean pepperoni, boolean lettuce, boolean tomato)
+public Burger(int size, boolean cheese, boolean mushrooms, boolean tomato)
 ```
 
 </div>
@@ -2207,6 +2206,8 @@ public Burger(int size, boolean cheese, boolean pepperoni, boolean lettuce, bool
 
 </div>
 
+خلاصه‌اش این می‌شه که الگوی Builder یه الگوی ساخت آبجکته که اومده تا جواب مشکل «تابع سازنده تلسکوپی (Telescoping Constructor)» رو بده؛ یعنی همون تابع سازنده‌ای که هی ورودی‌های اختیاری بهش اضافه می‌شه و قاطی‌پاتی می‌شه. به جاش، آبجکت رو قدم‌به‌قدم و خوانا می‌سازیم.
+
 <br>
 
 **مثال برنامه‌نویسی**
@@ -2224,45 +2225,35 @@ public Burger(int size, boolean cheese, boolean pepperoni, boolean lettuce, bool
 
 ```python
 class Burger:
-    _size = None
-
-    _cheese = False
-    _pepperoni = False
-    _lettuce = False
-    _tomato = False
-
     def __init__(self, builder):
-        self._size = builder.size
-        self._cheese = builder.cheese
-        self._pepperoni = builder.pepperoni
-        self._lettuce = builder.lettuce
-        self._tomato = builder.tomato
+        self.size = builder.size
+        self.cheese = builder.cheese
+        self.mushrooms = builder.mushrooms
+        self.tomato = builder.tomato
+
+    def get_description(self):
+        return (
+            f"Burger: size {self.size}, cheese: {str(self.cheese).lower()}, "
+            f"mushrooms: {str(self.mushrooms).lower()}, tomato: {str(self.tomato).lower()}"
+        )
 
 
 class BurgerBuilder:
-    size = None
-
-    cheese = False
-    pepperoni = False
-    lettuce = False
-    tomato = False
-
     def __init__(self, size):
         self.size = size
+        self.cheese = False
+        self.mushrooms = False
+        self.tomato = False
 
-    def addPepperoni(self):
-        self.pepperoni = True
-        return self
-
-    def addLettuce(self):
-        self.lettuce = True
-        return self
-
-    def addCheese(self):
+    def add_cheese(self):
         self.cheese = True
         return self
 
-    def addTomato(self):
+    def add_mushrooms(self):
+        self.mushrooms = True
+        return self
+
+    def add_tomato(self):
         self.tomato = True
         return self
 
@@ -2272,9 +2263,10 @@ class BurgerBuilder:
 
 # ----------------------------
 
-burger = BurgerBuilder(10).addPepperoni().addLettuce().addTomato().build()
+burger = BurgerBuilder(14).add_cheese().add_mushrooms().build()
 
-print(vars(burger))
+print(burger.get_description())
+# Burger: size 14, cheese: true, mushrooms: true, tomato: false
 ```
 
 </div>
@@ -2287,50 +2279,45 @@ print(vars(burger))
 
 ```typescript
 class Burger {
-    private size: any;
-
-    private cheese: boolean = false;
-    private pepperoni: boolean = false;
-    private lettuce: boolean = false;
-    private tomato: boolean = false;
+    private size: number;
+    private cheese: boolean;
+    private mushrooms: boolean;
+    private tomato: boolean;
 
     constructor(builder: BurgerBuilder) {
         this.size = builder.size;
         this.cheese = builder.cheese;
-        this.pepperoni = builder.pepperoni;
-        this.lettuce = builder.lettuce;
+        this.mushrooms = builder.mushrooms;
         this.tomato = builder.tomato;
+    }
+
+    getDescription(): string {
+        return `Burger: size ${this.size}, cheese: ${this.cheese}, ` +
+            `mushrooms: ${this.mushrooms}, tomato: ${this.tomato}`;
     }
 }
 
 class BurgerBuilder {
     size: number;
-
     cheese: boolean = false;
-    pepperoni: boolean = false;
-    lettuce: boolean = false;
+    mushrooms: boolean = false;
     tomato: boolean = false;
 
     constructor(size: number) {
         this.size = size;
     }
 
-    addPepperoni() {
-        this.pepperoni = true;
-        return this;
-    }
-
-    addLettuce() {
-        this.lettuce = true;
-        return this;
-    }
-
-    addCheese() {
+    addCheese(): this {
         this.cheese = true;
         return this;
     }
 
-    addTomato() {
+    addMushrooms(): this {
+        this.mushrooms = true;
+        return this;
+    }
+
+    addTomato(): this {
         this.tomato = true;
         return this;
     }
@@ -2342,13 +2329,13 @@ class BurgerBuilder {
 
 // ----------------------------
 
-let burger = new BurgerBuilder(10)
-    .addPepperoni()
-    .addLettuce()
-    .addTomato()
+const burger = new BurgerBuilder(14)
+    .addCheese()
+    .addMushrooms()
     .build();
 
-console.log(Object.keys(burger));
+console.log(burger.getDescription());
+// Burger: size 14, cheese: true, mushrooms: true, tomato: false
 ```
 
 </div>
@@ -2364,9 +2351,13 @@ class Burger {
     constructor(builder) {
         this.size = builder.size;
         this.cheese = builder.cheese;
-        this.pepperoni = builder.pepperoni;
-        this.lettuce = builder.lettuce;
+        this.mushrooms = builder.mushrooms;
         this.tomato = builder.tomato;
+    }
+
+    getDescription() {
+        return `Burger: size ${this.size}, cheese: ${this.cheese}, ` +
+            `mushrooms: ${this.mushrooms}, tomato: ${this.tomato}`;
     }
 }
 
@@ -2374,23 +2365,17 @@ class BurgerBuilder {
     constructor(size) {
         this.size = size;
         this.cheese = false;
-        this.pepperoni = false;
-        this.lettuce = false;
+        this.mushrooms = false;
         this.tomato = false;
-    }
-
-    addPepperoni() {
-        this.pepperoni = true;
-        return this;
-    }
-
-    addLettuce() {
-        this.lettuce = true;
-        return this;
     }
 
     addCheese() {
         this.cheese = true;
+        return this;
+    }
+
+    addMushrooms() {
+        this.mushrooms = true;
         return this;
     }
 
@@ -2404,15 +2389,15 @@ class BurgerBuilder {
     }
 }
 
+// ----------------------------
 
-let burger = new BurgerBuilder(10)
-    .addPepperoni()
-    .addLettuce()
-    .addTomato()
+const burger = new BurgerBuilder(14)
+    .addCheese()
+    .addMushrooms()
     .build();
 
-console.log(burger);
-console.log(Object.keys(burger));
+console.log(burger.getDescription());
+// Burger: size 14, cheese: true, mushrooms: true, tomato: false
 ```
 
 </div>
@@ -2429,23 +2414,24 @@ class Burger
 {
   private int mSize;
   private bool mCheese;
-  private bool mPepperoni;
-  private bool mLettuce;
+  private bool mMushrooms;
   private bool mTomato;
 
   public Burger(BurgerBuilder builder)
   {
     this.mSize = builder.Size;
     this.mCheese = builder.Cheese;
-    this.mPepperoni = builder.Pepperoni;
-    this.mLettuce = builder.Lettuce;
+    this.mMushrooms = builder.Mushrooms;
     this.mTomato = builder.Tomato;
   }
 
   public string GetDescription()
   {
     var sb = new StringBuilder();
-    sb.Append($"This is {this.mSize} inch Burger. ");
+    sb.Append($"Burger: size {this.mSize}, ");
+    sb.Append($"cheese: {this.mCheese.ToString().ToLower()}, ");
+    sb.Append($"mushrooms: {this.mMushrooms.ToString().ToLower()}, ");
+    sb.Append($"tomato: {this.mTomato.ToString().ToLower()}");
     return sb.ToString();
   }
 }
@@ -2453,8 +2439,7 @@ class Burger
 class BurgerBuilder {
   public int Size;
   public bool Cheese;
-  public bool Pepperoni;
-  public bool Lettuce;
+  public bool Mushrooms;
   public bool Tomato;
 
   public BurgerBuilder(int size)
@@ -2468,15 +2453,9 @@ class BurgerBuilder {
     return this;
   }
 
-  public BurgerBuilder AddPepperoni()
+  public BurgerBuilder AddMushrooms()
   {
-    this.Pepperoni = true;
-    return this;
-  }
-
-  public BurgerBuilder AddLettuce()
-  {
-    this.Lettuce = true;
+    this.Mushrooms = true;
     return this;
   }
 
@@ -2494,12 +2473,12 @@ class BurgerBuilder {
 
 // ----------------------------
 
-var burger = new BurgerBuilder(4).AddCheese()
-                                .AddPepperoni()
-                                .AddLettuce()
-                                .AddTomato()
-                                .Build();
+var burger = new BurgerBuilder(14)
+                .AddCheese()
+                .AddMushrooms()
+                .Build();
 Console.WriteLine(burger.GetDescription());
+// Burger: size 14, cheese: true, mushrooms: true, tomato: false
 
 ```
 
@@ -2516,42 +2495,40 @@ Console.WriteLine(burger.GetDescription());
 class Burger {
     private $size;
     private $cheese = false;
-    private $pepperoni = false;
-    private $lettuce = false;
+    private $mushrooms = false;
     private $tomato = false;
 
     public function __construct($builder) {
         $this->size = $builder->size;
         $this->cheese = $builder->cheese;
-        $this->pepperoni = $builder->pepperoni;
-        $this->lettuce = $builder->lettuce;
+        $this->mushrooms = $builder->mushrooms;
         $this->tomato = $builder->tomato;
+    }
+
+    public function getDescription() {
+        $b = fn($v) => $v ? 'true' : 'false';
+        return "Burger: size {$this->size}, cheese: {$b($this->cheese)}, "
+            . "mushrooms: {$b($this->mushrooms)}, tomato: {$b($this->tomato)}";
     }
 }
 
 class BurgerBuilder {
     public $size;
     public $cheese = false;
-    public $pepperoni = false;
-    public $lettuce = false;
+    public $mushrooms = false;
     public $tomato = false;
 
     public function __construct($size) {
         $this->size = $size;
     }
 
-    public function addPepperoni() {
-        $this->pepperoni = true;
-        return $this;
-    }
-
-    public function addLettuce() {
-        $this->lettuce = true;
-        return $this;
-    }
-
     public function addCheese() {
         $this->cheese = true;
+        return $this;
+    }
+
+    public function addMushrooms() {
+        $this->mushrooms = true;
         return $this;
     }
 
@@ -2565,14 +2542,13 @@ class BurgerBuilder {
     }
 }
 
-$burger = (new BurgerBuilder(10))
+$burger = (new BurgerBuilder(14))
             ->addCheese()
-            ->addPepperoni()
-            ->addLettuce()
-            ->addTomato()
+            ->addMushrooms()
             ->build();
 
-var_dump(get_object_vars($burger));
+echo $burger->getDescription();
+// Burger: size 14, cheese: true, mushrooms: true, tomato: false
 
 ```
 
@@ -2589,77 +2565,65 @@ var_dump(get_object_vars($burger));
 package main
 
 import (
-"fmt"
-"strings"
+	"fmt"
 )
 
 type Burger struct {
-Size int
-Cheese bool
-Pepperoni bool
-Lettuce bool
-Tomato bool
+	Size      int
+	Cheese    bool
+	Mushrooms bool
+	Tomato    bool
 }
 
 func NewBurger(builder *BurgerBuilder) *Burger {
-return &Burger{
-Size: builder.Size,
-Cheese: builder.Cheese,
-Pepperoni: builder.Pepperoni,
-Lettuce: builder.Lettuce,
-Tomato: builder.Tomato,
-}
+	return &Burger{
+		Size:      builder.Size,
+		Cheese:    builder.Cheese,
+		Mushrooms: builder.Mushrooms,
+		Tomato:    builder.Tomato,
+	}
 }
 
 func (b *Burger) GetDescription() string {
-var sb strings.Builder
-sb.WriteString(fmt.Sprintf("This is %d inch Burger. ", b.Size))
-return sb.String()
+	return fmt.Sprintf("Burger: size %d, cheese: %t, mushrooms: %t, tomato: %t",
+		b.Size, b.Cheese, b.Mushrooms, b.Tomato)
 }
 
 type BurgerBuilder struct {
-Size int
-Cheese bool
-Pepperoni bool
-Lettuce bool
-Tomato bool
+	Size      int
+	Cheese    bool
+	Mushrooms bool
+	Tomato    bool
 }
 
 func NewBurgerBuilder(size int) *BurgerBuilder {
-return &BurgerBuilder{Size: size}
+	return &BurgerBuilder{Size: size}
 }
 
 func (b *BurgerBuilder) AddCheese() *BurgerBuilder {
-b.Cheese = true
-return b
+	b.Cheese = true
+	return b
 }
 
-func (b *BurgerBuilder) AddPepperoni() *BurgerBuilder {
-b.Pepperoni = true
-return b
-}
-
-func (b *BurgerBuilder) AddLettuce() *BurgerBuilder {
-b.Lettuce = true
-return b
+func (b *BurgerBuilder) AddMushrooms() *BurgerBuilder {
+	b.Mushrooms = true
+	return b
 }
 
 func (b *BurgerBuilder) AddTomato() *BurgerBuilder {
-b.Tomato = true
-return b
+	b.Tomato = true
+	return b
 }
 
 func (b *BurgerBuilder) Build() *Burger {
-return NewBurger(b)
+	return NewBurger(b)
 }
 
 func main() {
-burger := NewBurgerBuilder(4).AddCheese().AddPepperoni().AddLettuce().AddTomato().Build()
-fmt.Println(burger.GetDescription())
+	burger := NewBurgerBuilder(14).AddCheese().AddMushrooms().Build()
+	fmt.Println(burger.GetDescription())
+	// Burger: size 14, cheese: true, mushrooms: true, tomato: false
 }
-
-
-
 
 ```
 
@@ -2676,70 +2640,63 @@ fmt.Println(burger.GetDescription())
 class Burger {
     private int size;
     private boolean cheese;
-    private boolean pepperoni;
-    private boolean lettuce;
+    private boolean mushrooms;
     private boolean tomato;
 
     public Burger(BurgerBuilder builder) {
         this.size = builder.size;
         this.cheese = builder.cheese;
-        this.pepperoni = builder.pepperoni;
-        this.lettuce = builder.lettuce;
+        this.mushrooms = builder.mushrooms;
         this.tomato = builder.tomato;
     }
+
     public String getDescription() {
-        var sb = new StringBuilder();
-        sb.append("This is " + this.size + " inch Burger.");
-        return sb.toString();
-    }
-    public static BurgerBuilder builder() {
-        return new BurgerBuilder();
+        return "Burger: size " + this.size
+                + ", cheese: " + this.cheese
+                + ", mushrooms: " + this.mushrooms
+                + ", tomato: " + this.tomato;
     }
 }
 
 class BurgerBuilder {
     public int size;
     public boolean cheese;
-    public boolean pepperoni;
-    public boolean lettuce;
+    public boolean mushrooms;
     public boolean tomato;
+
+    public BurgerBuilder(int size) {
+        this.size = size;
+    }
+
+    public BurgerBuilder addCheese() {
+        this.cheese = true;
+        return this;
+    }
+
+    public BurgerBuilder addMushrooms() {
+        this.mushrooms = true;
+        return this;
+    }
+
+    public BurgerBuilder addTomato() {
+        this.tomato = true;
+        return this;
+    }
 
     public Burger build() {
         return new Burger(this);
-    }
-    public BurgerBuilder size(int size) {
-        this.size = size;
-        return this;
-    }
-    public BurgerBuilder cheese(boolean cheese) {
-        this.cheese = cheese;
-        return this;
-    }
-    public BurgerBuilder pepperoni(boolean pepperoni) {
-        this.pepperoni = pepperoni;
-        return this;
-    }
-    public BurgerBuilder lettuce(boolean lettuce) {
-        this.lettuce = lettuce;
-        return this;
-    }
-    public BurgerBuilder tomato(boolean tomato) {
-        this.tomato = tomato;
-        return this;
     }
 }
 
 // ----------------------------
 
-Burger burger = Burger.builder()
-        .size(10)
-        .cheese(true)
-        .pepperoni(true)
-        .lettuce(false)
-        .tomato(false)
+Burger burger = new BurgerBuilder(14)
+        .addCheese()
+        .addMushrooms()
         .build();
 
 System.out.println(burger.getDescription());
+// Burger: size 14, cheese: true, mushrooms: true, tomato: false
 ```
 
 </div>
@@ -2755,79 +2712,80 @@ System.out.println(burger.getDescription());
 #include <string>
 #include <memory>
 
+class BurgerBuilder;
+
 class Burger {
 private:
     int size;
     bool cheese;
-    bool pepperoni;
-    bool lettuce;
+    bool mushrooms;
     bool tomato;
 
 public:
-    Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
-        : size(size), cheese(cheese), pepperoni(pepperoni), lettuce(lettuce), tomato(tomato) {}
-    
+    Burger(int size, bool cheese, bool mushrooms, bool tomato)
+        : size(size), cheese(cheese), mushrooms(mushrooms), tomato(tomato) {}
+
     std::string getDescription() const {
-        return "This is " + std::to_string(size) + " inch Burger.";
+        auto b = [](bool v) { return v ? "true" : "false"; };
+        return "Burger: size " + std::to_string(size) +
+               ", cheese: " + b(cheese) +
+               ", mushrooms: " + b(mushrooms) +
+               ", tomato: " + b(tomato);
     }
 };
 
 class BurgerBuilder {
 private:
-    int size = 0;
+    int size;
     bool cheese = false;
-    bool pepperoni = false;
-    bool lettuce = false;
+    bool mushrooms = false;
     bool tomato = false;
 
 public:
-    BurgerBuilder& setSize(int size) {
-        this->size = size;
+    explicit BurgerBuilder(int size) : size(size) {}
+
+    BurgerBuilder& addCheese() {
+        this->cheese = true;
         return *this;
     }
-    
-    BurgerBuilder& addCheese(bool cheese = true) {
-        this->cheese = cheese;
+
+    BurgerBuilder& addMushrooms() {
+        this->mushrooms = true;
         return *this;
     }
-    
-    BurgerBuilder& addPepperoni(bool pepperoni = true) {
-        this->pepperoni = pepperoni;
+
+    BurgerBuilder& addTomato() {
+        this->tomato = true;
         return *this;
     }
-    
-    BurgerBuilder& addLettuce(bool lettuce = true) {
-        this->lettuce = lettuce;
-        return *this;
-    }
-    
-    BurgerBuilder& addTomato(bool tomato = true) {
-        this->tomato = tomato;
-        return *this;
-    }
-    
+
     std::unique_ptr<Burger> build() {
-        return std::make_unique<Burger>(size, cheese, pepperoni, lettuce, tomato);
+        return std::make_unique<Burger>(size, cheese, mushrooms, tomato);
     }
 };
 
-// Usage
+// ----------------------------
+
 int main() {
-    auto burger = BurgerBuilder()
-        .setSize(10)
-        .addCheese(true)
-        .addPepperoni(true)
-        .addLettuce(false)
-        .addTomato(false)
+    auto burger = BurgerBuilder(14)
+        .addCheese()
+        .addMushrooms()
         .build();
-    
+
     std::cout << burger->getDescription() << std::endl;
-    
+    // Burger: size 14, cheese: true, mushrooms: true, tomato: false
+
     return 0;
 }
 ```
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی ساختن یه آبجکت کلی گزینه اختیاری داره و می‌خوای قدم‌به‌قدم و خوانا بسازیش»؛ ❌ «وقتی آبجکتت دو سه تا فیلد ساده داره و یه تابع سازنده معمولی کافیه».
+> 🪤 **دام رایج:** «build() رو صدا نزنی و با خود Builder کار کنی، یا فیلدهای اجباری رو نگیری و آبجکت نصفه‌نیمه بسازی».
+> 🔗 **فرقش با الگوهای دیگه:** «Builder یه آبجکت رو مرحله‌به‌مرحله می‌سازه، نه اینکه بین چند نوع آبجکت آماده انتخاب کنه».
+
 
 <br>
 
