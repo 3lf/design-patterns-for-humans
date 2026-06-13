@@ -11276,6 +11276,9 @@ int main() {
 
 </div>
 
+به زبون خودمون: یه شیء به اسم «سوژه (Subject)» یه فهرست از وابسته‌هاش رو نگه می‌داره که بهشون می‌گیم «ناظر (Observer)».
+هر وقت حال و وضعِ سوژه عوض می‌شه، خودش یکی‌یکی به همه ناظرها خبر می‌ده؛ معمولاً با صدا زدن یکی از متدهاشون.
+
 **مثال برنامه‌نویسی**
 
 در بخش اول یک کلاس برای ذخیره کردن یک شغل می‌سازیم و در بخش بعدی یک کلاس برای جویندگان کار می‌سازیم!
@@ -11290,8 +11293,6 @@ int main() {
 
 ```python
 class JobPost:
-    _title = None
-
     def __init__(self, title):
         self.title = title
 
@@ -11300,8 +11301,6 @@ class JobPost:
 
 
 class JobSeeker:
-    _name = None
-
     def __init__(self, name):
         self.name = name
 
@@ -11309,15 +11308,16 @@ class JobSeeker:
         print('Hi ' + self.name + '! New job posted: ' + job.getTitle())
 
 
-class JobCategory:
-    _observers = []
+class EmploymentAgency:
+    def __init__(self):
+        self.observers = []
 
     def notify(self, jobPosting):
-        for observer in self._observers:
+        for observer in self.observers:
             observer.onJobPosted(jobPosting)
 
     def attach(self, observer):
-        self._observers.append(observer)
+        self.observers.append(observer)
 
     def addJob(self, jobPosting):
         self.notify(jobPosting)
@@ -11328,11 +11328,11 @@ class JobCategory:
 johnDoe = JobSeeker('John Doe')
 janeDoe = JobSeeker('Jane Doe')
 
-jobPostings = JobCategory()
-jobPostings.attach(janeDoe)
+jobPostings = EmploymentAgency()
 jobPostings.attach(johnDoe)
+jobPostings.attach(janeDoe)
 
-jobPostings.addJob(JobPost('Software Engineer at XXX'))
+jobPostings.addJob(JobPost('Software Engineer'))
 
 # Output
 # Hi John Doe! New job posted: Software Engineer
@@ -11350,7 +11350,7 @@ jobPostings.addJob(JobPost('Software Engineer at XXX'))
 
 ```typescript
 class JobPost {
-    private title: string | null = null;
+    private title: string;
 
     constructor(title: string) {
         this.title = title;
@@ -11362,7 +11362,7 @@ class JobPost {
 }
 
 class JobSeeker {
-    private name: string | null = null;
+    private name: string;
 
     constructor(name: string) {
         this.name = name;
@@ -11373,7 +11373,7 @@ class JobSeeker {
     }
 }
 
-class JobCategory {
+class EmploymentAgency {
     private observers: JobSeeker[] = [];
 
     notify(jobPosting: JobPost): void {
@@ -11396,11 +11396,11 @@ class JobCategory {
 const johnDoe = new JobSeeker("John Doe");
 const janeDoe = new JobSeeker("Jane Doe");
 
-const jobPostings = new JobCategory();
-jobPostings.attach(janeDoe);
+const jobPostings = new EmploymentAgency();
 jobPostings.attach(johnDoe);
+jobPostings.attach(janeDoe);
 
-jobPostings.addJob(new JobPost("Software Engineer at XXX"));
+jobPostings.addJob(new JobPost("Software Engineer"));
 
 // Output
 // Hi John Doe! New job posted: Software Engineer
@@ -11435,7 +11435,7 @@ class JobSeeker {
     }
 }
 
-class JobCategory {
+class EmploymentAgency {
     constructor() {
         this.observers = [];
     }
@@ -11459,11 +11459,15 @@ class JobCategory {
 const johnDoe = new JobSeeker("John Doe");
 const janeDoe = new JobSeeker("Jane Doe");
 
-const jobPostings = new JobCategory();
-jobPostings.attach(janeDoe);
+const jobPostings = new EmploymentAgency();
 jobPostings.attach(johnDoe);
+jobPostings.attach(janeDoe);
 
-jobPostings.addJob(new JobPost("Software Engineer at XXX"));
+jobPostings.addJob(new JobPost("Software Engineer"));
+
+// Output
+// Hi John Doe! New job posted: Software Engineer
+// Hi Jane Doe! New job posted: Software Engineer
 ```
 
 </div>
@@ -11494,13 +11498,13 @@ class JobSeeker : IObserver<JobPost>
     Name = name;
   }
 
-  //Method is not being called by JobPostings class currently
+  //Method is not being called by EmploymentAgency class currently
   public void OnCompleted()
   {
     //No Implementation
   }
 
-  //Method is not being called by JobPostings class currently
+  //Method is not being called by EmploymentAgency class currently
   public void OnError(Exception error)
   {
     //No Implementation
@@ -11508,17 +11512,17 @@ class JobSeeker : IObserver<JobPost>
 
   public void OnNext(JobPost value)
   {
-    Console.WriteLine($"Hi {Name} ! New job posted: {value.Title}");
+    Console.WriteLine($"Hi {Name}! New job posted: {value.Title}");
   }
 }
 
 
-class JobPostings : IObservable<JobPost>
+class EmploymentAgency : IObservable<JobPost>
 {
   private List<IObserver<JobPost>> mObservers;
   private List<JobPost> mJobPostings;
 
-  public JobPostings()
+  public EmploymentAgency()
   {
     mObservers = new List<IObserver<JobPost>>();
     mJobPostings = new List<JobPost>();
@@ -11575,7 +11579,7 @@ var johnDoe = new JobSeeker("John Doe");
 var janeDoe = new JobSeeker("Jane Doe");
 
 //Create publisher and attch subscribers
-var jobPostings = new JobPostings();
+var jobPostings = new EmploymentAgency();
 jobPostings.Subscribe(johnDoe);
 jobPostings.Subscribe(janeDoe);
 
@@ -11620,14 +11624,14 @@ class JobSeeker implements SplObserver
 
     public function update(SplSubject $subject)
     {
-        if ($subject instanceof JobPostings) {
+        if ($subject instanceof EmploymentAgency) {
             $jobPost = $subject->getJobPost();
-            echo "Hi {$this->name} ! New job posted: {$jobPost->getTitle()}\n";
+            echo "Hi {$this->name}! New job posted: {$jobPost->getTitle()}\n";
         }
     }
 }
 
-class JobPostings implements SplSubject
+class EmploymentAgency implements SplSubject
 {
     private $observers;
     private $jobPostings;
@@ -11672,7 +11676,7 @@ $johnDoe = new JobSeeker("John Doe");
 $janeDoe = new JobSeeker("Jane Doe");
 
 //Create publisher and attach subscribers
-$jobPostings = new JobPostings();
+$jobPostings = new EmploymentAgency();
 $jobPostings->attach($johnDoe);
 $jobPostings->attach($janeDoe);
 
@@ -11723,41 +11727,41 @@ func (js *JobSeeker) OnJobPosted(job *JobPost) {
 	fmt.Printf("Hi %s! New job posted: %s\n", js.name, job.GetTitle())
 }
 
-type JobCategory struct {
+type EmploymentAgency struct {
 	observers []*JobSeeker
 }
 
-func NewJobCategory() *JobCategory {
-	return &JobCategory{}
+func NewEmploymentAgency() *EmploymentAgency {
+	return &EmploymentAgency{}
 }
 
-func (jc *JobCategory) Notify(jobPosting *JobPost) {
-	for _, observer := range jc.observers {
+func (ea *EmploymentAgency) Notify(jobPosting *JobPost) {
+	for _, observer := range ea.observers {
 		observer.OnJobPosted(jobPosting)
 	}
 }
 
-func (jc *JobCategory) Attach(observer *JobSeeker) {
-	jc.observers = append(jc.observers, observer)
+func (ea *EmploymentAgency) Attach(observer *JobSeeker) {
+	ea.observers = append(ea.observers, observer)
 }
 
-func (jc *JobCategory) AddJob(jobPosting *JobPost) {
-	jc.Notify(jobPosting)
+func (ea *EmploymentAgency) AddJob(jobPosting *JobPost) {
+	ea.Notify(jobPosting)
 }
 
 func main() {
 	johnDoe := NewJobSeeker("John Doe")
 	janeDoe := NewJobSeeker("Jane Doe")
 
-	jobPostings := NewJobCategory()
-	jobPostings.Attach(janeDoe)
+	jobPostings := NewEmploymentAgency()
 	jobPostings.Attach(johnDoe)
+	jobPostings.Attach(janeDoe)
 
-	jobPostings.AddJob(NewJobPost("Software Engineer at XXX"))
+	jobPostings.AddJob(NewJobPost("Software Engineer"))
 
 	// Output
-	// Hi Jane Doe! New job posted: Software Engineer at XXX
-	// Hi John Doe! New job posted: Software Engineer at XXX
+	// Hi John Doe! New job posted: Software Engineer
+	// Hi Jane Doe! New job posted: Software Engineer
 }
 
 
@@ -11797,7 +11801,7 @@ class JobSeeker {
     }
 }
 
-class JobCategory {
+class EmploymentAgency {
     private List<JobSeeker> observers = new ArrayList<>();
 
     public void notify(JobPost jobPosting) {
@@ -11820,13 +11824,13 @@ class JobCategory {
 JobSeeker johnDoe = new JobSeeker("John Doe");
 JobSeeker janeDoe = new JobSeeker("Jane Doe");
 
-JobCategory jobPostings = new JobCategory();
-jobPostings.attach(janeDoe);
+EmploymentAgency jobPostings = new EmploymentAgency();
 jobPostings.attach(johnDoe);
+jobPostings.attach(janeDoe);
 
-jobPostings.addJob(new JobPost("Software Engineer at IBM"));
-// Hi Jane Doe! New job posted: Software Engineer at IBM
-// Hi John Doe! New job posted: Software Engineer at IBM
+jobPostings.addJob(new JobPost("Software Engineer"));
+// Hi John Doe! New job posted: Software Engineer
+// Hi Jane Doe! New job posted: Software Engineer
 ```
 
 </div>
@@ -11875,7 +11879,7 @@ public:
 };
 
 // Subject class
-class JobCategory {
+class EmploymentAgency {
 private:
     std::vector<std::shared_ptr<JobSeeker>> observers;
 
@@ -11907,19 +11911,25 @@ int main() {
     auto johnDoe = std::make_shared<JobSeeker>("John Doe");
     auto janeDoe = std::make_shared<JobSeeker>("Jane Doe");
     
-    JobCategory jobPostings;
-    jobPostings.attach(janeDoe);
+    EmploymentAgency jobPostings;
     jobPostings.attach(johnDoe);
+    jobPostings.attach(janeDoe);
     
-    jobPostings.addJob(JobPost("Software Engineer at IBM"));
-    // Hi Jane Doe! New job posted: Software Engineer at IBM
-    // Hi John Doe! New job posted: Software Engineer at IBM
+    jobPostings.addJob(JobPost("Software Engineer"));
+    // Hi John Doe! New job posted: Software Engineer
+    // Hi Jane Doe! New job posted: Software Engineer
     
     return 0;
 }
 ```
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی یه تغییر باید چند جای مستقل رو خودکار باخبر کنه و نمی‌خوای فرستنده بدونه گیرنده‌ها کی‌ان»؛ ❌ «وقتی فقط یه شنونده داری یا یه صدا زدن مستقیم کافیه».
+> 🪤 **دام رایج:** «یادت بره ناظرها رو detach کنی، نشتی حافظه و خبردادن به شیء مرده می‌گیری».
+> 🔗 **فرقش با [میانجی (Mediator)](#میانجی-mediator-):** «ناظر یه‌طرفه از سوژه به ناظرها خبر پخش می‌کنه؛ میانجی رفت‌وبرگشتِ چندتا همکار رو از یه مرکز هماهنگ می‌کنه».
+
 
 <br>
 
