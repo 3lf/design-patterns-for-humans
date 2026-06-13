@@ -7007,11 +7007,16 @@ int main() {
 
 </div>
 
+به زبون خودمون: وزن‌سبک یه آبجکته که با share کردنِ بیشترین داده ممکن با آبجکت‌های مشابه، مصرف حافظه رو کم می‌کنه.
+وقتی قراره تعداد خیلی زیادی آبجکت بسازی و حالت تکراری و ساده‌شون کلی حافظه می‌بلعه، این پترن به دادت می‌رسه.
+
 **مثال برنامه‌نویسی**
 
 بیا مثال غرفه چای رو پیاده‌سازی کنیم. اول باید انواع چای و چای‌ساز رو پیاده‌سازی کنیم.
 
 توی مرحله بعد ما یک کلاس `TeaShop` داریم که وظیفه ثبت سفارش و آماده کردن اون‌هارو به عهده داره.
+
+برای اینکه حواس‌مون پیشِ خودِ پترن بمونه، اینجا کلاس چای رو خالی گذاشتیم؛ توی دنیای واقعی همین آبجکتِ مشترک می‌تونه داده‌های سنگینِ مشترک رو نگه داره. نکته اصلی اینه که چای‌ساز برای هر «نوع» چای فقط یه بار آبجکت می‌سازه و دفعه‌های بعد همون رو پس می‌ده؛ شماره میز هم از بیرون به سفارش وصل می‌شه، نه داخل خودِ چای.
 
 <details>
 <summary>Python</summary>
@@ -7019,48 +7024,60 @@ int main() {
 <div dir="ltr">
 
 ```python
-class GreenTea:
+# KarakTea is the flyweight: the shared, intrinsic part.
+class KarakTea:
     pass
 
 
+# TeaMaker acts as the factory and caches one tea object per type.
 class TeaMaker:
-    _availableTea = {}
+    def __init__(self):
+        self.available_tea = {}
 
-    def make(self, preference):
-        if not preference in self._availableTea:
-            self._availableTea[preference] = GreenTea()
+    def make(self, tea_type):
+        if tea_type not in self.available_tea:
+            self.available_tea[tea_type] = KarakTea()
 
-        return self._availableTea[preference]
+        return self.available_tea[tea_type]
+
+    def total_teas_made(self):
+        return len(self.available_tea)
 
 
 class TeaShop:
-    _orders = {}
-    _teaMaker = None
+    def __init__(self, tea_maker):
+        self.orders = {}
+        self.tea_maker = tea_maker
 
-    def __init__(self, teaMaker):
-        self._teaMaker = teaMaker
-
-    def takeOrder(self, teaType, table):
-        self._orders[table] = self._teaMaker.make(teaType)
+    def take_order(self, tea_type, table):
+        # Table number is the extrinsic state, passed in from outside.
+        self.orders[table] = self.tea_maker.make(tea_type)
 
     def serve(self):
-        for table, tea in self._orders.iteritems():
-            print("Serving tea to table #" + str(table))
+        for table in self.orders:
+            print("Serving Karak Tea to table #" + str(table))
 
 
 # ----------------------------
 
-teaMaker = TeaMaker()
-shop = TeaShop(teaMaker)
+tea_maker = TeaMaker()
+shop = TeaShop(tea_maker)
 
-shop.takeOrder('less sugar', 1)
-shop.takeOrder('more milk', 2)
-shop.takeOrder('without sugar', 5)
+shop.take_order("Karak", 1)
+shop.take_order("Karak", 3)
+shop.take_order("Karak", 5)
+shop.take_order("Karak", 7)
+shop.take_order("Karak", 9)
 
 shop.serve()
-# Serving tea to table# 1
-# Serving tea to table# 2
-# Serving tea to table# 5
+
+print("Total tea objects made: " + str(tea_maker.total_teas_made()))
+# Serving Karak Tea to table #1
+# Serving Karak Tea to table #3
+# Serving Karak Tea to table #5
+# Serving Karak Tea to table #7
+# Serving Karak Tea to table #9
+# Total tea objects made: 1
 ```
 
 </div>
@@ -7072,55 +7089,67 @@ shop.serve()
 <div dir="ltr">
 
 ```typescript
-class GreenTea {
+// KarakTea is the flyweight: the shared, intrinsic part.
+class KarakTea {
 }
 
+// TeaMaker acts as the factory and caches one tea object per type.
 class TeaMaker {
-    private availableTea: { [key: string]: GreenTea } = {};
+    private availableTea: { [key: string]: KarakTea } = {};
 
-    make(preference: string): GreenTea {
-        if (!(preference in this.availableTea)) {
-            this.availableTea[preference] = new GreenTea();
+    make(teaType: string): KarakTea {
+        if (!(teaType in this.availableTea)) {
+            this.availableTea[teaType] = new KarakTea();
         }
 
-        return this.availableTea[preference];
+        return this.availableTea[teaType];
+    }
+
+    totalTeasMade(): number {
+        return Object.keys(this.availableTea).length;
     }
 }
 
 class TeaShop {
-    private orders: { [key: number]: GreenTea } = {};
+    private orders: { [key: number]: KarakTea } = {};
     private teaMaker: TeaMaker;
 
     constructor(teaMaker: TeaMaker) {
         this.teaMaker = teaMaker;
     }
 
-    takeOrder(teaType: string, table: number) {
+    takeOrder(teaType: string, table: number): void {
+        // Table number is the extrinsic state, passed in from outside.
         this.orders[table] = this.teaMaker.make(teaType);
     }
 
-    serve() {
+    serve(): void {
         for (const table in this.orders) {
-            const tea = this.orders[table];
-            console.log(`Serving tea to table #${table}`);
+            console.log("Serving Karak Tea to table #" + table);
         }
     }
 }
 
 // ----------------------------
 
-    let
-teaMaker = new TeaMaker();
-let shop = new TeaShop(teaMaker);
+const teaMaker = new TeaMaker();
+const shop = new TeaShop(teaMaker);
 
-shop.takeOrder("less sugar", 1);
-shop.takeOrder("more milk", 2);
-shop.takeOrder("without sugar", 5);
+shop.takeOrder("Karak", 1);
+shop.takeOrder("Karak", 3);
+shop.takeOrder("Karak", 5);
+shop.takeOrder("Karak", 7);
+shop.takeOrder("Karak", 9);
 
 shop.serve();
-// Serving tea to table# 1
-// Serving tea to table# 2
-// Serving tea to table# 5
+
+console.log("Total tea objects made: " + teaMaker.totalTeasMade());
+// Serving Karak Tea to table #1
+// Serving Karak Tea to table #3
+// Serving Karak Tea to table #5
+// Serving Karak Tea to table #7
+// Serving Karak Tea to table #9
+// Total tea objects made: 1
 ```
 
 </div>
@@ -7134,20 +7163,26 @@ shop.serve();
 <div dir="ltr">
 
 ```javascript
-class GreenTea {
+// KarakTea is the flyweight: the shared, intrinsic part.
+class KarakTea {
 }
 
+// TeaMaker acts as the factory and caches one tea object per type.
 class TeaMaker {
     constructor() {
         this.availableTea = {};
     }
 
-    make(preference) {
-        if (!(preference in this.availableTea)) {
-            this.availableTea[preference] = new GreenTea();
+    make(teaType) {
+        if (!(teaType in this.availableTea)) {
+            this.availableTea[teaType] = new KarakTea();
         }
 
-        return this.availableTea[preference];
+        return this.availableTea[teaType];
+    }
+
+    totalTeasMade() {
+        return Object.keys(this.availableTea).length;
     }
 }
 
@@ -7158,13 +7193,13 @@ class TeaShop {
     }
 
     takeOrder(teaType, table) {
+        // Table number is the extrinsic state, passed in from outside.
         this.orders[table] = this.teaMaker.make(teaType);
     }
 
     serve() {
         for (const table in this.orders) {
-            const tea = this.orders[table];
-            console.log(`Serving tea to table #${table}`);
+            console.log("Serving Karak Tea to table #" + table);
         }
     }
 }
@@ -7173,14 +7208,21 @@ class TeaShop {
 const teaMaker = new TeaMaker();
 const shop = new TeaShop(teaMaker);
 
-shop.takeOrder("less sugar", 1);
-shop.takeOrder("more milk", 2);
-shop.takeOrder("without sugar", 5);
+shop.takeOrder("Karak", 1);
+shop.takeOrder("Karak", 3);
+shop.takeOrder("Karak", 5);
+shop.takeOrder("Karak", 7);
+shop.takeOrder("Karak", 9);
 
 shop.serve();
-// Serving tea to table #1
-// Serving tea to table #2
-// Serving tea to table #5
+
+console.log("Total tea objects made: " + teaMaker.totalTeasMade());
+// Serving Karak Tea to table #1
+// Serving Karak Tea to table #3
+// Serving Karak Tea to table #5
+// Serving Karak Tea to table #7
+// Serving Karak Tea to table #9
+// Total tea objects made: 1
 ```
 
 </div>
@@ -7194,31 +7236,35 @@ shop.serve();
 
 ```csharp
 
-// Anything that will be cached is flyweight.
-// Types of tea here will be flyweights.
+// KarakTea is the flyweight: the shared, intrinsic part.
 class KarakTea
 {
 }
 
-// Acts as a factory and saves the tea
+// Acts as a factory and caches one tea object per type.
 class TeaMaker
 {
-  private Dictionary<string,KarakTea> mAvailableTea = new Dictionary<string,KarakTea>();
+  private Dictionary<string, KarakTea> mAvailableTea = new Dictionary<string, KarakTea>();
 
-  public KarakTea Make(string preference)
+  public KarakTea Make(string teaType)
   {
-    if (!mAvailableTea.ContainsKey(preference))
+    if (!mAvailableTea.ContainsKey(teaType))
     {
-      mAvailableTea[preference] = new KarakTea();
+      mAvailableTea[teaType] = new KarakTea();
     }
 
-    return mAvailableTea[preference];
+    return mAvailableTea[teaType];
+  }
+
+  public int TotalTeasMade()
+  {
+    return mAvailableTea.Count;
   }
 }
 
 class TeaShop
 {
-  private Dictionary<int,KarakTea> mOrders = new Dictionary<int,KarakTea>();
+  private Dictionary<int, KarakTea> mOrders = new Dictionary<int, KarakTea>();
   private readonly TeaMaker mTeaMaker;
 
   public TeaShop(TeaMaker teaMaker)
@@ -7228,13 +7274,15 @@ class TeaShop
 
   public void TakeOrder(string teaType, int table)
   {
+    // Table number is the extrinsic state, passed in from outside.
     mOrders[table] = mTeaMaker.Make(teaType);
   }
 
   public void Serve()
   {
-    foreach(var table  in mOrders.Keys){
-      Console.WriteLine($"Serving Tea to table # {table}");
+    foreach (var table in mOrders.Keys)
+    {
+      Console.WriteLine("Serving Karak Tea to table #" + table);
     }
   }
 }
@@ -7244,14 +7292,21 @@ class TeaShop
 var teaMaker = new TeaMaker();
 var teaShop = new TeaShop(teaMaker);
 
-teaShop.TakeOrder("less sugar", 1);
-teaShop.TakeOrder("more milk", 2);
-teaShop.TakeOrder("without sugar", 5);
+teaShop.TakeOrder("Karak", 1);
+teaShop.TakeOrder("Karak", 3);
+teaShop.TakeOrder("Karak", 5);
+teaShop.TakeOrder("Karak", 7);
+teaShop.TakeOrder("Karak", 9);
 
 teaShop.Serve();
-// Serving tea to table# 1
-// Serving tea to table# 2
-// Serving tea to table# 5
+
+Console.WriteLine("Total tea objects made: " + teaMaker.TotalTeasMade());
+// Serving Karak Tea to table #1
+// Serving Karak Tea to table #3
+// Serving Karak Tea to table #5
+// Serving Karak Tea to table #7
+// Serving Karak Tea to table #9
+// Total tea objects made: 1
 
 ```
 
@@ -7265,24 +7320,28 @@ teaShop.Serve();
 <div dir="ltr">
 
 ```php
-// Anything that will be cached is flyweight.
-// Types of tea here will be flyweights.
+// KarakTea is the flyweight: the shared, intrinsic part.
 class KarakTea
 {
 }
 
-// Acts as a factory and saves the tea
+// Acts as a factory and caches one tea object per type.
 class TeaMaker
 {
   private array $mAvailableTea = [];
 
-  public function make(string $preference): KarakTea
+  public function make(string $teaType): KarakTea
   {
-    if (!array_key_exists($preference, $this->mAvailableTea)) {
-      $this->mAvailableTea[$preference] = new KarakTea();
+    if (!array_key_exists($teaType, $this->mAvailableTea)) {
+      $this->mAvailableTea[$teaType] = new KarakTea();
     }
 
-    return $this->mAvailableTea[$preference];
+    return $this->mAvailableTea[$teaType];
+  }
+
+  public function totalTeasMade(): int
+  {
+    return count($this->mAvailableTea);
   }
 }
 
@@ -7296,13 +7355,14 @@ class TeaShop
 
   public function takeOrder(string $teaType, int $table): void
   {
+    // Table number is the extrinsic state, passed in from outside.
     $this->mOrders[$table] = $this->teaMaker->make($teaType);
   }
 
   public function serve(): void
   {
     foreach ($this->mOrders as $table => $tea) {
-      echo "Serving tea to table # $table\n";
+      echo "Serving Karak Tea to table #$table\n";
     }
   }
 }
@@ -7310,14 +7370,21 @@ class TeaShop
 $teaMaker = new TeaMaker();
 $teaShop = new TeaShop($teaMaker);
 
-$teaShop->takeOrder("less sugar", 1);
-$teaShop->takeOrder("more milk", 2);
-$teaShop->takeOrder("without sugar", 5);
+$teaShop->takeOrder("Karak", 1);
+$teaShop->takeOrder("Karak", 3);
+$teaShop->takeOrder("Karak", 5);
+$teaShop->takeOrder("Karak", 7);
+$teaShop->takeOrder("Karak", 9);
 
 $teaShop->serve();
-// Serving tea to table# 1
-// Serving tea to table# 2
-// Serving tea to table# 5
+
+echo "Total tea objects made: " . $teaMaker->totalTeasMade() . "\n";
+// Serving Karak Tea to table #1
+// Serving Karak Tea to table #3
+// Serving Karak Tea to table #5
+// Serving Karak Tea to table #7
+// Serving Karak Tea to table #9
+// Total tea objects made: 1
 
 
 ```
@@ -7333,58 +7400,74 @@ $teaShop->serve();
 
 ```go
 
-type KarakTea struct {}
+// KarakTea is the flyweight: the shared, intrinsic part.
+type KarakTea struct{}
 
+// TeaMaker acts as the factory and caches one tea object per type.
 type TeaMaker struct {
     mAvailableTea map[string]*KarakTea
 }
 
-func (tm *TeaMaker) Make(preference string) *KarakTea {
-    if tm.mAvailableTea == nil {
-        tm.mAvailableTea = make(map[string]*KarakTea)
+func NewTeaMaker() *TeaMaker {
+    return &TeaMaker{mAvailableTea: make(map[string]*KarakTea)}
+}
+
+func (tm *TeaMaker) Make(teaType string) *KarakTea {
+    if _, ok := tm.mAvailableTea[teaType]; !ok {
+        tm.mAvailableTea[teaType] = &KarakTea{}
     }
-    if _, ok := tm.mAvailableTea[preference]; !ok {
-        tm.mAvailableTea[preference] = &KarakTea{}
-    }
-    return tm.mAvailableTea[preference]
+    return tm.mAvailableTea[teaType]
+}
+
+func (tm *TeaMaker) TotalTeasMade() int {
+    return len(tm.mAvailableTea)
 }
 
 type TeaShop struct {
-    mOrders map[int]*KarakTea
+    mTables   []int
+    mOrders   map[int]*KarakTea
     mTeaMaker *TeaMaker
 }
 
 func NewTeaShop(teaMaker *TeaMaker) *TeaShop {
-    if teaMaker == nil {
-        panic("teaMaker cannot be nil")
-    }
     return &TeaShop{
-        mOrders: make(map[int]*KarakTea),
+        mOrders:   make(map[int]*KarakTea),
         mTeaMaker: teaMaker,
     }
 }
 
 func (ts *TeaShop) TakeOrder(teaType string, table int) {
+    // Table number is the extrinsic state, passed in from outside.
+    if _, ok := ts.mOrders[table]; !ok {
+        ts.mTables = append(ts.mTables, table)
+    }
     ts.mOrders[table] = ts.mTeaMaker.Make(teaType)
 }
 
 func (ts *TeaShop) Serve() {
-    for table := range ts.mOrders {
-        fmt.Printf("Serving Tea to table # %d\n", table)
+    for _, table := range ts.mTables {
+        fmt.Printf("Serving Karak Tea to table #%d\n", table)
     }
 }
 // ---------------------------
-teaMaker := &TeaMaker{}
+teaMaker := NewTeaMaker()
 teaShop := NewTeaShop(teaMaker)
 
-teaShop.TakeOrder("less sugar", 1)
-teaShop.TakeOrder("more milk", 2)
-teaShop.TakeOrder("without sugar", 5)
+teaShop.TakeOrder("Karak", 1)
+teaShop.TakeOrder("Karak", 3)
+teaShop.TakeOrder("Karak", 5)
+teaShop.TakeOrder("Karak", 7)
+teaShop.TakeOrder("Karak", 9)
 
 teaShop.Serve()
-// Serving Tea to table # 1
-// Serving Tea to table # 2
-// Serving Tea to table # 5
+
+fmt.Printf("Total tea objects made: %d\n", teaMaker.TotalTeasMade())
+// Serving Karak Tea to table #1
+// Serving Karak Tea to table #3
+// Serving Karak Tea to table #5
+// Serving Karak Tea to table #7
+// Serving Karak Tea to table #9
+// Total tea objects made: 1
 
 ```
 
@@ -7398,40 +7481,44 @@ teaShop.Serve()
 <div dir="ltr">
 
 ```java
-// Anything that will be cached is flyweight.
-// Types of tea here will be flyweights.
+// KarakTea is the flyweight: the shared, intrinsic part.
 class KarakTea {
 }
 
-// Acts as a factory and saves the tea
+// Acts as a factory and caches one tea object per type.
 class TeaMaker {
     private Map<String, KarakTea> availableTea = new HashMap<>();
 
-    public KarakTea make(String preference) {
-        if (!availableTea.containsKey(preference)) {
-            availableTea.put(preference, new KarakTea());
+    public KarakTea make(String teaType) {
+        if (!availableTea.containsKey(teaType)) {
+            availableTea.put(teaType, new KarakTea());
         }
-        return availableTea.get(preference);
+        return availableTea.get(teaType);
+    }
+
+    public int totalTeasMade() {
+        return availableTea.size();
     }
 }
 
 class TeaShop {
-    private Map<Integer, KarakTea> orders = new HashMap<>();
+    private Map<Integer, KarakTea> orders = new LinkedHashMap<>();
     private TeaMaker teaMaker;
 
     public TeaShop(TeaMaker teaMaker) {
-        if(teaMaker == null)
+        if (teaMaker == null)
             throw new IllegalArgumentException("teaMaker cannot be null");
         this.teaMaker = teaMaker;
     }
 
     public void takeOrder(String teaType, int table) {
+        // Table number is the extrinsic state, passed in from outside.
         orders.put(table, teaMaker.make(teaType));
     }
 
     public void serve() {
-        for(Integer tableNo : orders.keySet()) {
-            System.out.println("Serving Tea to table " + tableNo);
+        for (Integer table : orders.keySet()) {
+            System.out.println("Serving Karak Tea to table #" + table);
         }
     }
 }
@@ -7441,14 +7528,21 @@ class TeaShop {
 TeaMaker teaMaker = new TeaMaker();
 TeaShop teaShop = new TeaShop(teaMaker);
 
-teaShop.takeOrder("less sugar", 1);
-teaShop.takeOrder("more milk", 2);
-teaShop.takeOrder("without sugar", 5);
+teaShop.takeOrder("Karak", 1);
+teaShop.takeOrder("Karak", 3);
+teaShop.takeOrder("Karak", 5);
+teaShop.takeOrder("Karak", 7);
+teaShop.takeOrder("Karak", 9);
 
 teaShop.serve();
-// Serving tea to table 1
-// Serving tea to table 2
-// Serving tea to table 5
+
+System.out.println("Total tea objects made: " + teaMaker.totalTeasMade());
+// Serving Karak Tea to table #1
+// Serving Karak Tea to table #3
+// Serving Karak Tea to table #5
+// Serving Karak Tea to table #7
+// Serving Karak Tea to table #9
+// Total tea objects made: 1
 ```
 
 </div>
@@ -7464,26 +7558,34 @@ teaShop.serve();
 #include <iostream>
 #include <unordered_map>
 #include <string>
+#include <vector>
 
+// KarakTea is the flyweight: the shared, intrinsic part.
 class KarakTea {
     // Tea implementation
 };
 
+// TeaMaker acts as the factory and caches one tea object per type.
 class TeaMaker {
 private:
     std::unordered_map<std::string, KarakTea*> availableTea;
 
 public:
-    KarakTea* make(const std::string& preference) {
-        if (availableTea.find(preference) == availableTea.end()) {
-            availableTea[preference] = new KarakTea();
+    KarakTea* make(const std::string& teaType) {
+        if (availableTea.find(teaType) == availableTea.end()) {
+            availableTea[teaType] = new KarakTea();
         }
-        return availableTea[preference];
+        return availableTea[teaType];
+    }
+
+    int totalTeasMade() const {
+        return availableTea.size();
     }
 };
 
 class TeaShop {
 private:
+    std::vector<int> tables;
     std::unordered_map<int, KarakTea*> orders;
     TeaMaker& teaMaker;
 
@@ -7491,12 +7593,16 @@ public:
     TeaShop(TeaMaker& maker) : teaMaker(maker) {}
 
     void takeOrder(const std::string& teaType, int table) {
+        // Table number is the extrinsic state, passed in from outside.
+        if (orders.find(table) == orders.end()) {
+            tables.push_back(table);
+        }
         orders[table] = teaMaker.make(teaType);
     }
 
     void serve() {
-        for (const auto& order : orders) {
-            std::cout << "Serving tea to table " << order.first << std::endl;
+        for (int table : tables) {
+            std::cout << "Serving Karak Tea to table #" << table << std::endl;
         }
     }
 };
@@ -7507,14 +7613,21 @@ int main() {
     TeaMaker teaMaker;
     TeaShop teaShop(teaMaker);
 
-    teaShop.takeOrder("less sugar", 1);
-    teaShop.takeOrder("more milk", 2);
-    teaShop.takeOrder("without sugar", 5);
+    teaShop.takeOrder("Karak", 1);
+    teaShop.takeOrder("Karak", 3);
+    teaShop.takeOrder("Karak", 5);
+    teaShop.takeOrder("Karak", 7);
+    teaShop.takeOrder("Karak", 9);
 
     teaShop.serve();
-    // Serving tea to table 1
-    // Serving tea to table 2
-    // Serving tea to table 5
+
+    std::cout << "Total tea objects made: " << teaMaker.totalTeasMade() << std::endl;
+    // Serving Karak Tea to table #1
+    // Serving Karak Tea to table #3
+    // Serving Karak Tea to table #5
+    // Serving Karak Tea to table #7
+    // Serving Karak Tea to table #9
+    // Total tea objects made: 1
     return 0;
 }
 ```
@@ -7522,6 +7635,11 @@ int main() {
 </div>
 
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی قراره تعداد خیلی زیادی آبجکت بسازی که بخش بزرگی از داده‌شون مشترکه و حافظه داره می‌ترکه»؛ ❌ «وقتی آبجکت‌هات کم‌اند یا حالت مشترکی ندارن که بشه share کرد».
+> 🪤 **دام رایج:** «به جای حالتِ مشترک و ثابت، روی حالتِ متغیر و بیرونی کش بگیری؛ اون‌وقت دیگه چیزی share نمی‌شه و کل ماجرا بی‌اثر می‌شه».
+
 
 <br>
 
