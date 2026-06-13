@@ -697,6 +697,8 @@ int main() {
 
 </div>
 
+خلاصه‌ش این می‌شه: به‌جای اینکه مستقیم با `new` یه آبجکت بسازی، یه متد مخصوص ساخت (همون متد کارخانه) صداش می‌زنی. این متد یا توی یه اینترفیس تعریف شده و فرزندها پیاده‌سازیش می‌کنن، یا توی کلاس پدر یه نسخه پیش‌فرض داره و فرزندها در صورت نیاز بازنویسیش می‌کنن. این‌جوری کدِ پدر لازم نیست بدونه دقیقاً داره کدوم کلاس رو می‌سازه.
+
 **مثال برنامه‌نویسی**
 
 بیا از مثال مدیر استخدام برای درک بهتر استفاده کنیم.
@@ -720,7 +722,7 @@ class Interviewer:
 
 class Developer(Interviewer):
     def askQuestions(self):
-        print('Asking about design patterns')
+        print('Asking about design patterns!')
 
 
 class CommunityExecutive(Interviewer):
@@ -772,7 +774,7 @@ interface Interviewer {
 
 class Developer implements Interviewer {
   askQuestions(): void {
-    console.log("Asking about design patterns");
+    console.log("Asking about design patterns!");
   }
 }
 
@@ -822,7 +824,7 @@ marketingManager.takeInterview();
 ```javascript
 class Developer {
     askQuestions() {
-        console.log("Asking about design patterns");
+        console.log("Asking about design patterns!");
     }
 }
 
@@ -887,7 +889,7 @@ class CommunityExecutive : IInterviewer
 {
     public void AskQuestions()
     {
-        Console.WriteLine("Asking about community building!");
+        Console.WriteLine("Asking about community building");
     }
 }
 
@@ -925,7 +927,7 @@ var devManager = new DevelopmentManager();
 devManager.TakeInterview(); //Output : Asking about design patterns!
 
 var marketingManager = new MarketingManager();
-marketingManager.TakeInterview();//Output : Asking about community building!
+marketingManager.TakeInterview();//Output : Asking about community building
 
 ```
 
@@ -956,7 +958,7 @@ class CommunityExecutive implements InterviewerInterface
 {
     public function askQuestions()
     {
-        echo "Asking about community building!";
+        echo "Asking about community building";
     }
 }
 
@@ -994,7 +996,7 @@ $devManager = new DevelopmentManager();
 $devManager->takeInterview(); // Output: Asking about design patterns!
 
 $marketingManager = new MarketingManager();
-$marketingManager->takeInterview(); // Output: Asking about community building!
+$marketingManager->takeInterview(); // Output: Asking about community building
 
 ```
 
@@ -1025,42 +1027,46 @@ func (d *Developer) AskQuestions() {
 type CommunityExecutive struct{}
 
 func (ce *CommunityExecutive) AskQuestions() {
-	fmt.Println("Asking about community building!")
+	fmt.Println("Asking about community building")
 }
 
-type HiringManager interface {
-	MakeInterviewer() Interviewer
-	TakeInterview()
+// HiringManager نقش کلاس پدر رو داره: takeInterview فقط یک‌بار اینجا تعریف می‌شه.
+// تنها چیزی که توی هر مدیر فرق می‌کنه، متد کارخانه‌ی makeInterviewer هست.
+type HiringManager struct {
+	makeInterviewer func() Interviewer
 }
 
-type DevelopmentManager struct{}
-
-func (dm *DevelopmentManager) MakeInterviewer() Interviewer {
-	return &Developer{}
-}
-
-func (dm *DevelopmentManager) TakeInterview() {
-	interviewer := dm.MakeInterviewer()
+func (hm *HiringManager) TakeInterview() {
+	interviewer := hm.makeInterviewer()
 	interviewer.AskQuestions()
 }
 
-type MarketingManager struct{}
-
-func (mm *MarketingManager) MakeInterviewer() Interviewer {
-	return &CommunityExecutive{}
+type DevelopmentManager struct {
+	HiringManager
 }
 
-func (mm *MarketingManager) TakeInterview() {
-	interviewer := mm.MakeInterviewer()
-	interviewer.AskQuestions()
+func NewDevelopmentManager() *DevelopmentManager {
+	return &DevelopmentManager{
+		HiringManager{makeInterviewer: func() Interviewer { return &Developer{} }},
+	}
+}
+
+type MarketingManager struct {
+	HiringManager
+}
+
+func NewMarketingManager() *MarketingManager {
+	return &MarketingManager{
+		HiringManager{makeInterviewer: func() Interviewer { return &CommunityExecutive{} }},
+	}
 }
 
 func main() {
-	devManager := &DevelopmentManager{}
-	devManager.TakeInterview() // Output : Asking about design patterns!
+	devManager := NewDevelopmentManager()
+	devManager.TakeInterview() // Output: Asking about design patterns!
 
-	marketingManager := &MarketingManager{}
-	marketingManager.TakeInterview() // Output : Asking about community building!
+	marketingManager := NewMarketingManager()
+	marketingManager.TakeInterview() // Output: Asking about community building
 }
 
 ```
@@ -1083,7 +1089,7 @@ class Developer implements Interviewer {
 
   @Override
   public void askQuestions() {
-    System.out.println("Asking about design patterns");
+    System.out.println("Asking about design patterns!");
   }
 }
 
@@ -1147,7 +1153,7 @@ public:
 class Developer : public Interviewer {
 public:
     void askQuestions() override {
-        std::cout << "Asking about design patterns" << std::endl;
+        std::cout << "Asking about design patterns!" << std::endl;
     }
 };
 
@@ -1190,7 +1196,7 @@ public:
 // Usage
 int main() {
     DevelopmentManager devManager;
-    devManager.takeInterview(); // Output: Asking about design patterns
+    devManager.takeInterview(); // Output: Asking about design patterns!
     
     MarketingManager marketingManager;
     marketingManager.takeInterview(); // Output: Asking about community building
@@ -1201,6 +1207,12 @@ int main() {
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ وقتی کلاس پدر منطق کلی کار رو می‌دونه ولی نوع دقیقِ آبجکتی که باید ساخته بشه به زیرکلاس بستگی داره، اون تصمیم رو می‌سپاری به فرزندها؛ ❌ ولی اگه فقط یه‌جا و بر اساس یه شرط ساده آبجکت می‌سازی، یه if کوچیک یا «کارخانه ساده» کافیه و این الگو زیادی‌ست.
+> 🪤 **دام رایج:** برای یه حالتِ ساده کلی زیرکلاس می‌سازی و کد رو بی‌خودی شلوغ می‌کنی؛ این الگو وقتی می‌ارزه که واقعاً چند نوع سازنده داشته باشی.
+> 🔗 **فرقش با [کارخانه ساده](#کارخانه-ساده-simple-factory-):** کارخانه ساده همه‌چی رو توی یه متد با شرط جمع می‌کنه، اما اینجا ساختِ آبجکت رو به ارث‌بری و زیرکلاس‌ها می‌سپاری، پس هر نوع جدید یعنی یه زیرکلاس جدید نه دست‌کاری متدِ موجود.
+
 
 <br>
 
@@ -1243,6 +1255,8 @@ int main() {
 > without specifying their concrete classes
 
 </div>
+
+یعنی الگوی کارخانه انتزاعی بهت یه راه می‌ده که یه گروه از کارخونه‌های هم‌خانواده رو زیر یه چتر جمع کنی؛ بدون اینکه کد مصرف‌کننده بدونه پشت پرده دقیقاً کدوم کلاس واقعی داره ساخته می‌شه. کارش اینه که خانواده‌ای از محصولات سازگار رو با هم بسازه، نه تک‌تک قطعه‌ها رو جدا.
 
 <br>
 
@@ -1288,14 +1302,14 @@ class DoorFittingExpert:
         pass
 
 
-class Welder(DoorFittingExpert):
-    def getDescription(self):
-        print('I can only fit iron doors')
-
-
 class Carpenter(DoorFittingExpert):
     def getDescription(self):
         print('I can only fit wooden doors')
+
+
+class Welder(DoorFittingExpert):
+    def getDescription(self):
+        print('I can only fit iron doors')
 
 
 class DoorFactory:
@@ -1329,8 +1343,8 @@ woodenFactory = WoodenDoorFactory()
 door = woodenFactory.makeDoor()
 expert = woodenFactory.makeFittingExpert()
 
-door.getDescription()
-expert.getDescription()
+door.getDescription()    # Output: I am a wooden door
+expert.getDescription()  # Output: I can only fit wooden doors
 
 # ----------------------------
 
@@ -1339,8 +1353,8 @@ ironFactory = IronDoorFactory()
 door = ironFactory.makeDoor()
 expert = ironFactory.makeFittingExpert()
 
-door.getDescription()
-expert.getDescription()
+door.getDescription()    # Output: I am an iron door
+expert.getDescription()  # Output: I can only fit iron doors
 ```
 
 </div>
@@ -1377,15 +1391,15 @@ interface DoorFittingExpert {
     getDescription(): void;
 }
 
-class Welder implements DoorFittingExpert {
-    getDescription(): void {
-        console.log("I can only fit iron doors");
-    }
-}
-
 class Carpenter implements DoorFittingExpert {
     getDescription(): void {
         console.log("I can only fit wooden doors");
+    }
+}
+
+class Welder implements DoorFittingExpert {
+    getDescription(): void {
+        console.log("I can only fit iron doors");
     }
 }
 
@@ -1414,6 +1428,7 @@ class IronDoorFactory extends DoorFactory {
         return new Welder();
     }
 }
+
 // ----------------------------
 
 let woodenFactory = new WoodenDoorFactory();
@@ -1421,8 +1436,8 @@ let woodenFactory = new WoodenDoorFactory();
 let door = woodenFactory.makeDoor();
 let expert = woodenFactory.makeFittingExpert();
 
-door.getDescription();
-expert.getDescription();
+door.getDescription();   // Output: I am a wooden door
+expert.getDescription(); // Output: I can only fit wooden doors
 
 // ----------------------------
 
@@ -1431,8 +1446,8 @@ let ironFactory = new IronDoorFactory();
 door = ironFactory.makeDoor();
 expert = ironFactory.makeFittingExpert();
 
-door.getDescription();
-expert.getDescription();
+door.getDescription();   // Output: I am an iron door
+expert.getDescription(); // Output: I can only fit iron doors
 
 ```
 
@@ -1462,15 +1477,15 @@ class IronDoor {
     }
 }
 
-class Welder {
-    getDescription() {
-        console.log("I can only fit iron doors");
-    }
-}
-
 class Carpenter {
     getDescription() {
         console.log("I can only fit wooden doors");
+    }
+}
+
+class Welder {
+    getDescription() {
+        console.log("I can only fit iron doors");
     }
 }
 
@@ -1504,22 +1519,25 @@ class IronDoorFactory extends DoorFactory {
     }
 }
 
+// ----------------------------
 
 let woodenFactory = new WoodenDoorFactory();
 
 let door = woodenFactory.makeDoor();
 let expert = woodenFactory.makeFittingExpert();
 
-door.getDescription();
-expert.getDescription();
+door.getDescription();   // Output: I am a wooden door
+expert.getDescription(); // Output: I can only fit wooden doors
+
+// ----------------------------
 
 let ironFactory = new IronDoorFactory();
 
 door = ironFactory.makeDoor();
 expert = ironFactory.makeFittingExpert();
 
-door.getDescription();
-expert.getDescription();
+door.getDescription();   // Output: I am an iron door
+expert.getDescription(); // Output: I can only fit iron doors
 ```
 
 </div>
@@ -1550,7 +1568,7 @@ class IronDoor : IDoor
 {
   public void GetDescription()
   {
-    Console.WriteLine("I am a iron door");
+    Console.WriteLine("I am an iron door");
   }
 }
 
@@ -1559,19 +1577,19 @@ interface IDoorFittingExpert
   void GetDescription();
 }
 
-class Welder : IDoorFittingExpert
-{
-  public void GetDescription()
-  {
-    Console.WriteLine("I can only fit iron doors");
-  }
-}
-
 class Carpenter : IDoorFittingExpert
 {
   public void GetDescription()
   {
     Console.WriteLine("I can only fit wooden doors");
+  }
+}
+
+class Welder : IDoorFittingExpert
+{
+  public void GetDescription()
+  {
+    Console.WriteLine("I can only fit iron doors");
   }
 }
 
@@ -1608,23 +1626,23 @@ class IronDoorFactory : IDoorFactory
   }
 }
 // ----------------------------
-var woodenDoorFactory = new WoodenDoorFactory();
+var woodenFactory = new WoodenDoorFactory();
 
-var woodenDoor = woodenDoorFactory.MakeDoor();
-var woodenDoorFittingExpert = woodenDoorFactory.MakeFittingExpert();
+var woodenDoor = woodenFactory.MakeDoor();
+var woodenExpert = woodenFactory.MakeFittingExpert();
 
-woodenDoor.GetDescription(); //Output : I am a wooden door
-woodenDoorFittingExpert.GetDescription();//Output : I can only fit woooden doors
+woodenDoor.GetDescription();   // Output: I am a wooden door
+woodenExpert.GetDescription(); // Output: I can only fit wooden doors
 
 // ----------------------------
 
-var ironDoorFactory = new IronDoorFactory();
+var ironFactory = new IronDoorFactory();
 
-var ironDoor = ironDoorFactory.MakeDoor();
-var ironDoorFittingExpert = ironDoorFactory.MakeFittingExpert();
+var ironDoor = ironFactory.MakeDoor();
+var ironExpert = ironFactory.MakeFittingExpert();
 
-ironDoor.GetDescription();//Output : I am a iron door
-ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
+ironDoor.GetDescription();   // Output: I am an iron door
+ironExpert.GetDescription(); // Output: I can only fit iron doors
 
 ```
 
@@ -1663,15 +1681,15 @@ interface DoorFittingExpertInterface {
   public function getDescription();
 }
 
-class Welder implements DoorFittingExpertInterface {
-  public function getDescription() {
-    echo "I can only fit iron doors";
-  }
-}
-
 class Carpenter implements DoorFittingExpertInterface {
   public function getDescription() {
     echo "I can only fit wooden doors";
+  }
+}
+
+class Welder implements DoorFittingExpertInterface {
+  public function getDescription() {
+    echo "I can only fit iron doors";
   }
 }
 
@@ -1704,22 +1722,25 @@ class IronDoorFactory implements DoorFactoryInterface {
 
 
 // Usage
-$woodenDoorFactory = new WoodenDoorFactory();
+$woodenFactory = new WoodenDoorFactory();
 
-$woodenDoor = $woodenDoorFactory->makeDoor();
-$woodenDoorFittingExpert = $woodenDoorFactory->makeFittingExpert();
+$woodenDoor = $woodenFactory->makeDoor();
+$woodenExpert = $woodenFactory->makeFittingExpert();
 
-$woodenDoor->getDescription(); // Output: I am a wooden door
-$woodenDoorFittingExpert->getDescription(); // Output: I can only fit wooden doors
+$woodenDoor->getDescription();   // Output: I am a wooden door
+echo "\n";
+$woodenExpert->getDescription(); // Output: I can only fit wooden doors
+echo "\n";
 
+$ironFactory = new IronDoorFactory();
 
-$ironDoorFactory = new IronDoorFactory();
+$ironDoor = $ironFactory->makeDoor();
+$ironExpert = $ironFactory->makeFittingExpert();
 
-$ironDoor = $ironDoorFactory->makeDoor();
-$ironDoorFittingExpert = $ironDoorFactory->makeFittingExpert();
-
-$ironDoor->getDescription(); // Output: I am an iron door
-$ironDoorFittingExpert->getDescription(); // Output: I can only fit iron doors
+$ironDoor->getDescription();   // Output: I am an iron door
+echo "\n";
+$ironExpert->getDescription(); // Output: I can only fit iron doors
+echo "\n";
 
 ```
 
@@ -1800,21 +1821,21 @@ func (i *IronDoorFactory) MakeFittingExpert() IDoorFittingExpert {
 }
 
 func main() {
-	woodenDoorFactory := &WoodenDoorFactory{}
+	woodenFactory := &WoodenDoorFactory{}
 
-	woodenDoor := woodenDoorFactory.MakeDoor()
-	woodenDoorFittingExpert := woodenDoorFactory.MakeFittingExpert()
+	woodenDoor := woodenFactory.MakeDoor()
+	woodenExpert := woodenFactory.MakeFittingExpert()
 
-	woodenDoor.GetDescription()           // Output: I am a wooden door
-	woodenDoorFittingExpert.GetDescription() // Output: I can only fit wooden doors
+	woodenDoor.GetDescription()   // Output: I am a wooden door
+	woodenExpert.GetDescription() // Output: I can only fit wooden doors
 
-	ironDoorFactory := &IronDoorFactory{}
+	ironFactory := &IronDoorFactory{}
 
-	ironDoor := ironDoorFactory.MakeDoor()
-	ironDoorFittingExpert := ironDoorFactory.MakeFittingExpert()
+	ironDoor := ironFactory.MakeDoor()
+	ironExpert := ironFactory.MakeFittingExpert()
 
-	ironDoor.GetDescription()           // Output: I am an iron door
-	ironDoorFittingExpert.GetDescription() // Output: I can only fit iron doors
+	ironDoor.GetDescription()   // Output: I am an iron door
+	ironExpert.GetDescription() // Output: I can only fit iron doors
 }
 
 ```
@@ -1855,17 +1876,17 @@ interface DoorFittingExpert {
     void getDescription();
 }
 
-class Welder implements DoorFittingExpert {
-    @Override
-    public void getDescription() {
-        System.out.println("I can only fit iron doors");
-    }
-}
-
 class Carpenter implements DoorFittingExpert {
     @Override
     public void getDescription() {
         System.out.println("I can only fit wooden doors");
+    }
+}
+
+class Welder implements DoorFittingExpert {
+    @Override
+    public void getDescription() {
+        System.out.println("I can only fit iron doors");
     }
 }
 
@@ -1887,10 +1908,12 @@ class WoodenDoorFactory implements DoorFactory {
 }
 
 class IronDoorFactory implements DoorFactory {
+    @Override
     public IronDoor makeDoor() {
         return new IronDoor();
     }
 
+    @Override
     public Welder makeFittingExpert() {
         return new Welder();
     }
@@ -1898,19 +1921,21 @@ class IronDoorFactory implements DoorFactory {
 
 // ----------------------------
 
-WoodenDoorFactory woodenDoorFactory = new WoodenDoorFactory();
-WoodenDoor woodenDoor = woodenDoorFactory.makeDoor();
-Carpenter carpenter = woodenDoorFactory.makeFittingExpert();
+WoodenDoorFactory woodenFactory = new WoodenDoorFactory();
+Door woodenDoor = woodenFactory.makeDoor();
+DoorFittingExpert woodenExpert = woodenFactory.makeFittingExpert();
 
-woodenDoor.getDescription(); // Output: I am a wooden door
-carpenter.getDescription(); // Output: I can only fit wooden doors
+woodenDoor.getDescription();   // Output: I am a wooden door
+woodenExpert.getDescription(); // Output: I can only fit wooden doors
 
-IronDoorFactory ironDoorFactory = new IronDoorFactory();
-IronDoor ironDoor = ironDoorFactory.makeDoor();
-Welder welder = ironDoorFactory.makeFittingExpert();
+// ----------------------------
 
-ironDoor.getDescription(); // Output: I am an iron door
-welder.getDescription(); // Output: I can only fit iron doors
+IronDoorFactory ironFactory = new IronDoorFactory();
+Door ironDoor = ironFactory.makeDoor();
+DoorFittingExpert ironExpert = ironFactory.makeFittingExpert();
+
+ironDoor.getDescription();   // Output: I am an iron door
+ironExpert.getDescription(); // Output: I can only fit iron doors
 ```
 
 </div>
@@ -1955,19 +1980,19 @@ public:
     virtual void getDescription() = 0;
 };
 
-// Welder
-class Welder : public DoorFittingExpert {
-public:
-    void getDescription() override {
-        std::cout << "I can only fit iron doors" << std::endl;
-    }
-};
-
 // Carpenter
 class Carpenter : public DoorFittingExpert {
 public:
     void getDescription() override {
         std::cout << "I can only fit wooden doors" << std::endl;
+    }
+};
+
+// Welder
+class Welder : public DoorFittingExpert {
+public:
+    void getDescription() override {
+        std::cout << "I can only fit iron doors" << std::endl;
     }
 };
 
@@ -2005,18 +2030,31 @@ public:
 
 // Usage
 int main() {
-    IronDoorFactory ironDoorFactory;
-    auto ironDoor = ironDoorFactory.makeDoor();
-    auto ironDoorFittingExpert = ironDoorFactory.makeFittingExpert();
-    
-    ironDoor->getDescription(); // Output: I am an iron door
-    ironDoorFittingExpert->getDescription(); // Output: I can only fit iron doors
-    
+    WoodenDoorFactory woodenFactory;
+    auto woodenDoor = woodenFactory.makeDoor();
+    auto woodenExpert = woodenFactory.makeFittingExpert();
+
+    woodenDoor->getDescription();   // Output: I am a wooden door
+    woodenExpert->getDescription(); // Output: I can only fit wooden doors
+
+    IronDoorFactory ironFactory;
+    auto ironDoor = ironFactory.makeDoor();
+    auto ironExpert = ironFactory.makeFittingExpert();
+
+    ironDoor->getDescription();   // Output: I am an iron door
+    ironExpert->getDescription(); // Output: I can only fit iron doors
+
     return 0;
 }
 ```
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ وقتی محصولاتت یه **خانواده هماهنگ** می‌سازن و باید با هم ست بمونن (مثل در چوبی + نجار)، تا یه دفعه قطعه ناجور قاطی نشه؛ ❌ وقتی فقط یه نوع محصول داری یا قرار نیست چند خانواده کنار هم زندگی کنن.
+> 🪤 **دام رایج:** خانواده‌ها رو زیادی ریز می‌کنی و کلی کلاس کارخونه می‌سازی که فقط یه محصول می‌ده؛ اونجا داری بی‌خودی پیچیده‌اش می‌کنی.
+> 🔗 **فرقش با [متد کارخانه](#متد-کارخانه-factory-method-):** متد کارخانه یه محصول رو می‌سازه، ولی کارخانه انتزاعی یه **خانواده کامل از محصولات مرتبط** رو با هم تحویل می‌ده.
+
 
 **همونطور که می‌بیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
