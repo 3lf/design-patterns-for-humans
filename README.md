@@ -9539,14 +9539,13 @@ int main() {
 
 </div>
 
+خلاصه‌اش این می‌شه: پیمایش‌گر (Iterator) یه ابزاره که باهاش روی عناصر یک مجموعه (Container) قدم می‌زنی و بهشون دسترسی پیدا می‌کنی. این الگو، منطق پیمایش رو از خود مجموعه جدا می‌کنه؛ هرچند گاهی پیمایش به ساختار همون مجموعه گره خورده و نمی‌شه کاملاً جداش کرد.
+
 **مثال برنامه‌نویسی**
 
-این مثال رو می‌خوایم یکم پایتونیک پیش بریم! می‌دونی که توی پایتون دو تا مفهوم Iterable و Iterator رو داریم پس می‌ریم ازشون
-استفاده کنیم!
+اینجا یه لیست از ایستگاه‌های رادیو (RadioStation) داریم که هر کدوم یه فرکانس دارن. لیست رو طوری می‌سازیم که قابل پیمایش باشه؛ بعد یکی‌یکی روی ایستگاه‌ها قدم می‌زنیم و فرکانس هر کدوم رو چاپ می‌کنیم.
 
-این کلاس یک Iterator هستش که می‌تونه توی یک WordsCollection جابجا بشه و عناصرش رو برگردونه!
-
-توی این کد هم می‌تونی ببین که چطوری می‌تونیم از Iterator‌ها استفاده کنیم!
+توی این کد می‌تونی ببینی که چطور بدون اینکه بدونی ایستگاه‌ها داخل چی ذخیره شدن، فقط با یه حلقه ساده روشون حرکت می‌کنی.
 
 <details>
 <summary>Python</summary>
@@ -9556,71 +9555,56 @@ int main() {
 ```python
 from __future__ import annotations
 from collections.abc import Iterable, Iterator
-from typing import Any, List
+from typing import List
 
 
-class AlphabeticalOrderIterator(Iterator):
-    _position: int = None
+class RadioStation:
+    def __init__(self, frequency: float) -> None:
+        self._frequency = frequency
 
-    def __init__(self, collection: WordsCollection, reverse: bool = False) -> None:
-        self._collection = collection
-        self._reverse = reverse
-        self._position = -1 if reverse else 0
+    def get_frequency(self) -> float:
+        return self._frequency
 
-    def __next__(self):
-        try:
-            value = self._collection[self._position]
-            self._position += -1 if self._reverse else 1
-        except IndexError:
+
+class StationIterator(Iterator):
+    def __init__(self, stations: List[RadioStation]) -> None:
+        self._stations = stations
+        self._position = 0
+
+    def __next__(self) -> RadioStation:
+        if self._position >= len(self._stations):
             raise StopIteration()
+        station = self._stations[self._position]
+        self._position += 1
+        return station
 
-        return value
 
+class RadioStationList(Iterable):
+    def __init__(self) -> None:
+        self._stations: List[RadioStation] = []
 
-class WordsCollection(Iterable):
-    def __init__(self, collection: List[Any] = []) -> None:
-        self._collection = collection
+    def add(self, station: RadioStation) -> None:
+        self._stations.append(station)
 
-    def __iter__(self) -> AlphabeticalOrderIterator:
-        return AlphabeticalOrderIterator(self._collection)
+    def __iter__(self) -> StationIterator:
+        return StationIterator(self._stations)
 
-    def get_reverse_iterator(self) -> AlphabeticalOrderIterator:
-        return AlphabeticalOrderIterator(self._collection, True)
-
-    def add_item(self, item: Any) -> None:
-        self._collection.append(item)
-
-#----------------------------
+# ----------------------------
 
 if __name__ == "__main__":
-    collection = WordsCollection()
-    collection.add_item("First")
-    collection.add_item("Second")
-    collection.add_item("Third")
+    stations = RadioStationList()
+    stations.add(RadioStation(89.0))
+    stations.add(RadioStation(101.0))
+    stations.add(RadioStation(102.5))
 
-    print("Straight traversal:")
-    print("\n".join(collection))
-
-    print("\n")
-    print("Reverse traversal:")
-    print("\n".join(collection.get_reverse_iterator()), end="")
-
-
-
+    for station in stations:
+        print(f"{station.get_frequency():.1f}")
 
 '''
-Output will be
-==============
-Straight traversal:
-First
-Second
-Third
-
-
-Reverse traversal:
-Third
-Second
-First%
+Output:
+89.0
+101.0
+102.5
 '''
 ```
 
@@ -9633,64 +9617,56 @@ First%
 <div dir="ltr">
 
 ```typescript
-interface Iterator<T> {
-    next(): { value: T; done: boolean };
+class RadioStation {
+    constructor(private frequency: number) {}
+
+    getFrequency(): number {
+        return this.frequency;
+    }
 }
 
-class AlphabeticalOrderIterator implements Iterator<string> {
-    private position: number;
+class StationIterator implements Iterator<RadioStation> {
+    private position = 0;
 
-    constructor(private collection: WordsCollection, private reverse = false) {
-        this.position = this.reverse ? -1 : 0;
-    }
+    constructor(private stations: RadioStation[]) {}
 
-    next() {
-        try {
-            const value = this.collection.collection[this.position];
-            this.position += this.reverse ? -1 : 1;
-            return {value, done: false};
-        } catch (error) {
-            return {value: undefined, done: true};
+    next(): IteratorResult<RadioStation> {
+        if (this.position < this.stations.length) {
+            const value = this.stations[this.position];
+            this.position += 1;
+            return { value, done: false };
         }
+        return { value: undefined as any, done: true };
     }
 }
 
-class WordsCollection {
-    collection: string[];
+class RadioStationList {
+    private stations: RadioStation[] = [];
 
-    constructor(collection: string[] = []) {
-        this.collection = collection;
+    add(station: RadioStation): void {
+        this.stations.push(station);
     }
 
-    [Symbol.iterator]() {
-        return new AlphabeticalOrderIterator(this);
-    }
-
-    getReverseIterator() {
-        return new AlphabeticalOrderIterator(this, true);
-    }
-
-    addItem(item: string) {
-        this.collection.push(item);
+    [Symbol.iterator](): Iterator<RadioStation> {
+        return new StationIterator(this.stations);
     }
 }
 
 // ----------------------------
 
-const collection = new WordsCollection();
-collection.addItem("First");
-collection.addItem("Second");
-collection.addItem("Third");
+const stations = new RadioStationList();
+stations.add(new RadioStation(89.0));
+stations.add(new RadioStation(101.0));
+stations.add(new RadioStation(102.5));
 
-console.log("Straight traversal:");
-for (const item of collection) {
-    console.log(item);
+for (const station of stations) {
+    console.log(station.getFrequency().toFixed(1));
 }
 
-console.log("\nReverse traversal:");
-for (const item of collection.getReverseIterator()) {
-    console.log(item);
-}
+// Output:
+// 89.0
+// 101.0
+// 102.5
 ```
 
 </div>
@@ -9701,60 +9677,61 @@ for (const item of collection.getReverseIterator()) {
 <div dir="ltr">
 
 ```javascript
-class AlphabeticalOrderIterator {
-    constructor(collection, reverse = false) {
-        this.collection = collection;
-        this.reverse = reverse;
-        this.position = this.reverse ? collection.collection.length - 1 : 0;
+class RadioStation {
+    constructor(frequency) {
+        this.frequency = frequency;
+    }
+
+    getFrequency() {
+        return this.frequency;
+    }
+}
+
+class StationIterator {
+    constructor(stations) {
+        this.stations = stations;
+        this.position = 0;
     }
 
     next() {
-        if (this.position >= 0 && this.position < this.collection.collection.length) {
-            const value = this.collection.collection[this.position];
-            this.position += this.reverse ? -1 : 1;
+        if (this.position < this.stations.length) {
+            const value = this.stations[this.position];
+            this.position += 1;
             return { value, done: false };
-        } else {
-            return { value: undefined, done: true };
         }
+        return { value: undefined, done: true };
     }
 }
 
-class WordsCollection {
-    constructor(collection = []) {
-        this.collection = collection;
+class RadioStationList {
+    constructor() {
+        this.stations = [];
+    }
+
+    add(station) {
+        this.stations.push(station);
     }
 
     [Symbol.iterator]() {
-        return new AlphabeticalOrderIterator(this);
-    }
-
-    getReverseIterator() {
-        return new AlphabeticalOrderIterator(this, true);
-    }
-
-    addItem(item) {
-        this.collection.push(item);
+        return new StationIterator(this.stations);
     }
 }
 
+// ----------------------------
 
-const collection = new WordsCollection();
-collection.addItem("First");
-collection.addItem("Second");
-collection.addItem("Third");
+const stations = new RadioStationList();
+stations.add(new RadioStation(89.0));
+stations.add(new RadioStation(101.0));
+stations.add(new RadioStation(102.5));
 
-console.log("Straight traversal:");
-for (const item of collection) {
-    console.log(item);
+for (const station of stations) {
+    console.log(station.getFrequency().toFixed(1));
 }
 
-console.log("\nReverse traversal:");
-const reverseIterator = collection.getReverseIterator();
-let result = reverseIterator.next();
-while (!result.done) {
-    console.log(result.value);
-    result = reverseIterator.next();
-}
+// Output:
+// 89.0
+// 101.0
+// 102.5
 ```
 
 </div>
@@ -9766,86 +9743,60 @@ while (!result.done) {
 <div dir="ltr">
 
 ```csharp
-
 class RadioStation
 {
-  private float mFrequency;
+    private float mFrequency;
 
-  public RadioStation(float frequency)
-  {
-    mFrequency = frequency;
-  }
+    public RadioStation(float frequency)
+    {
+        mFrequency = frequency;
+    }
 
-  public float GetFrequecy()
-  {
-    return mFrequency;
-  }
-
+    public float GetFrequency()
+    {
+        return mFrequency;
+    }
 }
-
 
 class StationList : IEnumerable<RadioStation>
 {
-  List<RadioStation> mStations = new List<RadioStation>();
+    private List<RadioStation> mStations = new List<RadioStation>();
 
-  public RadioStation this[int index]
-  {
-    get { return mStations[index]; }
-    set { mStations.Insert(index, value); }
-  }
-
-  public void Add(RadioStation station)
-  {
-    mStations.Add(station);
-  }
-
-  public void Remove(RadioStation station)
-  {
-    mStations.Remove(station);
-  }
-
-  public IEnumerator<RadioStation> GetEnumerator()
-  {
-    return this.GetEnumerator();
-  }
-
-  IEnumerator IEnumerable.GetEnumerator()
-  {
-    //Use can switch to this internal collection if you do not want to transform
-    //return mStations.GetEnumerator();
-
-    //use this if you want to transform the object before rendering
-    foreach (var x in mStations)
+    public void Add(RadioStation station)
     {
-      yield return x;
+        mStations.Add(station);
     }
-  }
+
+    public IEnumerator<RadioStation> GetEnumerator()
+    {
+        foreach (var station in mStations)
+        {
+            yield return station;
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }
-
-
 
 // ----------------------------
 
 var stations = new StationList();
-var station1 = new RadioStation(89);
-stations.Add(station1);
+stations.Add(new RadioStation(89.0f));
+stations.Add(new RadioStation(101.0f));
+stations.Add(new RadioStation(102.5f));
 
-var station2 = new RadioStation(101);
-stations.Add(station2);
-
-var station3 = new RadioStation(102);
-stations.Add(station3);
-
-foreach(var x in stations)
+foreach (var station in stations)
 {
-  Console.Write(x.GetFrequecy());
+    Console.WriteLine(station.GetFrequency().ToString("F1", CultureInfo.InvariantCulture));
 }
 
-var q = stations.Where(x => x.GetFrequecy() == 89).FirstOrDefault();
-Console.WriteLine(q.GetFrequecy());
-
-Console.ReadLine();
-
+// Output:
+// 89.0
+// 101.0
+// 102.5
 ```
 
 </div>
@@ -9882,45 +9833,27 @@ class StationList implements IteratorAggregate
         array_push($this->mStations, $station);
     }
 
-    public function remove(RadioStation $station)
+    public function getIterator(): Iterator
     {
-        $index = array_search($station, $this->mStations, true);
-        if ($index !== false) {
-            array_splice($this->mStations, $index, 1);
-        }
-    }
-
-    public function getIterator()
-    {
-        // Use can switch to this internal collection if you do not want to transform
-        // return new ArrayIterator($this->mStations);
-
-        // Use this if you want to transform the object before rendering
-        foreach ($this->mStations as $x) {
-            yield $x;
+        foreach ($this->mStations as $station) {
+            yield $station;
         }
     }
 }
 
 $stations = new StationList();
-$station1 = new RadioStation(89);
-$stations->add($station1);
+$stations->add(new RadioStation(89.0));
+$stations->add(new RadioStation(101.0));
+$stations->add(new RadioStation(102.5));
 
-$station2 = new RadioStation(101);
-$stations->add($station2);
-
-$station3 = new RadioStation(102);
-$stations->add($station3);
-
-foreach ($stations as $x) {
-    echo $x->getFrequency() . ' ';
+foreach ($stations as $station) {
+    echo number_format($station->getFrequency(), 1) . "\n";
 }
 
-$q = array_filter($stations, function ($x) {
-    return $x->getFrequency() == 89;
-});
-echo reset($q)->getFrequency();
-
+// Output:
+// 89.0
+// 101.0
+// 102.5
 ```
 
 </div>
@@ -9963,41 +9896,6 @@ func (s *StationList) Add(station *RadioStation) {
     s.stations = append(s.stations, station)
 }
 
-func (s *StationList) Remove(station *RadioStation) {
-    for i, v := range s.stations {
-        if v == station {
-            s.stations = append(s.stations[:i], s.stations[i+1:]...)
-            break
-        }
-    }
-}
-
-func (s *StationList) GetStation(index int) *RadioStation {
-    return s.stations[index]
-}
-
-func (s *StationList) Len() int {
-    return len(s.stations)
-}
-
-func (s *StationList) Less(i, j int) bool {
-    return s.stations[i].GetFrequency() < s.stations[j].GetFrequency()
-}
-
-func (s *StationList) Swap(i, j int) {
-    s.stations[i], s.stations[j] = s.stations[j], s.stations[i]
-}
-
-func (s *StationList) Sort() {
-    sort.Sort(s)
-}
-
-func (s *StationList) Search(station *RadioStation) int {
-    return sort.Search(len(s.stations), func(i int) bool {
-        return s.stations[i].GetFrequency() >= station.GetFrequency()
-    })
-}
-
 func (s *StationList) Iterator() <-chan *RadioStation {
     ch := make(chan *RadioStation)
     go func() {
@@ -10011,25 +9909,19 @@ func (s *StationList) Iterator() <-chan *RadioStation {
 
 func main() {
     stations := NewStationList()
-    station1 := NewRadioStation(89)
-    stations.Add(station1)
-
-    station2 := NewRadioStation(101)
-    stations.Add(station2)
-
-    station3 := NewRadioStation(102)
-    stations.Add(station3)
+    stations.Add(NewRadioStation(89.0))
+    stations.Add(NewRadioStation(101.0))
+    stations.Add(NewRadioStation(102.5))
 
     for station := range stations.Iterator() {
-        fmt.Println(station.GetFrequency())
+        fmt.Printf("%.1f\n", station.GetFrequency())
     }
-
-    q := sort.Search(stations.Len(), func(i int) bool {
-        return stations.GetStation(i).GetFrequency() >= 89
-    })
-    fmt.Println(stations.GetStation(q).GetFrequency())
 }
 
+// Output:
+// 89.0
+// 101.0
+// 102.5
 ```
 
 </div>
@@ -10061,44 +9953,32 @@ class StationList implements Iterable<RadioStation> {
         stations = new ArrayList<>();
     }
 
-    public List<RadioStation> getStations() {
-        return stations;
-    }
-
     public void add(RadioStation station) {
         stations.add(station);
     }
 
-    public void remove(RadioStation station) {
-        stations.remove(station);
-    }
-
     @Override
     public Iterator<RadioStation> iterator() {
-        return this.getStations().iterator();
+        return stations.iterator();
     }
 }
 
 // ----------------------------
 
 StationList stations = new StationList();
-RadioStation station1 = new RadioStation(89);
-stations.add(station1);
-
-RadioStation station2 = new RadioStation(101);
-stations.add(station2);
-
-RadioStation station3 = new RadioStation(102);
-stations.add(station3);
+stations.add(new RadioStation(89.0f));
+stations.add(new RadioStation(101.0f));
+stations.add(new RadioStation(102.5f));
 
 Iterator<RadioStation> stationIterator = stations.iterator();
 while (stationIterator.hasNext()) {
-RadioStation radioStation = stationIterator.next();
-System.out.println(radioStation.getFrequency());
+    RadioStation radioStation = stationIterator.next();
+    System.out.println(radioStation.getFrequency());
 }
+// Output:
 // 89.0
 // 101.0
-// 102.0
+// 102.5
 ```
 
 </div>
@@ -10113,6 +9993,7 @@ System.out.println(radioStation.getFrequency());
 ```cpp
 #include <iostream>
 #include <vector>
+#include <iomanip>
 
 class RadioStation {
 private:
@@ -10135,15 +10016,6 @@ public:
         stations.push_back(station);
     }
 
-    void remove(const RadioStation& station) {
-        for (auto it = stations.begin(); it != stations.end(); ++it) {
-            if (it->getFrequency() == station.getFrequency()) {
-                stations.erase(it);
-                break;
-            }
-        }
-    }
-
     std::vector<RadioStation>::iterator begin() {
         return stations.begin();
     }
@@ -10157,16 +10029,18 @@ public:
 
 int main() {
     StationList stations;
-    stations.add(RadioStation(89));
-    stations.add(RadioStation(101));
-    stations.add(RadioStation(102));
+    stations.add(RadioStation(89.0f));
+    stations.add(RadioStation(101.0f));
+    stations.add(RadioStation(102.5f));
 
     for (auto& station : stations) {
-        std::cout << station.getFrequency() << std::endl;
+        std::cout << std::fixed << std::setprecision(1)
+                  << station.getFrequency() << std::endl;
     }
-    // 89
-    // 101
-    // 102
+    // Output:
+    // 89.0
+    // 101.0
+    // 102.5
     return 0;
 }
 ```
@@ -10174,6 +10048,12 @@ int main() {
 </div>
 
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی می‌خوای روی یه مجموعه قدم بزنی بدون اینکه ساختار داخلیش (آرایه، درخت، گراف) رو لو بدی»؛ ❌ «وقتی یه آرایه ساده داری و حلقه معمولی زبان خودت کافیه، لازم نیست براش کلاس Iterator بسازی».
+> 🪤 **دام رایج:** «وسط پیمایش، خود مجموعه رو تغییر بدی (عنصر اضافه یا حذف کنی) و پیمایش‌گر قاطی کنه».
+> 🔗 **فرقش با چی؟:** «اینجا کراس‌لینکی لازم نیست؛ این الگو مستقل می‌ایسته».
+
 
 <br>
 
