@@ -2081,9 +2081,9 @@ int main() {
 </div>
 
 فرض کن رفتی ساندویچ‌فروشی که خودت مواد رو انتخاب می‌کنی (مثل Subway).
-تو نمی‌گید «یه ساندویچ بده!» (چون ممکنه توش پیاز باشه و تو متنفر باشی).
+تو نمی‌گی «یه ساندویچ بده!» (چون ممکنه توش پیاز باشه و تو ازش متنفر باشی).
 
-بلکه مرحله به مرحله می‌گید:
+بلکه مرحله به مرحله می‌گی:
 ۱. نون باگت باشه. 🥖
 ۲. پنیر اضافه بزن. 🧀
 ۳. گوجه و خیارشور بذار. 🍅
@@ -2506,9 +2506,11 @@ class Burger {
     }
 
     public function getDescription() {
-        $b = fn($v) => $v ? 'true' : 'false';
-        return "Burger: size {$this->size}, cheese: {$b($this->cheese)}, "
-            . "mushrooms: {$b($this->mushrooms)}, tomato: {$b($this->tomato)}";
+        $cheese = $this->cheese ? 'true' : 'false';
+        $mushrooms = $this->mushrooms ? 'true' : 'false';
+        $tomato = $this->tomato ? 'true' : 'false';
+        return "Burger: size {$this->size}, cheese: {$cheese}, "
+            . "mushrooms: {$mushrooms}, tomato: {$tomato}";
     }
 }
 
