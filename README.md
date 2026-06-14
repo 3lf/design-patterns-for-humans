@@ -13109,7 +13109,7 @@ int main() {
 <div dir="ltr">
 
 ```kotlin
-// Originator: holds state and creates/restores mementos.
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor {
     private var content: String = ""
 
@@ -13126,12 +13126,12 @@ class Editor {
     }
 }
 
-// Memento: an immutable snapshot of the editor's state.
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento(private val content: String) {
     fun getContent(): String = content
 }
 
-// Caretaker: keeps mementos on a stack without inspecting them.
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
 class History {
     private val mementos = ArrayDeque<EditorMemento>()
 
@@ -13173,7 +13173,7 @@ fun main() {
 <div dir="ltr">
 
 ```dart
-// Originator: holds state and creates/restores mementos.
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor {
   String _content = '';
 
@@ -13190,7 +13190,7 @@ class Editor {
   }
 }
 
-// Memento: an immutable snapshot of the editor's state.
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento {
   final String _content;
 
@@ -13199,7 +13199,7 @@ class EditorMemento {
   String getContent() => _content;
 }
 
-// Caretaker: keeps mementos on a stack without inspecting them.
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
 class History {
   final List<EditorMemento> _mementos = [];
 
