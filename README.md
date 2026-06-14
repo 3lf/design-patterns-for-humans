@@ -109,7 +109,7 @@
 *   🌍 **یه مثال از دنیای واقعی** تا حسش کنی.
 *   💡 **به زبون ساده** که ته‌نشین بشه.
 *   📖 **تعریف ویکی‌پدیا** (به‌همراه ترجمه فارسی) تا دقیق هم بدونی.
-*   💻 **کد، توی ۸ زبان** (Python، JavaScript، TypeScript، Java، C#، PHP، Go، C++)؛ روی زبون خودت کلیک کن و بازش کن.
+*   💻 **کد، توی ۱۰ زبان** (Python، JavaScript، TypeScript، Java، C#، PHP، Go، C++، Kotlin، Dart)؛ روی زبون خودت کلیک کن و بازش کن.
 *   🤔 **کی به کارش ببریم؟** یه جعبه کوتاه که می‌گه کجا به دردت می‌خوره، کجا نه، و فرقش با الگوهای شبیهش چیه.
 
 الگوها هم سه دسته‌ان: **سازنده (Creational)** درباره‌ی ساختن آبجکت‌هاست، **ساختاری (Structural)** درباره‌ی کنار هم چیدنِ کلاس‌ها و آبجکت‌ها، و **رفتاری (Behavioral)** درباره‌ی اینکه آبجکت‌ها چطور با هم حرف می‌زنن و کار رو بین خودشون تقسیم می‌کنن.
@@ -681,6 +681,82 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Door {
+    fun getWidth(): Int
+    fun getHeight(): Int
+}
+
+class WoodenDoor(private val width: Int, private val height: Int) : Door {
+    override fun getWidth(): Int = width
+    override fun getHeight(): Int = height
+}
+
+object DoorFactory {
+    fun makeDoor(width: Int, height: Int): Door {
+        return WoodenDoor(width, height)
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    val door = DoorFactory.makeDoor(90, 210)
+    println(door.getHeight())
+    println(door.getWidth())
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Door {
+  int getWidth();
+  int getHeight();
+}
+
+class WoodenDoor implements Door {
+  final int width;
+  final int height;
+
+  WoodenDoor(this.width, this.height);
+
+  @override
+  int getWidth() => width;
+
+  @override
+  int getHeight() => height;
+}
+
+class DoorFactory {
+  static Door makeDoor(int width, int height) {
+    return WoodenDoor(width, height);
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var door = DoorFactory.makeDoor(90, 210);
+  print(door.getHeight());
+  print(door.getWidth());
+}
+```
+
+</div>
+</details>
+
 > 🤔 **کی به کارش ببریم؟**
 > ✅ وقتی ساختن یه آبجکت چند خط مقدمه‌چینی داره و نمی‌خوای این شلوغی همه‌جای کدت پخش شه، بسپارش به یه متد کارخانه؛ ❌ اگه فقط یه `new` ساده‌ست، الکی پیچیده‌ش نکن.
 > 🪤 **دام رایج:** کم‌کم همه‌چی رو می‌ریزی توی یه `makeDoor` غول‌پیکر پر از `if`/`else`؛ همون‌جاست که باید بری سراغ الگوهای جدی‌تر.
@@ -1234,6 +1310,116 @@ int main() {
     marketingManager.takeInterview(); // Output: Asking about community building
     
     return 0;
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Interviewer {
+    fun askQuestions()
+}
+
+class Developer : Interviewer {
+    override fun askQuestions() {
+        println("Asking about design patterns!")
+    }
+}
+
+class CommunityExecutive : Interviewer {
+    override fun askQuestions() {
+        println("Asking about community building")
+    }
+}
+
+abstract class HiringManager {
+    abstract fun makeInterviewer(): Interviewer
+
+    fun takeInterview() {
+        val interviewer = makeInterviewer()
+        interviewer.askQuestions()
+    }
+}
+
+class DevelopmentManager : HiringManager() {
+    override fun makeInterviewer(): Interviewer = Developer()
+}
+
+class MarketingManager : HiringManager() {
+    override fun makeInterviewer(): Interviewer = CommunityExecutive()
+}
+
+// ----------------------------
+
+fun main() {
+    val devManager = DevelopmentManager()
+    devManager.takeInterview()
+
+    val marketingManager = MarketingManager()
+    marketingManager.takeInterview()
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Interviewer {
+  void askQuestions();
+}
+
+class Developer implements Interviewer {
+  @override
+  void askQuestions() {
+    print('Asking about design patterns!');
+  }
+}
+
+class CommunityExecutive implements Interviewer {
+  @override
+  void askQuestions() {
+    print('Asking about community building');
+  }
+}
+
+abstract class HiringManager {
+  Interviewer makeInterviewer();
+
+  void takeInterview() {
+    var interviewer = makeInterviewer();
+    interviewer.askQuestions();
+  }
+}
+
+class DevelopmentManager extends HiringManager {
+  @override
+  Interviewer makeInterviewer() => Developer();
+}
+
+class MarketingManager extends HiringManager {
+  @override
+  Interviewer makeInterviewer() => CommunityExecutive();
+}
+
+// ----------------------------
+
+void main() {
+  var devManager = DevelopmentManager();
+  devManager.takeInterview();
+
+  var marketingManager = MarketingManager();
+  marketingManager.takeInterview();
 }
 ```
 
@@ -2077,6 +2263,162 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Door {
+    fun getDescription()
+}
+
+class WoodenDoor : Door {
+    override fun getDescription() {
+        println("I am a wooden door")
+    }
+}
+
+class IronDoor : Door {
+    override fun getDescription() {
+        println("I am an iron door")
+    }
+}
+
+interface DoorFittingExpert {
+    fun getDescription()
+}
+
+class Carpenter : DoorFittingExpert {
+    override fun getDescription() {
+        println("I can only fit wooden doors")
+    }
+}
+
+class Welder : DoorFittingExpert {
+    override fun getDescription() {
+        println("I can only fit iron doors")
+    }
+}
+
+interface DoorFactory {
+    fun makeDoor(): Door
+    fun makeFittingExpert(): DoorFittingExpert
+}
+
+class WoodenDoorFactory : DoorFactory {
+    override fun makeDoor(): Door = WoodenDoor()
+    override fun makeFittingExpert(): DoorFittingExpert = Carpenter()
+}
+
+class IronDoorFactory : DoorFactory {
+    override fun makeDoor(): Door = IronDoor()
+    override fun makeFittingExpert(): DoorFittingExpert = Welder()
+}
+
+// ----------------------------
+
+fun main() {
+    val woodenFactory = WoodenDoorFactory()
+
+    val woodenDoor = woodenFactory.makeDoor()
+    val woodenExpert = woodenFactory.makeFittingExpert()
+
+    woodenDoor.getDescription()
+    woodenExpert.getDescription()
+
+    val ironFactory = IronDoorFactory()
+
+    val ironDoor = ironFactory.makeDoor()
+    val ironExpert = ironFactory.makeFittingExpert()
+
+    ironDoor.getDescription()
+    ironExpert.getDescription()
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Door {
+  void getDescription();
+}
+
+class WoodenDoor implements Door {
+  @override
+  void getDescription() => print('I am a wooden door');
+}
+
+class IronDoor implements Door {
+  @override
+  void getDescription() => print('I am an iron door');
+}
+
+abstract class DoorFittingExpert {
+  void getDescription();
+}
+
+class Carpenter implements DoorFittingExpert {
+  @override
+  void getDescription() => print('I can only fit wooden doors');
+}
+
+class Welder implements DoorFittingExpert {
+  @override
+  void getDescription() => print('I can only fit iron doors');
+}
+
+abstract class DoorFactory {
+  Door makeDoor();
+  DoorFittingExpert makeFittingExpert();
+}
+
+class WoodenDoorFactory implements DoorFactory {
+  @override
+  Door makeDoor() => WoodenDoor();
+
+  @override
+  DoorFittingExpert makeFittingExpert() => Carpenter();
+}
+
+class IronDoorFactory implements DoorFactory {
+  @override
+  Door makeDoor() => IronDoor();
+
+  @override
+  DoorFittingExpert makeFittingExpert() => Welder();
+}
+
+// ----------------------------
+
+void main() {
+  var woodenFactory = WoodenDoorFactory();
+
+  var door = woodenFactory.makeDoor();
+  var expert = woodenFactory.makeFittingExpert();
+
+  door.getDescription();
+  expert.getDescription();
+
+  var ironFactory = IronDoorFactory();
+
+  door = ironFactory.makeDoor();
+  expert = ironFactory.makeFittingExpert();
+
+  door.getDescription();
+  expert.getDescription();
+}
+```
+
+</div>
+</details>
+
 > 🤔 **کی به کارش ببریم؟**
 > ✅ وقتی محصولاتت یه **خانواده هماهنگ** می‌سازن و باید با هم ست بمونن (مثل در چوبی + نجار)، تا یه دفعه قطعه ناجور قاطی نشه؛ ❌ وقتی فقط یه نوع محصول داری یا قرار نیست چند خانواده کنار هم زندگی کنن.
 > 🪤 **دام رایج:** خانواده‌ها رو زیادی ریز می‌کنی و کلی کلاس کارخونه می‌سازی که فقط یه محصول می‌ده؛ اونجا داری بی‌خودی پیچیده‌اش می‌کنی.
@@ -2207,6 +2549,32 @@ func Burger(size int, cheese bool, mushrooms bool, tomato bool)
 
 ```java
 public Burger(int size, boolean cheese, boolean mushrooms, boolean tomato)
+```
+
+</div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+class Burger(size: Int, cheese: Boolean, mushrooms: Boolean, tomato: Boolean)
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class Burger {
+  Burger(int size, bool cheese, bool mushrooms, bool tomato);
+}
 ```
 
 </div>
@@ -2805,6 +3173,126 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+class Burger(builder: BurgerBuilder) {
+    private val size: Int = builder.size
+    private val cheese: Boolean = builder.cheese
+    private val mushrooms: Boolean = builder.mushrooms
+    private val tomato: Boolean = builder.tomato
+
+    fun getDescription(): String {
+        return "Burger: size $size, cheese: $cheese, " +
+            "mushrooms: $mushrooms, tomato: $tomato"
+    }
+}
+
+class BurgerBuilder(val size: Int) {
+    var cheese: Boolean = false
+    var mushrooms: Boolean = false
+    var tomato: Boolean = false
+
+    fun addCheese(): BurgerBuilder {
+        cheese = true
+        return this
+    }
+
+    fun addMushrooms(): BurgerBuilder {
+        mushrooms = true
+        return this
+    }
+
+    fun addTomato(): BurgerBuilder {
+        tomato = true
+        return this
+    }
+
+    fun build(): Burger {
+        return Burger(this)
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    val burger = BurgerBuilder(14)
+        .addCheese()
+        .addMushrooms()
+        .build()
+
+    println(burger.getDescription())
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class Burger {
+  final int size;
+  final bool cheese;
+  final bool mushrooms;
+  final bool tomato;
+
+  Burger(BurgerBuilder builder)
+      : size = builder.size,
+        cheese = builder.cheese,
+        mushrooms = builder.mushrooms,
+        tomato = builder.tomato;
+
+  String getDescription() {
+    return 'Burger: size $size, cheese: $cheese, '
+        'mushrooms: $mushrooms, tomato: $tomato';
+  }
+}
+
+class BurgerBuilder {
+  final int size;
+  bool cheese = false;
+  bool mushrooms = false;
+  bool tomato = false;
+
+  BurgerBuilder(this.size);
+
+  BurgerBuilder addCheese() {
+    cheese = true;
+    return this;
+  }
+
+  BurgerBuilder addMushrooms() {
+    mushrooms = true;
+    return this;
+  }
+
+  BurgerBuilder addTomato() {
+    tomato = true;
+    return this;
+  }
+
+  Burger build() => Burger(this);
+}
+
+// ----------------------------
+
+void main() {
+  var burger = BurgerBuilder(14).addCheese().addMushrooms().build();
+
+  print(burger.getDescription());
+}
+```
+
+</div>
+</details>
+
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی ساختن یه آبجکت کلی گزینه اختیاری داره و می‌خوای قدم‌به‌قدم و خوانا بسازیش»؛ ❌ «وقتی آبجکتت دو سه تا فیلد ساده داره و یه تابع سازنده معمولی کافیه».
 > 🪤 **دام رایج:** «build() رو صدا نزنی و با خود Builder کار کنی، یا فیلدهای اجباری رو نگیری و آبجکت نصفه‌نیمه بسازی».
@@ -3295,6 +3783,99 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+class Address(var city: String)
+
+class Person(val name: String, val address: Address) { // nested mutable object
+    // Shallow copy: new Person, but the SAME Address object is shared
+    fun shallowCopy(): Person {
+        return Person(name, address)
+    }
+
+    // Deep copy: the nested Address is copied too, so it is independent
+    fun deepCopy(): Person {
+        return Person(name, Address(address.city))
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    // Shallow clone: shares the nested Address
+    var original = Person("Sara", Address("Tehran"))
+    val shallow = original.shallowCopy()
+    shallow.address.city = "Shiraz"
+    println(shallow.address.city)    // Shiraz
+    println(original.address.city)   // Shiraz  -> the original changed too (shared Address)
+
+    // Deep clone: gets its own Address
+    original = Person("Sara", Address("Tehran"))
+    val deep = original.deepCopy()
+    deep.address.city = "Shiraz"
+    println(deep.address.city)       // Shiraz
+    println(original.address.city)   // Tehran  -> the original stayed the same
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class Address {
+  String city;
+
+  Address(this.city);
+}
+
+class Person {
+  String name;
+  Address address; // nested mutable object
+
+  Person(this.name, this.address);
+
+  // Shallow copy: new Person, but the SAME Address object is shared
+  Person shallowCopy() {
+    return Person(name, address);
+  }
+
+  // Deep copy: the nested Address is copied too, so it is independent
+  Person deepCopy() {
+    return Person(name, Address(address.city));
+  }
+}
+
+// ----------------------------
+
+void main() {
+  // Shallow clone: shares the nested Address
+  var original = Person('Sara', Address('Tehran'));
+  var shallow = original.shallowCopy();
+  shallow.address.city = 'Shiraz';
+  print(shallow.address.city);    // Shiraz
+  print(original.address.city);   // Shiraz  -> the original changed too (shared Address)
+
+  // Deep clone: gets its own Address
+  original = Person('Sara', Address('Tehran'));
+  var deep = original.deepCopy();
+  deep.address.city = 'Shiraz';
+  print(deep.address.city);       // Shiraz
+  print(original.address.city);   // Tehran  -> the original stayed the same
+}
+```
+
+</div>
+</details>
+
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی ساختن آبجکت از صفر گرونه، و یه نمونه آماده داری که فقط می‌خوای ازش کپی بگیری»؛ ❌ «وقتی آبجکت ساده‌ست و ساختن دوباره‌ش هیچ هزینه‌ای نداره».
 > 🪤 **دام رایج:** «کپی سطحی می‌گیری و یادت می‌ره فیلدهای تو در توش هنوز مشترکن؛ بعد تغییر کپی، اصلی رو هم خراب می‌کنه».
@@ -3627,6 +4208,58 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+object President {
+    // The single instance is the object itself
+}
+
+// ----------------------------
+
+fun main() {
+    val a = President
+    val b = President
+
+    println("Same instance? " + if (a === b) "True" else "False")
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class President {
+  static final President _instance = President._internal();
+
+  President._internal();
+
+  factory President() {
+    return _instance;
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var a = President();
+  var b = President();
+
+  print("Same instance? ${identical(a, b) ? "True" : "False"}");
+}
+```
+
 </div>
 </details>
 
@@ -4237,6 +4870,116 @@ int main() {
 // The hunter is hunting...
 // Woof
 ```
+</div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Lion {
+    fun roar(): String
+}
+
+class AfricanLion : Lion {
+    override fun roar(): String {
+        return "Roaaar"
+    }
+}
+
+class Hunter {
+    fun hunt(lion: Lion) {
+        println("The hunter is hunting...")
+        println(lion.roar())
+    }
+}
+
+class WildDog {
+    fun bark(): String {
+        return "Woof"
+    }
+}
+
+// Adapter around wild dog to make it compatible
+class WildDogAdapter(private val wildDog: WildDog) : Lion {
+    override fun roar(): String {
+        return wildDog.bark()
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    val africanLion = AfricanLion()
+    val wildDog = WildDog()
+    val wildDogAdapter = WildDogAdapter(wildDog)
+
+    val hunter = Hunter()
+    hunter.hunt(africanLion)
+    hunter.hunt(wildDogAdapter)
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Lion {
+  String roar();
+}
+
+class AfricanLion implements Lion {
+  @override
+  String roar() {
+    return "Roaaar";
+  }
+}
+
+class Hunter {
+  void hunt(Lion lion) {
+    print("The hunter is hunting...");
+    print(lion.roar());
+  }
+}
+
+class WildDog {
+  String bark() {
+    return "Woof";
+  }
+}
+
+// Adapter around wild dog to make it compatible
+class WildDogAdapter implements Lion {
+  final WildDog _wildDog;
+
+  WildDogAdapter(this._wildDog);
+
+  @override
+  String roar() {
+    return _wildDog.bark();
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var africanLion = AfricanLion();
+  var wildDog = WildDog();
+  var wildDogAdapter = WildDogAdapter(wildDog);
+
+  var hunter = Hunter();
+  hunter.hunt(africanLion);
+  hunter.hunt(wildDogAdapter);
+}
+```
+
 </div>
 </details>
 
@@ -4883,6 +5626,121 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Theme {
+    fun getColor(): String
+}
+
+interface WebPage {
+    fun getContent(): String
+}
+
+class DarkTheme : Theme {
+    override fun getColor() = "Dark Black"
+}
+
+class LightTheme : Theme {
+    override fun getColor() = "Off white"
+}
+
+class AquaTheme : Theme {
+    override fun getColor() = "Light blue"
+}
+
+class About(private val theme: Theme) : WebPage {
+    override fun getContent() = "About page in " + theme.getColor()
+}
+
+class Careers(private val theme: Theme) : WebPage {
+    override fun getContent() = "Careers page in " + theme.getColor()
+}
+
+// ----------------------------
+
+fun main() {
+    val darkTheme = DarkTheme()
+    val aquaTheme = AquaTheme()
+
+    val about = About(darkTheme)
+    val careers = Careers(aquaTheme)
+
+    println(about.getContent())
+    println(careers.getContent())
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Theme {
+  String getColor();
+}
+
+abstract class WebPage {
+  final Theme theme;
+
+  WebPage(this.theme);
+
+  String getContent();
+}
+
+class DarkTheme implements Theme {
+  @override
+  String getColor() => "Dark Black";
+}
+
+class LightTheme implements Theme {
+  @override
+  String getColor() => "Off white";
+}
+
+class AquaTheme implements Theme {
+  @override
+  String getColor() => "Light blue";
+}
+
+class About extends WebPage {
+  About(Theme theme) : super(theme);
+
+  @override
+  String getContent() => "About page in " + theme.getColor();
+}
+
+class Careers extends WebPage {
+  Careers(Theme theme) : super(theme);
+
+  @override
+  String getContent() => "Careers page in " + theme.getColor();
+}
+
+// ----------------------------
+
+void main() {
+  var darkTheme = DarkTheme();
+  var aquaTheme = AquaTheme();
+
+  var about = About(darkTheme);
+  var careers = Careers(aquaTheme);
+
+  print(about.getContent());
+  print(careers.getContent());
+}
+```
+
 </div>
 </details>
 
@@ -5658,6 +6516,143 @@ int main() {
 </div>
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Employee {
+    fun getName(): String
+    fun getSalary(): Double
+}
+
+class Developer(private val name: String, private val salary: Double) : Employee {
+    override fun getName() = name
+    override fun getSalary() = salary
+}
+
+class Designer(private val name: String, private val salary: Double) : Employee {
+    override fun getName() = name
+    override fun getSalary() = salary
+}
+
+// Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization(private val name: String) : Employee {
+    private val members = mutableListOf<Employee>()
+
+    fun add(employee: Employee) {
+        members.add(employee)
+    }
+
+    override fun getName() = name
+
+    override fun getSalary(): Double {
+        var total = 0.0
+        for (member in members) {
+            total += member.getSalary() // recurses into sub-organizations
+        }
+        return total
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    val designTeam = Organization("Design Team")
+    designTeam.add(Designer("Arya", 4000.0))
+
+    val company = Organization("Acme")
+    company.add(Developer("John", 5000.0))
+    company.add(Developer("Jane", 6000.0))
+    company.add(designTeam)
+
+    println("Total salary: ${company.getSalary().toInt()}")
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Employee {
+  String getName();
+  double getSalary();
+}
+
+class Developer implements Employee {
+  final String _name;
+  final double _salary;
+
+  Developer(this._name, this._salary);
+
+  @override
+  String getName() => _name;
+
+  @override
+  double getSalary() => _salary;
+}
+
+class Designer implements Employee {
+  final String _name;
+  final double _salary;
+
+  Designer(this._name, this._salary);
+
+  @override
+  String getName() => _name;
+
+  @override
+  double getSalary() => _salary;
+}
+
+// Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization implements Employee {
+  final String _name;
+  final List<Employee> _members = [];
+
+  Organization(this._name);
+
+  void add(Employee employee) {
+    _members.add(employee);
+  }
+
+  @override
+  String getName() => _name;
+
+  @override
+  double getSalary() {
+    double total = 0;
+    for (var member in _members) {
+      total += member.getSalary(); // recurses into sub-organizations
+    }
+    return total;
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var designTeam = Organization("Design Team");
+  designTeam.add(Designer("Arya", 4000));
+
+  var company = Organization("Acme");
+  company.add(Developer("John", 5000));
+  company.add(Developer("Jane", 6000));
+  company.add(designTeam);
+
+  print("Total salary: ${company.getSalary().toInt()}");
+}
+```
+
+</div>
+</details>
+
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی داده‌هات یه ساختار درختی دارن (بخش‌ها و کل‌ها) و می‌خوای با تک‌آبجکت و گروه یه‌جور رفتار کنی»؛ ❌ «وقتی آبجکت‌هات سلسله‌مراتب ندارن و صاف کنار هم‌ان؛ اون‌جا مرکب فقط پیچیدگی الکی اضافه می‌کنه».
 > 🪤 **دام رایج:** «این‌قدر هوس می‌کنی همه‌چی رو یکدست کنی که متدهای بی‌معنی مثل add روی «برگ» هم می‌ذاری و در زمان اجرا می‌ترکه».
@@ -6300,6 +7295,109 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Coffee {
+    fun cost(): Int
+    fun description(): String
+}
+
+class SimpleCoffee : Coffee {
+    override fun cost() = 10
+    override fun description() = "Simple coffee"
+}
+
+class MilkDecorator(private val coffee: Coffee) : Coffee {
+    override fun cost() = coffee.cost() + 2
+    override fun description() = coffee.description() + ", milk"
+}
+
+class SugarDecorator(private val coffee: Coffee) : Coffee {
+    override fun cost() = coffee.cost() + 1
+    override fun description() = coffee.description() + ", sugar"
+}
+
+// ----------------------------
+
+fun main() {
+    var coffee: Coffee = SimpleCoffee()
+    println("${coffee.description()}: ${coffee.cost()}")
+
+    coffee = MilkDecorator(coffee)
+    println("${coffee.description()}: ${coffee.cost()}")
+
+    coffee = SugarDecorator(coffee)
+    println("${coffee.description()}: ${coffee.cost()}")
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Coffee {
+  int cost();
+  String description();
+}
+
+class SimpleCoffee implements Coffee {
+  @override
+  int cost() => 10;
+
+  @override
+  String description() => "Simple coffee";
+}
+
+class MilkDecorator implements Coffee {
+  final Coffee _coffee;
+
+  MilkDecorator(this._coffee);
+
+  @override
+  int cost() => _coffee.cost() + 2;
+
+  @override
+  String description() => _coffee.description() + ", milk";
+}
+
+class SugarDecorator implements Coffee {
+  final Coffee _coffee;
+
+  SugarDecorator(this._coffee);
+
+  @override
+  int cost() => _coffee.cost() + 1;
+
+  @override
+  String description() => _coffee.description() + ", sugar";
+}
+
+// ----------------------------
+
+void main() {
+  Coffee coffee = SimpleCoffee();
+  print("${coffee.description()}: ${coffee.cost()}");
+
+  coffee = MilkDecorator(coffee);
+  print("${coffee.description()}: ${coffee.cost()}");
+
+  coffee = SugarDecorator(coffee);
+  print("${coffee.description()}: ${coffee.cost()}");
+}
+```
+
 </div>
 </details>
 
@@ -7001,6 +8099,96 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+class Computer {
+    fun getElectricShock() = println("Ouch!")
+    fun makeSound() = println("Beep beep!")
+    fun showLoadingScreen() = println("Loading..")
+    fun bam() = println("Ready to be used!")
+    fun closeEverything() = println("Bup bup..")
+    fun pullCurrent() = println("Haaah!")
+    fun sooth() = println("Zzzzz")
+}
+
+class ComputerFacade(private val computer: Computer) {
+    fun turnOn() {
+        computer.getElectricShock()
+        computer.makeSound()
+        computer.showLoadingScreen()
+        computer.bam()
+    }
+
+    fun turnOff() {
+        computer.closeEverything()
+        computer.pullCurrent()
+        computer.sooth()
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    val computer = ComputerFacade(Computer())
+    computer.turnOn()
+    computer.turnOff()
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class Computer {
+  void getElectricShock() => print('Ouch!');
+  void makeSound() => print('Beep beep!');
+  void showLoadingScreen() => print('Loading..');
+  void bam() => print('Ready to be used!');
+  void closeEverything() => print('Bup bup..');
+  void pullCurrent() => print('Haaah!');
+  void sooth() => print('Zzzzz');
+}
+
+class ComputerFacade {
+  final Computer _computer;
+
+  ComputerFacade(this._computer);
+
+  void turnOn() {
+    _computer.getElectricShock();
+    _computer.makeSound();
+    _computer.showLoadingScreen();
+    _computer.bam();
+  }
+
+  void turnOff() {
+    _computer.closeEverything();
+    _computer.pullCurrent();
+    _computer.sooth();
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var computer = ComputerFacade(Computer());
+  computer.turnOn();
+  computer.turnOff();
+}
+```
+
+</div>
+</details>
+
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی یه زیرسیستم شلوغ و چندمرحله‌ای داری و می‌خوای یه ورودی ساده و خوش‌دست جلوش بذاری»؛ ❌ «وقتی فقط یه کلاس ساده داری که اصلاً پیچیدگی‌ای برای قایم کردن نداره».
 > 🪤 **دام رایج:** «نما رو نکن یه کلاس خدا (God Object) که خودش همه‌کاره‌ست؛ نما فقط هماهنگ‌کننده‌ست، نه انجام‌دهنده همه‌چی».
@@ -7671,6 +8859,120 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+// KarakTea is the flyweight: the shared, intrinsic part.
+class KarakTea
+
+// TeaMaker acts as the factory and caches one tea object per type.
+class TeaMaker {
+    private val availableTea = mutableMapOf<String, KarakTea>()
+
+    fun make(teaType: String): KarakTea =
+        availableTea.getOrPut(teaType) { KarakTea() }
+
+    fun totalTeasMade(): Int = availableTea.size
+}
+
+class TeaShop(private val teaMaker: TeaMaker) {
+    private val orders = mutableMapOf<Int, KarakTea>()
+
+    fun takeOrder(teaType: String, table: Int) {
+        // Table number is the extrinsic state, passed in from outside.
+        orders[table] = teaMaker.make(teaType)
+    }
+
+    fun serve() {
+        for (table in orders.keys) {
+            println("Serving Karak Tea to table #" + table)
+        }
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    val teaMaker = TeaMaker()
+    val shop = TeaShop(teaMaker)
+
+    shop.takeOrder("Karak", 1)
+    shop.takeOrder("Karak", 3)
+    shop.takeOrder("Karak", 5)
+    shop.takeOrder("Karak", 7)
+    shop.takeOrder("Karak", 9)
+
+    shop.serve()
+
+    println("Total tea objects made: " + teaMaker.totalTeasMade())
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+// KarakTea is the flyweight: the shared, intrinsic part.
+class KarakTea {}
+
+// TeaMaker acts as the factory and caches one tea object per type.
+class TeaMaker {
+  final Map<String, KarakTea> _availableTea = {};
+
+  KarakTea make(String teaType) {
+    return _availableTea.putIfAbsent(teaType, () => KarakTea());
+  }
+
+  int totalTeasMade() => _availableTea.length;
+}
+
+class TeaShop {
+  final Map<int, KarakTea> _orders = {};
+  final TeaMaker _teaMaker;
+
+  TeaShop(this._teaMaker);
+
+  void takeOrder(String teaType, int table) {
+    // Table number is the extrinsic state, passed in from outside.
+    _orders[table] = _teaMaker.make(teaType);
+  }
+
+  void serve() {
+    for (var table in _orders.keys) {
+      print('Serving Karak Tea to table #$table');
+    }
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var teaMaker = TeaMaker();
+  var shop = TeaShop(teaMaker);
+
+  shop.takeOrder('Karak', 1);
+  shop.takeOrder('Karak', 3);
+  shop.takeOrder('Karak', 5);
+  shop.takeOrder('Karak', 7);
+  shop.takeOrder('Karak', 9);
+
+  shop.serve();
+
+  print('Total tea objects made: ${teaMaker.totalTeasMade()}');
+}
+```
+
+</div>
+</details>
+
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی قراره تعداد خیلی زیادی آبجکت بسازی که بخش بزرگی از داده‌شون مشترکه و حافظه داره می‌ترکه»؛ ❌ «وقتی آبجکت‌هات کم‌اند یا حالت مشترکی ندارن که بشه share کرد».
 > 🪤 **دام رایج:** «به جای حالتِ مشترک و ثابت، روی حالتِ متغیر و بیرونی کش بگیری؛ اون‌وقت دیگه چیزی share نمی‌شه و کل ماجرا بی‌اثر می‌شه».
@@ -8192,6 +9494,103 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Door {
+    fun open(password: String)
+    fun close()
+}
+
+class LabDoor : Door {
+    override fun open(password: String) = println("Opening lab door")
+    override fun close() = println("Closing lab door")
+}
+
+class SecurityProxy(private val door: Door) : Door {
+    override fun open(password: String) {
+        if (authenticate(password)) {
+            door.open(password)
+        } else {
+            println("Big no! It is not possible.")
+        }
+    }
+
+    private fun authenticate(password: String): Boolean = password == "\$ecr@t"
+
+    override fun close() {
+        door.close()
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    val door = SecurityProxy(LabDoor())
+    door.open("invalid")
+    door.open("\$ecr@t")
+    door.close()
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Door {
+  void open(String password);
+  void close();
+}
+
+class LabDoor implements Door {
+  @override
+  void open(String password) => print('Opening lab door');
+
+  @override
+  void close() => print('Closing lab door');
+}
+
+class SecurityProxy implements Door {
+  final Door _door;
+
+  SecurityProxy(this._door);
+
+  @override
+  void open(String password) {
+    if (authenticate(password)) {
+      _door.open(password);
+    } else {
+      print('Big no! It is not possible.');
+    }
+  }
+
+  bool authenticate(String password) => password == r'$ecr@t';
+
+  @override
+  void close() => _door.close();
+}
+
+// ----------------------------
+
+void main() {
+  var door = SecurityProxy(LabDoor());
+  door.open('invalid');
+  door.open(r'$ecr@t');
+  door.close();
+}
+```
+
+</div>
 </details>
 
 > 🤔 **کی به کارش ببریم؟**
@@ -8863,6 +10262,123 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+abstract class Account(protected var balance: Int) {
+    private var successor: Account? = null
+
+    fun setNext(account: Account) {
+        successor = account
+    }
+
+    fun pay(amountToPay: Int) {
+        if (canPay(amountToPay)) {
+            println("Paid " + amountToPay + " using " + getName())
+        } else if (successor != null) {
+            println("Cannot pay using " + getName() + ". Proceeding ..")
+            successor!!.pay(amountToPay)
+        } else {
+            println("None of the accounts have enough balance")
+        }
+    }
+
+    private fun canPay(amount: Int): Boolean = balance >= amount
+
+    protected fun getName(): String = this::class.simpleName!!
+}
+
+class Bank(balance: Int) : Account(balance)
+
+class Paypal(balance: Int) : Account(balance)
+
+class Bitcoin(balance: Int) : Account(balance)
+
+// ----------------------------
+
+fun main() {
+    val bank = Bank(100)        // Bank with balance 100
+    val paypal = Paypal(300)    // Paypal with balance 300
+    val bitcoin = Bitcoin(1000) // Bitcoin with balance 1000
+
+    bank.setNext(paypal)
+    paypal.setNext(bitcoin)
+
+    bank.pay(259)
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Account {
+  Account? _successor;
+  late int balance;
+
+  void setNext(Account account) {
+    _successor = account;
+  }
+
+  void pay(int amountToPay) {
+    if (canPay(amountToPay)) {
+      print('Paid $amountToPay using ${getName()}');
+    } else if (_successor != null) {
+      print('Cannot pay using ${getName()}. Proceeding ..');
+      _successor!.pay(amountToPay);
+    } else {
+      print('None of the accounts have enough balance');
+    }
+  }
+
+  bool canPay(int amount) => balance >= amount;
+
+  String getName() => runtimeType.toString();
+}
+
+class Bank extends Account {
+  Bank(int balance) {
+    this.balance = balance;
+  }
+}
+
+class Paypal extends Account {
+  Paypal(int balance) {
+    this.balance = balance;
+  }
+}
+
+class Bitcoin extends Account {
+  Bitcoin(int balance) {
+    this.balance = balance;
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var bank = Bank(100); // Bank with balance 100
+  var paypal = Paypal(300); // Paypal with balance 300
+  var bitcoin = Bitcoin(1000); // Bitcoin with balance 1000
+
+  bank.setNext(paypal);
+  paypal.setNext(bitcoin);
+
+  bank.pay(259);
+}
+```
+
+</div>
 </details>
 
 > 🤔 **کی به کارش ببریم؟**
@@ -9544,6 +11060,122 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+// Receiver
+class Bulb {
+    fun turnOn() = println("Bulb has been lit")
+    fun turnOff() = println("Darkness!")
+}
+
+interface Command {
+    fun execute()
+    fun undo()
+}
+
+// Command
+class TurnOn(private val bulb: Bulb) : Command {
+    override fun execute() = bulb.turnOn()
+    override fun undo() = bulb.turnOff()
+}
+
+class TurnOff(private val bulb: Bulb) : Command {
+    override fun execute() = bulb.turnOff()
+    override fun undo() = bulb.turnOn()
+}
+
+// Invoker
+class RemoteControl {
+    fun submit(command: Command) {
+        command.execute()
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    val bulb = Bulb()
+
+    val turnOn = TurnOn(bulb)
+    val turnOff = TurnOff(bulb)
+
+    val remote = RemoteControl()
+    remote.submit(turnOn)   // Bulb has been lit
+    remote.submit(turnOff)  // Darkness!
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+// Receiver
+class Bulb {
+  void turnOn() => print('Bulb has been lit');
+  void turnOff() => print('Darkness!');
+}
+
+abstract class Command {
+  void execute();
+  void undo();
+}
+
+// Command
+class TurnOn implements Command {
+  final Bulb _bulb;
+  TurnOn(this._bulb);
+
+  @override
+  void execute() => _bulb.turnOn();
+
+  @override
+  void undo() => _bulb.turnOff();
+}
+
+class TurnOff implements Command {
+  final Bulb _bulb;
+  TurnOff(this._bulb);
+
+  @override
+  void execute() => _bulb.turnOff();
+
+  @override
+  void undo() => _bulb.turnOn();
+}
+
+// Invoker
+class RemoteControl {
+  void submit(Command command) {
+    command.execute();
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var bulb = Bulb();
+
+  var turnOn = TurnOn(bulb);
+  var turnOff = TurnOff(bulb);
+
+  var remote = RemoteControl();
+  remote.submit(turnOn); // Bulb has been lit
+  remote.submit(turnOff); // Darkness!
+}
+```
+
+</div>
+</details>
+
 > 🤔 **کی به کارش ببریم؟**
 > ✅ وقتی می‌خوای درخواست‌ها رو به آبجکت تبدیل کنی تا بشه صف‌شون کرد، لاگ گرفت یا undo/redo اضافه کرد؛ ❌ وقتی فقط یه متد ساده رو صدا می‌زنی و قرار نیست درخواست رو نگه داری یا برگردونی.
 > 🪤 **دام رایج:** برای هر کار کوچیکی یه کلاس Command جدا می‌سازی و کد بی‌دلیل پر از کلاس‌های یه‌خطی می‌شه.
@@ -10098,6 +11730,103 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+class RadioStation(private val frequency: Float) {
+    fun getFrequency(): Float = frequency
+}
+
+class StationList : Iterable<RadioStation> {
+    private val stations = mutableListOf<RadioStation>()
+
+    fun add(station: RadioStation) {
+        stations.add(station)
+    }
+
+    override fun iterator(): Iterator<RadioStation> = stations.iterator()
+}
+
+// ----------------------------
+
+fun main() {
+    val stations = StationList()
+    stations.add(RadioStation(89.0f))
+    stations.add(RadioStation(101.0f))
+    stations.add(RadioStation(102.5f))
+
+    for (station in stations) {
+        println(station.getFrequency())
+    }
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+import 'dart:collection';
+
+class RadioStation {
+  final double _frequency;
+
+  RadioStation(this._frequency);
+
+  double getFrequency() => _frequency;
+}
+
+class StationIterator implements Iterator<RadioStation> {
+  final List<RadioStation> _stations;
+  int _position = -1;
+
+  StationIterator(this._stations);
+
+  @override
+  RadioStation get current => _stations[_position];
+
+  @override
+  bool moveNext() {
+    _position++;
+    return _position < _stations.length;
+  }
+}
+
+class StationList extends IterableBase<RadioStation> {
+  final List<RadioStation> _stations = [];
+
+  void add(RadioStation station) {
+    _stations.add(station);
+  }
+
+  @override
+  Iterator<RadioStation> get iterator => StationIterator(_stations);
+}
+
+// ----------------------------
+
+void main() {
+  var stations = StationList();
+  stations.add(RadioStation(89.0));
+  stations.add(RadioStation(101.0));
+  stations.add(RadioStation(102.5));
+
+  for (var station in stations) {
+    print(station.getFrequency().toStringAsFixed(1));
+  }
+}
+```
+
+</div>
+</details>
+
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی می‌خوای روی یه مجموعه قدم بزنی بدون اینکه ساختار داخلیش (آرایه، درخت، گراف) رو لو بدی»؛ ❌ «وقتی یه آرایه ساده داری و حلقه معمولی زبان خودت کافیه، لازم نیست براش کلاس Iterator بسازی».
 > 🪤 **دام رایج:** «وسط پیمایش، خود مجموعه رو تغییر بدی (عنصر اضافه یا حذف کنی) و پیمایش‌گر قاطی کنه».
@@ -10578,6 +12307,92 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface ChatRoomMediator {
+    fun showMessage(user: User, message: String)
+}
+
+class ChatRoom : ChatRoomMediator {
+    override fun showMessage(user: User, message: String) {
+        println("${user.getName()}: $message")
+    }
+}
+
+class User(private val name: String, private val chatRoom: ChatRoomMediator) {
+    fun getName(): String = name
+
+    fun send(message: String) {
+        chatRoom.showMessage(this, message)
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    val mediator = ChatRoom()
+
+    val john = User("John", mediator)
+    val jane = User("Jane", mediator)
+
+    john.send("Hi there!")
+    jane.send("Hey!")
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class ChatRoomMediator {
+  void showMessage(User user, String message);
+}
+
+class ChatRoom implements ChatRoomMediator {
+  @override
+  void showMessage(User user, String message) {
+    print('${user.getName()}: $message');
+  }
+}
+
+class User {
+  final String _name;
+  final ChatRoomMediator _chatRoom;
+
+  User(this._name, this._chatRoom);
+
+  String getName() => _name;
+
+  void send(String message) {
+    _chatRoom.showMessage(this, message);
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var mediator = ChatRoom();
+
+  var john = User('John', mediator);
+  var jane = User('Jane', mediator);
+
+  john.send('Hi there!');
+  jane.send('Hey!');
+}
+```
+
+</div>
 </details>
 
 > 🤔 **کی به کارش ببریم؟**
@@ -11288,6 +13103,138 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+// Originator: holds state and creates/restores mementos.
+class Editor {
+    private var content: String = ""
+
+    fun type(content: String) {
+        this.content = content
+    }
+
+    fun getContent(): String = content
+
+    fun save(): EditorMemento = EditorMemento(content)
+
+    fun restore(memento: EditorMemento) {
+        content = memento.getContent()
+    }
+}
+
+// Memento: an immutable snapshot of the editor's state.
+class EditorMemento(private val content: String) {
+    fun getContent(): String = content
+}
+
+// Caretaker: keeps mementos on a stack without inspecting them.
+class History {
+    private val mementos = ArrayDeque<EditorMemento>()
+
+    fun push(memento: EditorMemento) {
+        mementos.addLast(memento)
+    }
+
+    fun pop(): EditorMemento = mementos.removeLast()
+}
+
+// ----------------------------
+
+fun main() {
+    val editor = Editor()
+    val history = History()
+
+    editor.type("a")
+    history.push(editor.save())
+
+    editor.type("ab")
+    history.push(editor.save())
+
+    editor.type("abc")
+
+    editor.restore(history.pop())
+    println(editor.getContent())
+
+    editor.restore(history.pop())
+    println(editor.getContent())
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+// Originator: holds state and creates/restores mementos.
+class Editor {
+  String _content = '';
+
+  void type(String content) {
+    _content = content;
+  }
+
+  String getContent() => _content;
+
+  EditorMemento save() => EditorMemento(_content);
+
+  void restore(EditorMemento memento) {
+    _content = memento.getContent();
+  }
+}
+
+// Memento: an immutable snapshot of the editor's state.
+class EditorMemento {
+  final String _content;
+
+  EditorMemento(this._content);
+
+  String getContent() => _content;
+}
+
+// Caretaker: keeps mementos on a stack without inspecting them.
+class History {
+  final List<EditorMemento> _mementos = [];
+
+  void push(EditorMemento memento) {
+    _mementos.add(memento);
+  }
+
+  EditorMemento pop() => _mementos.removeLast();
+}
+
+// ----------------------------
+
+void main() {
+  var editor = Editor();
+  var history = History();
+
+  editor.type('a');
+  history.push(editor.save());
+
+  editor.type('ab');
+  history.push(editor.save());
+
+  editor.type('abc');
+
+  editor.restore(history.pop());
+  print(editor.getContent());
+
+  editor.restore(history.pop());
+  print(editor.getContent());
+}
+```
+
+</div>
+</details>
+
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی می‌خوای حالت یک شیء رو ذخیره کنی و بعداً بهش برگردی، بدون اینکه کپسوله‌بودنش رو بشکنی»؛ ❌ «وقتی حالت سنگینه یا snapshot ها زیاد می‌شن و حافظه‌ت رو می‌خورن».
 > 🪤 **دام رایج:** «نگه‌داشتن بی‌حساب‌وکتاب همه‌ی snapshot ها؛ یک سقف یا سیاست پاک‌سازی براش بذار».
@@ -11961,6 +13908,116 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+class JobPost(private val title: String) {
+    fun getTitle(): String = title
+}
+
+class JobSeeker(private val name: String) {
+    fun onJobPosted(job: JobPost) {
+        println("Hi $name! New job posted: ${job.getTitle()}")
+    }
+}
+
+class EmploymentAgency {
+    private val observers = mutableListOf<JobSeeker>()
+
+    fun notify(jobPosting: JobPost) {
+        for (observer in observers) {
+            observer.onJobPosted(jobPosting)
+        }
+    }
+
+    fun attach(observer: JobSeeker) {
+        observers.add(observer)
+    }
+
+    fun addJob(jobPosting: JobPost) {
+        notify(jobPosting)
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    val johnDoe = JobSeeker("John Doe")
+    val janeDoe = JobSeeker("Jane Doe")
+
+    val jobPostings = EmploymentAgency()
+    jobPostings.attach(johnDoe)
+    jobPostings.attach(janeDoe)
+
+    jobPostings.addJob(JobPost("Software Engineer"))
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+class JobPost {
+  final String _title;
+
+  JobPost(this._title);
+
+  String getTitle() => _title;
+}
+
+class JobSeeker {
+  final String _name;
+
+  JobSeeker(this._name);
+
+  void onJobPosted(JobPost job) {
+    print('Hi $_name! New job posted: ${job.getTitle()}');
+  }
+}
+
+class EmploymentAgency {
+  final List<JobSeeker> _observers = [];
+
+  void notify(JobPost jobPosting) {
+    for (var observer in _observers) {
+      observer.onJobPosted(jobPosting);
+    }
+  }
+
+  void attach(JobSeeker observer) {
+    _observers.add(observer);
+  }
+
+  void addJob(JobPost jobPosting) {
+    notify(jobPosting);
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var johnDoe = JobSeeker('John Doe');
+  var janeDoe = JobSeeker('Jane Doe');
+
+  var jobPostings = EmploymentAgency();
+  jobPostings.attach(johnDoe);
+  jobPostings.attach(janeDoe);
+
+  jobPostings.addJob(JobPost('Software Engineer'));
+}
+```
+
 </div>
 </details>
 
@@ -12842,6 +14899,167 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+// Visitee
+interface Animal {
+    fun accept(operation: AnimalOperation)
+}
+
+// Visitor
+interface AnimalOperation {
+    fun visitMonkey(monkey: Monkey)
+    fun visitLion(lion: Lion)
+    fun visitDolphin(dolphin: Dolphin)
+}
+
+class Monkey : Animal {
+    fun shout() = println("Ooh oo aa aa!")
+
+    override fun accept(operation: AnimalOperation) {
+        operation.visitMonkey(this)
+    }
+}
+
+class Lion : Animal {
+    fun roar() = println("Roaaar!")
+
+    override fun accept(operation: AnimalOperation) {
+        operation.visitLion(this)
+    }
+}
+
+class Dolphin : Animal {
+    fun speak() = println("Tuut tuttu tuutt!")
+
+    override fun accept(operation: AnimalOperation) {
+        operation.visitDolphin(this)
+    }
+}
+
+class Speak : AnimalOperation {
+    override fun visitMonkey(monkey: Monkey) = monkey.shout()
+    override fun visitLion(lion: Lion) = lion.roar()
+    override fun visitDolphin(dolphin: Dolphin) = dolphin.speak()
+}
+
+class Jump : AnimalOperation {
+    override fun visitMonkey(monkey: Monkey) = println("Jumped 20 feet high! on to the tree!")
+    override fun visitLion(lion: Lion) = println("Jumped 7 feet! back on the ground!")
+    override fun visitDolphin(dolphin: Dolphin) = println("Walked on water a little and disappeared")
+}
+
+// ----------------------------
+
+fun main() {
+    val monkey = Monkey()
+    val lion = Lion()
+    val dolphin = Dolphin()
+
+    val speak = Speak()
+    val jump = Jump()
+
+    monkey.accept(speak)
+    lion.accept(speak)
+    dolphin.accept(speak)
+
+    monkey.accept(jump)
+    lion.accept(jump)
+    dolphin.accept(jump)
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+// Visitor
+abstract class AnimalOperation {
+  void visitMonkey(Monkey monkey);
+  void visitLion(Lion lion);
+  void visitDolphin(Dolphin dolphin);
+}
+
+// Visitee
+abstract class Animal {
+  void accept(AnimalOperation operation);
+}
+
+class Monkey implements Animal {
+  void shout() => print('Ooh oo aa aa!');
+
+  @override
+  void accept(AnimalOperation operation) => operation.visitMonkey(this);
+}
+
+class Lion implements Animal {
+  void roar() => print('Roaaar!');
+
+  @override
+  void accept(AnimalOperation operation) => operation.visitLion(this);
+}
+
+class Dolphin implements Animal {
+  void speak() => print('Tuut tuttu tuutt!');
+
+  @override
+  void accept(AnimalOperation operation) => operation.visitDolphin(this);
+}
+
+class Speak implements AnimalOperation {
+  @override
+  void visitMonkey(Monkey monkey) => monkey.shout();
+
+  @override
+  void visitLion(Lion lion) => lion.roar();
+
+  @override
+  void visitDolphin(Dolphin dolphin) => dolphin.speak();
+}
+
+class Jump implements AnimalOperation {
+  @override
+  void visitMonkey(Monkey monkey) => print('Jumped 20 feet high! on to the tree!');
+
+  @override
+  void visitLion(Lion lion) => print('Jumped 7 feet! back on the ground!');
+
+  @override
+  void visitDolphin(Dolphin dolphin) => print('Walked on water a little and disappeared');
+}
+
+// ----------------------------
+
+void main() {
+  var monkey = Monkey();
+  var lion = Lion();
+  var dolphin = Dolphin();
+
+  var speak = Speak();
+  var jump = Jump();
+
+  monkey.accept(speak);
+  lion.accept(speak);
+  dolphin.accept(speak);
+
+  monkey.accept(jump);
+  lion.accept(jump);
+  dolphin.accept(jump);
+}
+```
+
+</div>
+</details>
+
 > 🤔 **کی به کارش ببریم؟**
 > ✅ وقتی یه ساختار از اشیای ثابت داری و مدام می‌خوای عملیات‌های تازه روشون اضافه کنی، مثل گزارش‌گیری، اعتبارسنجی یا صادر کردن خروجی؛ ❌ وقتی برعکس، خودِ نوع‌های اشیا مدام عوض و زیاد می‌شن ولی عملیات‌ها تقریباً ثابتن.
 > 🪤 **دام رایج:** هر بار که یه نوع حیوون جدید اضافه می‌کنی، مجبوری برِی توی تک‌تک Visitorها یه متد `visit` جدید بنویسی؛ پس اضافه کردن «نوع» اینجا گرونه.
@@ -13339,6 +15557,101 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface PaymentStrategy {
+    fun pay(amount: Int)
+}
+
+class CashPayment : PaymentStrategy {
+    override fun pay(amount: Int) {
+        println("Paid $amount in cash")
+    }
+}
+
+class CardPayment : PaymentStrategy {
+    override fun pay(amount: Int) {
+        println("Paid $amount by card")
+    }
+}
+
+class WalletPayment : PaymentStrategy {
+    override fun pay(amount: Int) {
+        println("Paid $amount from wallet")
+    }
+}
+
+class Checkout(private val strategy: PaymentStrategy) {
+    fun checkout(amount: Int) {
+        strategy.pay(amount)
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    var checkout = Checkout(CashPayment())
+    checkout.checkout(100)
+
+    checkout = Checkout(CardPayment())
+    checkout.checkout(250)
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class PaymentStrategy {
+  void pay(int amount);
+}
+
+class CashPayment implements PaymentStrategy {
+  @override
+  void pay(int amount) => print('Paid $amount in cash');
+}
+
+class CardPayment implements PaymentStrategy {
+  @override
+  void pay(int amount) => print('Paid $amount by card');
+}
+
+class WalletPayment implements PaymentStrategy {
+  @override
+  void pay(int amount) => print('Paid $amount from wallet');
+}
+
+class Checkout {
+  final PaymentStrategy _strategy;
+
+  Checkout(this._strategy);
+
+  void checkout(int amount) => _strategy.pay(amount);
+}
+
+// ----------------------------
+
+void main() {
+  var checkout = Checkout(CashPayment());
+  checkout.checkout(100);
+
+  checkout = Checkout(CardPayment());
+  checkout.checkout(250);
+}
+```
+
+</div>
 </details>
 
 > 🤔 **کی به کارش ببریم؟**
@@ -14010,6 +16323,115 @@ int main() {
 
 </div>
 
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface TrafficLightState {
+    fun name(): String
+    fun next(): TrafficLightState
+}
+
+class RedLight : TrafficLightState {
+    override fun name() = "Red"
+    override fun next(): TrafficLightState = GreenLight()
+}
+
+class GreenLight : TrafficLightState {
+    override fun name() = "Green"
+    override fun next(): TrafficLightState = YellowLight()
+}
+
+class YellowLight : TrafficLightState {
+    override fun name() = "Yellow"
+    override fun next(): TrafficLightState = RedLight()
+}
+
+class TrafficLight(private var state: TrafficLightState) {
+    fun name() = state.name()
+
+    fun next() {
+        state = state.next()
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    val light = TrafficLight(RedLight())
+    for (i in 0 until 4) {
+        println(light.name())
+        light.next()
+    }
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class TrafficLightState {
+  String name();
+  TrafficLightState next();
+}
+
+class RedLight implements TrafficLightState {
+  @override
+  String name() => 'Red';
+
+  @override
+  TrafficLightState next() => GreenLight();
+}
+
+class GreenLight implements TrafficLightState {
+  @override
+  String name() => 'Green';
+
+  @override
+  TrafficLightState next() => YellowLight();
+}
+
+class YellowLight implements TrafficLightState {
+  @override
+  String name() => 'Yellow';
+
+  @override
+  TrafficLightState next() => RedLight();
+}
+
+class TrafficLight {
+  TrafficLightState _state;
+
+  TrafficLight(this._state);
+
+  String name() => _state.name();
+
+  void next() {
+    _state = _state.next();
+  }
+}
+
+// ----------------------------
+
+void main() {
+  var light = TrafficLight(RedLight());
+  for (var i = 0; i < 4; i++) {
+    print(light.name());
+    light.next();
+  }
+}
+```
+
+</div>
 </details>
 
 > 🤔 **کی به کارش ببریم؟**
@@ -14788,6 +17210,140 @@ int main() {
 
 </details>
 
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+abstract class Builder {
+    // Template method
+    fun build() {
+        test()
+        lint()
+        assemble()
+        deploy()
+    }
+
+    abstract fun test()
+    abstract fun lint()
+    abstract fun assemble()
+    abstract fun deploy()
+}
+
+class AndroidBuilder : Builder() {
+    override fun test() {
+        println("Running android tests")
+    }
+
+    override fun lint() {
+        println("Linting the android code")
+    }
+
+    override fun assemble() {
+        println("Assembling the android build")
+    }
+
+    override fun deploy() {
+        println("Deploying android build to server")
+    }
+}
+
+class IosBuilder : Builder() {
+    override fun test() {
+        println("Running ios tests")
+    }
+
+    override fun lint() {
+        println("Linting the ios code")
+    }
+
+    override fun assemble() {
+        println("Assembling the ios build")
+    }
+
+    override fun deploy() {
+        println("Deploying ios build to server")
+    }
+}
+
+// ----------------------------
+
+fun main() {
+    val androidBuilder = AndroidBuilder()
+    androidBuilder.build()
+
+    val iosBuilder = IosBuilder()
+    iosBuilder.build()
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Builder {
+  // Template method
+  void build() {
+    test();
+    lint();
+    assemble();
+    deploy();
+  }
+
+  void test();
+  void lint();
+  void assemble();
+  void deploy();
+}
+
+class AndroidBuilder extends Builder {
+  @override
+  void test() => print('Running android tests');
+
+  @override
+  void lint() => print('Linting the android code');
+
+  @override
+  void assemble() => print('Assembling the android build');
+
+  @override
+  void deploy() => print('Deploying android build to server');
+}
+
+class IosBuilder extends Builder {
+  @override
+  void test() => print('Running ios tests');
+
+  @override
+  void lint() => print('Linting the ios code');
+
+  @override
+  void assemble() => print('Assembling the ios build');
+
+  @override
+  void deploy() => print('Deploying ios build to server');
+}
+
+// ----------------------------
+
+void main() {
+  var androidBuilder = AndroidBuilder();
+  androidBuilder.build();
+
+  var iosBuilder = IosBuilder();
+  iosBuilder.build();
+}
+```
+
+</div>
+</details>
+
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی چند تا کار، ترتیب و اسکلت یکسانی دارن و فقط چند قدمشون فرق می‌کنه»؛ ❌ «وقتی کل روند کار از این‌رو به اون‌رو فرق می‌کنه و قدم مشترکی بینشون نیست».
 > 🪤 **دام رایج:** «این‌قدر قدم‌ها رو قابل‌بازنویسی می‌کنی که دیگه اسکلت ثابتی نمی‌مونه و کنترل از دستت در می‌ره».
@@ -14832,6 +17388,8 @@ int main() {
 - محمد عزیز که زحمت مثال‌های Java رو کشید. ([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
 - سما عزیز که زحمت مثال‌های JavaScript رو کشید. ([samazzz](https://github.com/samazzz))
 - حمیدرضا عزیز که زحمت مثال‌های C++ رو کشید. ([hamiikalhor](https://github.com/hamiikalhor))
+- آریا عزیز که زحمت مثال‌های Kotlin رو کشید. ([ariaramin](https://github.com/ariaramin))
+- مجید عزیز که زحمت مثال‌های Dart رو کشید. ([majidrigizadeh](https://github.com/majidrigizadeh))
 - مهسا، محمد، سجاد و محسن عزیز که زحمت بهبود کدها رو کشیدند. ([MahsaMahdavian](https://github.com/MahsaMahdavian) / [MohammadMMoniri](https://github.com/MohammadMMoniri) / [ssmns](https://github.com/ssmns) / [Serajian](https://github.com/Serajian))
 
 </div>
