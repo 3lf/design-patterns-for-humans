@@ -2939,7 +2939,7 @@ $burger = (new BurgerBuilder(14))
             ->addMushrooms()
             ->build();
 
-echo $burger->getDescription();
+echo $burger->getDescription() . "\n";
 // Burger: size 14, cheese: true, mushrooms: true, tomato: false
 
 ```
