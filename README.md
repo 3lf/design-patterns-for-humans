@@ -5452,6 +5452,8 @@ func main() {
 <div dir="ltr">
 
 ```java
+import java.util.*;
+
 interface Employee {
 
     String getName();
@@ -7484,6 +7486,8 @@ fmt.Printf("Total tea objects made: %d\n", teaMaker.TotalTeasMade())
 <div dir="ltr">
 
 ```java
+import java.util.*;
+
 // KarakTea is the flyweight: the shared, intrinsic part.
 class KarakTea {
 }
@@ -9939,6 +9943,8 @@ func main() {
 <div dir="ltr">
 
 ```java
+import java.util.*;
+
 class RadioStation {
     private float frequency;
 
@@ -11765,6 +11771,8 @@ func main() {
 <div dir="ltr">
 
 ```java
+import java.util.*;
+
 class JobPost {
     private String title;
 
