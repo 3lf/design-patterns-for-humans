@@ -14733,8 +14733,6 @@ int main() {
     // Assembling the android build
     // Deploying android build to server
 
-    std::cout << std::endl;
-
     IosBuilder iosBuilder;
     iosBuilder.build();
     // Running ios tests
