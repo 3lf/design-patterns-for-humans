@@ -436,6 +436,8 @@ console.log(door.getWidth());
 <div dir="ltr">
 
 ```csharp
+using System;
+
 public interface IDoor
 {
     int GetHeight();
@@ -899,6 +901,8 @@ marketingManager.takeInterview();
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 interface IInterviewer
 {
@@ -1571,6 +1575,8 @@ expert.getDescription(); // Output: I can only fit iron doors
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 interface IDoor {
 
@@ -2153,6 +2159,8 @@ constructor(size, cheese = true, mushrooms = true, tomato = false) {}
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 public Burger(int size, bool cheese, bool mushrooms, bool tomato)
 
@@ -2421,6 +2429,9 @@ console.log(burger.getDescription());
 <div dir="ltr">
 
 ```csharp
+using System;
+using System.Text;
+
 class Burger
 {
   private int mSize;
@@ -3440,6 +3451,8 @@ console.log("Same instance?", Object.is(a, b) ? "True" : "False");
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 public class President
 {
@@ -3885,6 +3898,8 @@ hunter.hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
 <div dir="ltr">
 
 ```csharp
+using System;
+
 interface ILion
 {
   string Roar();
@@ -4482,6 +4497,8 @@ console.log(careers.getContent());  // Careers page in Light blue
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 interface IWebPage
 {
@@ -5174,6 +5191,9 @@ console.log(`Total salary: ${company.getSalary()}`);
 <div dir="ltr">
 
 ```csharp
+using System;
+using System.Collections.Generic;
+
 interface IEmployee
 {
   string GetName();
@@ -5900,6 +5920,8 @@ console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee, milk
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 interface ICoffee
 {
@@ -6554,6 +6576,8 @@ computer.turnOff();
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 class Computer
 {
@@ -7240,6 +7264,9 @@ console.log("Total tea objects made: " + teaMaker.totalTeasMade());
 <div dir="ltr">
 
 ```csharp
+using System;
+using System.Collections.Generic;
+
 
 // KarakTea is the flyweight: the shared, intrinsic part.
 class KarakTea
@@ -7855,6 +7882,8 @@ door.close();           // Closing lab door
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 interface IDoor
 {
@@ -8464,6 +8493,8 @@ bank.pay(259);
 <div dir="ltr">
 
 ```csharp
+using System;
+
 abstract class Account
 {
   private Account mSuccessor;
@@ -9092,6 +9123,8 @@ remote.submit(turnOff); // Darkness!
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 // Receiver
 class Bulb
@@ -9752,6 +9785,11 @@ for (const station of stations) {
 <div dir="ltr">
 
 ```csharp
+using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Globalization;
+
 class RadioStation
 {
     private float mFrequency;
@@ -10258,6 +10296,8 @@ jane.send("Hey!");
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 interface IChatRoomMediator
 {
@@ -11489,6 +11529,9 @@ jobPostings.addJob(new JobPost("Software Engineer"));
 <div dir="ltr">
 
 ```csharp
+using System;
+using System.Collections.Generic;
+
 
 class JobPost
 {
@@ -11588,7 +11631,7 @@ internal class Unsubscriber<JobPost> : IDisposable
 var johnDoe = new JobSeeker("John Doe");
 var janeDoe = new JobSeeker("Jane Doe");
 
-//Create publisher and attch subscribers
+//Create publisher and attach subscribers
 var jobPostings = new EmploymentAgency();
 jobPostings.Subscribe(johnDoe);
 jobPostings.Subscribe(janeDoe);
@@ -12244,6 +12287,8 @@ dolphin.accept(jump);   // Walked on water a little and disappeared
 <div dir="ltr">
 
 ```csharp
+using System;
+
 // Visitee
 interface IAnimal
 {
@@ -12995,6 +13040,8 @@ checkout.checkout(250); // Output: Paid 250 by card
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 interface IPaymentStrategy
 {
@@ -13025,16 +13072,16 @@ class WalletPayment : IPaymentStrategy
   }
 }
 
-class Checkout
+class ShoppingCart
 {
   private readonly IPaymentStrategy mStrategy;
 
-  public Checkout(IPaymentStrategy strategy)
+  public ShoppingCart(IPaymentStrategy strategy)
   {
     mStrategy = strategy;
   }
 
-  public void DoCheckout(int amount)
+  public void Checkout(int amount)
   {
     mStrategy.Pay(amount);
   }
@@ -13042,11 +13089,11 @@ class Checkout
 
 // ----------------------------
 
-var checkout = new Checkout(new CashPayment());
-checkout.DoCheckout(100); // Output: Paid 100 in cash
+var checkout = new ShoppingCart(new CashPayment());
+checkout.Checkout(100); // Output: Paid 100 in cash
 
-checkout = new Checkout(new CardPayment());
-checkout.DoCheckout(250); // Output: Paid 250 by card
+checkout = new ShoppingCart(new CardPayment());
+checkout.Checkout(250); // Output: Paid 250 by card
 
 ```
 
@@ -13570,6 +13617,8 @@ for (let i = 0; i < 4; i++) {
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 interface ITrafficLightState {
   string Name();
@@ -14278,6 +14327,8 @@ iosBuilder.build();
 <div dir="ltr">
 
 ```csharp
+using System;
+
 
 abstract class Builder
 {
