@@ -976,7 +976,7 @@ class Developer implements InterviewerInterface
 {
     public function askQuestions()
     {
-        echo "Asking about design patterns!";
+        echo "Asking about design patterns!\n";
     }
 }
 
@@ -984,7 +984,7 @@ class CommunityExecutive implements InterviewerInterface
 {
     public function askQuestions()
     {
-        echo "Asking about community building";
+        echo "Asking about community building\n";
     }
 }
 
@@ -3087,9 +3087,6 @@ public class Program
 <div dir="ltr">
 
 ```php
-
-<?php
-
 class Address
 {
     public string $city;
@@ -10923,7 +10920,6 @@ Console.WriteLine(editor.Content); // a
 <div dir="ltr">
 
 ```php
-<?php
 // Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento
 {
@@ -11630,86 +11626,70 @@ Console.ReadLine();
 <div dir="ltr">
 
 ```php
+interface ObserverInterface
+{
+    public function onJobPosted(JobPost $job): void;
+}
+
 class JobPost
 {
     public function __construct(private string $title)
     {
     }
 
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 }
 
-class JobSeeker implements SplObserver
+class JobSeeker implements ObserverInterface
 {
     public function __construct(private string $name)
     {
     }
 
-    public function update(SplSubject $subject)
+    public function onJobPosted(JobPost $job): void
     {
-        if ($subject instanceof EmploymentAgency) {
-            $jobPost = $subject->getJobPost();
-            echo "Hi {$this->name}! New job posted: {$jobPost->getTitle()}\n";
-        }
+        echo "Hi {$this->name}! New job posted: {$job->getTitle()}
+";
     }
 }
 
-class EmploymentAgency implements SplSubject
+class EmploymentAgency
 {
-    private $observers;
-    private $jobPostings;
+    private array $observers = [];
 
-    public function __construct()
+    public function attach(ObserverInterface $observer): void
     {
-        $this->observers = new SplObjectStorage();
-        $this->jobPostings = [];
+        $this->observers[] = $observer;
     }
 
-    public function attach(SplObserver $observer)
-    {
-        $this->observers->attach($observer);
-    }
-
-    public function detach(SplObserver $observer)
-    {
-        $this->observers->detach($observer);
-    }
-
-    public function notify()
+    public function notify(JobPost $jobPosting): void
     {
         foreach ($this->observers as $observer) {
-            $observer->update($this);
+            $observer->onJobPosted($jobPosting);
         }
     }
 
-    public function addJob(JobPost $jobPost)
+    public function addJob(JobPost $jobPosting): void
     {
-        $this->jobPostings[] = $jobPost;
-        $this->notify();
-    }
-
-    public function getJobPost()
-    {
-        return end($this->jobPostings);
+        $this->notify($jobPosting);
     }
 }
 
-//Create Subscribers
+// ----------------------------
+
 $johnDoe = new JobSeeker("John Doe");
 $janeDoe = new JobSeeker("Jane Doe");
 
-//Create publisher and attach subscribers
 $jobPostings = new EmploymentAgency();
 $jobPostings->attach($johnDoe);
 $jobPostings->attach($janeDoe);
 
-//Add a new job and see if subscribers get notified
 $jobPostings->addJob(new JobPost("Software Engineer"));
 
-//Output
+// Output:
 // Hi John Doe! New job posted: Software Engineer
 // Hi Jane Doe! New job posted: Software Engineer
 ```
