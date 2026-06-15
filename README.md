@@ -9,8 +9,8 @@
 </h3>
 
 <p dir="rtl" align="center">
-فهمیدن دیزاین پترن‌ها از اون موضوع‌هاست که ذهن رو به چالش میکشه.
- اینجا سعی می‌کنم با مثال‌های ساده از دنیای واقعی و دنیای کد ، اونو راحت وارد ذهنتون کنم.
+فهمیدن دیزاین پترن‌ها از اون موضوع‌هاست که ذهن رو به چالش می‌کشه.
+ اینجا سعی می‌کنم با مثال‌های ساده از دنیای واقعی و دنیای کد ، اونو راحت وارد ذهنت کنم.
 </p>
 
 ---
@@ -37,10 +37,10 @@
 
 | دسته‌بندی | دیزاین پترن‌ها |
 | --- | --- |
-| 🧱 **SOLID Principles** | [🧱 SOLID Principles](#-solid-principles) |
-| 🏗️ **Creational** | [🏠 Simple Factory](#-simple-factory)<br>[🏭 Factory Method](#-factory-method)<br>[🔨 Abstract Factory](#-abstract-factory)<br>[👷 Builder](#-builder)<br>[🐑 Prototype](#-prototype)<br>[💍 Singleton](#-singleton) |
-| 🧩 **Structural** | [🔌 Adapter](#-adapter)<br>[🌉 Bridge](#-bridge)<br>[🌿 Composite](#-composite)<br>[☕ Decorator](#-decorator)<br>[📦 Facade](#-facade)<br>[🍃 Flyweight](#-flyweight)<br>[🎱 Proxy](#-proxy) |
-| 🎭 **Behavioral** | [🔗 Chain of Responsibility](#-chain-of-responsibility)<br>[👮 Command](#-command)<br>[➿ Iterator](#-iterator)<br>[👽 Mediator](#-mediator)<br>[💾 Memento](#-memento)<br>[😎 Observer](#-observer)<br>[🏃 Visitor](#-visitor)<br>[💡 Strategy](#-strategy)<br>[💢 State](#-state)<br>[📒 Template Method](#-template-method) |
+| 🧱 **اصول SOLID** | [🧱 اصول SOLID (SOLID Principles)](#اصول-solid-solid-principles-)<br>[تک‌وظیفگی (SRP)](#۱-اصل-تک‌وظیفگی-single-responsibility-principle-srp-)<br>[باز/بسته (OCP)](#۲-اصل-بازبسته-openclosed-principle-ocp-)<br>[جایگزینی لیسکوف (LSP)](#۳-اصل-جایگزینی-لیسکوف-liskov-substitution-principle-lsp-)<br>[جداسازی اینترفیس (ISP)](#۴-اصل-جداسازی-اینترفیس-interface-segregation-principle-isp-)<br>[وارونگی وابستگی (DIP)](#۵-اصل-وارونگی-وابستگی-dependency-inversion-principle-dip-) |
+| 🏗️ **سازنده (Creational)** | [🏠 کارخانه ساده (Simple Factory)](#کارخانه-ساده-simple-factory-)<br>[🏭 متد کارخانه (Factory Method)](#متد-کارخانه-factory-method-)<br>[🔨 کارخانه انتزاعی (Abstract Factory)](#کارخانه-انتزاعی-abstract-factory-)<br>[👷 سازنده (Builder)](#سازنده-builder-)<br>[🐑 نمونه اولیه (Prototype)](#نمونه-اولیه-prototype-)<br>[💍 تک‌نمونه (Singleton)](#تک‌نمونه-singleton-) |
+| 🧩 **ساختاری (Structural)** | [🔌 مبدل (Adapter)](#مبدل-adapter-)<br>[🌉 پل (Bridge)](#پل-bridge-)<br>[🌿 مرکب (Composite)](#مرکب-composite-)<br>[☕ تزئین‌گر (Decorator)](#تزئین‌گر-decorator-)<br>[📦 نما (Facade)](#نما-facade-)<br>[🍃 وزن‌سبک (Flyweight)](#وزن‌سبک-flyweight-)<br>[🎱 پراکسی (Proxy)](#پراکسی-proxy-) |
+| 🎭 **رفتاری (Behavioral)** | [🔗 زنجیره مسئولیت (Chain of Responsibility)](#زنجیره-مسئولیت-chain-of-responsibility-)<br>[👮 فرمان (Command)](#فرمان-command-)<br>[➿ پیمایش‌گر (Iterator)](#پیمایش‌گر-iterator-)<br>[👽 میانجی (Mediator)](#میانجی-mediator-)<br>[💾 یادبود (Memento)](#یادبود-memento-)<br>[😎 ناظر (Observer)](#ناظر-observer-)<br>[🏃 بازدیدکننده (Visitor)](#بازدیدکننده-visitor-)<br>[💡 استراتژی (Strategy)](#استراتژی-strategy-)<br>[💢 حالت (State)](#حالت-state-)<br>[📒 متد قالب (Template Method)](#متد-قالب-template-method-) |
 
 </details>
 
@@ -52,7 +52,7 @@
 
 <div dir="rtl" align="center">
 
-# 🚀 مقدمه
+# مقدمه 🚀
 
 </div>
 
@@ -60,16 +60,16 @@
 
 دیزاین پترن‌ها یک سری دستور العمل برای مقابله با یک سری مشکلات رایج هستند.
 
-اونا یک سری کلاس، پکیج یا کتابخونه نیستند که با اضافه کردنشون به پروژه‌تون جادو کنن. در عوض یک سری راه حل بهتون میدن که
-در شرایط خاص به مشکل نخورین.
+اونا یک سری کلاس، پکیج یا کتابخونه نیستند که با اضافه کردنشون به پروژه‌ت جادو کنن. در عوض یک سری راه‌حل بهت می‌دن که
+در شرایط خاص به مشکل نخوری.
 
 <br>
 
-> پس دیزاین پترن‌ها راه حلی برای مشکلات رایج هستن.
+> پس دیزاین پترن‌ها راه‌حلی برای مشکلات رایج هستن.
 
 <br>
 
-**ویکی‌پدیا** دیزاین پترن‌ها رو اینطوری توصیف میکنه:
+**ویکی‌پدیا** دیزاین پترن‌ها رو اینطوری توصیف می‌کنه:
 
 > در مهندسی نرم‌افزار، الگوی طراحی یک راه‌حل عمومی قابل تکرار برای مشکلات متداول در زمینه طراحی نرم‌افزار است. الگوی
 > طراحی، یک طراحی تمام‌شده نیست که به صورت مستقیم بتواند تبدیل به کد منبع یا ماشین شود؛ بلکه، یک توضیح یا قالب برای حل
@@ -81,14 +81,13 @@
 <br>
 <div dir="rtl" align="right">
 
-## ⚠ هشدار
+## هشدار ⚠️
 
 </div>
 
-- الگو‌های طراحی برای همه مشکلات راه حل ندارن.
-- سعی نکنین حتما توی پروژه‌هاتون از اونا استفاده کنین و یادتون باشه دیزاین پترن‌ها راه حلی برای مشکلات هستن، نه راه حلی
-  برای پیدا کردن مشکلات، پس خیلی درگیر پیدا کردن دلیل برای استفاده ازشون نباشین.
-- اگه از اونا جای درست استفاده کنین، شما پروژه رو از مشکلات نجات دادین درغیر اینصورت قراره فاجعه به بار بیاد.
+- الگوهای طراحی برای همه مشکلات راه‌حل ندارن.
+- سعی نکن حتماً توی پروژه‌هات از اونا استفاده کنی؛ یادت باشه دیزاین پترن‌ها راه‌حلی برای مشکلاتن، نه راهی برای پیدا کردن مشکل. پس خیلی درگیرِ پیدا کردن دلیل برای استفاده ازشون نشو.
+- اگه سرِ جای درست از اونا استفاده کنی، پروژه رو از مشکلات نجات می‌دی؛ در غیر این صورت قراره فاجعه به بار بیاد.
 
 <br>
 <br>
@@ -97,23 +96,49 @@
 
 <div align="center">
 
-## 🧱 اصول SOLID (SOLID Principles)
+## این راهنما رو چطوری بخونیم؟ 🧭
 
 </div>
 
 <div dir="rtl">
 
-قبل از اینکه بریم سراغ دیزاین پترن‌ها، باید الفبای کدنویسی تمیز رو یاد بگیریم. این ۵ تا اصل (SOLID) بهتون کمک می‌کنن کدی بنویسید که راحت تغییر کنه و مثل ماکارونی درهم‌پیچیده نشه! 🍝
+این راهنما برای کسیه که یه کم با **شیءگرایی (OOP)** آشناست (کلاس، آبجکت، ارث‌بری، اینترفیس) و می‌خواد دیزاین پترن‌ها رو بدون خشکیِ کتاب‌های دانشگاهی یاد بگیره؛ از مبتدی تا کسی که فقط دنبال یه مرور سریعه.
 
-### ۱. اصل تک‌وظیفگی (Single Responsibility Principle - SRP) 🧙‍♂️
+هر الگو رو با یه قالب ثابت پیش می‌بریم تا راحت دنبالش کنی:
+
+*   🌍 **یه مثال از دنیای واقعی** تا حسش کنی.
+*   💡 **به زبون ساده** که ته‌نشین بشه.
+*   📖 **تعریف ویکی‌پدیا** (به‌همراه ترجمه فارسی) تا دقیق هم بدونی.
+*   💻 **کد، توی ۱۰ زبان** (Python، JavaScript، TypeScript، Java، C#، PHP، Go، C++، Kotlin، Dart)؛ روی زبون خودت کلیک کن و بازش کن.
+*   🤔 **کی به کارش ببریم؟** یه جعبه کوتاه که می‌گه کجا به دردت می‌خوره، کجا نه، و فرقش با الگوهای شبیهش چیه.
+
+الگوها هم سه دسته‌ان: **سازنده (Creational)** درباره‌ی ساختن آبجکت‌هاست، **ساختاری (Structural)** درباره‌ی کنار هم چیدنِ کلاس‌ها و آبجکت‌ها، و **رفتاری (Behavioral)** درباره‌ی اینکه آبجکت‌ها چطور با هم حرف می‌زنن و کار رو بین خودشون تقسیم می‌کنن.
+
+> 💡 لازم نیست همه رو یه‌جا حفظ کنی! اینجا رو مثل یه فرهنگِ لغت ببین؛ هر وقت سرِ مشکلی گیر کردی، برگرد و الگوی مناسبش رو پیدا کن.
+
+</div>
+
+---
+
+<div align="center">
+
+## اصول SOLID (SOLID Principles) 🧱
+
+</div>
+
+<div dir="rtl">
+
+قبل از اینکه بریم سراغ دیزاین پترن‌ها، باید الفبای کدنویسی تمیز رو یاد بگیریم. این ۵ تا اصل (SOLID) بهت کمک می‌کنن کدی بنویسی که راحت تغییر کنه و مثل ماکارونی درهم‌پیچیده نشه! 🍝
+
+### ۱. اصل تک‌وظیفگی (Single Responsibility Principle, SRP) 🧙‍♂️
 > **قانون طلایی:** هر کلاس فقط و فقط باید **یک دلیل** برای تغییر داشته باشه.
 
 <div align="center">
 📦 <b>مثال دنیای واقعی: جعبه ابزار vs چاقوی سوئیسی</b>
 </div>
 
-فرض کنید یه چاقوی سوئیسی دارید که هم پیچ‌گوشتیه، هم اره، هم دربازکن. اگه اره‌ش بشکنه، باید کل چاقو رو بدید تعمیر و دیگه پیچ‌گوشتی هم ندارید!
-بهترین کار اینه که یه جعبه ابزار داشته باشید که توش پیچ‌گوشتی جدا و اره جدا باشه. اینطوری خرابی یکی به بقیه ربطی نداره.
+فرض کن یه چاقوی سوئیسی داری که هم پیچ‌گوشتیه، هم اره، هم دربازکن. اگه اره‌ش بشکنه، باید کل چاقو رو بدی تعمیر و دیگه پیچ‌گوشتی هم نداری!
+بهترین کار اینه که یه جعبه ابزار داشته باشی که توش پیچ‌گوشتی جدا و اره جدا باشه. اینطوری خرابی یکی به بقیه ربطی نداره.
 
 💻 **توی کد یعنی چی؟**
 کلاسی که هم اطلاعات یوزر رو ثبت می‌کنه، هم بهش ایمیل خوش‌آمدگویی می‌فرسته، هم لاگ می‌ندازه، اشتباهه!
@@ -123,74 +148,74 @@
 
 ---
 
-### ۲. اصل باز/بسته (Open/Closed Principle - OCP) 🚪
+### ۲. اصل باز/بسته (Open/Closed Principle, OCP) 🚪
 > **قانون طلایی:** نرم‌افزار باید برای **توسعه باز** (Open)، اما برای **تغییر بسته** (Closed) باشه.
 
 <div align="center">
 🎮 <b>مثال دنیای واقعی: کنسول بازی</b>
 </div>
 
-شما یک پلی‌استیشن دارید. وقتی بازی جدیدی (مثل GTA VI) میاد، لازم نیست کل دستگاه رو باز کنید و سیم‌کشی‌شو عوض کنید تا بازی جدید رو بخونه!
-کنسول **بسته** است (سخت‌افزارش ثابت می‌مونه) اما برای **توسعه** بازه (فقط دیسک بازی جدید رو می‌ذارید توش).
+تو یک پلی‌استیشن داری. وقتی بازی جدیدی (مثل GTA VI) میاد، لازم نیست کل دستگاه رو باز کنی و سیم‌کشی‌شو عوض کنی تا بازی جدید رو بخونه!
+کنسول **بسته** است (سخت‌افزارش ثابت می‌مونه) اما برای **توسعه** بازه (فقط دیسک بازی جدید رو می‌ذاری توش).
 
 💻 **توی کد یعنی چی؟**
-اگه فردا مشتری گفت "حالا می‌خوام پرداخت با بیت‌کوین هم داشته باشیم"، نباید برید توی کلاس `PaymentService` و کد `if (type == 'bitcoin')` اضافه کنید (این یعنی تغییر کد قبلی ❌).
-باید طوری کد زده باشید که فقط یه کلاس جدید `BitcoinPayment` بسازید و سیستم خودکار بشناستش (این یعنی توسعه ✅).
+اگه فردا مشتری گفت «حالا می‌خوام پرداخت با بیت‌کوین هم داشته باشیم»، نباید بری توی کلاس `PaymentService` و کد `if (type == 'bitcoin')` اضافه کنی (این یعنی تغییر کد قبلی ❌).
+باید طوری کد زده باشی که فقط یه کلاس جدید `BitcoinPayment` بسازی و سیستم خودکار بشناستش (این یعنی توسعه ✅).
 
 ---
 
-### ۳. اصل جایگزینی لیسکوف (Liskov Substitution Principle - LSP) 🧩
+### ۳. اصل جایگزینی لیسکوف (Liskov Substitution Principle, LSP) 🧩
 > **قانون طلایی:** کلاس فرزند باید بتونه جای کلاس پدر بشینه، بدون اینکه رفتار برنامه عوض بشه یا ارور بده.
 
 <div align="center">
 ☕️ <b>مثال دنیای واقعی: دستگاه قهوه‌ساز</b>
 </div>
 
-فرض کنید یه کلاس کلی داریم به اسم **«دستگاه قهوه‌ساز»** که یه دستور داره به اسم: `addMilk()` (شیر اضافه کن).
-حالا میایم یه کلاس فرزند می‌سازیم به اسم **«دستگاه اسپرسوساز خالص»** (که فقط قهوه سیاه میده و اصلاً مخزن شیر نداره).
+فرض کن یه کلاس کلی داریم به اسم **«دستگاه قهوه‌ساز»** که یه دستور داره به اسم: `addMilk()` (شیر اضافه کن).
+حالا میایم یه کلاس فرزند می‌سازیم به اسم **«دستگاه اسپرسوساز خالص»** (که فقط قهوه سیاه می‌ده و اصلاً مخزن شیر نداره).
 
-اگه توی کد برنامه، هر جا که «دستگاه قهوه‌ساز» لازم داشتیم، بیایم این «اسپرسوساز» رو بذاریم، چی میشه؟
-وقتی برنامه دستورِ `addMilk()` رو صدا بزنه، اسپرسوساز قاطی می‌کنه یا ارور میده! 💥
+اگه توی کد برنامه، هر جا که «دستگاه قهوه‌ساز» لازم داشتیم، بیایم این «اسپرسوساز» رو بذاریم، چی می‌شه؟
+وقتی برنامه دستورِ `addMilk()` رو صدا بزنه، اسپرسوساز قاطی می‌کنه یا ارور می‌ده! 💥
 
 چرا؟ چون این فرزند (اسپرسوساز) نتونست به عهد و پیمان پدرش (که قول داده بود شیر اضافه کنه) وفادار بمونه. پس **اصل جایگزینی** رو نقض کرده.
 
 💻 **توی کد یعنی چی؟**
-اگه یه کلاس `Bird` (پدر) دارید که متد `fly()` داره، نباید کلاسی مثل `Penguin` (فرزند) بسازید که ازش ارث ببره ولی موقع پرواز ارور `I can't fly` بده!
-چون هر جا تو کد از `Bird` استفاده کردید، باید بتونید `Penguin` هم بذارید. اگه پنگوئن پرواز نمی‌کنه، پس نباید از `Bird` (که پرواز می‌کنه) ارث ببره.
+اگه یه کلاس `Bird` (پدر) داری که متد `fly()` داره، نباید کلاسی مثل `Penguin` (فرزند) بسازی که ازش ارث ببره ولی موقع پرواز ارور `I can't fly` بده!
+چون هر جا تو کد از `Bird` استفاده کردی، باید بتونی `Penguin` هم بذاری. اگه پنگوئن پرواز نمی‌کنه، پس نباید از `Bird` (که پرواز می‌کنه) ارث ببره.
 
 ---
 
-### ۴. اصل جداسازی اینترفیس (Interface Segregation Principle - ISP) ✂️
-> **قانون طلایی:** نباید کلاس‌ها رو مجبور کنیم متد‌هایی رو پیاده‌سازی کنن که بهشون نیاز ندارن.
+### ۴. اصل جداسازی اینترفیس (Interface Segregation Principle, ISP) ✂️
+> **قانون طلایی:** نباید کلاس‌ها رو مجبور کنیم متدهایی رو پیاده‌سازی کنن که بهشون نیاز ندارن.
 
 <div align="center">
 🍔 <b>مثال دنیای واقعی: منوی رستوران</b>
 </div>
 
-فرض کنید رفتید رستوران و فقط یه "سالاد فصل" می‌خواید. اما رستوران فقط یه منوی غول‌آسا داره به اسم "سوپر منو" که توش پیتزا، کباب، سوشی و سالاد هست. گارسون مجبورتون می‌کنه کل این منوی سنگین رو دستتون بگیرید و ورق بزنید تا برسید به سالاد.
-خیلی بهتر بود اگه یه "منوی سالاد" جدا و کوچیک و سبک وجود داشت.
+فرض کن رفتی رستوران و فقط یه «سالاد فصل» می‌خوای. اما رستوران فقط یه منوی غول‌آسا داره به اسم «سوپر منو» که توش پیتزا، کباب، سوشی و سالاد هست. گارسون مجبورت می‌کنه کل این منوی سنگین رو دستت بگیری و ورق بزنی تا برسی به سالاد.
+خیلی بهتر بود اگه یه «منوی سالاد» جدا و کوچیک و سبک وجود داشت.
 
 💻 **توی کد یعنی چی؟**
-اگه یه اینترفیس گنده دارید به اسم `Animal` که توش هم `fly()` داره، هم `swim()` و هم `bark()`.
+اگه یه اینترفیس گنده داری به اسم `Animal` که توش هم `fly()` داره، هم `swim()` و هم `bark()`.
 حالا کلاس `Dog` مجبوره `fly()` رو هم داشته باشه (و توش خالی باشه)!
-✅ **درست:** اینترفیس‌ها رو بشکنید: `Flyable`، `Swimmable`، `Barkable`. حالا سگ فقط `Barkable` و `Swimmable` رو پیاده‌سازی می‌کنه.
+✅ **درست:** اینترفیس‌ها رو بشکنی: `Flyable`، `Swimmable`، `Barkable`. حالا سگ فقط `Barkable` و `Swimmable` رو پیاده‌سازی می‌کنه.
 
 ---
 
-### ۵. اصل وارونگی وابستگی (Dependency Inversion Principle - DIP) 🔌
+### ۵. اصل وارونگی وابستگی (Dependency Inversion Principle, DIP) 🔌
 > **قانون طلایی:** به چیزهای واقعی و ملموس (Concrete) وابسته نباش، به مفاهیم کلی (Abstractions) وابسته باش.
 
 <div align="center">
 🔌 <b>مثال دنیای واقعی: دوشاخه و پریز برق</b>
 </div>
 
-لامپ اتاق شما که مستقیم به سیم‌های توی دیوار لحیم نشده، شده؟ معلومه که نه!
-چون اگه اینطوری بود، هر بار که می‌خواستید یه سشوار به برق بزنید یا لامپ رو عوض کنید، باید دیوار رو خراب می‌کردید و سیم‌کشی رو تغییر می‌دادید. 🧱
+لامپ اتاق تو که مستقیم به سیم‌های توی دیوار لحیم نشده، شده؟ معلومه که نه!
+چون اگه اینطوری بود، هر بار که می‌خواستی یه سشوار به برق بزنی یا لامپ رو عوض کنی، باید دیوار رو خراب می‌کردی و سیم‌کشی رو تغییر می‌دادی. 🧱
 به جاش چی داریم؟ «پریز برق». پریز یه استاندارد (Interface) هست. سشوار و تلویزیون و لامپ، همگی فقط با پریز کار دارن و براشون اصلا مهم نیست که پشت دیوار سیم‌ها چجوری سیم‌کشی شدن.
 
 💻 **توی کد یعنی چی؟**
-کلاس `Store` نباید مستقیم بگه `new MySQLDatabase()`. چون اگه فردا بخوایم بریم روی `PostgreSQL` بیچاره میشیم.
-کلاس `Store` باید بگه "من یه چیزی می‌خوام که `IDatabase` باشه". حالا اینکه اون پشت MySQL هست یا Mongo، برای `Store` مهم نیست.
+کلاس `Store` نباید مستقیم بگه `new MySQLDatabase()`. چون اگه فردا بخوایم بریم روی `PostgreSQL` بیچاره می‌شیم.
+کلاس `Store` باید بگه «من یه چیزی می‌خوام که `IDatabase` باشه». حالا اینکه اون پشت MySQL هست یا Mongo، برای `Store` مهم نیست.
 
 </div>
 
@@ -202,22 +227,24 @@
 
 <div align="center">
 
-# 🧱 الگوهای سازنده (Creational Design Patterns)
+# الگوهای سازنده (Creational Design Patterns) 🧱
 
 </div>
 
 به زبون ساده:
 
-> الگو‌های طراحی سازنده، به مشکلات مربوط به ساخت ابجکت‌ها می‌پردازن.
+> الگوهای طراحی سازنده، به مشکلات مربوط به ساخت آبجکت‌ها می‌پردازن.
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
 > In software engineering, creational design patterns are design patterns that deal with object creation mechanisms,
-> trying to create objects in a manner
+> trying to create objects in a manner suitable to the situation.
 
 </div>
+
+خلاصه: الگوهای سازنده روش ساختِ آبجکت‌ها رو طوری مدیریت می‌کنن که برای هر موقعیت، مناسب‌ترین راه انتخاب بشه.
 
 <br>
 
@@ -225,7 +252,7 @@
 
 <div align="center">
 
-## 🏠 Simple Factory
+## کارخانه ساده (Simple Factory) 🏠
 
 </div>
 
@@ -233,17 +260,17 @@
 🚪 <b>مثال دنیای واقعی: کارگاه نجاری</b>
 </div>
 
-فرض کنید دارید یه خونه می‌سازید. برای هر اتاقی یه در لازم دارید.
-آیا منطقیه که برای هر در، خودتون اره و تیشه بردارید و شروع کنید به بریدن چوب؟ 🪚 نه! اینطوری که تو گل می‌مونید.
+فرض کن داری یه خونه می‌سازی. برای هر اتاقی یه در لازم داری.
+آیا منطقیه که برای هر در، خودت اره و تیشه برداری و شروع کنی به بریدن چوب؟ 🪚 نه! اینطوری که تو گل می‌مونی.
 
-راه حل چیه؟ زنگ می‌زنید به "کارگاه نجاری" (Factory) و می‌گید: "آقا یه در چوبی با عرض ۹۰ و ارتفاع ۲۱۰ می‌خوام".
-دیگه براتون مهم نیست نجار چجوری چوب رو می‌بره یا از چه چسبی استفاده می‌کنه. شما فقط محصول نهایی رو تحویل می‌گیرید.
+راه‌حل چیه؟ زنگ می‌زنی به «کارگاه نجاری» (Factory) و می‌گی: «آقا یه در چوبی با عرض ۹۰ و ارتفاع ۲۱۰ می‌خوام».
+دیگه برات مهم نیست نجار چجوری چوب رو می‌بره یا از چه چسبی استفاده می‌کنه. تو فقط محصول نهایی رو تحویل می‌گیری.
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"بی‌خیالِ `new` کردنِ مستقیم شو! ساختن آبجکت رو بسپار به یه متد مخصوص."**
-> اینطوری کدتون تمیز می‌مونه و اگه فردا خواستید روش ساخت در رو عوض کنید، فقط همون کارگاه رو تغییر می‌دید، نه کل خونه رو.
+> این پترن می‌گه: **«بی‌خیالِ `new` کردنِ مستقیم شو! ساختن آبجکت رو بسپار به یه متد مخصوص.»**
+> اینطوری کدت تمیز می‌مونه و اگه فردا خواستی روش ساخت در رو عوض کنی، فقط همون کارگاه رو تغییر می‌دی، نه کل خونه رو.
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -254,7 +281,10 @@
 
 </div>
 
-**مثال برنامه نویسی**
+خلاصه‌ش به زبون خودمون: «کارخانه» یه آبجکته که کارش ساختن آبجکت‌های دیگه‌ست.
+یعنی به‌جای اینکه خودت مستقیم `new` بزنی، یه متد صدا می‌زنی و اون برات نمونه‌ی آماده رو تحویل می‌ده.
+
+**مثال برنامه‌نویسی**
 
 توی این مثال دقیقاً همون سناریوی در و کارگاه رو پیاده‌سازی می‌کنیم.
 اول یه اینترفیس `Door` داریم، بعد پیاده‌سازی `WoodenDoor`، و در نهایت `DoorFactory` که برامون در می‌سازه.
@@ -265,19 +295,21 @@
 <div dir="ltr">
 
 ```python
-class Door:
-    def getWidth(self):
-        pass
+from abc import ABC, abstractmethod
 
+
+class Door(ABC):
+    @abstractmethod
+    def getWidth(self):
+        ...
+
+    @abstractmethod
     def getHeight(self):
-        pass
+        ...
 
 
 class WoodenDoor(Door):
-    width = None
-    height = None
-
-    def __init__(self, width=5, height=5):
+    def __init__(self, width, height):
         self.width = width
         self.height = height
 
@@ -295,7 +327,7 @@ class DoorFactory:
 
 
 # ----------------------------
-door = DoorFactory.makeDoor(10, 10)
+door = DoorFactory.makeDoor(90, 210)
 print(door.getHeight())
 print(door.getWidth())
 ```
@@ -310,20 +342,16 @@ print(door.getWidth())
 <div dir="ltr">
 
 ```typescript
-class Door {
-    getWidth(): void {
-    }
-
-    getHeight(): void {
-    }
+interface Door {
+    getWidth(): number;
+    getHeight(): number;
 }
 
-class WoodenDoor extends Door {
-    width: number | null;
-    height: number | null;
+class WoodenDoor implements Door {
+    private width: number;
+    private height: number;
 
-    constructor(width: number = 5, height: number = 5) {
-        super();
+    constructor(width: number, height: number) {
         this.width = width;
         this.height = height;
     }
@@ -338,14 +366,14 @@ class WoodenDoor extends Door {
 }
 
 class DoorFactory {
-    static makeDoor(width: number, height: number): WoodenDoor {
+    static makeDoor(width: number, height: number): Door {
         return new WoodenDoor(width, height);
     }
 }
 
 // ----------------------------
 
-let door = DoorFactory.makeDoor(10, 10);
+const door: Door = DoorFactory.makeDoor(90, 210);
 console.log(door.getHeight());
 console.log(door.getWidth());
 ```
@@ -359,17 +387,19 @@ console.log(door.getWidth());
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Door {
     getWidth() {
+        throw new Error("not implemented");
     }
 
     getHeight() {
+        throw new Error("not implemented");
     }
 }
 
 class WoodenDoor extends Door {
-    constructor(width = 5, height = 5) {
+    constructor(width, height) {
         super();
         this.width = width;
         this.height = height;
@@ -391,7 +421,7 @@ class DoorFactory {
 }
 
 
-let door = DoorFactory.makeDoor(10, 10);
+const door = DoorFactory.makeDoor(90, 210);
 console.log(door.getHeight());
 console.log(door.getWidth());
 ```
@@ -405,7 +435,9 @@ console.log(door.getWidth());
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+
 public interface IDoor
 {
     int GetHeight();
@@ -444,9 +476,9 @@ public static class DoorFactory
 
 // ----------------------------
 
-var door = DoorFactory.MakeDoor(80, 30);
-Console.WriteLine($"Height of Door : {door.GetHeight()}");
-Console.WriteLine($"Width of Door : {door.GetWidth()}");
+var door = DoorFactory.MakeDoor(90, 210);
+Console.WriteLine(door.GetHeight());
+Console.WriteLine(door.GetWidth());
 ```
 
 </div>
@@ -458,7 +490,7 @@ Console.WriteLine($"Width of Door : {door.GetWidth()}");
 
 <div dir="ltr">
 
-```PHP
+```php
 interface DoorInterface {
     public function getHeight();
     public function getWidth();
@@ -487,9 +519,9 @@ class DoorFactory {
     }
 }
 
-$door = DoorFactory::makeDoor(80, 30);
-echo "Height of Door : " . $door->getHeight() . "\n";
-echo "Width of Door : " . $door->getWidth() . "\n";
+$door = DoorFactory::makeDoor(90, 210);
+echo $door->getHeight() . "\n";
+echo $door->getWidth() . "\n";
 
 ```
 
@@ -537,9 +569,9 @@ func (df *DoorFactory) makeDoor(width, height int) Door {
 
 func main() {
 	doorFactory := &DoorFactory{}
-	door := doorFactory.makeDoor(80, 30)
-	fmt.Printf("Height of Door : %d\n", door.getHeight())
-	fmt.Printf("Width of Door : %d\n", door.getWidth())
+	door := doorFactory.makeDoor(90, 210)
+	fmt.Println(door.getHeight())
+	fmt.Println(door.getWidth())
 }
 
 ```
@@ -554,11 +586,16 @@ func main() {
 <div dir="ltr">
 
 ```java
-public class Door {
+public interface Door {
+    int getHeight();
+    int getWidth();
+}
+
+public class WoodenDoor implements Door {
     private int width;
     private int height;
 
-    public Door(int width, int height) {
+    public WoodenDoor(int width, int height) {
         this.width = width;
         this.height = height;
     }
@@ -566,33 +603,20 @@ public class Door {
     public int getHeight() {
         return height;
     }
-    public void setHeight(int height) {
-        this.height = height;
-    }
     public int getWidth() {
         return width;
-    }
-    public void setWidth(int width) {
-        this.width = width;
-    }
-}
-
-public class WoodenDoor extends Door {
-
-    WoodenDoor(int width, int height) {
-        super(width, height);
     }
 }
 
 public class DoorFactory {
-    public static WoodenDoor makeDoor(int width, int height) {
+    public static Door makeDoor(int width, int height) {
         return new WoodenDoor(width, height);
     }
 }
 
 // ----------------------------
 
-Door door = DoorFactory.makeDoor(10, 10);
+Door door = DoorFactory.makeDoor(90, 210);
 System.out.println(door.getHeight());
 System.out.println(door.getWidth());
 ```
@@ -612,25 +636,25 @@ System.out.println(door.getWidth());
 class Door {
 public:
     virtual ~Door() = default;
-    virtual double getWidth() const = 0;
-    virtual double getHeight() const = 0;
+    virtual int getWidth() const = 0;
+    virtual int getHeight() const = 0;
 };
 
 // Wooden door implementation
 class WoodenDoor : public Door {
 private:
-    double width;
-    double height;
+    int width;
+    int height;
 
 public:
-    WoodenDoor(double width = 5.0, double height = 5.0) 
+    WoodenDoor(int width, int height)
         : width(width), height(height) {}
-    
-    double getWidth() const override {
+
+    int getWidth() const override {
         return width;
     }
-    
-    double getHeight() const override {
+
+    int getHeight() const override {
         return height;
     }
 };
@@ -638,17 +662,17 @@ public:
 // Door factory
 class DoorFactory {
 public:
-    static Door* makeDoor(double width, double height) {
+    static Door* makeDoor(int width, int height) {
         return new WoodenDoor(width, height);
     }
 };
 
 // Usage
 int main() {
-    Door* door = DoorFactory::makeDoor(100, 200);
-    std::cout << "Width: " << door->getWidth() << std::endl;
-    std::cout << "Height: " << door->getHeight() << std::endl;
-    
+    Door* door = DoorFactory::makeDoor(90, 210);
+    std::cout << door->getHeight() << std::endl;
+    std::cout << door->getWidth() << std::endl;
+
     delete door;
     return 0;
 }
@@ -664,13 +688,13 @@ int main() {
 
 ```kotlin
 interface Door {
-    fun getHeight(): Int
     fun getWidth(): Int
+    fun getHeight(): Int
 }
 
 class WoodenDoor(private val width: Int, private val height: Int) : Door {
-    override fun getHeight(): Int = height
     override fun getWidth(): Int = width
+    override fun getHeight(): Int = height
 }
 
 object DoorFactory {
@@ -679,16 +703,16 @@ object DoorFactory {
     }
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
-    val door = DoorFactory.makeDoor(100, 200)
-    println("Width: ${door.getWidth()}")
-    println("Height: ${door.getHeight()}")
+    val door = DoorFactory.makeDoor(90, 210)
+    println(door.getHeight())
+    println(door.getWidth())
 }
 ```
 
 </div>
-
 </details>
 
 <details>
@@ -703,20 +727,20 @@ abstract class Door {
 }
 
 class WoodenDoor implements Door {
-  final int _width;
-  final int _height;
+  final int width;
+  final int height;
 
-  WoodenDoor(this._width, this._height);
-
-  @override
-  int getWidth() => _width;
+  WoodenDoor(this.width, this.height);
 
   @override
-  int getHeight() => _height;
+  int getWidth() => width;
+
+  @override
+  int getHeight() => height;
 }
 
 class DoorFactory {
-  static WoodenDoor makeDoor(int width, int height) {
+  static Door makeDoor(int width, int height) {
     return WoodenDoor(width, height);
   }
 }
@@ -724,14 +748,20 @@ class DoorFactory {
 // ----------------------------
 
 void main() {
-  var door = DoorFactory.makeDoor(10, 10);
-  print(door.getHeight()); // 10
-  print(door.getWidth());  // 10
+  var door = DoorFactory.makeDoor(90, 210);
+  print(door.getHeight());
+  print(door.getWidth());
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ وقتی ساختن یه آبجکت چند خط مقدمه‌چینی داره و نمی‌خوای این شلوغی همه‌جای کدت پخش شه، بسپارش به یه متد کارخانه؛ ❌ اگه فقط یه `new` ساده‌ست، الکی پیچیده‌ش نکن.
+> 🪤 **دام رایج:** کم‌کم همه‌چی رو می‌ریزی توی یه `makeDoor` غول‌پیکر پر از `if`/`else`؛ همون‌جاست که باید بری سراغ الگوهای جدی‌تر.
+> 🔗 **فرقش با [متد کارخانه](#متد-کارخانه-factory-method-):** اینجا یه متد ساده‌ی (معمولاً static) خودش تصمیم می‌گیره چی بسازه؛ توی متد کارخانه، تصمیمِ ساخت رو به زیرکلاس‌ها واگذار می‌کنی.
+
 
 <br>
 
@@ -739,7 +769,7 @@ void main() {
 
 <div align="center">
 
-## 🏭 Factory Method
+## متد کارخانه (Factory Method) 🏭
 
 </div>
 
@@ -747,41 +777,43 @@ void main() {
 👔 <b>مثال دنیای واقعی: مدیر استخدام</b>
 </div>
 
-فرض کنید یه مدیر استخدام (`HiringManager`) داریم. فرآیند استخدام توی این شرکت یه قانون کلی داره:
+فرض کن یه مدیر استخدام (`HiringManager`) داریم. فرآیند استخدام توی این شرکت یه قانون کلی داره:
 ۱. مصاحبه‌کننده رو انتخاب کن.
 ۲. ازش بخواه سوال بپرسه.
 
-اما نکته اینجاست: مدیر استخدامِ کل، خودش نمی‌دونه برای هر پوزیشن چه سوالای تخصصی‌ای باید پرسیده بشه یا چه کسی صلاحیت داره. پس چی‌کار می‌کنه؟ ساختن "مصاحبه‌کننده" رو می‌سپاره به مدیرهای هر بخش.
+اما نکته اینجاست: مدیر استخدامِ کل، خودش نمی‌دونه برای هر پوزیشن چه سوالای تخصصی‌ای باید پرسیده بشه یا چه کسی صلاحیت داره. پس چی‌کار می‌کنه؟ ساختن «مصاحبه‌کننده» رو می‌سپاره به مدیرهای هر بخش.
 
 *   اگه استخدام برای بخش **فنی** باشه، مدیر فنی (`DevelopmentManager`) میاد و یه **برنامه‌نویس** (`Developer`) رو می‌سازه تا سوالای فنی بپرسه.
 *   اگه استخدام برای بخش **مارکتینگ** باشه، مدیر مارکتینگ (`MarketingManager`) میاد و یه **بازاریاب** (`CommunityExecutive`) رو می‌سازه.
 
-پس "فرآیند کلی مصاحبه" ثابته، اما اینکه "کی قراره سوال بپرسه" (یا همون ساختن آبجکت مصاحبه‌کننده) رو می‌سپاریم به زیرکلاس‌ها.
+پس «فرآیند کلی مصاحبه» ثابته، اما اینکه «کی قراره سوال بپرسه» (یا همون ساختن آبجکت مصاحبه‌کننده) رو می‌سپاریم به زیرکلاس‌ها.
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"من (کلاس پدر) منطق کلی کار رو می‌دونم، اما ساختن ابزار دقیقش (آبجکت) رو می‌سپارم به بچه‌هام (کلاس‌های فرزند)."**
+> این پترن می‌گه: **«من (کلاس پدر) منطق کلی کار رو می‌دونم، اما ساختن ابزار دقیقش (آبجکت) رو می‌سپارم به بچه‌هام (کلاس‌های فرزند).»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
 > In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with
 > the problem of creating objects without having to specify the exact class of the object that will be created. This is
-> done by creating objects by calling a factory method—either specified in an interface and implemented by child
+> done by creating objects by calling a factory method, either specified in an interface and implemented by child
 > classes,
-> or implemented in a base class and optionally overridden by derived classes—rather than by calling a constructor.
+> or implemented in a base class and optionally overridden by derived classes, rather than by calling a constructor.
 
 </div>
 
-**مثال برنامه نویسی**
+خلاصه‌ش این می‌شه: به‌جای اینکه مستقیم با `new` یه آبجکت بسازی، یه متد مخصوص ساخت (همون متد کارخانه) صداش می‌زنی. این متد یا توی یه اینترفیس تعریف شده و فرزندها پیاده‌سازیش می‌کنن، یا توی کلاس پدر یه نسخه پیش‌فرض داره و فرزندها در صورت نیاز بازنویسیش می‌کنن. این‌جوری کدِ پدر لازم نیست بدونه دقیقاً داره کدوم کلاس رو می‌سازه.
 
-بیاین از مثال مدیر استخدام برای درک بهتر استفاده کنیم.
+**مثال برنامه‌نویسی**
 
-پس اول یک اینترفیس برای مصاحبه کننده‌ها میسازیم و چند پیاده‌سازی هم برای اون ایجاد می‌کنیم.
+بیا از مثال مدیر استخدام برای درک بهتر استفاده کنیم.
 
-بعد از اون `HiringManager` رو پیاده سازی میکنیم
+پس اول یک اینترفیس برای مصاحبه کننده‌ها می‌سازیم و چند پیاده‌سازی هم برای اون ایجاد می‌کنیم.
 
-در نهایت هر فرزند میتونه ازش ارث بری کنه و متد `makeInterviewer` خودش رو داشته باشه:
+بعد از اون `HiringManager` رو پیاده‌سازی می‌کنیم
+
+در نهایت هر فرزند می‌تونه ازش ارث بری کنه و متد `makeInterviewer` خودش رو داشته باشه:
 
 <details>
 <summary>Python</summary>
@@ -796,7 +828,7 @@ class Interviewer:
 
 class Developer(Interviewer):
     def askQuestions(self):
-        print('Asking about design patterns')
+        print('Asking about design patterns!')
 
 
 class CommunityExecutive(Interviewer):
@@ -848,7 +880,7 @@ interface Interviewer {
 
 class Developer implements Interviewer {
   askQuestions(): void {
-    console.log("Asking about design patterns");
+    console.log("Asking about design patterns!");
   }
 }
 
@@ -895,10 +927,10 @@ marketingManager.takeInterview();
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Developer {
     askQuestions() {
-        console.log("Asking about design patterns");
+        console.log("Asking about design patterns!");
     }
 }
 
@@ -944,7 +976,9 @@ marketingManager.takeInterview();
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+
 
 interface IInterviewer
 {
@@ -963,7 +997,7 @@ class CommunityExecutive : IInterviewer
 {
     public void AskQuestions()
     {
-        Console.WriteLine("Asking about community building!");
+        Console.WriteLine("Asking about community building");
     }
 }
 
@@ -1001,7 +1035,7 @@ var devManager = new DevelopmentManager();
 devManager.TakeInterview(); //Output : Asking about design patterns!
 
 var marketingManager = new MarketingManager();
-marketingManager.TakeInterview();//Output : Asking about community building!
+marketingManager.TakeInterview();//Output : Asking about community building
 
 ```
 
@@ -1014,7 +1048,7 @@ marketingManager.TakeInterview();//Output : Asking about community building!
 
 <div dir="ltr">
 
-```PHP
+```php
 interface InterviewerInterface
 {
     public function askQuestions();
@@ -1024,7 +1058,7 @@ class Developer implements InterviewerInterface
 {
     public function askQuestions()
     {
-        echo "Asking about design patterns!";
+        echo "Asking about design patterns!\n";
     }
 }
 
@@ -1032,7 +1066,7 @@ class CommunityExecutive implements InterviewerInterface
 {
     public function askQuestions()
     {
-        echo "Asking about community building!";
+        echo "Asking about community building\n";
     }
 }
 
@@ -1070,7 +1104,7 @@ $devManager = new DevelopmentManager();
 $devManager->takeInterview(); // Output: Asking about design patterns!
 
 $marketingManager = new MarketingManager();
-$marketingManager->takeInterview(); // Output: Asking about community building!
+$marketingManager->takeInterview(); // Output: Asking about community building
 
 ```
 
@@ -1101,42 +1135,46 @@ func (d *Developer) AskQuestions() {
 type CommunityExecutive struct{}
 
 func (ce *CommunityExecutive) AskQuestions() {
-	fmt.Println("Asking about community building!")
+	fmt.Println("Asking about community building")
 }
 
-type HiringManager interface {
-	MakeInterviewer() Interviewer
-	TakeInterview()
+// HiringManager نقش کلاس پدر رو داره: takeInterview فقط یک‌بار اینجا تعریف می‌شه.
+// تنها چیزی که توی هر مدیر فرق می‌کنه، متد کارخانه‌ی makeInterviewer هست.
+type HiringManager struct {
+	makeInterviewer func() Interviewer
 }
 
-type DevelopmentManager struct{}
-
-func (dm *DevelopmentManager) MakeInterviewer() Interviewer {
-	return &Developer{}
-}
-
-func (dm *DevelopmentManager) TakeInterview() {
-	interviewer := dm.MakeInterviewer()
+func (hm *HiringManager) TakeInterview() {
+	interviewer := hm.makeInterviewer()
 	interviewer.AskQuestions()
 }
 
-type MarketingManager struct{}
-
-func (mm *MarketingManager) MakeInterviewer() Interviewer {
-	return &CommunityExecutive{}
+type DevelopmentManager struct {
+	HiringManager
 }
 
-func (mm *MarketingManager) TakeInterview() {
-	interviewer := mm.MakeInterviewer()
-	interviewer.AskQuestions()
+func NewDevelopmentManager() *DevelopmentManager {
+	return &DevelopmentManager{
+		HiringManager{makeInterviewer: func() Interviewer { return &Developer{} }},
+	}
+}
+
+type MarketingManager struct {
+	HiringManager
+}
+
+func NewMarketingManager() *MarketingManager {
+	return &MarketingManager{
+		HiringManager{makeInterviewer: func() Interviewer { return &CommunityExecutive{} }},
+	}
 }
 
 func main() {
-	devManager := &DevelopmentManager{}
-	devManager.TakeInterview() // Output : Asking about design patterns!
+	devManager := NewDevelopmentManager()
+	devManager.TakeInterview() // Output: Asking about design patterns!
 
-	marketingManager := &MarketingManager{}
-	marketingManager.TakeInterview() // Output : Asking about community building!
+	marketingManager := NewMarketingManager()
+	marketingManager.TakeInterview() // Output: Asking about community building
 }
 
 ```
@@ -1159,7 +1197,7 @@ class Developer implements Interviewer {
 
   @Override
   public void askQuestions() {
-    System.out.println("Asking about design patterns");
+    System.out.println("Asking about design patterns!");
   }
 }
 
@@ -1223,7 +1261,7 @@ public:
 class Developer : public Interviewer {
 public:
     void askQuestions() override {
-        std::cout << "Asking about design patterns" << std::endl;
+        std::cout << "Asking about design patterns!" << std::endl;
     }
 };
 
@@ -1266,7 +1304,7 @@ public:
 // Usage
 int main() {
     DevelopmentManager devManager;
-    devManager.takeInterview(); // Output: Asking about design patterns
+    devManager.takeInterview(); // Output: Asking about design patterns!
     
     MarketingManager marketingManager;
     marketingManager.takeInterview(); // Output: Asking about community building
@@ -1290,7 +1328,7 @@ interface Interviewer {
 
 class Developer : Interviewer {
     override fun askQuestions() {
-        println("Asking about design patterns")
+        println("Asking about design patterns!")
     }
 }
 
@@ -1302,7 +1340,7 @@ class CommunityExecutive : Interviewer {
 
 abstract class HiringManager {
     abstract fun makeInterviewer(): Interviewer
-    
+
     fun takeInterview() {
         val interviewer = makeInterviewer()
         interviewer.askQuestions()
@@ -1317,18 +1355,18 @@ class MarketingManager : HiringManager() {
     override fun makeInterviewer(): Interviewer = CommunityExecutive()
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
     val devManager = DevelopmentManager()
-    devManager.takeInterview() // Output: Asking about design patterns
-    
+    devManager.takeInterview()
+
     val marketingManager = MarketingManager()
-    marketingManager.takeInterview() // Output: Asking about community building
+    marketingManager.takeInterview()
 }
 ```
 
 </div>
-
 </details>
 
 <details>
@@ -1344,7 +1382,7 @@ abstract class Interviewer {
 class Developer implements Interviewer {
   @override
   void askQuestions() {
-    print('Asking about design patterns');
+    print('Asking about design patterns!');
   }
 }
 
@@ -1378,22 +1416,21 @@ class MarketingManager extends HiringManager {
 
 void main() {
   var devManager = DevelopmentManager();
-  devManager.takeInterview(); // Asking about design patterns
+  devManager.takeInterview();
 
   var marketingManager = MarketingManager();
-  marketingManager.takeInterview(); // Asking about community building
+  marketingManager.takeInterview();
 }
 ```
 
 </div>
 </details>
 
-<br>
+> 🤔 **کی به کارش ببریم؟**
+> ✅ وقتی کلاس پدر منطق کلی کار رو می‌دونه ولی نوع دقیقِ آبجکتی که باید ساخته بشه به زیرکلاس بستگی داره، اون تصمیم رو می‌سپاری به فرزندها؛ ❌ ولی اگه فقط یه‌جا و بر اساس یه شرط ساده آبجکت می‌سازی، یه if کوچیک یا «کارخانه ساده» کافیه و این الگو زیادی‌ست.
+> 🪤 **دام رایج:** برای یه حالتِ ساده کلی زیرکلاس می‌سازی و کد رو بی‌خودی شلوغ می‌کنی؛ این الگو وقتی می‌ارزه که واقعاً چند نوع سازنده داشته باشی.
+> 🔗 **فرقش با [کارخانه ساده](#کارخانه-ساده-simple-factory-):** کارخانه ساده همه‌چی رو توی یه متد با شرط جمع می‌کنه، اما اینجا ساختِ آبجکت رو به ارث‌بری و زیرکلاس‌ها می‌سپاری، پس هر نوع جدید یعنی یه زیرکلاس جدید نه دست‌کاری متدِ موجود.
 
-**چه موقع باید ازش استفاده کنیم؟**
-
-اساساً زمانی ازین الگو استفاده میشه که چندین کلاس با ریشه مشترک داریم (یعنی چندین کلاس یک کلاس parent رو پیاده‌سازی
-می‌کنند) و با توجه به شرایط تصمیم میگیریم از یکی از اون‌ها استفاده کنیم.
 
 <br>
 
@@ -1401,7 +1438,7 @@ void main() {
 
 <div align="center">
 
-## 🔨 Abstract Factory
+## کارخانه انتزاعی (Abstract Factory) 🔨
 
 </div>
 
@@ -1409,19 +1446,19 @@ void main() {
 🛠 <b>مثال دنیای واقعی: سرویس کامل نصب در</b>
 </div>
 
-بیاید مثال قبلی رو کامل‌تر کنیم. فرض کنید شما فقط "در" نمی‌خواید، بلکه "نصاب" هم می‌خواید.
+بیا مثال قبلی رو کامل‌تر کنیم. فرض کن تو فقط «در» نمی‌خوای، بلکه «نصاب» هم می‌خوای.
 نکته مهم اینه که اینا باید با هم **ست** باشن:
-*   اگه در **چوبی** خریدید، باید **نجار** بیاد نصبش کنه.
-*   اگه در **آهنی** خریدید، باید **جوشکار** بیاد.
+*   اگه در **چوبی** خریدی، باید **نجار** بیاد نصبش کنه.
+*   اگه در **آهنی** خریدی، باید **جوشکار** بیاد.
 
-فاجعه اونجاست که در چوبی بخرید ولی جوشکار بیاد دم خونه! 🔥
+فاجعه اونجاست که در چوبی بخری ولی جوشکار بیاد دم خونه! 🔥
 
-اینجاست که **Abstract Factory** میاد وسط. ما به جای اینکه در و نصاب رو جدا جدا سفارش بدیم، زنگ می‌زنیم به "کارخونه محصولات چوبی". اونا هم در چوبی میدن، هم نجار رو می‌فرستن. اینطوری خیالمون راحته که همه چی با هم جوره.
+اینجاست که **Abstract Factory** میاد وسط. ما به جای اینکه در و نصاب رو جدا جدا سفارش بدیم، زنگ می‌زنیم به «کارخونه محصولات چوبی». اونا هم در چوبی می‌دن، هم نجار رو می‌فرستن. اینطوری خیالمون راحته که همه چی با هم جوره.
 
 💡 **به زبون ساده:**
-> این پترن کارخونه‌ای از کارخونه‌هاست! یعنی یه کارخونه که بسته‌های کامل و هماهنگ (Products Family) رو تحویل میده تا مبادا قطعات ناسازگار کنار هم قرار بگیرن.
+> این پترن کارخونه‌ای از کارخونه‌هاست! یعنی یه کارخونه که بسته‌های کامل و هماهنگ (Products Family) رو تحویل می‌ده تا مبادا قطعات ناسازگار کنار هم قرار بگیرن.
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -1430,23 +1467,25 @@ void main() {
 
 </div>
 
+یعنی الگوی کارخانه انتزاعی بهت یه راه می‌ده که یه گروه از کارخونه‌های هم‌خانواده رو زیر یه چتر جمع کنی؛ بدون اینکه کد مصرف‌کننده بدونه پشت پرده دقیقاً کدوم کلاس واقعی داره ساخته می‌شه. کارش اینه که خانواده‌ای از محصولات سازگار رو با هم بسازه، نه تک‌تک قطعه‌ها رو جدا.
+
 <br>
 
-**مثال برنامه نویسی**
+**مثال برنامه‌نویسی**
 
-خب همون مثال ساخت خونه و نیاز به درب‌های مختلف رو ترجمه میکنیم.
+خب همون مثال ساخت خونه و نیاز به درب‌های مختلف رو ترجمه می‌کنیم.
 
 اول باید اینترفیس درب رو بسازیم و چند پیاده‌سازی ازش ایجاد کنیم.
 
 در مرحله بعد برای هر درب متخصص مربوطه رو ایجاد می‌کنیم.
 
-و در مرحله آخر سراغ پیاده‌سازی دیزاین پترن‌مون میریم.
+و در مرحله آخر سراغ پیاده‌سازی دیزاین پترن‌مون می‌ریم.
 
-برای مثال کلاس `WoodenDoorFactory` زمانی استفاده میشه که نیاز به درب چوبی داریم و کارش اینه که برای ایجاد ابجکت درب (که
+برای مثال کلاس `WoodenDoorFactory` زمانی استفاده می‌شه که نیاز به درب چوبی داریم و کارش اینه که برای ایجاد آبجکت درب (که
 اینجا
-درب چوبی هست) از کلاس `WoodenDoor` و برای ایجاد ابجکت متخصص (که اینجا نجار هست) از `Carpenter` استفاده کنه.
+درب چوبی هست) از کلاس `WoodenDoor` و برای ایجاد آبجکت متخصص (که اینجا نجار هست) از `Carpenter` استفاده کنه.
 
-این موضوع برای درب آهنی و ... هم بطور مشابه پیاده‌سازی میشه.
+این موضوع برای درب آهنی و ... هم به‌طور مشابه پیاده‌سازی می‌شه.
 
 <details>
 <summary>Python</summary>
@@ -1474,14 +1513,14 @@ class DoorFittingExpert:
         pass
 
 
-class Welder(DoorFittingExpert):
-    def getDescription(self):
-        print('I can only fit iron doors')
-
-
 class Carpenter(DoorFittingExpert):
     def getDescription(self):
         print('I can only fit wooden doors')
+
+
+class Welder(DoorFittingExpert):
+    def getDescription(self):
+        print('I can only fit iron doors')
 
 
 class DoorFactory:
@@ -1515,8 +1554,8 @@ woodenFactory = WoodenDoorFactory()
 door = woodenFactory.makeDoor()
 expert = woodenFactory.makeFittingExpert()
 
-door.getDescription()
-expert.getDescription()
+door.getDescription()    # Output: I am a wooden door
+expert.getDescription()  # Output: I can only fit wooden doors
 
 # ----------------------------
 
@@ -1525,13 +1564,13 @@ ironFactory = IronDoorFactory()
 door = ironFactory.makeDoor()
 expert = ironFactory.makeFittingExpert()
 
-door.getDescription()
-expert.getDescription()
+door.getDescription()    # Output: I am an iron door
+expert.getDescription()  # Output: I can only fit iron doors
 ```
 
 </div>
 
-**همونطور که میبیند، می‌تونیم بطور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+**همون‌طور که می‌بینی، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و از این موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
 انتخاب نمی‌کنیم.**
 
@@ -1563,15 +1602,15 @@ interface DoorFittingExpert {
     getDescription(): void;
 }
 
-class Welder implements DoorFittingExpert {
-    getDescription(): void {
-        console.log("I can only fit iron doors");
-    }
-}
-
 class Carpenter implements DoorFittingExpert {
     getDescription(): void {
         console.log("I can only fit wooden doors");
+    }
+}
+
+class Welder implements DoorFittingExpert {
+    getDescription(): void {
+        console.log("I can only fit iron doors");
     }
 }
 
@@ -1600,6 +1639,7 @@ class IronDoorFactory extends DoorFactory {
         return new Welder();
     }
 }
+
 // ----------------------------
 
 let woodenFactory = new WoodenDoorFactory();
@@ -1607,8 +1647,8 @@ let woodenFactory = new WoodenDoorFactory();
 let door = woodenFactory.makeDoor();
 let expert = woodenFactory.makeFittingExpert();
 
-door.getDescription();
-expert.getDescription();
+door.getDescription();   // Output: I am a wooden door
+expert.getDescription(); // Output: I can only fit wooden doors
 
 // ----------------------------
 
@@ -1617,14 +1657,14 @@ let ironFactory = new IronDoorFactory();
 door = ironFactory.makeDoor();
 expert = ironFactory.makeFittingExpert();
 
-door.getDescription();
-expert.getDescription();
+door.getDescription();   // Output: I am an iron door
+expert.getDescription(); // Output: I can only fit iron doors
 
 ```
 
 </div>
 
-**همونطور که میبیند، می‌تونیم بطور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+**همون‌طور که می‌بینی، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و از این موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
 انتخاب نمی‌کنیم.**
 
@@ -1635,7 +1675,7 @@ expert.getDescription();
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class WoodenDoor {
     getDescription() {
         console.log("I am a wooden door");
@@ -1648,15 +1688,15 @@ class IronDoor {
     }
 }
 
-class Welder {
-    getDescription() {
-        console.log("I can only fit iron doors");
-    }
-}
-
 class Carpenter {
     getDescription() {
         console.log("I can only fit wooden doors");
+    }
+}
+
+class Welder {
+    getDescription() {
+        console.log("I can only fit iron doors");
     }
 }
 
@@ -1690,22 +1730,25 @@ class IronDoorFactory extends DoorFactory {
     }
 }
 
+// ----------------------------
 
 let woodenFactory = new WoodenDoorFactory();
 
 let door = woodenFactory.makeDoor();
 let expert = woodenFactory.makeFittingExpert();
 
-door.getDescription();
-expert.getDescription();
+door.getDescription();   // Output: I am a wooden door
+expert.getDescription(); // Output: I can only fit wooden doors
+
+// ----------------------------
 
 let ironFactory = new IronDoorFactory();
 
 door = ironFactory.makeDoor();
 expert = ironFactory.makeFittingExpert();
 
-door.getDescription();
-expert.getDescription();
+door.getDescription();   // Output: I am an iron door
+expert.getDescription(); // Output: I can only fit iron doors
 ```
 
 </div>
@@ -1717,7 +1760,9 @@ expert.getDescription();
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+
 
 interface IDoor {
 
@@ -1736,7 +1781,7 @@ class IronDoor : IDoor
 {
   public void GetDescription()
   {
-    Console.WriteLine("I am a iron door");
+    Console.WriteLine("I am an iron door");
   }
 }
 
@@ -1745,19 +1790,19 @@ interface IDoorFittingExpert
   void GetDescription();
 }
 
-class Welder : IDoorFittingExpert
-{
-  public void GetDescription()
-  {
-    Console.WriteLine("I can only fit iron doors");
-  }
-}
-
 class Carpenter : IDoorFittingExpert
 {
   public void GetDescription()
   {
     Console.WriteLine("I can only fit wooden doors");
+  }
+}
+
+class Welder : IDoorFittingExpert
+{
+  public void GetDescription()
+  {
+    Console.WriteLine("I can only fit iron doors");
   }
 }
 
@@ -1794,29 +1839,29 @@ class IronDoorFactory : IDoorFactory
   }
 }
 // ----------------------------
-var woodenDoorFactory = new WoodenDoorFactory();
+var woodenFactory = new WoodenDoorFactory();
 
-var woodenDoor = woodenDoorFactory.MakeDoor();
-var woodenDoorFittingExpert = woodenDoorFactory.MakeFittingExpert();
+var woodenDoor = woodenFactory.MakeDoor();
+var woodenExpert = woodenFactory.MakeFittingExpert();
 
-woodenDoor.GetDescription(); //Output : I am a wooden door
-woodenDoorFittingExpert.GetDescription();//Output : I can only fit woooden doors
+woodenDoor.GetDescription();   // Output: I am a wooden door
+woodenExpert.GetDescription(); // Output: I can only fit wooden doors
 
 // ----------------------------
 
-var ironDoorFactory = new IronDoorFactory();
+var ironFactory = new IronDoorFactory();
 
-var ironDoor = ironDoorFactory.MakeDoor();
-var ironDoorFittingExpert = ironDoorFactory.MakeFittingExpert();
+var ironDoor = ironFactory.MakeDoor();
+var ironExpert = ironFactory.MakeFittingExpert();
 
-ironDoor.GetDescription();//Output : I am a iron door
-ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
+ironDoor.GetDescription();   // Output: I am an iron door
+ironExpert.GetDescription(); // Output: I can only fit iron doors
 
 ```
 
 </div>
 
-**همونطور که میبیند، می‌تونیم بطور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+**همون‌طور که می‌بینی، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و از این موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
 انتخاب نمی‌کنیم.**
 
@@ -1827,7 +1872,7 @@ ironDoorFittingExpert.GetDescription();//Output : I can only fit iron doors
 
 <div dir="ltr">
 
-```PHP
+```php
 
 interface DoorInterface {
   public function getDescription();
@@ -1849,15 +1894,15 @@ interface DoorFittingExpertInterface {
   public function getDescription();
 }
 
-class Welder implements DoorFittingExpertInterface {
-  public function getDescription() {
-    echo "I can only fit iron doors";
-  }
-}
-
 class Carpenter implements DoorFittingExpertInterface {
   public function getDescription() {
     echo "I can only fit wooden doors";
+  }
+}
+
+class Welder implements DoorFittingExpertInterface {
+  public function getDescription() {
+    echo "I can only fit iron doors";
   }
 }
 
@@ -1890,28 +1935,31 @@ class IronDoorFactory implements DoorFactoryInterface {
 
 
 // Usage
-$woodenDoorFactory = new WoodenDoorFactory();
+$woodenFactory = new WoodenDoorFactory();
 
-$woodenDoor = $woodenDoorFactory->makeDoor();
-$woodenDoorFittingExpert = $woodenDoorFactory->makeFittingExpert();
+$woodenDoor = $woodenFactory->makeDoor();
+$woodenExpert = $woodenFactory->makeFittingExpert();
 
-$woodenDoor->getDescription(); // Output: I am a wooden door
-$woodenDoorFittingExpert->getDescription(); // Output: I can only fit wooden doors
+$woodenDoor->getDescription();   // Output: I am a wooden door
+echo "\n";
+$woodenExpert->getDescription(); // Output: I can only fit wooden doors
+echo "\n";
 
+$ironFactory = new IronDoorFactory();
 
-$ironDoorFactory = new IronDoorFactory();
+$ironDoor = $ironFactory->makeDoor();
+$ironExpert = $ironFactory->makeFittingExpert();
 
-$ironDoor = $ironDoorFactory->makeDoor();
-$ironDoorFittingExpert = $ironDoorFactory->makeFittingExpert();
-
-$ironDoor->getDescription(); // Output: I am an iron door
-$ironDoorFittingExpert->getDescription(); // Output: I can only fit iron doors
+$ironDoor->getDescription();   // Output: I am an iron door
+echo "\n";
+$ironExpert->getDescription(); // Output: I can only fit iron doors
+echo "\n";
 
 ```
 
 </div>
 
-**همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+**همون‌طور که می‌بینی، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و از این موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
 انتخاب نمی‌کنیم.**
 
@@ -1986,28 +2034,28 @@ func (i *IronDoorFactory) MakeFittingExpert() IDoorFittingExpert {
 }
 
 func main() {
-	woodenDoorFactory := &WoodenDoorFactory{}
+	woodenFactory := &WoodenDoorFactory{}
 
-	woodenDoor := woodenDoorFactory.MakeDoor()
-	woodenDoorFittingExpert := woodenDoorFactory.MakeFittingExpert()
+	woodenDoor := woodenFactory.MakeDoor()
+	woodenExpert := woodenFactory.MakeFittingExpert()
 
-	woodenDoor.GetDescription()           // Output: I am a wooden door
-	woodenDoorFittingExpert.GetDescription() // Output: I can only fit wooden doors
+	woodenDoor.GetDescription()   // Output: I am a wooden door
+	woodenExpert.GetDescription() // Output: I can only fit wooden doors
 
-	ironDoorFactory := &IronDoorFactory{}
+	ironFactory := &IronDoorFactory{}
 
-	ironDoor := ironDoorFactory.MakeDoor()
-	ironDoorFittingExpert := ironDoorFactory.MakeFittingExpert()
+	ironDoor := ironFactory.MakeDoor()
+	ironExpert := ironFactory.MakeFittingExpert()
 
-	ironDoor.GetDescription()           // Output: I am an iron door
-	ironDoorFittingExpert.GetDescription() // Output: I can only fit iron doors
+	ironDoor.GetDescription()   // Output: I am an iron door
+	ironExpert.GetDescription() // Output: I can only fit iron doors
 }
 
 ```
 
 </div>
 
-**همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
+**همون‌طور که می‌بینی، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و از این موضوع مطمئن باشیم که متخصص اشتباه برای یک
 درب
 انتخاب نمی‌کنیم.**
 
@@ -2041,17 +2089,17 @@ interface DoorFittingExpert {
     void getDescription();
 }
 
-class Welder implements DoorFittingExpert {
-    @Override
-    public void getDescription() {
-        System.out.println("I can only fit iron doors");
-    }
-}
-
 class Carpenter implements DoorFittingExpert {
     @Override
     public void getDescription() {
         System.out.println("I can only fit wooden doors");
+    }
+}
+
+class Welder implements DoorFittingExpert {
+    @Override
+    public void getDescription() {
+        System.out.println("I can only fit iron doors");
     }
 }
 
@@ -2073,10 +2121,12 @@ class WoodenDoorFactory implements DoorFactory {
 }
 
 class IronDoorFactory implements DoorFactory {
+    @Override
     public IronDoor makeDoor() {
         return new IronDoor();
     }
 
+    @Override
     public Welder makeFittingExpert() {
         return new Welder();
     }
@@ -2084,19 +2134,21 @@ class IronDoorFactory implements DoorFactory {
 
 // ----------------------------
 
-WoodenDoorFactory woodenDoorFactory = new WoodenDoorFactory();
-WoodenDoor woodenDoor = woodenDoorFactory.makeDoor();
-Carpenter carpenter = woodenDoorFactory.makeFittingExpert();
+WoodenDoorFactory woodenFactory = new WoodenDoorFactory();
+Door woodenDoor = woodenFactory.makeDoor();
+DoorFittingExpert woodenExpert = woodenFactory.makeFittingExpert();
 
-woodenDoor.getDescription(); // Output: I am a wooden door
-carpenter.getDescription(); // Output: I can only fit wooden doors
+woodenDoor.getDescription();   // Output: I am a wooden door
+woodenExpert.getDescription(); // Output: I can only fit wooden doors
 
-IronDoorFactory ironDoorFactory = new IronDoorFactory();
-IronDoor ironDoor = ironDoorFactory.makeDoor();
-Welder welder = ironDoorFactory.makeFittingExpert();
+// ----------------------------
 
-ironDoor.getDescription(); // Output: I am an iron door
-welder.getDescription(); // Output: I can only fit iron doors
+IronDoorFactory ironFactory = new IronDoorFactory();
+Door ironDoor = ironFactory.makeDoor();
+DoorFittingExpert ironExpert = ironFactory.makeFittingExpert();
+
+ironDoor.getDescription();   // Output: I am an iron door
+ironExpert.getDescription(); // Output: I can only fit iron doors
 ```
 
 </div>
@@ -2141,19 +2193,19 @@ public:
     virtual void getDescription() = 0;
 };
 
-// Welder
-class Welder : public DoorFittingExpert {
-public:
-    void getDescription() override {
-        std::cout << "I can only fit iron doors" << std::endl;
-    }
-};
-
 // Carpenter
 class Carpenter : public DoorFittingExpert {
 public:
     void getDescription() override {
         std::cout << "I can only fit wooden doors" << std::endl;
+    }
+};
+
+// Welder
+class Welder : public DoorFittingExpert {
+public:
+    void getDescription() override {
+        std::cout << "I can only fit iron doors" << std::endl;
     }
 };
 
@@ -2191,13 +2243,20 @@ public:
 
 // Usage
 int main() {
-    IronDoorFactory ironDoorFactory;
-    auto ironDoor = ironDoorFactory.makeDoor();
-    auto ironDoorFittingExpert = ironDoorFactory.makeFittingExpert();
-    
-    ironDoor->getDescription(); // Output: I am an iron door
-    ironDoorFittingExpert->getDescription(); // Output: I can only fit iron doors
-    
+    WoodenDoorFactory woodenFactory;
+    auto woodenDoor = woodenFactory.makeDoor();
+    auto woodenExpert = woodenFactory.makeFittingExpert();
+
+    woodenDoor->getDescription();   // Output: I am a wooden door
+    woodenExpert->getDescription(); // Output: I can only fit wooden doors
+
+    IronDoorFactory ironFactory;
+    auto ironDoor = ironFactory.makeDoor();
+    auto ironExpert = ironFactory.makeFittingExpert();
+
+    ironDoor->getDescription();   // Output: I am an iron door
+    ironExpert->getDescription(); // Output: I can only fit iron doors
+
     return 0;
 }
 ```
@@ -2230,15 +2289,15 @@ interface DoorFittingExpert {
     fun getDescription()
 }
 
-class Welder : DoorFittingExpert {
-    override fun getDescription() {
-        println("I can only fit iron doors")
-    }
-}
-
 class Carpenter : DoorFittingExpert {
     override fun getDescription() {
         println("I can only fit wooden doors")
+    }
+}
+
+class Welder : DoorFittingExpert {
+    override fun getDescription() {
+        println("I can only fit iron doors")
     }
 }
 
@@ -2257,26 +2316,28 @@ class IronDoorFactory : DoorFactory {
     override fun makeFittingExpert(): DoorFittingExpert = Welder()
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
     val woodenFactory = WoodenDoorFactory()
-    val woodenDoor = woodenFactory.makeDoor()
-    val carpenter = woodenFactory.makeFittingExpert()
 
-    woodenDoor.getDescription() // Output: I am a wooden door
-    carpenter.getDescription() // Output: I can only fit wooden doors
+    val woodenDoor = woodenFactory.makeDoor()
+    val woodenExpert = woodenFactory.makeFittingExpert()
+
+    woodenDoor.getDescription()
+    woodenExpert.getDescription()
 
     val ironFactory = IronDoorFactory()
-    val ironDoor = ironFactory.makeDoor()
-    val welder = ironFactory.makeFittingExpert()
 
-    ironDoor.getDescription() // Output: I am an iron door
-    welder.getDescription() // Output: I can only fit iron doors
+    val ironDoor = ironFactory.makeDoor()
+    val ironExpert = ironFactory.makeFittingExpert()
+
+    ironDoor.getDescription()
+    ironExpert.getDescription()
 }
 ```
 
 </div>
-
 </details>
 
 <details>
@@ -2303,14 +2364,14 @@ abstract class DoorFittingExpert {
   void getDescription();
 }
 
-class Welder implements DoorFittingExpert {
-  @override
-  void getDescription() => print('I can only fit iron doors');
-}
-
 class Carpenter implements DoorFittingExpert {
   @override
   void getDescription() => print('I can only fit wooden doors');
+}
+
+class Welder implements DoorFittingExpert {
+  @override
+  void getDescription() => print('I can only fit iron doors');
 }
 
 abstract class DoorFactory {
@@ -2338,31 +2399,31 @@ class IronDoorFactory implements DoorFactory {
 
 void main() {
   var woodenFactory = WoodenDoorFactory();
+
   var door = woodenFactory.makeDoor();
   var expert = woodenFactory.makeFittingExpert();
-  door.getDescription();   // I am a wooden door
-  expert.getDescription(); // I can only fit wooden doors
+
+  door.getDescription();
+  expert.getDescription();
 
   var ironFactory = IronDoorFactory();
-  var ironDoor = ironFactory.makeDoor();
-  var welder = ironFactory.makeFittingExpert();
-  ironDoor.getDescription();  // I am an iron door
-  welder.getDescription();    // I can only fit iron doors
+
+  door = ironFactory.makeDoor();
+  expert = ironFactory.makeFittingExpert();
+
+  door.getDescription();
+  expert.getDescription();
 }
 ```
 
 </div>
 </details>
 
-<br>
+> 🤔 **کی به کارش ببریم؟**
+> ✅ وقتی محصولاتت یه **خانواده هماهنگ** می‌سازن و باید با هم ست بمونن (مثل در چوبی + نجار)، تا یه دفعه قطعه ناجور قاطی نشه؛ ❌ وقتی فقط یه نوع محصول داری یا قرار نیست چند خانواده کنار هم زندگی کنن.
+> 🪤 **دام رایج:** خانواده‌ها رو زیادی ریز می‌کنی و کلی کلاس کارخونه می‌سازی که فقط یه محصول می‌ده؛ اونجا داری بی‌خودی پیچیده‌اش می‌کنی.
+> 🔗 **فرقش با [متد کارخانه](#متد-کارخانه-factory-method-):** متد کارخانه یه محصول رو می‌سازه، ولی کارخانه انتزاعی یه **خانواده کامل از محصولات مرتبط** رو با هم تحویل می‌ده.
 
-**همونطور که میبیند، می‌تونیم به‌طور مشابه با هر دو نوع درب برخورد کنیم و ازین موضوع مطمئن باشیم که متخصص اشتباه برای یک
-درب
-انتخاب نمی‌کنیم.**
-
-**چه موقع باید ازش استفاده کنیم؟**
-
-زمانی که وابستگی‌های منطقی نه چندان ساده برای ایجاد وجود داره، میتونیم ازین دیزاین پترن استفاده کنیم.
 
 <br>
 
@@ -2370,7 +2431,7 @@ void main() {
 
 <div align="center">
 
-## 👷 Builder
+## سازنده (Builder) 👷
 
 </div>
 
@@ -2378,25 +2439,25 @@ void main() {
 🍔 <b>مثال دنیای واقعی: ساخت ساندویچ سفارشی</b>
 </div>
 
-فرض کنید رفتید ساندویچ‌فروشی که خودتون مواد رو انتخاب می‌کنید (مثل Subway یا هایدا).
-شما نمی‌گید "یه ساندویچ بده!" (چون ممکنه توش پیاز باشه و شما متنفر باشید).
+فرض کن رفتی ساندویچ‌فروشی که خودت مواد رو انتخاب می‌کنی (مثل Subway).
+تو نمی‌گی «یه ساندویچ بده!» (چون ممکنه توش پیاز باشه و تو ازش متنفر باشی).
 
-بلکه مرحله به مرحله می‌گید:
+بلکه مرحله به مرحله می‌گی:
 ۱. نون باگت باشه. 🥖
 ۲. پنیر اضافه بزن. 🧀
 ۳. گوجه و خیارشور بذار. 🍅
 ۴. پیاز نذار! 🧅
 ۵. سس خردل بزن. 🌭
 
-در نهایت ساندویچ مخصوص **خودتون** ساخته میشه. این دقیقاً کاریه که الگوی **Builder** انجام میده.
+در نهایت ساندویچ مخصوص **خودت** ساخته می‌شه. این دقیقاً کاریه که الگوی **Builder** انجام می‌ده.
 
 💡 **به زبون ساده:**
-> دیدید بعضی وقت‌ها یه تابع سازنده (Constructor) داریم که ۱۰ تا ورودی داره و آدم گیج میشه کدوم به کدومه؟ 😵‍💫
-> (به این مشکل میگن "Telescoping Constructor Anti-pattern")
+> دیدی بعضی وقت‌ها یه تابع سازنده (Constructor) داریم که ۱۰ تا ورودی داره و آدم گیج می‌شه کدوم به کدومه؟ 😵‍💫
+> (به این مشکل می‌گن "Telescoping Constructor Anti-pattern")
 >
-> الگوی Builder میگه: **"به جای اینکه همه چیز رو یه هو بریزی تو حلق تابع، بیا مرحله به مرحله و تمیز آبجکت رو بسازیم."**
+> الگوی Builder می‌گه: **«به جای اینکه همه چیز رو یه‌جا بدی دست تابع سازنده، بیا مرحله به مرحله و تمیز آبجکت رو بسازیم.»**
 
-برای همه ما پیش اومده که یک تابع سازنده ترسناک به این شکل ببینیم که آدم رو فراری میده:
+برای همه ما پیش اومده که یک تابع سازنده ترسناک به این شکل ببینیم که آدم رو فراری می‌ده:
 
 
 <details>
@@ -2404,7 +2465,7 @@ void main() {
 <div dir="ltr">
 
 ```python
-def __init__(self, size, cheese=True, pepperoni=True, tomato=False, lettuce=True)
+def __init__(self, size, cheese=True, mushrooms=True, tomato=False): ...
 ```
 
 </div>
@@ -2415,8 +2476,7 @@ def __init__(self, size, cheese=True, pepperoni=True, tomato=False, lettuce=True
 <div dir="ltr">
 
 ```typescript
-constructor(size: any, cheese: boolean = true, pepperoni:boolean = true, tomato: boolean = false, lettuce: boolean = true) {}
-
+constructor(size: number, cheese: boolean = true, mushrooms: boolean = true, tomato: boolean = false) {}
 ```
 
 </div>
@@ -2427,8 +2487,8 @@ constructor(size: any, cheese: boolean = true, pepperoni:boolean = true, tomato:
 
 <div dir="ltr">
 
-```javaScript
-constructor(size, cheese = true, pepperoni = true, tomato = false, lettuce = true) {}
+```javascript
+constructor(size, cheese = true, mushrooms = true, tomato = false) {}
 ```
 
 </div>
@@ -2440,9 +2500,11 @@ constructor(size, cheese = true, pepperoni = true, tomato = false, lettuce = tru
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
 
-public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
+
+public Burger(int size, bool cheese, bool mushrooms, bool tomato)
 
 ```
 
@@ -2455,9 +2517,9 @@ public Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
 
 <div dir="ltr">
 
-```PHP
+```php
 
-public function __construct(int $size, bool $cheese, bool $pepperoni, bool $lettuce, bool $tomato)
+public function __construct(int $size, bool $cheese, bool $mushrooms, bool $tomato)
 
 ```
 
@@ -2472,7 +2534,7 @@ public function __construct(int $size, bool $cheese, bool $pepperoni, bool $lett
 
 ```go
 
-func Burger(size int, cheese bool, pepperoni bool, lettuce bool, tomato bool)
+func Burger(size int, cheese bool, mushrooms bool, tomato bool)
 
 ```
 
@@ -2486,25 +2548,19 @@ func Burger(size int, cheese bool, pepperoni bool, lettuce bool, tomato bool)
 <div dir="ltr">
 
 ```java
-public Burger(int size, boolean cheese, boolean pepperoni, boolean lettuce, boolean tomato)
+public Burger(int size, boolean cheese, boolean mushrooms, boolean tomato)
 ```
 
 </div>
 </details>
 
 <details>
-  <summary>Kotlin</summary>
+<summary>Kotlin</summary>
 
 <div dir="ltr">
 
 ```kotlin
-class Burger(
-    val size: Int,
-    val cheese: Boolean,
-    val pepperoni: Boolean,
-    val lettuce: Boolean,
-    val tomato: Boolean
-)
+class Burger(size: Int, cheese: Boolean, mushrooms: Boolean, tomato: Boolean)
 ```
 
 </div>
@@ -2512,22 +2568,23 @@ class Burger(
 
 <details>
 <summary>Dart</summary>
+
 <div dir="ltr">
 
 ```dart
-Burger(int size, {bool cheese = true, bool pepperoni = true, bool tomato = false, bool lettuce = true})
+class Burger {
+  Burger(int size, bool cheese, bool mushrooms, bool tomato);
+}
 ```
 
 </div>
 </details>
 
-<br>
-
-در این شرایط معمولا Builder میتونه به دادمون برسه.
+در این شرایط معمولا Builder می‌تونه به دادمون برسه.
 
 <br>
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -2536,15 +2593,17 @@ Burger(int size, {bool cheese = true, bool pepperoni = true, bool tomato = false
 
 </div>
 
+خلاصه‌اش این می‌شه که الگوی Builder یه الگوی ساخت آبجکته که اومده تا جواب مشکل «تابع سازنده تلسکوپی (Telescoping Constructor)» رو بده؛ یعنی همون تابع سازنده‌ای که هی ورودی‌های اختیاری بهش اضافه می‌شه و قاطی‌پاتی می‌شه. به جاش، آبجکت رو قدم‌به‌قدم و خوانا می‌سازیم.
+
 <br>
 
-**مثال برنامه نویسی**
+**مثال برنامه‌نویسی**
 
-در این بخش هم میخوام مثال برگر رو براتون ترجمه کنم.
+در این بخش هم می‌خوام مثال برگر رو برات ترجمه کنم.
 
 اولین مرحله اینه که یک کلاس برگر معمولی داشته باشیم
 
-در ادامه کلاس Builder رو براش ایجاد میکنیم.
+در ادامه کلاس Builder رو براش ایجاد می‌کنیم.
 
 <details>
 <summary>Python</summary>
@@ -2553,45 +2612,35 @@ Burger(int size, {bool cheese = true, bool pepperoni = true, bool tomato = false
 
 ```python
 class Burger:
-    _size = None
-
-    _cheese = False
-    _pepperoni = False
-    _lettuce = False
-    _tomato = False
-
     def __init__(self, builder):
-        self._size = builder.size
-        self._cheese = builder.cheese
-        self._pepperoni = builder.pepperoni
-        self._lettuce = builder.lettuce
-        self._tomato = builder.tomato
+        self.size = builder.size
+        self.cheese = builder.cheese
+        self.mushrooms = builder.mushrooms
+        self.tomato = builder.tomato
+
+    def get_description(self):
+        return (
+            f"Burger: size {self.size}, cheese: {str(self.cheese).lower()}, "
+            f"mushrooms: {str(self.mushrooms).lower()}, tomato: {str(self.tomato).lower()}"
+        )
 
 
 class BurgerBuilder:
-    size = None
-
-    cheese = False
-    pepperoni = False
-    lettuce = False
-    tomato = False
-
     def __init__(self, size):
         self.size = size
+        self.cheese = False
+        self.mushrooms = False
+        self.tomato = False
 
-    def addPepperoni(self):
-        self.pepperoni = True
-        return self
-
-    def addLettuce(self):
-        self.lettuce = True
-        return self
-
-    def addCheese(self):
+    def add_cheese(self):
         self.cheese = True
         return self
 
-    def addTomato(self):
+    def add_mushrooms(self):
+        self.mushrooms = True
+        return self
+
+    def add_tomato(self):
         self.tomato = True
         return self
 
@@ -2601,9 +2650,10 @@ class BurgerBuilder:
 
 # ----------------------------
 
-burger = BurgerBuilder(10).addPepperoni().addLettuce().addTomato().build()
+burger = BurgerBuilder(14).add_cheese().add_mushrooms().build()
 
-print(vars(burger))
+print(burger.get_description())
+# Burger: size 14, cheese: true, mushrooms: true, tomato: false
 ```
 
 </div>
@@ -2616,50 +2666,45 @@ print(vars(burger))
 
 ```typescript
 class Burger {
-    private size: any;
-
-    private cheese: boolean = false;
-    private pepperoni: boolean = false;
-    private lettuce: boolean = false;
-    private tomato: boolean = false;
+    private size: number;
+    private cheese: boolean;
+    private mushrooms: boolean;
+    private tomato: boolean;
 
     constructor(builder: BurgerBuilder) {
         this.size = builder.size;
         this.cheese = builder.cheese;
-        this.pepperoni = builder.pepperoni;
-        this.lettuce = builder.lettuce;
+        this.mushrooms = builder.mushrooms;
         this.tomato = builder.tomato;
+    }
+
+    getDescription(): string {
+        return `Burger: size ${this.size}, cheese: ${this.cheese}, ` +
+            `mushrooms: ${this.mushrooms}, tomato: ${this.tomato}`;
     }
 }
 
 class BurgerBuilder {
     size: number;
-
     cheese: boolean = false;
-    pepperoni: boolean = false;
-    lettuce: boolean = false;
+    mushrooms: boolean = false;
     tomato: boolean = false;
 
     constructor(size: number) {
         this.size = size;
     }
 
-    addPepperoni() {
-        this.pepperoni = true;
-        return this;
-    }
-
-    addLettuce() {
-        this.lettuce = true;
-        return this;
-    }
-
-    addCheese() {
+    addCheese(): this {
         this.cheese = true;
         return this;
     }
 
-    addTomato() {
+    addMushrooms(): this {
+        this.mushrooms = true;
+        return this;
+    }
+
+    addTomato(): this {
         this.tomato = true;
         return this;
     }
@@ -2671,13 +2716,13 @@ class BurgerBuilder {
 
 // ----------------------------
 
-let burger = new BurgerBuilder(10)
-    .addPepperoni()
-    .addLettuce()
-    .addTomato()
+const burger = new BurgerBuilder(14)
+    .addCheese()
+    .addMushrooms()
     .build();
 
-console.log(Object.keys(burger));
+console.log(burger.getDescription());
+// Burger: size 14, cheese: true, mushrooms: true, tomato: false
 ```
 
 </div>
@@ -2688,14 +2733,18 @@ console.log(Object.keys(burger));
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Burger {
     constructor(builder) {
         this.size = builder.size;
         this.cheese = builder.cheese;
-        this.pepperoni = builder.pepperoni;
-        this.lettuce = builder.lettuce;
+        this.mushrooms = builder.mushrooms;
         this.tomato = builder.tomato;
+    }
+
+    getDescription() {
+        return `Burger: size ${this.size}, cheese: ${this.cheese}, ` +
+            `mushrooms: ${this.mushrooms}, tomato: ${this.tomato}`;
     }
 }
 
@@ -2703,23 +2752,17 @@ class BurgerBuilder {
     constructor(size) {
         this.size = size;
         this.cheese = false;
-        this.pepperoni = false;
-        this.lettuce = false;
+        this.mushrooms = false;
         this.tomato = false;
-    }
-
-    addPepperoni() {
-        this.pepperoni = true;
-        return this;
-    }
-
-    addLettuce() {
-        this.lettuce = true;
-        return this;
     }
 
     addCheese() {
         this.cheese = true;
+        return this;
+    }
+
+    addMushrooms() {
+        this.mushrooms = true;
         return this;
     }
 
@@ -2733,15 +2776,15 @@ class BurgerBuilder {
     }
 }
 
+// ----------------------------
 
-let burger = new BurgerBuilder(10)
-    .addPepperoni()
-    .addLettuce()
-    .addTomato()
+const burger = new BurgerBuilder(14)
+    .addCheese()
+    .addMushrooms()
     .build();
 
-console.log(burger);
-console.log(Object.keys(burger));
+console.log(burger.getDescription());
+// Burger: size 14, cheese: true, mushrooms: true, tomato: false
 ```
 
 </div>
@@ -2753,28 +2796,32 @@ console.log(Object.keys(burger));
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+using System.Text;
+
 class Burger
 {
   private int mSize;
   private bool mCheese;
-  private bool mPepperoni;
-  private bool mLettuce;
+  private bool mMushrooms;
   private bool mTomato;
 
   public Burger(BurgerBuilder builder)
   {
     this.mSize = builder.Size;
     this.mCheese = builder.Cheese;
-    this.mPepperoni = builder.Pepperoni;
-    this.mLettuce = builder.Lettuce;
+    this.mMushrooms = builder.Mushrooms;
     this.mTomato = builder.Tomato;
   }
 
   public string GetDescription()
   {
     var sb = new StringBuilder();
-    sb.Append($"This is {this.mSize} inch Burger. ");
+    sb.Append($"Burger: size {this.mSize}, ");
+    sb.Append($"cheese: {this.mCheese.ToString().ToLower()}, ");
+    sb.Append($"mushrooms: {this.mMushrooms.ToString().ToLower()}, ");
+    sb.Append($"tomato: {this.mTomato.ToString().ToLower()}");
     return sb.ToString();
   }
 }
@@ -2782,8 +2829,7 @@ class Burger
 class BurgerBuilder {
   public int Size;
   public bool Cheese;
-  public bool Pepperoni;
-  public bool Lettuce;
+  public bool Mushrooms;
   public bool Tomato;
 
   public BurgerBuilder(int size)
@@ -2797,15 +2843,9 @@ class BurgerBuilder {
     return this;
   }
 
-  public BurgerBuilder AddPepperoni()
+  public BurgerBuilder AddMushrooms()
   {
-    this.Pepperoni = true;
-    return this;
-  }
-
-  public BurgerBuilder AddLettuce()
-  {
-    this.Lettuce = true;
+    this.Mushrooms = true;
     return this;
   }
 
@@ -2823,12 +2863,12 @@ class BurgerBuilder {
 
 // ----------------------------
 
-var burger = new BurgerBuilder(4).AddCheese()
-                                .AddPepperoni()
-                                .AddLettuce()
-                                .AddTomato()
-                                .Build();
+var burger = new BurgerBuilder(14)
+                .AddCheese()
+                .AddMushrooms()
+                .Build();
 Console.WriteLine(burger.GetDescription());
+// Burger: size 14, cheese: true, mushrooms: true, tomato: false
 
 ```
 
@@ -2841,46 +2881,46 @@ Console.WriteLine(burger.GetDescription());
 
 <div dir="ltr">
 
-```PHP
+```php
 class Burger {
     private $size;
     private $cheese = false;
-    private $pepperoni = false;
-    private $lettuce = false;
+    private $mushrooms = false;
     private $tomato = false;
 
     public function __construct($builder) {
         $this->size = $builder->size;
         $this->cheese = $builder->cheese;
-        $this->pepperoni = $builder->pepperoni;
-        $this->lettuce = $builder->lettuce;
+        $this->mushrooms = $builder->mushrooms;
         $this->tomato = $builder->tomato;
+    }
+
+    public function getDescription() {
+        $cheese = $this->cheese ? 'true' : 'false';
+        $mushrooms = $this->mushrooms ? 'true' : 'false';
+        $tomato = $this->tomato ? 'true' : 'false';
+        return "Burger: size {$this->size}, cheese: {$cheese}, "
+            . "mushrooms: {$mushrooms}, tomato: {$tomato}";
     }
 }
 
 class BurgerBuilder {
     public $size;
     public $cheese = false;
-    public $pepperoni = false;
-    public $lettuce = false;
+    public $mushrooms = false;
     public $tomato = false;
 
     public function __construct($size) {
         $this->size = $size;
     }
 
-    public function addPepperoni() {
-        $this->pepperoni = true;
-        return $this;
-    }
-
-    public function addLettuce() {
-        $this->lettuce = true;
-        return $this;
-    }
-
     public function addCheese() {
         $this->cheese = true;
+        return $this;
+    }
+
+    public function addMushrooms() {
+        $this->mushrooms = true;
         return $this;
     }
 
@@ -2894,14 +2934,13 @@ class BurgerBuilder {
     }
 }
 
-$burger = (new BurgerBuilder(10))
+$burger = (new BurgerBuilder(14))
             ->addCheese()
-            ->addPepperoni()
-            ->addLettuce()
-            ->addTomato()
+            ->addMushrooms()
             ->build();
 
-var_dump(get_object_vars($burger));
+echo $burger->getDescription() . "\n";
+// Burger: size 14, cheese: true, mushrooms: true, tomato: false
 
 ```
 
@@ -2918,77 +2957,65 @@ var_dump(get_object_vars($burger));
 package main
 
 import (
-"fmt"
-"strings"
+	"fmt"
 )
 
 type Burger struct {
-Size int
-Cheese bool
-Pepperoni bool
-Lettuce bool
-Tomato bool
+	Size      int
+	Cheese    bool
+	Mushrooms bool
+	Tomato    bool
 }
 
 func NewBurger(builder *BurgerBuilder) *Burger {
-return &Burger{
-Size: builder.Size,
-Cheese: builder.Cheese,
-Pepperoni: builder.Pepperoni,
-Lettuce: builder.Lettuce,
-Tomato: builder.Tomato,
-}
+	return &Burger{
+		Size:      builder.Size,
+		Cheese:    builder.Cheese,
+		Mushrooms: builder.Mushrooms,
+		Tomato:    builder.Tomato,
+	}
 }
 
 func (b *Burger) GetDescription() string {
-var sb strings.Builder
-sb.WriteString(fmt.Sprintf("This is %d inch Burger. ", b.Size))
-return sb.String()
+	return fmt.Sprintf("Burger: size %d, cheese: %t, mushrooms: %t, tomato: %t",
+		b.Size, b.Cheese, b.Mushrooms, b.Tomato)
 }
 
 type BurgerBuilder struct {
-Size int
-Cheese bool
-Pepperoni bool
-Lettuce bool
-Tomato bool
+	Size      int
+	Cheese    bool
+	Mushrooms bool
+	Tomato    bool
 }
 
 func NewBurgerBuilder(size int) *BurgerBuilder {
-return &BurgerBuilder{Size: size}
+	return &BurgerBuilder{Size: size}
 }
 
 func (b *BurgerBuilder) AddCheese() *BurgerBuilder {
-b.Cheese = true
-return b
+	b.Cheese = true
+	return b
 }
 
-func (b *BurgerBuilder) AddPepperoni() *BurgerBuilder {
-b.Pepperoni = true
-return b
-}
-
-func (b *BurgerBuilder) AddLettuce() *BurgerBuilder {
-b.Lettuce = true
-return b
+func (b *BurgerBuilder) AddMushrooms() *BurgerBuilder {
+	b.Mushrooms = true
+	return b
 }
 
 func (b *BurgerBuilder) AddTomato() *BurgerBuilder {
-b.Tomato = true
-return b
+	b.Tomato = true
+	return b
 }
 
 func (b *BurgerBuilder) Build() *Burger {
-return NewBurger(b)
+	return NewBurger(b)
 }
 
 func main() {
-burger := NewBurgerBuilder(4).AddCheese().AddPepperoni().AddLettuce().AddTomato().Build()
-fmt.Println(burger.GetDescription())
+	burger := NewBurgerBuilder(14).AddCheese().AddMushrooms().Build()
+	fmt.Println(burger.GetDescription())
+	// Burger: size 14, cheese: true, mushrooms: true, tomato: false
 }
-
-
-
 
 ```
 
@@ -3005,70 +3032,63 @@ fmt.Println(burger.GetDescription())
 class Burger {
     private int size;
     private boolean cheese;
-    private boolean pepperoni;
-    private boolean lettuce;
+    private boolean mushrooms;
     private boolean tomato;
 
     public Burger(BurgerBuilder builder) {
         this.size = builder.size;
         this.cheese = builder.cheese;
-        this.pepperoni = builder.pepperoni;
-        this.lettuce = builder.lettuce;
+        this.mushrooms = builder.mushrooms;
         this.tomato = builder.tomato;
     }
+
     public String getDescription() {
-        var sb = new StringBuilder();
-        sb.append("This is " + this.size + " inch Burger.");
-        return sb.toString();
-    }
-    public static BurgerBuilder builder() {
-        return new BurgerBuilder();
+        return "Burger: size " + this.size
+                + ", cheese: " + this.cheese
+                + ", mushrooms: " + this.mushrooms
+                + ", tomato: " + this.tomato;
     }
 }
 
 class BurgerBuilder {
     public int size;
     public boolean cheese;
-    public boolean pepperoni;
-    public boolean lettuce;
+    public boolean mushrooms;
     public boolean tomato;
+
+    public BurgerBuilder(int size) {
+        this.size = size;
+    }
+
+    public BurgerBuilder addCheese() {
+        this.cheese = true;
+        return this;
+    }
+
+    public BurgerBuilder addMushrooms() {
+        this.mushrooms = true;
+        return this;
+    }
+
+    public BurgerBuilder addTomato() {
+        this.tomato = true;
+        return this;
+    }
 
     public Burger build() {
         return new Burger(this);
-    }
-    public BurgerBuilder size(int size) {
-        this.size = size;
-        return this;
-    }
-    public BurgerBuilder cheese(boolean cheese) {
-        this.cheese = cheese;
-        return this;
-    }
-    public BurgerBuilder pepperoni(boolean pepperoni) {
-        this.pepperoni = pepperoni;
-        return this;
-    }
-    public BurgerBuilder lettuce(boolean lettuce) {
-        this.lettuce = lettuce;
-        return this;
-    }
-    public BurgerBuilder tomato(boolean tomato) {
-        this.tomato = tomato;
-        return this;
     }
 }
 
 // ----------------------------
 
-Burger burger = Burger.builder()
-        .size(10)
-        .cheese(true)
-        .pepperoni(true)
-        .lettuce(false)
-        .tomato(false)
+Burger burger = new BurgerBuilder(14)
+        .addCheese()
+        .addMushrooms()
         .build();
 
 System.out.println(burger.getDescription());
+// Burger: size 14, cheese: true, mushrooms: true, tomato: false
 ```
 
 </div>
@@ -3084,74 +3104,69 @@ System.out.println(burger.getDescription());
 #include <string>
 #include <memory>
 
+class BurgerBuilder;
+
 class Burger {
 private:
     int size;
     bool cheese;
-    bool pepperoni;
-    bool lettuce;
+    bool mushrooms;
     bool tomato;
 
 public:
-    Burger(int size, bool cheese, bool pepperoni, bool lettuce, bool tomato)
-        : size(size), cheese(cheese), pepperoni(pepperoni), lettuce(lettuce), tomato(tomato) {}
-    
+    Burger(int size, bool cheese, bool mushrooms, bool tomato)
+        : size(size), cheese(cheese), mushrooms(mushrooms), tomato(tomato) {}
+
     std::string getDescription() const {
-        return "This is " + std::to_string(size) + " inch Burger.";
+        auto b = [](bool v) { return v ? "true" : "false"; };
+        return "Burger: size " + std::to_string(size) +
+               ", cheese: " + b(cheese) +
+               ", mushrooms: " + b(mushrooms) +
+               ", tomato: " + b(tomato);
     }
 };
 
 class BurgerBuilder {
 private:
-    int size = 0;
+    int size;
     bool cheese = false;
-    bool pepperoni = false;
-    bool lettuce = false;
+    bool mushrooms = false;
     bool tomato = false;
 
 public:
-    BurgerBuilder& setSize(int size) {
-        this->size = size;
+    explicit BurgerBuilder(int size) : size(size) {}
+
+    BurgerBuilder& addCheese() {
+        this->cheese = true;
         return *this;
     }
-    
-    BurgerBuilder& addCheese(bool cheese = true) {
-        this->cheese = cheese;
+
+    BurgerBuilder& addMushrooms() {
+        this->mushrooms = true;
         return *this;
     }
-    
-    BurgerBuilder& addPepperoni(bool pepperoni = true) {
-        this->pepperoni = pepperoni;
+
+    BurgerBuilder& addTomato() {
+        this->tomato = true;
         return *this;
     }
-    
-    BurgerBuilder& addLettuce(bool lettuce = true) {
-        this->lettuce = lettuce;
-        return *this;
-    }
-    
-    BurgerBuilder& addTomato(bool tomato = true) {
-        this->tomato = tomato;
-        return *this;
-    }
-    
+
     std::unique_ptr<Burger> build() {
-        return std::make_unique<Burger>(size, cheese, pepperoni, lettuce, tomato);
+        return std::make_unique<Burger>(size, cheese, mushrooms, tomato);
     }
 };
 
-// Usage
+// ----------------------------
+
 int main() {
-    auto burger = BurgerBuilder()
-        .setSize(10)
-        .addCheese(true)
-        .addPepperoni(true)
-        .addLettuce(false)
-        .addTomato(false)
+    auto burger = BurgerBuilder(14)
+        .addCheese()
+        .addMushrooms()
         .build();
-    
+
     std::cout << burger->getDescription() << std::endl;
-    
+    // Burger: size 14, cheese: true, mushrooms: true, tomato: false
+
     return 0;
 }
 ```
@@ -3164,48 +3179,49 @@ int main() {
 <div dir="ltr">
 
 ```kotlin
-data class Burger(
-    var size: Int = 0,
-    var cheese: Boolean = false,
-    var pepperoni: Boolean = false,
-    var lettuce: Boolean = false,
-    var tomato: Boolean = false
-) {
+class Burger(builder: BurgerBuilder) {
+    private val size: Int = builder.size
+    private val cheese: Boolean = builder.cheese
+    private val mushrooms: Boolean = builder.mushrooms
+    private val tomato: Boolean = builder.tomato
+
     fun getDescription(): String {
-        val toppings = mutableListOf<String>()
-
-        if (cheese) toppings.add("Cheese")
-        if (pepperoni) toppings.add("Pepperoni")
-        if (lettuce) toppings.add("Lettuce")
-        if (tomato) toppings.add("Tomato")
-
-        return "This is $size inch Burger with ${toppings.joinToString(", ")}."
+        return "Burger: size $size, cheese: $cheese, " +
+            "mushrooms: $mushrooms, tomato: $tomato"
     }
 }
 
-class BurgerBuilder {
-    private var size: Int = 0
-    private var cheese: Boolean = false
-    private var pepperoni: Boolean = false
-    private var lettuce: Boolean = false
-    private var tomato: Boolean = false
+class BurgerBuilder(val size: Int) {
+    var cheese: Boolean = false
+    var mushrooms: Boolean = false
+    var tomato: Boolean = false
 
-    fun size(size: Int) = apply { this.size = size }
-    fun cheese(cheese: Boolean = true) = apply { this.cheese = cheese }
-    fun pepperoni(pepperoni: Boolean = true) = apply { this.pepperoni = pepperoni }
-    fun lettuce(lettuce: Boolean = true) = apply { this.lettuce = lettuce }
-    fun tomato(tomato: Boolean = true) = apply { this.tomato = tomato }
-    fun build() = Burger(size, cheese, pepperoni, lettuce, tomato)
+    fun addCheese(): BurgerBuilder {
+        cheese = true
+        return this
+    }
+
+    fun addMushrooms(): BurgerBuilder {
+        mushrooms = true
+        return this
+    }
+
+    fun addTomato(): BurgerBuilder {
+        tomato = true
+        return this
+    }
+
+    fun build(): Burger {
+        return Burger(this)
+    }
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
-    val burger = BurgerBuilder()
-        .size(10)
-        .cheese(true)
-        .pepperoni(true)
-        .lettuce(false)
-        .tomato(false)
+    val burger = BurgerBuilder(14)
+        .addCheese()
+        .addMushrooms()
         .build()
 
     println(burger.getDescription())
@@ -3213,7 +3229,6 @@ fun main() {
 ```
 
 </div>
-
 </details>
 
 <details>
@@ -3223,43 +3238,38 @@ fun main() {
 
 ```dart
 class Burger {
-  final int _size;
-  final bool _cheese;
-  final bool _pepperoni;
-  final bool _lettuce;
-  final bool _tomato;
+  final int size;
+  final bool cheese;
+  final bool mushrooms;
+  final bool tomato;
 
   Burger(BurgerBuilder builder)
-      : _size = builder.size,
-        _cheese = builder.cheese,
-        _pepperoni = builder.pepperoni,
-        _lettuce = builder.lettuce,
-        _tomato = builder.tomato;
+      : size = builder.size,
+        cheese = builder.cheese,
+        mushrooms = builder.mushrooms,
+        tomato = builder.tomato;
 
-  String getDescription() => 'This is $_size inch Burger.';
+  String getDescription() {
+    return 'Burger: size $size, cheese: $cheese, '
+        'mushrooms: $mushrooms, tomato: $tomato';
+  }
 }
 
 class BurgerBuilder {
-  int size;
+  final int size;
   bool cheese = false;
-  bool pepperoni = false;
-  bool lettuce = false;
+  bool mushrooms = false;
   bool tomato = false;
 
   BurgerBuilder(this.size);
 
-  BurgerBuilder addPepperoni() {
-    pepperoni = true;
-    return this;
-  }
-
-  BurgerBuilder addLettuce() {
-    lettuce = true;
-    return this;
-  }
-
   BurgerBuilder addCheese() {
     cheese = true;
+    return this;
+  }
+
+  BurgerBuilder addMushrooms() {
+    mushrooms = true;
     return this;
   }
 
@@ -3274,25 +3284,20 @@ class BurgerBuilder {
 // ----------------------------
 
 void main() {
-  var burger = (BurgerBuilder(10)
-        ..addPepperoni()
-        ..addLettuce()
-        ..addTomato())
-      .build();
+  var burger = BurgerBuilder(14).addCheese().addMushrooms().build();
 
-  print(burger.getDescription()); // This is 10 inch Burger.
+  print(burger.getDescription());
 }
 ```
 
 </div>
 </details>
 
-<br>
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی ساختن یه آبجکت کلی گزینه اختیاری داره و می‌خوای قدم‌به‌قدم و خوانا بسازیش»؛ ❌ «وقتی آبجکتت دو سه تا فیلد ساده داره و یه تابع سازنده معمولی کافیه».
+> 🪤 **دام رایج:** «build() رو صدا نزنی و با خود Builder کار کنی، یا فیلدهای اجباری رو نگیری و آبجکت نصفه‌نیمه بسازی».
+> 🔗 **فرقش با الگوهای دیگه:** «Builder یه آبجکت رو مرحله‌به‌مرحله می‌سازه، نه اینکه بین چند نوع آبجکت آماده انتخاب کنه».
 
-**چه موقع باید ازش استفاده کنیم؟**
-
-همونطور که قبل تر اشاره کردم این دیزاین پترن رو معمولا برای ساخت ابجکت‌های پیچیده یا ابجکت‌هایی که نیاز به شخصی سازی
-زیادی دارن استفاده میکنیم.
 
 <br>
 
@@ -3300,24 +3305,24 @@ void main() {
 
 <div align="center">
 
-## 🐑 Prototype
+## نمونه اولیه (Prototype) 🐑
 
 </div>
 
 <div align="center">
-🧬 <b>مثال دنیای واقعی: گوسفند دالی (شبیه‌سازی)</b>
+🧬 <b>مثال دنیای واقعی: کپی گرفتن از یه سند آماده</b>
 </div>
 
-ماجرای گوسفند دالی رو شنیدید؟ 🐑 دالی اولین گوسفندی بود که "متولد" نشد، بلکه از روی یه گوسفند دیگه **کپی** (Clone) شد.
+فرض کن یه فایل ورد داری که کلی روش وقت گذاشتی؛ حاشیه، فونت، استایل، همه چی تنظیم شده. حالا برای یه سند جدید، از صفر شروع نمی‌کنی. همون فایل رو **Copy/Paste** می‌کنی و فقط متنش رو عوض می‌کنی. این دقیقاً کاری‌ه که این پترن می‌کنه؛ به جای ساختن از صفر، از روی یه نمونه آماده یه **کپی** (Clone) می‌گیری.
 
 توی دنیای کامپیوتر هم خیلی وقتا پیش میاد که ساختن یه آبجکت از صفر خیلی هزینه داره (مثلاً باید کلی دیتابیس رو کوئری بزنه تا ساخته بشه).
 به جای اینکه هر دفعه این مسیر سخت رو بریم، میایم از روی یه نمونه آماده (Prototype) یه کپی می‌گیریم. مثل دستور **Copy/Paste**.
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"به جای اینکه بگی `new` و همه چیز رو از اول بسازی، از روی یکی که داری یه `clone` بگیر."**
+> این پترن می‌گه: **«به جای اینکه بگی `new` و همه چیز رو از اول بسازی، از روی یکی که داری یه `clone` بگیر.»**
 > (مخصوصاً وقتی ساختن آبجکت خیلی زمان‌بر یا پیچیده باشه).
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -3326,44 +3331,57 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+به زبون خودمون: پترن نمونه اولیه (Prototype) یه پترن سازنده (Creational) هست. وقتی به دردت می‌خوره که نوع آبجکتی که می‌خوای بسازی رو یه نمونه آماده مشخص می‌کنه؛ پس به جای ساختن از صفر، از روی همون نمونه یه کپی (Clone) می‌گیری و آبجکت جدیدت آماده‌ست.
 
-فرض کنید کلاس SomeComponent رو به صورتی که در کد میبینید داریم.
+**مثال برنامه‌نویسی**
 
-باید دو کلاس copy و deep کپی ایجاد کنیم.
+فرض کن یه کلاس Person داریم که یه اسم داره و یه آبجکت تو در توی Address، که توش شهر طرف نگه‌داری می‌شه.
+
+می‌خوایم دو جور کپی ازش بگیریم؛ یه کپی سطحی (Shallow Copy) و یه کپی عمیق (Deep Copy)، تا فرقشون رو زنده ببینی.
 
 <details>
 <summary>Python</summary>
 
-پایتون magic method‌هایی برای این مساله در نظر گرفته که ماهم از همون دو تابع معروف copy و deep copy استفاده میکنیم:
+پایتون magic method‌هایی برای این مسئله در نظر گرفته که ما هم از همون دو تابع معروف copy و deep copy استفاده می‌کنیم:
 
 <div dir="ltr">
 
 ```python
-class SomeComponent:
-    def __init__(self, some_int, some_list_of_objects, some_circular_ref):
-        self.some_int = some_int
-        self.some_list_of_objects = some_list_of_objects
-        self.some_circular_ref = some_circular_ref
+import copy
+
+
+class Address:
+    def __init__(self, city):
+        self.city = city
+
+
+class Person:
+    def __init__(self, name, address):
+        self.name = name
+        self.address = address  # nested mutable object
 
     def __copy__(self):
-        some_list_of_objects = copy.copy(self.some_list_of_objects)
-        some_circular_ref = copy.copy(self.some_circular_ref)
-        new = self.__class__(
-            self.some_int, some_list_of_objects, some_circular_ref
-        )
-        new.__dict__.update(self.__dict__)
-        return new
+        # Shallow copy: new Person, but the SAME Address object is shared
+        return Person(self.name, self.address)
 
-    def __deepcopy__(self, memo={}):
-        some_list_of_objects = copy.deepcopy(self.some_list_of_objects, memo)
-        some_circular_ref = copy.deepcopy(self.some_circular_ref, memo)
-        new = self.__class__(
-            self.some_int, some_list_of_objects, some_circular_ref
-        )
-        new.__dict__ = copy.deepcopy(self.__dict__, memo)
+    def __deepcopy__(self, memo):
+        # Deep copy: the nested Address is copied too, so it is independent
+        return Person(self.name, copy.deepcopy(self.address, memo))
 
-        return new
+
+# Shallow clone: shares the nested Address
+original = Person("Sara", Address("Tehran"))
+shallow = copy.copy(original)
+shallow.address.city = "Shiraz"
+print(shallow.address.city)    # Shiraz
+print(original.address.city)   # Shiraz  -> the original changed too (shared Address)
+
+# Deep clone: gets its own Address
+original = Person("Sara", Address("Tehran"))
+deep = copy.deepcopy(original)
+deep.address.city = "Shiraz"
+print(deep.address.city)       # Shiraz
+print(original.address.city)   # Tehran  -> the original stayed the same
 ```
 
 </div>
@@ -3375,64 +3393,47 @@ class SomeComponent:
 <div dir="ltr">
 
 ```typescript
-class SomeComponent {
-    someInt: number;
-    someListOfObjects: any[];
-    someCircularRef: any;
+class Address {
+    city: string;
 
-    constructor(someInt: number, someListOfObjects: any[], someCircularRef: any) {
-        this.someInt = someInt;
-        this.someListOfObjects = someListOfObjects;
-        this.someCircularRef = someCircularRef;
-    }
-
-    copy() {
-        let someListOfObjects = Object.assign([], this.someListOfObjects);
-        let someCircularRef = Object.assign({}, this.someCircularRef);
-        let newComponent = new SomeComponent(
-            this.someInt, someListOfObjects, someCircularRef
-        );
-        Object.assign(newComponent, this);
-        return newComponent;
-    }
-
-    deepCopy(memo: object = {}) {
-        let someListOfObjects = JSON.parse(JSON.stringify(this.someListOfObjects));
-        let someCircularRef = JSON.parse(JSON.stringify(this.someCircularRef));
-        let newComponent = new SomeComponent(
-            this.someInt, someListOfObjects, someCircularRef
-        );
-        newComponent = JSON.parse(JSON.stringify(this));
-        return newComponent;
+    constructor(city: string) {
+        this.city = city;
     }
 }
 
-// ------------------------------
+class Person {
+    name: string;
+    address: Address; // nested mutable object
 
-let component = new SomeComponent(1, [1,2,3], {x : 1});
-let copyComponent = component.copy();
+    constructor(name: string, address: Address) {
+        this.name = name;
+        this.address = address;
+    }
 
-console.log(copyComponent.someListOfObjects);   // [ 1, 2, 3 ]
-console.log(copyComponent.someCircularRef);     // { x: 1 }
+    // Shallow copy: new Person, but the SAME Address object is shared
+    shallowCopy(): Person {
+        return new Person(this.name, this.address);
+    }
 
-component.someListOfObjects.push(4);
-component.someCircularRef.y = 6;
+    // Deep copy: the nested Address is copied too, so it is independent
+    deepCopy(): Person {
+        return new Person(this.name, new Address(this.address.city));
+    }
+}
 
-console.log(copyComponent.someListOfObjects)    // [ 1, 2, 3, 4 ]
-console.log(copyComponent.someCircularRef)      // { x: 1, y: 6 }
+// Shallow clone: shares the nested Address
+let original = new Person("Sara", new Address("Tehran"));
+let shallow = original.shallowCopy();
+shallow.address.city = "Shiraz";
+console.log(shallow.address.city);    // Shiraz
+console.log(original.address.city);   // Shiraz  -> the original changed too (shared Address)
 
-// ------------------------------
-let component2 = new SomeComponent(1, [1,2,3], {x : 1});
-let copyComponent2 = component2.deepCopy();
-
-console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
-console.log(copyComponent2.someCircularRef);     // { x: 1 }
-
-component2.someListOfObjects.push(4);
-component2.someCircularRef.y = 6;
-
-console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
-console.log(copyComponent2.someCircularRef);     // { x: 1 }
+// Deep clone: gets its own Address
+original = new Person("Sara", new Address("Tehran"));
+let deep = original.deepCopy();
+deep.address.city = "Shiraz";
+console.log(deep.address.city);       // Shiraz
+console.log(original.address.city);   // Tehran  -> the original stayed the same
 ```
 
 </div>
@@ -3443,59 +3444,43 @@ console.log(copyComponent2.someCircularRef);     // { x: 1 }
 
 <div dir="ltr">
 
-```javaScript
-class SomeComponent {
-    constructor(someInt, someListOfObjects, someCircularRef) {
-        this.someInt = someInt;
-        this.someListOfObjects = someListOfObjects;
-        this.someCircularRef = someCircularRef;
-    }
-
-    copy() {
-        let someListOfObjects = Object.assign([], this.someListOfObjects);
-        let someCircularRef = Object.assign({}, this.someCircularRef);
-        let newComponent = new SomeComponent(
-            this.someInt, someListOfObjects, someCircularRef
-        );
-        Object.assign(newComponent, this);
-        return newComponent;
-    }
-
-    deepCopy() {
-
-        let someListOfObjects = JSON.parse(JSON.stringify(this.someListOfObjects));
-        let someCircularRef = JSON.parse(JSON.stringify(this.someCircularRef));
-        let newComponent = new SomeComponent(
-            this.someInt, someListOfObjects, someCircularRef
-        );
-        newComponent = JSON.parse(JSON.stringify(this));
-        return newComponent;
+```javascript
+class Address {
+    constructor(city) {
+        this.city = city;
     }
 }
 
-let component = new SomeComponent(1, [1, 2, 3], { x: 1 });
-let copyComponent = component.copy();
+class Person {
+    constructor(name, address) {
+        this.name = name;
+        this.address = address; // nested mutable object
+    }
 
-console.log(copyComponent.someListOfObjects);   // [ 1, 2, 3 ]
-console.log(copyComponent.someCircularRef);     // { x: 1 }
+    // Shallow copy: new Person, but the SAME Address object is shared
+    shallowCopy() {
+        return new Person(this.name, this.address);
+    }
 
-component.someListOfObjects.push(4);
-component.someCircularRef.y = 6;
+    // Deep copy: the nested Address is copied too, so it is independent
+    deepCopy() {
+        return new Person(this.name, new Address(this.address.city));
+    }
+}
 
-console.log(copyComponent.someListOfObjects);   // [ 1, 2, 3, 4 ]
-console.log(copyComponent.someCircularRef);     // { x: 1, y: 6 }
+// Shallow clone: shares the nested Address
+let original = new Person("Sara", new Address("Tehran"));
+let shallow = original.shallowCopy();
+shallow.address.city = "Shiraz";
+console.log(shallow.address.city);    // Shiraz
+console.log(original.address.city);   // Shiraz  -> the original changed too (shared Address)
 
-let component2 = new SomeComponent(1, [1, 2, 3], { x: 1 });
-let copyComponent2 = component2.deepCopy();
-
-console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
-console.log(copyComponent2.someCircularRef);     // { x: 1 }
-
-component2.someListOfObjects.push(4);
-component2.someCircularRef.y = 6;
-
-console.log(copyComponent2.someListOfObjects);   // [ 1, 2, 3 ]
-console.log(copyComponent2.someCircularRef);     // { x: 1 }
+// Deep clone: gets its own Address
+original = new Person("Sara", new Address("Tehran"));
+let deep = original.deepCopy();
+deep.address.city = "Shiraz";
+console.log(deep.address.city);       // Shiraz
+console.log(original.address.city);   // Tehran  -> the original stayed the same
 ```
 
 </div>
@@ -3507,119 +3492,66 @@ console.log(copyComponent2.someCircularRef);     // { x: 1 }
 
 <div dir="ltr">
 
-```C#
+```csharp
 
-public class SomeComponent
+using System;
+
+public class Address
 {
-    public int someInt;
-    public string? someString;
+    public string City;
 
-    public SomeComponent ShallowCopy()
+    public Address(string city)
     {
-        return (SomeComponent)this.MemberwiseClone();
+        City = city;
+    }
+}
+
+public class Person
+{
+    public string Name;
+    public Address Address; // nested mutable object
+
+    public Person(string name, Address address)
+    {
+        Name = name;
+        Address = address;
     }
 
-    public SomeComponent DeepCopy()
+    // Shallow copy: MemberwiseClone keeps the SAME Address reference (shared)
+    public Person ShallowCopy()
     {
-        SomeComponent clone = (SomeComponent)this.MemberwiseClone();
-        clone.someInt = someInt;
-        clone.someString = someString;
+        return (Person)this.MemberwiseClone();
+    }
+
+    // Deep copy: also copy the nested Address, so it is independent
+    public Person DeepCopy()
+    {
+        Person clone = (Person)this.MemberwiseClone();
+        clone.Address = new Address(this.Address.City);
         return clone;
     }
 }
 
-// ----------------------------
-
-SomeComponent c1 = new SomeComponent();
-c1.someInt = 1;
-c1.someString = "someString1";
-
-// Perform a shallow copy of c1 and assign it to c2.
-SomeComponent c2 = c1.ShallowCopy();
-
-// Make a deep copy of c1 and assign it to c3.
-SomeComponent c3 = c1.DeepCopy();
-
-Console.WriteLine(c1.someInt + ":" + c1.someString); // 1:someString1
-Console.WriteLine(c2.someInt + ":" + c2.someString); // 1:someString1
-Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
-
-c1.someInt = 2;
-c1.someString = "someString2";
-
-Console.WriteLine(c1.someInt + ":" + c1.someString); // 2:someString2
-Console.WriteLine(c2.someInt + ":" + c2.someString); // 1:someString1
-Console.WriteLine(c3.someInt + ":" + c3.someString); // 1:someString1
-
-```
-
-</div>
-
-<br>
-
-برای deepCopy میتونیم از json Deserialize استفاده کنیم :
-
-<div dir="ltr">
-
-```C#
-
-public abstract class Person
+public class Program
 {
-    public abstract string Name { get; set; }
-
-    public abstract Person Clone(bool deepClone);
-}
-
-public class Manager : Person
-{
-    public override string Name { get; set; }
-
-    public Manager(string name)
+    public static void Main()
     {
-        Name = name;
+        // Shallow clone: shares the nested Address
+        Person original = new Person("Sara", new Address("Tehran"));
+        Person shallow = original.ShallowCopy();
+        shallow.Address.City = "Shiraz";
+        Console.WriteLine(shallow.Address.City);    // Shiraz
+        Console.WriteLine(original.Address.City);   // Shiraz  -> the original changed too (shared Address)
 
-    }
-
-    public override Person Clone( bool deepClone=false)
-    {
-       if (deepClone)
-        {
-            var objectAsJson = JsonConvert.SerializeObject(this);
-            return JsonConvert.DeserializeObject<Manager>(objectAsJson);
-
-        }
-        return (Person)MemberwiseClone();
+        // Deep clone: gets its own Address
+        original = new Person("Sara", new Address("Tehran"));
+        Person deep = original.DeepCopy();
+        deep.Address.City = "Shiraz";
+        Console.WriteLine(deep.Address.City);       // Shiraz
+        Console.WriteLine(original.Address.City);   // Tehran  -> the original stayed the same
     }
 }
 
-public class Employee : Person
-{
-    public Manager Manager { get; set; }
-    public override string Name { get; set; }
-    public Employee(string name, Manager manager)
-    {
-
-        Name = name;
-        Manager = manager;
-    }
-    public override Person Clone(bool deepClone = false)
-    {
-           if (deepClone)
-        {
-            var objectAsJson = JsonConvert.SerializeObject(this);
-            return JsonConvert.DeserializeObject<Employee>(objectAsJson);
-
-        }
-        return (Person)MemberwiseClone() ;
-    }
-
-}
-
-var manager = new Manager("Cindey");
-var managerClone = (Manager)manager.Clone(true);
-
-var employee = new Employee("kevin", managerClone);
-var employeeClone = (Employee)employee.Clone(true);
 ```
 
 </div>
@@ -3631,52 +3563,56 @@ var employeeClone = (Employee)employee.Clone(true);
 
 <div dir="ltr">
 
-```PHP
-
-class SomeComponent
+```php
+class Address
 {
-    public int $someInt;
-    public ?string $someString;
+    public string $city;
 
-    public function __clone()
+    public function __construct(string $city)
     {
-        // no need to manually copy fields, PHP's __clone does it automatically for primitive types
+        $this->city = $city;
+    }
+}
+
+class Person
+{
+    public string $name;
+    public Address $address; // nested mutable object
+
+    public function __construct(string $name, Address $address)
+    {
+        $this->name = $name;
+        $this->address = $address;
     }
 
-    public function shallowCopy(): SomeComponent
+    // Shallow copy: clone keeps the SAME Address object (shared)
+    public function shallowCopy(): Person
     {
         return clone $this;
     }
 
-    public function deepCopy(): SomeComponent
+    // Deep copy: also copy the nested Address, so it is independent
+    public function deepCopy(): Person
     {
         $clone = clone $this;
-        $clone->someInt = $this->someInt;
-        $clone->someString = $this->someString;
+        $clone->address = new Address($this->address->city);
         return $clone;
     }
 }
 
-$c1 = new SomeComponent();
-$c1->someInt = 1;
-$c1->someString = "someString1";
+// Shallow clone: shares the nested Address
+$original = new Person("Sara", new Address("Tehran"));
+$shallow = $original->shallowCopy();
+$shallow->address->city = "Shiraz";
+echo $shallow->address->city . "\n";    // Shiraz
+echo $original->address->city . "\n";   // Shiraz  -> the original changed too (shared Address)
 
-// Perform a shallow copy of c1 and assign it to c2.
-$c2 = $c1->shallowCopy();
-
-// Make a deep copy of c1 and assign it to c3.
-$c3 = $c1->deepCopy();
-
-echo $c1->someInt . ":" . $c1->someString . "\n"; // 1:someString1
-echo $c2->someInt . ":" . $c2->someString . "\n"; // 1:someString1
-echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
-
-$c1->someInt = 2;
-$c1->someString = "someString2";
-
-echo $c1->someInt . ":" . $c1->someString . "\n"; // 2:someString2
-echo $c2->someInt . ":" . $c2->someString . "\n"; // 1:someString1
-echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
+// Deep clone: gets its own Address
+$original = new Person("Sara", new Address("Tehran"));
+$deep = $original->deepCopy();
+$deep->address->city = "Shiraz";
+echo $deep->address->city . "\n";       // Shiraz
+echo $original->address->city . "\n";   // Tehran  -> the original stayed the same
 
 ```
 
@@ -3692,88 +3628,41 @@ echo $c3->someInt . ":" . $c3->someString . "\n"; // 1:someString1
 ```go
 package main
 
-import (
-    "encoding/json"
-    "fmt"
-)
+import "fmt"
 
-type Person interface {
-    GetName() string
-    SetName(name string)
-    Clone(deepClone bool) Person
+type Address struct {
+	City string
 }
 
-type Manager struct {
-    Name string `json:"name"`
+type Person struct {
+	Name    string
+	Address *Address // nested mutable object
 }
 
-func NewManager(name string) *Manager {
-    return &Manager{
-        Name: name,
-    }
+// Shallow copy: new Person, but the SAME Address pointer is shared
+func (p *Person) ShallowCopy() *Person {
+	return &Person{Name: p.Name, Address: p.Address}
 }
 
-func (m *Manager) GetName() string {
-    return m.Name
-}
-
-func (m *Manager) SetName(name string) {
-    m.Name = name
-}
-
-func (m *Manager) Clone(deepClone bool) Person {
-    if deepClone {
-        objectAsJson, _ := json.Marshal(m)
-        clone := &Manager{}
-        json.Unmarshal(objectAsJson, clone)
-        return clone
-    }
-    return &Manager{
-        Name: m.Name,
-    }
-}
-
-type Employee struct {
-    Name    string   `json:"name"`
-    Manager *Manager `json:"manager"`
-}
-
-func NewEmployee(name string, manager *Manager) *Employee {
-    return &Employee{
-        Name:    name,
-        Manager: manager,
-    }
-}
-
-func (e *Employee) GetName() string {
-    return e.Name
-}
-
-func (e *Employee) SetName(name string) {
-    e.Name = name
-}
-
-func (e *Employee) Clone(deepClone bool) Person {
-    if deepClone {
-        objectAsJson, _ := json.Marshal(e)
-        clone := &Employee{}
-        json.Unmarshal(objectAsJson, clone)
-        return clone
-    }
-    return &Employee{
-        Name:    e.Name,
-        Manager: e.Manager.Clone(false).(*Manager),
-    }
+// Deep copy: the nested Address is copied too, so it is independent
+func (p *Person) DeepCopy() *Person {
+	return &Person{Name: p.Name, Address: &Address{City: p.Address.City}}
 }
 
 func main() {
-    manager := NewManager("Cindey")
-    managerClone := manager.Clone(true).(*Manager)
-    fmt.Println(managerClone.GetName())
+	// Shallow clone: shares the nested Address
+	original := &Person{Name: "Sara", Address: &Address{City: "Tehran"}}
+	shallow := original.ShallowCopy()
+	shallow.Address.City = "Shiraz"
+	fmt.Println(shallow.Address.City)  // Shiraz
+	fmt.Println(original.Address.City) // Shiraz  -> the original changed too (shared Address)
 
-    employee := NewEmployee("kevin", managerClone)
-    employeeClone := employee.Clone(true).(*Employee)
-    fmt.Println(employeeClone.GetName(), employeeClone.Manager.GetName())
+	// Deep clone: gets its own Address
+	original = &Person{Name: "Sara", Address: &Address{City: "Tehran"}}
+	deep := original.DeepCopy()
+	deep.Address.City = "Shiraz"
+	fmt.Println(deep.Address.City)     // Shiraz
+	fmt.Println(original.Address.City) // Tehran  -> the original stayed the same
 }
 
 ```
@@ -3788,49 +3677,51 @@ func main() {
 <div dir="ltr">
 
 ```java
-interface Cloneable {
-    Object clone();
-}
-class SomeComponent implements Cloneable {
-    private int someInt;
-    private String someString;
+class Address {
+    String city;
 
-    public int getSomeInt() {return someInt;}
-    public void setSomeInt(int someInt) {this.someInt = someInt;}
-    public String getSomeString() {return someString;}
-    public void setSomeString(String someString) {this.someString = someString;}
-
-    public SomeComponent copy() {
-        return this;
-    }
-
-    public SomeComponent deepCopy() {
-        return this.clone();
-    }
-
-    @Override
-    public SomeComponent clone() {
-        SomeComponent cloned = new SomeComponent();
-        cloned.setSomeInt(this.someInt);
-        cloned.setSomeString(this.someString);
-        return cloned;
+    Address(String city) {
+        this.city = city;
     }
 }
 
-// ----------------------------
+class Person {
+    String name;
+    Address address; // nested mutable object
 
-SomeComponent mainComponent = new SomeComponent();
-mainComponent.setSomeInt(1);
-mainComponent.setSomeString("main");
+    Person(String name, Address address) {
+        this.name = name;
+        this.address = address;
+    }
 
-SomeComponent copyComponent = mainComponent.copy();
-SomeComponent clonedComponent = mainComponent.deepCopy();
+    // Shallow copy: new Person, but the SAME Address object is shared
+    Person shallowCopy() {
+        return new Person(this.name, this.address);
+    }
 
-copyComponent.setSomeString("copy");
-clonedComponent.setSomeString("clone");
+    // Deep copy: the nested Address is copied too, so it is independent
+    Person deepCopy() {
+        return new Person(this.name, new Address(this.address.city));
+    }
+}
 
-System.out.println(mainComponent.getSomeString().equals(copyComponent.getSomeString()));    // True
-System.out.println(mainComponent.getSomeString().equals(clonedComponent.getSomeString()));  // False
+public class Proto {
+    public static void main(String[] args) {
+        // Shallow clone: shares the nested Address
+        Person original = new Person("Sara", new Address("Tehran"));
+        Person shallow = original.shallowCopy();
+        shallow.address.city = "Shiraz";
+        System.out.println(shallow.address.city);    // Shiraz
+        System.out.println(original.address.city);   // Shiraz  -> the original changed too (shared Address)
+
+        // Deep clone: gets its own Address
+        original = new Person("Sara", new Address("Tehran"));
+        Person deep = original.deepCopy();
+        deep.address.city = "Shiraz";
+        System.out.println(deep.address.city);       // Shiraz
+        System.out.println(original.address.city);   // Tehran  -> the original stayed the same
+    }
+}
 ```
 
 </div>
@@ -3846,55 +3737,46 @@ System.out.println(mainComponent.getSomeString().equals(clonedComponent.getSomeS
 #include <string>
 #include <memory>
 
-class SomeComponent {
-private:
-    int someInt;
-    std::string someString;
-
+class Address {
 public:
-    SomeComponent() : someInt(0), someString("") {}
-    
-    SomeComponent(int someInt, const std::string& someString) 
-        : someInt(someInt), someString(someString) {}
-    
-    // Copy constructor for shallow copy
-    SomeComponent(const SomeComponent& other) 
-        : someInt(other.someInt), someString(other.someString) {}
-    
-    void setSomeInt(int value) { someInt = value; }
-    void setSomeString(const std::string& value) { someString = value; }
-    int getSomeInt() const { return someInt; }
-    const std::string& getSomeString() const { return someString; }
-    
-    // Shallow copy
-    SomeComponent copy() const {
-        return SomeComponent(*this);
+    std::string city;
+    Address(const std::string& city) : city(city) {}
+};
+
+class Person {
+public:
+    std::string name;
+    std::shared_ptr<Address> address; // nested mutable object
+
+    Person(const std::string& name, std::shared_ptr<Address> address)
+        : name(name), address(address) {}
+
+    // Shallow copy: new Person, but the SAME Address object is shared
+    Person shallowCopy() const {
+        return Person(name, address);
     }
-    
-    // Deep copy
-    SomeComponent deepCopy() const {
-        SomeComponent cloned;
-        cloned.setSomeInt(this->someInt);
-        cloned.setSomeString(this->someString);
-        return cloned;
+
+    // Deep copy: the nested Address is copied too, so it is independent
+    Person deepCopy() const {
+        return Person(name, std::make_shared<Address>(address->city));
     }
 };
 
-// Usage
 int main() {
-    SomeComponent mainComponent;
-    mainComponent.setSomeInt(1);
-    mainComponent.setSomeString("main");
-    
-    SomeComponent copyComponent = mainComponent.copy();
-    SomeComponent clonedComponent = mainComponent.deepCopy();
-    
-    copyComponent.setSomeString("copy");
-    clonedComponent.setSomeString("clone");
-    
-    std::cout << (mainComponent.getSomeString() == copyComponent.getSomeString()) << std::endl;    // 0
-    std::cout << (mainComponent.getSomeString() == clonedComponent.getSomeString()) << std::endl;  // 0
-    
+    // Shallow clone: shares the nested Address
+    Person original("Sara", std::make_shared<Address>("Tehran"));
+    Person shallow = original.shallowCopy();
+    shallow.address->city = "Shiraz";
+    std::cout << shallow.address->city << std::endl;   // Shiraz
+    std::cout << original.address->city << std::endl;  // Shiraz  -> the original changed too (shared Address)
+
+    // Deep clone: gets its own Address
+    original = Person("Sara", std::make_shared<Address>("Tehran"));
+    Person deep = original.deepCopy();
+    deep.address->city = "Shiraz";
+    std::cout << deep.address->city << std::endl;      // Shiraz
+    std::cout << original.address->city << std::endl;  // Tehran  -> the original stayed the same
+
     return 0;
 }
 ```
@@ -3907,26 +3789,40 @@ int main() {
 <div dir="ltr">
 
 ```kotlin
-data class SomeComponent(
-    var someInt: Int = 0,
-    var someString: String = ""
-)
+class Address(var city: String)
 
-// Usage
+class Person(val name: String, val address: Address) { // nested mutable object
+    // Shallow copy: new Person, but the SAME Address object is shared
+    fun shallowCopy(): Person {
+        return Person(name, address)
+    }
+
+    // Deep copy: the nested Address is copied too, so it is independent
+    fun deepCopy(): Person {
+        return Person(name, Address(address.city))
+    }
+}
+
+// ----------------------------
+
 fun main() {
-    val mainComponent = SomeComponent(someInt = 1, someString = "main")
+    // Shallow clone: shares the nested Address
+    var original = Person("Sara", Address("Tehran"))
+    val shallow = original.shallowCopy()
+    shallow.address.city = "Shiraz"
+    println(shallow.address.city)    // Shiraz
+    println(original.address.city)   // Shiraz  -> the original changed too (shared Address)
 
-    // copy() returns an independent clone
-    val clonedComponent = mainComponent.copy()
-    clonedComponent.someString = "clone"
-
-    println(mainComponent.someString)    // main
-    println(clonedComponent.someString)  // clone
+    // Deep clone: gets its own Address
+    original = Person("Sara", Address("Tehran"))
+    val deep = original.deepCopy()
+    deep.address.city = "Shiraz"
+    println(deep.address.city)       // Shiraz
+    println(original.address.city)   // Tehran  -> the original stayed the same
 }
 ```
 
 </div>
-
 </details>
 
 <details>
@@ -3935,53 +3831,70 @@ fun main() {
 <div dir="ltr">
 
 ```dart
-class SomeComponent {
-  int someInt;
-  List<Object> someListOfObjects;
-  SomeComponent? someCircularRef;
+class Address {
+  String city;
 
-  SomeComponent(this.someInt, this.someListOfObjects, this.someCircularRef);
+  Address(this.city);
+}
 
-  SomeComponent clone() {
-    return SomeComponent(
-      someInt,
-      List.from(someListOfObjects),
-      someCircularRef?.clone(),
-    );
+class Person {
+  String name;
+  Address address; // nested mutable object
+
+  Person(this.name, this.address);
+
+  // Shallow copy: new Person, but the SAME Address object is shared
+  Person shallowCopy() {
+    return Person(name, address);
+  }
+
+  // Deep copy: the nested Address is copied too, so it is independent
+  Person deepCopy() {
+    return Person(name, Address(address.city));
   }
 }
 
 // ----------------------------
 
 void main() {
-  var original = SomeComponent(42, [1, 2, 3], null);
-  var copy = original.clone();
+  // Shallow clone: shares the nested Address
+  var original = Person('Sara', Address('Tehran'));
+  var shallow = original.shallowCopy();
+  shallow.address.city = 'Shiraz';
+  print(shallow.address.city);    // Shiraz
+  print(original.address.city);   // Shiraz  -> the original changed too (shared Address)
 
-  print(original.someInt == copy.someInt); // true
-  print(identical(original.someListOfObjects, copy.someListOfObjects)); // false
+  // Deep clone: gets its own Address
+  original = Person('Sara', Address('Tehran'));
+  var deep = original.deepCopy();
+  deep.address.city = 'Shiraz';
+  print(deep.address.city);       // Shiraz
+  print(original.address.city);   // Tehran  -> the original stayed the same
 }
 ```
 
 </div>
 </details>
 
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی ساختن آبجکت از صفر گرونه، و یه نمونه آماده داری که فقط می‌خوای ازش کپی بگیری»؛ ❌ «وقتی آبجکت ساده‌ست و ساختن دوباره‌ش هیچ هزینه‌ای نداره».
+> 🪤 **دام رایج:** «کپی سطحی می‌گیری و یادت می‌ره فیلدهای تو در توش هنوز مشترکن؛ بعد تغییر کپی، اصلی رو هم خراب می‌کنه».
+> 🔗 **فرقش با کارخانه:** نمونه اولیه از روی یه آبجکت موجود کپی می‌گیره، ولی کارخانه هر بار یه آبجکت تازه از صفر می‌سازه.
+
+
 <br>
 
-**تفاوت Shadow Copy و Deep Copy ؟**
+**تفاوت کپی سطحی (Shallow Copy) و کپی عمیق (Deep Copy) چیه؟**
 <br>
-توی Shadow Copy، یک متغیر ساخته می‌شود و به مکانی توی حافظه، که مقدار متغیر قبلی توش قرار گرفته، اشاره می‌کنه. پس اگر
-شما مقدار
-متغیر اول رو تغییر بدین، متغیر دوم هم تغییر می‌کنه. و همین‌طور اگر مقدار متغیر دوم رو تغییر بدین، مقدار متغیر اول هم
-تغییر می‌کنه.
+توی کپی سطحی (Shallow Copy)، یه آبجکت جدید ساخته می‌شه، ولی فیلدهای تو در توش (مثل همون Address توی مثال) کپی نمی‌شن؛ هر دو آبجکت به یه آدرس مشترک توی حافظه اشاره می‌کنن. پس اگه شهرِ اون Address رو از روی کپی عوض کنی، چون آبجکت Address یکی‌ه، آبجکت اصلی هم تغییر می‌کنه.
 
-ولی توی deep copy، یک متغیر ساخته می‌شه و مقدار متغیر قبلی توی اون کپی می‌شه. در نتیجه تغییر ابجکت اول یا ابجکت کپی
-تغییری توی اون یکی به وجود نمیاره.
+ولی توی کپی عمیق (Deep Copy)، اون آبجکت تو در تو هم جدا کپی می‌شه. در نتیجه هر کدوم Address خودشون رو دارن و تغییر یکی هیچ اثری روی اون یکی نمی‌ذاره.
 
 <br>
 
 <div align="center">
 
-## 💍 Singleton
+## تک‌نمونه (Singleton) 💍
 
 </div>
 
@@ -3989,16 +3902,16 @@ void main() {
 👑 <b>مثال دنیای واقعی: رئیس‌جمهور</b>
 </div>
 
-توی یک کشور، نمیشه ۱۰ تا رئیس‌جمهور داشت! 🏛️
+توی یک کشور، نمی‌شه ۱۰ تا رئیس‌جمهور داشت! 🏛️
 همیشه **فقط و فقط یک** رئیس‌جمهور وجود داره. هر وقت هر کسی (از هر وزارتخونه‌ای) با رئیس‌جمهور کار داره، باید به همون **یک نفر واحد** مراجعه کنه، نه اینکه بره برای خودش یه رئیس‌جمهور جدید بسازه!
 
 💡 **به زبون ساده:**
 > این پترن تضمین می‌کنه که از یه کلاس، **فقط یه دونه آبجکت** ساخته بشه و همه جای برنامه از همون یکی استفاده کنن. (مثلاً برای کانکشن دیتابیس).
 
 ⚠️ **هشدار:**
-> دیزاین پترن Singleton یه جورایی "آنتی پترن" (ضد الگو) هم حساب میشه! چون مثل "متغیر عمومی" (Global Variable) عمل می‌کنه و اگه زیاده‌روی کنید، تست نوشتن و دیباگ کردن پروژه رو تبدیل به کابوس می‌کنه. پس با احتیاط مصرف کنید! 💊
+> دیزاین پترن Singleton یه جورایی «آنتی پترن» (ضد الگو) هم حساب می‌شه! چون مثل «متغیر عمومی» (Global Variable) عمل می‌کنه و اگه زیاده‌روی کنی، تست نوشتن و دیباگ کردن پروژه رو تبدیل به کابوس می‌کنه. پس با احتیاط مصرفش کن! 💊
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -4007,14 +3920,16 @@ void main() {
 
 </div>
 
+خلاصه‌اش این می‌شه که الگوی تک‌نمونه (Singleton) ساختن آبجکت از یه کلاس رو به فقط یه دونه محدود می‌کنه. این وقتی به درد می‌خوره که دقیقاً یه آبجکت لازم داری تا کارهای کل سیستم رو هماهنگ کنه.
+
 <br>
 
-**مثال برنامه نویسی**
+**مثال برنامه‌نویسی**
 
-بطور کلی برای ساخت singleton باید تابع سازنده private بشه، cloning و متود‌های copy بسته بشن و تابع استاتیکی برای ساخت
-ابجکت تعریف بشه.
+به‌طور کلی برای ساخت singleton باید تابع سازنده private بشه، cloning و متدهای copy بسته بشن و تابع استاتیکی برای ساخت
+آبجکت تعریف بشه.
 
-ولی توی پایتون راه حل ساده تری وجود داره که اون استفاده از metaclass هاست:
+ولی توی پایتون یه راه‌حل ساده‌تر هست و اون هم استفاده از metaclassهاست:
 
 <details>
 <summary>Python</summary>
@@ -4027,30 +3942,27 @@ class SingletonMeta(type):
 
     def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
-            instance = super().__call__(*args, **kwargs)
-            cls._instances[cls] = instance
+            cls._instances[cls] = super().__call__(*args, **kwargs)
         return cls._instances[cls]
 
 
-class Singleton(metaclass=SingletonMeta):
-    def some_business_logic(self):
-        pass
+class President(metaclass=SingletonMeta):
+    pass
 
 
 if __name__ == "__main__":
     # The client code.
 
-    s1 = Singleton()
-    s2 = Singleton()
+    a = President()
+    b = President()
 
-    if id(s1) == id(s2):
-        print("Singleton works, both variables contain the same instance.")
-    else:
-        print("Singleton failed, variables contain different instances.")
+    print("Same instance?", "True" if a is b else "False")
+    # Output: Same instance? True
 ```
 
 </div>
-این روش Thread Safe نیست. برای اطلاعات بیشتر سرچ کنید :)
+
+این روش لزوماً Thread Safe نیست؛ یعنی اگه چند نخ (Thread) هم‌زمان اولین بار `getInstance` رو صدا بزنن، شاید بیشتر از یه نمونه ساخته بشه. تو محیط چندنخی باید با یه قفل (Lock) جلوش رو بگیری.
 
 </details>
 
@@ -4059,35 +3971,28 @@ if __name__ == "__main__":
 <div dir="ltr">
 
 ```typescript
-class Singleton {
-    private static instance: Singleton;
+class President {
+    private static instance: President;
 
     private constructor() {
         // Private constructor prevents direct instantiation
     }
 
-    public static getInstance(): Singleton {
-        if (!Singleton.instance) {
-            Singleton.instance = new Singleton();
+    public static getInstance(): President {
+        if (!President.instance) {
+            President.instance = new President();
         }
-        return Singleton.instance;
-    }
-
-    someBusinessLogic() {
-        console.log("Executing some business logic...");
+        return President.instance;
     }
 }
 
 // ----------------------------
 
-const s1 = Singleton.getInstance();
-const s2 = Singleton.getInstance();
+const a = President.getInstance();
+const b = President.getInstance();
 
-if (Object.is(s1, s2)) {
-    console.log("Singleton works, both variables contain the same instance.");
-} else {
-    console.log("Singleton failed, variables contain different instances.");
-}
+console.log("Same instance?", Object.is(a, b) ? "True" : "False");
+// Output: Same instance? True
 ```
 
 </div>
@@ -4099,44 +4004,23 @@ if (Object.is(s1, s2)) {
 
 <div dir="ltr">
 
-```javaScript
-class SingletonMeta extends Function {
-    static _instances = {};
-
-    constructor(...args) {
-        const instance = super(...args);
-        const className = this.constructor.name;
-        if (!SingletonMeta._instances[className]) {
-            SingletonMeta._instances[className] = instance;
-        }
-        return SingletonMeta._instances[className];
-    }
+```javascript
+class President {
+    static #instance;
 
     static getInstance() {
-        const className = this.name;
-        if (!SingletonMeta._instances[className]) {
-            SingletonMeta._instances[className] = new this();
+        if (!President.#instance) {
+            President.#instance = new President();
         }
-        return SingletonMeta._instances[className];
+        return President.#instance;
     }
 }
 
-class Singleton extends SingletonMeta {
-    someBusinessLogic() {
-        console.log("Executing some business logic...");
-    }
-}
+const a = President.getInstance();
+const b = President.getInstance();
 
-const s1 = Singleton.getInstance();
-const s2 = Singleton.getInstance();
-
-if (Object.is(s1, s2)) {
-    console.log("Singleton works, both variables contain the same instance.");
-} else {
-    console.log("Singleton failed, variables contain different instances.");
-}
-
-s1.someBusinessLogic();
+console.log("Same instance?", Object.is(a, b) ? "True" : "False");
+// Output: Same instance? True
 ```
 
 </div>
@@ -4148,18 +4032,19 @@ s1.someBusinessLogic();
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+
 
 public class President
 {
   static President instance;
-  // Private constructor
+
+  // Private constructor hides direct instantiation
   private President()
   {
-    //Hiding the Constructor
   }
 
-  // Public constructor
   public static President GetInstance()
   {
     if (instance == null) {
@@ -4174,7 +4059,8 @@ public class President
 President a = President.GetInstance();
 President b = President.GetInstance();
 
-Console.WriteLine(a == b); //Output : true
+Console.WriteLine($"Same instance? {(a == b ? "True" : "False")}");
+// Output: Same instance? True
 
 ```
 
@@ -4187,7 +4073,7 @@ Console.WriteLine(a == b); //Output : true
 
 <div dir="ltr">
 
-```PHP
+```php
 
 class President
 {
@@ -4210,7 +4096,8 @@ class President
 $a = President::getInstance();
 $b = President::getInstance();
 
-var_dump($a === $b); // Output: bool(true)
+echo "Same instance? " . ($a === $b ? "True" : "False") . "\n";
+// Output: Same instance? True
 
 ```
 
@@ -4224,7 +4111,7 @@ var_dump($a === $b); // Output: bool(true)
 <div dir="ltr">
 
 ```go
-type President struct {}
+type President struct{}
 
 var instance *President
 
@@ -4239,7 +4126,13 @@ func GetInstance() *President {
 
 a := GetInstance()
 b := GetInstance()
-fmt.Println(a == b) // Output: true
+
+same := "False"
+if a == b {
+  same = "True"
+}
+fmt.Println("Same instance?", same)
+// Output: Same instance? True
 
 
 ```
@@ -4274,7 +4167,8 @@ class President {
 President a = President.getInstance();
 President b = President.getInstance();
 
-System.out.println(a == b); // True
+System.out.println("Same instance? " + (a == b ? "True" : "False"));
+// Output: Same instance? True
 ```
 
 </div>
@@ -4287,49 +4181,30 @@ System.out.println(a == b); // True
 
 ```cpp
 #include <iostream>
-#include <memory>
-#include <mutex>
 
 class President {
 private:
-    static std::unique_ptr<President> instance;
-    static std::mutex mtx;
-    
     // Private constructor
     President() = default;
-    
+
     // Delete copy constructor and assignment operator
     President(const President&) = delete;
     President& operator=(const President&) = delete;
 
 public:
+    // Thread-safe in C++11 and later (Meyers singleton)
     static President& getInstance() {
-        std::lock_guard<std::mutex> lock(mtx);
-        if (!instance) {
-            instance = std::unique_ptr<President>(new President());
-        }
-        return *instance;
-    }
-    
-    void doSomething() {
-        std::cout << "President is doing something" << std::endl;
+        static President instance;
+        return instance;
     }
 };
 
-// Static member definitions
-std::unique_ptr<President> President::instance = nullptr;
-std::mutex President::mtx;
-
-// Usage
 int main() {
     President& a = President::getInstance();
     President& b = President::getInstance();
-    
-    std::cout << (&a == &b) << std::endl; // True
-    
-    a.doSomething();
-    b.doSomething();
-    
+
+    std::cout << "Same instance? " << (&a == &b ? "True" : "False") << std::endl;
+    // Output: Same instance? True
     return 0;
 }
 ```
@@ -4342,38 +4217,21 @@ int main() {
 <div dir="ltr">
 
 ```kotlin
-class President private constructor() {
-    fun doSomething() {
-        println("President is doing something")
-    }
-
-    companion object {
-        private var instance: President? = null
-
-        @Synchronized
-        fun getInstance(): President {
-            if (instance == null) {
-                instance = President()
-            }
-            return instance!!
-        }
-    }
+object President {
+    // The single instance is the object itself
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
-    val a = President.getInstance()
-    val b = President.getInstance()
+    val a = President
+    val b = President
 
-    println(a === b) // true
-
-    a.doSomething()
-    b.doSomething()
+    println("Same instance? " + if (a === b) "True" else "False")
 }
 ```
 
 </div>
-
 </details>
 
 <details>
@@ -4382,36 +4240,35 @@ fun main() {
 <div dir="ltr">
 
 ```dart
-class Singleton {
-  static Singleton? _instance;
+class President {
+  static final President _instance = President._internal();
 
-  Singleton._internal();
+  President._internal();
 
-  factory Singleton() {
-    _instance ??= Singleton._internal();
-    return _instance!;
+  factory President() {
+    return _instance;
   }
-
-  void someBusinessLogic() {}
 }
 
 // ----------------------------
 
 void main() {
-  var s1 = Singleton();
-  var s2 = Singleton();
+  var a = President();
+  var b = President();
 
-  if (identical(s1, s2)) {
-    print('Singleton works, both variables contain the same instance.');
-  } else {
-    print('Singleton failed, variables contain different instances.');
-  }
+  print("Same instance? ${identical(a, b) ? "True" : "False"}");
 }
 ```
 
 </div>
 </details>
 
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی واقعاً باید توی کل برنامه فقط یه نمونه از یه چیز وجود داشته باشه، مثل تنظیمات سراسری یا یه استخر کانکشن (Connection Pool)»؛ ❌ «وقتی فقط برای راحتیِ دسترسی می‌خوای همه‌جا بهش برسی، که اون‌وقت داری متغیر عمومی (Global Variable) می‌سازی».
+> 🪤 **دام رایج:** «حالت مشترک و قابل‌تغییرِ تک‌نمونه، تست‌ها رو به هم وابسته می‌کنه و توی برنامه‌های چندنخی (Multithreaded) دردسر می‌سازه».
+
+
+<br>
 <br>
 
 ---
@@ -4420,15 +4277,15 @@ void main() {
 
 <div align="center">
 
-# 🧰 الگوهای ساختاری (Structural Design Patterns)
+# الگوهای ساختاری (Structural Design Patterns) 🧰
 
 </div>
 
 به زبون ساده:
 
-> بطور کلی الگو‌های طراحی ساختاری با روابط بین موجودیت‌ها و ترکیب کردن اونا کار دارن.
+> به‌طور کلی الگوهای طراحی ساختاری با روابط بین موجودیت‌ها و ترکیب کردن اونا کار دارن.
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -4437,13 +4294,15 @@ void main() {
 
 </div>
 
+خلاصه: الگوهای ساختاری کمک می‌کنن کلاس‌ها و آبجکت‌ها رو طوری کنار هم بچینی که رابطه‌هاشون ساده و سرراست بمونه.
+
 <br>
 
 ---
 
 <div align="center">
 
-## 🔌 Adapter
+## مبدل (Adapter) 🔌
 
 </div>
 
@@ -4451,17 +4310,17 @@ void main() {
 🔌 <b>مثال دنیای واقعی: تبدیل دوشاخه برق</b>
 </div>
 
-فرض کنید رفتید سفر خارج (مثلاً آمریکا). لپ‌تاپتون شارژش تموم شده و می‌خواید بزنید به برق.
-اما ای داد بیداد! 😱 پریزهای اونجا سه شاخه‌ست، ولی شارژر شما دو شاخه‌ست.
+فرض کن رفتی سفر خارج (مثلاً آمریکا). لپ‌تاپت شارژش تموم شده و می‌خوای بزنی به برق.
+اما ای داد بیداد! 😱 پریزهای اونجا سه شاخه‌ست، ولی شارژر تو دو شاخه‌ست.
 
-شارژر شما (کلاینت) نمی‌تونه مستقیم وارد پریز (سرویس) بشه.
-اینجا چیکار می‌کنید؟ سیم شارژر رو می‌برید؟ دیوار رو خراب می‌کنید؟ نه!
-میرید یه **"مبدل" (Adapter)** می‌خرید. مبدل یه سرش به شارژر شما می‌خوره، سر دیگه‌ش به پریز دیوار.
+شارژر تو (کلاینت) نمی‌تونه مستقیم وارد پریز (سرویس) بشه.
+اینجا چیکار می‌کنی؟ سیم شارژر رو می‌بری؟ دیوار رو خراب می‌کنی؟ نه!
+می‌ری یه **«مبدل» (Adapter)** می‌خری. مبدل یه سرش به شارژر تو می‌خوره، سر دیگه‌ش به پریز دیوار.
 
 💡 **به زبون ساده:**
-> آداپتور یعنی: **"وقتی دو تا چیز به هم نمی‌خورن، یه واسطه بذار وسط که اینو به اون وصل کنه، بدون اینکه دست به ترکیب اصلیشون بزنی."**
+> آداپتور یعنی: **«وقتی دو تا چیز به هم نمی‌خورن، یه واسطه بذار وسط که اینو به اون وصل کنه، بدون اینکه دست به ترکیب اصلیشون بزنی.»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -4471,20 +4330,23 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+خلاصه‌ش این می‌شه: آداپتور به تو اجازه می‌ده از یه کلاسِ موجود، انگار که یه اینترفیس دیگه‌ست استفاده کنی.
+بیشتر وقتی به کارت میاد که بخوای کلاس‌های آماده رو کنار بقیه به کار بگیری، بدون اینکه کد اصلیشون رو دست بزنی.
 
-فرض کنید یه بازی داریم که توش یه "شکارچی" (`Hunter`) هست که عادت داره "شیر" (`Lion`) شکار کنه.
-شکارچی وقتی شیر می‌بینه، انتظار داره شیر "غرش" (`roar`) کنه.
+**مثال برنامه‌نویسی**
 
-حالا یه "سگ وحشی" (`WildDog`) به بازی اضافه شده. اما سگ‌ها غرش نمی‌کنن، "پارس" (`bark`) می‌کنن.
+فرض کن یه بازی داریم که توش یه «شکارچی» (`Hunter`) هست که عادت داره «شیر» (`Lion`) شکار کنه.
+شکارچی وقتی شیر می‌بینه، انتظار داره شیر «غرش» (`roar`) کنه.
+
+حالا یه «سگ وحشی» (`WildDog`) به بازی اضافه شده. اما سگ‌ها غرش نمی‌کنن، «پارس» (`bark`) می‌کنن.
 شکارچی قاطی می‌کنه! چون فقط بلده با متد `roar` کار کنه.
 
 اینجا یه `WildDogAdapter` می‌سازیم. این آداپتور:
 1.  از بیرون شبیه `Lion` به نظر میاد (متد `roar` داره).
-2.  اما اون پشت، وقتی `roar` صدا زده میشه، میره `bark` سگ رو صدا می‌زنه.
+2.  اما اون پشت، وقتی `roar` صدا زده می‌شه، می‌ره `bark` سگ رو صدا می‌زنه.
 اینطوری شکارچی فکر می‌کنه داره شیر شکار می‌کنه، ولی در واقع داره سگ شکار می‌کنه! 😉
 
-برای حلش به این صورت میتونیم براش آداپتور تعریف کنیم:
+برای حلش به این صورت می‌تونیم براش آداپتور تعریف کنیم:
 
 <details>
 <summary>Python</summary>
@@ -4493,52 +4355,53 @@ void main() {
 
 ```python
 class Lion:
-    def roar(self):
-        pass
+    def roar(self) -> str:
+        raise NotImplementedError
 
 
 class AfricanLion(Lion):
-    def roar(self):
-        pass
-
-
-class AsianLion(Lion):
-    def roar(self):
-        pass
+    def roar(self) -> str:
+        return "Roaaar"
 
 
 class Hunter:
-    def hunt(self, lion):
-        lion.roar()
+    def hunt(self, lion: Lion) -> None:
+        print("The hunter is hunting...")
+        print(lion.roar())
 
 
 class WildDog:
-    @staticmethod
-    def bark():
-        pass
+    def bark(self) -> str:
+        return "Woof"
 
 
 class WildDogAdapter(Lion):
-    _dog = None
+    def __init__(self, dog: WildDog):
+        self.dog = dog
 
-    def __init__(self, dog):
-        self._dog = dog
-
-    def roar(self):
-        self._dog.bark()
+    def roar(self) -> str:
+        return self.dog.bark()
 
 
 # ----------------------------
 
-wildDog = WildDog()
-wildDogAdapter = WildDogAdapter(wildDog)
+african_lion = AfricanLion()
+wild_dog = WildDog()
+wild_dog_adapter = WildDogAdapter(wild_dog)
 
 hunter = Hunter()
-hunter.hunt(wildDogAdapter)
+hunter.hunt(african_lion)       # The hunter is hunting... -> Roaaar
+hunter.hunt(wild_dog_adapter)   # The hunter is hunting... -> Woof
+
+# Output:
+# The hunter is hunting...
+# Roaaar
+# The hunter is hunting...
+# Woof
 ```
 
 </div>
-در واقع مثال واقعی و قابل حس نیست ولی مفهوم رو به خوبی منتقل می‌کنه.
+این مثال یه‌کم انتزاعیه، ولی مفهوم رو خیلی خوب می‌رسونه.
 
 </details>
 
@@ -4547,29 +4410,26 @@ hunter.hunt(wildDogAdapter)
 <div dir="ltr">
 
 ```typescript
-class Lion {
-    roar(): void {
-    }
+interface Lion {
+    roar(): string;
 }
 
-class AfricanLion extends Lion {
-    roar(): void {
-    }
-}
-
-class AsianLion extends Lion {
-    roar(): void {
+class AfricanLion implements Lion {
+    roar(): string {
+        return "Roaaar";
     }
 }
 
 class Hunter {
     hunt(lion: Lion): void {
-        lion.roar();
+        console.log("The hunter is hunting...");
+        console.log(lion.roar());
     }
 }
 
 class WildDog {
-    static bark(): void {
+    bark(): string {
+        return "Woof";
     }
 }
 
@@ -4580,18 +4440,26 @@ class WildDogAdapter implements Lion {
         this.dog = dog;
     }
 
-    roar(): void {
-        this.dog.bark();
+    roar(): string {
+        return this.dog.bark();
     }
 }
 
 // ----------------------------
 
+const africanLion = new AfricanLion();
 const wildDog = new WildDog();
 const wildDogAdapter = new WildDogAdapter(wildDog);
 
 const hunter = new Hunter();
-hunter.hunt(wildDogAdapter);
+hunter.hunt(africanLion);      // The hunter is hunting... -> Roaaar
+hunter.hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 ```
 
 </div>
@@ -4601,34 +4469,29 @@ hunter.hunt(wildDogAdapter);
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Lion {
     roar() {
-        console.log("Lion roars!");
+        return "";
     }
 }
 
 class AfricanLion extends Lion {
     roar() {
-        console.log("African Lion roars!");
-    }
-}
-
-class AsianLion extends Lion {
-    roar() {
-        console.log("Asian Lion roars!");
+        return "Roaaar";
     }
 }
 
 class Hunter {
     hunt(lion) {
-        lion.roar();
+        console.log("The hunter is hunting...");
+        console.log(lion.roar());
     }
 }
 
 class WildDog {
-    static bark() {
-        console.log("Wild Dog barks!");
+    bark() {
+        return "Woof";
     }
 }
 
@@ -4639,16 +4502,25 @@ class WildDogAdapter extends Lion {
     }
 
     roar() {
-        this.dog.bark();
+        return this.dog.bark();
     }
 }
 
+// ----------------------------
 
+const africanLion = new AfricanLion();
 const wildDog = new WildDog();
 const wildDogAdapter = new WildDogAdapter(wildDog);
 
 const hunter = new Hunter();
-hunter.hunt(wildDogAdapter);
+hunter.hunt(africanLion);      // The hunter is hunting... -> Roaaar
+hunter.hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 ```
 
 </div>
@@ -4659,25 +4531,19 @@ hunter.hunt(wildDogAdapter);
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+
 interface ILion
 {
-  void Roar();
+  string Roar();
 }
 
 class AfricanLion : ILion
 {
-  public void Roar()
+  public string Roar()
   {
-
-  }
-}
-
-class AsiaLion : ILion
-{
-  public void Roar()
-  {
-
+    return "Roaaar";
   }
 }
 
@@ -4685,15 +4551,17 @@ class Hunter
 {
   public void Hunt(ILion lion)
   {
-
+    Console.WriteLine("The hunter is hunting...");
+    Console.WriteLine(lion.Roar());
   }
 }
 
 // This needs to be added to the game
 class WildDog
 {
-  public void bark()
+  public string Bark()
   {
+    return "Woof";
   }
 }
 
@@ -4705,19 +4573,27 @@ class WildDogAdapter : ILion
   {
     this.mDog = dog;
   }
-  public void Roar()
+  public string Roar()
   {
-    mDog.bark();
+    return mDog.Bark();
   }
 }
 
 // ----------------------------
 
+var africanLion = new AfricanLion();
 var wildDog = new WildDog();
 var wildDogAdapter = new WildDogAdapter(wildDog);
 
 var hunter = new Hunter();
-hunter.Hunt(wildDogAdapter);
+hunter.Hunt(africanLion);      // The hunter is hunting... -> Roaaar
+hunter.Hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 
 ```
 
@@ -4730,33 +4606,28 @@ hunter.Hunt(wildDogAdapter);
 
 <div dir="ltr">
 
-```PHP
+```php
 
 interface Lion {
-    public function roar();
+    public function roar(): string;
 }
 
 class AfricanLion implements Lion {
-    public function roar() {
-        // implementation specific to AfricanLion
-    }
-}
-
-class AsianLion implements Lion {
-    public function roar() {
-        // implementation specific to AsianLion
+    public function roar(): string {
+        return "Roaaar";
     }
 }
 
 class Hunter {
-    public function hunt(Lion $lion) {
-        $lion->roar();
+    public function hunt(Lion $lion): void {
+        echo "The hunter is hunting...\n";
+        echo $lion->roar() . "\n";
     }
 }
 
 class WildDog {
-    public static function bark() {
-        // implementation specific to WildDog
+    public function bark(): string {
+        return "Woof";
     }
 }
 
@@ -4768,17 +4639,25 @@ class WildDogAdapter implements Lion
     {
         $this->mDog = $dog;
     }
-    public function roar()
+    public function roar(): string
     {
-        $this->mDog->bark();
+        return $this->mDog->bark();
     }
 }
 
+$africanLion = new AfricanLion();
 $wildDog = new WildDog();
 $wildDogAdapter = new WildDogAdapter($wildDog);
 
 $hunter = new Hunter();
-$hunter->hunt($wildDogAdapter);
+$hunter->hunt($africanLion);      // The hunter is hunting... -> Roaaar
+$hunter->hunt($wildDogAdapter);   // The hunter is hunting... -> Woof
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 
 ```
 
@@ -4797,43 +4676,52 @@ package main
 
 import "fmt"
 
-type ILion interface {
-Roar()
+type Lion interface {
+	Roar() string
 }
 
 type AfricanLion struct{}
 
-func (a AfricanLion) Roar() {}
-
-type AsiaLion struct{}
-
-func (a AsiaLion) Roar() {}
+func (a AfricanLion) Roar() string {
+	return "Roaaar"
+}
 
 type Hunter struct{}
 
-func (h Hunter) Hunt(lion ILion) {}
+func (h Hunter) Hunt(lion Lion) {
+	fmt.Println("The hunter is hunting...")
+	fmt.Println(lion.Roar())
+}
 
 type WildDog struct{}
 
-func (w WildDog) bark() {}
-
-type WildDogAdapter struct {
-dog WildDog
+func (w WildDog) Bark() string {
+	return "Woof"
 }
 
-func (w WildDogAdapter) Roar() {
-w.dog.bark()
+type WildDogAdapter struct {
+	dog WildDog
+}
+
+func (w WildDogAdapter) Roar() string {
+	return w.dog.Bark()
 }
 
 func main() {
-wildDog := WildDog{}
-wildDogAdapter := WildDogAdapter{wildDog}
+	africanLion := AfricanLion{}
+	wildDog := WildDog{}
+	wildDogAdapter := WildDogAdapter{dog: wildDog}
 
-hunter := Hunter{}
-hunter.Hunt(wildDogAdapter)
-
-fmt.Println("Done")
+	hunter := Hunter{}
+	hunter.Hunt(africanLion)    // The hunter is hunting... -> Roaaar
+	hunter.Hunt(wildDogAdapter) // The hunter is hunting... -> Woof
 }
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 
 ```
 
@@ -4849,37 +4737,29 @@ fmt.Println("Done")
 ```java
 interface Lion {
 
-    void roar();
+    String roar();
 }
 
 class AfricanLion implements Lion {
 
     @Override
-    public void roar() {
-        System.out.println("African lion roaring.");
-    }
-}
-
-class AsianLion implements Lion {
-
-    @Override
-    public void roar() {
-        System.out.println("Asian lion roaring.");
+    public String roar() {
+        return "Roaaar";
     }
 }
 
 class Hunter {
 
-    public void Hunt(Lion lion) {
-        System.out.println("Attacking and listening...🦻");
-        lion.roar();
+    public void hunt(Lion lion) {
+        System.out.println("The hunter is hunting...");
+        System.out.println(lion.roar());
     }
 }
 
 class WildDog {
 
-    public void bark() {
-        System.out.println("Wild dog barking");
+    public String bark() {
+        return "Woof";
     }
 }
 
@@ -4890,18 +4770,28 @@ class WildDogAdapter implements Lion {
     public WildDogAdapter(WildDog wildDog) {
         this.wildDog = wildDog;
     }
-    public void roar() {
-        wildDog.bark();
+
+    @Override
+    public String roar() {
+        return wildDog.bark();
     }
 }
 
 // ----------------------------
 
+AfricanLion africanLion = new AfricanLion();
 WildDog wildDog = new WildDog();
 WildDogAdapter wildDogAdapter = new WildDogAdapter(wildDog);
 
 Hunter hunter = new Hunter();
-hunter.Hunt(wildDogAdapter);
+hunter.hunt(africanLion);      // The hunter is hunting... -> Roaaar
+hunter.hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 ```
 
 </div>
@@ -4914,69 +4804,71 @@ hunter.Hunt(wildDogAdapter);
 
 ```cpp
 #include <iostream>
+#include <string>
 
 // Lion interface
 class Lion {
 public:
     virtual ~Lion() = default;
-    virtual void roar() = 0;
+    virtual std::string roar() = 0;
 };
 
 // African lion
 class AfricanLion : public Lion {
 public:
-    void roar() override {
-        std::cout << "African Lion: Roar!" << std::endl;
+    std::string roar() override {
+        return "Roaaar";
     }
 };
 
-// Asian lion
-class AsianLion : public Lion {
+// Hunter
+class Hunter {
 public:
-    void roar() override {
-        std::cout << "Asian Lion: Roar!" << std::endl;
+    void hunt(Lion* lion) {
+        std::cout << "The hunter is hunting..." << std::endl;
+        std::cout << lion->roar() << std::endl;
     }
 };
 
 // Wild dog (incompatible interface)
 class WildDog {
 public:
-    void bark() {
-        std::cout << "Wild Dog: Bark!" << std::endl;
+    std::string bark() {
+        return "Woof";
     }
 };
 
-// Adapter to make WildDog compatible with Lion interface
+// Adapter to make WildDog compatible with the Lion interface
 class WildDogAdapter : public Lion {
 private:
     WildDog* dog;
 
 public:
     WildDogAdapter(WildDog* dog) : dog(dog) {}
-    
-    void roar() override {
-        dog->bark();
-    }
-};
 
-// Hunter class
-class Hunter {
-public:
-    void hunt(Lion* lion) {
-        lion->roar();
+    std::string roar() override {
+        return dog->bark();
     }
 };
 
 // Usage
 int main() {
+    AfricanLion africanLion;
     WildDog wildDog;
     WildDogAdapter wildDogAdapter(&wildDog);
-    
+
     Hunter hunter;
-    hunter.hunt(&wildDogAdapter);
-    
+    hunter.hunt(&africanLion);      // The hunter is hunting... -> Roaaar
+    hunter.hunt(&wildDogAdapter);   // The hunter is hunting... -> Woof
+
     return 0;
 }
+
+// Output:
+// The hunter is hunting...
+// Roaaar
+// The hunter is hunting...
+// Woof
 ```
 </div>
 </details>
@@ -4988,51 +4880,49 @@ int main() {
 
 ```kotlin
 interface Lion {
-    fun roar()
+    fun roar(): String
 }
 
 class AfricanLion : Lion {
-    override fun roar() {
-        println("African Lion: Roar!")
-    }
-}
-
-class AsianLion : Lion {
-    override fun roar() {
-        println("Asian Lion: Roar!")
-    }
-}
-
-class WildDog {
-    fun bark() {
-        println("Wild Dog: Bark!")
-    }
-}
-
-class WildDogAdapter(private val dog: WildDog) : Lion {
-    override fun roar() {
-        dog.bark()
+    override fun roar(): String {
+        return "Roaaar"
     }
 }
 
 class Hunter {
     fun hunt(lion: Lion) {
-        lion.roar()
+        println("The hunter is hunting...")
+        println(lion.roar())
     }
 }
 
-// Usage
+class WildDog {
+    fun bark(): String {
+        return "Woof"
+    }
+}
+
+// Adapter around wild dog to make it compatible
+class WildDogAdapter(private val wildDog: WildDog) : Lion {
+    override fun roar(): String {
+        return wildDog.bark()
+    }
+}
+
+// ----------------------------
+
 fun main() {
+    val africanLion = AfricanLion()
     val wildDog = WildDog()
     val wildDogAdapter = WildDogAdapter(wildDog)
-    
+
     val hunter = Hunter()
+    hunter.hunt(africanLion)
     hunter.hunt(wildDogAdapter)
 }
 ```
 
 </div>
-
 </details>
 
 <details>
@@ -5042,47 +4932,50 @@ fun main() {
 
 ```dart
 abstract class Lion {
-  void roar();
+  String roar();
 }
 
 class AfricanLion implements Lion {
   @override
-  void roar() {}
-}
-
-class AsianLion implements Lion {
-  @override
-  void roar() {}
+  String roar() {
+    return "Roaaar";
+  }
 }
 
 class Hunter {
   void hunt(Lion lion) {
-    lion.roar();
+    print("The hunter is hunting...");
+    print(lion.roar());
   }
 }
 
 class WildDog {
-  void bark() {}
+  String bark() {
+    return "Woof";
+  }
 }
 
+// Adapter around wild dog to make it compatible
 class WildDogAdapter implements Lion {
-  final WildDog _dog;
+  final WildDog _wildDog;
 
-  WildDogAdapter(this._dog);
+  WildDogAdapter(this._wildDog);
 
   @override
-  void roar() {
-    _dog.bark();
+  String roar() {
+    return _wildDog.bark();
   }
 }
 
 // ----------------------------
 
 void main() {
+  var africanLion = AfricanLion();
   var wildDog = WildDog();
   var wildDogAdapter = WildDogAdapter(wildDog);
 
   var hunter = Hunter();
+  hunter.hunt(africanLion);
   hunter.hunt(wildDogAdapter);
 }
 ```
@@ -5090,13 +4983,19 @@ void main() {
 </div>
 </details>
 
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی یه کلاس کارِتو راه می‌اندازه ولی امضای متدهاش با چیزی که کدت انتظار داره جور نیست»؛ ❌ «وقتی خودت کنترل هر دو طرف رو داری و می‌تونی همون اول اینترفیس رو درست طراحی کنی».
+> 🪤 **دام رایج:** «آداپتور رو کم‌کم پر از منطق اضافه می‌کنی تا جایی که از یه واسطه ساده تبدیل می‌شه به یه لایه شلوغ که فهمیدنش سخته».
+> 🔗 **فرقش با [پل (Bridge)](#پل-bridge-):** «پل رو از اول طراحی می‌کنی تا انتزاع و پیاده‌سازی مستقل از هم رشد کنن؛ آداپتور بعد از ماجرا میاد که دو تا چیزِ ناسازگارِ موجود رو به هم برسونه. (نزدیک به [پراکسی (Proxy)](#پراکسی-proxy-) و [تزئین‌گر (Decorator)](#تزئین‌گر-decorator-) هم هست؛ ولی اون‌ها اینترفیس رو عوض نمی‌کنن)».
+
+
 <br>
 
 ---
 
 <div align="center">
 
-## 🌉 Bridge
+## پل (Bridge) 🌉
 
 </div>
 
@@ -5104,29 +5003,29 @@ void main() {
 🎨 <b>مثال دنیای واقعی: تم وب‌سایت</b>
 </div>
 
-فرض کنید یه وب‌سایت دارید که ۲ تا صفحه داره: `About` و `Careers`.
-حالا می‌خواید ۳ تا تم رنگی هم اضافه کنید: `Dark`, `Light`, `Aqua`.
+فرض کن یه وب‌سایت داری که ۲ تا صفحه داره: `About` و `Careers`.
+حالا می‌خوای ۳ تا تم رنگی هم اضافه کنی: `Dark`, `Light`, `Aqua`.
 
-اگه از روش معمولی (ارث‌بری) برید، باید برای هر صفحه، ۳ تا حالت بسازید:
+اگه از روش معمولی (ارث‌بری) بری، باید برای هر صفحه، ۳ تا حالت بسازی:
 *   `AboutDark`, `AboutLight`, `AboutAqua`
 *   `CareersDark`, `CareersLight`, `CareersAqua`
 
-می‌بینید؟ تعداد کلاس‌ها داره منفجر میشه! (تعداد صفحات × تعداد تم‌ها). 💣
-اگه فردا ۱۰ تا صفحه و ۵ تا تم داشته باشید، باید ۵۰ تا کلاس بسازید!
+می‌بینی؟ تعداد کلاس‌ها داره منفجر می‌شه! (تعداد صفحات × تعداد تم‌ها). 💣
+اگه فردا ۱۰ تا صفحه و ۵ تا تم داشته باشی، باید ۵۰ تا کلاس بسازی!
 
 **راه‌حل Bridge چیه؟**
-میگه این دوتا رو از هم جدا کن:
+می‌گه این دوتا رو از هم جدا کن:
 ۱. یه سلسله‌مراتب برای **صفحات** (About, Careers).
 ۲. یه سلسله‌مراتب برای **تم‌ها** (Dark, Light).
-حالا توی هر صفحه، یه "پل" (Bridge) می‌زنیم به تم مورد نظر. اینطوری فقط ۱۰ + ۵ کلاس داریم، نه ۱۰ × ۵.
+حالا توی هر صفحه، یه «پل» (Bridge) می‌زنیم به تم مورد نظر. اینطوری فقط ۱۰ + ۵ کلاس داریم، نه ۱۰ × ۵.
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"ارث‌بری رو ول کن، از ترکیب (Composition) استفاده کن."**
-> به جای اینکه بگی "من یه صفحه درباره ما هستم که سیاهه"، بگو "من یه صفحه درباره ما هستم که یه تم (حالا هر چی) دارم."
+> دوتا چیزی که دارن جدا جدا تغییر می‌کنن، مثلاً «صفحه» و «تم»، رو به دوتا سلسله‌مراتب مستقل بشکن و با یه «پل» به هم وصلشون کن؛ اینطوری به جای ضرب کردن حالت‌ها در هم، فقط جمعشون می‌کنی.
+> به جای اینکه بگی «من یه صفحه درباره ما هستم که سیاهه»، بگو «من یه صفحه درباره ما هستم که یه تم، حالا هر چی، دارم.»
 
 ![With and without the bridge pattern](images/without_bridge.png)
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -5135,13 +5034,15 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+خلاصه‌اش این می‌شه: «انتزاع» (Abstraction) رو، یعنی همون چیزی که داری باهاش کار می‌کنی، از «پیاده‌سازی» (Implementation) جدا نگه دار؛ اونوقت هر کدوم می‌تونن مستقل از اون یکی تغییر کنن و رشد کنن، بدون اینکه به هم گره بخورن.
 
-بیاید همون مثال سایت و قالب که بالاتر درموردش صحبت کردیم رو پیاده‌سازی کنیم.
+**مثال برنامه‌نویسی**
+
+بیا همون مثال سایت و قالب که بالاتر درباره‌ش صحبت کردیم رو پیاده‌سازی کنیم.
 
 در مرحله اول کلاس `WebPage` و پیاده‌سازی‌هایی از اون رو داریم.
 
-برای قالب هم، باید کلاس و پیاده سازی‌های مختلفی بنویسیم:
+برای قالب هم، باید کلاس و پیاده‌سازی‌های مختلفی بنویسیم:
 
 <details>
 <summary>Python</summary>
@@ -5149,9 +5050,27 @@ void main() {
 <div dir="ltr">
 
 ```python
-class WebPage:
-    _theme = None
+class Theme:
+    def getColor(self):
+        pass
 
+
+class DarkTheme(Theme):
+    def getColor(self):
+        return "Dark Black"
+
+
+class LightTheme(Theme):
+    def getColor(self):
+        return "Off white"
+
+
+class AquaTheme(Theme):
+    def getColor(self):
+        return "Light blue"
+
+
+class WebPage:
     def __init__(self, theme):
         self.theme = theme
 
@@ -5169,35 +5088,16 @@ class Careers(WebPage):
         return "Careers page in " + self.theme.getColor()
 
 
-class Theme:
-    def getColor(self):
-        pass
-
-
-class DarkTheme(Theme):
-    def getColor(self):
-        return 'Dark Black'
-
-
-class LightTheme(Theme):
-    def getColor(self):
-        return 'Off White'
-
-
-class AquaTheme(Theme):
-    def getColor(self):
-        return 'Light Blue'
-
-
 # ----------------------------
 
 darkTheme = DarkTheme()
+aquaTheme = AquaTheme()
 
 about = About(darkTheme)
-careers = Careers(darkTheme)
+careers = Careers(aquaTheme)
 
-print(about.getContent())
-print(careers.getContent())
+print(about.getContent())    # About page in Dark Black
+print(careers.getContent())  # Careers page in Light blue
 ```
 
 </div>
@@ -5209,63 +5109,60 @@ print(careers.getContent())
 <div dir="ltr">
 
 ```typescript
-class WebPage {
-    protected _theme: any;
-
-    constructor(theme: any) {
-        this._theme = theme;
-    }
-
-    getContent(): string {
-        return "";
-    }
+interface Theme {
+    getColor(): string;
 }
 
-class About extends WebPage {
-    getContent(): string {
-        return "About page in " + this._theme.getColor();
-    }
-}
-
-class Careers extends WebPage {
-    getContent(): string {
-        return "Careers page in " + this._theme.getColor();
-    }
-}
-
-class Theme {
-    getColor(): string {
-        return "";
-    }
-}
-
-class DarkTheme extends Theme {
+class DarkTheme implements Theme {
     getColor(): string {
         return "Dark Black";
     }
 }
 
-class LightTheme extends Theme {
+class LightTheme implements Theme {
     getColor(): string {
-        return "Off White";
+        return "Off white";
     }
 }
 
-class AquaTheme extends Theme {
+class AquaTheme implements Theme {
     getColor(): string {
-        return "Light Blue";
+        return "Light blue";
+    }
+}
+
+abstract class WebPage {
+    protected theme: Theme;
+
+    constructor(theme: Theme) {
+        this.theme = theme;
+    }
+
+    abstract getContent(): string;
+}
+
+class About extends WebPage {
+    getContent(): string {
+        return "About page in " + this.theme.getColor();
+    }
+}
+
+class Careers extends WebPage {
+    getContent(): string {
+        return "Careers page in " + this.theme.getColor();
     }
 }
 
 // ----------------------------
 
 const darkTheme = new DarkTheme();
+const aquaTheme = new AquaTheme();
 
 const about = new About(darkTheme);
-const careers = new Careers(darkTheme);
+const careers = new Careers(aquaTheme);
 
-console.log(about.getContent());
-console.log(careers.getContent());
+console.log(about.getContent());    // About page in Dark Black
+console.log(careers.getContent());  // Careers page in Light blue
 ```
 
 </div>
@@ -5276,7 +5173,31 @@ console.log(careers.getContent());
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
+class Theme {
+    getColor() {
+        return "";
+    }
+}
+
+class DarkTheme extends Theme {
+    getColor() {
+        return "Dark Black";
+    }
+}
+
+class LightTheme extends Theme {
+    getColor() {
+        return "Off white";
+    }
+}
+
+class AquaTheme extends Theme {
+    getColor() {
+        return "Light blue";
+    }
+}
+
 class WebPage {
     constructor(theme) {
         this._theme = theme;
@@ -5299,38 +5220,15 @@ class Careers extends WebPage {
     }
 }
 
-class Theme {
-    getColor() {
-        return "";
-    }
-}
-
-class DarkTheme extends Theme {
-    getColor() {
-        return "Dark Black";
-    }
-}
-
-class LightTheme extends Theme {
-    getColor() {
-        return "Off White";
-    }
-}
-
-class AquaTheme extends Theme {
-    getColor() {
-        return "Light Blue";
-    }
-}
-
 
 const darkTheme = new DarkTheme();
+const aquaTheme = new AquaTheme();
 
 const about = new About(darkTheme);
-const careers = new Careers(darkTheme);
+const careers = new Careers(aquaTheme);
 
-console.log(about.getContent());
-console.log(careers.getContent());
+console.log(about.getContent());    // About page in Dark Black
+console.log(careers.getContent());  // Careers page in Light blue
 ```
 
 </div>
@@ -5342,7 +5240,9 @@ console.log(careers.getContent());
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+
 
 interface IWebPage
 {
@@ -5397,7 +5297,7 @@ class LightTheme : ITheme
 {
   public string GetColor()
   {
-    return "Off White";
+    return "Off white";
   }
 }
 
@@ -5412,13 +5312,13 @@ class AquaTheme : ITheme
 // ----------------------------
 
 var darkTheme = new DarkTheme();
-var lightTheme = new LightTheme();
+var aquaTheme = new AquaTheme();
 
-var about= new About(darkTheme);
-var careers = new Careers(lightTheme);
+var about = new About(darkTheme);
+var careers = new Careers(aquaTheme);
 
-Console.WriteLine(about.GetContent()); // Output: About page in Dark Black
-Console.WriteLine(careers.GetContent()); // Output: Careers page in Off White
+Console.WriteLine(about.GetContent());   // About page in Dark Black
+Console.WriteLine(careers.GetContent()); // Careers page in Light blue
 
 ```
 
@@ -5430,7 +5330,7 @@ Console.WriteLine(careers.GetContent()); // Output: Careers page in Off White
 <summary>PHP</summary>
 <div dir="ltr">
 
-```PHP
+```php
 interface WebPageInterface {
   public function getContent();
 }
@@ -5471,24 +5371,24 @@ class DarkTheme implements ThemeInterface {
 
 class LightTheme implements ThemeInterface {
   public function getColor() {
-    return "Off White";
+    return "Off white";
   }
 }
 
 class AquaTheme implements ThemeInterface {
   public function getColor() {
-    return "Light Blue";
+    return "Light blue";
   }
 }
 
 $darkTheme = new DarkTheme();
-$lightTheme = new LightTheme();
+$aquaTheme = new AquaTheme();
 
 $about = new About($darkTheme);
-$careers = new Careers($lightTheme);
+$careers = new Careers($aquaTheme);
 
-echo $about->getColor() . "\n"; // Output: About page in Dark Black
-echo $careers->getColor() . "\n"; // Output: Careers page in Off White
+echo $about->getContent() . "\n";   // About page in Dark Black
+echo $careers->getContent() . "\n"; // Careers page in Light blue
 
 ```
 
@@ -5546,7 +5446,7 @@ return "Dark Black"
 type LightTheme struct{}
 
 func (l *LightTheme) GetColor() string {
-return "Off White"
+return "Off white"
 }
 
 type AquaTheme struct{}
@@ -5557,13 +5457,13 @@ return "Light blue"
 
 func main() {
 darkTheme := &DarkTheme{}
-lightTheme := &LightTheme{}
+aquaTheme := &AquaTheme{}
 
 about := NewAbout(darkTheme)
-careers := NewCareers(lightTheme)
+careers := NewCareers(aquaTheme)
 
-fmt.Println(about.GetContent())   // Output: About page in Dark Black
-fmt.Println(careers.GetContent()) // Output: Careers page in Off White
+fmt.Println(about.GetContent())   // About page in Dark Black
+fmt.Println(careers.GetContent()) // Careers page in Light blue
 }
 ```
 
@@ -5611,13 +5511,19 @@ class Careers implements WebPage {
 
 class DarkTheme implements Theme {
     public String getColor() {
-        return "Dark theme";
+        return "Dark Black";
     }
 }
 
 class LightTheme implements Theme {
     public String getColor() {
-        return "Light theme";
+        return "Off white";
+    }
+}
+
+class AquaTheme implements Theme {
+    public String getColor() {
+        return "Light blue";
     }
 }
 
@@ -5625,13 +5531,13 @@ class LightTheme implements Theme {
 
 
 DarkTheme darkTheme = new DarkTheme();
-LightTheme lightTheme = new LightTheme();
+AquaTheme aquaTheme = new AquaTheme();
 
-About about= new About(darkTheme);
-Careers careers = new Careers(lightTheme);
+About about = new About(darkTheme);
+Careers careers = new Careers(aquaTheme);
 
-System.out.println(about.getContent());     // About page in Dark theme
-System.out.println(careers.getContent());   // Careers page in Light theme
+System.out.println(about.getContent());     // About page in Dark Black
+System.out.println(careers.getContent());   // Careers page in Light blue
 ```
 
 </div>
@@ -5666,7 +5572,7 @@ public:
 class LightTheme : public Theme {
 public:
     std::string getColor() override {
-        return "Off White";
+        return "Off white";
     }
 };
 
@@ -5674,7 +5580,7 @@ public:
 class AquaTheme : public Theme {
 public:
     std::string getColor() override {
-        return "Light Blue";
+        return "Light blue";
     }
 };
 
@@ -5695,7 +5601,7 @@ public:
     About(std::unique_ptr<Theme> theme) : WebPage(std::move(theme)) {}
     
     std::string getContent() override {
-        return "About page in " + theme->getColor() + " theme";
+        return "About page in " + theme->getColor();
     }
 };
 
@@ -5705,18 +5611,18 @@ public:
     Careers(std::unique_ptr<Theme> theme) : WebPage(std::move(theme)) {}
     
     std::string getContent() override {
-        return "Careers page in " + theme->getColor() + " theme";
+        return "Careers page in " + theme->getColor();
     }
 };
 
 // Usage
 int main() {
     About about(std::make_unique<DarkTheme>());
-    Careers careers(std::make_unique<LightTheme>());
-    
-    std::cout << about.getContent() << std::endl;     // About page in Dark Black theme
-    std::cout << careers.getContent() << std::endl;   // Careers page in Off White theme
-    
+    Careers careers(std::make_unique<AquaTheme>());
+
+    std::cout << about.getContent() << std::endl;     // About page in Dark Black
+    std::cout << careers.getContent() << std::endl;   // Careers page in Light blue
+
     return 0;
 }
 ```
@@ -5733,42 +5639,44 @@ interface Theme {
     fun getColor(): String
 }
 
+interface WebPage {
+    fun getContent(): String
+}
+
 class DarkTheme : Theme {
     override fun getColor() = "Dark Black"
 }
 
 class LightTheme : Theme {
-    override fun getColor() = "Off White"
+    override fun getColor() = "Off white"
 }
 
 class AquaTheme : Theme {
-    override fun getColor() = "Light Blue"
+    override fun getColor() = "Light blue"
 }
 
-abstract class WebPage(protected val theme: Theme) {
-    abstract fun getContent(): String
+class About(private val theme: Theme) : WebPage {
+    override fun getContent() = "About page in " + theme.getColor()
 }
 
-class About(theme: Theme) : WebPage(theme) {
-    override fun getContent() = "About page in ${theme.getColor()} theme"
+class Careers(private val theme: Theme) : WebPage {
+    override fun getContent() = "Careers page in " + theme.getColor()
 }
 
-class Careers(theme: Theme) : WebPage(theme) {
-    override fun getContent() = "Careers page in ${theme.getColor()} theme"
-}
+// ----------------------------
 
-// Usage
 fun main() {
     val darkTheme = DarkTheme()
-    val lightTheme = LightTheme()
+    val aquaTheme = AquaTheme()
 
     val about = About(darkTheme)
-    val careers = Careers(lightTheme)
+    val careers = Careers(aquaTheme)
 
-    println(about.getContent())     // Output: About page in Dark Black theme
-    println(careers.getContent())   // Output: Careers page in Off White theme
+    println(about.getContent())
+    println(careers.getContent())
 }
 ```
+
 </div>
 </details>
 
@@ -5782,56 +5690,65 @@ abstract class Theme {
   String getColor();
 }
 
+abstract class WebPage {
+  final Theme theme;
+
+  WebPage(this.theme);
+
+  String getContent();
+}
+
 class DarkTheme implements Theme {
   @override
-  String getColor() => 'Dark Black';
+  String getColor() => "Dark Black";
 }
 
 class LightTheme implements Theme {
   @override
-  String getColor() => 'Off White';
+  String getColor() => "Off white";
 }
 
 class AquaTheme implements Theme {
   @override
-  String getColor() => 'Light Blue';
-}
-
-abstract class WebPage {
-  final Theme theme;
-  WebPage(this.theme);
-  String getContent();
+  String getColor() => "Light blue";
 }
 
 class About extends WebPage {
   About(Theme theme) : super(theme);
 
   @override
-  String getContent() => 'About page in ${theme.getColor()}';
+  String getContent() => "About page in " + theme.getColor();
 }
 
 class Careers extends WebPage {
   Careers(Theme theme) : super(theme);
 
   @override
-  String getContent() => 'Careers page in ${theme.getColor()}';
+  String getContent() => "Careers page in " + theme.getColor();
 }
 
 // ----------------------------
 
 void main() {
   var darkTheme = DarkTheme();
+  var aquaTheme = AquaTheme();
 
   var about = About(darkTheme);
-  var careers = Careers(darkTheme);
+  var careers = Careers(aquaTheme);
 
-  print(about.getContent());   // About page in Dark Black
-  print(careers.getContent()); // Careers page in Dark Black
+  print(about.getContent());
+  print(careers.getContent());
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی دوتا بُعد مستقل داری که جدا جدا زیاد می‌شن، مثل صفحه × تم، و نمی‌خوای ضربشون کنی در هم»؛ ❌ «وقتی فقط یه بُعد داری یا حالت‌ها هیچ‌وقت قرار نیست زیاد بشن».
+> 🪤 **دام رایج:** «از همون اول همه‌چی رو با پل می‌سازی و کد رو الکی پیچیده می‌کنی، در حالی که هنوز انفجار کلاس‌ها اتفاق نیفتاده».
+> 🔗 **فرقش با [مبدل (Adapter)](#مبدل-adapter-):** «مبدل بعد از ساخته‌شدن کد، دوتا چیز ناسازگار رو به هم می‌چسبونه؛ پل از اول طراحی می‌شه تا دو بُعد جدا بمونن».
+
 
 <br>
 
@@ -5839,7 +5756,7 @@ void main() {
 
 <div align="center">
 
-## 🌿 Composite
+## مرکب (Composite) 🌿
 
 </div>
 
@@ -5847,22 +5764,22 @@ void main() {
 📦 <b>مثال دنیای واقعی: جعبه تو جعبه</b>
 </div>
 
-فرض کنید قراره قیمت یه بسته پستی بزرگ رو حساب کنید.
+فرض کن قراره قیمت یه بسته پستی بزرگ رو حساب کنی.
 توی این بسته بزرگ، ممکنه:
 ۱. چندتا محصول تکی باشه (مثلاً یه کتاب، یه گوشی).
-۲. چندتا "جعبه کوچیک‌تر" باشه که توی اون جعبه‌ها هم دوباره محصول یا حتی جعبه‌های دیگه هست!
+۲. چندتا «جعبه کوچیک‌تر» باشه که توی اون جعبه‌ها هم دوباره محصول یا حتی جعبه‌های دیگه هست!
 
-اگه بخواید قیمت کل رو حساب کنید، باید دونه دونه جعبه‌ها رو باز کنید.
+اگه بخوای قیمت کل رو حساب کنی، باید دونه دونه جعبه‌ها رو باز کنی.
 اما توی دنیای کامپیوتر، ما دوست داریم با **کل بسته** یه طوری رفتار کنیم که انگار یه **محصول تکی** هست.
-یعنی وقتی میگیم `GetPrice()`، خودش بره ته توش رو دراره و قیمت همه زیرمجموعه‌هاش رو جمع بزنه و برگردونه.
+یعنی وقتی می‌گیم `GetPrice()`، خودش بره ته توش رو دراره و قیمت همه زیرمجموعه‌هاش رو جمع بزنه و برگردونه.
 
 💡 **به زبون ساده:**
 > این پترن برای ساختن **ساختارهای درختی** (Tree Structures) عالیه.
-> به شما اجازه میده با یک "گروه از آبجکت‌ها" (Composite) دقیقاً همون‌طوری رفتار کنید که با یک "آبجکت تکی" (Leaf) رفتار می‌کنید.
+> به تو اجازه می‌ده با یک «گروه از آبجکت‌ها» (Composite) دقیقاً همون‌طوری رفتار کنی که با یک «آبجکت تکی» (Leaf) رفتار می‌کنی.
 
 ![Composite](images/Composite.png)
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -5874,11 +5791,14 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+خلاصه‌اش این می‌شه که الگوی مرکب بهت اجازه می‌ده آبجکت‌ها رو توی یه ساختار درختی بچینی و بعد کل اون درخت رو درست مثل یه آبجکت تکی صدا بزنی.
+فرقی نمی‌کنه طرفت یه «برگ» تنهاست یا یه «شاخه» پر از زیرمجموعه؛ با هردوشون عین هم رفتار می‌کنی و خود ساختار، ته‌توش رو در میاره.
 
-بطور کلی توی دیزاین پترن composite ما دو مدل دیتا داریم:
+**مثال برنامه‌نویسی**
 
-یک: اینکه Composite که میتونه برای خودش زیرمجموعه داشته باشه. (هرچند خودش هم وظایفی داشته باشه)
+به‌طور کلی توی دیزاین پترن composite ما دو مدل دیتا داریم:
+
+یک: اینکه Composite که می‌تونه برای خودش زیرمجموعه داشته باشه. (هرچند خودش هم وظایفی داشته باشه)
 
 دو: Leaf که در واقع زیر مجموعه نداره و فقط یک سری وظیفه داره.
 
@@ -5891,56 +5811,73 @@ void main() {
 <div dir="ltr">
 
 ```python
-class Component():
-    def add(self, component: Component) -> None:
-        pass
-
-    def remove(self, component: Component) -> None:
-        pass
-
-    def operation(self) -> str:
-        pass
+from abc import ABC, abstractmethod
+from typing import List
 
 
-class Leaf(Component):
-    def operation(self) -> str:
-        return "Leaf"
+class Employee(ABC):
+    @abstractmethod
+    def get_name(self) -> str: ...
+
+    @abstractmethod
+    def get_salary(self) -> float: ...
 
 
-class Composite(Component):
-    def __init__(self) -> None:
-        self._children: List[Component] = []
+class Developer(Employee):
+    def __init__(self, name: str, salary: float) -> None:
+        self._name = name
+        self._salary = salary
 
-    def add(self, component: Component) -> None:
-        self._children.append(component)
+    def get_name(self) -> str:
+        return self._name
 
-    def remove(self, component: Component) -> None:
-        self._children.remove(component)
+    def get_salary(self) -> float:
+        return self._salary
 
-    def operation(self) -> str:
-        results = []
-        for child in self._children:
-            results.append(child.operation())
-        return f"Branch({'+'.join(results)})"
+
+class Designer(Employee):
+    def __init__(self, name: str, salary: float) -> None:
+        self._name = name
+        self._salary = salary
+
+    def get_name(self) -> str:
+        return self._name
+
+    def get_salary(self) -> float:
+        return self._salary
+
+
+# Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization(Employee):
+    def __init__(self, name: str) -> None:
+        self._name = name
+        self._members: List[Employee] = []
+
+    def add(self, employee: Employee) -> None:
+        self._members.append(employee)
+
+    def get_name(self) -> str:
+        return self._name
+
+    def get_salary(self) -> float:
+        total = 0.0
+        for member in self._members:
+            total += member.get_salary()  # recurses into sub-organizations
+        return total
 
 
 # ----------------------------
 
-tree = Composite()
+design_team = Organization("Design Team")
+design_team.add(Designer("Arya", 4000))
 
-branch1 = Composite()
-branch1.add(Leaf())
-branch1.add(Leaf())
+company = Organization("Acme")
+company.add(Developer("John", 5000))
+company.add(Developer("Jane", 6000))
+company.add(design_team)
 
-branch2 = Composite()
-branch2.add(Leaf())
-
-tree.add(branch1)
-tree.add(branch2)
-
-print(f"RESULT: {tree.operation()}", end="")
-# RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
-
+print(f"Total salary: {company.get_salary():g}")
+# Total salary: 15000
 ```
 
 </div>
@@ -5954,57 +5891,74 @@ print(f"RESULT: {tree.operation()}", end="")
 <div dir="ltr">
 
 ```typescript
-interface Component {
-    add(component: Component): void;
+interface Employee {
+    getName(): string;
 
-    remove(component: Component): void;
-
-    operation(): string;
+    getSalary(): number;
 }
 
-class Leaf implements Component {
-    operation(): string {
-        return "Leaf";
+class Developer implements Employee {
+    constructor(private name: string, private salary: number) {
+    }
+
+    getName(): string {
+        return this.name;
+    }
+
+    getSalary(): number {
+        return this.salary;
     }
 }
 
-class Composite implements Component {
-    private children: Component[] = [];
-
-    add(component: Component): void {
-        this.children.push(component);
+class Designer implements Employee {
+    constructor(private name: string, private salary: number) {
     }
 
-    remove(component: Component): void {
-        const index = this.children.indexOf(component);
-        this.children.splice(index, 1);
+    getName(): string {
+        return this.name;
     }
 
-    operation(): string {
-        const results: string[] = [];
-        for (const child of this.children) {
-            results.push(child.operation());
+    getSalary(): number {
+        return this.salary;
+    }
+}
+
+// Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization implements Employee {
+    private members: Employee[] = [];
+
+    constructor(private name: string) {
+    }
+
+    add(employee: Employee): void {
+        this.members.push(employee);
+    }
+
+    getName(): string {
+        return this.name;
+    }
+
+    getSalary(): number {
+        let total = 0;
+        for (const member of this.members) {
+            total += member.getSalary(); // recurses into sub-organizations
         }
-        return `Branch(${results.join("+")})`;
+        return total;
     }
 }
 
 // ----------------------------
 
-const tree = new Composite();
+const designTeam = new Organization("Design Team");
+designTeam.add(new Designer("Arya", 4000));
 
-const branch1 = new Composite();
-branch1.add(new Leaf());
-branch1.add(new Leaf());
+const company = new Organization("Acme");
+company.add(new Developer("John", 5000));
+company.add(new Developer("Jane", 6000));
+company.add(designTeam);
 
-const branch2 = new Composite();
-branch2.add(new Leaf());
-
-tree.add(branch1);
-tree.add(branch2);
-
-console.log(`RESULT: ${tree.operation()}`);
-// RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
+console.log(`Total salary: ${company.getSalary()}`);
+// Total salary: 15000
 ```
 
 </div>
@@ -6017,53 +5971,73 @@ console.log(`RESULT: ${tree.operation()}`);
 
 <div dir="ltr">
 
-```javaScript
-class Leaf {
-    operation() {
-        return "Leaf";
+```javascript
+class Developer {
+    constructor(name, salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    getSalary() {
+        return this.salary;
     }
 }
 
-class Composite {
-    constructor() {
-        this.children = [];
+class Designer {
+    constructor(name, salary) {
+        this.name = name;
+        this.salary = salary;
     }
 
-    add(component) {
-        this.children.push(component);
+    getName() {
+        return this.name;
     }
 
-    remove(component) {
-        const index = this.children.indexOf(component);
-        if (index !== -1) {
-            this.children.splice(index, 1);
-        }
-    }
-
-    operation() {
-        const results = [];
-        for (const child of this.children) {
-            results.push(child.operation());
-        }
-        return `Branch(${results.join("+")})`;
+    getSalary() {
+        return this.salary;
     }
 }
 
+// Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization {
+    constructor(name) {
+        this.name = name;
+        this.members = [];
+    }
 
-const tree = new Composite();
+    add(employee) {
+        this.members.push(employee);
+    }
 
-const branch1 = new Composite();
-branch1.add(new Leaf());
-branch1.add(new Leaf());
+    getName() {
+        return this.name;
+    }
 
-const branch2 = new Composite();
-branch2.add(new Leaf());
+    getSalary() {
+        let total = 0;
+        for (const member of this.members) {
+            total += member.getSalary(); // recurses into sub-organizations
+        }
+        return total;
+    }
+}
 
-tree.add(branch1);
-tree.add(branch2);
+// ----------------------------
 
-console.log(`RESULT: ${tree.operation()}`);
-// Output: RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
+const designTeam = new Organization("Design Team");
+designTeam.add(new Designer("Arya", 4000));
+
+const company = new Organization("Acme");
+company.add(new Developer("John", 5000));
+company.add(new Developer("Jane", 6000));
+company.add(designTeam);
+
+console.log(`Total salary: ${company.getSalary()}`);
+// Total salary: 15000
 ```
 
 </div>
@@ -6075,15 +6049,15 @@ console.log(`RESULT: ${tree.operation()}`);
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+using System.Collections.Generic;
 
 interface IEmployee
 {
-  float GetSalary();
-  string GetRole();
   string GetName();
+  float GetSalary();
 }
-
 
 class Developer : IEmployee
 {
@@ -6096,19 +6070,14 @@ class Developer : IEmployee
     this.mSalary = salary;
   }
 
-  public float GetSalary()
-  {
-    return this.mSalary;
-  }
-
-  public string GetRole()
-  {
-    return "Developer";
-  }
-
   public string GetName()
   {
     return this.mName;
+  }
+
+  public float GetSalary()
+  {
+    return this.mSalary;
   }
 }
 
@@ -6123,61 +6092,61 @@ class Designer : IEmployee
     this.mSalary = salary;
   }
 
+  public string GetName()
+  {
+    return this.mName;
+  }
+
   public float GetSalary()
   {
     return this.mSalary;
   }
+}
 
-  public string GetRole()
+// Organization is itself an IEmployee (the Composite); it can hold sub-members
+class Organization : IEmployee
+{
+  private string mName;
+  private List<IEmployee> mMembers = new List<IEmployee>();
+
+  public Organization(string name)
   {
-    return "Designer";
+    this.mName = name;
+  }
+
+  public void Add(IEmployee employee)
+  {
+    mMembers.Add(employee);
   }
 
   public string GetName()
   {
     return this.mName;
   }
-}
 
-
-class Organization
-{
-  protected List<IEmployee> employees;
-
-  public Organization()
+  public float GetSalary()
   {
-    employees = new List<IEmployee>();
-  }
-
-  public void AddEmployee(IEmployee employee)
-  {
-    employees.Add(employee);
-  }
-
-  public float GetNetSalaries()
-  {
-    float netSalary = 0;
-
-    foreach (var e in employees) {
-      netSalary += e.GetSalary();
+    float total = 0;
+    foreach (var member in mMembers)
+    {
+      total += member.GetSalary(); // recurses into sub-organizations
     }
-    return netSalary;
+    return total;
   }
 }
 
 // ----------------------------
 
-//Arrange Employees, Organization and add employees
-var developer = new Developer("John", 5000);
-var designer = new Designer("Arya", 5000);
+var designTeam = new Organization("Design Team");
+designTeam.Add(new Designer("Arya", 4000));
 
-var organization = new Organization();
-organization.AddEmployee(developer);
-organization.AddEmployee(designer);
+var company = new Organization("Acme");
+company.Add(new Developer("John", 5000));
+company.Add(new Developer("Jane", 6000));
+company.Add(designTeam);
 
-Console.WriteLine($"Net Salary of Employees in Organization is {organization.GetNetSalaries():c}");
-//Ouptut: Net Salary of Employees in Organization is $10000.00
-
+Console.WriteLine($"Total salary: {company.GetSalary()}");
+// Total salary: 15000
 ```
 
 </div>
@@ -6189,11 +6158,10 @@ Console.WriteLine($"Net Salary of Employees in Organization is {organization.Get
 
 <div dir="ltr">
 
-```PHP
+```php
 interface EmployeeInterface {
-  function getSalary(): float;
-  function getRole(): string;
   function getName(): string;
+  function getSalary(): float;
 }
 
 class Developer implements EmployeeInterface {
@@ -6205,16 +6173,12 @@ class Developer implements EmployeeInterface {
     $this->salary = $salary;
   }
 
-  public function getSalary(): float {
-    return $this->salary;
-  }
-
-  public function getRole(): string {
-    return "Developer";
-  }
-
   public function getName(): string {
     return $this->name;
+  }
+
+  public function getSalary(): float {
+    return $this->salary;
   }
 }
 
@@ -6227,50 +6191,53 @@ class Designer implements EmployeeInterface {
     $this->salary = $salary;
   }
 
+  public function getName(): string {
+    return $this->name;
+  }
+
   public function getSalary(): float {
     return $this->salary;
   }
+}
 
-  public function getRole(): string {
-    return "Designer";
+// Organization is itself an EmployeeInterface (the Composite); it can hold sub-members
+class Organization implements EmployeeInterface {
+  private string $name;
+  private array $members = array();
+
+  public function __construct(string $name) {
+    $this->name = $name;
+  }
+
+  public function add(EmployeeInterface $employee): void {
+    $this->members[] = $employee;
   }
 
   public function getName(): string {
     return $this->name;
   }
-}
 
-class Organization {
-  protected array $employees;
-
-  public function __construct() {
-    $this->employees = array();
-  }
-
-  public function addEmployee(EmployeeInterface $employee): void {
-    $this->employees[] = $employee;
-  }
-
-  public function getNetSalaries(): float {
-    $netSalary = 0;
-    foreach ($this->employees as $e) {
-      $netSalary += $e->getSalary();
+  public function getSalary(): float {
+    $total = 0;
+    foreach ($this->members as $member) {
+      $total += $member->getSalary(); // recurses into sub-organizations
     }
-    return $netSalary;
+    return $total;
   }
 }
 
-// Arrange Employees, Organization, and add employees
-$developer = new Developer("John", 5000);
-$designer = new Designer("Aria", 5000);
+// ----------------------------
 
-$organization = new Organization();
-$organization->addEmployee($developer);
-$organization->addEmployee($designer);
+$designTeam = new Organization("Design Team");
+$designTeam->add(new Designer("Arya", 4000));
 
-echo "Net Salary of Employees in Organization is " . number_format($organization->getNetSalaries(), 2, '.', ',') . PHP_EOL;
-// Output: Net Salary of Employees in Organization is $10,000.00
+$company = new Organization("Acme");
+$company->add(new Developer("John", 5000));
+$company->add(new Developer("Jane", 6000));
+$company->add($designTeam);
 
+echo "Total salary: " . $company->getSalary() . PHP_EOL;
+// Total salary: 15000
 ```
 
 </div>
@@ -6287,75 +6254,71 @@ package main
 
 import "fmt"
 
-type IEmployee interface {
-    GetSalary() float32
-    GetRole() string
+type Employee interface {
     GetName() string
+    GetSalary() float64
 }
 
 type Developer struct {
     Name   string
-    Salary float32
-}
-
-func (d *Developer) GetSalary() float32 {
-    return d.Salary
-}
-
-func (d *Developer) GetRole() string {
-    return "Developer"
+    Salary float64
 }
 
 func (d *Developer) GetName() string {
     return d.Name
 }
 
-type Designer struct {
-    Name   string
-    Salary float32
-}
-
-func (d *Designer) GetSalary() float32 {
+func (d *Developer) GetSalary() float64 {
     return d.Salary
 }
 
-func (d *Designer) GetRole() string {
-    return "Designer"
+type Designer struct {
+    Name   string
+    Salary float64
 }
 
 func (d *Designer) GetName() string {
     return d.Name
 }
 
+func (d *Designer) GetSalary() float64 {
+    return d.Salary
+}
+
+// Organization is itself an Employee (the Composite); it can hold sub-members
 type Organization struct {
-    employees []IEmployee
+    Name    string
+    members []Employee
 }
 
-func (o *Organization) AddEmployee(employee IEmployee) {
-    o.employees = append(o.employees, employee)
+func (o *Organization) Add(employee Employee) {
+    o.members = append(o.members, employee)
 }
 
-func (o *Organization) GetNetSalaries() float32 {
-    netSalary := float32(0)
-    for _, e := range o.employees {
-        netSalary += e.GetSalary()
+func (o *Organization) GetName() string {
+    return o.Name
+}
+
+func (o *Organization) GetSalary() float64 {
+    total := float64(0)
+    for _, member := range o.members {
+        total += member.GetSalary() // recurses into sub-organizations
     }
-    return netSalary
+    return total
 }
 
 func main() {
-    //Arrange Employees, Organization and add employees
-    developer := &Developer{Name: "John", Salary: 5000}
-    designer := &Designer{Name: "Arya", Salary: 5000}
+    designTeam := &Organization{Name: "Design Team"}
+    designTeam.Add(&Designer{Name: "Arya", Salary: 4000})
 
-    organization := &Organization{}
-    organization.AddEmployee(developer)
-    organization.AddEmployee(designer)
+    company := &Organization{Name: "Acme"}
+    company.Add(&Developer{Name: "John", Salary: 5000})
+    company.Add(&Developer{Name: "Jane", Salary: 6000})
+    company.Add(designTeam)
 
-    fmt.Printf("Net Salary of Employees in Organization is %v\n", organization.GetNetSalaries())
-    // Output: Net Salary of Employees in Organization is 10000
+    fmt.Printf("Total salary: %g\n", company.GetSalary())
+    // Total salary: 15000
 }
-
 ```
 
 </div>
@@ -6368,11 +6331,12 @@ func main() {
 <div dir="ltr">
 
 ```java
+import java.util.*;
+
 interface Employee {
 
-    float getSalary();
-    String getRole();
     String getName();
+    float getSalary();
 }
 
 class Developer implements Employee {
@@ -6384,14 +6348,11 @@ class Developer implements Employee {
         this.salary = salary;
     }
 
-    public float getSalary() {
-        return this.salary;
-    }
-    public String getRole() {
-        return "Developer";
-    }
     public String getName() {
         return this.name;
+    }
+    public float getSalary() {
+        return this.salary;
     }
 }
 
@@ -6404,49 +6365,52 @@ class Designer implements Employee {
         this.salary = salary;
     }
 
-    public float getSalary() {
-        return this.salary;
-    }
-    public String getRole() {
-        return "Designer";
-    }
     public String getName() {
         return this.name;
     }
+    public float getSalary() {
+        return this.salary;
+    }
 }
 
-class Organization {
-    protected List<Employee> employees;
+// Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization implements Employee {
+    private String name;
+    private List<Employee> members = new ArrayList<>();
 
-    public Organization() {
-        employees = new ArrayList<>();
+    public Organization(String name) {
+        this.name = name;
     }
 
-    public void addEmployee(Employee employee) {
-        employees.add(employee);
+    public void add(Employee employee) {
+        members.add(employee);
     }
 
-    public float getNetSalaries() {
-        float netSalary = 0;
+    public String getName() {
+        return this.name;
+    }
 
-        for(Employee employee : employees) {
-            netSalary += employee.getSalary();
+    public float getSalary() {
+        float total = 0;
+        for (Employee member : members) {
+            total += member.getSalary(); // recurses into sub-organizations
         }
-        return netSalary;
+        return total;
     }
 }
 
 // ----------------------------
 
-Developer developer = new Developer("John",5000);
-Designer designer = new Designer("Arya",5000);
+Organization designTeam = new Organization("Design Team");
+designTeam.add(new Designer("Arya", 4000));
 
-Organization organization = new Organization();
-organization.addEmployee(developer);
-organization.addEmployee(designer);
+Organization company = new Organization("Acme");
+company.add(new Developer("John", 5000));
+company.add(new Developer("Jane", 6000));
+company.add(designTeam);
 
-System.out.println("Organization employees salary : " + organization.getNetSalaries());
-// Organization employees salary : 10000.0
+System.out.printf("Total salary: %.0f%n", company.getSalary());
+// Total salary: 15000
 ```
 
 </div>
@@ -6471,7 +6435,7 @@ public:
     virtual double getSalary() const = 0;
 };
 
-// Developer class
+// Developer leaf
 class Developer : public Employee {
 private:
     std::string name;
@@ -6479,17 +6443,17 @@ private:
 
 public:
     Developer(const std::string& name, double salary) : name(name), salary(salary) {}
-    
+
     std::string getName() const override {
         return name;
     }
-    
+
     double getSalary() const override {
         return salary;
     }
 };
 
-// Designer class
+// Designer leaf
 class Designer : public Employee {
 private:
     std::string name;
@@ -6497,30 +6461,37 @@ private:
 
 public:
     Designer(const std::string& name, double salary) : name(name), salary(salary) {}
-    
+
     std::string getName() const override {
         return name;
     }
-    
+
     double getSalary() const override {
         return salary;
     }
 };
 
-// Organization class (Composite)
-class Organization {
+// Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization : public Employee {
 private:
-    std::vector<std::unique_ptr<Employee>> employees;
+    std::string name;
+    std::vector<std::shared_ptr<Employee>> members;
 
 public:
-    void addEmployee(std::unique_ptr<Employee> employee) {
-        employees.push_back(std::move(employee));
+    explicit Organization(const std::string& name) : name(name) {}
+
+    void add(std::shared_ptr<Employee> employee) {
+        members.push_back(std::move(employee));
     }
-    
-    double getNetSalaries() const {
+
+    std::string getName() const override {
+        return name;
+    }
+
+    double getSalary() const override {
         double total = 0.0;
-        for (const auto& employee : employees) {
-            total += employee->getSalary();
+        for (const auto& member : members) {
+            total += member->getSalary(); // recurses into sub-organizations
         }
         return total;
     }
@@ -6528,16 +6499,17 @@ public:
 
 // Usage
 int main() {
-    auto developer = std::make_unique<Developer>("John", 5000);
-    auto designer = std::make_unique<Designer>("Arya", 5000);
-    
-    Organization organization;
-    organization.addEmployee(std::move(developer));
-    organization.addEmployee(std::move(designer));
-    
-    std::cout << "Organization employees salary : " << organization.getNetSalaries() << std::endl;
-    // Organization employees salary : 10000.0
-    
+    auto designTeam = std::make_shared<Organization>("Design Team");
+    designTeam->add(std::make_shared<Designer>("Arya", 4000));
+
+    auto company = std::make_shared<Organization>("Acme");
+    company->add(std::make_shared<Developer>("John", 5000));
+    company->add(std::make_shared<Developer>("Jane", 6000));
+    company->add(designTeam);
+
+    std::cout << "Total salary: " << company->getSalary() << std::endl;
+    // Total salary: 15000
+
     return 0;
 }
 ```
@@ -6565,27 +6537,37 @@ class Designer(private val name: String, private val salary: Double) : Employee 
     override fun getSalary() = salary
 }
 
-class Organization {
-    private val employees = mutableListOf<Employee>()
+// Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization(private val name: String) : Employee {
+    private val members = mutableListOf<Employee>()
 
-    fun addEmployee(employee: Employee) {
-        employees += employee
+    fun add(employee: Employee) {
+        members.add(employee)
     }
 
-    fun getNetSalaries(): Double = employees.sumOf { it.getSalary() }
+    override fun getName() = name
+
+    override fun getSalary(): Double {
+        var total = 0.0
+        for (member in members) {
+            total += member.getSalary() // recurses into sub-organizations
+        }
+        return total
+    }
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
-    val developer = Developer("John", 5000.0)
-    val designer = Designer("Arya", 5000.0)
+    val designTeam = Organization("Design Team")
+    designTeam.add(Designer("Arya", 4000.0))
 
-    val organization = Organization()
-    organization.addEmployee(developer)
-    organization.addEmployee(designer)
+    val company = Organization("Acme")
+    company.add(Developer("John", 5000.0))
+    company.add(Developer("Jane", 6000.0))
+    company.add(designTeam)
 
-    println("Organization employees salary : ${organization.getNetSalaries()}")
-    // Organization employees salary : 10000.0
+    println("Total salary: ${company.getSalary().toInt()}")
 }
 ```
 
@@ -6598,59 +6580,83 @@ fun main() {
 <div dir="ltr">
 
 ```dart
-abstract class Component {
-  void add(Component component) {}
-  void remove(Component component) {}
-  String operation();
+abstract class Employee {
+  String getName();
+  double getSalary();
 }
 
-class Leaf extends Component {
+class Developer implements Employee {
+  final String _name;
+  final double _salary;
+
+  Developer(this._name, this._salary);
+
   @override
-  String operation() => 'Leaf';
+  String getName() => _name;
+
+  @override
+  double getSalary() => _salary;
 }
 
-class Composite extends Component {
-  final List<Component> _children = [];
+class Designer implements Employee {
+  final String _name;
+  final double _salary;
+
+  Designer(this._name, this._salary);
 
   @override
-  void add(Component component) {
-    _children.add(component);
+  String getName() => _name;
+
+  @override
+  double getSalary() => _salary;
+}
+
+// Organization is itself an Employee (the Composite); it can hold sub-members
+class Organization implements Employee {
+  final String _name;
+  final List<Employee> _members = [];
+
+  Organization(this._name);
+
+  void add(Employee employee) {
+    _members.add(employee);
   }
 
   @override
-  void remove(Component component) {
-    _children.remove(component);
-  }
+  String getName() => _name;
 
   @override
-  String operation() {
-    var results = _children.map((c) => c.operation()).join('+');
-    return 'Branch($results)';
+  double getSalary() {
+    double total = 0;
+    for (var member in _members) {
+      total += member.getSalary(); // recurses into sub-organizations
+    }
+    return total;
   }
 }
 
 // ----------------------------
 
 void main() {
-  var tree = Composite();
+  var designTeam = Organization("Design Team");
+  designTeam.add(Designer("Arya", 4000));
 
-  var branch1 = Composite();
-  branch1.add(Leaf());
-  branch1.add(Leaf());
+  var company = Organization("Acme");
+  company.add(Developer("John", 5000));
+  company.add(Developer("Jane", 6000));
+  company.add(designTeam);
 
-  var branch2 = Composite();
-  branch2.add(Leaf());
-
-  tree.add(branch1);
-  tree.add(branch2);
-
-  print('RESULT: ${tree.operation()}');
-  // RESULT: Branch(Branch(Leaf+Leaf)+Branch(Leaf))
+  print("Total salary: ${company.getSalary().toInt()}");
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی داده‌هات یه ساختار درختی دارن (بخش‌ها و کل‌ها) و می‌خوای با تک‌آبجکت و گروه یه‌جور رفتار کنی»؛ ❌ «وقتی آبجکت‌هات سلسله‌مراتب ندارن و صاف کنار هم‌ان؛ اون‌جا مرکب فقط پیچیدگی الکی اضافه می‌کنه».
+> 🪤 **دام رایج:** «این‌قدر هوس می‌کنی همه‌چی رو یکدست کنی که متدهای بی‌معنی مثل add روی «برگ» هم می‌ذاری و در زمان اجرا می‌ترکه».
+
 
 <br>
 
@@ -6658,7 +6664,7 @@ void main() {
 
 <div align="center">
 
-## ☕ Decorator
+## تزئین‌گر (Decorator) ☕
 
 </div>
 
@@ -6666,25 +6672,25 @@ void main() {
 ☕ <b>مثال دنیای واقعی: کافی‌شاپ</b>
 </div>
 
-فرض کنید رفتید کافی‌شاپ و سفارش قهوه میدید.
-اول یه "قهوه ساده" سفارش میدید. ☕
-بعد میگید "شیر هم اضافه کن". 🥛 (الآن شد قهوه با شیر)
-بعد میگید "خامه هم روش بریز". 🧁 (الآن شد قهوه با شیر و خامه)
+فرض کن رفتی کافی‌شاپ و سفارش قهوه می‌دی.
+اول یه «قهوه ساده» سفارش می‌دی. ☕
+بعد می‌گی «شیر هم اضافه کن». 🥛 (الآن شد قهوه با شیر)
+بعد می‌گی «شکر هم بریز توش». 🧂 (الآن شد قهوه با شیر و شکر)
 
 آیا برای هر کدوم از این ترکیب‌ها باید یه کلاس جدید بسازیم؟
 *   `SimpleCoffee`
 *   `CoffeeWithMilk`
-*   `CoffeeWithMilkAndWhip`
+*   `CoffeeWithMilkAndSugar`
 *   ...
 
-نه! اینطوری که کلاس‌ها منفجر میشن!
-الگوی **Decorator** میگه: "قهوه ساده رو پایه قرار بده و هر چیزی که خواستی رو مثل لایه‌های مختلف دورش بپیچ (Decorate کن)."
+نه! اینطوری که کلاس‌ها منفجر می‌شن!
+الگوی **Decorator** می‌گه: «قهوه ساده رو پایه قرار بده و هر چیزی که خواستی رو مثل لایه‌های مختلف دورش بپیچ (Decorate کن).»
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"به جای اینکه کلاس رو تغییر بدی، قابلیت‌های جدید رو لایه لایه بهش اضافه کن."**
-> (دقیقا مثل لباس پوشیدن! اول لباس زیر، بعد پیراهن، بعد کاپشن. هر لایه یه چیزی به قبلی اضافه میکنه).
+> این پترن می‌گه: **«به جای اینکه کلاس رو تغییر بدی، قابلیت‌های جدید رو لایه لایه بهش اضافه کن.»**
+> (دقیقا مثل لباس پوشیدن! اول لباس زیر، بعد پیراهن، بعد کاپشن. هر لایه یه چیزی به قبلی اضافه می‌کنه).
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -6695,16 +6701,18 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+به زبون خودمون: الگوی تزئین‌گر می‌گه که می‌تونی بدون دست زدن به خود کلاس، رفتار و قابلیت‌های تازه رو به یه آبجکت مشخص اضافه کنی؛ اونم به‌صورت لایه‌لایه و حتی همون لحظه که برنامه داره اجرا می‌شه. اینطوری هر کلاس مسئول یه کار می‌مونه و آبجکت‌های دیگه از همون کلاس دست‌نخورده باقی می‌مونن.
 
-برای مثال قهوه را در نظر بگیرید. اول از همه ما یک قهوه ساده داریم که رابط قهوه را پیاده سازی می کند.
+**مثال برنامه‌نویسی**
 
-ما می‌خوایم کد رو توسعه‌پذیر کنیم تا در صورت نیاز، گزینه‌ها بتونند اون رو تغییر بدند.
+بیا قهوه رو در نظر بگیریم. اول از همه یه قهوه ساده داریم که اینترفیس `Coffee` رو پیاده‌سازی می‌کنه.
 
-پس بیاید چند دکوریتور براش بسازیم.
+می‌خوایم کد رو توسعه‌پذیر کنیم تا در صورت نیاز، گزینه‌های جدید بتونن رفتارش رو تغییر بدن.
 
-همونطور که میبینید خیلی ساده میتونیم هر ابجکت رو به عنوان ورودی تابع بعدی بدیم و اینطوری چندین مرحله افزودنی رو خیلی
-راحت به ابجکتمون اضافه کردیم!
+پس بیا چند تزئین‌گر (Decorator) براش بسازیم.
+
+همون‌طور که می‌بینی خیلی ساده می‌تونیم هر آبجکت رو به عنوان ورودی تابع بعدی بدیم و اینطوری چندین مرحله افزودنی رو خیلی
+راحت به آبجکتمون اضافه کردیم!
 
 <details>
 <summary>Python</summary>
@@ -6713,77 +6721,53 @@ void main() {
 
 ```python
 class Coffee:
-    def getCost(self):
+    def cost(self):
         pass
 
-    def getDescription(self):
+    def description(self):
         pass
 
 
 class SimpleCoffee(Coffee):
-    def getCost(self):
+    def cost(self):
         return 10
 
-    def getDescription(self):
-        return 'Simple Coffee'
+    def description(self):
+        return 'Simple coffee'
 
 
-class MilkCoffee(Coffee):
-    _coffee = None
-
+class MilkDecorator(Coffee):
     def __init__(self, coffee):
         self._coffee = coffee
 
-    def getCost(self):
-        return self._coffee.getCost() + 2
+    def cost(self):
+        return self._coffee.cost() + 2
 
-    def getDescription(self):
-        return self._coffee.getDescription() + ', milk'
+    def description(self):
+        return self._coffee.description() + ', milk'
 
 
-class WhipCoffee(Coffee):
-    _coffee = None
-
+class SugarDecorator(Coffee):
     def __init__(self, coffee):
         self._coffee = coffee
 
-    def getCost(self):
-        return self._coffee.getCost() + 5
+    def cost(self):
+        return self._coffee.cost() + 1
 
-    def getDescription(self):
-        return self._coffee.getDescription() + ', whip'
-
-
-class VanillaCoffee(Coffee):
-    _coffee = None
-
-    def __init__(self, coffee):
-        self._coffee = coffee
-
-    def getCost(self):
-        return self._coffee.getCost() + 3
-
-    def getDescription(self):
-        return self._coffee.getDescription() + ', vanilla'
+    def description(self):
+        return self._coffee.description() + ', sugar'
 
 
 # ----------------------------
 
-someCoffee = SimpleCoffee()
-print(someCoffee.getCost())
-print(someCoffee.getDescription())
+coffee = SimpleCoffee()
+print(f"{coffee.description()}: {coffee.cost()}")  # Simple coffee: 10
 
-someCoffee = MilkCoffee(someCoffee)
-print(someCoffee.getCost())
-print(someCoffee.getDescription())
+coffee = MilkDecorator(coffee)
+print(f"{coffee.description()}: {coffee.cost()}")  # Simple coffee, milk: 12
 
-someCoffee = VanillaCoffee(someCoffee)
-print(someCoffee.getCost())
-print(someCoffee.getDescription())
-
-someCoffee = WhipCoffee(someCoffee)
-print(someCoffee.getCost())
-print(someCoffee.getDescription())
+coffee = SugarDecorator(coffee)
+print(f"{coffee.description()}: {coffee.cost()}")  # Simple coffee, milk, sugar: 13
 ```
 
 </div>
@@ -6795,90 +6779,63 @@ print(someCoffee.getDescription())
 <div dir="ltr">
 
 ```typescript
-abstract class Coffee {
-    abstract getCost(): number;
-
-    abstract getDescription(): string;
+interface Coffee {
+    cost(): number;
+    description(): string;
 }
 
-class SimpleCoffee extends Coffee {
-    getCost(): number {
+class SimpleCoffee implements Coffee {
+    cost(): number {
         return 10;
     }
 
-    getDescription(): string {
-        return "Simple Coffee";
+    description(): string {
+        return "Simple coffee";
     }
 }
 
-class MilkCoffee extends Coffee {
+class MilkDecorator implements Coffee {
     private coffee: Coffee;
 
     constructor(coffee: Coffee) {
-        super();
         this.coffee = coffee;
     }
 
-    getCost(): number {
-        return this.coffee.getCost() + 2;
+    cost(): number {
+        return this.coffee.cost() + 2;
     }
 
-    getDescription(): string {
-        return this.coffee.getDescription() + ", milk";
+    description(): string {
+        return this.coffee.description() + ", milk";
     }
 }
 
-class WhipCoffee extends Coffee {
+class SugarDecorator implements Coffee {
     private coffee: Coffee;
 
     constructor(coffee: Coffee) {
-        super();
         this.coffee = coffee;
     }
 
-    getCost(): number {
-        return this.coffee.getCost() + 5;
+    cost(): number {
+        return this.coffee.cost() + 1;
     }
 
-    getDescription(): string {
-        return this.coffee.getDescription() + ", whip";
-    }
-}
-
-class VanillaCoffee extends Coffee {
-    private coffee: Coffee;
-
-    constructor(coffee: Coffee) {
-        super();
-        this.coffee = coffee;
-    }
-
-    getCost(): number {
-        return this.coffee.getCost() + 3;
-    }
-
-    getDescription(): string {
-        return this.coffee.getDescription() + ", vanilla";
+    description(): string {
+        return this.coffee.description() + ", sugar";
     }
 }
 
 // ----------------------------
 
-let someCoffee = new SimpleCoffee();
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
+let coffee: Coffee = new SimpleCoffee();
+console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee: 10
 
-someCoffee = new MilkCoffee(someCoffee);
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
+coffee = new MilkDecorator(coffee);
+console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee, milk: 12
 
-someCoffee = new VanillaCoffee(someCoffee);
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
-
-someCoffee = new WhipCoffee(someCoffee);
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
+coffee = new SugarDecorator(coffee);
+console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee, milk, sugar: 13
 ```
 
 </div>
@@ -6888,88 +6845,66 @@ console.log(someCoffee.getDescription());
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Coffee {
-    getCost() {
-        throw new Error("getCost() must be implemented by subclasses");
+    cost() {
+        throw new Error("cost() must be implemented by subclasses");
     }
 
-    getDescription() {
-        throw new Error("getDescription() must be implemented by subclasses");
+    description() {
+        throw new Error("description() must be implemented by subclasses");
     }
 }
 
 class SimpleCoffee extends Coffee {
-    getCost() {
+    cost() {
         return 10;
     }
 
-    getDescription() {
-        return "Simple Coffee";
+    description() {
+        return "Simple coffee";
     }
 }
 
-class MilkCoffee extends Coffee {
+class MilkDecorator extends Coffee {
     constructor(coffee) {
         super();
         this.coffee = coffee;
     }
 
-    getCost() {
-        return this.coffee.getCost() + 2;
+    cost() {
+        return this.coffee.cost() + 2;
     }
 
-    getDescription() {
-        return this.coffee.getDescription() + ", milk";
+    description() {
+        return this.coffee.description() + ", milk";
     }
 }
 
-class WhipCoffee extends Coffee {
+class SugarDecorator extends Coffee {
     constructor(coffee) {
         super();
         this.coffee = coffee;
     }
 
-    getCost() {
-        return this.coffee.getCost() + 5;
+    cost() {
+        return this.coffee.cost() + 1;
     }
 
-    getDescription() {
-        return this.coffee.getDescription() + ", whip";
-    }
-}
-
-class VanillaCoffee extends Coffee {
-    constructor(coffee) {
-        super();
-        this.coffee = coffee;
-    }
-
-    getCost() {
-        return this.coffee.getCost() + 3;
-    }
-
-    getDescription() {
-        return this.coffee.getDescription() + ", vanilla";
+    description() {
+        return this.coffee.description() + ", sugar";
     }
 }
 
 
-let someCoffee = new SimpleCoffee();
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
+let coffee = new SimpleCoffee();
+console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee: 10
 
-someCoffee = new MilkCoffee(someCoffee);
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
+coffee = new MilkDecorator(coffee);
+console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee, milk: 12
 
-someCoffee = new VanillaCoffee(someCoffee);
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
-
-someCoffee = new WhipCoffee(someCoffee);
-console.log(someCoffee.getCost());
-console.log(someCoffee.getDescription());
+coffee = new SugarDecorator(coffee);
+console.log(`${coffee.description()}: ${coffee.cost()}`); // Simple coffee, milk, sugar: 13
 ```
 
 </div>
@@ -6980,102 +6915,80 @@ console.log(someCoffee.getDescription());
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+
 
 interface ICoffee
 {
-  int GetCost();
-  string GetDescription();
+  int Cost();
+  string Description();
 }
 
 class SimpleCoffee : ICoffee
 {
-  public int GetCost()
+  public int Cost()
   {
-    return 5;
+    return 10;
   }
 
-  public string GetDescription()
+  public string Description()
   {
-    return "Simple Coffee";
-  }
-}
-
-class MilkCoffee : ICoffee
-{
-  private readonly ICoffee mCoffee;
-
-  public MilkCoffee(ICoffee coffee)
-  {
-    mCoffee = coffee ?? throw new ArgumentNullException("coffee", "coffee should not be null");
-  }
-  public int GetCost()
-  {
-    return mCoffee.GetCost() + 1;
-  }
-
-  public string GetDescription()
-  {
-    return String.Concat(mCoffee.GetDescription(), ", milk");
+    return "Simple coffee";
   }
 }
 
-class WhipCoffee : ICoffee
+class MilkDecorator : ICoffee
 {
   private readonly ICoffee mCoffee;
 
-  public WhipCoffee(ICoffee coffee)
+  public MilkDecorator(ICoffee coffee)
   {
     mCoffee = coffee ?? throw new ArgumentNullException("coffee", "coffee should not be null");
   }
-  public int GetCost()
+
+  public int Cost()
   {
-    return mCoffee.GetCost() + 1;
+    return mCoffee.Cost() + 2;
   }
 
-  public string GetDescription()
+  public string Description()
   {
-    return String.Concat(mCoffee.GetDescription(), ", whip");
+    return String.Concat(mCoffee.Description(), ", milk");
   }
 }
 
-class VanillaCoffee : ICoffee
+class SugarDecorator : ICoffee
 {
   private readonly ICoffee mCoffee;
 
-  public VanillaCoffee(ICoffee coffee)
+  public SugarDecorator(ICoffee coffee)
   {
     mCoffee = coffee ?? throw new ArgumentNullException("coffee", "coffee should not be null");
   }
-  public int GetCost()
+
+  public int Cost()
   {
-    return mCoffee.GetCost() + 1;
+    return mCoffee.Cost() + 1;
   }
 
-  public string GetDescription()
+  public string Description()
   {
-    return String.Concat(mCoffee.GetDescription(), ", vanilla");
+    return String.Concat(mCoffee.Description(), ", sugar");
   }
 }
 
 
 // ----------------------------
 
-var myCoffee = new SimpleCoffee();
-Console.WriteLine($"{myCoffee.GetCost():c}"); // $ 5.00
-Console.WriteLine(myCoffee.GetDescription()); // Simple Coffee
+ICoffee coffee = new SimpleCoffee();
+Console.WriteLine($"{coffee.Description()}: {coffee.Cost()}"); // Simple coffee: 10
 
-var milkCoffee = new MilkCoffee(myCoffee);
-Console.WriteLine($"{milkCoffee.GetCost():c}"); // $ 6.00
-Console.WriteLine(milkCoffee.GetDescription()); // Simple Coffee, milk
+coffee = new MilkDecorator(coffee);
+Console.WriteLine($"{coffee.Description()}: {coffee.Cost()}"); // Simple coffee, milk: 12
 
-var whipCoffee = new WhipCoffee(milkCoffee);
-Console.WriteLine($"{whipCoffee.GetCost():c}"); // $ 7.00
-Console.WriteLine(whipCoffee.GetDescription()); // Simple Coffee, milk, whip
-
-var vanillaCoffee = new VanillaCoffee(whipCoffee);
-Console.WriteLine($"{vanillaCoffee.GetCost():c}"); // $ 8.00
-Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip, vanilla
+coffee = new SugarDecorator(coffee);
+Console.WriteLine($"{coffee.Description()}: {coffee.Cost()}"); // Simple coffee, milk, sugar: 13
 
 ```
 
@@ -7088,85 +7001,62 @@ Console.WriteLine(vanillaCoffee.GetDescription()); // Simple Coffee, milk, whip,
 
 <div dir="ltr">
 
-```PHP
+```php
 interface CoffeeInterface {
-  public function getCost();
-  public function getDescription();
+  public function cost();
+  public function description();
 }
 
 class SimpleCoffee implements CoffeeInterface {
-  public function getCost() {
-    return 5;
+  public function cost() {
+    return 10;
   }
 
-  public function getDescription() {
-    return "Simple Coffee";
+  public function description() {
+    return "Simple coffee";
   }
 }
 
-class MilkCoffee implements CoffeeInterface {
+class MilkDecorator implements CoffeeInterface {
   private $coffee;
 
   public function __construct(CoffeeInterface $coffee) {
     $this->coffee = $coffee ?? throw new Exception("coffee should not be null");
   }
 
-  public function getCost() {
-    return $this->coffee->getCost() + 1;
+  public function cost() {
+    return $this->coffee->cost() + 2;
   }
 
-  public function getDescription() {
-    return $this->coffee->getDescription() . ", milk";
+  public function description() {
+    return $this->coffee->description() . ", milk";
   }
 }
 
-class WhipCoffee implements CoffeeInterface {
+class SugarDecorator implements CoffeeInterface {
   private $coffee;
 
   public function __construct(CoffeeInterface $coffee) {
     $this->coffee = $coffee ?? throw new Exception("coffee should not be null");
   }
 
-  public function getCost() {
-    return $this->coffee->getCost() + 1;
+  public function cost() {
+    return $this->coffee->cost() + 1;
   }
 
-  public function getDescription() {
-    return $this->coffee->getDescription() . ", whip";
-  }
-}
-
-class VanillaCoffee implements CoffeeInterface {
-  private $coffee;
-
-  public function __construct(CoffeeInterface $coffee) {
-    $this->coffee = $coffee ?? throw new Exception("coffee should not be null");
-  }
-
-  public function getCost() {
-    return $this->coffee->getCost() + 1;
-  }
-
-  public function getDescription() {
-    return $this->coffee->getDescription() . ", vanilla";
+  public function description() {
+    return $this->coffee->description() . ", sugar";
   }
 }
 
-$myCoffee = new SimpleCoffee();
-echo "$" . number_format($myCoffee->getCost(), 2) . "\n"; // $5.00
-echo $myCoffee->getDescription() . "\n"; // Simple Coffee
+$coffee = new SimpleCoffee();
+echo $coffee->description() . ": " . $coffee->cost() . "\n"; // Simple coffee: 10
 
-$milkCoffee = new MilkCoffee($myCoffee);
-echo "$" . number_format($milkCoffee->getCost(), 2) . "\n"; // $6.00
-echo $milkCoffee->getDescription() . "\n"; // Simple Coffee, milk
+$coffee = new MilkDecorator($coffee);
+echo $coffee->description() . ": " . $coffee->cost() . "\n"; // Simple coffee, milk: 12
 
-$whipCoffee = new WhipCoffee($milkCoffee);
-echo "$" . number_format($whipCoffee->getCost(), 2) . "\n"; // $7.00
-echo $whipCoffee->getDescription() . "\n"; // Simple Coffee, milk, whip
-
-$vanillaCoffee = new VanillaCoffee($whipCoffee);
-echo "$" . number_format($vanillaCoffee->getCost(), 2) . "\n"; // $8.00
-echo $vanillaCoffee->getDescription() . "\n"; // Simple Coffee, milk, whip, vanilla
+$coffee = new SugarDecorator($coffee);
+echo $coffee->description() . ": " . $coffee->cost() . "\n"; // Simple coffee, milk, sugar: 13
 
 ```
 
@@ -7186,97 +7076,69 @@ import (
 	"fmt"
 )
 
-type ICoffee interface {
-	GetCost() int
-	GetDescription() string
+type Coffee interface {
+	Cost() int
+	Description() string
 }
 
 type SimpleCoffee struct{}
 
-func (c *SimpleCoffee) GetCost() int {
-	return 5
+func (c *SimpleCoffee) Cost() int {
+	return 10
 }
 
-func (c *SimpleCoffee) GetDescription() string {
-	return "Simple Coffee"
+func (c *SimpleCoffee) Description() string {
+	return "Simple coffee"
 }
 
-type MilkCoffee struct {
-	coffee ICoffee
+type MilkDecorator struct {
+	coffee Coffee
 }
 
-func NewMilkCoffee(coffee ICoffee) *MilkCoffee {
+func NewMilkDecorator(coffee Coffee) *MilkDecorator {
 	if coffee == nil {
 		panic("coffee should not be nil")
 	}
-	return &MilkCoffee{coffee: coffee}
+	return &MilkDecorator{coffee: coffee}
 }
 
-func (c *MilkCoffee) GetCost() int {
-	return c.coffee.GetCost() + 1
+func (c *MilkDecorator) Cost() int {
+	return c.coffee.Cost() + 2
 }
 
-func (c *MilkCoffee) GetDescription() string {
-	return fmt.Sprintf("%s, milk", c.coffee.GetDescription())
+func (c *MilkDecorator) Description() string {
+	return fmt.Sprintf("%s, milk", c.coffee.Description())
 }
 
-type WhipCoffee struct {
-	coffee ICoffee
+type SugarDecorator struct {
+	coffee Coffee
 }
 
-func NewWhipCoffee(coffee ICoffee) *WhipCoffee {
+func NewSugarDecorator(coffee Coffee) *SugarDecorator {
 	if coffee == nil {
 		panic("coffee should not be nil")
 	}
-	return &WhipCoffee{coffee: coffee}
+	return &SugarDecorator{coffee: coffee}
 }
 
-func (c *WhipCoffee) GetCost() int {
-	return c.coffee.GetCost() + 1
+func (c *SugarDecorator) Cost() int {
+	return c.coffee.Cost() + 1
 }
 
-func (c *WhipCoffee) GetDescription() string {
-	return fmt.Sprintf("%s, whip", c.coffee.GetDescription())
-}
-
-type VanillaCoffee struct {
-	coffee ICoffee
-}
-
-func NewVanillaCoffee(coffee ICoffee) *VanillaCoffee {
-	if coffee == nil {
-		panic("coffee should not be nil")
-	}
-	return &VanillaCoffee{coffee: coffee}
-}
-
-func (c *VanillaCoffee) GetCost() int {
-	return c.coffee.GetCost() + 1
-}
-
-func (c *VanillaCoffee) GetDescription() string {
-	return fmt.Sprintf("%s, vanilla", c.coffee.GetDescription())
+func (c *SugarDecorator) Description() string {
+	return fmt.Sprintf("%s, sugar", c.coffee.Description())
 }
 
 func main() {
-	myCoffee := &SimpleCoffee{}
-	fmt.Printf("%s\n", myCoffee.GetCost())
-	fmt.Printf("%s\n", myCoffee.GetDescription())
+	var coffee Coffee = &SimpleCoffee{}
+	fmt.Printf("%s: %d\n", coffee.Description(), coffee.Cost()) // Simple coffee: 10
 
-	milkCoffee := NewMilkCoffee(myCoffee)
-	fmt.Printf("%s\n", milkCoffee.GetCost())
-	fmt.Printf("%s\n", milkCoffee.GetDescription())
+	coffee = NewMilkDecorator(coffee)
+	fmt.Printf("%s: %d\n", coffee.Description(), coffee.Cost()) // Simple coffee, milk: 12
 
-	whipCoffee := NewWhipCoffee(milkCoffee)
-	fmt.Printf("%s\n", whipCoffee.GetCost())
-	fmt.Printf("%s\n", whipCoffee.GetDescription())
-
-	vanillaCoffee := NewVanillaCoffee(whipCoffee)
-	fmt.Printf("%s\n", vanillaCoffee.GetCost())
-	fmt.Printf("%s\n", vanillaCoffee.GetDescription())
+	coffee = NewSugarDecorator(coffee)
+	fmt.Printf("%s: %d\n", coffee.Description(), coffee.Cost()) // Simple coffee, milk, sugar: 13
 }
-
-
 ```
 
 </div>
@@ -7291,92 +7153,67 @@ func main() {
 ```java
 interface Coffee {
 
-    int getCost();
-    String getDescription();
+    int cost();
+    String description();
 }
 
 class SimpleCoffee implements Coffee {
 
-    public int getCost() {
-        return 5;
+    public int cost() {
+        return 10;
     }
 
-    public String getDescription() {
-        return "Simple Coffee";
+    public String description() {
+        return "Simple coffee";
     }
 }
 
-class MilkCoffee implements Coffee {
+class MilkDecorator implements Coffee {
     private final Coffee coffee;
 
-    public MilkCoffee(Coffee coffee) {
+    public MilkDecorator(Coffee coffee) {
         if(coffee == null)
             throw new IllegalArgumentException("coffee should not be null");
         this.coffee = coffee;
     }
 
-    public int getCost() {
-        return coffee.getCost() + 1;
+    public int cost() {
+        return coffee.cost() + 2;
     }
 
-    public String getDescription() {
-        return coffee.getDescription() + ", Milk";
+    public String description() {
+        return coffee.description() + ", milk";
     }
 }
 
-class WhipCoffee implements Coffee {
+class SugarDecorator implements Coffee {
     private final Coffee coffee;
 
-    public WhipCoffee(Coffee coffee) {
+    public SugarDecorator(Coffee coffee) {
         if(coffee == null)
             throw new IllegalArgumentException("coffee should not be null");
         this.coffee = coffee;
     }
 
-    public int getCost() {
-        return coffee.getCost() + 1;
+    public int cost() {
+        return coffee.cost() + 1;
     }
 
-    public String getDescription() {
-        return coffee.getDescription() + ", Whip";
-    }
-}
-
-class VanillaCoffee implements Coffee {
-    private final Coffee coffee;
-
-    public VanillaCoffee(Coffee coffee) {
-        if(coffee == null)
-            throw new IllegalArgumentException("coffee should not be null");
-        this.coffee = coffee;
-    }
-
-    public int getCost() {
-        return coffee.getCost() + 1;
-    }
-
-    public String getDescription() {
-        return coffee.getDescription() + ", Vanilla";
+    public String description() {
+        return coffee.description() + ", sugar";
     }
 }
 
 // ----------------------------
 
-SimpleCoffee simpleCoffee = new SimpleCoffee();
-System.out.println("$" + simpleCoffee.getCost()); // $5
-System.out.println(simpleCoffee.getDescription()); // Simple Coffee
+Coffee coffee = new SimpleCoffee();
+System.out.println(coffee.description() + ": " + coffee.cost()); // Simple coffee: 10
 
-MilkCoffee milkCoffee = new MilkCoffee(simpleCoffee);
-System.out.println("$" + milkCoffee.getCost()); // $6
-System.out.println(milkCoffee.getDescription()); // Simple Coffee, Milk
+coffee = new MilkDecorator(coffee);
+System.out.println(coffee.description() + ": " + coffee.cost()); // Simple coffee, milk: 12
 
-WhipCoffee whipCoffee = new WhipCoffee(milkCoffee);
-System.out.println("$" + whipCoffee.getCost()); // $7
-System.out.println(whipCoffee.getDescription()); // Simple Coffee, Milk, Whip
-
-VanillaCoffee vanillaCoffee = new VanillaCoffee(whipCoffee);
-System.out.println("$" + vanillaCoffee.getCost()); // $8
-System.out.println(vanillaCoffee.getDescription()); // Simple Coffee, Milk, Whip, Vanilla
+coffee = new SugarDecorator(coffee);
+System.out.println(coffee.description() + ": " + coffee.cost()); // Simple coffee, milk, sugar: 13
 ```
 
 </div>
@@ -7396,83 +7233,65 @@ System.out.println(vanillaCoffee.getDescription()); // Simple Coffee, Milk, Whip
 class Coffee {
 public:
     virtual ~Coffee() = default;
-    virtual double getCost() const = 0;
-    virtual std::string getDescription() const = 0;
+    virtual int cost() const = 0;
+    virtual std::string description() const = 0;
 };
 
 // Simple coffee
 class SimpleCoffee : public Coffee {
 public:
-    double getCost() const override {
-        return 10.0;
+    int cost() const override {
+        return 10;
     }
-    
-    std::string getDescription() const override {
-        return "Simple Coffee";
+
+    std::string description() const override {
+        return "Simple coffee";
     }
-};
-
-// Coffee decorator base class
-class CoffeeDecorator : public Coffee {
-protected:
-    std::unique_ptr<Coffee> coffee;
-
-public:
-    CoffeeDecorator(std::unique_ptr<Coffee> coffee) : coffee(std::move(coffee)) {}
 };
 
 // Milk decorator
-class MilkCoffee : public CoffeeDecorator {
+class MilkDecorator : public Coffee {
+    std::unique_ptr<Coffee> coffee;
+
 public:
-    MilkCoffee(std::unique_ptr<Coffee> coffee) : CoffeeDecorator(std::move(coffee)) {}
-    
-    double getCost() const override {
-        return coffee->getCost() + 2.0;
+    MilkDecorator(std::unique_ptr<Coffee> coffee) : coffee(std::move(coffee)) {}
+
+    int cost() const override {
+        return coffee->cost() + 2;
     }
-    
-    std::string getDescription() const override {
-        return coffee->getDescription() + ", Milk";
+
+    std::string description() const override {
+        return coffee->description() + ", milk";
     }
 };
 
-// Whip decorator
-class WhipCoffee : public CoffeeDecorator {
-public:
-    WhipCoffee(std::unique_ptr<Coffee> coffee) : CoffeeDecorator(std::move(coffee)) {}
-    
-    double getCost() const override {
-        return coffee->getCost() + 5.0;
-    }
-    
-    std::string getDescription() const override {
-        return coffee->getDescription() + ", Whip";
-    }
-};
+// Sugar decorator
+class SugarDecorator : public Coffee {
+    std::unique_ptr<Coffee> coffee;
 
-// Vanilla decorator
-class VanillaCoffee : public CoffeeDecorator {
 public:
-    VanillaCoffee(std::unique_ptr<Coffee> coffee) : CoffeeDecorator(std::move(coffee)) {}
-    
-    double getCost() const override {
-        return coffee->getCost() + 3.0;
+    SugarDecorator(std::unique_ptr<Coffee> coffee) : coffee(std::move(coffee)) {}
+
+    int cost() const override {
+        return coffee->cost() + 1;
     }
-    
-    std::string getDescription() const override {
-        return coffee->getDescription() + ", Vanilla";
+
+    std::string description() const override {
+        return coffee->description() + ", sugar";
     }
 };
 
 // Usage
 int main() {
-    auto someCoffee = std::make_unique<SimpleCoffee>();
-    auto milkCoffee = std::make_unique<MilkCoffee>(std::move(someCoffee));
-    auto whipCoffee = std::make_unique<WhipCoffee>(std::move(milkCoffee));
-    auto vanillaCoffee = std::make_unique<VanillaCoffee>(std::move(whipCoffee));
-    
-    std::cout << "$" << vanillaCoffee->getCost() << std::endl; // $20
-    std::cout << vanillaCoffee->getDescription() << std::endl; // Simple Coffee, Milk, Whip, Vanilla
-    
+    std::unique_ptr<Coffee> coffee = std::make_unique<SimpleCoffee>();
+    std::cout << coffee->description() << ": " << coffee->cost() << std::endl; // Simple coffee: 10
+
+    coffee = std::make_unique<MilkDecorator>(std::move(coffee));
+    std::cout << coffee->description() << ": " << coffee->cost() << std::endl; // Simple coffee, milk: 12
+
+    coffee = std::make_unique<SugarDecorator>(std::move(coffee));
+    std::cout << coffee->description() << ": " << coffee->cost() << std::endl; // Simple coffee, milk, sugar: 13
+
     return 0;
 }
 ```
@@ -7486,44 +7305,36 @@ int main() {
 
 ```kotlin
 interface Coffee {
-    fun getCost(): Double
-    fun getDescription(): String
+    fun cost(): Int
+    fun description(): String
 }
 
 class SimpleCoffee : Coffee {
-    override fun getCost() = 10.0
-    override fun getDescription() = "Simple Coffee"
+    override fun cost() = 10
+    override fun description() = "Simple coffee"
 }
 
-abstract class CoffeeDecorator(protected val coffee: Coffee) : Coffee {
-    override fun getCost() = coffee.getCost()
-    override fun getDescription() = coffee.getDescription()
+class MilkDecorator(private val coffee: Coffee) : Coffee {
+    override fun cost() = coffee.cost() + 2
+    override fun description() = coffee.description() + ", milk"
 }
 
-class MilkCoffee(coffee: Coffee) : CoffeeDecorator(coffee) {
-    override fun getCost() = coffee.getCost() + 2.0
-    override fun getDescription() = "${coffee.getDescription()}, Milk"
+class SugarDecorator(private val coffee: Coffee) : Coffee {
+    override fun cost() = coffee.cost() + 1
+    override fun description() = coffee.description() + ", sugar"
 }
 
-class WhipCoffee(coffee: Coffee) : CoffeeDecorator(coffee) {
-    override fun getCost() = coffee.getCost() + 5.0
-    override fun getDescription() = "${coffee.getDescription()}, Whip"
-}
+// ----------------------------
 
-class VanillaCoffee(coffee: Coffee) : CoffeeDecorator(coffee) {
-    override fun getCost() = coffee.getCost() + 3.0
-    override fun getDescription() = "${coffee.getDescription()}, Vanilla"
-}
-
-// Usage
 fun main() {
-    val someCoffee: Coffee = SimpleCoffee()
-    val milkCoffee: Coffee = MilkCoffee(someCoffee)
-    val whipCoffee: Coffee = WhipCoffee(milkCoffee)
-    val vanillaCoffee: Coffee = VanillaCoffee(whipCoffee)
+    var coffee: Coffee = SimpleCoffee()
+    println("${coffee.description()}: ${coffee.cost()}")
 
-    println("$${vanillaCoffee.getCost().toInt()}") // $20
-    println(vanillaCoffee.getDescription()) // Simple Coffee, Milk, Whip, Vanilla
+    coffee = MilkDecorator(coffee)
+    println("${coffee.description()}: ${coffee.cost()}")
+
+    coffee = SugarDecorator(coffee)
+    println("${coffee.description()}: ${coffee.cost()}")
 }
 ```
 
@@ -7537,77 +7348,64 @@ fun main() {
 
 ```dart
 abstract class Coffee {
-  double getCost();
-  String getDescription();
+  int cost();
+  String description();
 }
 
 class SimpleCoffee implements Coffee {
   @override
-  double getCost() => 10;
+  int cost() => 10;
 
   @override
-  String getDescription() => 'Simple Coffee';
+  String description() => "Simple coffee";
 }
 
-class MilkCoffee implements Coffee {
+class MilkDecorator implements Coffee {
   final Coffee _coffee;
 
-  MilkCoffee(this._coffee);
+  MilkDecorator(this._coffee);
 
   @override
-  double getCost() => _coffee.getCost() + 2;
+  int cost() => _coffee.cost() + 2;
 
   @override
-  String getDescription() => '${_coffee.getDescription()}, milk';
+  String description() => _coffee.description() + ", milk";
 }
 
-class WhipCoffee implements Coffee {
+class SugarDecorator implements Coffee {
   final Coffee _coffee;
 
-  WhipCoffee(this._coffee);
+  SugarDecorator(this._coffee);
 
   @override
-  double getCost() => _coffee.getCost() + 5;
+  int cost() => _coffee.cost() + 1;
 
   @override
-  String getDescription() => '${_coffee.getDescription()}, whip';
-}
-
-class VanillaCoffee implements Coffee {
-  final Coffee _coffee;
-
-  VanillaCoffee(this._coffee);
-
-  @override
-  double getCost() => _coffee.getCost() + 3;
-
-  @override
-  String getDescription() => '${_coffee.getDescription()}, vanilla';
+  String description() => _coffee.description() + ", sugar";
 }
 
 // ----------------------------
 
 void main() {
-  Coffee someCoffee = SimpleCoffee();
-  print(someCoffee.getCost());         // 10
-  print(someCoffee.getDescription());  // Simple Coffee
+  Coffee coffee = SimpleCoffee();
+  print("${coffee.description()}: ${coffee.cost()}");
 
-  someCoffee = MilkCoffee(someCoffee);
-  print(someCoffee.getCost());         // 12
-  print(someCoffee.getDescription());  // Simple Coffee, milk
+  coffee = MilkDecorator(coffee);
+  print("${coffee.description()}: ${coffee.cost()}");
 
-  someCoffee = VanillaCoffee(someCoffee);
-  print(someCoffee.getCost());         // 15
-  print(someCoffee.getDescription());  // Simple Coffee, milk, vanilla
-
-  someCoffee = WhipCoffee(someCoffee);
-  print(someCoffee.getCost());         // 20
-  print(someCoffee.getDescription());  // Simple Coffee, milk, vanilla, whip
+  coffee = SugarDecorator(coffee);
+  print("${coffee.description()}: ${coffee.cost()}");
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی می‌خوای قابلیت‌ها رو لایه‌لایه و موقع اجرا به یه آبجکت اضافه کنی، بدون اینکه کلاسش رو دست بزنی»؛ ❌ «وقتی فقط یکی دو حالت ثابت داری و یه ساب‌کلاس ساده کافیه».
+> 🪤 **دام رایج:** «وقتی ده‌ها لایه روی هم می‌پیچی، دنبال کردن مسیر و دیباگ کردنش سخت و گیج‌کننده می‌شه».
+> 🔗 **فرقش با [پراکسی (Proxy)](#پراکسی-proxy-):** «تزئین‌گر قابلیت تازه به آبجکت اضافه می‌کنه؛ پراکسی همون رفتار رو نگه می‌داره ولی دسترسی بهش رو کنترل می‌کنه».
+
 
 <br>
 
@@ -7615,7 +7413,7 @@ void main() {
 
 <div align="center">
 
-## 📦 Facade
+## نما (Facade) 📦
 
 </div>
 
@@ -7623,16 +7421,16 @@ void main() {
 💻 <b>مثال دنیای واقعی: دکمه پاور لپ‌تاپ</b>
 </div>
 
-شما برای روشن کردن لپ‌تاپ فقط یه کار می‌کنید: دکمه پاور رو می‌زنید.
+تو برای روشن کردن لپ‌تاپ فقط یه کار می‌کنی: دکمه پاور رو می‌زنی.
 ولی پشت همون یک دکمه، کلی کار ریز و درشت اتفاق می‌افته: برق‌رسانی، چک کردن سخت‌افزار، بوت شدن سیستم‌عامل، بالا اومدن سرویس‌ها و...
 
-شما نه لازم دارید این مراحل رو حفظ باشید، نه دوست دارید هر بار ۱۰ تا دکمه بزنید. فقط می‌خواید «روشن بشه». 😄
+تو نه لازم داری این مراحل رو حفظ باشی، نه دوست داری هر بار ۱۰ تا دکمه بزنی. فقط می‌خوای «روشن بشه». 😄
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"برای یک سیستم شلوغ و پیچیده، یه ورودیِ ساده و خوش‌دست درست کن."**
+> این پترن می‌گه: **«برای یک سیستم شلوغ و پیچیده، یه ورودیِ ساده و خوش‌دست درست کن.»**
 > کاربر فقط با همون ورودی ساده کار می‌کنه و جزئیاتِ پشت پرده قایم می‌مونه.
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -7640,14 +7438,16 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+نما یه آبجکته که یه رابط ساده‌شده جلوی یه تیکه کدِ بزرگ‌تر می‌ذاره، مثل یه کتابخونه کلاس‌ها. تو با همون رابط ساده کار می‌کنی و درگیر پیچیدگی پشتش نمی‌شی.
 
-بیاین همون مثال مربوط به کامپیوتر رو پیاده‌سازی کنیم!
+**مثال برنامه‌نویسی**
+
+بیا همون مثال مربوط به کامپیوتر رو پیاده‌سازی کنیم!
 
 اول باید کلاس کامپیوتر رو بسازیم.
 
-کلاس Facade به این صورت پیاده‌سازی میشه که یک ابجکت رو به عنوان ورودی دریافت میکنه و با هر تابع خودش یک سری عملیات رو
-روی اون ابجکت اعمال میکنه.
+کلاس Facade به این صورت پیاده‌سازی می‌شه که یک آبجکت رو به عنوان ورودی دریافت می‌کنه و با هر تابع خودش یک سری عملیات رو
+روی اون آبجکت اعمال می‌کنه.
 
 <details>
 
@@ -7661,27 +7461,25 @@ class Computer:
         print("Ouch!")
 
     def makeSound(self):
-        print("Beep Beep!")
+        print("Beep beep!")
 
     def showLoadingScreen(self):
-        print("Loading...")
+        print("Loading..")
 
     def bam(self):
-        print("Ready to be used...")
+        print("Ready to be used!")
 
     def closeEverything(self):
-        print("Bup bup bup buzzz!")
-
-    def sooth(self):
-        print("Zzzzz")
+        print("Bup bup..")
 
     def pullCurrent(self):
         print("Haaah!")
 
+    def sooth(self):
+        print("Zzzzz")
+
 
 class ComputerFacade:
-    _computer = None
-
     def __init__(self, computer):
         self.computer = computer
 
@@ -7704,13 +7502,12 @@ computer.turnOn()
 computer.turnOff()
 
 '''
-Output will be
-==============
+Output:
 Ouch!
-Beep Beep!
-Loading...
-Ready to be used...
-Bup bup bup buzzz!
+Beep beep!
+Loading..
+Ready to be used!
+Bup bup..
 Haaah!
 Zzzzz
 '''
@@ -7733,27 +7530,27 @@ class Computer {
     }
 
     makeSound() {
-        console.log("Beep Beep!");
+        console.log("Beep beep!");
     }
 
     showLoadingScreen() {
-        console.log("Loading...");
+        console.log("Loading..");
     }
 
     bam() {
-        console.log("Ready to be used...");
+        console.log("Ready to be used!");
     }
 
     closeEverything() {
-        console.log("Bup bup bup buzzz!");
-    }
-
-    sooth() {
-        console.log("Zzzzz");
+        console.log("Bup bup..");
     }
 
     pullCurrent() {
         console.log("Haaah!");
+    }
+
+    sooth() {
+        console.log("Zzzzz");
     }
 }
 
@@ -7761,10 +7558,6 @@ class ComputerFacade {
     private computer: Computer;
 
     constructor(computer: Computer) {
-        this.computer = computer;
-    }
-
-    set computer(computer: Computer) {
         this.computer = computer;
     }
 
@@ -7784,10 +7577,18 @@ class ComputerFacade {
 
 // ----------------------------
 
-    let
-computer = new ComputerFacade(new Computer());
+const computer = new ComputerFacade(new Computer());
 computer.turnOn();
 computer.turnOff();
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 ```
 
 </div>
@@ -7800,43 +7601,39 @@ computer.turnOff();
 
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Computer {
     getElectricShock() {
         console.log("Ouch!");
     }
 
     makeSound() {
-        console.log("Beep Beep!");
+        console.log("Beep beep!");
     }
 
     showLoadingScreen() {
-        console.log("Loading...");
+        console.log("Loading..");
     }
 
     bam() {
-        console.log("Ready to be used...");
+        console.log("Ready to be used!");
     }
 
     closeEverything() {
-        console.log("Bup bup bup buzzz!");
-    }
-
-    sooth() {
-        console.log("Zzzzz");
+        console.log("Bup bup..");
     }
 
     pullCurrent() {
         console.log("Haaah!");
     }
+
+    sooth() {
+        console.log("Zzzzz");
+    }
 }
 
 class ComputerFacade {
     constructor(computer) {
-        this.computer = computer;
-    }
-
-    set computer(computer) {
         this.computer = computer;
     }
 
@@ -7857,6 +7654,15 @@ class ComputerFacade {
 const computer = new ComputerFacade(new Computer());
 computer.turnOn();
 computer.turnOff();
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 ```
 
 </div>
@@ -7868,43 +7674,45 @@ computer.turnOff();
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+
 
 class Computer
 {
   public void GetElectricShock()
   {
-    Console.Write("Ouch!");
+    Console.WriteLine("Ouch!");
   }
 
   public void MakeSound()
   {
-    Console.Write("Beep beep!");
+    Console.WriteLine("Beep beep!");
   }
 
   public void ShowLoadingScreen()
   {
-    Console.Write("Loading..");
+    Console.WriteLine("Loading..");
   }
 
   public void Bam()
   {
-    Console.Write("Ready to be used!");
+    Console.WriteLine("Ready to be used!");
   }
 
   public void CloseEverything()
   {
-    Console.Write("Bup bup bup buzzzz!");
-  }
-
-  public void Sooth()
-  {
-    Console.Write("Zzzzz");
+    Console.WriteLine("Bup bup..");
   }
 
   public void PullCurrent()
   {
-    Console.Write("Haaah!");
+    Console.WriteLine("Haaah!");
+  }
+
+  public void Sooth()
+  {
+    Console.WriteLine("Zzzzz");
   }
 }
 
@@ -7937,10 +7745,17 @@ class ComputerFacade
 // ----------------------------
 
 var computer = new ComputerFacade(new Computer());
-computer.TurnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
-Console.WriteLine();
-computer.TurnOff();  // Bup bup buzzz! Haah! Zzzzz
-Console.ReadLine();
+computer.TurnOn();
+computer.TurnOff();
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 
 ```
 
@@ -7953,42 +7768,42 @@ Console.ReadLine();
 
 <div dir="ltr">
 
-```PHP
+```php
 class Computer
 {
   public function getElectricShock()
   {
-    echo "Ouch!";
+    echo "Ouch!" . PHP_EOL;
   }
 
   public function makeSound()
   {
-    echo "Beep beep!";
+    echo "Beep beep!" . PHP_EOL;
   }
 
   public function showLoadingScreen()
   {
-    echo "Loading..";
+    echo "Loading.." . PHP_EOL;
   }
 
   public function bam()
   {
-    echo "Ready to be used!";
+    echo "Ready to be used!" . PHP_EOL;
   }
 
   public function closeEverything()
   {
-    echo "Bup bup bup buzzzz!";
-  }
-
-  public function sooth()
-  {
-    echo "Zzzzz";
+    echo "Bup bup.." . PHP_EOL;
   }
 
   public function pullCurrent()
   {
-    echo "Haaah!";
+    echo "Haaah!" . PHP_EOL;
+  }
+
+  public function sooth()
+  {
+    echo "Zzzzz" . PHP_EOL;
   }
 }
 
@@ -8015,9 +7830,17 @@ class ComputerFacade
 }
 
 $computerFacade = new ComputerFacade(new Computer());
-$computerFacade->turnOn(); // Ouch! Beep beep! Loading.. Ready to be used!
-echo PHP_EOL;
-$computerFacade->turnOff();  // Bup bup buzzz! Haah! Zzzzz
+$computerFacade->turnOn();
+$computerFacade->turnOff();
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 
 ```
 
@@ -8041,31 +7864,31 @@ import (
 type computer struct{}
 
 func (c *computer) getElectricShock() {
-    fmt.Print("Ouch!")
+    fmt.Println("Ouch!")
 }
 
 func (c *computer) makeSound() {
-    fmt.Print("Beep beep!")
+    fmt.Println("Beep beep!")
 }
 
 func (c *computer) showLoadingScreen() {
-    fmt.Print("Loading..")
+    fmt.Println("Loading..")
 }
 
 func (c *computer) bam() {
-    fmt.Print("Ready to be used!")
+    fmt.Println("Ready to be used!")
 }
 
 func (c *computer) closeEverything() {
-    fmt.Print("Bup bup bup buzzzz!")
-}
-
-func (c *computer) soothe() {
-    fmt.Print("Zzzzz")
+    fmt.Println("Bup bup..")
 }
 
 func (c *computer) pullCurrent() {
-    fmt.Print("Haaah!")
+    fmt.Println("Haaah!")
+}
+
+func (c *computer) sooth() {
+    fmt.Println("Zzzzz")
 }
 
 type computerFacade struct {
@@ -8089,15 +7912,23 @@ func (cf *computerFacade) turnOn() {
 func (cf *computerFacade) turnOff() {
     cf.computer.closeEverything()
     cf.computer.pullCurrent()
-    cf.computer.soothe()
+    cf.computer.sooth()
 }
 
 func main() {
     c := newComputerFacade(&computer{})
-    c.turnOn() // Ouch! Beep beep! Loading.. Ready to be used!
-    fmt.Println()
-    c.turnOff() // Bup bup buzzz! Haah! Zzzzz
+    c.turnOn()
+    c.turnOff()
 }
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 
 ```
 
@@ -8129,15 +7960,15 @@ class Computer {
     }
 
     public void closeEverything() {
-        System.out.println("Bup bup bup buzzzz!");
-    }
-
-    public void sooth() {
-        System.out.println("Zzzzz");
+        System.out.println("Bup bup..");
     }
 
     public void pullCurrent() {
         System.out.println("Haaah!");
+    }
+
+    public void sooth() {
+        System.out.println("Zzzzz");
     }
 }
 
@@ -8167,10 +7998,17 @@ class ComputerFacade {
 // ----------------------------
 
 ComputerFacade computer = new ComputerFacade(new Computer());
-computer.turnOn();      // Ouch! Beep beep! Loading.. Ready to be used!
-System.out.println();
-computer.turnOff();     // Bup bup buzzz! Haah! Zzzzz
-System.out.println();
+computer.turnOn();
+computer.turnOff();
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 ```
 
 </div>
@@ -8204,15 +8042,15 @@ public:
     }
 
     void closeEverything() {
-        std::cout << "Bup bup bup buzzzz!" << std::endl;
-    }
-
-    void sooth() {
-        std::cout << "Zzzzz" << std::endl;
+        std::cout << "Bup bup.." << std::endl;
     }
 
     void pullCurrent() {
         std::cout << "Haaah!" << std::endl;
+    }
+
+    void sooth() {
+        std::cout << "Zzzzz" << std::endl;
     }
 };
 
@@ -8242,11 +8080,19 @@ public:
 int main() {
     Computer comp;
     ComputerFacade computer(comp);
-    computer.turnOn();      // Ouch! Beep beep! Loading.. Ready to be used!
-    std::cout << std::endl;
-    computer.turnOff();     // Bup bup buzzz! Haah! Zzzzz
+    computer.turnOn();
+    computer.turnOff();
     return 0;
 }
+
+// Output:
+// Ouch!
+// Beep beep!
+// Loading..
+// Ready to be used!
+// Bup bup..
+// Haaah!
+// Zzzzz
 ```
 
 </div>
@@ -8262,10 +8108,9 @@ int main() {
 class Computer {
     fun getElectricShock() = println("Ouch!")
     fun makeSound() = println("Beep beep!")
-    fun showLoadingScreen() = println("Loading...")
+    fun showLoadingScreen() = println("Loading..")
     fun bam() = println("Ready to be used!")
-
-    fun closeEverything() = println("Bup bup bup buzzzz!")
+    fun closeEverything() = println("Bup bup..")
     fun pullCurrent() = println("Haaah!")
     fun sooth() = println("Zzzzz")
 }
@@ -8285,12 +8130,12 @@ class ComputerFacade(private val computer: Computer) {
     }
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
     val computer = ComputerFacade(Computer())
-    computer.turnOn()  // Ouch! Beep beep! Loading... Ready to be used!
-    println()
-    computer.turnOff() // Bup bup bup buzzzz! Haaah! Zzzzz
+    computer.turnOn()
+    computer.turnOff()
 }
 ```
 
@@ -8305,12 +8150,12 @@ fun main() {
 ```dart
 class Computer {
   void getElectricShock() => print('Ouch!');
-  void makeSound() => print('Beep Beep!');
-  void showLoadingScreen() => print('Loading...');
-  void bam() => print('Ready to be used...');
-  void closeEverything() => print('Bup bup bup buzzz!');
-  void sooth() => print('Zzzzz');
+  void makeSound() => print('Beep beep!');
+  void showLoadingScreen() => print('Loading..');
+  void bam() => print('Ready to be used!');
+  void closeEverything() => print('Bup bup..');
   void pullCurrent() => print('Haaah!');
+  void sooth() => print('Zzzzz');
 }
 
 class ComputerFacade {
@@ -8344,13 +8189,18 @@ void main() {
 </div>
 </details>
 
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی یه زیرسیستم شلوغ و چندمرحله‌ای داری و می‌خوای یه ورودی ساده و خوش‌دست جلوش بذاری»؛ ❌ «وقتی فقط یه کلاس ساده داری که اصلاً پیچیدگی‌ای برای قایم کردن نداره».
+> 🪤 **دام رایج:** «نما رو نکن یه کلاس خدا (God Object) که خودش همه‌کاره‌ست؛ نما فقط هماهنگ‌کننده‌ست، نه انجام‌دهنده همه‌چی».
+
+
 <br>
 
 ---
 
 <div align="center">
 
-## 🍃 Flyweight
+## وزن‌سبک (Flyweight) 🍃
 
 </div>
 
@@ -8362,10 +8212,10 @@ void main() {
 یعنی برای ۱۰۰ تا مشتری، قرار نیست ۱۰۰ بار «چای رو از صفر درست کنه»؛ بخش اصلی و مشترک (خودِ چای) رو نگه می‌داره و فقط چیزهای متفاوت رو برای هر نفر جدا حساب می‌کنه (مثلاً «کم‌شکر»، «با شیر»، «لیوانِ میز ۵»).
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"بخش‌های مشترکِ آبجکت‌ها رو share کن؛ تفاوت‌ها رو از بیرون بهش بده."**
-> نتیجه؟ وقتی تعداد آبجکت‌ها خیلی زیاد میشه، حافظه و هزینه‌ی ساختن‌شون کمتر میشه.
+> این پترن می‌گه: **«بخش‌های مشترکِ آبجکت‌ها رو share کن؛ تفاوت‌ها رو از بیرون بهش بده.»**
+> نتیجه؟ وقتی تعداد آبجکت‌ها خیلی زیاد می‌شه، حافظه و هزینه ساختن‌شون کمتر می‌شه.
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -8375,11 +8225,16 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+به زبون خودمون: وزن‌سبک یه آبجکته که با share کردنِ بیشترین داده ممکن با آبجکت‌های مشابه، مصرف حافظه رو کم می‌کنه.
+وقتی قراره تعداد خیلی زیادی آبجکت بسازی و حالت تکراری و ساده‌شون کلی حافظه می‌بلعه، این پترن به دادت می‌رسه.
 
-بیاین مثال غرفه چای رو پیاده سازی کنیم. اول باید انواع چای و چای ساز رو پیاده سازی کنیم.
+**مثال برنامه‌نویسی**
+
+بیا مثال غرفه چای رو پیاده‌سازی کنیم. اول باید انواع چای و چای‌ساز رو پیاده‌سازی کنیم.
 
 توی مرحله بعد ما یک کلاس `TeaShop` داریم که وظیفه ثبت سفارش و آماده کردن اون‌هارو به عهده داره.
+
+برای اینکه حواس‌مون پیشِ خودِ پترن بمونه، اینجا کلاس چای رو خالی گذاشتیم؛ توی دنیای واقعی همین آبجکتِ مشترک می‌تونه داده‌های سنگینِ مشترک رو نگه داره. نکته اصلی اینه که چای‌ساز برای هر «نوع» چای فقط یه بار آبجکت می‌سازه و دفعه‌های بعد همون رو پس می‌ده؛ شماره میز هم از بیرون به سفارش وصل می‌شه، نه داخل خودِ چای.
 
 <details>
 <summary>Python</summary>
@@ -8387,48 +8242,60 @@ void main() {
 <div dir="ltr">
 
 ```python
-class GreenTea:
+# KarakTea is the flyweight: the shared, intrinsic part.
+class KarakTea:
     pass
 
 
+# TeaMaker acts as the factory and caches one tea object per type.
 class TeaMaker:
-    _availableTea = {}
+    def __init__(self):
+        self.available_tea = {}
 
-    def make(self, preference):
-        if not preference in self._availableTea:
-            self._availableTea[preference] = GreenTea()
+    def make(self, tea_type):
+        if tea_type not in self.available_tea:
+            self.available_tea[tea_type] = KarakTea()
 
-        return self._availableTea[preference]
+        return self.available_tea[tea_type]
+
+    def total_teas_made(self):
+        return len(self.available_tea)
 
 
 class TeaShop:
-    _orders = {}
-    _teaMaker = None
+    def __init__(self, tea_maker):
+        self.orders = {}
+        self.tea_maker = tea_maker
 
-    def __init__(self, teaMaker):
-        self._teaMaker = teaMaker
-
-    def takeOrder(self, teaType, table):
-        self._orders[table] = self._teaMaker.make(teaType)
+    def take_order(self, tea_type, table):
+        # Table number is the extrinsic state, passed in from outside.
+        self.orders[table] = self.tea_maker.make(tea_type)
 
     def serve(self):
-        for table, tea in self._orders.iteritems():
-            print("Serving tea to table #" + str(table))
+        for table in self.orders:
+            print("Serving Karak Tea to table #" + str(table))
 
 
 # ----------------------------
 
-teaMaker = TeaMaker()
-shop = TeaShop(teaMaker)
+tea_maker = TeaMaker()
+shop = TeaShop(tea_maker)
 
-shop.takeOrder('less sugar', 1)
-shop.takeOrder('more milk', 2)
-shop.takeOrder('without sugar', 5)
+shop.take_order("Karak", 1)
+shop.take_order("Karak", 3)
+shop.take_order("Karak", 5)
+shop.take_order("Karak", 7)
+shop.take_order("Karak", 9)
 
 shop.serve()
-# Serving tea to table# 1
-# Serving tea to table# 2
-# Serving tea to table# 5
+
+print("Total tea objects made: " + str(tea_maker.total_teas_made()))
+# Serving Karak Tea to table #1
+# Serving Karak Tea to table #3
+# Serving Karak Tea to table #5
+# Serving Karak Tea to table #7
+# Serving Karak Tea to table #9
+# Total tea objects made: 1
 ```
 
 </div>
@@ -8440,55 +8307,67 @@ shop.serve()
 <div dir="ltr">
 
 ```typescript
-class GreenTea {
+// KarakTea is the flyweight: the shared, intrinsic part.
+class KarakTea {
 }
 
+// TeaMaker acts as the factory and caches one tea object per type.
 class TeaMaker {
-    private availableTea: { [key: string]: GreenTea } = {};
+    private availableTea: { [key: string]: KarakTea } = {};
 
-    make(preference: string): GreenTea {
-        if (!(preference in this.availableTea)) {
-            this.availableTea[preference] = new GreenTea();
+    make(teaType: string): KarakTea {
+        if (!(teaType in this.availableTea)) {
+            this.availableTea[teaType] = new KarakTea();
         }
 
-        return this.availableTea[preference];
+        return this.availableTea[teaType];
+    }
+
+    totalTeasMade(): number {
+        return Object.keys(this.availableTea).length;
     }
 }
 
 class TeaShop {
-    private orders: { [key: number]: GreenTea } = {};
+    private orders: { [key: number]: KarakTea } = {};
     private teaMaker: TeaMaker;
 
     constructor(teaMaker: TeaMaker) {
         this.teaMaker = teaMaker;
     }
 
-    takeOrder(teaType: string, table: number) {
+    takeOrder(teaType: string, table: number): void {
+        // Table number is the extrinsic state, passed in from outside.
         this.orders[table] = this.teaMaker.make(teaType);
     }
 
-    serve() {
+    serve(): void {
         for (const table in this.orders) {
-            const tea = this.orders[table];
-            console.log(`Serving tea to table #${table}`);
+            console.log("Serving Karak Tea to table #" + table);
         }
     }
 }
 
 // ----------------------------
 
-    let
-teaMaker = new TeaMaker();
-let shop = new TeaShop(teaMaker);
+const teaMaker = new TeaMaker();
+const shop = new TeaShop(teaMaker);
 
-shop.takeOrder("less sugar", 1);
-shop.takeOrder("more milk", 2);
-shop.takeOrder("without sugar", 5);
+shop.takeOrder("Karak", 1);
+shop.takeOrder("Karak", 3);
+shop.takeOrder("Karak", 5);
+shop.takeOrder("Karak", 7);
+shop.takeOrder("Karak", 9);
 
 shop.serve();
-// Serving tea to table# 1
-// Serving tea to table# 2
-// Serving tea to table# 5
+
+console.log("Total tea objects made: " + teaMaker.totalTeasMade());
+// Serving Karak Tea to table #1
+// Serving Karak Tea to table #3
+// Serving Karak Tea to table #5
+// Serving Karak Tea to table #7
+// Serving Karak Tea to table #9
+// Total tea objects made: 1
 ```
 
 </div>
@@ -8501,21 +8380,27 @@ shop.serve();
 
 <div dir="ltr">
 
-```javaScript
-class GreenTea {
+```javascript
+// KarakTea is the flyweight: the shared, intrinsic part.
+class KarakTea {
 }
 
+// TeaMaker acts as the factory and caches one tea object per type.
 class TeaMaker {
     constructor() {
         this.availableTea = {};
     }
 
-    make(preference) {
-        if (!(preference in this.availableTea)) {
-            this.availableTea[preference] = new GreenTea();
+    make(teaType) {
+        if (!(teaType in this.availableTea)) {
+            this.availableTea[teaType] = new KarakTea();
         }
 
-        return this.availableTea[preference];
+        return this.availableTea[teaType];
+    }
+
+    totalTeasMade() {
+        return Object.keys(this.availableTea).length;
     }
 }
 
@@ -8526,13 +8411,13 @@ class TeaShop {
     }
 
     takeOrder(teaType, table) {
+        // Table number is the extrinsic state, passed in from outside.
         this.orders[table] = this.teaMaker.make(teaType);
     }
 
     serve() {
         for (const table in this.orders) {
-            const tea = this.orders[table];
-            console.log(`Serving tea to table #${table}`);
+            console.log("Serving Karak Tea to table #" + table);
         }
     }
 }
@@ -8541,14 +8426,21 @@ class TeaShop {
 const teaMaker = new TeaMaker();
 const shop = new TeaShop(teaMaker);
 
-shop.takeOrder("less sugar", 1);
-shop.takeOrder("more milk", 2);
-shop.takeOrder("without sugar", 5);
+shop.takeOrder("Karak", 1);
+shop.takeOrder("Karak", 3);
+shop.takeOrder("Karak", 5);
+shop.takeOrder("Karak", 7);
+shop.takeOrder("Karak", 9);
 
 shop.serve();
-// Serving tea to table #1
-// Serving tea to table #2
-// Serving tea to table #5
+
+console.log("Total tea objects made: " + teaMaker.totalTeasMade());
+// Serving Karak Tea to table #1
+// Serving Karak Tea to table #3
+// Serving Karak Tea to table #5
+// Serving Karak Tea to table #7
+// Serving Karak Tea to table #9
+// Total tea objects made: 1
 ```
 
 </div>
@@ -8560,33 +8452,40 @@ shop.serve();
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+using System.Collections.Generic;
 
-// Anything that will be cached is flyweight.
-// Types of tea here will be flyweights.
+
+// KarakTea is the flyweight: the shared, intrinsic part.
 class KarakTea
 {
 }
 
-// Acts as a factory and saves the tea
+// Acts as a factory and caches one tea object per type.
 class TeaMaker
 {
-  private Dictionary<string,KarakTea> mAvailableTea = new Dictionary<string,KarakTea>();
+  private Dictionary<string, KarakTea> mAvailableTea = new Dictionary<string, KarakTea>();
 
-  public KarakTea Make(string preference)
+  public KarakTea Make(string teaType)
   {
-    if (!mAvailableTea.ContainsKey(preference))
+    if (!mAvailableTea.ContainsKey(teaType))
     {
-      mAvailableTea[preference] = new KarakTea();
+      mAvailableTea[teaType] = new KarakTea();
     }
 
-    return mAvailableTea[preference];
+    return mAvailableTea[teaType];
+  }
+
+  public int TotalTeasMade()
+  {
+    return mAvailableTea.Count;
   }
 }
 
 class TeaShop
 {
-  private Dictionary<int,KarakTea> mOrders = new Dictionary<int,KarakTea>();
+  private Dictionary<int, KarakTea> mOrders = new Dictionary<int, KarakTea>();
   private readonly TeaMaker mTeaMaker;
 
   public TeaShop(TeaMaker teaMaker)
@@ -8596,13 +8495,15 @@ class TeaShop
 
   public void TakeOrder(string teaType, int table)
   {
+    // Table number is the extrinsic state, passed in from outside.
     mOrders[table] = mTeaMaker.Make(teaType);
   }
 
   public void Serve()
   {
-    foreach(var table  in mOrders.Keys){
-      Console.WriteLine($"Serving Tea to table # {table}");
+    foreach (var table in mOrders.Keys)
+    {
+      Console.WriteLine("Serving Karak Tea to table #" + table);
     }
   }
 }
@@ -8612,14 +8513,21 @@ class TeaShop
 var teaMaker = new TeaMaker();
 var teaShop = new TeaShop(teaMaker);
 
-teaShop.TakeOrder("less sugar", 1);
-teaShop.TakeOrder("more milk", 2);
-teaShop.TakeOrder("without sugar", 5);
+teaShop.TakeOrder("Karak", 1);
+teaShop.TakeOrder("Karak", 3);
+teaShop.TakeOrder("Karak", 5);
+teaShop.TakeOrder("Karak", 7);
+teaShop.TakeOrder("Karak", 9);
 
 teaShop.Serve();
-// Serving tea to table# 1
-// Serving tea to table# 2
-// Serving tea to table# 5
+
+Console.WriteLine("Total tea objects made: " + teaMaker.TotalTeasMade());
+// Serving Karak Tea to table #1
+// Serving Karak Tea to table #3
+// Serving Karak Tea to table #5
+// Serving Karak Tea to table #7
+// Serving Karak Tea to table #9
+// Total tea objects made: 1
 
 ```
 
@@ -8632,25 +8540,29 @@ teaShop.Serve();
 
 <div dir="ltr">
 
-```PHP
-// Anything that will be cached is flyweight.
-// Types of tea here will be flyweights.
+```php
+// KarakTea is the flyweight: the shared, intrinsic part.
 class KarakTea
 {
 }
 
-// Acts as a factory and saves the tea
+// Acts as a factory and caches one tea object per type.
 class TeaMaker
 {
   private array $mAvailableTea = [];
 
-  public function make(string $preference): KarakTea
+  public function make(string $teaType): KarakTea
   {
-    if (!array_key_exists($preference, $this->mAvailableTea)) {
-      $this->mAvailableTea[$preference] = new KarakTea();
+    if (!array_key_exists($teaType, $this->mAvailableTea)) {
+      $this->mAvailableTea[$teaType] = new KarakTea();
     }
 
-    return $this->mAvailableTea[$preference];
+    return $this->mAvailableTea[$teaType];
+  }
+
+  public function totalTeasMade(): int
+  {
+    return count($this->mAvailableTea);
   }
 }
 
@@ -8664,13 +8576,14 @@ class TeaShop
 
   public function takeOrder(string $teaType, int $table): void
   {
+    // Table number is the extrinsic state, passed in from outside.
     $this->mOrders[$table] = $this->teaMaker->make($teaType);
   }
 
   public function serve(): void
   {
     foreach ($this->mOrders as $table => $tea) {
-      echo "Serving tea to table # $table\n";
+      echo "Serving Karak Tea to table #$table\n";
     }
   }
 }
@@ -8678,14 +8591,21 @@ class TeaShop
 $teaMaker = new TeaMaker();
 $teaShop = new TeaShop($teaMaker);
 
-$teaShop->takeOrder("less sugar", 1);
-$teaShop->takeOrder("more milk", 2);
-$teaShop->takeOrder("without sugar", 5);
+$teaShop->takeOrder("Karak", 1);
+$teaShop->takeOrder("Karak", 3);
+$teaShop->takeOrder("Karak", 5);
+$teaShop->takeOrder("Karak", 7);
+$teaShop->takeOrder("Karak", 9);
 
 $teaShop->serve();
-// Serving tea to table# 1
-// Serving tea to table# 2
-// Serving tea to table# 5
+
+echo "Total tea objects made: " . $teaMaker->totalTeasMade() . "\n";
+// Serving Karak Tea to table #1
+// Serving Karak Tea to table #3
+// Serving Karak Tea to table #5
+// Serving Karak Tea to table #7
+// Serving Karak Tea to table #9
+// Total tea objects made: 1
 
 
 ```
@@ -8701,58 +8621,74 @@ $teaShop->serve();
 
 ```go
 
-type KarakTea struct {}
+// KarakTea is the flyweight: the shared, intrinsic part.
+type KarakTea struct{}
 
+// TeaMaker acts as the factory and caches one tea object per type.
 type TeaMaker struct {
     mAvailableTea map[string]*KarakTea
 }
 
-func (tm *TeaMaker) Make(preference string) *KarakTea {
-    if tm.mAvailableTea == nil {
-        tm.mAvailableTea = make(map[string]*KarakTea)
+func NewTeaMaker() *TeaMaker {
+    return &TeaMaker{mAvailableTea: make(map[string]*KarakTea)}
+}
+
+func (tm *TeaMaker) Make(teaType string) *KarakTea {
+    if _, ok := tm.mAvailableTea[teaType]; !ok {
+        tm.mAvailableTea[teaType] = &KarakTea{}
     }
-    if _, ok := tm.mAvailableTea[preference]; !ok {
-        tm.mAvailableTea[preference] = &KarakTea{}
-    }
-    return tm.mAvailableTea[preference]
+    return tm.mAvailableTea[teaType]
+}
+
+func (tm *TeaMaker) TotalTeasMade() int {
+    return len(tm.mAvailableTea)
 }
 
 type TeaShop struct {
-    mOrders map[int]*KarakTea
+    mTables   []int
+    mOrders   map[int]*KarakTea
     mTeaMaker *TeaMaker
 }
 
 func NewTeaShop(teaMaker *TeaMaker) *TeaShop {
-    if teaMaker == nil {
-        panic("teaMaker cannot be nil")
-    }
     return &TeaShop{
-        mOrders: make(map[int]*KarakTea),
+        mOrders:   make(map[int]*KarakTea),
         mTeaMaker: teaMaker,
     }
 }
 
 func (ts *TeaShop) TakeOrder(teaType string, table int) {
+    // Table number is the extrinsic state, passed in from outside.
+    if _, ok := ts.mOrders[table]; !ok {
+        ts.mTables = append(ts.mTables, table)
+    }
     ts.mOrders[table] = ts.mTeaMaker.Make(teaType)
 }
 
 func (ts *TeaShop) Serve() {
-    for table := range ts.mOrders {
-        fmt.Printf("Serving Tea to table # %d\n", table)
+    for _, table := range ts.mTables {
+        fmt.Printf("Serving Karak Tea to table #%d\n", table)
     }
 }
 // ---------------------------
-teaMaker := &TeaMaker{}
+teaMaker := NewTeaMaker()
 teaShop := NewTeaShop(teaMaker)
 
-teaShop.TakeOrder("less sugar", 1)
-teaShop.TakeOrder("more milk", 2)
-teaShop.TakeOrder("without sugar", 5)
+teaShop.TakeOrder("Karak", 1)
+teaShop.TakeOrder("Karak", 3)
+teaShop.TakeOrder("Karak", 5)
+teaShop.TakeOrder("Karak", 7)
+teaShop.TakeOrder("Karak", 9)
 
 teaShop.Serve()
-// Serving Tea to table # 1
-// Serving Tea to table # 2
-// Serving Tea to table # 5
+
+fmt.Printf("Total tea objects made: %d\n", teaMaker.TotalTeasMade())
+// Serving Karak Tea to table #1
+// Serving Karak Tea to table #3
+// Serving Karak Tea to table #5
+// Serving Karak Tea to table #7
+// Serving Karak Tea to table #9
+// Total tea objects made: 1
 
 ```
 
@@ -8766,40 +8702,46 @@ teaShop.Serve()
 <div dir="ltr">
 
 ```java
-// Anything that will be cached is flyweight.
-// Types of tea here will be flyweights.
+import java.util.*;
+
+// KarakTea is the flyweight: the shared, intrinsic part.
 class KarakTea {
 }
 
-// Acts as a factory and saves the tea
+// Acts as a factory and caches one tea object per type.
 class TeaMaker {
     private Map<String, KarakTea> availableTea = new HashMap<>();
 
-    public KarakTea make(String preference) {
-        if (!availableTea.containsKey(preference)) {
-            availableTea.put(preference, new KarakTea());
+    public KarakTea make(String teaType) {
+        if (!availableTea.containsKey(teaType)) {
+            availableTea.put(teaType, new KarakTea());
         }
-        return availableTea.get(preference);
+        return availableTea.get(teaType);
+    }
+
+    public int totalTeasMade() {
+        return availableTea.size();
     }
 }
 
 class TeaShop {
-    private Map<Integer, KarakTea> orders = new HashMap<>();
+    private Map<Integer, KarakTea> orders = new LinkedHashMap<>();
     private TeaMaker teaMaker;
 
     public TeaShop(TeaMaker teaMaker) {
-        if(teaMaker == null)
+        if (teaMaker == null)
             throw new IllegalArgumentException("teaMaker cannot be null");
         this.teaMaker = teaMaker;
     }
 
     public void takeOrder(String teaType, int table) {
+        // Table number is the extrinsic state, passed in from outside.
         orders.put(table, teaMaker.make(teaType));
     }
 
     public void serve() {
-        for(Integer tableNo : orders.keySet()) {
-            System.out.println("Serving Tea to table " + tableNo);
+        for (Integer table : orders.keySet()) {
+            System.out.println("Serving Karak Tea to table #" + table);
         }
     }
 }
@@ -8809,14 +8751,21 @@ class TeaShop {
 TeaMaker teaMaker = new TeaMaker();
 TeaShop teaShop = new TeaShop(teaMaker);
 
-teaShop.takeOrder("less sugar", 1);
-teaShop.takeOrder("more milk", 2);
-teaShop.takeOrder("without sugar", 5);
+teaShop.takeOrder("Karak", 1);
+teaShop.takeOrder("Karak", 3);
+teaShop.takeOrder("Karak", 5);
+teaShop.takeOrder("Karak", 7);
+teaShop.takeOrder("Karak", 9);
 
 teaShop.serve();
-// Serving tea to table 1
-// Serving tea to table 2
-// Serving tea to table 5
+
+System.out.println("Total tea objects made: " + teaMaker.totalTeasMade());
+// Serving Karak Tea to table #1
+// Serving Karak Tea to table #3
+// Serving Karak Tea to table #5
+// Serving Karak Tea to table #7
+// Serving Karak Tea to table #9
+// Total tea objects made: 1
 ```
 
 </div>
@@ -8832,26 +8781,34 @@ teaShop.serve();
 #include <iostream>
 #include <unordered_map>
 #include <string>
+#include <vector>
 
+// KarakTea is the flyweight: the shared, intrinsic part.
 class KarakTea {
     // Tea implementation
 };
 
+// TeaMaker acts as the factory and caches one tea object per type.
 class TeaMaker {
 private:
     std::unordered_map<std::string, KarakTea*> availableTea;
 
 public:
-    KarakTea* make(const std::string& preference) {
-        if (availableTea.find(preference) == availableTea.end()) {
-            availableTea[preference] = new KarakTea();
+    KarakTea* make(const std::string& teaType) {
+        if (availableTea.find(teaType) == availableTea.end()) {
+            availableTea[teaType] = new KarakTea();
         }
-        return availableTea[preference];
+        return availableTea[teaType];
+    }
+
+    int totalTeasMade() const {
+        return availableTea.size();
     }
 };
 
 class TeaShop {
 private:
+    std::vector<int> tables;
     std::unordered_map<int, KarakTea*> orders;
     TeaMaker& teaMaker;
 
@@ -8859,12 +8816,16 @@ public:
     TeaShop(TeaMaker& maker) : teaMaker(maker) {}
 
     void takeOrder(const std::string& teaType, int table) {
+        // Table number is the extrinsic state, passed in from outside.
+        if (orders.find(table) == orders.end()) {
+            tables.push_back(table);
+        }
         orders[table] = teaMaker.make(teaType);
     }
 
     void serve() {
-        for (const auto& order : orders) {
-            std::cout << "Serving tea to table " << order.first << std::endl;
+        for (int table : tables) {
+            std::cout << "Serving Karak Tea to table #" << table << std::endl;
         }
     }
 };
@@ -8875,14 +8836,21 @@ int main() {
     TeaMaker teaMaker;
     TeaShop teaShop(teaMaker);
 
-    teaShop.takeOrder("less sugar", 1);
-    teaShop.takeOrder("more milk", 2);
-    teaShop.takeOrder("without sugar", 5);
+    teaShop.takeOrder("Karak", 1);
+    teaShop.takeOrder("Karak", 3);
+    teaShop.takeOrder("Karak", 5);
+    teaShop.takeOrder("Karak", 7);
+    teaShop.takeOrder("Karak", 9);
 
     teaShop.serve();
-    // Serving tea to table 1
-    // Serving tea to table 2
-    // Serving tea to table 5
+
+    std::cout << "Total tea objects made: " << teaMaker.totalTeasMade() << std::endl;
+    // Serving Karak Tea to table #1
+    // Serving Karak Tea to table #3
+    // Serving Karak Tea to table #5
+    // Serving Karak Tea to table #7
+    // Serving Karak Tea to table #9
+    // Total tea objects made: 1
     return 0;
 }
 ```
@@ -8897,42 +8865,49 @@ int main() {
 <div dir="ltr">
 
 ```kotlin
+// KarakTea is the flyweight: the shared, intrinsic part.
 class KarakTea
 
+// TeaMaker acts as the factory and caches one tea object per type.
 class TeaMaker {
     private val availableTea = mutableMapOf<String, KarakTea>()
 
-    fun make(preference: String): KarakTea =
-        availableTea.getOrPut(preference) { KarakTea() }
+    fun make(teaType: String): KarakTea =
+        availableTea.getOrPut(teaType) { KarakTea() }
+
+    fun totalTeasMade(): Int = availableTea.size
 }
 
 class TeaShop(private val teaMaker: TeaMaker) {
     private val orders = mutableMapOf<Int, KarakTea>()
 
     fun takeOrder(teaType: String, table: Int) {
+        // Table number is the extrinsic state, passed in from outside.
         orders[table] = teaMaker.make(teaType)
     }
 
     fun serve() {
-        for (table in orders.keys.sorted()) {
-            println("Serving tea to table $table")
+        for (table in orders.keys) {
+            println("Serving Karak Tea to table #" + table)
         }
     }
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
     val teaMaker = TeaMaker()
-    val teaShop = TeaShop(teaMaker)
+    val shop = TeaShop(teaMaker)
 
-    teaShop.takeOrder("less sugar", 1)
-    teaShop.takeOrder("more milk", 2)
-    teaShop.takeOrder("without sugar", 5)
+    shop.takeOrder("Karak", 1)
+    shop.takeOrder("Karak", 3)
+    shop.takeOrder("Karak", 5)
+    shop.takeOrder("Karak", 7)
+    shop.takeOrder("Karak", 9)
 
-    teaShop.serve()
-    // Serving tea to table 1
-    // Serving tea to table 2
-    // Serving tea to table 5
+    shop.serve()
+
+    println("Total tea objects made: " + teaMaker.totalTeasMade())
 }
 ```
 
@@ -8945,31 +8920,35 @@ fun main() {
 <div dir="ltr">
 
 ```dart
-class GreenTea {}
+// KarakTea is the flyweight: the shared, intrinsic part.
+class KarakTea {}
 
+// TeaMaker acts as the factory and caches one tea object per type.
 class TeaMaker {
-  final Map<String, GreenTea> _availableTea = {};
+  final Map<String, KarakTea> _availableTea = {};
 
-  GreenTea make(String preference) {
-    _availableTea.putIfAbsent(preference, () => GreenTea());
-    return _availableTea[preference]!;
+  KarakTea make(String teaType) {
+    return _availableTea.putIfAbsent(teaType, () => KarakTea());
   }
+
+  int totalTeasMade() => _availableTea.length;
 }
 
 class TeaShop {
-  final Map<int, GreenTea> _orders = {};
+  final Map<int, KarakTea> _orders = {};
   final TeaMaker _teaMaker;
 
   TeaShop(this._teaMaker);
 
   void takeOrder(String teaType, int table) {
+    // Table number is the extrinsic state, passed in from outside.
     _orders[table] = _teaMaker.make(teaType);
   }
 
   void serve() {
-    _orders.forEach((table, tea) {
-      print('Serving tea to table #$table');
-    });
+    for (var table in _orders.keys) {
+      print('Serving Karak Tea to table #$table');
+    }
   }
 }
 
@@ -8979,19 +8958,25 @@ void main() {
   var teaMaker = TeaMaker();
   var shop = TeaShop(teaMaker);
 
-  shop.takeOrder('less sugar', 1);
-  shop.takeOrder('more milk', 2);
-  shop.takeOrder('without sugar', 5);
+  shop.takeOrder('Karak', 1);
+  shop.takeOrder('Karak', 3);
+  shop.takeOrder('Karak', 5);
+  shop.takeOrder('Karak', 7);
+  shop.takeOrder('Karak', 9);
 
   shop.serve();
-  // Serving tea to table #1
-  // Serving tea to table #2
-  // Serving tea to table #5
+
+  print('Total tea objects made: ${teaMaker.totalTeasMade()}');
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی قراره تعداد خیلی زیادی آبجکت بسازی که بخش بزرگی از داده‌شون مشترکه و حافظه داره می‌ترکه»؛ ❌ «وقتی آبجکت‌هات کم‌اند یا حالت مشترکی ندارن که بشه share کرد».
+> 🪤 **دام رایج:** «به جای حالتِ مشترک و ثابت، روی حالتِ متغیر و بیرونی کش بگیری؛ اون‌وقت دیگه چیزی share نمی‌شه و کل ماجرا بی‌اثر می‌شه».
+
 
 <br>
 
@@ -8999,7 +8984,7 @@ void main() {
 
 <div align="center">
 
-## 🎱 Proxy
+## پراکسی (Proxy) 🎱
 
 </div>
 
@@ -9007,16 +8992,16 @@ void main() {
 🔐 <b>مثال دنیای واقعی: درِ رمزدار</b>
 </div>
 
-فرض کنید یه درِ مهم دارید (مثلاً درِ آزمایشگاه).
-شما مستقیم نمی‌رید با خودِ در کلنجار برید؛ اول رمز می‌زنید یا کارت می‌کشید.
+فرض کن یه درِ مهم داری (مثلاً درِ آزمایشگاه).
+تو مستقیم سراغ خودِ در نمی‌ری؛ اول رمز می‌زنی یا کارت می‌کشی.
 
-اگه رمز درست بود، در باز میشه. اگه غلط بود، اصلاً اجازه نمی‌ده به «درِ اصلی» دسترسی پیدا کنید.
-اون قفل/کارت‌خوان دقیقاً نقش یه واسطه رو داره که قبل از رسیدن شما به شیء اصلی، یه سری کار اضافه انجام میده (امنیت، لاگ، محدودیت، حتی کش!). 🛡️
+اگه رمز درست بود، در باز می‌شه. اگه غلط بود، اصلاً اجازه نمی‌ده به «درِ اصلی» دسترسی پیدا کنی.
+اون قفل/کارت‌خوان دقیقاً نقش یه واسطه رو داره که قبل از رسیدن تو به شیء اصلی، یه سری کار اضافه انجام می‌ده (امنیت، لاگ، محدودیت، حتی کش!). 🛡️
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"به جای دسترسی مستقیم به شیء اصلی، از یه واسطه استفاده کن که کنترل و قابلیت‌های اضافه بده."**
+> این پترن می‌گه: **«به جای دسترسی مستقیم به شیء اصلی، از یه واسطه استفاده کن که کنترل و قابلیت‌های اضافه بده.»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -9028,12 +9013,16 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+خلاصه‌اش این می‌شه که پراکسی یه کلاسه که نقش رابط رو برای یه شیء دیگه بازی می‌کنه.
+کلاینت به جای اینکه مستقیم سراغ شیء اصلی بره، با همین پراکسی حرف می‌زنه و اون پشت‌صحنه درخواست رو به شیء واقعی می‌رسونه.
+پراکسی می‌تونه فقط درخواست رو پاس بده، یا قبلش یه کار اضافه هم انجام بده؛ مثل کش کردن وقتی کار روی شیء اصلی سنگینه، یا چک کردن شرط‌ها قبل از اینکه به شیء اصلی دست بزنیم.
 
-خب بیاید مثال درب رو پیاده سازی کنیم.
+**مثال برنامه‌نویسی**
 
-اول اینترفیس درب رو میسازیم و بعدش یک مدل درب پیاده سازی میکنیم.
-در مرحله بعد هم یک پروکسی برای اضافه کردن امنیت به درب میسازیم.
+خب بیاید مثال درب رو پیاده‌سازی کنیم.
+
+اول اینترفیس درب رو می‌سازیم و بعدش یک مدل درب پیاده‌سازی می‌کنیم.
+در مرحله بعد هم یک پروکسی برای اضافه کردن امنیت به درب می‌سازیم.
 
 <details>
 <summary>Python</summary>
@@ -9042,35 +9031,33 @@ void main() {
 
 ```python
 class Door:
-    def open(self):
-        pass
+    def open(self, password):
+        raise NotImplementedError
 
     def close(self):
-        pass
+        raise NotImplementedError
 
 
 class LabDoor(Door):
-    def open(self):
+    def open(self, password):
         print("Opening lab door")
 
     def close(self):
-        print("Closing the lab door")
+        print("Closing lab door")
 
 
-class SecuredDoor():
-    _door = None
-
+class SecurityProxy(Door):
     def __init__(self, door):
         self.door = door
 
     def open(self, password):
         if self.authenticate(password):
-            self.door.open()
+            self.door.open(password)
         else:
-            print("Big no! It ain't possible.")
+            print("Big no! It is not possible.")
 
     def authenticate(self, password):
-        return password == '$ecr@t'
+        return password == "$ecr@t"
 
     def close(self):
         self.door.close()
@@ -9078,11 +9065,10 @@ class SecuredDoor():
 
 # ----------------------------
 
-door = SecuredDoor(LabDoor())
-door.open('invalid')  # Big no! It ain't possible
-
-door.open('$ecr@t')  # Opening lab door
-door.close()  # Closing Lab Door
+door = SecurityProxy(LabDoor())
+door.open("invalid")   # Big no! It is not possible.
+door.open("$ecr@t")    # Opening lab door
+door.close()           # Closing lab door
 ```
 
 </div>
@@ -9095,22 +9081,21 @@ door.close()  # Closing Lab Door
 
 ```typescript
 interface Door {
-    open(): void;
-
+    open(password: string): void;
     close(): void;
 }
 
 class LabDoor implements Door {
-    open(): void {
+    open(password: string): void {
         console.log("Opening lab door");
     }
 
     close(): void {
-        console.log("Closing the lab door");
+        console.log("Closing lab door");
     }
 }
 
-class SecuredDoor {
+class SecurityProxy implements Door {
     private door: Door;
 
     constructor(door: Door) {
@@ -9119,13 +9104,13 @@ class SecuredDoor {
 
     open(password: string): void {
         if (this.authenticate(password)) {
-            this.door.open();
+            this.door.open(password);
         } else {
-            console.log("Big no! It ain't possible.");
+            console.log("Big no! It is not possible.");
         }
     }
 
-    authenticate(password: string): boolean {
+    private authenticate(password: string): boolean {
         return password === "$ecr@t";
     }
 
@@ -9136,10 +9121,10 @@ class SecuredDoor {
 
 // ----------------------------
 
-const door = new SecuredDoor(new LabDoor());
-door.open("invalid"); // Big no! It ain't possible
-door.open("$ecr@t"); // Opening lab door
-door.close(); // Closing Lab Door
+const door = new SecurityProxy(new LabDoor());
+door.open("invalid");   // Big no! It is not possible.
+door.open("$ecr@t");    // Opening lab door
+door.close();           // Closing lab door
 ```
 
 </div>
@@ -9150,27 +9135,27 @@ door.close(); // Closing Lab Door
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class LabDoor {
-    open() {
+    open(password) {
         console.log("Opening lab door");
     }
 
     close() {
-        console.log("Closing the lab door");
+        console.log("Closing lab door");
     }
 }
 
-class SecuredDoor {
+class SecurityProxy {
     constructor(door) {
         this.door = door;
     }
 
     open(password) {
         if (this.authenticate(password)) {
-            this.door.open();
+            this.door.open(password);
         } else {
-            console.log("Big no! It ain't possible.");
+            console.log("Big no! It is not possible.");
         }
     }
 
@@ -9184,10 +9169,10 @@ class SecuredDoor {
 }
 
 
-const door = new SecuredDoor(new LabDoor());
-door.open("invalid");
-door.open("$ecr@t");
-door.close();
+const door = new SecurityProxy(new LabDoor());
+door.open("invalid");   // Big no! It is not possible.
+door.open("$ecr@t");    // Opening lab door
+door.close();           // Closing lab door
 ```
 
 </div>
@@ -9199,32 +9184,34 @@ door.close();
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+
 
 interface IDoor
 {
-  void Open();
+  void Open(string password);
   void Close();
 }
 
 class LabDoor : IDoor
 {
+  public void Open(string password)
+  {
+    Console.WriteLine("Opening lab door");
+  }
+
   public void Close()
   {
     Console.WriteLine("Closing lab door");
   }
-
-  public void Open()
-  {
-    Console.WriteLine("Opening lab door");
-  }
 }
 
-class SecuredDoor : IDoor
+class SecurityProxy : IDoor
 {
   private IDoor mDoor;
 
-  public SecuredDoor(IDoor door)
+  public SecurityProxy(IDoor door)
   {
     mDoor = door ?? throw new ArgumentNullException("door", "door can not be null");
   }
@@ -9233,11 +9220,11 @@ class SecuredDoor : IDoor
   {
     if (Authenticate(password))
     {
-      mDoor.Open();
+      mDoor.Open(password);
     }
     else
     {
-      Console.WriteLine("Big no! It ain't possible.");
+      Console.WriteLine("Big no! It is not possible.");
     }
   }
 
@@ -9254,11 +9241,10 @@ class SecuredDoor : IDoor
 
 // ----------------------------
 
-var door = new SecuredDoor(new LabDoor());
-door.Open("invalid"); // Big no! It ain't possible.
-
-door.Open("$ecr@t"); // Opening lab door
-door.Close(); // Closing lab door
+IDoor door = new SecurityProxy(new LabDoor());
+door.Open("invalid"); // Big no! It is not possible.
+door.Open("$ecr@t");  // Opening lab door
+door.Close();         // Closing lab door
 
 ```
 
@@ -9271,33 +9257,31 @@ door.Close(); // Closing lab door
 
 <div dir="ltr">
 
-```PHP
+```php
 interface DoorInterface {
-  public function open();
+  public function open(string $password);
   public function close();
 }
 
 class LabDoor implements DoorInterface {
+  public function open(string $password) {
+    echo "Opening lab door\n";
+  }
+
   public function close() {
     echo "Closing lab door\n";
   }
-
-  public function open() {
-    echo "Opening lab door\n";
-  }
 }
 
-class SecuredDoor implements DoorInterface {
-  private $door;
-
+class SecurityProxy implements DoorInterface {
   public function __construct(private DoorInterface $door) {
   }
 
   public function open(string $password) {
     if ($this->authenticate($password)) {
-      $this->door->open();
+      $this->door->open($password);
     } else {
-      echo "Big no! It ain't possible.\n";
+      echo "Big no! It is not possible.\n";
     }
   }
 
@@ -9310,11 +9294,10 @@ class SecuredDoor implements DoorInterface {
   }
 }
 
-$door = new SecuredDoor(new LabDoor());
-$door->open('invalid');  // Big no! It ain't possible
-
-$door->open('$ecr@t');  // Opening lab door
-$door->close();  // Closing lab door
+$door = new SecurityProxy(new LabDoor());
+$door->open('invalid');  // Big no! It is not possible.
+$door->open('$ecr@t');   // Opening lab door
+$door->close();          // Closing lab door
 ```
 
 </div>
@@ -9331,51 +9314,50 @@ package main
 
 import "fmt"
 
-type IDoor interface {
-    Open()
+type Door interface {
+    Open(password string)
     Close()
 }
 
-type LabDoor struct {}
+type LabDoor struct{}
+
+func (d LabDoor) Open(password string) {
+    fmt.Println("Opening lab door")
+}
 
 func (d LabDoor) Close() {
     fmt.Println("Closing lab door")
 }
 
-func (d LabDoor) Open() {
-    fmt.Println("Opening lab door")
+type SecurityProxy struct {
+    door Door
 }
 
-type SecuredDoor struct {
-    door IDoor
+func NewSecurityProxy(door Door) *SecurityProxy {
+    return &SecurityProxy{door: door}
 }
 
-func NewSecuredDoor(door IDoor) *SecuredDoor {
-    return &SecuredDoor{door: door}
-}
-
-func (d *SecuredDoor) Open(password string) {
-    if d.Authenticate(password) {
-        d.door.Open()
+func (d *SecurityProxy) Open(password string) {
+    if d.authenticate(password) {
+        d.door.Open(password)
     } else {
-        fmt.Println("Big no! It ain't possible.")
+        fmt.Println("Big no! It is not possible.")
     }
 }
 
-func (d *SecuredDoor) Authenticate(password string) bool {
+func (d *SecurityProxy) authenticate(password string) bool {
     return password == "$ecr@t"
 }
 
-func (d *SecuredDoor) Close() {
+func (d *SecurityProxy) Close() {
     d.door.Close()
 }
 
 func main() {
-    door := NewSecuredDoor(LabDoor{})
-    door.Open("invalid") // Big no! It ain't possible.
-
-    door.Open("$ecr@t") // Opening lab door
-    door.Close() // Closing lab door
+    door := NewSecurityProxy(LabDoor{})
+    door.Open("invalid") // Big no! It is not possible.
+    door.Open("$ecr@t")  // Opening lab door
+    door.Close()         // Closing lab door
 }
 
 ```
@@ -9391,44 +9373,40 @@ func main() {
 
 ```java
 interface Door {
-    void open();
+    void open(String password);
     void close();
 }
 
 class LabDoor implements Door {
+    public void open(String password) {
+        System.out.println("Opening lab door");
+    }
+
     public void close() {
         System.out.println("Closing lab door");
     }
-
-    public void open() {
-        System.out.println("Opening lab door");
-    }
 }
 
-class SecuredDoor implements Door {
+class SecurityProxy implements Door {
     private Door door;
 
-    public SecuredDoor(Door door) {
+    public SecurityProxy(Door door) {
         if (door == null)
             throw new IllegalArgumentException("door can not be null");
         this.door = door;
     }
 
+    @Override
     public void open(String password) {
         if (authenticate(password)) {
-            door.open();
+            door.open(password);
         } else {
-            System.out.println("Big no! It ain't possible.");
+            System.out.println("Big no! It is not possible.");
         }
     }
 
     private boolean authenticate(String password) {
         return "$ecr@t".equals(password);
-    }
-
-    @Override
-    public void open() {
-        System.out.println("Big no! It ain't possible.");
     }
 
     @Override
@@ -9439,9 +9417,9 @@ class SecuredDoor implements Door {
 
 // ----------------------------
 
-SecuredDoor door = new SecuredDoor(new LabDoor());
+Door door = new SecurityProxy(new LabDoor());
 
-door.open("invalid");       // Big no! It ain't possible.
+door.open("invalid");       // Big no! It is not possible.
 door.open("$ecr@t");        // Opening lab door
 door.close();               // Closing lab door
 ```
@@ -9462,13 +9440,13 @@ door.close();               // Closing lab door
 class Door {
 public:
     virtual ~Door() = default;
-    virtual void open() = 0;
+    virtual void open(const std::string& password) = 0;
     virtual void close() = 0;
 };
 
 class LabDoor : public Door {
 public:
-    void open() override {
+    void open(const std::string& password) override {
         std::cout << "Opening lab door" << std::endl;
     }
 
@@ -9477,7 +9455,7 @@ public:
     }
 };
 
-class SecuredDoor : public Door {
+class SecurityProxy : public Door {
 private:
     Door& door;
 
@@ -9486,17 +9464,13 @@ private:
     }
 
 public:
-    SecuredDoor(Door& d) : door(d) {}
+    SecurityProxy(Door& d) : door(d) {}
 
-    void open() override {
-        std::cout << "Big no! It ain't possible." << std::endl;
-    }
-
-    void open(const std::string& password) {
+    void open(const std::string& password) override {
         if (authenticate(password)) {
-            door.open();
+            door.open(password);
         } else {
-            std::cout << "Big no! It ain't possible." << std::endl;
+            std::cout << "Big no! It is not possible." << std::endl;
         }
     }
 
@@ -9509,9 +9483,9 @@ public:
 
 int main() {
     LabDoor labDoor;
-    SecuredDoor door(labDoor);
+    SecurityProxy door(labDoor);
 
-    door.open("invalid");       // Big no! It ain't possible.
+    door.open("invalid");       // Big no! It is not possible.
     door.open("$ecr@t");        // Opening lab door
     door.close();               // Closing lab door
     return 0;
@@ -9529,42 +9503,38 @@ int main() {
 
 ```kotlin
 interface Door {
-    fun open()
+    fun open(password: String)
     fun close()
 }
 
 class LabDoor : Door {
-    override fun open() = println("Opening lab door")
+    override fun open(password: String) = println("Opening lab door")
     override fun close() = println("Closing lab door")
 }
 
-class SecuredDoor(private val door: Door) : Door {
-    private fun authenticate(password: String) = password == "\$ecr@t"
-
-    override fun open() {
-        println("Big no! It ain't possible.")
-    }
-
-    fun open(password: String) {
+class SecurityProxy(private val door: Door) : Door {
+    override fun open(password: String) {
         if (authenticate(password)) {
-            door.open()
+            door.open(password)
         } else {
-            open()
+            println("Big no! It is not possible.")
         }
     }
+
+    private fun authenticate(password: String): Boolean = password == "\$ecr@t"
 
     override fun close() {
         door.close()
     }
 }
 
-// Usage
-fun main() {
-    val door = SecuredDoor(LabDoor())
+// ----------------------------
 
-    door.open()  // Big no! It ain't possible.
-    door.open("\$ecr@t")  // Opening lab door
-    door.close()          // Closing lab door
+fun main() {
+    val door = SecurityProxy(LabDoor())
+    door.open("invalid")
+    door.open("\$ecr@t")
+    door.close()
 }
 ```
 
@@ -9578,48 +9548,56 @@ fun main() {
 
 ```dart
 abstract class Door {
-  void open();
+  void open(String password);
   void close();
 }
 
 class LabDoor implements Door {
   @override
-  void open() => print('Opening lab door');
+  void open(String password) => print('Opening lab door');
 
   @override
-  void close() => print('Closing the lab door');
+  void close() => print('Closing lab door');
 }
 
-class SecuredDoor {
+class SecurityProxy implements Door {
   final Door _door;
 
-  SecuredDoor(this._door);
+  SecurityProxy(this._door);
 
+  @override
   void open(String password) {
     if (authenticate(password)) {
-      _door.open();
+      _door.open(password);
     } else {
-      print("Big no! It ain't possible.");
+      print('Big no! It is not possible.');
     }
   }
 
   bool authenticate(String password) => password == r'$ecr@t';
 
+  @override
   void close() => _door.close();
 }
 
 // ----------------------------
 
 void main() {
-  var door = SecuredDoor(LabDoor());
-  door.open('invalid');   // Big no! It ain't possible.
-  door.open(r'$ecr@t');   // Opening lab door
-  door.close();           // Closing the lab door
+  var door = SecurityProxy(LabDoor());
+  door.open('invalid');
+  door.open(r'$ecr@t');
+  door.close();
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ وقتی می‌خوای دسترسی به یه شیء رو کنترل کنی یا قبل و بعدش یه کار اضافه (امنیت، کش، لاگ) بچسبونی، بی‌اینکه خودِ شیء اصلی عوض بشه؛ ❌ وقتی فقط می‌خوای رفتارش رو گسترش بدی نه کنترلش، که اون‌وقت کار تزئین‌گره.
+> 🪤 **دام رایج:** پراکسی رو این‌قدر چاق نکن که کم‌کم منطق اصلی بره توش و دیگه معلوم نباشه شیء واقعی کیه.
+> 🔗 **فرقش با [تزئین‌گر (Decorator)](#تزئین‌گر-decorator-):** تزئین‌گر قابلیت اضافه می‌کنه و شفافه، پراکسی دسترسی رو واسطه‌گری و کنترل می‌کنه؛ و فرقش با [مبدل (Adapter)](#مبدل-adapter-) اینه که مبدل اینترفیس رو عوض می‌کنه، ولی پراکسی همون اینترفیس رو نگه می‌داره.
+
 
 <br>
 <br>
@@ -9630,15 +9608,15 @@ void main() {
 
 <div align="center">
 
-# 🎭 الگو‌های رفتاری (Behavioral Design Patterns)
+# الگوهای رفتاری (Behavioral Design Patterns) 🎭
 
 </div>
 
 به زبون ساده:
 
-> این الگوها به شما اجازه میدهند که رفتار کلاس‌ها رو تغییر بدین و یا اینکه این رفتار رو به کلاس‌های دیگه اضافه کنین.
+> این الگوها بهت اجازه می‌دن که رفتار کلاس‌ها رو تغییر بدی، یا این رفتار رو به کلاس‌های دیگه اضافه کنی.
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -9647,13 +9625,15 @@ void main() {
 
 </div>
 
+خلاصه: الگوهای رفتاری روی این تمرکز دارن که آبجکت‌ها چطور با هم حرف بزنن و کار رو بین خودشون تقسیم کنن.
+
 <br>
 
 ---
 
 <div align="center">
 
-## 🔗 Chain of Responsibility
+## زنجیره مسئولیت (Chain of Responsibility) 🔗
 
 </div>
 
@@ -9661,18 +9641,18 @@ void main() {
 💳 <b>مثال دنیای واقعی: پرداخت از چند حساب</b>
 </div>
 
-فرض کنید ۳ تا منبع پول دارید: حساب بانکی، حساب `PayPal` و کیف پول `Bitcoin`.
-حالا می‌خواید یک خرید انجام بدید. منطقیه سیستم چی‌کار کنه؟
+فرض کن ۳ تا منبع پول داری: حساب بانکی، حساب `PayPal` و کیف پول `Bitcoin`.
+حالا می‌خوای یک خرید انجام بدی. منطقیه سیستم چی‌کار کنه؟
 ۱. اول تلاش کن از حساب بانکی پرداخت کنه.
 ۲. اگه موجودی کافی نبود، بره سراغ `PayPal`.
 ۳. اگه اونم نشد، بره سراغ `Bitcoin`.
 
-یعنی درخواست پرداخت، توی یه مسیرِ مرحله‌به‌مرحله جلو میره تا یکی بالاخره جواب بده. 🧾
+یعنی درخواست پرداخت، توی یه مسیرِ مرحله‌به‌مرحله جلو می‌ره تا یکی بالاخره جواب بده. 🧾
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"درخواست رو بنداز توی یک زنجیره؛ هر مرحله نتونست انجام بده، پاس بده مرحله بعدی."**
+> این پترن می‌گه: **«درخواست رو بنداز توی یک زنجیره؛ هر مرحله نتونست انجام بده، پاس بده مرحله بعدی.»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -9682,23 +9662,22 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+به زبون خودمون: یک منبعِ درخواست داریم و یک رشته پردازنده که پشت سر هم چیده شدن. هر پردازنده می‌دونه چه نوع درخواستی رو خودش می‌تونه جواب بده؛ هرچی از پسش برنمیاد رو دست‌نخورده پاس می‌ده به پردازنده بعدیِ توی زنجیره.
 
-میخوایم همون مثال پرداخت رو باهم پیاده سازی کنیم.
+**مثال برنامه‌نویسی**
 
-خب توی کد بالا یک کلاس مرجع ساختیم که اسمش Account هست. این کلاس یک متد داره که اسمش pay هست. این متد یک مقدار رو میگیره
-و سعی میکنه اون مقدار رو از حساب خود پرداخت کنه. اگر موفق نشد، اون مقدار رو به حساب بعدی انتقال میده.
+می‌خوایم همون مثال پرداخت رو باهم پیاده‌سازی کنیم.
+
+بیا یه کلاس مرجع به اسم `Account` بسازیم که یه متد `pay` داره. این متد یه مقدار می‌گیره و سعی می‌کنه از حساب خودش پرداخت کنه؛ اگه موجودی کم بیاد، درخواست رو به حساب بعدی پاس می‌ده.
 
 نکته:
-تابع inspect.stack یک تابعیه که میتونه اطلاعاتی از فراخوانی تابع رو برگردونه. مثلا اگر ما از این تابع در یک تابع دیگه
-استفاده کنیم، این تابع میتونه اسم تابعی که از اون استفاده شده رو برگردونه.
+متد getName هر حساب با کمک type(self).__name__ اسم کلاس خودش رو برمی‌گردونه؛ یعنی Bank یا Paypal یا Bitcoin. این‌جوری توی پیام پرداخت دقیقاً معلوم می‌شه کدوم حساب جواب داده.
 
-خب حالا میخوایم یک حساب بانکی، یک حساب پی پال و یک حساب بیت کوین بسازیم.
+حالا یه حساب بانکی، یه حساب `PayPal` و یه حساب `Bitcoin` می‌سازیم.
 
-همونطور که میبینید اومدیم و بعد از ساختن این حساب‌ها اونارو به هم متصل کردیم!
+بعد از ساختنشون، حساب‌ها رو به‌ترتیب به هم وصل می‌کنیم تا زنجیره تشکیل بشه.
 
-سیستم اول سعی کرده با حساب بانکی پرداخت کنه ولی موجودی کافی نداشت، بعدش سعی کرده با حساب پی پال پرداخت کنه ولی موجودی
-کافی نداشت، و در نهایت با حساب بیت کوین پرداخت میکنه!
+وقتی پرداخت رو شروع کنیم، اول حساب بانکی امتحان می‌شه؛ چون موجودی کافی نداره، درخواست به `PayPal` پاس داده می‌شه و این بار پرداخت انجام می‌شه.
 
 <details>
 <summary>Python</summary>
@@ -9708,53 +9687,46 @@ void main() {
 ```python
 class Account:
     _successor = None
-    _balance = None
 
     def setNext(self, account):
         self._successor = account
 
     def pay(self, amountToPay):
-
         if self.canPay(amountToPay):
-            print("Paid " + str(amountToPay) + " using " + self.caller())
+            print("Paid " + str(amountToPay) + " using " + self.getName())
         elif self._successor:
-            print("Cannot pay using " + self.caller() + ". Proceeding ..")
+            print("Cannot pay using " + self.getName() + ". Proceeding ..")
             self._successor.pay(amountToPay)
         else:
-            raise ValueError("None of the accounts have enough balance")
+            print("None of the accounts have enough balance")
 
     def canPay(self, amount):
         return self.balance >= amount
-    def caller(self):
-        return str(type(self).__name__)
+
+    def getName(self):
+        return type(self).__name__
 
 
 class Bank(Account):
-    _balance = None
-
     def __init__(self, balance):
         self.balance = balance
 
 
 class Paypal(Account):
-    _balance = None
-
     def __init__(self, balance):
         self.balance = balance
 
 
 class Bitcoin(Account):
-    _balance = None
-
     def __init__(self, balance):
         self.balance = balance
 
 
 # ----------------------------
 
-bank = Bank(100)  # Bank with balance 100
-paypal = Paypal(200)  # Paypal with balance 200
-bitcoin = Bitcoin(300)  # Bitcoin with balance 300
+bank = Bank(100)        # Bank with balance 100
+paypal = Paypal(300)    # Paypal with balance 300
+bitcoin = Bitcoin(1000) # Bitcoin with balance 1000
 
 bank.setNext(paypal)
 paypal.setNext(bitcoin)
@@ -9765,9 +9737,8 @@ bank.pay(259)
 '''
 Output will be
 ==============
-Cannot pay using bank. Proceeding ..
-Cannot pay using paypal. Proceeding ..:
-Paid 259 using Bitcoin!
+Cannot pay using Bank. Proceeding ..
+Paid 259 using Paypal
 '''
 ```
 
@@ -9782,34 +9753,33 @@ Paid 259 using Bitcoin!
 ```typescript
 class Account {
     protected _successor: Account | null = null;
-    protected _balance: number | null = null;
+    protected _balance: number = 0;
 
     setNext(account: Account): void {
         this._successor = account;
     }
 
     pay(amountToPay: number): void {
-        const myCaller = (new Error().stack as string).split("at ")[2].split(" ")[0];
         if (this.canPay(amountToPay)) {
-            console.log(‍‍`Paid ${amountToPay} using ${myCaller}`
-        )
-            ;
+            console.log(`Paid ${amountToPay} using ${this.getName()}`);
         } else if (this._successor) {
-            console.log(`Cannot pay using ${myCaller}. Proceeding ..`);
+            console.log(`Cannot pay using ${this.getName()}. Proceeding ..`);
             this._successor.pay(amountToPay);
         } else {
-            throw new Error("None of the accounts have enough balance");
+            console.log("None of the accounts have enough balance");
         }
     }
 
     canPay(amount: number): boolean {
         return this._balance >= amount;
     }
+
+    getName(): string {
+        return this.constructor.name;
+    }
 }
 
 class Bank extends Account {
-    protected _balance: number | null = null;
-
     constructor(balance: number) {
         super();
         this._balance = balance;
@@ -9817,8 +9787,6 @@ class Bank extends Account {
 }
 
 class Paypal extends Account {
-    protected _balance: number | null = null;
-
     constructor(balance: number) {
         super();
         this._balance = balance;
@@ -9826,8 +9794,6 @@ class Paypal extends Account {
 }
 
 class Bitcoin extends Account {
-    protected _balance: number | null = null;
-
     constructor(balance: number) {
         super();
         this._balance = balance;
@@ -9836,35 +9802,14 @@ class Bitcoin extends Account {
 
 // ----------------------------
 
-const bank = new Bank(100);
-const paypal = new Paypal(200);
-const bitcoin = new Bitcoin(300);
+const bank = new Bank(100);        // Bank with balance 100
+const paypal = new Paypal(300);    // Paypal with balance 300
+const bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
 
 bank.setNext(paypal);
 paypal.setNext(bitcoin);
 
 bank.pay(259);
-
-''
-'
-Output
-will
-be
-=== === === === ==
-Cannot
-pay
-using
-bank.Proceeding..Cannot
-pay
-using
-paypal.Proceeding..
-:
-Paid
-259
-using
-Bitcoin!
-''
-'
 ```
 
 </div>
@@ -9874,7 +9819,7 @@ Bitcoin!
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Account {
     constructor() {
         this._successor = null;
@@ -9886,19 +9831,22 @@ class Account {
     }
 
     pay(amountToPay) {
-        const myCaller = (new Error().stack).split("at ")[2].split(" ")[0];
         if (this.canPay(amountToPay)) {
-            console.log(`Paid ${amountToPay} using ${myCaller}`);
+            console.log(`Paid ${amountToPay} using ${this.getName()}`);
         } else if (this._successor) {
-            console.log(`Cannot pay using ${myCaller}. Proceeding ..`);
+            console.log(`Cannot pay using ${this.getName()}. Proceeding ..`);
             this._successor.pay(amountToPay);
         } else {
-            throw new Error("None of the accounts have enough balance");
+            console.log("None of the accounts have enough balance");
         }
     }
 
     canPay(amount) {
         return this._balance >= amount;
+    }
+
+    getName() {
+        return this.constructor.name;
     }
 }
 
@@ -9923,10 +9871,11 @@ class Bitcoin extends Account {
     }
 }
 
+// ----------------------------
 
-const bank = new Bank(100);
-const paypal = new Paypal(200);
-const bitcoin = new Bitcoin(300);
+const bank = new Bank(100);        // Bank with balance 100
+const paypal = new Paypal(300);    // Paypal with balance 300
+const bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
 
 bank.setNext(paypal);
 paypal.setNext(bitcoin);
@@ -9942,35 +9891,37 @@ bank.pay(259);
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
 
 abstract class Account
 {
   private Account mSuccessor;
-  protected decimal mBalance;
+  protected int mBalance;
 
   public void SetNext(Account account)
   {
     mSuccessor = account;
   }
 
-  public void Pay(decimal amountTopay)
+  public void Pay(int amountToPay)
   {
-    if (CanPay(amountTopay))
+    if (CanPay(amountToPay))
     {
-      Console.WriteLine($"Paid {amountTopay:c} using {this.GetType().Name}.");
+      Console.WriteLine($"Paid {amountToPay} using {this.GetType().Name}");
     }
     else if (this.mSuccessor != null)
     {
-      Console.WriteLine($"Cannot pay using {this.GetType().Name}. Proceeding..");
-      mSuccessor.Pay(amountTopay);
+      Console.WriteLine($"Cannot pay using {this.GetType().Name}. Proceeding ..");
+      mSuccessor.Pay(amountToPay);
     }
     else
     {
-      throw new Exception("None of the accounts have enough balance");
+      Console.WriteLine("None of the accounts have enough balance");
     }
   }
-  private bool CanPay(decimal amount)
+
+  private bool CanPay(int amount)
   {
     return mBalance >= amount;
   }
@@ -9978,7 +9929,7 @@ abstract class Account
 
 class Bank : Account
 {
-  public Bank(decimal balance)
+  public Bank(int balance)
   {
     this.mBalance = balance;
   }
@@ -9986,7 +9937,7 @@ class Bank : Account
 
 class Paypal : Account
 {
-  public Paypal(decimal balance)
+  public Paypal(int balance)
   {
     this.mBalance = balance;
   }
@@ -9994,7 +9945,7 @@ class Paypal : Account
 
 class Bitcoin : Account
 {
-  public Bitcoin(decimal balance)
+  public Bitcoin(int balance)
   {
     this.mBalance = balance;
   }
@@ -10002,27 +9953,18 @@ class Bitcoin : Account
 
 // ----------------------------
 
-// Let's prepare a chain like below
-//      $bank->$paypal->$bitcoin
-//
-// First priority bank
-//      If bank can't pay then paypal
-//      If paypal can't pay then bit coin
-var bank = new Bank(100);          // Bank with balance 100
-var paypal = new Paypal(200);      // Paypal with balance 200
-var bitcoin = new Bitcoin(300);    // Bitcoin with balance 300
+var bank = new Bank(100);        // Bank with balance 100
+var paypal = new Paypal(300);    // Paypal with balance 300
+var bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
 
 bank.SetNext(paypal);
 paypal.SetNext(bitcoin);
 
-// Let's try to pay using the first priority i.e. bank
 bank.Pay(259);
 // Output will be
 // ==============
-// Cannot pay using bank. Proceeding ..
-// Cannot pay using paypal. Proceeding ..:
-// Paid 259 using Bitcoin!
-
+// Cannot pay using Bank. Proceeding ..
+// Paid 259 using Paypal
 ```
 
 </div>
@@ -10034,7 +9976,7 @@ bank.Pay(259);
 
 <div dir="ltr">
 
-```PHP
+```php
 abstract class Account
 {
     private $successor;
@@ -10048,12 +9990,12 @@ abstract class Account
     public function pay($amountToPay)
     {
         if ($this->canPay($amountToPay)) {
-            echo "Paid " . number_format($amountToPay, 2) . " using " . get_class($this) . "." . PHP_EOL;
+            echo "Paid " . $amountToPay . " using " . get_class($this) . PHP_EOL;
         } elseif ($this->successor != null) {
-            echo "Cannot pay using " . get_class($this) . ". Proceeding.." . PHP_EOL;
+            echo "Cannot pay using " . get_class($this) . ". Proceeding .." . PHP_EOL;
             $this->successor->pay($amountToPay);
         } else {
-            throw new Exception("None of the accounts have enough balance");
+            echo "None of the accounts have enough balance" . PHP_EOL;
         }
     }
 
@@ -10087,27 +10029,20 @@ class Bitcoin extends Account
     }
 }
 
-// Let's prepare a chain like below
-//      $bank->$paypal->$bitcoin
-//
-// First priority bank
-//      If bank can't pay then PayPal
-//      If PayPal can't pay then bitcoin
-$bank = new Bank(100);          // Bank with balance 100
-$paypal = new Paypal(200);      // PayPal with balance 200
-$bitcoin = new Bitcoin(300);    // Bitcoin with balance 300
+// ----------------------------
+
+$bank = new Bank(100);        // Bank with balance 100
+$paypal = new Paypal(300);    // Paypal with balance 300
+$bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
 
 $bank->setNext($paypal);
 $paypal->setNext($bitcoin);
 
-// Let's try to pay using the first priority i.e. bank
 $bank->pay(259);
 // Output will be
 // ==============
-// Cannot pay using Bank. Proceeding..
-// Cannot pay using Paypal. Proceeding..
-// Paid 259.00 using Bitcoin.
-
+// Cannot pay using Bank. Proceeding ..
+// Paid 259 using Paypal
 ```
 
 </div>
@@ -10124,72 +10059,57 @@ package main
 
 import "fmt"
 
+type payer interface {
+	Pay(amountToPay int)
+}
+
 type Account struct {
-	mSuccessor *Account
-	mBalance   float64
+	successor payer
+	balance   int
+	name      string
 }
 
-func (a *Account) SetNext(account *Account) {
-	a.mSuccessor = account
+func (a *Account) SetNext(account payer) {
+	a.successor = account
 }
 
-func (a *Account) Pay(amountTopay float64) {
-	if a.CanPay(amountTopay) {
-		fmt.Printf("Paid %.2f using %T.\n", amountTopay, a)
-	} else if a.mSuccessor != nil {
-		fmt.Printf("Cannot pay using %T. Proceeding..\n", a)
-		a.mSuccessor.Pay(amountTopay)
+func (a *Account) Pay(amountToPay int) {
+	if a.canPay(amountToPay) {
+		fmt.Printf("Paid %d using %s\n", amountToPay, a.name)
+	} else if a.successor != nil {
+		fmt.Printf("Cannot pay using %s. Proceeding ..\n", a.name)
+		a.successor.Pay(amountToPay)
 	} else {
-		panic("None of the accounts have enough balance")
+		fmt.Println("None of the accounts have enough balance")
 	}
 }
 
-func (a *Account) CanPay(amount float64) bool {
-	return a.mBalance >= amount
+func (a *Account) canPay(amount int) bool {
+	return a.balance >= amount
 }
 
-type Bank struct {
-	Account
+func NewBank(balance int) *Account {
+	return &Account{balance: balance, name: "Bank"}
 }
 
-func NewBank(balance float64) *Bank {
-	return &Bank{Account{mBalance: balance}}
+func NewPaypal(balance int) *Account {
+	return &Account{balance: balance, name: "Paypal"}
 }
 
-type Paypal struct {
-	Account
-}
-
-func NewPaypal(balance float64) *Paypal {
-	return &Paypal{Account{mBalance: balance}}
-}
-
-type Bitcoin struct {
-	Account
-}
-
-func NewBitcoin(balance float64) *Bitcoin {
-	return &Bitcoin{Account{mBalance: balance}}
+func NewBitcoin(balance int) *Account {
+	return &Account{balance: balance, name: "Bitcoin"}
 }
 
 func main() {
-	// Let's prepare a chain like below
-	//      $bank->$paypal->$bitcoin
-	//
-	// First priority bank
-	//      If bank can't pay then paypal
-	//      If paypal can't pay then bit coin
-	bank := NewBank(100)         // Bank with balance 100
-	paypal := NewPaypal(200)     // Paypal with balance 200
-	bitcoin := NewBitcoin(300)   // Bitcoin with balance 300
+	bank := NewBank(100)        // Bank with balance 100
+	paypal := NewPaypal(300)    // Paypal with balance 300
+	bitcoin := NewBitcoin(1000) // Bitcoin with balance 1000
 
-	bank.SetNext(&paypal.Account)
-	paypal.SetNext(&bitcoin.Account)
+	bank.SetNext(paypal)
+	paypal.SetNext(bitcoin)
 
-	// Let's try to pay using the first priority i.e. bank
 	bank.Pay(259)
 }
-
 ```
 
 </div>
@@ -10210,15 +10130,15 @@ abstract class Account {
     successor = account;
   }
 
-  public void pay(Integer amountToPay) throws Exception {
-    String accountType = this.getClass().getName();
+  public void pay(Integer amountToPay) {
+    String accountType = this.getClass().getSimpleName();
     if (canPay(amountToPay)) {
-      System.out.println("Successful payment ($" + amountToPay +") by " + accountType + " account" );
+      System.out.println("Paid " + amountToPay + " using " + accountType);
     } else if (this.successor != null) {
-      System.out.println("Cannot pay by " + accountType + " account. Proceeding...");
+      System.out.println("Cannot pay using " + accountType + ". Proceeding ..");
       successor.pay(amountToPay);
     } else {
-      throw new Exception("None of the accounts have enough balance");
+      System.out.println("None of the accounts have enough balance");
     }
   }
 
@@ -10247,21 +10167,18 @@ class Bitcoin extends Account {
 
 // ----------------------------
 
-// Creating payment accounts
-Bank bank =         new Bank(100);      // Bank     balance 100
-Paypal paypal =     new Paypal(200);    // Paypal   balance 200
-Bitcoin bitcoin =   new Bitcoin(300);   // Bitcoin  balance 300
+Bank bank = new Bank(100);           // Bank with balance 100
+Paypal paypal = new Paypal(300);     // Paypal with balance 300
+Bitcoin bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
 
-// Creating payment chain
-// Bank -> Paypal -> Bitcoin
 bank.setNext(paypal);
 paypal.setNext(bitcoin);
 
-// Do pay
 bank.pay(259);
-// Cannot pay by Bank account.   Proceeding...
-// Cannot pay by Paypal account. Proceeding...
-// Successful payment ($259) by Bitcoin account!
+// Output will be
+// ==============
+// Cannot pay using Bank. Proceeding ..
+// Paid 259 using Paypal
 ```
 
 </div>
@@ -10280,9 +10197,11 @@ bank.pay(259);
 class Account {
 protected:
     Account* successor = nullptr;
-    int balance;
+    int balance = 0;
 
 public:
+    virtual ~Account() = default;
+
     void setNext(Account* account) {
         successor = account;
     }
@@ -10291,7 +10210,7 @@ public:
         if (canPay(amountToPay)) {
             std::cout << "Paid " << amountToPay << " using " << getName() << std::endl;
         } else if (successor != nullptr) {
-            std::cout << "Cannot pay using " << getName() << ". Proceeding..." << std::endl;
+            std::cout << "Cannot pay using " << getName() << ". Proceeding .." << std::endl;
             successor->pay(amountToPay);
         } else {
             std::cout << "None of the accounts have enough balance" << std::endl;
@@ -10327,17 +10246,16 @@ public:
 // ----------------------------
 
 int main() {
-    Bank bank(100);
-    Paypal paypal(200);
-    Bitcoin bitcoin(300);
+    Bank bank(100);        // Bank with balance 100
+    Paypal paypal(300);    // Paypal with balance 300
+    Bitcoin bitcoin(1000); // Bitcoin with balance 1000
 
     bank.setNext(&paypal);
     paypal.setNext(&bitcoin);
 
     bank.pay(259);
-    // Cannot pay using Bank. Proceeding...
-    // Cannot pay using Paypal. Proceeding...
-    // Paid 259 using Bitcoin
+    // Cannot pay using Bank. Proceeding ..
+    // Paid 259 using Paypal
     return 0;
 }
 ```
@@ -10361,45 +10279,37 @@ abstract class Account(protected var balance: Int) {
 
     fun pay(amountToPay: Int) {
         if (canPay(amountToPay)) {
-            println("Paid $amountToPay using ${getName()}")
+            println("Paid " + amountToPay + " using " + getName())
         } else if (successor != null) {
-            println("Cannot pay using ${getName()}. Proceeding...")
+            println("Cannot pay using " + getName() + ". Proceeding ..")
             successor!!.pay(amountToPay)
         } else {
             println("None of the accounts have enough balance")
         }
     }
 
-    protected abstract fun getName(): String
+    private fun canPay(amount: Int): Boolean = balance >= amount
 
-    private fun canPay(amount: Int) = balance >= amount
+    protected fun getName(): String = this::class.simpleName!!
 }
 
-class Bank(balance: Int) : Account(balance) {
-    override fun getName() = "Bank"
-}
+class Bank(balance: Int) : Account(balance)
 
-class Paypal(balance: Int) : Account(balance) {
-    override fun getName() = "Paypal"
-}
+class Paypal(balance: Int) : Account(balance)
 
-class Bitcoin(balance: Int) : Account(balance) {
-    override fun getName() = "Bitcoin"
-}
+class Bitcoin(balance: Int) : Account(balance)
 
-// Usage
+// ----------------------------
+
 fun main() {
-    val bank = Bank(100)
-    val paypal = Paypal(200)
-    val bitcoin = Bitcoin(300)
+    val bank = Bank(100)        // Bank with balance 100
+    val paypal = Paypal(300)    // Paypal with balance 300
+    val bitcoin = Bitcoin(1000) // Bitcoin with balance 1000
 
     bank.setNext(paypal)
     paypal.setNext(bitcoin)
 
     bank.pay(259)
-    // Cannot pay using Bank. Proceeding...
-    // Cannot pay using Paypal. Proceeding...
-    // Paid 259 using Bitcoin
 }
 ```
 
@@ -10414,40 +10324,42 @@ fun main() {
 ```dart
 abstract class Account {
   Account? _successor;
-  late double balance;
+  late int balance;
 
   void setNext(Account account) {
     _successor = account;
   }
 
-  void pay(double amountToPay) {
+  void pay(int amountToPay) {
     if (canPay(amountToPay)) {
-      print('Paid $amountToPay using $runtimeType');
+      print('Paid $amountToPay using ${getName()}');
     } else if (_successor != null) {
-      print('Cannot pay using $runtimeType. Proceeding ..');
+      print('Cannot pay using ${getName()}. Proceeding ..');
       _successor!.pay(amountToPay);
     } else {
-      throw Exception('None of the accounts have enough balance');
+      print('None of the accounts have enough balance');
     }
   }
 
-  bool canPay(double amount) => balance >= amount;
+  bool canPay(int amount) => balance >= amount;
+
+  String getName() => runtimeType.toString();
 }
 
 class Bank extends Account {
-  Bank(double balance) {
+  Bank(int balance) {
     this.balance = balance;
   }
 }
 
 class Paypal extends Account {
-  Paypal(double balance) {
+  Paypal(int balance) {
     this.balance = balance;
   }
 }
 
 class Bitcoin extends Account {
-  Bitcoin(double balance) {
+  Bitcoin(int balance) {
     this.balance = balance;
   }
 }
@@ -10455,22 +10367,24 @@ class Bitcoin extends Account {
 // ----------------------------
 
 void main() {
-  var bank = Bank(100);
-  var paypal = Paypal(200);
-  var bitcoin = Bitcoin(300);
+  var bank = Bank(100); // Bank with balance 100
+  var paypal = Paypal(300); // Paypal with balance 300
+  var bitcoin = Bitcoin(1000); // Bitcoin with balance 1000
 
   bank.setNext(paypal);
   paypal.setNext(bitcoin);
 
   bank.pay(259);
-  // Cannot pay using Bank. Proceeding ..
-  // Cannot pay using Paypal. Proceeding ..
-  // Paid 259 using Bitcoin
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی یک درخواست چند تا handler احتمالی داره و نمی‌دونی کدوم بالاخره جوابش رو می‌ده، بسپارش به زنجیره»؛ ❌ «وقتی همیشه دقیقاً یک نفر مسئوله و مقصد از اول معلومه، زنجیره فقط شلوغش می‌کنه».
+> 🪤 **دام رایج:** «اگه هیچ حلقه‌ای درخواست رو برنداره و ته زنجیره رو خالی بذاری، درخواست بی‌صدا گم می‌شه؛ همیشه حالت آخر رو مدیریت کن».
+
 
 <br>
 
@@ -10478,7 +10392,7 @@ void main() {
 
 <div align="center">
 
-## 👮 Command
+## فرمان (Command) 👮
 
 </div>
 
@@ -10486,18 +10400,18 @@ void main() {
 🎮 <b>مثال دنیای واقعی: ریموت کنترل</b>
 </div>
 
-فرض کنید یه ریموت دارید و می‌خواید لامپ رو روشن/خاموش کنید.
-ریموت خودش «لامپ» نیست و قرار هم نیست بدونه دقیقاً لامپ چطوری روشن میشه؛ فقط یه دستور آماده داره: «روشن کن» یا «خاموش کن».
+فرض کن یه ریموت داری و می‌خوای لامپ رو روشن/خاموش کنی.
+ریموت خودش «لامپ» نیست و قرار هم نیست بدونه دقیقاً لامپ چطوری روشن می‌شه؛ فقط یه دستور آماده داره: «روشن کن» یا «خاموش کن».
 
-حالا مزیتش چیه؟ چون دستورها آبجکت شدن، می‌تونید:
-*   چندتا دستور رو صف کنید
-*   لاگ بگیرید چی اجرا شد
-*   حتی (اگه خواستید) undo/redo هم اضافه کنید
+حالا مزیتش چیه؟ چون دستورها آبجکت شدن، می‌تونی:
+*   چندتا دستور رو صف کنی
+*   لاگ بگیری چی اجرا شد
+*   حتی (اگه خواستی) undo/redo هم اضافه کنی
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"درخواست رو تبدیل کن به یک آبجکتِ مستقل (Command) تا فرستنده از اجراکننده جدا بشه."**
+> این پترن می‌گه: **«درخواست رو تبدیل کن به یک آبجکتِ مستقل (Command) تا فرستنده از اجراکننده جدا بشه.»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -10507,17 +10421,21 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+خلاصه‌اش این می‌شه: توی برنامه‌نویسی شیءگرا، الگوی فرمان (Command) یه الگوی رفتاریه که یه درخواست رو می‌بنده توی یه آبجکت.
+این آبجکت همه‌چیزی که برای انجام اون کار لازمه رو نگه می‌داره: اسم متد، آبجکتی که متد مال اونه و مقدار پارامترها.
+این‌جوری می‌تونی همون درخواست رو نگه داری و هر وقت خواستی بعداً اجراش کنی.
 
-میخوایم یک کنترل برای لامپ درست کنیم (Receiver).
+**مثال برنامه‌نویسی**
+
+می‌خوایم یک کنترل برای لامپ درست کنیم (Receiver).
 
 اول باید یک ساختار برای دستورات درست کنیم (Command).
 
-و در نهایت باید کنترل رو بسازیم که میتونه دستورات رو اجرا کنه! (Invoker)
+و در نهایت کنترل رو می‌سازیم که می‌تونه دستورها رو اجرا کنه (Invoker).
 
-توی این کد هم اول یک لامپ میسازیم و بعدش کامند‌های روشن کردن و خاموش کردن رو ایجاد میکنیم!
+اول یه لامپ می‌سازیم، بعد دستورهای روشن و خاموش کردن رو می‌سازیم.
 
-در نهایت وقتی نیاز به خاموش کردن یا روشن کردن داشته باشیم این کامند‌هارو به کنترلمون میفرستیم و اون اجراشون میکنه!
+در نهایت هر وقت بخوایم چراغ رو روشن یا خاموش کنیم، این دستورها رو به کنترل می‌دیم و اون اجراشون می‌کنه.
 
 <details>
 <summary>Python</summary>
@@ -10534,12 +10452,13 @@ class Bulb:
 
 
 class Command:
-    _bulb = None
-
     def __init__(self, bulb):
         self._bulb = bulb
 
     def execute(self):
+        pass
+
+    def undo(self):
         pass
 
 
@@ -10547,10 +10466,16 @@ class TurnOn(Command):
     def execute(self):
         self._bulb.turnOn()
 
+    def undo(self):
+        self._bulb.turnOff()
+
 
 class TurnOff(Command):
     def execute(self):
         self._bulb.turnOff()
+
+    def undo(self):
+        self._bulb.turnOn()
 
 
 class RemoteControl:
@@ -10566,7 +10491,7 @@ turnOn = TurnOn(bulb)
 turnOff = TurnOff(bulb)
 
 remote = RemoteControl()
-remote.submit(turnOn)  # Bulb has been lit!
+remote.submit(turnOn)   # Bulb has been lit
 remote.submit(turnOff)  # Darkness!
 
 ```
@@ -10581,40 +10506,46 @@ remote.submit(turnOff)  # Darkness!
 
 ```typescript
 class Bulb {
-    turnOn() {
+    turnOn(): void {
         console.log("Bulb has been lit");
     }
 
-    turnOff() {
+    turnOff(): void {
         console.log("Darkness!");
     }
 }
 
-class Command {
-    protected _bulb: Bulb | null = null;
+interface Command {
+    execute(): void;
+    undo(): void;
+}
 
-    constructor(bulb: Bulb) {
-        this._bulb = bulb;
-    }
+class TurnOn implements Command {
+    constructor(private bulb: Bulb) {}
 
     execute(): void {
+        this.bulb.turnOn();
+    }
+
+    undo(): void {
+        this.bulb.turnOff();
     }
 }
 
-class TurnOn extends Command {
-    execute() {
-        this._bulb!.turnOn();
-    }
-}
+class TurnOff implements Command {
+    constructor(private bulb: Bulb) {}
 
-class TurnOff extends Command {
-    execute() {
-        this._bulb!.turnOff();
+    execute(): void {
+        this.bulb.turnOff();
+    }
+
+    undo(): void {
+        this.bulb.turnOn();
     }
 }
 
 class RemoteControl {
-    submit(command: { execute: () => void }) {
+    submit(command: Command): void {
         command.execute();
     }
 }
@@ -10627,7 +10558,7 @@ const turnOn = new TurnOn(bulb);
 const turnOff = new TurnOff(bulb);
 
 const remote = new RemoteControl();
-remote.submit(turnOn); // Bulb has been lit!
+remote.submit(turnOn);  // Bulb has been lit
 remote.submit(turnOff); // Darkness!
 ```
 
@@ -10638,7 +10569,7 @@ remote.submit(turnOff); // Darkness!
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Bulb {
     turnOn() {
         console.log("Bulb has been lit");
@@ -10655,7 +10586,9 @@ class Command {
     }
 
     execute() {
+    }
 
+    undo() {
     }
 }
 
@@ -10663,11 +10596,19 @@ class TurnOn extends Command {
     execute() {
         this._bulb.turnOn();
     }
+
+    undo() {
+        this._bulb.turnOff();
+    }
 }
 
 class TurnOff extends Command {
     execute() {
         this._bulb.turnOff();
+    }
+
+    undo() {
+        this._bulb.turnOn();
     }
 }
 
@@ -10677,6 +10618,7 @@ class RemoteControl {
     }
 }
 
+// ----------------------------
 
 const bulb = new Bulb();
 
@@ -10684,8 +10626,8 @@ const turnOn = new TurnOn(bulb);
 const turnOff = new TurnOff(bulb);
 
 const remote = new RemoteControl();
-remote.submit(turnOn);
-remote.submit(turnOff);
+remote.submit(turnOn);  // Bulb has been lit
+remote.submit(turnOff); // Darkness!
 ```
 
 </div>
@@ -10696,7 +10638,9 @@ remote.submit(turnOff);
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+
 
 // Receiver
 class Bulb
@@ -10712,13 +10656,10 @@ class Bulb
   }
 }
 
-
-
 interface ICommand
 {
   void Execute();
   void Undo();
-  void Redo();
 }
 
 // Command
@@ -10728,7 +10669,7 @@ class TurnOn : ICommand
 
   public TurnOn(Bulb bulb)
   {
-    mBulb = bulb ?? throw new ArgumentNullException("Bulb", "Bulb cannot be null");
+    mBulb = bulb;
   }
 
   public void Execute()
@@ -10739,11 +10680,6 @@ class TurnOn : ICommand
   public void Undo()
   {
     mBulb.TurnOff();
-  }
-
-  public void Redo()
-  {
-    Execute();
   }
 }
 
@@ -10753,7 +10689,7 @@ class TurnOff : ICommand
 
   public TurnOff(Bulb bulb)
   {
-    mBulb = bulb ?? throw new ArgumentNullException("Bulb", "Bulb cannot be null");
+    mBulb = bulb;
   }
 
   public void Execute()
@@ -10765,13 +10701,7 @@ class TurnOff : ICommand
   {
     mBulb.TurnOn();
   }
-
-  public void Redo()
-  {
-    Execute();
-  }
 }
-
 
 // Invoker
 class RemoteControl
@@ -10782,19 +10712,16 @@ class RemoteControl
   }
 }
 
-
 // ----------------------------
 
-  var bulb = new Bulb();
+var bulb = new Bulb();
 
-  var turnOn = new TurnOn(bulb);
-  var turnOff = new TurnOff(bulb);
+var turnOn = new TurnOn(bulb);
+var turnOff = new TurnOff(bulb);
 
-  var remote = new RemoteControl();
-  remote.Submit(turnOn); // Bulb has been lit!
-  remote.Submit(turnOff); // Darkness!
-
-  Console.ReadLine();
+var remote = new RemoteControl();
+remote.Submit(turnOn);  // Bulb has been lit
+remote.Submit(turnOff); // Darkness!
 
 ```
 
@@ -10807,7 +10734,7 @@ class RemoteControl
 
 <div dir="ltr">
 
-```PHP
+```php
 // Receiver
 class Bulb
 {
@@ -10826,7 +10753,6 @@ interface CommandInterface
 {
     public function execute();
     public function undo();
-    public function redo();
 }
 
 // Command
@@ -10845,11 +10771,6 @@ class TurnOn implements CommandInterface
     {
         $this->bulb->turnOff();
     }
-
-    public function redo()
-    {
-        $this->execute();
-    }
 }
 
 class TurnOff implements CommandInterface
@@ -10866,11 +10787,6 @@ class TurnOff implements CommandInterface
     public function undo()
     {
         $this->bulb->turnOn();
-    }
-
-    public function redo()
-    {
-        $this->execute();
     }
 }
 
@@ -10890,9 +10806,8 @@ $turnOn = new TurnOn($bulb);
 $turnOff = new TurnOff($bulb);
 
 $remote = new RemoteControl();
-$remote->submit($turnOn); // Bulb has been lit!
+$remote->submit($turnOn);  // Bulb has been lit
 $remote->submit($turnOff); // Darkness!
-
 
 ```
 
@@ -10922,11 +10837,10 @@ func (b *Bulb) TurnOff() {
     fmt.Println("Darkness!")
 }
 
-// ICommand interface
-type ICommand interface {
+// Command interface
+type Command interface {
     Execute()
     Undo()
-    Redo()
 }
 
 // Command
@@ -10942,10 +10856,6 @@ func (c *TurnOnCommand) Undo() {
     c.bulb.TurnOff()
 }
 
-func (c *TurnOnCommand) Redo() {
-    c.Execute()
-}
-
 type TurnOffCommand struct {
     bulb *Bulb
 }
@@ -10958,14 +10868,10 @@ func (c *TurnOffCommand) Undo() {
     c.bulb.TurnOn()
 }
 
-func (c *TurnOffCommand) Redo() {
-    c.Execute()
-}
-
 // Invoker
 type RemoteControl struct{}
 
-func (r *RemoteControl) Submit(command ICommand) {
+func (r *RemoteControl) Submit(command Command) {
     command.Execute()
 }
 
@@ -10979,7 +10885,6 @@ func main() {
     remote.Submit(turnOn)  // Bulb has been lit
     remote.Submit(turnOff) // Darkness!
 }
-
 
 ```
 
@@ -10996,18 +10901,17 @@ func main() {
 // Receiver
 class Bulb {
     public void turnOn() {
-        System.out.println("Bulb is turned ON");
+        System.out.println("Bulb has been lit");
     }
 
     public void turnOff() {
-        System.out.println("Bulb is turned OFF");
+        System.out.println("Darkness!");
     }
 }
 
 interface Command {
     void execute();
     void undo();
-    void redo();
 }
 
 // Command
@@ -11015,8 +10919,6 @@ class TurnOn implements Command {
     private Bulb bulb;
 
     public TurnOn(Bulb bulb) {
-        if (bulb == null)
-            throw new IllegalArgumentException("Bulb cannot be null");
         this.bulb = bulb;
     }
 
@@ -11028,11 +10930,6 @@ class TurnOn implements Command {
     @Override
     public void undo() {
         bulb.turnOff();
-    }
-
-    @Override
-    public void redo() {
-        execute();
     }
 }
 
@@ -11040,8 +10937,6 @@ class TurnOff implements Command {
     private Bulb bulb;
 
     public TurnOff(Bulb bulb) {
-        if (bulb == null)
-            throw new IllegalArgumentException("Bulb cannot be null");
         this.bulb = bulb;
     }
 
@@ -11053,11 +10948,6 @@ class TurnOff implements Command {
     @Override
     public void undo() {
         bulb.turnOn();
-    }
-
-    @Override
-    public void redo() {
-        execute();
     }
 }
 
@@ -11075,8 +10965,8 @@ TurnOn turnOnCmd = new TurnOn(bulb);
 TurnOff turnOffCmd = new TurnOff(bulb);
 
 RemoteControl remote = new RemoteControl();
-remote.submit(turnOnCmd);       // Bulb is turned ON
-remote.submit(turnOffCmd);      // Bulb is turned OFF
+remote.submit(turnOnCmd);  // Bulb has been lit
+remote.submit(turnOffCmd); // Darkness!
 ```
 
 </div>
@@ -11095,7 +10985,7 @@ remote.submit(turnOffCmd);      // Bulb is turned OFF
 class Bulb {
 public:
     void turnOn() {
-        std::cout << "Bulb has been lit!" << std::endl;
+        std::cout << "Bulb has been lit" << std::endl;
     }
 
     void turnOff() {
@@ -11109,7 +10999,6 @@ public:
     virtual ~Command() = default;
     virtual void execute() = 0;
     virtual void undo() = 0;
-    virtual void redo() = 0;
 };
 
 class TurnOn : public Command {
@@ -11126,10 +11015,6 @@ public:
     void undo() override {
         bulb.turnOff();
     }
-
-    void redo() override {
-        execute();
-    }
 };
 
 class TurnOff : public Command {
@@ -11145,10 +11030,6 @@ public:
 
     void undo() override {
         bulb.turnOn();
-    }
-
-    void redo() override {
-        execute();
     }
 };
 
@@ -11169,8 +11050,8 @@ int main() {
     TurnOff turnOff(bulb);
 
     RemoteControl remote;
-    remote.submit(turnOn);   // Bulb has been lit!
-    remote.submit(turnOff);  // Darkness!
+    remote.submit(turnOn);  // Bulb has been lit
+    remote.submit(turnOff); // Darkness!
     return 0;
 }
 ```
@@ -11187,26 +11068,24 @@ int main() {
 ```kotlin
 // Receiver
 class Bulb {
-    fun turnOn() = println("Bulb has been lit!")
+    fun turnOn() = println("Bulb has been lit")
     fun turnOff() = println("Darkness!")
 }
 
 interface Command {
     fun execute()
     fun undo()
-    fun redo()
 }
 
+// Command
 class TurnOn(private val bulb: Bulb) : Command {
     override fun execute() = bulb.turnOn()
     override fun undo() = bulb.turnOff()
-    override fun redo() = execute()
 }
 
 class TurnOff(private val bulb: Bulb) : Command {
     override fun execute() = bulb.turnOff()
     override fun undo() = bulb.turnOn()
-    override fun redo() = execute()
 }
 
 // Invoker
@@ -11216,14 +11095,16 @@ class RemoteControl {
     }
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
     val bulb = Bulb()
+
     val turnOn = TurnOn(bulb)
     val turnOff = TurnOff(bulb)
 
     val remote = RemoteControl()
-    remote.submit(turnOn)   // Bulb has been lit!
+    remote.submit(turnOn)   // Bulb has been lit
     remote.submit(turnOff)  // Darkness!
 }
 ```
@@ -11237,6 +11118,7 @@ fun main() {
 <div dir="ltr">
 
 ```dart
+// Receiver
 class Bulb {
   void turnOn() => print('Bulb has been lit');
   void turnOff() => print('Darkness!');
@@ -11244,24 +11126,33 @@ class Bulb {
 
 abstract class Command {
   void execute();
+  void undo();
 }
 
-class TurnOn extends Command {
+// Command
+class TurnOn implements Command {
   final Bulb _bulb;
   TurnOn(this._bulb);
 
   @override
   void execute() => _bulb.turnOn();
+
+  @override
+  void undo() => _bulb.turnOff();
 }
 
-class TurnOff extends Command {
+class TurnOff implements Command {
   final Bulb _bulb;
   TurnOff(this._bulb);
 
   @override
   void execute() => _bulb.turnOff();
+
+  @override
+  void undo() => _bulb.turnOn();
 }
 
+// Invoker
 class RemoteControl {
   void submit(Command command) {
     command.execute();
@@ -11277,7 +11168,7 @@ void main() {
   var turnOff = TurnOff(bulb);
 
   var remote = RemoteControl();
-  remote.submit(turnOn);  // Bulb has been lit
+  remote.submit(turnOn); // Bulb has been lit
   remote.submit(turnOff); // Darkness!
 }
 ```
@@ -11285,13 +11176,18 @@ void main() {
 </div>
 </details>
 
+> 🤔 **کی به کارش ببریم؟**
+> ✅ وقتی می‌خوای درخواست‌ها رو به آبجکت تبدیل کنی تا بشه صف‌شون کرد، لاگ گرفت یا undo/redo اضافه کرد؛ ❌ وقتی فقط یه متد ساده رو صدا می‌زنی و قرار نیست درخواست رو نگه داری یا برگردونی.
+> 🪤 **دام رایج:** برای هر کار کوچیکی یه کلاس Command جدا می‌سازی و کد بی‌دلیل پر از کلاس‌های یه‌خطی می‌شه.
+
+
 <br>
 
 ---
 
 <div align="center">
 
-## ➿ Iterator
+## پیمایش‌گر (Iterator) ➿
 
 </div>
 
@@ -11299,14 +11195,14 @@ void main() {
 📻 <b>مثال دنیای واقعی: رادیو (دکمه بعدی/قبلی)</b>
 </div>
 
-شما وقتی رادیو گوش می‌دید، فقط دکمه «بعدی» یا «قبلی» رو می‌زنید و فرکانس عوض میشه.
-برای شما مهم نیست رادیو فرکانس‌ها رو کجا و چطوری ذخیره کرده (لیست؟ جدول؟ چی؟).
-فقط می‌خواید یکی یکی بین گزینه‌ها حرکت کنید. همین! 😄
+تو وقتی رادیو گوش می‌دی، فقط دکمه «بعدی» یا «قبلی» رو می‌زنی و فرکانس عوض می‌شه.
+برای تو مهم نیست رادیو فرکانس‌ها رو کجا و چطوری ذخیره کرده (لیست؟ جدول؟ چی؟).
+فقط می‌خوای یکی یکی بین گزینه‌ها حرکت کنی. همین! 😄
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"روی یک مجموعه قدم بزن، بدون اینکه ساختار داخلی اون مجموعه رو لو بدی."**
+> این پترن می‌گه: **«روی یک مجموعه قدم بزن، بدون اینکه ساختار داخلی اون مجموعه رو لو بدی.»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -11317,14 +11213,13 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+خلاصه‌اش این می‌شه: پیمایش‌گر (Iterator) یه ابزاره که باهاش روی عناصر یک مجموعه (Container) قدم می‌زنی و بهشون دسترسی پیدا می‌کنی. این الگو، منطق پیمایش رو از خود مجموعه جدا می‌کنه؛ هرچند گاهی پیمایش به ساختار همون مجموعه گره خورده و نمی‌شه کاملاً جداش کرد.
 
-این مثال رو میخوایم یکم پایتونیک پیش بریم! میدونید که توی پایتون دو تا مفهوم Iterable و Iterator رو داریم پس میریم ازشون
-استفاده کنیم!
+**مثال برنامه‌نویسی**
 
-این کلاس یک Iterator هستش که میتونه توی یک WordsCollection جابجا بشه و عناصرش رو برگردونه!
+اینجا یه لیست از ایستگاه‌های رادیو (RadioStation) داریم که هر کدوم یه فرکانس دارن. لیست رو طوری می‌سازیم که قابل پیمایش باشه؛ بعد یکی‌یکی روی ایستگاه‌ها قدم می‌زنیم و فرکانس هر کدوم رو چاپ می‌کنیم.
 
-توی این کد هم میتونید ببینید که چطوری میتونیم از Iterator‌ها استفاده کنیم!
+توی این کد می‌تونی ببینی که چطور بدون اینکه بدونی ایستگاه‌ها داخل چی ذخیره شدن، فقط با یه حلقه ساده روشون حرکت می‌کنی.
 
 <details>
 <summary>Python</summary>
@@ -11334,71 +11229,56 @@ void main() {
 ```python
 from __future__ import annotations
 from collections.abc import Iterable, Iterator
-from typing import Any, List
+from typing import List
 
 
-class AlphabeticalOrderIterator(Iterator):
-    _position: int = None
+class RadioStation:
+    def __init__(self, frequency: float) -> None:
+        self._frequency = frequency
 
-    def __init__(self, collection: WordsCollection, reverse: bool = False) -> None:
-        self._collection = collection
-        self._reverse = reverse
-        self._position = -1 if reverse else 0
+    def get_frequency(self) -> float:
+        return self._frequency
 
-    def __next__(self):
-        try:
-            value = self._collection[self._position]
-            self._position += -1 if self._reverse else 1
-        except IndexError:
+
+class StationIterator(Iterator):
+    def __init__(self, stations: List[RadioStation]) -> None:
+        self._stations = stations
+        self._position = 0
+
+    def __next__(self) -> RadioStation:
+        if self._position >= len(self._stations):
             raise StopIteration()
+        station = self._stations[self._position]
+        self._position += 1
+        return station
 
-        return value
 
+class RadioStationList(Iterable):
+    def __init__(self) -> None:
+        self._stations: List[RadioStation] = []
 
-class WordsCollection(Iterable):
-    def __init__(self, collection: List[Any] = []) -> None:
-        self._collection = collection
+    def add(self, station: RadioStation) -> None:
+        self._stations.append(station)
 
-    def __iter__(self) -> AlphabeticalOrderIterator:
-        return AlphabeticalOrderIterator(self._collection)
+    def __iter__(self) -> StationIterator:
+        return StationIterator(self._stations)
 
-    def get_reverse_iterator(self) -> AlphabeticalOrderIterator:
-        return AlphabeticalOrderIterator(self._collection, True)
-
-    def add_item(self, item: Any) -> None:
-        self._collection.append(item)
-
-#----------------------------
+# ----------------------------
 
 if __name__ == "__main__":
-    collection = WordsCollection()
-    collection.add_item("First")
-    collection.add_item("Second")
-    collection.add_item("Third")
+    stations = RadioStationList()
+    stations.add(RadioStation(89.0))
+    stations.add(RadioStation(101.0))
+    stations.add(RadioStation(102.5))
 
-    print("Straight traversal:")
-    print("\n".join(collection))
-
-    print("\n")
-    print("Reverse traversal:")
-    print("\n".join(collection.get_reverse_iterator()), end="")
-
-
-
+    for station in stations:
+        print(f"{station.get_frequency():.1f}")
 
 '''
-Output will be
-==============
-Straight traversal:
-First
-Second
-Third
-
-
-Reverse traversal:
-Third
-Second
-First%
+Output:
+89.0
+101.0
+102.5
 '''
 ```
 
@@ -11411,64 +11291,56 @@ First%
 <div dir="ltr">
 
 ```typescript
-interface Iterator<T> {
-    next(): { value: T; done: boolean };
+class RadioStation {
+    constructor(private frequency: number) {}
+
+    getFrequency(): number {
+        return this.frequency;
+    }
 }
 
-class AlphabeticalOrderIterator implements Iterator<string> {
-    private position: number;
+class StationIterator implements Iterator<RadioStation> {
+    private position = 0;
 
-    constructor(private collection: WordsCollection, private reverse = false) {
-        this.position = this.reverse ? -1 : 0;
-    }
+    constructor(private stations: RadioStation[]) {}
 
-    next() {
-        try {
-            const value = this.collection.collection[this.position];
-            this.position += this.reverse ? -1 : 1;
-            return {value, done: false};
-        } catch (error) {
-            return {value: undefined, done: true};
+    next(): IteratorResult<RadioStation> {
+        if (this.position < this.stations.length) {
+            const value = this.stations[this.position];
+            this.position += 1;
+            return { value, done: false };
         }
+        return { value: undefined as any, done: true };
     }
 }
 
-class WordsCollection {
-    collection: string[];
+class RadioStationList {
+    private stations: RadioStation[] = [];
 
-    constructor(collection: string[] = []) {
-        this.collection = collection;
+    add(station: RadioStation): void {
+        this.stations.push(station);
     }
 
-    [Symbol.iterator]() {
-        return new AlphabeticalOrderIterator(this);
-    }
-
-    getReverseIterator() {
-        return new AlphabeticalOrderIterator(this, true);
-    }
-
-    addItem(item: string) {
-        this.collection.push(item);
+    [Symbol.iterator](): Iterator<RadioStation> {
+        return new StationIterator(this.stations);
     }
 }
 
 // ----------------------------
 
-const collection = new WordsCollection();
-collection.addItem("First");
-collection.addItem("Second");
-collection.addItem("Third");
+const stations = new RadioStationList();
+stations.add(new RadioStation(89.0));
+stations.add(new RadioStation(101.0));
+stations.add(new RadioStation(102.5));
 
-console.log("Straight traversal:");
-for (const item of collection) {
-    console.log(item);
+for (const station of stations) {
+    console.log(station.getFrequency().toFixed(1));
 }
 
-console.log("\nReverse traversal:");
-for (const item of collection.getReverseIterator()) {
-    console.log(item);
-}
+// Output:
+// 89.0
+// 101.0
+// 102.5
 ```
 
 </div>
@@ -11478,61 +11350,62 @@ for (const item of collection.getReverseIterator()) {
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
-class AlphabeticalOrderIterator {
-    constructor(collection, reverse = false) {
-        this.collection = collection;
-        this.reverse = reverse;
-        this.position = this.reverse ? collection.collection.length - 1 : 0;
+```javascript
+class RadioStation {
+    constructor(frequency) {
+        this.frequency = frequency;
+    }
+
+    getFrequency() {
+        return this.frequency;
+    }
+}
+
+class StationIterator {
+    constructor(stations) {
+        this.stations = stations;
+        this.position = 0;
     }
 
     next() {
-        if (this.position >= 0 && this.position < this.collection.collection.length) {
-            const value = this.collection.collection[this.position];
-            this.position += this.reverse ? -1 : 1;
+        if (this.position < this.stations.length) {
+            const value = this.stations[this.position];
+            this.position += 1;
             return { value, done: false };
-        } else {
-            return { value: undefined, done: true };
         }
+        return { value: undefined, done: true };
     }
 }
 
-class WordsCollection {
-    constructor(collection = []) {
-        this.collection = collection;
+class RadioStationList {
+    constructor() {
+        this.stations = [];
+    }
+
+    add(station) {
+        this.stations.push(station);
     }
 
     [Symbol.iterator]() {
-        return new AlphabeticalOrderIterator(this);
-    }
-
-    getReverseIterator() {
-        return new AlphabeticalOrderIterator(this, true);
-    }
-
-    addItem(item) {
-        this.collection.push(item);
+        return new StationIterator(this.stations);
     }
 }
 
+// ----------------------------
 
-const collection = new WordsCollection();
-collection.addItem("First");
-collection.addItem("Second");
-collection.addItem("Third");
+const stations = new RadioStationList();
+stations.add(new RadioStation(89.0));
+stations.add(new RadioStation(101.0));
+stations.add(new RadioStation(102.5));
 
-console.log("Straight traversal:");
-for (const item of collection) {
-    console.log(item);
+for (const station of stations) {
+    console.log(station.getFrequency().toFixed(1));
 }
 
-console.log("\nReverse traversal:");
-const reverseIterator = collection.getReverseIterator();
-let result = reverseIterator.next();
-while (!result.done) {
-    console.log(result.value);
-    result = reverseIterator.next();
-}
+// Output:
+// 89.0
+// 101.0
+// 102.5
 ```
 
 </div>
@@ -11543,87 +11416,66 @@ while (!result.done) {
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Globalization;
 
 class RadioStation
 {
-  private float mFrequency;
+    private float mFrequency;
 
-  public RadioStation(float frequency)
-  {
-    mFrequency = frequency;
-  }
+    public RadioStation(float frequency)
+    {
+        mFrequency = frequency;
+    }
 
-  public float GetFrequecy()
-  {
-    return mFrequency;
-  }
-
+    public float GetFrequency()
+    {
+        return mFrequency;
+    }
 }
-
 
 class StationList : IEnumerable<RadioStation>
 {
-  List<RadioStation> mStations = new List<RadioStation>();
+    private List<RadioStation> mStations = new List<RadioStation>();
 
-  public RadioStation this[int index]
-  {
-    get { return mStations[index]; }
-    set { mStations.Insert(index, value); }
-  }
-
-  public void Add(RadioStation station)
-  {
-    mStations.Add(station);
-  }
-
-  public void Remove(RadioStation station)
-  {
-    mStations.Remove(station);
-  }
-
-  public IEnumerator<RadioStation> GetEnumerator()
-  {
-    return this.GetEnumerator();
-  }
-
-  IEnumerator IEnumerable.GetEnumerator()
-  {
-    //Use can switch to this internal collection if you do not want to transform
-    //return mStations.GetEnumerator();
-
-    //use this if you want to transform the object before rendering
-    foreach (var x in mStations)
+    public void Add(RadioStation station)
     {
-      yield return x;
+        mStations.Add(station);
     }
-  }
+
+    public IEnumerator<RadioStation> GetEnumerator()
+    {
+        foreach (var station in mStations)
+        {
+            yield return station;
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }
-
-
 
 // ----------------------------
 
 var stations = new StationList();
-var station1 = new RadioStation(89);
-stations.Add(station1);
+stations.Add(new RadioStation(89.0f));
+stations.Add(new RadioStation(101.0f));
+stations.Add(new RadioStation(102.5f));
 
-var station2 = new RadioStation(101);
-stations.Add(station2);
-
-var station3 = new RadioStation(102);
-stations.Add(station3);
-
-foreach(var x in stations)
+foreach (var station in stations)
 {
-  Console.Write(x.GetFrequecy());
+    Console.WriteLine(station.GetFrequency().ToString("F1", CultureInfo.InvariantCulture));
 }
 
-var q = stations.Where(x => x.GetFrequecy() == 89).FirstOrDefault();
-Console.WriteLine(q.GetFrequecy());
-
-Console.ReadLine();
-
+// Output:
+// 89.0
+// 101.0
+// 102.5
 ```
 
 </div>
@@ -11635,7 +11487,7 @@ Console.ReadLine();
 
 <div dir="ltr">
 
-```PHP
+```php
 class RadioStation
 {
     private $mFrequency;
@@ -11660,45 +11512,27 @@ class StationList implements IteratorAggregate
         array_push($this->mStations, $station);
     }
 
-    public function remove(RadioStation $station)
+    public function getIterator(): Iterator
     {
-        $index = array_search($station, $this->mStations, true);
-        if ($index !== false) {
-            array_splice($this->mStations, $index, 1);
-        }
-    }
-
-    public function getIterator()
-    {
-        // Use can switch to this internal collection if you do not want to transform
-        // return new ArrayIterator($this->mStations);
-
-        // Use this if you want to transform the object before rendering
-        foreach ($this->mStations as $x) {
-            yield $x;
+        foreach ($this->mStations as $station) {
+            yield $station;
         }
     }
 }
 
 $stations = new StationList();
-$station1 = new RadioStation(89);
-$stations->add($station1);
+$stations->add(new RadioStation(89.0));
+$stations->add(new RadioStation(101.0));
+$stations->add(new RadioStation(102.5));
 
-$station2 = new RadioStation(101);
-$stations->add($station2);
-
-$station3 = new RadioStation(102);
-$stations->add($station3);
-
-foreach ($stations as $x) {
-    echo $x->getFrequency() . ' ';
+foreach ($stations as $station) {
+    echo number_format($station->getFrequency(), 1) . "\n";
 }
 
-$q = array_filter($stations, function ($x) {
-    return $x->getFrequency() == 89;
-});
-echo reset($q)->getFrequency();
-
+// Output:
+// 89.0
+// 101.0
+// 102.5
 ```
 
 </div>
@@ -11741,41 +11575,6 @@ func (s *StationList) Add(station *RadioStation) {
     s.stations = append(s.stations, station)
 }
 
-func (s *StationList) Remove(station *RadioStation) {
-    for i, v := range s.stations {
-        if v == station {
-            s.stations = append(s.stations[:i], s.stations[i+1:]...)
-            break
-        }
-    }
-}
-
-func (s *StationList) GetStation(index int) *RadioStation {
-    return s.stations[index]
-}
-
-func (s *StationList) Len() int {
-    return len(s.stations)
-}
-
-func (s *StationList) Less(i, j int) bool {
-    return s.stations[i].GetFrequency() < s.stations[j].GetFrequency()
-}
-
-func (s *StationList) Swap(i, j int) {
-    s.stations[i], s.stations[j] = s.stations[j], s.stations[i]
-}
-
-func (s *StationList) Sort() {
-    sort.Sort(s)
-}
-
-func (s *StationList) Search(station *RadioStation) int {
-    return sort.Search(len(s.stations), func(i int) bool {
-        return s.stations[i].GetFrequency() >= station.GetFrequency()
-    })
-}
-
 func (s *StationList) Iterator() <-chan *RadioStation {
     ch := make(chan *RadioStation)
     go func() {
@@ -11789,25 +11588,19 @@ func (s *StationList) Iterator() <-chan *RadioStation {
 
 func main() {
     stations := NewStationList()
-    station1 := NewRadioStation(89)
-    stations.Add(station1)
-
-    station2 := NewRadioStation(101)
-    stations.Add(station2)
-
-    station3 := NewRadioStation(102)
-    stations.Add(station3)
+    stations.Add(NewRadioStation(89.0))
+    stations.Add(NewRadioStation(101.0))
+    stations.Add(NewRadioStation(102.5))
 
     for station := range stations.Iterator() {
-        fmt.Println(station.GetFrequency())
+        fmt.Printf("%.1f\n", station.GetFrequency())
     }
-
-    q := sort.Search(stations.Len(), func(i int) bool {
-        return stations.GetStation(i).GetFrequency() >= 89
-    })
-    fmt.Println(stations.GetStation(q).GetFrequency())
 }
 
+// Output:
+// 89.0
+// 101.0
+// 102.5
 ```
 
 </div>
@@ -11820,6 +11613,8 @@ func main() {
 <div dir="ltr">
 
 ```java
+import java.util.*;
+
 class RadioStation {
     private float frequency;
 
@@ -11839,44 +11634,32 @@ class StationList implements Iterable<RadioStation> {
         stations = new ArrayList<>();
     }
 
-    public List<RadioStation> getStations() {
-        return stations;
-    }
-
     public void add(RadioStation station) {
         stations.add(station);
     }
 
-    public void remove(RadioStation station) {
-        stations.remove(station);
-    }
-
     @Override
     public Iterator<RadioStation> iterator() {
-        return this.getStations().iterator();
+        return stations.iterator();
     }
 }
 
 // ----------------------------
 
 StationList stations = new StationList();
-RadioStation station1 = new RadioStation(89);
-stations.add(station1);
-
-RadioStation station2 = new RadioStation(101);
-stations.add(station2);
-
-RadioStation station3 = new RadioStation(102);
-stations.add(station3);
+stations.add(new RadioStation(89.0f));
+stations.add(new RadioStation(101.0f));
+stations.add(new RadioStation(102.5f));
 
 Iterator<RadioStation> stationIterator = stations.iterator();
 while (stationIterator.hasNext()) {
-RadioStation radioStation = stationIterator.next();
-System.out.println(radioStation.getFrequency());
+    RadioStation radioStation = stationIterator.next();
+    System.out.println(radioStation.getFrequency());
 }
+// Output:
 // 89.0
 // 101.0
-// 102.0
+// 102.5
 ```
 
 </div>
@@ -11891,6 +11674,7 @@ System.out.println(radioStation.getFrequency());
 ```cpp
 #include <iostream>
 #include <vector>
+#include <iomanip>
 
 class RadioStation {
 private:
@@ -11913,15 +11697,6 @@ public:
         stations.push_back(station);
     }
 
-    void remove(const RadioStation& station) {
-        for (auto it = stations.begin(); it != stations.end(); ++it) {
-            if (it->getFrequency() == station.getFrequency()) {
-                stations.erase(it);
-                break;
-            }
-        }
-    }
-
     std::vector<RadioStation>::iterator begin() {
         return stations.begin();
     }
@@ -11935,16 +11710,18 @@ public:
 
 int main() {
     StationList stations;
-    stations.add(RadioStation(89));
-    stations.add(RadioStation(101));
-    stations.add(RadioStation(102));
+    stations.add(RadioStation(89.0f));
+    stations.add(RadioStation(101.0f));
+    stations.add(RadioStation(102.5f));
 
     for (auto& station : stations) {
-        std::cout << station.getFrequency() << std::endl;
+        std::cout << std::fixed << std::setprecision(1)
+                  << station.getFrequency() << std::endl;
     }
-    // 89
-    // 101
-    // 102
+    // Output:
+    // 89.0
+    // 101.0
+    // 102.5
     return 0;
 }
 ```
@@ -11959,37 +11736,31 @@ int main() {
 <div dir="ltr">
 
 ```kotlin
-data class RadioStation(private val frequency: Float) {
-    fun getFrequency() = frequency
+class RadioStation(private val frequency: Float) {
+    fun getFrequency(): Float = frequency
 }
 
 class StationList : Iterable<RadioStation> {
     private val stations = mutableListOf<RadioStation>()
 
     fun add(station: RadioStation) {
-        stations += station
-    }
-
-    fun remove(station: RadioStation) {
-        stations.removeIf { it.getFrequency() == station.getFrequency() }
+        stations.add(station)
     }
 
     override fun iterator(): Iterator<RadioStation> = stations.iterator()
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
     val stations = StationList()
-    stations.add(RadioStation(89f))
-    stations.add(RadioStation(101f))
-    stations.add(RadioStation(102f))
+    stations.add(RadioStation(89.0f))
+    stations.add(RadioStation(101.0f))
+    stations.add(RadioStation(102.5f))
 
     for (station in stations) {
         println(station.getFrequency())
     }
-    // 89.0
-    // 101.0
-    // 102.0
 }
 ```
 
@@ -12002,35 +11773,53 @@ fun main() {
 <div dir="ltr">
 
 ```dart
-class WordsCollection extends Iterable<String> {
-  final List<String> _collection = [];
+import 'dart:collection';
 
-  void addItem(String item) {
-    _collection.add(item);
+class RadioStation {
+  final double _frequency;
+
+  RadioStation(this._frequency);
+
+  double getFrequency() => _frequency;
+}
+
+class StationIterator implements Iterator<RadioStation> {
+  final List<RadioStation> _stations;
+  int _position = -1;
+
+  StationIterator(this._stations);
+
+  @override
+  RadioStation get current => _stations[_position];
+
+  @override
+  bool moveNext() {
+    _position++;
+    return _position < _stations.length;
+  }
+}
+
+class StationList extends IterableBase<RadioStation> {
+  final List<RadioStation> _stations = [];
+
+  void add(RadioStation station) {
+    _stations.add(station);
   }
 
   @override
-  Iterator<String> get iterator => _collection.iterator;
-
-  Iterable<String> get reversed => _collection.reversed;
+  Iterator<RadioStation> get iterator => StationIterator(_stations);
 }
 
 // ----------------------------
 
 void main() {
-  var collection = WordsCollection();
-  collection.addItem('First');
-  collection.addItem('Second');
-  collection.addItem('Third');
+  var stations = StationList();
+  stations.add(RadioStation(89.0));
+  stations.add(RadioStation(101.0));
+  stations.add(RadioStation(102.5));
 
-  print('Straight traversal:');
-  for (var item in collection) {
-    print(item);
-  }
-
-  print('\nReverse traversal:');
-  for (var item in collection.reversed) {
-    print(item);
+  for (var station in stations) {
+    print(station.getFrequency().toStringAsFixed(1));
   }
 }
 ```
@@ -12038,13 +11827,19 @@ void main() {
 </div>
 </details>
 
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی می‌خوای روی یه مجموعه قدم بزنی بدون اینکه ساختار داخلیش (آرایه، درخت، گراف) رو لو بدی»؛ ❌ «وقتی یه آرایه ساده داری و حلقه معمولی زبان خودت کافیه، لازم نیست براش کلاس Iterator بسازی».
+> 🪤 **دام رایج:** «وسط پیمایش، خود مجموعه رو تغییر بدی (عنصر اضافه یا حذف کنی) و پیمایش‌گر قاطی کنه».
+> 🔗 **فرقش با حلقه‌ی ساده:** پیمایش‌گر منطقِ گشتن رو از خود مجموعه جدا می‌کنه، پس می‌تونی ساختار داخلی رو عوض کنی بدون اینکه کدِ پیمایش بشکنه.
+
+
 <br>
 
 ---
 
 <div align="center">
 
-## 👽 Mediator
+## میانجی (Mediator) 👽
 
 </div>
 
@@ -12052,15 +11847,15 @@ void main() {
 💬 <b>مثال دنیای واقعی: چت‌روم</b>
 </div>
 
-فرض کنید توی یه گروه/چت‌روم هستید.
-وقتی «جان» پیام میده، لازم نیست مستقیم بره با تک‌تک آدم‌ها ارتباط برقرار کنه. پیام رو میده به خودِ چت‌روم، و چت‌روم تصمیم می‌گیره چطوری پیام رو نشون بده.
+فرض کن توی یه گروه/چت‌روم هستی.
+وقتی «جان» پیام می‌ده، لازم نیست مستقیم بره با تک‌تک آدم‌ها ارتباط برقرار کنه. پیام رو می‌ده به خودِ چت‌روم، و چت‌روم تصمیم می‌گیره چطوری پیام رو نشون بده.
 
-اینطوری کاربرها (colleagueها) فقط «چت‌روم» رو می‌شناسن، نه همدیگه رو. نتیجه؟ وابستگی‌ها کمتر میشه و کد تمیزتر درمیاد. 🧩
+اینطوری کاربرها (colleagueها) فقط «چت‌روم» رو می‌شناسن، نه همدیگه رو. نتیجه؟ وابستگی‌ها کمتر می‌شه و کد تمیزتر درمیاد. 🧩
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"ارتباط بین چند آبجکت رو بده به یک مرکز (Mediator)، تا خودشون مستقیم به هم نچسبن."**
+> این پترن می‌گه: **«ارتباط بین چند آبجکت رو بده به یک مرکز (Mediator)، تا خودشون مستقیم به هم نچسبن.»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -12069,9 +11864,12 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+خلاصه‌ش این می‌شه که الگوی میانجی (Mediator) یه آبجکت تعریف می‌کنه که چم‌وخمِ گفت‌وگوی یه دسته آبجکت با همدیگه رو توی خودش جمع می‌کنه.
+چون این الگو می‌تونه روی رفتار برنامه موقع اجرا اثر بذاره، یه الگوی رفتاری (Behavioral) حساب می‌شه.
 
-میخوایم یک ساختار چت روم بسازیم! (Mediator)
+**مثال برنامه‌نویسی**
+
+می‌خوایم یک ساختار چت روم بسازیم! (Mediator)
 
 خب حالا بخش یوزر‌ها: (Colleagues)
 
@@ -12081,55 +11879,41 @@ void main() {
 <div dir="ltr">
 
 ```python
-import datetime
-
-
 class ChatRoomMediator:
-    def showMessage(self, user, message):
-        pass
+    def show_message(self, user, message):
+        raise NotImplementedError
 
 
 class ChatRoom(ChatRoomMediator):
-    def showMessage(self, user, message):
-        time = datetime.datetime.now()
-        sender = user.getName()
-
-        print(str(time) + '[' + sender + ']: ' + message)
+    def show_message(self, user, message):
+        print(user.get_name() + ': ' + message)
 
 
 class User:
-    _name = None
-    _chatMediator = None
+    def __init__(self, name, chat_room):
+        self._name = name
+        self._chat_room = chat_room
 
-    def __init__(self, name, chatMediator):
-        self.name = name
-        self._chatMediator = chatMediator
-
-    def getName(self):
-        return self.name
+    def get_name(self):
+        return self._name
 
     def send(self, message):
-        self._chatMediator.showMessage(self, message)
+        self._chat_room.show_message(self, message)
 
 
-#----------------------------
+# ----------------------------
 
 mediator = ChatRoom()
 
 john = User('John', mediator)
 jane = User('Jane', mediator)
 
-john.send('Hi There!')
+john.send('Hi there!')
 jane.send('Hey!')
 
-
-'''
-Output will be
-==============
-2024-09-23 21:20:17.284000[John]: Hi There!
-2024-09-23 21:20:17.284023[Jane]: Hey!
-
-'''
+# Output:
+# John: Hi there!
+# Jane: Hey!
 ```
 
 </div>
@@ -12142,27 +11926,23 @@ Output will be
 <div dir="ltr">
 
 ```typescript
-class ChatRoomMediator {
-    showMessage(user: User, message: string): void {
-    }
+interface ChatRoomMediator {
+    showMessage(user: User, message: string): void;
 }
 
-class ChatRoom extends ChatRoomMediator {
+class ChatRoom implements ChatRoomMediator {
     showMessage(user: User, message: string): void {
-        let time = new Date();
-        let sender = user.getName();
-
-        console.log(`${time.toLocaleString()} [${sender}]: ${message}`);
+        console.log(`${user.getName()}: ${message}`);
     }
 }
 
 class User {
     private name: string;
-    private chatMediator: ChatRoomMediator;
+    private chatRoom: ChatRoomMediator;
 
-    constructor(name: string, chatMediator: ChatRoomMediator) {
+    constructor(name: string, chatRoom: ChatRoomMediator) {
         this.name = name;
-        this.chatMediator = chatMediator;
+        this.chatRoom = chatRoom;
     }
 
     getName(): string {
@@ -12170,7 +11950,7 @@ class User {
     }
 
     send(message: string): void {
-        this.chatMediator.showMessage(this, message);
+        this.chatRoom.showMessage(this, message);
     }
 }
 
@@ -12184,9 +11964,9 @@ const jane = new User("Jane", mediator);
 john.send("Hi there!");
 jane.send("Hey!");
 
-// Output will be:
-// Feb 14, 10:58 [John]: Hi there!
-// Feb 14, 10:58 [Jane]: Hey!
+// Output:
+// John: Hi there!
+// Jane: Hey!
 ```
 
 </div>
@@ -12196,26 +11976,22 @@ jane.send("Hey!");
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class ChatRoomMediator {
     showMessage(user, message) {
-
     }
 }
 
 class ChatRoom extends ChatRoomMediator {
     showMessage(user, message) {
-        const time = new Date();
-        const sender = user.getName();
-
-        console.log(`${time.toLocaleString()} [${sender}]: ${message}`);
+        console.log(`${user.getName()}: ${message}`);
     }
 }
 
 class User {
-    constructor(name, chatMediator) {
+    constructor(name, chatRoom) {
         this.name = name;
-        this.chatMediator = chatMediator;
+        this.chatRoom = chatRoom;
     }
 
     getName() {
@@ -12223,10 +11999,9 @@ class User {
     }
 
     send(message) {
-        this.chatMediator.showMessage(this, message);
+        this.chatRoom.showMessage(this, message);
     }
 }
-
 
 const mediator = new ChatRoom();
 
@@ -12235,6 +12010,10 @@ const jane = new User("Jane", mediator);
 
 john.send("Hi there!");
 jane.send("Hey!");
+
+// Output:
+// John: Hi there!
+// Jane: Hey!
 ```
 
 </div>
@@ -12245,19 +12024,21 @@ jane.send("Hey!");
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+
 
 interface IChatRoomMediator
 {
   void ShowMessage(User user, string message);
 }
 
-//Mediator
+// Mediator
 class ChatRoom : IChatRoomMediator
 {
   public void ShowMessage(User user, string message)
   {
-    Console.WriteLine($"{DateTime.Now.ToString("MMMM dd, H:mm")} [{user.GetName()}]:{message}");
+    Console.WriteLine($"{user.GetName()}: {message}");
   }
 }
 
@@ -12267,9 +12048,9 @@ class User
   private string mName;
   private IChatRoomMediator mChatRoom;
 
-  public User(string name, IChatRoomMediator chatroom)
+  public User(string name, IChatRoomMediator chatRoom)
   {
-    mChatRoom = chatroom;
+    mChatRoom = chatRoom;
     mName = name;
   }
 
@@ -12294,8 +12075,9 @@ var jane = new User("Jane", mediator);
 john.Send("Hi there!");
 jane.Send("Hey!");
 
-//April 14, 20:05[John]:Hi there!
-//April 14, 20:05[Jane]:Hey!
+// Output:
+// John: Hi there!
+// Jane: Hey!
 
 ```
 
@@ -12308,7 +12090,7 @@ jane.Send("Hey!");
 
 <div dir="ltr">
 
-```PHP
+```php
 interface ChatRoomMediator
 {
     public function showMessage(User $user, string $message): void;
@@ -12318,7 +12100,7 @@ class ChatRoom implements ChatRoomMediator
 {
     public function showMessage(User $user, string $message): void
     {
-        echo date('F d, H:i') . " [" . $user->getName() . "]: " . $message . "\n";
+        echo $user->getName() . ": " . $message . "\n";
     }
 }
 
@@ -12353,8 +12135,8 @@ $john->send("Hi there!");
 $jane->send("Hey!");
 
 // Output:
-// February 15, 14:44 [John]: Hi there!
-// February 15, 14:44 [Jane]: Hey!
+// John: Hi there!
+// Jane: Hey!
 
 ```
 
@@ -12370,10 +12152,7 @@ $jane->send("Hey!");
 ```go
 package main
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
 type ChatRoomMediator interface {
 	ShowMessage(user *User, message string)
@@ -12382,7 +12161,7 @@ type ChatRoomMediator interface {
 type ChatRoom struct{}
 
 func (cr *ChatRoom) ShowMessage(user *User, message string) {
-	fmt.Printf("%s [%s]: %s\n", time.Now().Format("January 02, 15:04"), user.GetName(), message)
+	fmt.Printf("%s: %s\n", user.GetName(), message)
 }
 
 type User struct {
@@ -12406,6 +12185,10 @@ func main() {
 
 	john.Send("Hi there!")
 	jane.Send("Hey!")
+
+	// Output:
+	// John: Hi there!
+	// Jane: Hey!
 }
 
 ```
@@ -12424,14 +12207,12 @@ interface ChatRoomMediator {
     void showMessage(User user, String message);
 }
 
-//Mediator
+// Mediator
 class ChatRoom implements ChatRoomMediator {
-
-    SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, HH:mm");
 
     @Override
     public void showMessage(User user, String message) {
-        System.out.println(sdf.format(new Date())+ " [" + user.getName() + "]: " + message);
+        System.out.println(user.getName() + ": " + message);
     }
 }
 
@@ -12439,8 +12220,8 @@ class User {
     private String name;
     private ChatRoomMediator chatRoom;
 
-    public User(String name, ChatRoomMediator chatroom) {
-        chatRoom = chatroom;
+    public User(String name, ChatRoomMediator chatRoom) {
+        this.chatRoom = chatRoom;
         this.name = name;
     }
 
@@ -12460,8 +12241,8 @@ ChatRoom mediator = new ChatRoom();
 User john = new User("John", mediator);
 User jane = new User("Jane", mediator);
 
-john.send("Hi there!"); // March 01, 21:38 [John]: Hi there!
-jane.send("Hey!");      // March 01, 21:38 [Jane]: Hey!
+john.send("Hi there!"); // John: Hi there!
+jane.send("Hey!");      // Jane: Hey!
 ```
 
 </div>
@@ -12476,7 +12257,6 @@ jane.send("Hey!");      // March 01, 21:38 [Jane]: Hey!
 ```cpp
 #include <iostream>
 #include <string>
-#include <ctime>
 
 class User;
 
@@ -12492,8 +12272,8 @@ private:
     ChatRoomMediator* chatRoom;
 
 public:
-    User(const std::string& n, ChatRoomMediator* room) 
-        : name(n), chatRoom(room) {}
+    User(const std::string& name, ChatRoomMediator* chatRoom)
+        : name(name), chatRoom(chatRoom) {}
 
     std::string getName() const {
         return name;
@@ -12507,9 +12287,7 @@ public:
 class ChatRoom : public ChatRoomMediator {
 public:
     void showMessage(User* user, const std::string& message) override {
-        time_t now = time(0);
-        char* dt = ctime(&now);
-        std::cout << dt << " [" << user->getName() << "]: " << message << std::endl;
+        std::cout << user->getName() << ": " << message << std::endl;
     }
 };
 
@@ -12537,31 +12315,26 @@ int main() {
 <div dir="ltr">
 
 ```kotlin
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-
 interface ChatRoomMediator {
     fun showMessage(user: User, message: String)
 }
 
 class ChatRoom : ChatRoomMediator {
-    private val formatter = DateTimeFormatter.ofPattern("MMMM dd, H:mm")
-
     override fun showMessage(user: User, message: String) {
-        val time = LocalDateTime.now().format(formatter)
-        println("$time [${user.getName()}]: $message")
+        println("${user.getName()}: $message")
     }
 }
 
 class User(private val name: String, private val chatRoom: ChatRoomMediator) {
-    fun getName() = name
+    fun getName(): String = name
 
     fun send(message: String) {
         chatRoom.showMessage(this, message)
     }
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
     val mediator = ChatRoom()
 
@@ -12589,22 +12362,20 @@ abstract class ChatRoomMediator {
 class ChatRoom implements ChatRoomMediator {
   @override
   void showMessage(User user, String message) {
-    var time = DateTime.now();
-    var sender = user.getName();
-    print('$time[$sender]: $message');
+    print('${user.getName()}: $message');
   }
 }
 
 class User {
   final String _name;
-  final ChatRoomMediator _chatMediator;
+  final ChatRoomMediator _chatRoom;
 
-  User(this._name, this._chatMediator);
+  User(this._name, this._chatRoom);
 
   String getName() => _name;
 
   void send(String message) {
-    _chatMediator.showMessage(this, message);
+    _chatRoom.showMessage(this, message);
   }
 }
 
@@ -12616,7 +12387,7 @@ void main() {
   var john = User('John', mediator);
   var jane = User('Jane', mediator);
 
-  john.send('Hi There!');
+  john.send('Hi there!');
   jane.send('Hey!');
 }
 ```
@@ -12624,13 +12395,19 @@ void main() {
 </div>
 </details>
 
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی چند آبجکت جوری تو هم گره خوردن که هرکی با همه بقیه مستقیم حرف می‌زنه و این تار عنکبوتِ وابستگی داره خفه‌ت می‌کنه»؛ ❌ «وقتی فقط دو سه آبجکت ساده داری که ارتباط مستقیمشون اصلاً پیچیده نیست».
+> 🪤 **دام رایج:** «خودِ میانجی کم‌کم همه منطق رو می‌بلعه و تبدیل می‌شه به یه «آبجکت خدا (God Object)» که هیچ‌کس جرئت دست‌زدن بهش رو نداره».
+> 🔗 **فرقش با [ناظر (Observer)](#ناظر-observer-):** «اونجا یه سوژه به چند ناظری که خودشون اشتراک گرفتن خبر می‌ده؛ اینجا یه مرکز رفت‌وآمدِ دوطرفه پیام‌ها رو بین آبجکت‌ها میزون می‌کنه».
+
+
 <br>
 
 ---
 
 <div align="center">
 
-## 💾 Memento
+## یادبود (Memento) 💾
 
 </div>
 
@@ -12638,16 +12415,16 @@ void main() {
 ↩️ <b>مثال دنیای واقعی: دکمه Undo</b>
 </div>
 
-فرض کنید دارید توی یک ادیتور متن تایپ می‌کنید.
-یه دفعه یه چیزی خراب میشه و می‌گید: «ای بابا! برگردون به ۲ دقیقه قبل.»
+فرض کن داری توی یک ادیتور متن تایپ می‌کنی.
+یه دفعه یه چیزی خراب می‌شه و می‌گی: «ای بابا! برگردون به ۲ دقیقه قبل.»
 
 ادیتور برای اینکه بتونه این کار رو بکنه، هر از گاهی از وضعیت خودش یه «عکس» (Snapshot) برمی‌داره و نگه می‌داره.
-وقتی شما `Undo` می‌زنید، یکی از همون عکس‌ها رو برمی‌گردونه و همه‌چی برمی‌گرده به حالت قبل. 🧠
+وقتی تو `Undo` می‌زنی، یکی از همون عکس‌ها رو برمی‌گردونه و همه‌چی برمی‌گرده به حالت قبل. 🧠
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"از حالتِ فعلی یه snapshot بگیر، نگهش دار، هر وقت لازم شد restore کن."**
+> این پترن می‌گه: **«از حالتِ فعلی یه snapshot بگیر، نگهش دار، هر وقت لازم شد restore کن.»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -12656,13 +12433,17 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+یعنی این الگو به یک شیء این امکان رو می‌ده که بدون اینکه جزئیات درونیش لو بره، یک snapshot از حالتش بگیره و بعداً بهش برگرده؛ همون کاری که موقع undo اتفاق می‌افته.
 
-میخوایم یک ادیتور متن بسازیم و قابلیت ذخیره کردن و بازگردانی بهش اضافه کنیم!
+**مثال برنامه‌نویسی**
 
-خب اول یک کلاس به عنوان حافظه ادیتور میسازیم! مشخصه که وظیفه‌اش فقط نگهداری یک مقدار هست!
+می‌خوایم یک ادیتور متن بسازیم و قابلیت ذخیره کردن و بازگردانی بهش اضافه کنیم!
 
-در ادامه یک کلاس ادیتور میسازیم که قابلیت تایپ کردن، خالی کردن، سیو و برگشت حافظه داره!
+خب اول یک کلاس به عنوان حافظه ادیتور می‌سازیم! مشخصه که وظیفه‌اش فقط نگهداری یک مقدار هست!
+
+در ادامه یک کلاس ادیتور می‌سازیم که قابلیت تایپ کردن، خالی کردن، سیو و برگشت حافظه داره!
+
+یک نقش سوم هم داریم به اسم نگهبان (Caretaker)؛ این همون چیزیه که snapshot ها رو نگه می‌داره و ترتیبشون رو می‌سپره، ولی هیچ‌وقت داخلشون رو دستکاری نمی‌کنه. به‌خاطر همینه که حالت داخلی ادیتور همچنان پیش خودش محرمانه می‌مونه. ما اینجا نگهبان رو یک کلاس `History` می‌سازیم که یک stack از memento ها رو نگه می‌داره.
 
 <details>
 <summary>Python</summary>
@@ -12670,53 +12451,63 @@ void main() {
 <div dir="ltr">
 
 ```python
-class EditorMemento:
-    _content = None
+# Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
+class Editor:
+    def __init__(self):
+        self._content = ""
 
-    def __init__(self, content):
+    def type(self, content):
         self._content = content
 
-    def getContent(self):
-        return self._content
-
-
-class Editor:
-    _content = ''
-
-    def type(self, words):
-        self._content = self._content + ' ' + words
-
-    def getContent(self):
+    def get_content(self):
         return self._content
 
     def save(self):
         return EditorMemento(self._content)
 
     def restore(self, memento):
-        self._content = memento.getContent()
+        self._content = memento.get_content()
+
+
+# Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
+class EditorMemento:
+    def __init__(self, content):
+        self._content = content
+
+    def get_content(self):
+        return self._content
+
+
+# Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History:
+    def __init__(self):
+        self._mementos = []
+
+    def push(self, memento):
+        self._mementos.append(memento)
+
+    def pop(self):
+        return self._mementos.pop()
 
 
 # ----------------------------
 
 editor = Editor()
-editor.type('This is the first sentence')
-editor.type('This is the second.')
+history = History()
 
-saved = editor.save()
-editor.type('And this is the third')
+editor.type("a")
+history.push(editor.save())
 
-print(editor.getContent())
+editor.type("ab")
+history.push(editor.save())
 
-editor.restore(saved)
-print(editor.getContent())
+editor.type("abc")
 
-'''
-Output will be
-==============
- This is the first sentence This is the second. And this is the third
- This is the first sentence This is the second.
-'''
+editor.restore(history.pop())
+print(editor.get_content())  # ab
 
+editor.restore(history.pop())
+print(editor.get_content())  # a
 ```
 
 </div>
@@ -12728,8 +12519,9 @@ Output will be
 <div dir="ltr">
 
 ```typescript
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento {
-    private content: string | null = null;
+    private content: string;
 
     constructor(content: string) {
         this.content = content;
@@ -12740,11 +12532,12 @@ class EditorMemento {
     }
 }
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor {
     private content = "";
 
-    type(words: string): void {
-        this.content = this.content + " " + words;
+    type(content: string): void {
+        this.content = content;
     }
 
     getContent(): string {
@@ -12760,19 +12553,37 @@ class Editor {
     }
 }
 
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History {
+    private mementos: EditorMemento[] = [];
+
+    push(memento: EditorMemento): void {
+        this.mementos.push(memento);
+    }
+
+    pop(): EditorMemento {
+        return this.mementos.pop()!;
+    }
+}
+
 // ----------------------------
 
 const editor = new Editor();
-editor.type("This is the first sentence");
-editor.type("This is the second.");
+const history = new History();
 
-const saved = editor.save();
-editor.type("And this is the third");
+editor.type("a");
+history.push(editor.save());
 
-console.log(editor.getContent()); // This is the first sentence. This is second. And this is third.
+editor.type("ab");
+history.push(editor.save());
 
-editor.restore(saved);
-console.log(editor.getContent()); // This is the first sentence. This is second.
+editor.type("abc");
+
+editor.restore(history.pop());
+console.log(editor.getContent()); // ab
+
+editor.restore(history.pop());
+console.log(editor.getContent()); // a
 ```
 
 </div>
@@ -12782,7 +12593,8 @@ console.log(editor.getContent()); // This is the first sentence. This is second.
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento {
     constructor(content) {
         this.content = content;
@@ -12793,13 +12605,14 @@ class EditorMemento {
     }
 }
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor {
     constructor() {
         this.content = "";
     }
 
-    type(words) {
-        this.content = this.content + " " + words;
+    type(content) {
+        this.content = content;
     }
 
     getContent() {
@@ -12815,18 +12628,39 @@ class Editor {
     }
 }
 
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History {
+    constructor() {
+        this.mementos = [];
+    }
+
+    push(memento) {
+        this.mementos.push(memento);
+    }
+
+    pop() {
+        return this.mementos.pop();
+    }
+}
+
+// ----------------------------
 
 const editor = new Editor();
-editor.type("This is the first sentence");
-editor.type("This is the second.");
+const history = new History();
 
-const saved = editor.save();
-editor.type("And this is the third");
+editor.type("a");
+history.push(editor.save());
 
-console.log(editor.getContent());
+editor.type("ab");
+history.push(editor.save());
 
-editor.restore(saved);
-console.log(editor.getContent());
+editor.type("abc");
+
+editor.restore(history.pop());
+console.log(editor.getContent()); // ab
+
+editor.restore(history.pop());
+console.log(editor.getContent()); // a
 ```
 
 </div>
@@ -12837,84 +12671,86 @@ console.log(editor.getContent());
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+using System.Collections.Generic;
 
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento
 {
-  private string mContent;
+    private readonly string mContent;
 
-  public EditorMemento(string content)
-  {
-    mContent = content;
-  }
-
-  public string Content
-  {
-    get
+    public EditorMemento(string content)
     {
-      return mContent;
+        mContent = content;
     }
-  }
+
+    public string Content
+    {
+        get { return mContent; }
+    }
 }
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
+class Editor
+{
+    private string mContent = string.Empty;
 
-class Editor {
-
-  private string mContent = string.Empty;
-  private EditorMemento memento;
-
-  public Editor()
-  {
-    memento = new EditorMemento(string.Empty);
-  }
-
-  public void Type(string words)
-  {
-    mContent = String.Concat(mContent," ", words);
-  }
-
-  public string Content
-  {
-    get
+    public void Type(string words)
     {
-      return mContent;
+        mContent = words;
     }
-  }
 
-  public void Save()
-  {
-    memento = new EditorMemento(mContent);
-  }
+    public string Content
+    {
+        get { return mContent; }
+    }
 
-  public void Restore()
-  {
-    mContent = memento.Content;
-  }
+    public EditorMemento Save()
+    {
+        return new EditorMemento(mContent);
+    }
+
+    public void Restore(EditorMemento memento)
+    {
+        mContent = memento.Content;
+    }
+}
+
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History
+{
+    private readonly Stack<EditorMemento> mementos = new Stack<EditorMemento>();
+
+    public void Push(EditorMemento memento)
+    {
+        mementos.Push(memento);
+    }
+
+    public EditorMemento Pop()
+    {
+        return mementos.Pop();
+    }
 }
 
 // ----------------------------
 
 var editor = new Editor();
+var history = new History();
 
-//Type some stuff
-editor.Type("This is the first sentence.");
-editor.Type("This is second.");
+editor.Type("a");
+history.Push(editor.Save());
 
-// Save the state to restore to : This is the first sentence. This is second.
-editor.Save();
+editor.Type("ab");
+history.Push(editor.Save());
 
-//Type some more
-editor.Type("This is third.");
+editor.Type("abc");
 
-//Output the content
-Console.WriteLine(editor.Content); // This is the first sentence. This is second. This is third.
+editor.Restore(history.Pop());
+Console.WriteLine(editor.Content); // ab
 
-//Restoring to last saved state
-editor.Restore();
-
-Console.Write(editor.Content); // This is the first sentence. This is second
-
-
+editor.Restore(history.Pop());
+Console.WriteLine(editor.Content); // a
 ```
 
 </div>
@@ -12926,72 +12762,83 @@ Console.Write(editor.Content); // This is the first sentence. This is second
 
 <div dir="ltr">
 
-```PHP
+```php
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento
 {
-  private $mContent;
+    private $content;
 
-  public function __construct($content)
-  {
-    $this->mContent = $content;
-  }
+    public function __construct($content)
+    {
+        $this->content = $content;
+    }
 
-  public function getContent()
-  {
-    return $this->mContent;
-  }
+    public function getContent()
+    {
+        return $this->content;
+    }
 }
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor
 {
-  private $mContent = '';
-  private $memento;
+    private $content = '';
 
-  public function __construct()
-  {
-    $this->memento = new EditorMemento('');
-  }
+    public function type($words)
+    {
+        $this->content = $words;
+    }
 
-  public function type($words)
-  {
-    $this->mContent .= ' ' . $words;
-  }
+    public function getContent()
+    {
+        return $this->content;
+    }
 
-  public function getContent()
-  {
-    return $this->mContent;
-  }
+    public function save()
+    {
+        return new EditorMemento($this->content);
+    }
 
-  public function save()
-  {
-    $this->memento = new EditorMemento($this->mContent);
-  }
-
-  public function restore()
-  {
-    $this->mContent = $this->memento->getContent();
-  }
+    public function restore($memento)
+    {
+        $this->content = $memento->getContent();
+    }
 }
 
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History
+{
+    private $mementos = [];
+
+    public function push($memento)
+    {
+        $this->mementos[] = $memento;
+    }
+
+    public function pop()
+    {
+        return array_pop($this->mementos);
+    }
+}
+
+// ----------------------------
+
 $editor = new Editor();
+$history = new History();
 
-//Type some stuff
-$editor->type("This is the first sentence.");
-$editor->type("This is second.");
+$editor->type("a");
+$history->push($editor->save());
 
-// Save the state to restore to : This is the first sentence. This is second.
-$editor->save();
+$editor->type("ab");
+$history->push($editor->save());
 
-//Type some more
-$editor->type("This is third.");
+$editor->type("abc");
 
-//Output the content
-echo $editor->getContent(); // This is the first sentence. This is second. This is third.
+$editor->restore($history->pop());
+echo $editor->getContent() . "\n"; // ab
 
-//Restoring to last saved state
-$editor->restore();
-
-echo $editor->getContent(); // This is the first sentence. This is second
+$editor->restore($history->pop());
+echo $editor->getContent() . "\n"; // a
 ```
 
 </div>
@@ -13004,8 +12851,12 @@ echo $editor->getContent(); // This is the first sentence. This is second
 <div dir="ltr">
 
 ```java
+import java.util.Deque;
+import java.util.ArrayDeque;
+
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento {
-    private String content;
+    private final String content;
 
     public EditorMemento(String content) {
         this.content = content;
@@ -13016,47 +12867,60 @@ class EditorMemento {
     }
 }
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor {
     private String content = "";
-    private EditorMemento memento;
-
-    public Editor() {
-        this.memento = new EditorMemento("");
-    }
 
     public void type(String words) {
-        if(!this.content.isEmpty())
-            this.content += " ";
-        this.content += words;
+        this.content = words;
     }
 
     public String getContent() {
         return this.content;
     }
 
-    public void save() {
-        memento = new EditorMemento(content);
+    public EditorMemento save() {
+        return new EditorMemento(this.content);
     }
 
-    public void restore() {
-        content = memento.getContent();
+    public void restore(EditorMemento memento) {
+        this.content = memento.getContent();
     }
 }
 
-// ----------------------------
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History {
+    private final Deque<EditorMemento> mementos = new ArrayDeque<>();
 
-editor.type("This is the first sentence.");
-editor.type("This is second.");
-// Save the state
-editor.save();
-// Type more
-editor.type("This is third.");
-// Print all contents
-System.out.println(editor.getContent()); // This is the first sentence. This is second. This is third.
-// Restoring to last saved state
-editor.restore();
-// Print content
-System.out.println(editor.getContent()); // This is the first sentence. This is second.
+    public void push(EditorMemento memento) {
+        mementos.push(memento);
+    }
+
+    public EditorMemento pop() {
+        return mementos.pop();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Editor editor = new Editor();
+        History history = new History();
+
+        editor.type("a");
+        history.push(editor.save());
+
+        editor.type("ab");
+        history.push(editor.save());
+
+        editor.type("abc");
+
+        editor.restore(history.pop());
+        System.out.println(editor.getContent()); // ab
+
+        editor.restore(history.pop());
+        System.out.println(editor.getContent()); // a
+    }
+}
 ```
 
 </div>
@@ -13069,11 +12933,11 @@ System.out.println(editor.getContent()); // This is the first sentence. This is 
 <div dir="ltr">
 
 ```go
-
 package main
 
 import "fmt"
 
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 type EditorMemento struct {
 	content string
 }
@@ -13082,16 +12946,17 @@ func NewEditorMemento(content string) *EditorMemento {
 	return &EditorMemento{content: content}
 }
 
-func (e *EditorMemento) GetContent() string {
-	return e.content
+func (m *EditorMemento) GetContent() string {
+	return m.content
 }
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 type Editor struct {
 	content string
 }
 
-func (e *Editor) Type(words string) {
-	e.content = e.content + " " + words
+func (e *Editor) Type(content string) {
+	e.content = content
 }
 
 func (e *Editor) GetContent() string {
@@ -13106,21 +12971,42 @@ func (e *Editor) Restore(memento *EditorMemento) {
 	e.content = memento.GetContent()
 }
 
-func main() {
-	editor := &Editor{}
-	editor.Type("This is the first sentence")
-	editor.Type("This is the second.")
-
-	saved := editor.Save()
-	editor.Type("And this is the third")
-
-	fmt.Println(editor.GetContent())
-
-	editor.Restore(saved)
-	fmt.Println(editor.GetContent())
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+type History struct {
+	mementos []*EditorMemento
 }
 
+func (h *History) Push(memento *EditorMemento) {
+	h.mementos = append(h.mementos, memento)
+}
 
+func (h *History) Pop() *EditorMemento {
+	last := len(h.mementos) - 1
+	memento := h.mementos[last]
+	h.mementos = h.mementos[:last]
+	return memento
+}
+
+// ----------------------------
+
+func main() {
+	editor := &Editor{}
+	history := &History{}
+
+	editor.Type("a")
+	history.Push(editor.Save())
+
+	editor.Type("ab")
+	history.Push(editor.Save())
+
+	editor.Type("abc")
+
+	editor.Restore(history.Pop())
+	fmt.Println(editor.GetContent()) // ab
+
+	editor.Restore(history.Pop())
+	fmt.Println(editor.GetContent()) // a
+}
 ```
 
 </div>
@@ -13135,7 +13021,9 @@ func main() {
 ```cpp
 #include <iostream>
 #include <string>
+#include <vector>
 
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
 class EditorMemento {
 private:
     std::string content;
@@ -13148,20 +13036,21 @@ public:
     }
 };
 
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor {
 private:
     std::string content;
 
 public:
     void type(const std::string& words) {
-        content = content + " " + words;
+        content = words;
     }
 
     std::string getContent() const {
         return content;
     }
 
-    EditorMemento save() {
+    EditorMemento save() const {
         return EditorMemento(content);
     }
 
@@ -13170,20 +13059,42 @@ public:
     }
 };
 
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History {
+private:
+    std::vector<EditorMemento> mementos;
+
+public:
+    void push(const EditorMemento& memento) {
+        mementos.push_back(memento);
+    }
+
+    EditorMemento pop() {
+        EditorMemento memento = mementos.back();
+        mementos.pop_back();
+        return memento;
+    }
+};
+
 // ----------------------------
 
 int main() {
     Editor editor;
-    editor.type("This is the first sentence");
-    editor.type("This is the second.");
+    History history;
 
-    EditorMemento saved = editor.save();
-    editor.type("And this is the third");
+    editor.type("a");
+    history.push(editor.save());
 
-    std::cout << editor.getContent() << std::endl;
+    editor.type("ab");
+    history.push(editor.save());
 
-    editor.restore(saved);
-    std::cout << editor.getContent() << std::endl;
+    editor.type("abc");
+
+    editor.restore(history.pop());
+    std::cout << editor.getContent() << std::endl; // ab
+
+    editor.restore(history.pop());
+    std::cout << editor.getContent() << std::endl; // a
     return 0;
 }
 ```
@@ -13198,13 +13109,12 @@ int main() {
 <div dir="ltr">
 
 ```kotlin
-data class EditorMemento(val content: String)
-
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor {
     private var content: String = ""
 
-    fun type(words: String) {
-        content = if (content.isEmpty()) words else "$content $words"
+    fun type(content: String) {
+        this.content = content
     }
 
     fun getContent(): String = content
@@ -13212,23 +13122,44 @@ class Editor {
     fun save(): EditorMemento = EditorMemento(content)
 
     fun restore(memento: EditorMemento) {
-        content = memento.content
+        content = memento.getContent()
     }
 }
 
-// Usage
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
+class EditorMemento(private val content: String) {
+    fun getContent(): String = content
+}
+
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History {
+    private val mementos = ArrayDeque<EditorMemento>()
+
+    fun push(memento: EditorMemento) {
+        mementos.addLast(memento)
+    }
+
+    fun pop(): EditorMemento = mementos.removeLast()
+}
+
+// ----------------------------
+
 fun main() {
     val editor = Editor()
+    val history = History()
 
-    editor.type("This is the first sentence.")
-    editor.type("This is the second.")
+    editor.type("a")
+    history.push(editor.save())
 
-    val saved = editor.save()
-    editor.type("And this is the third.")
+    editor.type("ab")
+    history.push(editor.save())
 
+    editor.type("abc")
+
+    editor.restore(history.pop())
     println(editor.getContent())
 
-    editor.restore(saved)
+    editor.restore(history.pop())
     println(editor.getContent())
 }
 ```
@@ -13242,19 +13173,12 @@ fun main() {
 <div dir="ltr">
 
 ```dart
-class EditorMemento {
-  final String _content;
-
-  EditorMemento(this._content);
-
-  String getContent() => _content;
-}
-
+// Originator: حالت رو نگه می‌داره و memento می‌سازه/برمی‌گردونه.
 class Editor {
   String _content = '';
 
-  void type(String words) {
-    _content = '$_content $words';
+  void type(String content) {
+    _content = content;
   }
 
   String getContent() => _content;
@@ -13266,27 +13190,56 @@ class Editor {
   }
 }
 
+// Memento: یک snapshot غیرقابل‌تغییر از حالت ادیتور.
+class EditorMemento {
+  final String _content;
+
+  EditorMemento(this._content);
+
+  String getContent() => _content;
+}
+
+// Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
+class History {
+  final List<EditorMemento> _mementos = [];
+
+  void push(EditorMemento memento) {
+    _mementos.add(memento);
+  }
+
+  EditorMemento pop() => _mementos.removeLast();
+}
+
 // ----------------------------
 
 void main() {
   var editor = Editor();
-  editor.type('This is the first sentence');
-  editor.type('This is the second.');
+  var history = History();
 
-  var saved = editor.save();
-  editor.type('And this is the third');
+  editor.type('a');
+  history.push(editor.save());
 
+  editor.type('ab');
+  history.push(editor.save());
+
+  editor.type('abc');
+
+  editor.restore(history.pop());
   print(editor.getContent());
-  //  This is the first sentence This is the second. And this is the third
 
-  editor.restore(saved);
+  editor.restore(history.pop());
   print(editor.getContent());
-  //  This is the first sentence This is the second.
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی می‌خوای حالت یک شیء رو ذخیره کنی و بعداً بهش برگردی، بدون اینکه کپسوله‌بودنش رو بشکنی»؛ ❌ «وقتی حالت سنگینه یا snapshot ها زیاد می‌شن و حافظه‌ت رو می‌خورن».
+> 🪤 **دام رایج:** «نگه‌داشتن بی‌حساب‌وکتاب همه‌ی snapshot ها؛ یک سقف یا سیاست پاک‌سازی براش بذار».
+
+
 
 <br>
 
@@ -13294,7 +13247,7 @@ void main() {
 
 <div align="center">
 
-## 😎 Observer
+## ناظر (Observer) 😎
 
 </div>
 
@@ -13302,15 +13255,15 @@ void main() {
 📬 <b>مثال دنیای واقعی: اعلان‌های سایت کاریابی</b>
 </div>
 
-فرض کنید توی یه سایت کاریابی ثبت‌نام کردید و می‌گید: «هر وقت توی دسته‌ی برنامه‌نویسی، یه شغل جدید اومد، به من خبر بده.»
-حالا از اون طرف، سایت هر بار که یه آگهی جدید اضافه میشه، میاد به همه‌ی آدم‌هایی که اون دسته رو دنبال می‌کنن ایمیل/نوتیف می‌فرسته.
+فرض کن توی یه سایت کاریابی ثبت‌نام کردی و می‌گی: «هر وقت توی دسته برنامه‌نویسی، یه شغل جدید اومد، به من خبر بده.»
+حالا از اون طرف، سایت هر بار که یه آگهی جدید اضافه می‌شه، میاد به همه آدم‌هایی که اون دسته رو دنبال می‌کنن ایمیل/نوتیف می‌فرسته.
 
-یعنی شما لازم نیست هر روز برید سایت رو چک کنید. خودِ سیستم با هر تغییر، خبرتون می‌کنه. 🔔
+یعنی تو لازم نیست هر روز بری سایت رو چک کنی. خودِ سیستم با هر تغییر، خبرت می‌کنه. 🔔
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"یک نفر تغییر می‌کنه (Subject) و بقیه‌ای که دنبالشن (Observerها) خودکار باخبر میشن."**
+> این پترن می‌گه: **«یک نفر تغییر می‌کنه (Subject) و بقیه‌ای که دنبالشن (Observerها) خودکار باخبر می‌شن.»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -13320,12 +13273,15 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+به زبون خودمون: یه شیء به اسم «سوژه (Subject)» یه فهرست از وابسته‌هاش رو نگه می‌داره که بهشون می‌گیم «ناظر (Observer)».
+هر وقت حال و وضعِ سوژه عوض می‌شه، خودش یکی‌یکی به همه ناظرها خبر می‌ده؛ معمولاً با صدا زدن یکی از متدهاشون.
 
-در بخش اول یک کلاس برای ذخیره کردن یک شغل میسازیم و در بخش بعدی یک کلاس برای جویندگان کار میسازیم!
+**مثال برنامه‌نویسی**
 
-و بعد باید یک کلاس برای دسته بندی‌های مختلف کار ایجاد کنیم و جویندگان کار میتونن بهش اضافه بشن و اگه شغلی توی اون دسته
-بندی ارسال بشه به اونا اطلاع رسانی میشه!
+در بخش اول یک کلاس برای ذخیره کردن یک شغل می‌سازیم و در بخش بعدی یک کلاس برای جویندگان کار می‌سازیم!
+
+و بعد باید یک کلاس برای دسته بندی‌های مختلف کار ایجاد کنیم و جویندگان کار می‌تونن بهش اضافه بشن و اگه شغلی توی اون دسته
+بندی ارسال بشه به اونا اطلاع رسانی می‌شه!
 
 <details>
 <summary>Python</summary>
@@ -13334,8 +13290,6 @@ void main() {
 
 ```python
 class JobPost:
-    _title = None
-
     def __init__(self, title):
         self.title = title
 
@@ -13344,8 +13298,6 @@ class JobPost:
 
 
 class JobSeeker:
-    _name = None
-
     def __init__(self, name):
         self.name = name
 
@@ -13353,15 +13305,16 @@ class JobSeeker:
         print('Hi ' + self.name + '! New job posted: ' + job.getTitle())
 
 
-class JobCategory:
-    _observers = []
+class EmploymentAgency:
+    def __init__(self):
+        self.observers = []
 
     def notify(self, jobPosting):
-        for observer in self._observers:
+        for observer in self.observers:
             observer.onJobPosted(jobPosting)
 
     def attach(self, observer):
-        self._observers.append(observer)
+        self.observers.append(observer)
 
     def addJob(self, jobPosting):
         self.notify(jobPosting)
@@ -13372,11 +13325,11 @@ class JobCategory:
 johnDoe = JobSeeker('John Doe')
 janeDoe = JobSeeker('Jane Doe')
 
-jobPostings = JobCategory()
-jobPostings.attach(janeDoe)
+jobPostings = EmploymentAgency()
 jobPostings.attach(johnDoe)
+jobPostings.attach(janeDoe)
 
-jobPostings.addJob(JobPost('Software Engineer at XXX'))
+jobPostings.addJob(JobPost('Software Engineer'))
 
 # Output
 # Hi John Doe! New job posted: Software Engineer
@@ -13394,7 +13347,7 @@ jobPostings.addJob(JobPost('Software Engineer at XXX'))
 
 ```typescript
 class JobPost {
-    private title: string | null = null;
+    private title: string;
 
     constructor(title: string) {
         this.title = title;
@@ -13406,7 +13359,7 @@ class JobPost {
 }
 
 class JobSeeker {
-    private name: string | null = null;
+    private name: string;
 
     constructor(name: string) {
         this.name = name;
@@ -13417,7 +13370,7 @@ class JobSeeker {
     }
 }
 
-class JobCategory {
+class EmploymentAgency {
     private observers: JobSeeker[] = [];
 
     notify(jobPosting: JobPost): void {
@@ -13440,11 +13393,11 @@ class JobCategory {
 const johnDoe = new JobSeeker("John Doe");
 const janeDoe = new JobSeeker("Jane Doe");
 
-const jobPostings = new JobCategory();
-jobPostings.attach(janeDoe);
+const jobPostings = new EmploymentAgency();
 jobPostings.attach(johnDoe);
+jobPostings.attach(janeDoe);
 
-jobPostings.addJob(new JobPost("Software Engineer at XXX"));
+jobPostings.addJob(new JobPost("Software Engineer"));
 
 // Output
 // Hi John Doe! New job posted: Software Engineer
@@ -13458,7 +13411,7 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class JobPost {
     constructor(title) {
         this.title = title;
@@ -13479,7 +13432,7 @@ class JobSeeker {
     }
 }
 
-class JobCategory {
+class EmploymentAgency {
     constructor() {
         this.observers = [];
     }
@@ -13503,11 +13456,15 @@ class JobCategory {
 const johnDoe = new JobSeeker("John Doe");
 const janeDoe = new JobSeeker("Jane Doe");
 
-const jobPostings = new JobCategory();
-jobPostings.attach(janeDoe);
+const jobPostings = new EmploymentAgency();
 jobPostings.attach(johnDoe);
+jobPostings.attach(janeDoe);
 
-jobPostings.addJob(new JobPost("Software Engineer at XXX"));
+jobPostings.addJob(new JobPost("Software Engineer"));
+
+// Output
+// Hi John Doe! New job posted: Software Engineer
+// Hi Jane Doe! New job posted: Software Engineer
 ```
 
 </div>
@@ -13518,7 +13475,10 @@ jobPostings.addJob(new JobPost("Software Engineer at XXX"));
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+using System.Collections.Generic;
+
 
 class JobPost
 {
@@ -13538,13 +13498,13 @@ class JobSeeker : IObserver<JobPost>
     Name = name;
   }
 
-  //Method is not being called by JobPostings class currently
+  //Method is not being called by EmploymentAgency class currently
   public void OnCompleted()
   {
     //No Implementation
   }
 
-  //Method is not being called by JobPostings class currently
+  //Method is not being called by EmploymentAgency class currently
   public void OnError(Exception error)
   {
     //No Implementation
@@ -13552,17 +13512,17 @@ class JobSeeker : IObserver<JobPost>
 
   public void OnNext(JobPost value)
   {
-    Console.WriteLine($"Hi {Name} ! New job posted: {value.Title}");
+    Console.WriteLine($"Hi {Name}! New job posted: {value.Title}");
   }
 }
 
 
-class JobPostings : IObservable<JobPost>
+class EmploymentAgency : IObservable<JobPost>
 {
   private List<IObserver<JobPost>> mObservers;
   private List<JobPost> mJobPostings;
 
-  public JobPostings()
+  public EmploymentAgency()
   {
     mObservers = new List<IObserver<JobPost>>();
     mJobPostings = new List<JobPost>();
@@ -13618,8 +13578,8 @@ internal class Unsubscriber<JobPost> : IDisposable
 var johnDoe = new JobSeeker("John Doe");
 var janeDoe = new JobSeeker("Jane Doe");
 
-//Create publisher and attch subscribers
-var jobPostings = new JobPostings();
+//Create publisher and attach subscribers
+var jobPostings = new EmploymentAgency();
 jobPostings.Subscribe(johnDoe);
 jobPostings.Subscribe(janeDoe);
 
@@ -13643,87 +13603,71 @@ Console.ReadLine();
 
 <div dir="ltr">
 
-```PHP
+```php
+interface ObserverInterface
+{
+    public function onJobPosted(JobPost $job): void;
+}
+
 class JobPost
 {
     public function __construct(private string $title)
     {
     }
 
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 }
 
-class JobSeeker implements SplObserver
+class JobSeeker implements ObserverInterface
 {
     public function __construct(private string $name)
     {
     }
 
-    public function update(SplSubject $subject)
+    public function onJobPosted(JobPost $job): void
     {
-        if ($subject instanceof JobPostings) {
-            $jobPost = $subject->getJobPost();
-            echo "Hi {$this->name} ! New job posted: {$jobPost->getTitle()}\n";
-        }
+        echo "Hi {$this->name}! New job posted: {$job->getTitle()}
+";
     }
 }
 
-class JobPostings implements SplSubject
+class EmploymentAgency
 {
-    private $observers;
-    private $jobPostings;
+    private array $observers = [];
 
-    public function __construct()
+    public function attach(ObserverInterface $observer): void
     {
-        $this->observers = new SplObjectStorage();
-        $this->jobPostings = [];
+        $this->observers[] = $observer;
     }
 
-    public function attach(SplObserver $observer)
-    {
-        $this->observers->attach($observer);
-    }
-
-    public function detach(SplObserver $observer)
-    {
-        $this->observers->detach($observer);
-    }
-
-    public function notify()
+    public function notify(JobPost $jobPosting): void
     {
         foreach ($this->observers as $observer) {
-            $observer->update($this);
+            $observer->onJobPosted($jobPosting);
         }
     }
 
-    public function addJob(JobPost $jobPost)
+    public function addJob(JobPost $jobPosting): void
     {
-        $this->jobPostings[] = $jobPost;
-        $this->notify();
-    }
-
-    public function getJobPost()
-    {
-        return end($this->jobPostings);
+        $this->notify($jobPosting);
     }
 }
 
-//Create Subscribers
+// ----------------------------
+
 $johnDoe = new JobSeeker("John Doe");
 $janeDoe = new JobSeeker("Jane Doe");
 
-//Create publisher and attach subscribers
-$jobPostings = new JobPostings();
+$jobPostings = new EmploymentAgency();
 $jobPostings->attach($johnDoe);
 $jobPostings->attach($janeDoe);
 
-//Add a new job and see if subscribers get notified
 $jobPostings->addJob(new JobPost("Software Engineer"));
 
-//Output
+// Output:
 // Hi John Doe! New job posted: Software Engineer
 // Hi Jane Doe! New job posted: Software Engineer
 ```
@@ -13767,41 +13711,41 @@ func (js *JobSeeker) OnJobPosted(job *JobPost) {
 	fmt.Printf("Hi %s! New job posted: %s\n", js.name, job.GetTitle())
 }
 
-type JobCategory struct {
+type EmploymentAgency struct {
 	observers []*JobSeeker
 }
 
-func NewJobCategory() *JobCategory {
-	return &JobCategory{}
+func NewEmploymentAgency() *EmploymentAgency {
+	return &EmploymentAgency{}
 }
 
-func (jc *JobCategory) Notify(jobPosting *JobPost) {
-	for _, observer := range jc.observers {
+func (ea *EmploymentAgency) Notify(jobPosting *JobPost) {
+	for _, observer := range ea.observers {
 		observer.OnJobPosted(jobPosting)
 	}
 }
 
-func (jc *JobCategory) Attach(observer *JobSeeker) {
-	jc.observers = append(jc.observers, observer)
+func (ea *EmploymentAgency) Attach(observer *JobSeeker) {
+	ea.observers = append(ea.observers, observer)
 }
 
-func (jc *JobCategory) AddJob(jobPosting *JobPost) {
-	jc.Notify(jobPosting)
+func (ea *EmploymentAgency) AddJob(jobPosting *JobPost) {
+	ea.Notify(jobPosting)
 }
 
 func main() {
 	johnDoe := NewJobSeeker("John Doe")
 	janeDoe := NewJobSeeker("Jane Doe")
 
-	jobPostings := NewJobCategory()
-	jobPostings.Attach(janeDoe)
+	jobPostings := NewEmploymentAgency()
 	jobPostings.Attach(johnDoe)
+	jobPostings.Attach(janeDoe)
 
-	jobPostings.AddJob(NewJobPost("Software Engineer at XXX"))
+	jobPostings.AddJob(NewJobPost("Software Engineer"))
 
 	// Output
-	// Hi Jane Doe! New job posted: Software Engineer at XXX
-	// Hi John Doe! New job posted: Software Engineer at XXX
+	// Hi John Doe! New job posted: Software Engineer
+	// Hi Jane Doe! New job posted: Software Engineer
 }
 
 
@@ -13817,6 +13761,8 @@ func main() {
 <div dir="ltr">
 
 ```java
+import java.util.*;
+
 class JobPost {
     private String title;
 
@@ -13841,7 +13787,7 @@ class JobSeeker {
     }
 }
 
-class JobCategory {
+class EmploymentAgency {
     private List<JobSeeker> observers = new ArrayList<>();
 
     public void notify(JobPost jobPosting) {
@@ -13864,13 +13810,13 @@ class JobCategory {
 JobSeeker johnDoe = new JobSeeker("John Doe");
 JobSeeker janeDoe = new JobSeeker("Jane Doe");
 
-JobCategory jobPostings = new JobCategory();
-jobPostings.attach(janeDoe);
+EmploymentAgency jobPostings = new EmploymentAgency();
 jobPostings.attach(johnDoe);
+jobPostings.attach(janeDoe);
 
-jobPostings.addJob(new JobPost("Software Engineer at IBM"));
-// Hi Jane Doe! New job posted: Software Engineer at IBM
-// Hi John Doe! New job posted: Software Engineer at IBM
+jobPostings.addJob(new JobPost("Software Engineer"));
+// Hi John Doe! New job posted: Software Engineer
+// Hi Jane Doe! New job posted: Software Engineer
 ```
 
 </div>
@@ -13919,7 +13865,7 @@ public:
 };
 
 // Subject class
-class JobCategory {
+class EmploymentAgency {
 private:
     std::vector<std::shared_ptr<JobSeeker>> observers;
 
@@ -13951,13 +13897,13 @@ int main() {
     auto johnDoe = std::make_shared<JobSeeker>("John Doe");
     auto janeDoe = std::make_shared<JobSeeker>("Jane Doe");
     
-    JobCategory jobPostings;
-    jobPostings.attach(janeDoe);
+    EmploymentAgency jobPostings;
     jobPostings.attach(johnDoe);
+    jobPostings.attach(janeDoe);
     
-    jobPostings.addJob(JobPost("Software Engineer at IBM"));
-    // Hi Jane Doe! New job posted: Software Engineer at IBM
-    // Hi John Doe! New job posted: Software Engineer at IBM
+    jobPostings.addJob(JobPost("Software Engineer"));
+    // Hi John Doe! New job posted: Software Engineer
+    // Hi Jane Doe! New job posted: Software Engineer
     
     return 0;
 }
@@ -13971,8 +13917,8 @@ int main() {
 <div dir="ltr">
 
 ```kotlin
-data class JobPost(private val title: String) {
-    fun getTitle() = title
+class JobPost(private val title: String) {
+    fun getTitle(): String = title
 }
 
 class JobSeeker(private val name: String) {
@@ -13981,19 +13927,17 @@ class JobSeeker(private val name: String) {
     }
 }
 
-class JobCategory {
+class EmploymentAgency {
     private val observers = mutableListOf<JobSeeker>()
 
+    fun notify(jobPosting: JobPost) {
+        for (observer in observers) {
+            observer.onJobPosted(jobPosting)
+        }
+    }
+
     fun attach(observer: JobSeeker) {
-        observers += observer
-    }
-
-    fun detach(observer: JobSeeker) {
-        observers -= observer
-    }
-
-    private fun notify(jobPosting: JobPost) {
-        observers.forEach { it.onJobPosted(jobPosting) }
+        observers.add(observer)
     }
 
     fun addJob(jobPosting: JobPost) {
@@ -14001,16 +13945,17 @@ class JobCategory {
     }
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
     val johnDoe = JobSeeker("John Doe")
     val janeDoe = JobSeeker("Jane Doe")
 
-    val jobPostings = JobCategory()
-    jobPostings.attach(janeDoe)
+    val jobPostings = EmploymentAgency()
     jobPostings.attach(johnDoe)
+    jobPostings.attach(janeDoe)
 
-    jobPostings.addJob(JobPost("Software Engineer at IBM"))
+    jobPostings.addJob(JobPost("Software Engineer"))
 }
 ```
 
@@ -14041,7 +13986,7 @@ class JobSeeker {
   }
 }
 
-class JobCategory {
+class EmploymentAgency {
   final List<JobSeeker> _observers = [];
 
   void notify(JobPost jobPosting) {
@@ -14065,18 +14010,22 @@ void main() {
   var johnDoe = JobSeeker('John Doe');
   var janeDoe = JobSeeker('Jane Doe');
 
-  var jobPostings = JobCategory();
-  jobPostings.attach(janeDoe);
+  var jobPostings = EmploymentAgency();
   jobPostings.attach(johnDoe);
+  jobPostings.attach(janeDoe);
 
-  jobPostings.addJob(JobPost('Software Engineer at XXX'));
-  // Hi Jane Doe! New job posted: Software Engineer at XXX
-  // Hi John Doe! New job posted: Software Engineer at XXX
+  jobPostings.addJob(JobPost('Software Engineer'));
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی یه تغییر باید چند جای مستقل رو خودکار باخبر کنه و نمی‌خوای فرستنده بدونه گیرنده‌ها کی‌ان»؛ ❌ «وقتی فقط یه شنونده داری یا یه صدا زدن مستقیم کافیه».
+> 🪤 **دام رایج:** «یادت بره ناظرها رو detach کنی، نشتی حافظه و خبردادن به شیء مرده می‌گیری».
+> 🔗 **فرقش با [میانجی (Mediator)](#میانجی-mediator-):** «ناظر یه‌طرفه از سوژه به ناظرها خبر پخش می‌کنه؛ میانجی رفت‌وبرگشتِ چندتا همکار رو از یه مرکز هماهنگ می‌کنه».
+
 
 <br>
 
@@ -14084,7 +14033,7 @@ void main() {
 
 <div align="center">
 
-## 🏃 Visitor
+## بازدیدکننده (Visitor) 🏃
 
 </div>
 
@@ -14092,19 +14041,19 @@ void main() {
 🦁 <b>مثال دنیای واقعی: دامپزشک در باغ‌وحش</b>
 </div>
 
-فرض کنید توی یه باغ‌وحش، کلی حیوان دارید: میمون، شیر، دلفین و...
-حالا هر چند وقت یک بار می‌خواید یه «عملیات جدید» به همه‌شون اضافه کنید:
+فرض کن توی یه باغ‌وحش، کلی حیوان داری: میمون، شیر، دلفین و...
+حالا هر چند وقت یک بار می‌خوای یه «عملیات جدید» به همه‌شون اضافه کنی:
 *   یک روز «معاینه»
 *   یک روز «واکسن»
 *   یک روز «گزارش‌گیری از صدا»
 
-اگه هر بار برید توی کلاس تک‌تک حیوان‌ها دست ببرید و متد جدید اضافه کنید، کدتون خیلی زود شلوغ و شکننده میشه.
-الگوی Visitor میگه: «عملیات‌ها رو جدا کن. بذار حیوان‌ها همون‌قدر ساده بمونن، و بازدیدکننده‌ها (Visitorها) بیان روشون عملیات انجام بدن.»
+اگه هر بار بری توی کلاس تک‌تک حیوان‌ها دست ببری و متد جدید اضافه کنی، کدت خیلی زود شلوغ و شکننده می‌شه.
+الگوی Visitor می‌گه: «عملیات‌ها رو جدا کن. بذار حیوان‌ها همون‌قدر ساده بمونن، و بازدیدکننده‌ها (Visitorها) بیان روشون عملیات انجام بدن.»
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"بدون تغییر کلاس‌های اصلی، قابلیت/عملیات جدید اضافه کن (با Visitor)."**
+> این پترن می‌گه: **«بدون تغییر کلاس‌های اصلی، قابلیت/عملیات جدید اضافه کن (با Visitor).»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -14116,9 +14065,13 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+ترجمه‌ی آزاد: الگوی Visitor راهیه برای جدا کردن یه عملیات از ساختار اشیائی که روش کار می‌کنه. سودِ عملی این جداسازی اینه که می‌تونی عملیات جدید رو به اشیای موجود اضافه کنی، بدون اینکه خود اون اشیا رو دست بزنی؛ یعنی همون اصل باز/بسته (Open/Closed) رو رعایت کردی.
 
-فرض کنید یک باغ وحش مجازی داریم و میخوایم یک عالمه امکان رو به حیوون‌های مختلف اضافه کنیم! مثلا صداشون، نحوه پریدنشون و
+به این ترفندِ دوصدایی (Double Dispatch) می‌گن: حیوون با `accept` خودش رو به بازدیدکننده معرفی می‌کنه و بازدیدکننده هم متد `visit` مخصوص همون نوع رو صدا می‌زنه، پس کار درست بر اساس «نوع حیوون» و «نوع عملیات» با هم انتخاب می‌شه.
+
+**مثال برنامه‌نویسی**
+
+فرض کن یک باغ وحش مجازی داریم و می‌خوایم یک عالمه امکان رو به حیوون‌های مختلف اضافه کنیم! مثلا صداشون، نحوه پریدنشون و
 ...
 
 <details>
@@ -14127,7 +14080,6 @@ void main() {
 <div dir="ltr">
 
 ```python
-
 # Visitee
 class Animal:
     def accept(self, operation):
@@ -14181,23 +14133,6 @@ class Speak(AnimalOperation):
         dolphin.speak()
 
 
-monkey = Monkey()
-lion = Lion()
-dolphin = Dolphin()
-
-speak = Speak()
-monkey.accept(speak)  # Ooh oo aa aa!
-lion.accept(speak)  # Roaaar!
-dolphin.accept(speak)  # Tuut tutt tuttt!
-```
-
-</div>
-
-حالا اگه بخوایم قابلیت پریدن رو به حیوونا اضافه کنیم، کار خیلی راحته ببینید:
-
-<div dir="ltr">
-
-```python
 class Jump(AnimalOperation):
     def visitMonkey(self, monkey):
         print('Jumped 20 feet high! on to the tree!')
@@ -14207,25 +14142,22 @@ class Jump(AnimalOperation):
 
     def visitDolphin(self, dolphin):
         print('Walked on water a little and disappeared')
-```
 
-</div>
 
-حالا نحوه فراخوانیش رو در کنار صدای حیوونا ببینید:
+monkey = Monkey()
+lion = Lion()
+dolphin = Dolphin()
 
-<div dir="ltr">
-
-```python
+speak = Speak()
 jump = Jump()
 
-monkey.accept(speak)  # Ooh oo aa aa!
-monkey.accept(jump)  # Jumped 20 feet high! on to the tree!
+monkey.accept(speak)   # Ooh oo aa aa!
+lion.accept(speak)     # Roaaar!
+dolphin.accept(speak)  # Tuut tuttu tuutt!
 
-lion.accept(speak)  # Roaaar!
-lion.accept(jump)  # Jumped 7 feet! Back on the ground!
-
-dolphin.accept(speak)  # Tuut tutt tuutt!
-dolphin.accept(jump)  # Walked on water a little and disappeared
+monkey.accept(jump)    # Jumped 20 feet high! on to the tree!
+lion.accept(jump)      # Jumped 7 feet! back on the ground!
+dolphin.accept(jump)   # Walked on water a little and disappeared
 ```
 
 </div>
@@ -14239,9 +14171,7 @@ dolphin.accept(jump)  # Walked on water a little and disappeared
 ```typescript
 interface AnimalOperation {
   visitMonkey(monkey: Monkey): void;
-
   visitLion(lion: Lion): void;
-
   visitDolphin(dolphin: Dolphin): void;
 }
 
@@ -14280,27 +14210,18 @@ class Dolphin implements Animal {
 }
 
 class Speak implements AnimalOperation {
-  visitMonkey(monkey: Monkey) {
+  visitMonkey(monkey: Monkey): void {
     monkey.shout();
   }
 
-  visitLion(lion: Lion) {
+  visitLion(lion: Lion): void {
     lion.roar();
   }
 
-  visitDolphin(dolphin: Dolphin) {
+  visitDolphin(dolphin: Dolphin): void {
     dolphin.speak();
   }
 }
-
-const monkey = new Monkey();
-const lion = new Lion();
-const dolphin = new Dolphin();
-const speak = new Speak();
-
-monkey.accept(speak); // Ooh oo aa aa!
-lion.accept(speak); // Roaaar!
-dolphin.accept(speak); //Tuut tutt tuttt!
 
 class Jump implements AnimalOperation {
   visitMonkey(monkey: Monkey): void {
@@ -14316,16 +14237,20 @@ class Jump implements AnimalOperation {
   }
 }
 
+const monkey = new Monkey();
+const lion = new Lion();
+const dolphin = new Dolphin();
+
+const speak = new Speak();
 const jump = new Jump();
 
-monkey.accept(speak); // Ooh oo aa aa!
-monkey.accept(jump); // Jumped 20 feet high! on to the tree!
+monkey.accept(speak);   // Ooh oo aa aa!
+lion.accept(speak);     // Roaaar!
+dolphin.accept(speak);  // Tuut tuttu tuutt!
 
-lion.accept(speak); // Roaaar!
-lion.accept(jump); // Jumped 7 feet! Back on the ground!
-
-dolphin.accept(speak); // Tuut tutt tuutt!
-dolphin.accept(jump); // Walked on water a little and disappeared
+monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
+lion.accept(jump);      // Jumped 7 feet! back on the ground!
+dolphin.accept(jump);   // Walked on water a little and disappeared
 ```
 
 </div>
@@ -14335,7 +14260,7 @@ dolphin.accept(jump); // Walked on water a little and disappeared
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Monkey {
     shout() {
         console.log("Ooh oo aa aa!");
@@ -14394,7 +14319,6 @@ class Jump {
     }
 }
 
-
 const monkey = new Monkey();
 const lion = new Lion();
 const dolphin = new Dolphin();
@@ -14402,13 +14326,13 @@ const dolphin = new Dolphin();
 const speak = new Speak();
 const jump = new Jump();
 
-monkey.accept(speak);
-lion.accept(speak);
-dolphin.accept(speak);
+monkey.accept(speak);   // Ooh oo aa aa!
+lion.accept(speak);     // Roaaar!
+dolphin.accept(speak);  // Tuut tuttu tuutt!
 
-monkey.accept(jump);
-lion.accept(jump);
-dolphin.accept(jump);
+monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
+lion.accept(jump);      // Jumped 7 feet! back on the ground!
+dolphin.accept(jump);   // Walked on water a little and disappeared
 ```
 
 </div>
@@ -14419,7 +14343,8 @@ dolphin.accept(jump);
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
 
 // Visitee
 interface IAnimal
@@ -14435,18 +14360,16 @@ interface IAnimalOperation
   void VisitDolphin(Dolphin dolphin);
 }
 
-
-
 class Monkey : IAnimal
 {
   public void Shout()
   {
-    Console.WriteLine("Oooh o aa aa!");
+    Console.WriteLine("Ooh oo aa aa!");
   }
 
   public void Accept(IAnimalOperation operation)
   {
-      operation.VisitMonkey(this);
+    operation.VisitMonkey(this);
   }
 }
 
@@ -14454,12 +14377,12 @@ class Lion : IAnimal
 {
   public void Roar()
   {
-    Console.WriteLine("Roaar!");
+    Console.WriteLine("Roaaar!");
   }
 
   public void Accept(IAnimalOperation operation)
   {
-      operation.VisitLion(this);
+    operation.VisitLion(this);
   }
 }
 
@@ -14467,21 +14390,20 @@ class Dolphin : IAnimal
 {
   public void Speak()
   {
-    Console.WriteLine("Tuut tittu tuutt!");
+    Console.WriteLine("Tuut tuttu tuutt!");
   }
 
   public void Accept(IAnimalOperation operation)
   {
-      operation.VisitDolphin(this);
+    operation.VisitDolphin(this);
   }
 }
 
-
 class Speak : IAnimalOperation
 {
-  public void VisitDolphin(Dolphin dolphin)
+  public void VisitMonkey(Monkey monkey)
   {
-    dolphin.Speak();
+    monkey.Shout();
   }
 
   public void VisitLion(Lion lion)
@@ -14489,9 +14411,27 @@ class Speak : IAnimalOperation
     lion.Roar();
   }
 
+  public void VisitDolphin(Dolphin dolphin)
+  {
+    dolphin.Speak();
+  }
+}
+
+class Jump : IAnimalOperation
+{
   public void VisitMonkey(Monkey monkey)
   {
-    monkey.Shout();
+    Console.WriteLine("Jumped 20 feet high! on to the tree!");
+  }
+
+  public void VisitLion(Lion lion)
+  {
+    Console.WriteLine("Jumped 7 feet! back on the ground!");
+  }
+
+  public void VisitDolphin(Dolphin dolphin)
+  {
+    Console.WriteLine("Walked on water a little and disappeared");
   }
 }
 
@@ -14502,45 +14442,15 @@ var lion = new Lion();
 var dolphin = new Dolphin();
 
 var speak = new Speak();
+var jump = new Jump();
 
 monkey.Accept(speak);    // Ooh oo aa aa!
 lion.Accept(speak);      // Roaaar!
-dolphin.Accept(speak);   // Tuut tutt tuutt!
+dolphin.Accept(speak);   // Tuut tuttu tuutt!
 
-// -----------------------------
-
-class Jump : IAnimalOperation
-{
-  public void VisitDolphin(Dolphin dolphin)
-  {
-    Console.WriteLine("Walked on water a little and disappeared!");
-  }
-
-  public void VisitLion(Lion lion)
-  {
-    Console.WriteLine("Jumped 7 feet! Back on the ground!");
-  }
-
-  public void VisitMonkey(Monkey monkey)
-  {
-    Console.WriteLine("Jumped 20 feet high! on to the tree!");
-  }
-}
-
-// ------------------------------
-
-var jump = new Jump();
-
-monkey.Accept(speak);   // Ooh oo aa aa!
-monkey.Accept(jump);    // Jumped 20 feet high! on to the tree!
-
-lion.Accept(speak);     // Roaaar!
-lion.Accept(jump);      // Jumped 7 feet! Back on the ground!
-
-dolphin.Accept(speak);  // Tuut tutt tuutt!
-dolphin.Accept(jump);   // Walked on water a little and disappeared
-
-
+monkey.Accept(jump);     // Jumped 20 feet high! on to the tree!
+lion.Accept(jump);       // Jumped 7 feet! back on the ground!
+dolphin.Accept(jump);    // Walked on water a little and disappeared
 ```
 
 </div>
@@ -14552,7 +14462,7 @@ dolphin.Accept(jump);   // Walked on water a little and disappeared
 
 <div dir="ltr">
 
-```PHP
+```php
 // Visitee
 interface AnimalInterface
 {
@@ -14571,7 +14481,7 @@ class Monkey implements AnimalInterface
 {
   public function shout()
   {
-    echo "Oooh o aa aa!";
+    echo "Ooh oo aa aa!\n";
   }
 
   public function accept(AnimalOperationInterface $operation)
@@ -14584,7 +14494,7 @@ class Lion implements AnimalInterface
 {
   public function roar()
   {
-    echo "Roaar!";
+    echo "Roaaar!\n";
   }
 
   public function accept(AnimalOperationInterface $operation)
@@ -14597,7 +14507,7 @@ class Dolphin implements AnimalInterface
 {
   public function speak()
   {
-    echo "Tuut tittu tuutt!";
+    echo "Tuut tuttu tuutt!\n";
   }
 
   public function accept(AnimalOperationInterface $operation)
@@ -14608,9 +14518,9 @@ class Dolphin implements AnimalInterface
 
 class Speak implements AnimalOperationInterface
 {
-  public function visitDolphin(Dolphin $dolphin)
+  public function visitMonkey(Monkey $monkey)
   {
-    $dolphin->speak();
+    $monkey->shout();
   }
 
   public function visitLion(Lion $lion)
@@ -14618,9 +14528,27 @@ class Speak implements AnimalOperationInterface
     $lion->roar();
   }
 
+  public function visitDolphin(Dolphin $dolphin)
+  {
+    $dolphin->speak();
+  }
+}
+
+class Jump implements AnimalOperationInterface
+{
   public function visitMonkey(Monkey $monkey)
   {
-    $monkey->shout();
+    echo "Jumped 20 feet high! on to the tree!\n";
+  }
+
+  public function visitLion(Lion $lion)
+  {
+    echo "Jumped 7 feet! back on the ground!\n";
+  }
+
+  public function visitDolphin(Dolphin $dolphin)
+  {
+    echo "Walked on water a little and disappeared\n";
   }
 }
 
@@ -14629,40 +14557,15 @@ $lion = new Lion();
 $dolphin = new Dolphin();
 
 $speak = new Speak();
+$jump = new Jump();
 
 $monkey->accept($speak);    // Ooh oo aa aa!
 $lion->accept($speak);      // Roaaar!
-$dolphin->accept($speak);   // Tuut tutt tuutt!
+$dolphin->accept($speak);   // Tuut tuttu tuutt!
 
-class Jump implements AnimalOperationInterface
-{
-  public function visitDolphin(Dolphin $dolphin)
-  {
-    echo "Walked on water a little and disappeared!";
-  }
-
-  public function visitLion(Lion $lion)
-  {
-    echo "Jumped 7 feet! Back on the ground!";
-  }
-
-  public function visitMonkey(Monkey $monkey)
-  {
-    echo "Jumped 20 feet high! on to the tree!";
-  }
-}
-
-$jump = new Jump();
-
-$monkey->accept($speak);   // Ooh oo aa aa!
-$monkey->accept($jump);    // Jumped 20 feet high! on to the tree!
-
-$lion->accept($speak);     // Roaaar!
-$lion->accept($jump);      // Jumped 7 feet! Back on the ground!
-
-$dolphin->accept($speak);  // Tuut tutt tuutt!
-$dolphin->accept($jump);   // Walked on water a little and disappeared
-
+$monkey->accept($jump);     // Jumped 20 feet high! on to the tree!
+$lion->accept($jump);       // Jumped 7 feet! back on the ground!
+$dolphin->accept($jump);    // Walked on water a little and disappeared
 ```
 
 </div>
@@ -14675,7 +14578,6 @@ $dolphin->accept($jump);   // Walked on water a little and disappeared
 <div dir="ltr">
 
 ```go
-
 package main
 
 import "fmt"
@@ -14736,18 +14638,36 @@ func (s *Speak) VisitDolphin(dolphin *Dolphin) {
 	dolphin.Speak()
 }
 
+type Jump struct{}
+
+func (j *Jump) VisitMonkey(monkey *Monkey) {
+	fmt.Println("Jumped 20 feet high! on to the tree!")
+}
+
+func (j *Jump) VisitLion(lion *Lion) {
+	fmt.Println("Jumped 7 feet! back on the ground!")
+}
+
+func (j *Jump) VisitDolphin(dolphin *Dolphin) {
+	fmt.Println("Walked on water a little and disappeared")
+}
+
 func main() {
 	monkey := &Monkey{}
 	lion := &Lion{}
 	dolphin := &Dolphin{}
 
 	speak := &Speak{}
+	jump := &Jump{}
+
 	monkey.Accept(speak)  // Ooh oo aa aa!
 	lion.Accept(speak)    // Roaaar!
 	dolphin.Accept(speak) // Tuut tuttu tuutt!
+
+	monkey.Accept(jump)  // Jumped 20 feet high! on to the tree!
+	lion.Accept(jump)    // Jumped 7 feet! back on the ground!
+	dolphin.Accept(jump) // Walked on water a little and disappeared
 }
-
-
 ```
 
 </div>
@@ -14761,7 +14681,6 @@ func main() {
 
 ```java
 interface AnimalOperation {
-
     void visitMonkey(Monkey monkey);
     void visitLion(Lion lion);
     void visitDolphin(Dolphin dolphin);
@@ -14772,8 +14691,7 @@ interface Animal {
 }
 
 class Monkey implements Animal {
-
-    void shout() {
+    public void shout() {
         System.out.println("Ooh oo aa aa!");
     }
 
@@ -14784,7 +14702,6 @@ class Monkey implements Animal {
 }
 
 class Lion implements Animal {
-
     public void roar() {
         System.out.println("Roaaar!");
     }
@@ -14796,7 +14713,6 @@ class Lion implements Animal {
 }
 
 class Dolphin implements Animal {
-
     public void speak() {
         System.out.println("Tuut tuttu tuutt!");
     }
@@ -14808,7 +14724,6 @@ class Dolphin implements Animal {
 }
 
 class Speak implements AnimalOperation {
-
     @Override
     public void visitMonkey(Monkey monkey) {
         monkey.shout();
@@ -14825,20 +14740,7 @@ class Speak implements AnimalOperation {
     }
 }
 
-// -----------------------
-
-Monkey monkey = new Monkey();
-Lion lion = new Lion();
-Dolphin dolphin = new Dolphin();
-
-Speak speak = new Speak();
-
-monkey.accept(speak);   // Ooh oo aa aa!
-lion.accept(speak);     // Roaaar!
-dolphin.accept(speak);  // Tuut tutt tuttt!
-
 class Jump implements AnimalOperation {
-
     @Override
     public void visitMonkey(Monkey monkey) {
         System.out.println("Jumped 20 feet high! on to the tree!");
@@ -14857,15 +14759,19 @@ class Jump implements AnimalOperation {
 
 // -----------------------
 
+Monkey monkey = new Monkey();
+Lion lion = new Lion();
+Dolphin dolphin = new Dolphin();
+
+Speak speak = new Speak();
 Jump jump = new Jump();
 
 monkey.accept(speak);   // Ooh oo aa aa!
-monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
-
 lion.accept(speak);     // Roaaar!
-lion.accept(jump);      // Jumped 7 feet! Back on the ground!
+dolphin.accept(speak);  // Tuut tuttu tuutt!
 
-dolphin.accept(speak);  // Tuut tutt tuutt!
+monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
+lion.accept(jump);      // Jumped 7 feet! back on the ground!
 dolphin.accept(jump);   // Walked on water a little and disappeared
 ```
 
@@ -14928,7 +14834,7 @@ public:
 class Dolphin : public Animal {
 public:
     void speak() {
-        std::cout << "Tuut tutt tuttt!" << std::endl;
+        std::cout << "Tuut tuttu tuutt!" << std::endl;
     }
 
     void accept(AnimalOperation& operation) override {
@@ -14936,7 +14842,7 @@ public:
     }
 };
 
-// Concrete visitor
+// Concrete visitor: Speak
 class Speak : public AnimalOperation {
 public:
     void visitMonkey(Monkey& monkey) override {
@@ -14952,6 +14858,22 @@ public:
     }
 };
 
+// Concrete visitor: Jump
+class Jump : public AnimalOperation {
+public:
+    void visitMonkey(Monkey& monkey) override {
+        std::cout << "Jumped 20 feet high! on to the tree!" << std::endl;
+    }
+
+    void visitLion(Lion& lion) override {
+        std::cout << "Jumped 7 feet! back on the ground!" << std::endl;
+    }
+
+    void visitDolphin(Dolphin& dolphin) override {
+        std::cout << "Walked on water a little and disappeared" << std::endl;
+    }
+};
+
 // ----------------------------
 
 int main() {
@@ -14960,10 +14882,15 @@ int main() {
     Dolphin dolphin;
 
     Speak speak;
+    Jump jump;
 
     monkey.accept(speak);   // Ooh oo aa aa!
     lion.accept(speak);     // Roaaar!
-    dolphin.accept(speak);  // Tuut tutt tuttt!
+    dolphin.accept(speak);  // Tuut tuttu tuutt!
+
+    monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
+    lion.accept(jump);      // Jumped 7 feet! back on the ground!
+    dolphin.accept(jump);   // Walked on water a little and disappeared
     return 0;
 }
 ```
@@ -15007,7 +14934,7 @@ class Lion : Animal {
 }
 
 class Dolphin : Animal {
-    fun speak() = println("Tuut tutt tuttt!")
+    fun speak() = println("Tuut tuttu tuutt!")
 
     override fun accept(operation: AnimalOperation) {
         operation.visitDolphin(this)
@@ -15020,17 +14947,29 @@ class Speak : AnimalOperation {
     override fun visitDolphin(dolphin: Dolphin) = dolphin.speak()
 }
 
-// Usage
+class Jump : AnimalOperation {
+    override fun visitMonkey(monkey: Monkey) = println("Jumped 20 feet high! on to the tree!")
+    override fun visitLion(lion: Lion) = println("Jumped 7 feet! back on the ground!")
+    override fun visitDolphin(dolphin: Dolphin) = println("Walked on water a little and disappeared")
+}
+
+// ----------------------------
+
 fun main() {
     val monkey = Monkey()
     val lion = Lion()
     val dolphin = Dolphin()
 
     val speak = Speak()
+    val jump = Jump()
 
-    monkey.accept(speak)   // Ooh oo aa aa!
-    lion.accept(speak)     // Roaaar!
-    dolphin.accept(speak)  // Tuut tutt tuttt!
+    monkey.accept(speak)
+    lion.accept(speak)
+    dolphin.accept(speak)
+
+    monkey.accept(jump)
+    lion.accept(jump)
+    dolphin.accept(jump)
 }
 ```
 
@@ -15043,31 +14982,33 @@ fun main() {
 <div dir="ltr">
 
 ```dart
+// Visitor
 abstract class AnimalOperation {
   void visitMonkey(Monkey monkey);
   void visitLion(Lion lion);
   void visitDolphin(Dolphin dolphin);
 }
 
+// Visitee
 abstract class Animal {
   void accept(AnimalOperation operation);
 }
 
-class Monkey extends Animal {
+class Monkey implements Animal {
   void shout() => print('Ooh oo aa aa!');
 
   @override
   void accept(AnimalOperation operation) => operation.visitMonkey(this);
 }
 
-class Lion extends Animal {
+class Lion implements Animal {
   void roar() => print('Roaaar!');
 
   @override
   void accept(AnimalOperation operation) => operation.visitLion(this);
 }
 
-class Dolphin extends Animal {
+class Dolphin implements Animal {
   void speak() => print('Tuut tuttu tuutt!');
 
   @override
@@ -15104,19 +15045,26 @@ void main() {
   var dolphin = Dolphin();
 
   var speak = Speak();
-  monkey.accept(speak);  // Ooh oo aa aa!
-  lion.accept(speak);    // Roaaar!
-  dolphin.accept(speak); // Tuut tuttu tuutt!
-
   var jump = Jump();
-  monkey.accept(jump);   // Jumped 20 feet high! on to the tree!
-  lion.accept(jump);     // Jumped 7 feet! back on the ground!
-  dolphin.accept(jump);  // Walked on water a little and disappeared
+
+  monkey.accept(speak);
+  lion.accept(speak);
+  dolphin.accept(speak);
+
+  monkey.accept(jump);
+  lion.accept(jump);
+  dolphin.accept(jump);
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ وقتی یه ساختار از اشیای ثابت داری و مدام می‌خوای عملیات‌های تازه روشون اضافه کنی، مثل گزارش‌گیری، اعتبارسنجی یا صادر کردن خروجی؛ ❌ وقتی برعکس، خودِ نوع‌های اشیا مدام عوض و زیاد می‌شن ولی عملیات‌ها تقریباً ثابتن.
+> 🪤 **دام رایج:** هر بار که یه نوع حیوون جدید اضافه می‌کنی، مجبوری برِی توی تک‌تک Visitorها یه متد `visit` جدید بنویسی؛ پس اضافه کردن «نوع» اینجا گرونه.
+> 🔗 **فرقش با الگوهای دیگه:** یک جمله: عملیات‌ها ارزون اضافه می‌شن ولی نوع جدید گرونه.
+
 
 <br>
 
@@ -15124,7 +15072,7 @@ void main() {
 
 <div align="center">
 
-## 💡 Strategy
+## استراتژی (Strategy) 💡
 
 </div>
 
@@ -15132,18 +15080,20 @@ void main() {
 🧠 <b>مثال دنیای واقعی: انتخاب روش (بسته به شرایط)</b>
 </div>
 
-فرض کنید می‌خواید یه کار رو انجام بدید، ولی چند راه مختلف برای انجام دادنش دارید.
-مثلاً توی مرتب‌سازی داده‌ها:
-*   وقتی دیتاست کوچیکه، یه روش ساده مثل `Bubble Sort` شاید کافی باشه.
-*   وقتی دیتاست بزرگه، یه روش سریع‌تر مثل `Quick Sort` بهتره.
+فرض کن می‌خوای یه کار رو انجام بدی، ولی چند راه مختلف برای انجام دادنش داری.
+مثلاً موقع پرداخت توی صندوق فروشگاه:
+*   یکی پول نقد می‌ده.
+*   یکی کارت می‌کشه.
+*   یکی هم از کیف‌پول دیجیتالش (Wallet) پرداخت می‌کنه.
 
-شما نمی‌خواید کل برنامه‌تون رو به `if/else`‌های طولانی تبدیل کنید که هر بار یکی گفت «روش جدید هم اضافه کن»، همه‌جا رو دستکاری کنید.
-پس الگوریتم‌ها رو جدا می‌کنید و هر لحظه هر کدوم رو خواستید می‌ذارید داخل سیستم. ✅
+صندوق همیشه یه کار ساده می‌کنه: «این مبلغ رو بگیر». این که پول چطوری گرفته می‌شه، کار خود روش پرداخته، نه صندوق.
+تو نمی‌خوای کل کد صندوق رو پر کنی از `if/else`‌های طولانی که هر بار یه روش پرداخت جدید اومد، همه‌جا رو دستکاری کنی.
+پس هر روش پرداخت رو جدا می‌کنی و هر لحظه هر کدوم رو خواستی می‌ذاری داخل صندوق. ✅
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"چند تا الگوریتم قابل تعویض داشته باش و انتخابشون رو بنداز به زمان اجرا."**
+> این پترن می‌گه: **«چند تا الگوریتم قابل تعویض داشته باش و انتخابشون رو بنداز به زمان اجرا.»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -15152,11 +15102,14 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+خلاصه‌اش این می‌شه: چند تا روش انجام یک کار رو جدا از هم نگه می‌داری و هر کدوم رو که خواستی، همون لحظه‌ی اجرا (Runtime) انتخاب می‌کنی.
+این‌طوری بدنه‌ی اصلی برنامه دست‌نخورده می‌مونه و فقط روشی که بهش می‌دی عوض می‌شه.
 
-میخوایم یک سرویس پیاده سازی کنیم که با توجه به داده‌هامون تصمیم بگیریم از یک نوع از مرتب سازی استفاده کنیم!
+**مثال برنامه‌نویسی**
 
-یک کلاس بسازیم که وظیفه‌اش مدیریت این استراتژی‌ها باشه.
+می‌خوایم یه صندوق پرداخت بسازیم که موقع تسویه‌حساب، بسته به این که مشتری چه روشی رو انتخاب کرده، از همون روش پرداخت استفاده کنه!
+
+اول یه قرارداد مشترک («پرداخت کن») تعریف می‌کنیم، بعد یه کلاس صندوق می‌سازیم که وظیفه‌اش فقط نگه‌داشتن روش پرداخت و سپردن کار به اونه.
 
 <details>
 <summary>Python</summary>
@@ -15164,43 +15117,41 @@ void main() {
 <div dir="ltr">
 
 ```python
-class SortStrategy:
-    def sort(self, dataset):
+class PaymentStrategy:
+    def pay(self, amount):
         pass
 
 
-class BubbleSortStrategy(SortStrategy):
-    def sort(self, dataset):
-        print('Sorting using bubble sort')
-
-        return dataset
+class CashPayment(PaymentStrategy):
+    def pay(self, amount):
+        print(f'Paid {amount} in cash')
 
 
-class QuickSortStrategy(SortStrategy):
-    def sort(self, dataset):
-        print('Sorting using quick sort')
-        return dataset
+class CardPayment(PaymentStrategy):
+    def pay(self, amount):
+        print(f'Paid {amount} by card')
 
 
-class Sorter:
-    _sorter = None
+class WalletPayment(PaymentStrategy):
+    def pay(self, amount):
+        print(f'Paid {amount} from wallet')
 
-    def __init__(self, sorter):
-        self._sorter = sorter
 
-    def sort(self, dataset):
-        return self._sorter.sort(dataset)
+class Checkout:
+    def __init__(self, strategy):
+        self._strategy = strategy
+
+    def checkout(self, amount):
+        self._strategy.pay(amount)
 
 
 # ----------------------------
 
-dataset = [1, 5, 4, 3, 2, 8]
+checkout = Checkout(CashPayment())
+checkout.checkout(100)  # Output: Paid 100 in cash
 
-sorter = Sorter(BubbleSortStrategy())
-sorter.sort(dataset)
-
-sorter = Sorter(QuickSortStrategy())
-sorter.sort(dataset)
+checkout = Checkout(CardPayment())
+checkout.checkout(250)  # Output: Paid 250 by card
 ```
 
 </div>
@@ -15212,45 +15163,47 @@ sorter.sort(dataset)
 <div dir="ltr">
 
 ```typescript
-interface SortStrategy {
-    sort(dataset: any[]): any[];
+interface PaymentStrategy {
+    pay(amount: number): void;
 }
 
-class BubbleSortStrategy implements SortStrategy {
-    sort(dataset: any[]): any[] {
-        console.log("Sorting using bubble sort");
-        return dataset;
+class CashPayment implements PaymentStrategy {
+    pay(amount: number): void {
+        console.log(`Paid ${amount} in cash`);
     }
 }
 
-class QuickSortStrategy implements SortStrategy {
-    sort(dataset: any[]): any[] {
-        console.log("Sorting using quick sort");
-        return dataset;
+class CardPayment implements PaymentStrategy {
+    pay(amount: number): void {
+        console.log(`Paid ${amount} by card`);
     }
 }
 
-class Sorter {
-    private sorter: SortStrategy;
+class WalletPayment implements PaymentStrategy {
+    pay(amount: number): void {
+        console.log(`Paid ${amount} from wallet`);
+    }
+}
 
-    constructor(sorter: SortStrategy) {
-        this.sorter = sorter;
+class Checkout {
+    private strategy: PaymentStrategy;
+
+    constructor(strategy: PaymentStrategy) {
+        this.strategy = strategy;
     }
 
-    sort(dataset: any[]): any[] {
-        return this.sorter.sort(dataset);
+    checkout(amount: number): void {
+        this.strategy.pay(amount);
     }
 }
 
 // ----------------------------
 
-const dataset = [1, 5, 4, 3, 2, 8];
+let checkout = new Checkout(new CashPayment());
+checkout.checkout(100); // Output: Paid 100 in cash
 
-const sorter = new Sorter(new BubbleSortStrategy());
-sorter.sort(dataset);
-
-const sorter2 = new Sorter(new QuickSortStrategy());
-sorter2.sort(dataset);
+checkout = new Checkout(new CardPayment());
+checkout.checkout(250); // Output: Paid 250 by card
 ```
 
 </div>
@@ -15260,38 +15213,40 @@ sorter2.sort(dataset);
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
-class BubbleSortStrategy {
-    sort(dataset) {
-        console.log("Sorting using bubble sort");
-        return dataset;
+```javascript
+class CashPayment {
+    pay(amount) {
+        console.log(`Paid ${amount} in cash`);
     }
 }
 
-class QuickSortStrategy {
-    sort(dataset) {
-        console.log("Sorting using quick sort");
-        return dataset;
+class CardPayment {
+    pay(amount) {
+        console.log(`Paid ${amount} by card`);
     }
 }
 
-class Sorter {
-    constructor(sorter) {
-        this.sorter = sorter;
-    }
-
-    sort(dataset) {
-        return this.sorter.sort(dataset);
+class WalletPayment {
+    pay(amount) {
+        console.log(`Paid ${amount} from wallet`);
     }
 }
 
-const dataset = [1, 5, 4, 3, 2, 8];
+class Checkout {
+    constructor(strategy) {
+        this.strategy = strategy;
+    }
 
-const sorter = new Sorter(new BubbleSortStrategy());
-sorter.sort(dataset);
+    checkout(amount) {
+        this.strategy.pay(amount);
+    }
+}
 
-const sorter2 = new Sorter(new QuickSortStrategy());
-sorter2.sort(dataset);
+let checkout = new Checkout(new CashPayment());
+checkout.checkout(100); // Output: Paid 100 in cash
+
+checkout = new Checkout(new CardPayment());
+checkout.checkout(250); // Output: Paid 250 by card
 ```
 
 </div>
@@ -15302,55 +15257,61 @@ sorter2.sort(dataset);
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
 
-interface ISortStrategy
+
+interface IPaymentStrategy
 {
-  List<int> Sort(List<int> dataset);
+  void Pay(int amount);
 }
 
-class BubbleSortStrategy : ISortStrategy
+class CashPayment : IPaymentStrategy
 {
-  public List<int> Sort(List<int> dataset)
+  public void Pay(int amount)
   {
-    Console.WriteLine("Sorting using Bubble Sort !");
-    return dataset;
+    Console.WriteLine($"Paid {amount} in cash");
   }
 }
 
-class QuickSortStrategy : ISortStrategy
+class CardPayment : IPaymentStrategy
 {
-  public List<int> Sort(List<int> dataset)
+  public void Pay(int amount)
   {
-    Console.WriteLine("Sorting using Quick Sort !");
-    return dataset;
+    Console.WriteLine($"Paid {amount} by card");
   }
 }
 
-class Sorter
+class WalletPayment : IPaymentStrategy
 {
-  private readonly ISortStrategy mSorter;
-
-  public Sorter(ISortStrategy sorter)
+  public void Pay(int amount)
   {
-    mSorter = sorter;
+    Console.WriteLine($"Paid {amount} from wallet");
+  }
+}
+
+class ShoppingCart
+{
+  private readonly IPaymentStrategy mStrategy;
+
+  public ShoppingCart(IPaymentStrategy strategy)
+  {
+    mStrategy = strategy;
   }
 
-  public List<int> Sort(List<int> unSortedList)
+  public void Checkout(int amount)
   {
-    return mSorter.Sort(unSortedList);
+    mStrategy.Pay(amount);
   }
 }
 
 // ----------------------------
 
-var unSortedList = new List<int> { 1, 10, 2, 16, 19 };
+var checkout = new ShoppingCart(new CashPayment());
+checkout.Checkout(100); // Output: Paid 100 in cash
 
-var sorter = new Sorter(new BubbleSortStrategy());
-sorter.Sort(unSortedList); // // Output : Sorting using Bubble Sort !
-
-sorter = new Sorter(new QuickSortStrategy());
-sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
+checkout = new ShoppingCart(new CardPayment());
+checkout.Checkout(250); // Output: Paid 250 by card
 
 ```
 
@@ -15363,44 +15324,46 @@ sorter.Sort(unSortedList); // // Output : Sorting using Quick Sort !
 
 <div dir="ltr">
 
-```PHP
-interface SortStrategyInterface {
-  public function sort($dataset);
+```php
+interface PaymentStrategyInterface {
+  public function pay($amount);
 }
 
-class BubbleSortStrategy implements SortStrategyInterface {
-  public function sort($dataset) {
-    echo "Sorting using Bubble Sort !\n";
-    return $dataset;
+class CashPayment implements PaymentStrategyInterface {
+  public function pay($amount) {
+    echo "Paid $amount in cash\n";
   }
 }
 
-class QuickSortStrategy implements SortStrategyInterface {
-  public function sort($dataset) {
-    echo "Sorting using Quick Sort !\n";
-    return $dataset;
+class CardPayment implements PaymentStrategyInterface {
+  public function pay($amount) {
+    echo "Paid $amount by card\n";
   }
 }
 
-class Sorter {
-  private $mSorter;
-
-  public function __construct(SortStrategyInterface $sorter) {
-    $this->mSorter = $sorter;
-  }
-
-  public function sort($unSortedList) {
-    return $this->mSorter->sort($unSortedList);
+class WalletPayment implements PaymentStrategyInterface {
+  public function pay($amount) {
+    echo "Paid $amount from wallet\n";
   }
 }
 
-$unSortedList = [1, 10, 2, 16, 19];
+class Checkout {
+  private $mStrategy;
 
-$sorter = new Sorter(new BubbleSortStrategy());
-$sorter->sort($unSortedList); // Output : Sorting using Bubble Sort !
+  public function __construct(PaymentStrategyInterface $strategy) {
+    $this->mStrategy = $strategy;
+  }
 
-$sorter = new Sorter(new QuickSortStrategy());
-$sorter->sort($unSortedList); // Output : Sorting using Quick Sort !
+  public function checkout($amount) {
+    $this->mStrategy->pay($amount);
+  }
+}
+
+$checkout = new Checkout(new CashPayment());
+$checkout->checkout(100); // Output: Paid 100 in cash
+
+$checkout = new Checkout(new CardPayment());
+$checkout->checkout(250); // Output: Paid 250 by card
 
 ```
 
@@ -15420,50 +15383,51 @@ import (
 	"fmt"
 )
 
-// SortStrategy is the interface that defines the sorting strategy
-type SortStrategy interface {
-	Sort(dataset []int) []int
+// PaymentStrategy is the interface that defines a payment method
+type PaymentStrategy interface {
+	Pay(amount int)
 }
 
-// BubbleSortStrategy implements the SortStrategy interface
-type BubbleSortStrategy struct{}
+// CashPayment implements the PaymentStrategy interface
+type CashPayment struct{}
 
-func (b *BubbleSortStrategy) Sort(dataset []int) []int {
-	fmt.Println("Sorting using bubble sort")
-	// Implement bubble sort logic here (omitted for brevity)
-	return dataset
+func (c *CashPayment) Pay(amount int) {
+	fmt.Printf("Paid %d in cash\n", amount)
 }
 
-// QuickSortStrategy implements the SortStrategy interface
-type QuickSortStrategy struct{}
+// CardPayment implements the PaymentStrategy interface
+type CardPayment struct{}
 
-func (q *QuickSortStrategy) Sort(dataset []int) []int {
-	fmt.Println("Sorting using quick sort")
-	// Implement quick sort logic here (omitted for brevity)
-	return dataset
+func (c *CardPayment) Pay(amount int) {
+	fmt.Printf("Paid %d by card\n", amount)
 }
 
-// Sorter is the context that uses a sorting strategy
-type Sorter struct {
-	sorter SortStrategy
+// WalletPayment implements the PaymentStrategy interface
+type WalletPayment struct{}
+
+func (w *WalletPayment) Pay(amount int) {
+	fmt.Printf("Paid %d from wallet\n", amount)
 }
 
-func NewSorter(sorter SortStrategy) *Sorter {
-	return &Sorter{sorter: sorter}
+// Checkout is the context that uses a payment strategy
+type Checkout struct {
+	strategy PaymentStrategy
 }
 
-func (s *Sorter) Sort(dataset []int) []int {
-	return s.sorter.Sort(dataset)
+func NewCheckout(strategy PaymentStrategy) *Checkout {
+	return &Checkout{strategy: strategy}
+}
+
+func (c *Checkout) Checkout(amount int) {
+	c.strategy.Pay(amount)
 }
 
 func main() {
-	dataset := []int{1, 5, 4, 3, 2, 8}
+	checkout := NewCheckout(&CashPayment{})
+	checkout.Checkout(100) // Output: Paid 100 in cash
 
-	sorter := NewSorter(&BubbleSortStrategy{})
-	sorter.Sort(dataset)
-
-	sorter = NewSorter(&QuickSortStrategy{})
-	sorter.Sort(dataset)
+	checkout = NewCheckout(&CardPayment{})
+	checkout.Checkout(250) // Output: Paid 250 by card
 }
 ```
 
@@ -15477,49 +15441,53 @@ func main() {
 <div dir="ltr">
 
 ```java
-interface SortStrategy {
-    List<Integer> sort(List<Integer> dataset);
+interface PaymentStrategy {
+    void pay(int amount);
 }
 
-class BubbleSortStrategy implements SortStrategy {
+class CashPayment implements PaymentStrategy {
 
     @Override
-    public List<Integer> sort(List<Integer> dataset) {
-        System.out.println("Sorting by Bubble sort!");
-        return dataset;
+    public void pay(int amount) {
+        System.out.println("Paid " + amount + " in cash");
     }
 }
 
-class QuickSortStrategy implements SortStrategy {
+class CardPayment implements PaymentStrategy {
 
     @Override
-    public List<Integer> sort(List<Integer> dataset) {
-        System.out.println("Sorting by Quick sort!");
-        return dataset;
+    public void pay(int amount) {
+        System.out.println("Paid " + amount + " by card");
     }
 }
 
-class Sorter {
-    private SortStrategy sorter;
+class WalletPayment implements PaymentStrategy {
 
-    public Sorter(SortStrategy sorter) {
-        this.sorter = sorter;
+    @Override
+    public void pay(int amount) {
+        System.out.println("Paid " + amount + " from wallet");
+    }
+}
+
+class Checkout {
+    private PaymentStrategy strategy;
+
+    public Checkout(PaymentStrategy strategy) {
+        this.strategy = strategy;
     }
 
-    public List<Integer> sort(List<Integer> unSortedList) {
-        return sorter.sort(unSortedList);
+    public void checkout(int amount) {
+        strategy.pay(amount);
     }
 }
 
 // ----------------------------
 
-List<Integer> unSortedList = List.of(1, 10, 2, 16, 19);
+Checkout checkout = new Checkout(new CashPayment());
+checkout.checkout(100); // Paid 100 in cash
 
-Sorter sorter = new Sorter(new BubbleSortStrategy());
-sorter.sort(unSortedList); // Sorting by Bubble sort!
-
-sorter = new Sorter(new QuickSortStrategy());
-sorter.sort(unSortedList); // Sorting by Quick sort!
+checkout = new Checkout(new CardPayment());
+checkout.checkout(250); // Paid 250 by card
 ```
 
 </div>
@@ -15533,54 +15501,56 @@ sorter.sort(unSortedList); // Sorting by Quick sort!
 
 ```cpp
 #include <iostream>
-#include <vector>
 
-class SortStrategy {
+class PaymentStrategy {
 public:
-    virtual ~SortStrategy() = default;
-    virtual std::vector<int> sort(std::vector<int>& dataset) = 0;
+    virtual ~PaymentStrategy() = default;
+    virtual void pay(int amount) = 0;
 };
 
-class BubbleSortStrategy : public SortStrategy {
+class CashPayment : public PaymentStrategy {
 public:
-    std::vector<int> sort(std::vector<int>& dataset) override {
-        std::cout << "Sorting using bubble sort" << std::endl;
-        return dataset;
+    void pay(int amount) override {
+        std::cout << "Paid " << amount << " in cash" << std::endl;
     }
 };
 
-class QuickSortStrategy : public SortStrategy {
+class CardPayment : public PaymentStrategy {
 public:
-    std::vector<int> sort(std::vector<int>& dataset) override {
-        std::cout << "Sorting using quick sort" << std::endl;
-        return dataset;
+    void pay(int amount) override {
+        std::cout << "Paid " << amount << " by card" << std::endl;
     }
 };
 
-class Sorter {
+class WalletPayment : public PaymentStrategy {
+public:
+    void pay(int amount) override {
+        std::cout << "Paid " << amount << " from wallet" << std::endl;
+    }
+};
+
+class Checkout {
 private:
-    SortStrategy* strategy;
+    PaymentStrategy* strategy;
 
 public:
-    Sorter(SortStrategy* s) : strategy(s) {}
+    Checkout(PaymentStrategy* s) : strategy(s) {}
 
-    std::vector<int> sort(std::vector<int>& dataset) {
-        return strategy->sort(dataset);
+    void checkout(int amount) {
+        strategy->pay(amount);
     }
 };
 
 // ----------------------------
 
 int main() {
-    std::vector<int> dataset = {1, 5, 4, 3, 2, 8};
+    CashPayment cash;
+    Checkout checkout(&cash);
+    checkout.checkout(100); // Output: Paid 100 in cash
 
-    BubbleSortStrategy bubbleSort;
-    Sorter sorter(&bubbleSort);
-    sorter.sort(dataset);
-
-    QuickSortStrategy quickSort;
-    Sorter sorter2(&quickSort);
-    sorter2.sort(dataset);
+    CardPayment card;
+    Checkout checkout2(&card);
+    checkout2.checkout(250); // Output: Paid 250 by card
     return 0;
 }
 ```
@@ -15595,37 +15565,42 @@ int main() {
 <div dir="ltr">
 
 ```kotlin
-interface SortStrategy {
-    fun sort(dataset: List<Int>): List<Int>
+interface PaymentStrategy {
+    fun pay(amount: Int)
 }
 
-class BubbleSortStrategy : SortStrategy {
-    override fun sort(dataset: List<Int>): List<Int> {
-        println("Sorting using bubble sort")
-        return dataset
+class CashPayment : PaymentStrategy {
+    override fun pay(amount: Int) {
+        println("Paid $amount in cash")
     }
 }
 
-class QuickSortStrategy : SortStrategy {
-    override fun sort(dataset: List<Int>): List<Int> {
-        println("Sorting using quick sort")
-        return dataset
+class CardPayment : PaymentStrategy {
+    override fun pay(amount: Int) {
+        println("Paid $amount by card")
     }
 }
 
-class Sorter(private val sorter: SortStrategy) {
-    fun sort(dataset: List<Int>): List<Int> = sorter.sort(dataset)
+class WalletPayment : PaymentStrategy {
+    override fun pay(amount: Int) {
+        println("Paid $amount from wallet")
+    }
 }
 
-// Usage
+class Checkout(private val strategy: PaymentStrategy) {
+    fun checkout(amount: Int) {
+        strategy.pay(amount)
+    }
+}
+
+// ----------------------------
+
 fun main() {
-    val dataset = listOf(1, 5, 4, 3, 2, 8)
+    var checkout = Checkout(CashPayment())
+    checkout.checkout(100)
 
-    val sorter = Sorter(BubbleSortStrategy())
-    sorter.sort(dataset)
-
-    val sorter2 = Sorter(QuickSortStrategy())
-    sorter2.sort(dataset)
+    checkout = Checkout(CardPayment())
+    checkout.checkout(250)
 }
 ```
 
@@ -15638,49 +15613,52 @@ fun main() {
 <div dir="ltr">
 
 ```dart
-abstract class SortStrategy {
-  List<int> sort(List<int> dataset);
+abstract class PaymentStrategy {
+  void pay(int amount);
 }
 
-class BubbleSortStrategy implements SortStrategy {
+class CashPayment implements PaymentStrategy {
   @override
-  List<int> sort(List<int> dataset) {
-    print('Sorting using bubble sort');
-    return dataset;
-  }
+  void pay(int amount) => print('Paid $amount in cash');
 }
 
-class QuickSortStrategy implements SortStrategy {
+class CardPayment implements PaymentStrategy {
   @override
-  List<int> sort(List<int> dataset) {
-    print('Sorting using quick sort');
-    return dataset;
-  }
+  void pay(int amount) => print('Paid $amount by card');
 }
 
-class Sorter {
-  final SortStrategy _sorter;
+class WalletPayment implements PaymentStrategy {
+  @override
+  void pay(int amount) => print('Paid $amount from wallet');
+}
 
-  Sorter(this._sorter);
+class Checkout {
+  final PaymentStrategy _strategy;
 
-  List<int> sort(List<int> dataset) => _sorter.sort(dataset);
+  Checkout(this._strategy);
+
+  void checkout(int amount) => _strategy.pay(amount);
 }
 
 // ----------------------------
 
 void main() {
-  var dataset = [1, 5, 4, 3, 2, 8];
+  var checkout = Checkout(CashPayment());
+  checkout.checkout(100);
 
-  var sorter = Sorter(BubbleSortStrategy());
-  sorter.sort(dataset); // Sorting using bubble sort
-
-  sorter = Sorter(QuickSortStrategy());
-  sorter.sort(dataset); // Sorting using quick sort
+  checkout = Checkout(CardPayment());
+  checkout.checkout(250);
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی چند تا روش هم‌خانواده برای یه کار داری و می‌خوای موقع اجرا بینشون سوییچ کنی»؛ ❌ «وقتی فقط یه روش داری و قرار نیست هیچ‌وقت عوض بشه».
+> 🪤 **دام رایج:** «جداکردن هر `if` کوچیک به یه کلاس استراتژی جدا؛ این کار رو فقط وقتی بکن که روش‌ها واقعاً مستقل و قابل تعویض‌ان».
+> 🔗 **فرقش با [حالت (State)](#حالت-state-):** «استراتژی روشِ انجام یه کار رو از بیرون بهش می‌دی و خودش عوضش نمی‌کنه؛ ولی حالت بر اساس وضعیت داخلی شیء، خودبه‌خود رفتارش رو تغییر می‌ده».
+
 
 <br>
 
@@ -15688,24 +15666,24 @@ void main() {
 
 <div align="center">
 
-## 💢 State
+## حالت (State) 💢
 
 </div>
 
 <div align="center">
-⌨️ <b>مثال دنیای واقعی: حالت تایپ (عادی/حروف بزرگ/حروف کوچک)</b>
+🚦 <b>مثال دنیای واقعی: چراغ راهنمایی</b>
 </div>
 
-فرض کنید دارید تایپ می‌کنید.
-یه وقت می‌خواید همه‌چی حروف بزرگ باشه (مثل وقتی `Caps Lock` رو روشن می‌کنید)، یه وقت می‌خواید همه‌چی حروف کوچک باشه، یه وقت هم حالت معمولی.
+یه چراغ راهنمایی رو در نظر بگیر.
+قرمزه؛ بعد سبز می‌شه؛ بعد زرد می‌شه؛ بعد دوباره قرمز. هر رنگ، خودش می‌دونه نوبت بعدی باید بره سراغ کدوم رنگ.
 
-نکته اینه که «کاری که انجام می‌دید» یکیه (دارید متن می‌نویسید) ولی **رفتار خروجی** با توجه به حالت فعلی عوض میشه.
-این دقیقاً همون چیزیه که State میگه: به جای اینکه توی یک کلاس بزرگ پر از شرط بنویسید، حالت‌ها رو به شکل آبجکت‌های جدا نگه دارید و هر وقت لازم شد state رو عوض کنید. 🧩
+نکته اینه که خود چراغ یه دکمه «برو حالت بعدی» بیشتر نداره؛ ولی **اینکه بعدش چی می‌شه** به حالت فعلیش بستگی داره.
+این دقیقاً همون چیزیه که State می‌گه: به جای اینکه توی یک کلاس بزرگ پر از شرط بنویسی، هر حالت رو به شکل یه آبجکت جدا نگه می‌داری و خود حالت تصمیم می‌گیره گذار (Transition) بعدی به کجاست. 🧩
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"رفتار شیء رو به state فعلیش بسپر؛ با عوض شدن state، رفتار هم عوض میشه."**
+> این پترن می‌گه: **«رفتار شیء رو به state فعلیش بسپر؛ با عوض شدن state، رفتار هم عوض می‌شه.»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -15719,14 +15697,16 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+خلاصه‌اش این می‌شه که الگوی State یه ماشین حالت (State Machine) رو شیءگرا پیاده می‌کنه؛ هر حالت رو یه کلاس جدا می‌گیری و خود حالت تصمیم می‌گیره بعدیش چی باشه.
+از این زاویه، خیلی شبیه استراتژیه (Strategy)، با این فرق که اینجا خود شیء می‌تونه حالتِ فعلیش رو از داخل عوض کنه.
 
-میخوایم یک ادیتور بسازیم که قابلیت‌هایی مثل این داشته باشه که متنی که تایپ میشه حروف کوچیک باشه یا همش حروف بزرگ باشه یا
-معمولی باشه!
+**مثال برنامه‌نویسی**
 
-اول بیاید کلاس‌هامون بر پایه الگوی State رو بسازیم:
+می‌خوایم یک چراغ راهنمایی بسازیم که سه حالت داشته باشه؛ قرمز، سبز و زرد. هر حالت بدونه اسمش چیه و نوبت بعدی باید بره سراغ کدوم حالت، یعنی از قرمز به سبز، از سبز به زرد و از زرد دوباره به قرمز.
 
-بعد ادیتور رو بسازیم و بهش یاد بدیم این کلاس‌ها رو توی خودش نگه داره و ازشون استفاده کنه!
+اول بیا کلاس‌های حالت رو بر پایه الگوی State بسازیم:
+
+بعد خود چراغ رو بسازیم و بهش یاد بدیم حالت فعلیش رو نگه داره و موقع گذار، تصمیم رو به خود حالت بسپره!
 
 <details>
 <summary>Python</summary>
@@ -15734,63 +15714,67 @@ void main() {
 <div dir="ltr">
 
 ```python
-class WritingState:
-    def write(self, words):
-        pass
+from abc import ABC, abstractmethod
 
 
-class UpperCase(WritingState):
-    def write(self, words):
-        print(words.upper())
+class TrafficLightState(ABC):
+    @abstractmethod
+    def name(self):
+        ...
+
+    @abstractmethod
+    def next(self):
+        ...
 
 
-class LowerCase(WritingState):
-    def write(self, words):
-        print(words.lower())
+class RedLight(TrafficLightState):
+    def name(self):
+        return "Red"
+
+    def next(self):
+        return GreenLight()
 
 
-class DefaultText(WritingState):
-    def write(self, words):
-        print(words)
+class GreenLight(TrafficLightState):
+    def name(self):
+        return "Green"
+
+    def next(self):
+        return YellowLight()
 
 
-class TextEditor():
-    _state = None
+class YellowLight(TrafficLightState):
+    def name(self):
+        return "Yellow"
 
+    def next(self):
+        return RedLight()
+
+
+class TrafficLight:
     def __init__(self, state):
         self._state = state
 
-    def setState(self, state):
-        self._state = state
+    def name(self):
+        return self._state.name()
 
-    def write(self, words):
-        self._state.write(words)
+    def next(self):
+        self._state = self._state.next()
 
 
 # ----------------------------
 
-editor = TextEditor(DefaultText())
-editor.write('First Line')
-
-editor.setState(UpperCase())
-
-editor.write('Second Line')
-editor.write('Third Line')
-
-editor.setState(LowerCase())
-
-editor.write('Fourth Line')
-editor.write('Fifth Line')
-
+light = TrafficLight(RedLight())
+for _ in range(4):
+    print(light.name())
+    light.next()
 
 '''
-Output will be
-==============
-First Line
-SECOND LINE
-THIRD LINE
-fourth line
-fifth line
+Output:
+Red
+Green
+Yellow
+Red
 '''
 
 ```
@@ -15804,58 +15788,70 @@ fifth line
 <div dir="ltr">
 
 ```typescript
-interface WritingState {
-    write(words: string): void;
+interface TrafficLightState {
+    name(): string;
+    next(): TrafficLightState;
 }
 
-class UpperCase implements WritingState {
-    write(words: string): void {
-        console.log(words.toUpperCase());
+class RedLight implements TrafficLightState {
+    name(): string {
+        return "Red";
+    }
+
+    next(): TrafficLightState {
+        return new GreenLight();
     }
 }
 
-class LowerCase implements WritingState {
-    write(words: string): void {
-        console.log(words.toLowerCase());
+class GreenLight implements TrafficLightState {
+    name(): string {
+        return "Green";
+    }
+
+    next(): TrafficLightState {
+        return new YellowLight();
     }
 }
 
-class DefaultText implements WritingState {
-    write(words: string): void {
-        console.log(words);
+class YellowLight implements TrafficLightState {
+    name(): string {
+        return "Yellow";
+    }
+
+    next(): TrafficLightState {
+        return new RedLight();
     }
 }
 
-class TextEditor {
-    private state: WritingState;
+class TrafficLight {
+    private state: TrafficLightState;
 
-    constructor(state: WritingState) {
+    constructor(state: TrafficLightState) {
         this.state = state;
     }
 
-    setState(state: WritingState) {
-        this.state = state;
+    name(): string {
+        return this.state.name();
     }
 
-    type(words: string) {
-        this.state.write(words);
+    next(): void {
+        this.state = this.state.next();
     }
 }
 
 // ----------------------------
 
-const editor = new TextEditor(new DefaultText());
-editor.type("First Line"); // First Line
+const light = new TrafficLight(new RedLight());
+for (let i = 0; i < 4; i++) {
+    console.log(light.name());
+    light.next();
+}
 
-editor.setState(new UpperCase());
-
-editor.type("Second Line"); // SECOND LINE
-editor.type("Third Line"); // THIRD LINE
-
-editor.setState(new LowerCase());
-
-editor.type("Fourth Line"); // fourth line
-editor.type("Fifth Line"); // fifth line
+// Output:
+// Red
+// Green
+// Yellow
+// Red
 ```
 
 </div>
@@ -15865,50 +15861,64 @@ editor.type("Fifth Line"); // fifth line
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
-class UpperCase {
-    write(words) {
-        console.log(words.toUpperCase());
+```javascript
+class RedLight {
+    name() {
+        return "Red";
+    }
+
+    next() {
+        return new GreenLight();
     }
 }
 
-class LowerCase {
-    write(words) {
-        console.log(words.toLowerCase());
+class GreenLight {
+    name() {
+        return "Green";
+    }
+
+    next() {
+        return new YellowLight();
     }
 }
 
-class DefaultText {
-    write(words) {
-        console.log(words);
+class YellowLight {
+    name() {
+        return "Yellow";
+    }
+
+    next() {
+        return new RedLight();
     }
 }
 
-class TextEditor {
+class TrafficLight {
     constructor(state) {
         this.state = state;
     }
 
-    setState(state) {
-        this.state = state;
+    name() {
+        return this.state.name();
     }
 
-    type(words) {
-        this.state.write(words);
+    next() {
+        this.state = this.state.next();
     }
 }
 
+// ----------------------------
 
-const editor = new TextEditor(new DefaultText());
-editor.type("First Line");
+const light = new TrafficLight(new RedLight());
+for (let i = 0; i < 4; i++) {
+    console.log(light.name());
+    light.next();
+}
 
-editor.setState(new UpperCase());
-editor.type("Second Line");
-editor.type("Third Line");
-
-editor.setState(new LowerCase());
-editor.type("Fourth Line");
-editor.type("Fifth Line")
+// Output:
+// Red
+// Green
+// Yellow
+// Red
 ```
 
 </div>
@@ -15919,56 +15929,47 @@ editor.type("Fifth Line")
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
 
-interface IWritingState {
 
-  void Write(string words);
-
+interface ITrafficLightState {
+  string Name();
+  ITrafficLightState Next();
 }
 
-class UpperCase : IWritingState
+class RedLight : ITrafficLightState
 {
-  public void Write(string words)
-  {
-    Console.WriteLine(words.ToUpper());
-  }
+  public string Name() => "Red";
+  public ITrafficLightState Next() => new GreenLight();
 }
 
-class LowerCase : IWritingState
+class GreenLight : ITrafficLightState
 {
-  public void Write(string words)
-  {
-    Console.WriteLine(words.ToLower());
-  }
+  public string Name() => "Green";
+  public ITrafficLightState Next() => new YellowLight();
 }
 
-class DefaultText : IWritingState
+class YellowLight : ITrafficLightState
 {
-  public void Write(string words)
-  {
-    Console.WriteLine(words);
-  }
+  public string Name() => "Yellow";
+  public ITrafficLightState Next() => new RedLight();
 }
 
+class TrafficLight {
 
-class TextEditor {
+  private ITrafficLightState mState;
 
-  private IWritingState mState;
-
-  public TextEditor()
-  {
-    mState = new DefaultText();
-  }
-
-  public void SetState(IWritingState state)
+  public TrafficLight(ITrafficLightState state)
   {
     mState = state;
   }
 
-  public void Type(string words)
+  public string Name() => mState.Name();
+
+  public void Next()
   {
-    mState.Write(words);
+    mState = mState.Next();
   }
 
 }
@@ -15976,26 +15977,19 @@ class TextEditor {
 
 // ----------------------------
 
-var editor = new TextEditor();
+var light = new TrafficLight(new RedLight());
 
-editor.Type("First line");
-
-editor.SetState(new UpperCase());
-
-editor.Type("Second Line");
-editor.Type("Third Line");
-
-editor.SetState(new LowerCase());
-
-editor.Type("Fourth Line");
-editor.Type("Fifthe Line");
+for (int i = 0; i < 4; i++)
+{
+  Console.WriteLine(light.Name());
+  light.Next();
+}
 
 // Output:
-// First line
-// SECOND LINE
-// THIRD LINE
-// fourth line
-// fifth line
+// Red
+// Green
+// Yellow
+// Red
 
 ```
 
@@ -16008,74 +16002,82 @@ editor.Type("Fifthe Line");
 
 <div dir="ltr">
 
-```PHP
-interface WritingStateInterface {
-  public function write(string $words);
+```php
+interface TrafficLightStateInterface {
+  public function name(): string;
+  public function next(): TrafficLightStateInterface;
 }
 
-class UpperCase implements WritingStateInterface
+class RedLight implements TrafficLightStateInterface
 {
-  public function write(string $words)
+  public function name(): string
   {
-    echo strtoupper($words) . "\n";
+    return "Red";
+  }
+
+  public function next(): TrafficLightStateInterface
+  {
+    return new GreenLight();
   }
 }
 
-class LowerCase implements WritingStateInterface
+class GreenLight implements TrafficLightStateInterface
 {
-  public function write(string $words)
+  public function name(): string
   {
-    echo strtolower($words) . "\n";
+    return "Green";
+  }
+
+  public function next(): TrafficLightStateInterface
+  {
+    return new YellowLight();
   }
 }
 
-class DefaultText implements WritingStateInterface
+class YellowLight implements TrafficLightStateInterface
 {
-  public function write(string $words)
+  public function name(): string
   {
-    echo $words . "\n";
+    return "Yellow";
+  }
+
+  public function next(): TrafficLightStateInterface
+  {
+    return new RedLight();
   }
 }
 
-class TextEditor {
-  private WritingStateInterface $state;
+class TrafficLight {
+  private TrafficLightStateInterface $state;
 
-  public function __construct()
-  {
-    $this->state = new DefaultText();
-  }
-
-  public function setState(WritingStateInterface $state)
+  public function __construct(TrafficLightStateInterface $state)
   {
     $this->state = $state;
   }
 
-  public function type(string $words)
+  public function name(): string
   {
-    $this->state->write($words);
+    return $this->state->name();
+  }
+
+  public function next(): void
+  {
+    $this->state = $this->state->next();
   }
 }
 
-$editor = new TextEditor();
+$light = new TrafficLight(new RedLight());
 
-$editor->type("First line");
-
-$editor->setState(new UpperCase());
-
-$editor->type("Second Line");
-$editor->type("Third Line");
-
-$editor->setState(new LowerCase());
-
-$editor->type("Fourth Line");
-$editor->type("Fifth Line");
+for ($i = 0; $i < 4; $i++) {
+  echo $light->name() . "\n";
+  $light->next();
+}
 
 // Output:
-// First line
-// SECOND LINE
-// THIRD LINE
-// fourth line
-// fifth line
+// Red
+// Green
+// Yellow
+// Red
 
 ```
 
@@ -16092,71 +16094,73 @@ $editor->type("Fifth Line");
 
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-// WritingState interface
-type WritingState interface {
-	Write(words string)
+// TrafficLightState interface
+type TrafficLightState interface {
+	Name() string
+	Next() TrafficLightState
 }
 
-// UpperCase struct
-type UpperCase struct{}
+// RedLight struct
+type RedLight struct{}
 
-// Write for UpperCase
-func (u *UpperCase) Write(words string) {
-	fmt.Println(strings.ToUpper(words))
+func (r *RedLight) Name() string {
+	return "Red"
 }
 
-// LowerCase struct
-type LowerCase struct{}
-
-// Write for LowerCase
-func (l *LowerCase) Write(words string) {
-	fmt.Println(strings.ToLower(words))
+func (r *RedLight) Next() TrafficLightState {
+	return &GreenLight{}
 }
 
-// DefaultText struct
-type DefaultText struct{}
+// GreenLight struct
+type GreenLight struct{}
 
-// Write for DefaultText
-func (d *DefaultText) Write(words string) {
-	fmt.Println(words)
+func (g *GreenLight) Name() string {
+	return "Green"
 }
 
-// TextEditor struct
-type TextEditor struct {
-	state WritingState
+func (g *GreenLight) Next() TrafficLightState {
+	return &YellowLight{}
 }
 
-// NewTextEditor constructor
-func NewTextEditor(state WritingState) *TextEditor {
-	return &TextEditor{state: state}
+// YellowLight struct
+type YellowLight struct{}
+
+func (y *YellowLight) Name() string {
+	return "Yellow"
 }
 
-// SetState method for TextEditor
-func (te *TextEditor) SetState(state WritingState) {
-	te.state = state
+func (y *YellowLight) Next() TrafficLightState {
+	return &RedLight{}
 }
 
-// Type method for TextEditor
-func (te *TextEditor) Type(words string) {
-	te.state.Write(words)
+// TrafficLight holds the current state
+type TrafficLight struct {
+	state TrafficLightState
+}
+
+// NewTrafficLight constructor
+func NewTrafficLight(state TrafficLightState) *TrafficLight {
+	return &TrafficLight{state: state}
+}
+
+// Name delegates to the current state
+func (t *TrafficLight) Name() string {
+	return t.state.Name()
+}
+
+// Next asks the current state for the next one
+func (t *TrafficLight) Next() {
+	t.state = t.state.Next()
 }
 
 func main() {
-	editor := NewTextEditor(&DefaultText{})
-	editor.Type("First Line") // First line
-
-	editor.SetState(&UpperCase{})
-	editor.Type("Second Line") // SECOND LINE
-	editor.Type("Third Line")  // THIRD LINE
-
-	editor.SetState(&LowerCase{})
-	editor.Type("Fourth Line") // fourth line
-	editor.Type("Fifth Line")  // fifth line
+	light := NewTrafficLight(&RedLight{})
+	for i := 0; i < 4; i++ {
+		fmt.Println(light.Name())
+		light.Next()
+	}
 }
 
 ```
@@ -16171,57 +16175,71 @@ func main() {
 <div dir="ltr">
 
 ```java
-interface WritingState {
-    void write(String words);
+interface TrafficLightState {
+    String name();
+    TrafficLightState next();
 }
 
-class UpperCase implements WritingState {
-    public void write(String words) {
-        System.out.println(words.toUpperCase());
+class RedLight implements TrafficLightState {
+    public String name() {
+        return "Red";
+    }
+
+    public TrafficLightState next() {
+        return new GreenLight();
     }
 }
 
-class LowerCase implements WritingState {
-    public void write(String words) {
-        System.out.println(words.toLowerCase());
+class GreenLight implements TrafficLightState {
+    public String name() {
+        return "Green";
+    }
+
+    public TrafficLightState next() {
+        return new YellowLight();
     }
 }
 
-class DefaultText implements WritingState {
-    public void write(String words) {
-        System.out.println(words);
+class YellowLight implements TrafficLightState {
+    public String name() {
+        return "Yellow";
+    }
+
+    public TrafficLightState next() {
+        return new RedLight();
     }
 }
 
-class TextEditor {
-    private WritingState state;
+class TrafficLight {
+    private TrafficLightState state;
 
-    public TextEditor() {
-        state = new DefaultText();
-    }
-
-    public void setState(WritingState state) {
+    public TrafficLight(TrafficLightState state) {
         this.state = state;
     }
 
-    public void type(String words) {
-        state.write(words);
+    public String name() {
+        return state.name();
+    }
+
+    public void next() {
+        state = state.next();
     }
 }
 
 // ----------------------------
 
-TextEditor editor = new TextEditor();
+TrafficLight light = new TrafficLight(new RedLight());
 
-editor.type("First line"); // First line
+for (int i = 0; i < 4; i++) {
+    System.out.println(light.name());
+    light.next();
+}
 
-editor.setState(new UpperCase());
-editor.type("Second line"); // SECOND LINE
-editor.type("Third Line");  // THIRD LINE
-
-editor.setState(new LowerCase());
-editor.type("Fourth line"); // fourth line
-editor.type("FIFTH Line");  // fifth line
+// Output:
+// Red
+// Green
+// Yellow
+// Red
 ```
 
 </div>
@@ -16235,72 +16253,70 @@ editor.type("FIFTH Line");  // fifth line
 
 ```cpp
 #include <iostream>
+#include <memory>
 #include <string>
-#include <algorithm>
 
-class WritingState {
+class TrafficLightState {
 public:
-    virtual ~WritingState() = default;
-    virtual void write(const std::string& words) = 0;
+    virtual ~TrafficLightState() = default;
+    virtual std::string name() const = 0;
+    virtual std::unique_ptr<TrafficLightState> next() const = 0;
 };
 
-class UpperCase : public WritingState {
+class GreenLight;
+class YellowLight;
+
+class RedLight : public TrafficLightState {
 public:
-    void write(const std::string& words) override {
-        std::string upper = words;
-        std::transform(upper.begin(), upper.end(), upper.begin(), ::toupper);
-        std::cout << upper << std::endl;
-    }
+    std::string name() const override { return "Red"; }
+    std::unique_ptr<TrafficLightState> next() const override;
 };
 
-class LowerCase : public WritingState {
+class GreenLight : public TrafficLightState {
 public:
-    void write(const std::string& words) override {
-        std::string lower = words;
-        std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
-        std::cout << lower << std::endl;
-    }
+    std::string name() const override { return "Green"; }
+    std::unique_ptr<TrafficLightState> next() const override;
 };
 
-class DefaultText : public WritingState {
+class YellowLight : public TrafficLightState {
 public:
-    void write(const std::string& words) override {
-        std::cout << words << std::endl;
-    }
+    std::string name() const override { return "Yellow"; }
+    std::unique_ptr<TrafficLightState> next() const override;
 };
 
-class TextEditor {
+std::unique_ptr<TrafficLightState> RedLight::next() const {
+    return std::make_unique<GreenLight>();
+}
+
+std::unique_ptr<TrafficLightState> GreenLight::next() const {
+    return std::make_unique<YellowLight>();
+}
+
+std::unique_ptr<TrafficLightState> YellowLight::next() const {
+    return std::make_unique<RedLight>();
+}
+
+class TrafficLight {
 private:
-    WritingState* state;
+    std::unique_ptr<TrafficLightState> state;
 
 public:
-    TextEditor() : state(new DefaultText()) {}
-    ~TextEditor() { delete state; }
+    explicit TrafficLight(std::unique_ptr<TrafficLightState> initial)
+        : state(std::move(initial)) {}
 
-    void setState(WritingState* newState) {
-        delete state;
-        state = newState;
-    }
+    std::string name() const { return state->name(); }
 
-    void type(const std::string& words) {
-        state->write(words);
-    }
+    void next() { state = state->next(); }
 };
 
 // ----------------------------
 
 int main() {
-    TextEditor editor;
-
-    editor.type("First line");  // First line
-
-    editor.setState(new UpperCase());
-    editor.type("Second line"); // SECOND LINE
-    editor.type("Third line");  // THIRD LINE
-
-    editor.setState(new LowerCase());
-    editor.type("Fourth line"); // fourth line
-    editor.type("Fifth line");  // fifth line
+    TrafficLight light(std::make_unique<RedLight>());
+    for (int i = 0; i < 4; ++i) {
+        std::cout << light.name() << std::endl;
+        light.next();
+    }
     return 0;
 }
 ```
@@ -16311,53 +16327,46 @@ int main() {
 
 <details>
 <summary>Kotlin</summary>
+
 <div dir="ltr">
 
 ```kotlin
-interface WritingState {
-    fun write(words: String)
+interface TrafficLightState {
+    fun name(): String
+    fun next(): TrafficLightState
 }
 
-class UpperCase : WritingState {
-    override fun write(words: String) {
-        println(words.uppercase())
+class RedLight : TrafficLightState {
+    override fun name() = "Red"
+    override fun next(): TrafficLightState = GreenLight()
+}
+
+class GreenLight : TrafficLightState {
+    override fun name() = "Green"
+    override fun next(): TrafficLightState = YellowLight()
+}
+
+class YellowLight : TrafficLightState {
+    override fun name() = "Yellow"
+    override fun next(): TrafficLightState = RedLight()
+}
+
+class TrafficLight(private var state: TrafficLightState) {
+    fun name() = state.name()
+
+    fun next() {
+        state = state.next()
     }
 }
 
-class LowerCase : WritingState {
-    override fun write(words: String) {
-        println(words.lowercase())
-    }
-}
+// ----------------------------
 
-class DefaultText : WritingState {
-    override fun write(words: String) {
-        println(words)
-    }
-}
-
-class TextEditor(private var state: WritingState) {
-    fun setState(state: WritingState) {
-        this.state = state
-    }
-
-    fun type(words: String) {
-        state.write(words)
-    }
-}
-
-// Usage
 fun main() {
-    val editor = TextEditor(DefaultText())
-    editor.type("First Line")
-
-    editor.setState(UpperCase())
-    editor.type("Second Line")
-    editor.type("Third Line")
-
-    editor.setState(LowerCase())
-    editor.type("Fourth Line")
-    editor.type("Fifth Line")
+    val light = TrafficLight(RedLight())
+    for (i in 0 until 4) {
+        println(light.name())
+        light.next()
+    }
 }
 ```
 
@@ -16370,64 +16379,66 @@ fun main() {
 <div dir="ltr">
 
 ```dart
-abstract class WritingState {
-  void write(String words);
+abstract class TrafficLightState {
+  String name();
+  TrafficLightState next();
 }
 
-class UpperCase implements WritingState {
+class RedLight implements TrafficLightState {
   @override
-  void write(String words) => print(words.toUpperCase());
-}
+  String name() => 'Red';
 
-class LowerCase implements WritingState {
   @override
-  void write(String words) => print(words.toLowerCase());
+  TrafficLightState next() => GreenLight();
 }
 
-class DefaultText implements WritingState {
+class GreenLight implements TrafficLightState {
   @override
-  void write(String words) => print(words);
+  String name() => 'Green';
+
+  @override
+  TrafficLightState next() => YellowLight();
 }
 
-class TextEditor {
-  WritingState _state;
+class YellowLight implements TrafficLightState {
+  @override
+  String name() => 'Yellow';
 
-  TextEditor(this._state);
+  @override
+  TrafficLightState next() => RedLight();
+}
 
-  void setState(WritingState state) {
-    _state = state;
-  }
+class TrafficLight {
+  TrafficLightState _state;
 
-  void write(String words) {
-    _state.write(words);
+  TrafficLight(this._state);
+
+  String name() => _state.name();
+
+  void next() {
+    _state = _state.next();
   }
 }
 
 // ----------------------------
 
 void main() {
-  var editor = TextEditor(DefaultText());
-  editor.write('First Line');
-
-  editor.setState(UpperCase());
-  editor.write('Second Line');
-  editor.write('Third Line');
-
-  editor.setState(LowerCase());
-  editor.write('Fourth Line');
-  editor.write('Fifth Line');
-
-  // Output:
-  // First Line
-  // SECOND LINE
-  // THIRD LINE
-  // fourth line
-  // fifth line
+  var light = TrafficLight(RedLight());
+  for (var i = 0; i < 4; i++) {
+    print(light.name());
+    light.next();
+  }
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی رفتار یه شیء به یه «حالت» داخلی بستگی داره و خود حالت‌ها هم با شرط مشخص از یکی به اون یکی گذار می‌کنن، مثل چراغ راهنمایی یا چرخه سفارش»؛ ❌ «وقتی فقط می‌خوای یه رفتار رو از بیرون عوض کنی و خبری از گذار خودکار بین حالت‌ها نیست».
+> 🪤 **دام رایج:** «اگه گذار بین حالت‌ها رو از بیرون با setState دستی انجام بدی، عملاً به استراتژی (Strategy) رسیدی؛ جذابیت State اینه که خود حالت، حالت بعدی رو انتخاب کنه».
+> 🔗 **فرقش با [استراتژی (Strategy)](#استراتژی-strategy-):** «توی Strategy تو از بیرون الگوریتم رو دستی می‌چینی؛ توی State خود شیء با عوض شدن حالتش، رفتارش رو خودکار عوض می‌کنه».
+
 
 <br>
 
@@ -16435,7 +16446,7 @@ void main() {
 
 <div align="center">
 
-## 📒 Template Method
+## متد قالب (Template Method) 📒
 
 </div>
 
@@ -16443,19 +16454,19 @@ void main() {
 🏗️ <b>مثال دنیای واقعی: خط تولید با مراحل ثابت</b>
 </div>
 
-فرض کنید توی یک کارخونه/خط تولید، یه کار همیشه با همین ترتیب جلو میره:
+فرض کن توی یک کارخونه/خط تولید، یه کار همیشه با همین ترتیب جلو می‌ره:
 ۱. اول تست
 ۲. بعد بررسی کیفیت
 ۳. بعد بسته‌بندی
 ۴. آخرش ارسال
 
-ترتیبش ثابت و غیرقابل چونه زدنه. ولی بعضی مرحله‌ها بسته به محصول فرق می‌کنه.
+ترتیبش ثابت و غیرقابل چونه‌زدنه. ولی بعضی مرحله‌ها بسته به محصول فرق می‌کنه.
 مثلاً «تست کردن محصول A» با «تست کردن محصول B» یکی نیست، ولی هر دو باید توی همون جای مشخص از روند اجرا بشن.
 
 💡 **به زبون ساده:**
-> این پترن میگه: **"اسکلت الگوریتم ثابته؛ فقط بعضی قدم‌هاش رو فرزندها پر می‌کنن یا عوض می‌کنن."**
+> این پترن می‌گه: **«اسکلت الگوریتم ثابته؛ فقط بعضی قدم‌هاش رو فرزندها پر می‌کنن یا عوض می‌کنن.»**
 
-ویکی پدیا:
+ویکی‌پدیا:
 
 <div dir="ltr">
 
@@ -16466,13 +16477,16 @@ void main() {
 
 </div>
 
-**مثال برنامه نویسی**
+خلاصه‌اش این می‌شه که الگوریتم اصلی، یه اسکلت ثابت داره که توی کلاس والد تعریف می‌شه و ترتیب قدم‌ها رو مشخص می‌کنه.
+بعد می‌تونی بعضی از این قدم‌ها رو توی کلاس‌های فرزند جور دیگه‌ای پیاده‌سازی کنی، بدون این‌که به ساختار کلی الگوریتم دست بزنی.
 
-فرض کنید ما یک زیرساخت برای ساخت اپلیکیشن‌های گوشی نیاز داریم!
+**مثال برنامه‌نویسی**
 
-خب مراحل تقریبا مشخصه و فقط ما باید مراحل build, lint , test و deploy رو پیاده سازی کنیم!
+فرض کن ما یک زیرساخت برای ساخت اپلیکیشن‌های گوشی نیاز داریم!
 
-بعد باید پیاده سازی برای اندروید و آی او اس رو بسازیم.
+خب مراحل تقریباً مشخصه و فقط باید مراحل `build`، `lint`، `test` و `deploy` رو پیاده‌سازی کنیم.
+
+بعد باید پیاده‌سازی برای اندروید و iOS رو بسازیم.
 
 <details>
 <summary>Python</summary>
@@ -16640,12 +16654,11 @@ iosBuilder.build();
 </div>
 </details>
 
-
 <details>
 <summary>JavaScript</summary>
 <div dir="ltr">
 
-```javaScript
+```javascript
 class Builder {
     build() {
         this.test();
@@ -16711,10 +16724,20 @@ class IosBuilder extends Builder {
 const androidBuilder = new AndroidBuilder();
 androidBuilder.build();
 
-
+// Output:
+// Running android tests
+// Linting the android code
+// Assembling the android build
+// Deploying android build to server
 
 const iosBuilder = new IosBuilder();
 iosBuilder.build();
+
+// Output:
+// Running ios tests
+// Linting the ios code
+// Assembling the ios build
+// Deploying ios build to server
 ```
 
 </div>
@@ -16725,7 +16748,9 @@ iosBuilder.build();
 
 <div dir="ltr">
 
-```C#
+```csharp
+using System;
+
 
 abstract class Builder
 {
@@ -16825,7 +16850,7 @@ iosBuilder.Build();
 
 <div dir="ltr">
 
-```PHP
+```php
 abstract class Builder {
   // Template method
   public function Build() {
@@ -16850,7 +16875,7 @@ class AndroidBuilder extends Builder {
     echo "Deploying android build to server\n";
   }
 
-  public function lnt() {
+  public function lint() {
     echo "Linting the android code\n";
   }
 
@@ -17033,46 +17058,46 @@ abstract class Builder {
 class AndroidBuilder extends Builder {
 
     @Override
-    public void assemble() {
-        System.out.println("Assembling android build");
-    }
-
-    @Override
-    public void deploy() {
-        System.out.println("Deploying android build");
-    }
-
-    @Override
-    public void lint() {
-        System.out.println("Linting android code");
-    }
-
-    @Override
     public void test() {
         System.out.println("Running android tests");
     }
-}
 
-class IOSBuilder extends Builder {
+    @Override
+    public void lint() {
+        System.out.println("Linting the android code");
+    }
 
     @Override
     public void assemble() {
-        System.out.println("Assembling iOS build");
+        System.out.println("Assembling the android build");
     }
 
     @Override
     public void deploy() {
-        System.out.println("Deploying iOS build");
+        System.out.println("Deploying android build to server");
+    }
+}
+
+class IosBuilder extends Builder {
+
+    @Override
+    public void test() {
+        System.out.println("Running ios tests");
     }
 
     @Override
     public void lint() {
-        System.out.println("Linting iOS code");
+        System.out.println("Linting the ios code");
     }
 
     @Override
-    public void test() {
-        System.out.println("Running iOS tests");
+    public void assemble() {
+        System.out.println("Assembling the ios build");
+    }
+
+    @Override
+    public void deploy() {
+        System.out.println("Deploying ios build to server");
     }
 }
 
@@ -17081,16 +17106,16 @@ class IOSBuilder extends Builder {
 AndroidBuilder androidBuilder = new AndroidBuilder();
 androidBuilder.build();
 // Running android tests
-// Linting android code
-// Assembling android build
-// Deploying android build
+// Linting the android code
+// Assembling the android build
+// Deploying android build to server
 
-IOSBuilder iOSBuilder = new IOSBuilder();
-iOSBuilder.build();
-// Running iOS tests
-// Linting iOS code
-// Assembling iOS build
-// Deploying iOS build
+IosBuilder iosBuilder = new IosBuilder();
+iosBuilder.build();
+// Running ios tests
+// Linting the ios code
+// Assembling the ios build
+// Deploying ios build to server
 ```
 
 </div>
@@ -17171,8 +17196,6 @@ int main() {
     // Assembling the android build
     // Deploying android build to server
 
-    std::cout << std::endl;
-
     IosBuilder iosBuilder;
     iosBuilder.build();
     // Running ios tests
@@ -17187,13 +17210,14 @@ int main() {
 
 </details>
 
-
 <details>
 <summary>Kotlin</summary>
+
 <div dir="ltr">
 
 ```kotlin
 abstract class Builder {
+    // Template method
     fun build() {
         test()
         lint()
@@ -17243,7 +17267,8 @@ class IosBuilder : Builder() {
     }
 }
 
-// Usage
+// ----------------------------
+
 fun main() {
     val androidBuilder = AndroidBuilder()
     androidBuilder.build()
@@ -17263,6 +17288,7 @@ fun main() {
 
 ```dart
 abstract class Builder {
+  // Template method
   void build() {
     test();
     lint();
@@ -17309,22 +17335,20 @@ class IosBuilder extends Builder {
 void main() {
   var androidBuilder = AndroidBuilder();
   androidBuilder.build();
-  // Running android tests
-  // Linting the android code
-  // Assembling the android build
-  // Deploying android build to server
 
   var iosBuilder = IosBuilder();
   iosBuilder.build();
-  // Running ios tests
-  // Linting the ios code
-  // Assembling the ios build
-  // Deploying ios build to server
 }
 ```
 
 </div>
 </details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی چند تا کار، ترتیب و اسکلت یکسانی دارن و فقط چند قدمشون فرق می‌کنه»؛ ❌ «وقتی کل روند کار از این‌رو به اون‌رو فرق می‌کنه و قدم مشترکی بینشون نیست».
+> 🪤 **دام رایج:** «این‌قدر قدم‌ها رو قابل‌بازنویسی می‌کنی که دیگه اسکلت ثابتی نمی‌مونه و کنترل از دستت در می‌ره».
+> 🔗 **فرقش با [استراتژی (Strategy)](#استراتژی-strategy-):** «اینجا با ارث‌بری فقط چند قدمِ یه روندِ ثابت رو عوض می‌کنی؛ توی استراتژی کلِ الگوریتم رو به‌صورت یه شیء جدا تزریق و تعویض می‌کنی».
+
 
 <br>
 
@@ -17334,39 +17358,39 @@ void main() {
 
 <div align="center">
 
-# 🤝 کمک کردن به این پروژه!
+# کمک کردن به این پروژه! 🤝
 
 </div>
 
 <div align="right">
 
-- این پروژه رو fork کنید و به زبون‌های برنامه نویسی دیگه توسعه بدید!
-- این ریپو رو برای دوستاتون بفرستید!
-- اشتباهاتی که وجود داره رو با issue و یا pull request فیکس کنید!
-- مثال‌ها رو بهبود ببخشید و با issue و یا pull request به اشتراک بسازید!
-- اگه تجربه عملی ای با هر الگو دارید اون رو به مثال ها اضافه کنید!
-- با ⭐ به پروژه از من و این ریپو حمایت کنید و باعث دیده شدنش بشید!
+- این پروژه رو fork کنی و به زبون‌های برنامه‌نویسی دیگه توسعه بدی!
+- این ریپو رو برای دوستات بفرستی!
+- اشتباهاتی که وجود داره رو با issue و یا pull request فیکس کنی!
+- مثال‌ها رو بهتر کنی و با issue یا pull request به اشتراک بذاری.
+- اگه تجربه عملی‌ای با هر الگو داری، اون رو به مثال‌ها اضافه کن.
+- با ⭐ به پروژه از من و این ریپو حمایت کنی و باعث دیده شدنش بشی!
 
 </div>
 
 <div align="center">
 
-## مشارکت کنندگان
+## مشارکت‌کنندگان
 
 </div>
 
 <div align="right">
 
-- امیر عزیز که زحمت مثال های TypeScript رو کشید.([amirmalekian](https://github.com/amirmalekian))
-- رضا عزیز که زحمت مثال های #C رو کشید.([RezaMansouri70](https://github.com/RezaMansouri70))
-- صالح عزیز که زحمت مثال های PHP رو کشید.([salehhashemi1992](https://github.com/salehhashemi1992))
-- عاطفه عزیز که زحمت مثال های Golang رو کشید.([atefeh-komeyli](https://github.com/atefeh-komeyli))
-- محمد عزیز که زحمت مثال های Java رو کشید.([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
-- سما عزیز که زحمت مثال های JavaScript رو کشید.([samazzz](https://github.com/samazzz))
-- حمیدرضا عزیز که زحمت مثال های C++ رو کشید.([hamiikalhor](https://github.com/hamiikalhor))
-- آریا عزیز که زحمت مثال های Kotlin رو کشید.([ariaramin](https://github.com/ariaramin))
-- مجید عزیز که زحمت مثال های Dart رو کشید.([majidrigizadeh](https://github.com/majidrigizadeh))
-- مهسا، محمد، سجاد و محسن عزیز که زحمت بهبود کد هارو کشیدند.([MahsaMahdavian](https://github.com/MahsaMahdavian) / [MohammadMMoniri](https://github.com/MohammadMMoniri) / [ssmns](https://github.com/ssmns) / [Serajian](https://github.com/Serajian))
+- امیر عزیز که زحمت مثال‌های TypeScript رو کشید. ([amirmalekian](https://github.com/amirmalekian))
+- رضا عزیز که زحمت مثال‌های C# رو کشید. ([RezaMansouri70](https://github.com/RezaMansouri70))
+- صالح عزیز که زحمت مثال‌های PHP رو کشید. ([salehhashemi1992](https://github.com/salehhashemi1992))
+- عاطفه عزیز که زحمت مثال‌های Golang رو کشید. ([atefeh-komeyli](https://github.com/atefeh-komeyli))
+- محمد عزیز که زحمت مثال‌های Java رو کشید. ([Mohammad-Masoomi-Homayoun](https://github.com/Mohammad-Masoomi-Homayoun))
+- سما عزیز که زحمت مثال‌های JavaScript رو کشید. ([samazzz](https://github.com/samazzz))
+- حمیدرضا عزیز که زحمت مثال‌های C++ رو کشید. ([hamiikalhor](https://github.com/hamiikalhor))
+- آریا عزیز که زحمت مثال‌های Kotlin رو کشید. ([ariaramin](https://github.com/ariaramin))
+- مجید عزیز که زحمت مثال‌های Dart رو کشید. ([majidrigizadeh](https://github.com/majidrigizadeh))
+- مهسا، محمد، سجاد و محسن عزیز که زحمت بهبود کدها رو کشیدند. ([MahsaMahdavian](https://github.com/MahsaMahdavian) / [MohammadMMoniri](https://github.com/MohammadMMoniri) / [ssmns](https://github.com/ssmns) / [Serajian](https://github.com/Serajian))
 
 </div>
 
