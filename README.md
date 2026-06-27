@@ -2543,6 +2543,18 @@ public Burger(int size, boolean cheese, boolean mushrooms, boolean tomato)
 </details>
 
 <details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+Burger(int size, bool cheese, bool mushrooms, bool tomato);
+```
+
+</div>
+</details>
+
+<details>
 <summary>Kotlin</summary>
 
 <div dir="ltr">
@@ -15139,6 +15151,9 @@ checkout.checkout(100)  # Output: Paid 100 in cash
 
 checkout = Checkout(CardPayment())
 checkout.checkout(250)  # Output: Paid 250 by card
+
+checkout = Checkout(WalletPayment())
+checkout.checkout(75)  # Output: Paid 75 from wallet
 ```
 
 </div>
@@ -15191,6 +15206,9 @@ checkout.checkout(100); // Output: Paid 100 in cash
 
 checkout = new Checkout(new CardPayment());
 checkout.checkout(250); // Output: Paid 250 by card
+
+checkout = new Checkout(new WalletPayment());
+checkout.checkout(75); // Output: Paid 75 from wallet
 ```
 
 </div>
@@ -15234,6 +15252,9 @@ checkout.checkout(100); // Output: Paid 100 in cash
 
 checkout = new Checkout(new CardPayment());
 checkout.checkout(250); // Output: Paid 250 by card
+
+checkout = new Checkout(new WalletPayment());
+checkout.checkout(75); // Output: Paid 75 from wallet
 ```
 
 </div>
@@ -15300,6 +15321,9 @@ checkout.Checkout(100); // Output: Paid 100 in cash
 checkout = new ShoppingCart(new CardPayment());
 checkout.Checkout(250); // Output: Paid 250 by card
 
+checkout = new ShoppingCart(new WalletPayment());
+checkout.Checkout(75); // Output: Paid 75 from wallet
+
 ```
 
 </div>
@@ -15351,6 +15375,9 @@ $checkout->checkout(100); // Output: Paid 100 in cash
 
 $checkout = new Checkout(new CardPayment());
 $checkout->checkout(250); // Output: Paid 250 by card
+
+$checkout = new Checkout(new WalletPayment());
+$checkout->checkout(75); // Output: Paid 75 from wallet
 
 ```
 
@@ -15415,6 +15442,9 @@ func main() {
 
 	checkout = NewCheckout(&CardPayment{})
 	checkout.Checkout(250) // Output: Paid 250 by card
+
+	checkout = NewCheckout(&WalletPayment{})
+	checkout.Checkout(75) // Output: Paid 75 from wallet
 }
 ```
 
@@ -15475,6 +15505,9 @@ checkout.checkout(100); // Paid 100 in cash
 
 checkout = new Checkout(new CardPayment());
 checkout.checkout(250); // Paid 250 by card
+
+checkout = new Checkout(new WalletPayment());
+checkout.checkout(75); // Paid 75 from wallet
 ```
 
 </div>
@@ -15538,6 +15571,10 @@ int main() {
     CardPayment card;
     Checkout checkout2(&card);
     checkout2.checkout(250); // Output: Paid 250 by card
+
+    WalletPayment wallet;
+    Checkout checkout3(&wallet);
+    checkout3.checkout(75); // Output: Paid 75 from wallet
     return 0;
 }
 ```
@@ -15588,6 +15625,9 @@ fun main() {
 
     checkout = Checkout(CardPayment())
     checkout.checkout(250)
+
+    checkout = Checkout(WalletPayment())
+    checkout.checkout(75)
 }
 ```
 
@@ -15635,6 +15675,9 @@ void main() {
 
   checkout = Checkout(CardPayment());
   checkout.checkout(250);
+
+  checkout = Checkout(WalletPayment());
+  checkout.checkout(75);
 }
 ```
 
