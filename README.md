@@ -109,7 +109,7 @@
 *   🌍 **یه مثال از دنیای واقعی** تا حسش کنی.
 *   💡 **به زبون ساده** که ته‌نشین بشه.
 *   📖 **تعریف ویکی‌پدیا** (به‌همراه ترجمه فارسی) تا دقیق هم بدونی.
-*   💻 **کد، توی ۱۰ زبان** (Python، JavaScript، TypeScript، Java، C#، PHP، Go، C++، Kotlin، Dart)؛ روی زبون خودت کلیک کن و بازش کن.
+*   💻 **کد، توی ۱۰ زبان** (Python، TypeScript، JavaScript، C#، PHP، Go، Java، C++، Kotlin، Dart)؛ روی زبون خودت کلیک کن و بازش کن.
 *   🤔 **کی به کارش ببریم؟** یه جعبه کوتاه که می‌گه کجا به دردت می‌خوره، کجا نه، و فرقش با الگوهای شبیهش چیه.
 
 الگوها هم سه دسته‌ان: **سازنده (Creational)** درباره‌ی ساختن آبجکت‌هاست، **ساختاری (Structural)** درباره‌ی کنار هم چیدنِ کلاس‌ها و آبجکت‌ها، و **رفتاری (Behavioral)** درباره‌ی اینکه آبجکت‌ها چطور با هم حرف می‌زنن و کار رو بین خودشون تقسیم می‌کنن.
@@ -337,7 +337,7 @@ print(door.getWidth())
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 
 <div dir="ltr">
 
@@ -869,7 +869,7 @@ marketingManager.takeInterview()
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 
 <div dir="ltr">
 
@@ -1573,7 +1573,7 @@ expert.getDescription()  # Output: I can only fit iron doors
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 
 <div dir="ltr">
 
@@ -2460,7 +2460,7 @@ def __init__(self, size, cheese=True, mushrooms=True, tomato=False): ...
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -2537,6 +2537,18 @@ func Burger(size int, cheese bool, mushrooms bool, tomato bool)
 
 ```java
 public Burger(int size, boolean cheese, boolean mushrooms, boolean tomato)
+```
+
+</div>
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+Burger(int size, bool cheese, bool mushrooms, bool tomato);
 ```
 
 </div>
@@ -2649,7 +2661,7 @@ print(burger.get_description())
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -3330,7 +3342,7 @@ void main() {
 <details>
 <summary>Python</summary>
 
-پایتون magic method‌هایی برای این مسئله در نظر گرفته که ما هم از همون دو تابع معروف copy و deep copy استفاده می‌کنیم:
+پایتون برای این کار متدهای ویژه‌ای داره که بهشون magic method می‌گن (همون متدهای دو زیرخطی مثل `__copy__`)؛ ما هم از همون دو تابع معروفِ copy و deep copy استفاده می‌کنیم:
 
 <div dir="ltr">
 
@@ -3377,7 +3389,7 @@ print(original.address.city)   # Tehran  -> the original stayed the same
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -3949,12 +3961,12 @@ if __name__ == "__main__":
 
 </div>
 
-این روش لزوماً Thread Safe نیست؛ یعنی اگه چند نخ (Thread) هم‌زمان اولین بار `getInstance` رو صدا بزنن، شاید بیشتر از یه نمونه ساخته بشه. تو محیط چندنخی باید با یه قفل (Lock) جلوش رو بگیری.
+این روش لزوماً Thread Safe نیست؛ یعنی اگه چند نخ (Thread، یعنی چند مسیر اجرای هم‌زمان) اولین بار با هم اولین نمونه رو بسازن، شاید بیشتر از یه نمونه درست بشه. تو محیط چندنخی باید با یه قفل (Lock) جلوش رو بگیری.
 
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -4253,6 +4265,7 @@ void main() {
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی واقعاً باید توی کل برنامه فقط یه نمونه از یه چیز وجود داشته باشه، مثل تنظیمات سراسری یا یه مخزنِ اتصال‌ها (Connection Pool)»؛ ❌ «وقتی فقط برای راحتیِ دسترسی می‌خوای همه‌جا بهش برسی، که اون‌وقت داری متغیر سراسری (Global Variable) می‌سازی».
 > 🪤 **دام رایج:** «حالت مشترک و قابل‌تغییرِ تک‌نمونه، تست‌ها رو به هم وابسته می‌کنه و توی برنامه‌های چندنخی (Multithreaded) دردسر می‌سازه».
+> 🔗 **فرقش با متغیر سراسری:** هر دو یه نمونه‌ی مشترک در دسترس می‌ذارن، ولی تک‌نمونه خودش ساختش رو کنترل می‌کنه و تا لازم نشه نمونه رو نمی‌سازه؛ متغیر سراسری از اول همه‌جا بازه و هیچ کنترلی روش نداری.
 
 
 <br>
@@ -4393,7 +4406,7 @@ hunter.hunt(wild_dog_adapter)   # The hunter is hunting... -> Woof
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -5092,7 +5105,7 @@ print(careers.getContent())  # Careers page in Light blue
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -5789,7 +5802,7 @@ void main() {
 
 دو: Leaf که زیرمجموعه نداره و فقط یه سری وظیفه داره.
 
-خب اول بیایم یک اینترفیس پایه برای کامپوننت‌هامون بسازیم و در ادامه هم اینترفیس‌های Composite و Leaf رو بسازیم:
+خب این بار به‌جای جعبه و قیمت، همین ایده رو با یه سازمان و حقوقِ کارمندها پیاده می‌کنیم: شرکت مثل همون جعبه‌ی بزرگه، هر کارمند مثل یه جنسِ تکی، و جمعِ کل حقوق همون «قیمت کل». اول یه اینترفیس مشترک (`Employee`) می‌سازیم که هم تک‌کارمندها (برگ، مثل `Developer`) و هم گروه‌ها (`Organization`) ازش پیروی می‌کنن؛ همین یکی‌بودنِ اینترفیس اجازه می‌ده با تک‌نفر و کل سازمان یک‌جور رفتار کنیم:
 
 <details>
 
@@ -5873,7 +5886,7 @@ print(f"Total salary: {company.get_salary():g}")
 
 <details>
 
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 
 <div dir="ltr">
 
@@ -6643,6 +6656,7 @@ void main() {
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی داده‌هات یه ساختار درختی دارن (بخش‌ها و کل‌ها) و می‌خوای با تک‌آبجکت و گروه یه‌جور رفتار کنی»؛ ❌ «وقتی آبجکت‌هات سلسله‌مراتب ندارن و صاف کنار هم‌ان؛ اون‌جا درختی فقط پیچیدگی الکی اضافه می‌کنه».
 > 🪤 **دام رایج:** «این‌قدر هوس می‌کنی همه‌چی رو یکدست کنی که متدهای بی‌معنی مثل add رو روی «برگ» هم می‌ذاری، و بعد برنامه موقع اجرا می‌ترکه».
+> 🔗 **فرقش با [دکوریتور (Decorator)](#دکوریتور-decorator-):** هر دو ساختارِ تو‌در‌تو می‌سازن، ولی درختی برای اینه که با تک‌جزء و گروه یک‌جور رفتار کنی (سلسله‌مراتبِ جزء-کل)؛ دکوریتور لایه‌لایه قابلیت به یه آبجکت اضافه می‌کنه.
 
 
 <br>
@@ -6761,7 +6775,7 @@ print(f"{coffee.description()}: {coffee.cost()}")  # Simple coffee, milk, sugar:
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -7504,7 +7518,7 @@ Zzzzz
 
 <details>
 
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 
 <div dir="ltr">
 
@@ -8177,6 +8191,7 @@ void main() {
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی یه زیرسیستم شلوغ و چندمرحله‌ای داری و می‌خوای یه ورودی ساده و خوش‌دست جلوش بذاری»؛ ❌ «وقتی فقط یه کلاس ساده داری که اصلاً پیچیدگی‌ای برای قایم کردن نداره».
 > 🪤 **دام رایج:** «نما رو نکن یه گاد آبجکت (God Object) که خودش همه‌کاره‌ست؛ نما فقط هماهنگ‌کننده‌ست، نه انجام‌دهنده همه‌چی».
+> 🔗 **فرقش با [مبدل (Adapter)](#مبدل-adapter-):** نما یه درگاهِ ساده جلوی یه سیستمِ شلوغ می‌ذاره تا کار باهاش راحت شه؛ مبدل اینترفیسِ یه چیزِ موجود رو عوض می‌کنه تا با یه اینترفیسِ دیگه جور دربیاد.
 
 
 <br>
@@ -8288,7 +8303,7 @@ print("Total tea objects made: " + str(tea_maker.total_teas_made()))
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -8961,6 +8976,7 @@ void main() {
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی قراره تعداد خیلی زیادی آبجکت بسازی که بخش بزرگی از داده‌شون مشترکه و حافظه داره می‌ترکه»؛ ❌ «وقتی آبجکت‌هات کم‌اند یا حالت مشترکی ندارن که بشه share کرد».
 > 🪤 **دام رایج:** «به جای حالتِ مشترک و ثابت، روی حالتِ متغیر و بیرونی کش بگیری؛ اون‌وقت دیگه چیزی مشترک نمی‌مونه و کل ماجرا بی‌اثر می‌شه».
+> 🔗 **فرقش با [تک‌نمونه (Singleton)](#تک‌نمونه-singleton-):** تک‌نمونه فقط یه نمونه از کل کلاس داره؛ فلای‌وِیت برای هر «نوعِ» مشترک یه نمونه نگه می‌داره و همون رو بین کلی آبجکت به اشتراک می‌ذاره تا حافظه کم بیاد.
 
 
 <br>
@@ -9061,7 +9077,7 @@ door.close()           # Closing lab door
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -9732,7 +9748,7 @@ Paid 259 using Paypal
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -10369,6 +10385,7 @@ void main() {
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی یک درخواست چند تا پردازندهٔ احتمالی داره و نمی‌دونی کدوم بالاخره جوابش رو می‌ده، بسپارش به زنجیره»؛ ❌ «وقتی همیشه دقیقاً یک نفر مسئوله و مقصد از اول معلومه، زنجیره فقط شلوغش می‌کنه».
 > 🪤 **دام رایج:** «اگه هیچ حلقه‌ای درخواست رو برنداره و ته زنجیره رو خالی بذاری، درخواست بی‌صدا گم می‌شه؛ همیشه حالت آخر رو مدیریت کن».
+> 🔗 **فرقش با [دکوریتور (Decorator)](#دکوریتور-decorator-):** هر دو یه زنجیره از آبجکت‌ان، ولی توی دکوریتور همه‌ی لایه‌ها اجرا می‌شن و هرکدوم چیزی اضافه می‌کنه؛ توی زنجیره‌ی مسئولیت معمولاً فقط یه حلقه درخواست رو می‌گیره و کار تموم می‌شه.
 
 
 <br>
@@ -10480,7 +10497,7 @@ remote.submit(turnOff)  # Darkness!
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -11158,6 +11175,7 @@ void main() {
 > 🤔 **کی به کارش ببریم؟**
 > ✅ وقتی می‌خوای درخواست‌ها رو به آبجکت تبدیل کنی تا بشه صف‌شون کرد، لاگ گرفت یا undo/redo اضافه کرد؛ ❌ وقتی فقط یه متد ساده رو صدا می‌زنی و قرار نیست درخواست رو نگه داری یا برگردونی.
 > 🪤 **دام رایج:** برای هر کار کوچیکی یه کلاس Command جدا می‌سازی و کد بی‌دلیل پر از کلاس‌های یه‌خطی می‌شه.
+> 🔗 **فرقش با [استراتژی (Strategy)](#استراتژی-strategy-):** هر دو یه کار رو توی یه آبجکت می‌پیچن، ولی فرمان یه «درخواست» رو بسته‌بندی می‌کنه تا بعداً اجرا، صف یا undo بشه؛ استراتژی یه «الگوریتمِ» قابل‌تعویضه که همین حالا کارِ جاری رو جور دیگه انجام می‌ده.
 
 
 <br>
@@ -11266,7 +11284,7 @@ Output:
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -11900,7 +11918,7 @@ jane.send('Hey!')
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 
 <div dir="ltr">
 
@@ -12494,7 +12512,7 @@ print(editor.get_content())  # a
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -13217,6 +13235,7 @@ void main() {
 > 🤔 **کی به کارش ببریم؟**
 > ✅ «وقتی می‌خوای حالت یک شیء رو ذخیره کنی و بعداً بهش برگردی، بدون اینکه کپسوله‌بودنش رو بشکنی»؛ ❌ «وقتی حالت سنگینه یا snapshot ها زیاد می‌شن و حافظه‌ت رو می‌خورن».
 > 🪤 **دام رایج:** «نگه‌داشتن بی‌حساب‌وکتاب همه‌ی snapshot ها؛ یک سقف یا سیاست پاک‌سازی براش بذار».
+> 🔗 **فرقش با [فرمان (Command)](#فرمان-command-):** هر دو به undo ربط دارن، ولی نقطه‌ی بازگشت کلِ حالت رو عکس می‌گیره و بعداً برمی‌گردونه؛ فرمان با نگه‌داشتنِ خودِ دستورها و معکوس‌کردنشون undo می‌کنه.
 
 
 
@@ -13234,8 +13253,8 @@ void main() {
 📬 <b>مثال دنیای واقعی: اعلان‌های سایت کاریابی</b>
 </div>
 
-فرض کن توی یه سایت کاریابی ثبت‌نام کردی و می‌گی: «هر وقت توی دسته برنامه‌نویسی، یه شغل جدید اومد، به من خبر بده.»
-حالا از اون طرف، سایت هر بار که یه آگهی جدید اضافه می‌شه، میاد به همه آدم‌هایی که اون دسته رو دنبال می‌کنن ایمیل/نوتیف می‌فرسته.
+فرض کن توی یه سایت کاریابی ثبت‌نام کردی و می‌گی: «هر وقت یه شغل جدید اومد، به من خبر بده.»
+حالا از اون طرف، سایت هر بار که یه آگهی جدید اضافه می‌شه، به همه‌ی کسایی که عضو شدن ایمیل/نوتیف می‌فرسته.
 
 یعنی تو لازم نیست هر روز بری سایت رو چک کنی. خودِ سیستم با هر تغییر، خبرت می‌کنه. 🔔
 
@@ -13259,7 +13278,7 @@ void main() {
 
 اول یه کلاس می‌سازیم برای نگه‌داشتن یه شغل، بعد یه کلاس برای جوینده‌های کار.
 
-و بعد یک کلاس برای دسته‌بندی‌های مختلفِ کار می‌سازیم که جوینده‌ها می‌تونن توش عضو بشن. هر وقت شغلی توی اون دسته‌بندی ثبت بشه، خودکار به همه‌شون خبر می‌ده.
+و بعد یک کلاس می‌سازیم که آگهی‌ها رو نگه می‌داره و جوینده‌ها می‌تونن توش عضو بشن. هر وقت شغل جدیدی ثبت بشه، خودکار به همه‌ی عضوها خبر می‌ده.
 
 <details>
 <summary>Python</summary>
@@ -13320,7 +13339,7 @@ jobPostings.addJob(JobPost('Software Engineer'))
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -14047,6 +14066,8 @@ void main() {
 
 این کار رو با «ارجاع دوگانه» (Double Dispatch) انجام می‌دن. حیوون با `accept` خودش رو به بازدیدکننده معرفی می‌کنه و بازدیدکننده هم متد `visit` مخصوص همون نوع رو صدا می‌زنه. این‌طوری کارِ درست هم‌زمان بر اساس «نوع حیوون» و «نوع عملیات» انتخاب می‌شه.
 
+یه مثالِ سریع: یه `Lion` رو به `accept` یه بازدیدکننده‌ی صدا می‌دی؛ خودِ شیر تو `accept` می‌گه `operation.visitLion(self)`، و بازدیدکننده هم تو `visitLion` صدای شیر رو می‌سازه. حالا اگه همون شیر رو به بازدیدکننده‌ی پرش بدی، این بار `visitLion`ـه که پرشش رو حساب می‌کنه.
+
 **مثال برنامه‌نویسی**
 
 فرض کن یک باغ وحش مجازی داریم و می‌خوایم یک عالمه امکان رو به حیوون‌های مختلف اضافه کنیم! مثلا صداشون، نحوه پریدنشون و
@@ -14143,7 +14164,7 @@ dolphin.accept(jump)   # Walked on water a little and disappeared
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -15130,6 +15151,9 @@ checkout.checkout(100)  # Output: Paid 100 in cash
 
 checkout = Checkout(CardPayment())
 checkout.checkout(250)  # Output: Paid 250 by card
+
+checkout = Checkout(WalletPayment())
+checkout.checkout(75)  # Output: Paid 75 from wallet
 ```
 
 </div>
@@ -15137,7 +15161,7 @@ checkout.checkout(250)  # Output: Paid 250 by card
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -15182,6 +15206,9 @@ checkout.checkout(100); // Output: Paid 100 in cash
 
 checkout = new Checkout(new CardPayment());
 checkout.checkout(250); // Output: Paid 250 by card
+
+checkout = new Checkout(new WalletPayment());
+checkout.checkout(75); // Output: Paid 75 from wallet
 ```
 
 </div>
@@ -15225,6 +15252,9 @@ checkout.checkout(100); // Output: Paid 100 in cash
 
 checkout = new Checkout(new CardPayment());
 checkout.checkout(250); // Output: Paid 250 by card
+
+checkout = new Checkout(new WalletPayment());
+checkout.checkout(75); // Output: Paid 75 from wallet
 ```
 
 </div>
@@ -15291,6 +15321,9 @@ checkout.Checkout(100); // Output: Paid 100 in cash
 checkout = new ShoppingCart(new CardPayment());
 checkout.Checkout(250); // Output: Paid 250 by card
 
+checkout = new ShoppingCart(new WalletPayment());
+checkout.Checkout(75); // Output: Paid 75 from wallet
+
 ```
 
 </div>
@@ -15342,6 +15375,9 @@ $checkout->checkout(100); // Output: Paid 100 in cash
 
 $checkout = new Checkout(new CardPayment());
 $checkout->checkout(250); // Output: Paid 250 by card
+
+$checkout = new Checkout(new WalletPayment());
+$checkout->checkout(75); // Output: Paid 75 from wallet
 
 ```
 
@@ -15406,6 +15442,9 @@ func main() {
 
 	checkout = NewCheckout(&CardPayment{})
 	checkout.Checkout(250) // Output: Paid 250 by card
+
+	checkout = NewCheckout(&WalletPayment{})
+	checkout.Checkout(75) // Output: Paid 75 from wallet
 }
 ```
 
@@ -15466,6 +15505,9 @@ checkout.checkout(100); // Paid 100 in cash
 
 checkout = new Checkout(new CardPayment());
 checkout.checkout(250); // Paid 250 by card
+
+checkout = new Checkout(new WalletPayment());
+checkout.checkout(75); // Paid 75 from wallet
 ```
 
 </div>
@@ -15529,6 +15571,10 @@ int main() {
     CardPayment card;
     Checkout checkout2(&card);
     checkout2.checkout(250); // Output: Paid 250 by card
+
+    WalletPayment wallet;
+    Checkout checkout3(&wallet);
+    checkout3.checkout(75); // Output: Paid 75 from wallet
     return 0;
 }
 ```
@@ -15579,6 +15625,9 @@ fun main() {
 
     checkout = Checkout(CardPayment())
     checkout.checkout(250)
+
+    checkout = Checkout(WalletPayment())
+    checkout.checkout(75)
 }
 ```
 
@@ -15626,6 +15675,9 @@ void main() {
 
   checkout = Checkout(CardPayment());
   checkout.checkout(250);
+
+  checkout = Checkout(WalletPayment());
+  checkout.checkout(75);
 }
 ```
 
@@ -15762,7 +15814,7 @@ Red
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -16460,9 +16512,9 @@ void main() {
 
 **مثال برنامه‌نویسی**
 
-فرض کن ما یک زیرساخت برای ساخت اپلیکیشن‌های گوشی نیاز داریم!
+حالا همون خط تولید رو ببر توی نرم‌افزار: می‌خوایم یه زیرساخت برای ساختِ اپلیکیشن‌های گوشی بسازیم که روند ساختش (build) همیشه ثابته.
 
-خب مراحل تقریباً مشخصه و فقط باید مراحل `build`، `lint`، `test` و `deploy` رو پیاده‌سازی کنیم.
+متدِ `build` ترتیب کارها رو نگه می‌داره و خودش قدم‌های `test`، `lint`، `assemble` و `deploy` رو پشت‌سرهم صدا می‌زنه؛ ما فقط همین چهار قدم رو برای هر پلتفرم جور دیگه پیاده‌سازی می‌کنیم.
 
 بعد باید پیاده‌سازی برای اندروید و iOS رو بسازیم.
 
@@ -16547,7 +16599,7 @@ iosBuilder.build()
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
