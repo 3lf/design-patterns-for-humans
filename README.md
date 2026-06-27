@@ -109,7 +109,7 @@
 *   🌍 **یه مثال از دنیای واقعی** تا حسش کنی.
 *   💡 **به زبون ساده** که ته‌نشین بشه.
 *   📖 **تعریف ویکی‌پدیا** (به‌همراه ترجمه فارسی) تا دقیق هم بدونی.
-*   💻 **کد، توی ۱۰ زبان** (Python، JavaScript، TypeScript، Java، C#، PHP، Go، C++، Kotlin، Dart)؛ روی زبون خودت کلیک کن و بازش کن.
+*   💻 **کد، توی ۱۰ زبان** (Python، TypeScript، JavaScript، C#، PHP، Go، Java، C++، Kotlin، Dart)؛ روی زبون خودت کلیک کن و بازش کن.
 *   🤔 **کی به کارش ببریم؟** یه جعبه کوتاه که می‌گه کجا به دردت می‌خوره، کجا نه، و فرقش با الگوهای شبیهش چیه.
 
 الگوها هم سه دسته‌ان: **سازنده (Creational)** درباره‌ی ساختن آبجکت‌هاست، **ساختاری (Structural)** درباره‌ی کنار هم چیدنِ کلاس‌ها و آبجکت‌ها، و **رفتاری (Behavioral)** درباره‌ی اینکه آبجکت‌ها چطور با هم حرف می‌زنن و کار رو بین خودشون تقسیم می‌کنن.
@@ -337,7 +337,7 @@ print(door.getWidth())
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 
 <div dir="ltr">
 
@@ -869,7 +869,7 @@ marketingManager.takeInterview()
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 
 <div dir="ltr">
 
@@ -1573,7 +1573,7 @@ expert.getDescription()  # Output: I can only fit iron doors
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 
 <div dir="ltr">
 
@@ -2460,7 +2460,7 @@ def __init__(self, size, cheese=True, mushrooms=True, tomato=False): ...
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -2649,7 +2649,7 @@ print(burger.get_description())
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -3377,7 +3377,7 @@ print(original.address.city)   # Tehran  -> the original stayed the same
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -3954,7 +3954,7 @@ if __name__ == "__main__":
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -4393,7 +4393,7 @@ hunter.hunt(wild_dog_adapter)   # The hunter is hunting... -> Woof
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -5092,7 +5092,7 @@ print(careers.getContent())  # Careers page in Light blue
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -5873,7 +5873,7 @@ print(f"Total salary: {company.get_salary():g}")
 
 <details>
 
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 
 <div dir="ltr">
 
@@ -6761,7 +6761,7 @@ print(f"{coffee.description()}: {coffee.cost()}")  # Simple coffee, milk, sugar:
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -7504,7 +7504,7 @@ Zzzzz
 
 <details>
 
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 
 <div dir="ltr">
 
@@ -8288,7 +8288,7 @@ print("Total tea objects made: " + str(tea_maker.total_teas_made()))
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -9061,7 +9061,7 @@ door.close()           # Closing lab door
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -9732,7 +9732,7 @@ Paid 259 using Paypal
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -10480,7 +10480,7 @@ remote.submit(turnOff)  # Darkness!
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -11266,7 +11266,7 @@ Output:
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -11900,7 +11900,7 @@ jane.send('Hey!')
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 
 <div dir="ltr">
 
@@ -12494,7 +12494,7 @@ print(editor.get_content())  # a
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -13320,7 +13320,7 @@ jobPostings.addJob(JobPost('Software Engineer'))
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -14143,7 +14143,7 @@ dolphin.accept(jump)   # Walked on water a little and disappeared
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -15137,7 +15137,7 @@ checkout.checkout(250)  # Output: Paid 250 by card
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -15762,7 +15762,7 @@ Red
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
@@ -16547,7 +16547,7 @@ iosBuilder.build()
 </details>
 
 <details>
-<summary>Typescript</summary>
+<summary>TypeScript</summary>
 <div dir="ltr">
 
 ```typescript
