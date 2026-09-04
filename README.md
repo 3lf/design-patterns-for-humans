@@ -4111,28 +4111,40 @@ echo "Same instance? " . ($a === $b ? "True" : "False") . "\n";
 <div dir="ltr">
 
 ```go
+package main
+
+import (
+	"fmt"
+	"sync"
+)
+
 type President struct{}
 
-var instance *President
+var (
+	instance *President
+	once     sync.Once
+)
 
 func GetInstance() *President {
-  if instance == nil {
-    instance = &President{}
-  }
-  return instance
+	once.Do(func() {
+		instance = &President{}
+	})
+	return instance
 }
 
 // -----------------------
 
-a := GetInstance()
-b := GetInstance()
+func main() {
+	a := GetInstance()
+	b := GetInstance()
 
-same := "False"
-if a == b {
-  same = "True"
+	same := "False"
+	if a == b {
+		same = "True"
+	}
+	fmt.Println("Same instance?", same)
+	// Output: Same instance? True
 }
-fmt.Println("Same instance?", same)
-// Output: Same instance? True
 
 
 ```
@@ -8620,6 +8632,9 @@ echo "Total tea objects made: " . $teaMaker->totalTeasMade() . "\n";
 <div dir="ltr">
 
 ```go
+package main
+
+import "fmt"
 
 // KarakTea is the flyweight: the shared, intrinsic part.
 type KarakTea struct{}
@@ -8671,24 +8686,27 @@ func (ts *TeaShop) Serve() {
     }
 }
 // ---------------------------
-teaMaker := NewTeaMaker()
-teaShop := NewTeaShop(teaMaker)
 
-teaShop.TakeOrder("Karak", 1)
-teaShop.TakeOrder("Karak", 3)
-teaShop.TakeOrder("Karak", 5)
-teaShop.TakeOrder("Karak", 7)
-teaShop.TakeOrder("Karak", 9)
+func main() {
+    teaMaker := NewTeaMaker()
+    teaShop := NewTeaShop(teaMaker)
 
-teaShop.Serve()
+    teaShop.TakeOrder("Karak", 1)
+    teaShop.TakeOrder("Karak", 3)
+    teaShop.TakeOrder("Karak", 5)
+    teaShop.TakeOrder("Karak", 7)
+    teaShop.TakeOrder("Karak", 9)
 
-fmt.Printf("Total tea objects made: %d\n", teaMaker.TotalTeasMade())
-// Serving Karak Tea to table #1
-// Serving Karak Tea to table #3
-// Serving Karak Tea to table #5
-// Serving Karak Tea to table #7
-// Serving Karak Tea to table #9
-// Total tea objects made: 1
+    teaShop.Serve()
+
+    fmt.Printf("Total tea objects made: %d\n", teaMaker.TotalTeasMade())
+    // Serving Karak Tea to table #1
+    // Serving Karak Tea to table #3
+    // Serving Karak Tea to table #5
+    // Serving Karak Tea to table #7
+    // Serving Karak Tea to table #9
+    // Total tea objects made: 1
+}
 
 ```
 
