@@ -40,7 +40,7 @@
 | 🧱 **اصول SOLID** | [🧱 اصول SOLID (SOLID Principles)](#اصول-solid-solid-principles-)<br>[تک‌مسئولیتی (SRP)](#۱-اصل-تک‌مسئولیتی-single-responsibility-principle-srp-)<br>[باز/بسته (OCP)](#۲-اصل-بازبسته-openclosed-principle-ocp-)<br>[جایگزینی لیسکوف (LSP)](#۳-اصل-جایگزینی-لیسکوف-liskov-substitution-principle-lsp-)<br>[تفکیک اینترفیس (ISP)](#۴-اصل-تفکیک-اینترفیس-interface-segregation-principle-isp-)<br>[وارونگی وابستگی (DIP)](#۵-اصل-وارونگی-وابستگی-dependency-inversion-principle-dip-) |
 | 🏗️ **سازنده (Creational)** | [🏠 کارخانه ساده (Simple Factory)](#کارخانه-ساده-simple-factory-)<br>[🏭 فکتوری متد (Factory Method)](#فکتوری-متد-factory-method-)<br>[🔨 کارخانه انتزاعی (Abstract Factory)](#کارخانه-انتزاعی-abstract-factory-)<br>[👷 بیلدر (Builder)](#بیلدر-builder-)<br>[🐑 نمونه اولیه (Prototype)](#نمونه-اولیه-prototype-)<br>[💍 تک‌نمونه (Singleton)](#تک‌نمونه-singleton-) |
 | 🧩 **ساختاری (Structural)** | [🔌 مبدل (Adapter)](#مبدل-adapter-)<br>[🌉 پل (Bridge)](#پل-bridge-)<br>[🌿 درختی (Composite)](#درختی-composite-)<br>[☕ دکوریتور (Decorator)](#دکوریتور-decorator-)<br>[📦 نما (Facade)](#نما-facade-)<br>[🍃 فلای‌وِیت (Flyweight)](#فلای‌وِیت-flyweight-)<br>[🎱 پراکسی (Proxy)](#پراکسی-proxy-) |
-| 🎭 **رفتاری (Behavioral)** | [🔗 زنجیره مسئولیت (Chain of Responsibility)](#زنجیره-مسئولیت-chain-of-responsibility-)<br>[👮 فرمان (Command)](#فرمان-command-)<br>[➿ پیمایش‌گر (Iterator)](#پیمایش‌گر-iterator-)<br>[👽 میانجی (Mediator)](#میانجی-mediator-)<br>[💾 نقطه‌ی بازگشت (Memento)](#نقطه‌ی-بازگشت-memento-)<br>[😎 ناظر (Observer)](#ناظر-observer-)<br>[🏃 بازدیدکننده (Visitor)](#بازدیدکننده-visitor-)<br>[💡 استراتژی (Strategy)](#استراتژی-strategy-)<br>[💢 حالت (State)](#حالت-state-)<br>[📒 متد قالب (Template Method)](#متد-قالب-template-method-) |
+| 🎭 **رفتاری (Behavioral)** | [🔗 زنجیره مسئولیت (Chain of Responsibility)](#زنجیره-مسئولیت-chain-of-responsibility-)<br>[👮 فرمان (Command)](#فرمان-command-)<br>[🧠 مفسر (Interpreter)](#مفسر-interpreter-)<br>[➿ پیمایش‌گر (Iterator)](#پیمایش‌گر-iterator-)<br>[👽 میانجی (Mediator)](#میانجی-mediator-)<br>[💾 نقطه‌ی بازگشت (Memento)](#نقطه‌ی-بازگشت-memento-)<br>[😎 ناظر (Observer)](#ناظر-observer-)<br>[🏃 بازدیدکننده (Visitor)](#بازدیدکننده-visitor-)<br>[💡 استراتژی (Strategy)](#استراتژی-strategy-)<br>[💢 حالت (State)](#حالت-state-)<br>[📒 متد قالب (Template Method)](#متد-قالب-template-method-) |
 
 </details>
 
@@ -11179,6 +11179,756 @@ void main() {
 > 🤔 **کی به کارش ببریم؟**
 > ✅ وقتی می‌خوای درخواست‌ها رو به آبجکت تبدیل کنی تا بشه صف‌شون کرد، لاگ گرفت یا undo/redo اضافه کرد؛ ❌ وقتی فقط یه متد ساده رو صدا می‌زنی و قرار نیست درخواست رو نگه داری یا برگردونی.
 > 🪤 **دام رایج:** برای هر کار کوچیکی یه کلاس Command جدا می‌سازی و کد بی‌دلیل پر از کلاس‌های یه‌خطی می‌شه.
+
+
+<br>
+
+---
+
+<div align="center">
+
+## مفسر (Interpreter) 🧠
+
+</div>
+
+<div align="center">
+🪪 <b>مثال دنیای واقعی: قانون ورود به شرکت</b>
+</div>
+
+فرض کن نگهبانِ یه شرکت برای راه‌دادن افراد این قانون رو جلوی دستش گذاشته:
+
+`employee AND (active OR admin)`
+
+هر تکه از این جمله یه معنی مشخص داره: `employee` و `active` و `admin` وضعیت فرد رو بررسی می‌کنن، `AND` می‌گه هر دو طرف باید درست باشن و `OR` می‌گه درست‌بودن یکی از دو طرف کافیه.
+نگهبان لازم نیست برای هر قانون تازه از اول یه روند جدید اختراع کنه؛ همون تکه‌های کوچیک رو کنار هم می‌چینه و قانون جدید رو می‌خونه.
+
+💡 **به زبون ساده:**
+> این پترن می‌گه: **«برای یه زبان کوچیک، هر قاعده رو به یه آبجکت تبدیل کن؛ بعد این آبجکت‌ها رو کنار هم بچین تا جمله تفسیر بشه.»**
+
+ویکی‌پدیا:
+
+<div dir="ltr">
+
+> In computer programming, the interpreter pattern is a design pattern that specifies how to evaluate sentences in a language.
+
+</div>
+
+به زبون خودمون: اول یه دستور زبان کوچیک تعریف می‌کنی. بعد برای هر قاعده از اون دستور زبان، یه کلاس می‌سازی که بلد باشه سهم خودش از جمله رو تفسیر کنه. با ترکیب این کلاس‌ها، یه درخت از عبارت‌ها شکل می‌گیره و نتیجه از پایین درخت به بالا حساب می‌شه.
+
+**مثال برنامه‌نویسی**
+
+می‌خوایم یه زبان خیلی کوچیک برای قانون‌های دسترسی بسازیم. دستور زبانمون این سه تا قاعده رو داره:
+
+<div dir="ltr">
+
+```text
+rule := term ("OR" term)*
+term := factor ("AND" factor)*
+factor := word | "(" rule ")"
+```
+
+</div>
+
+کلاس `WordExpression` یه عبارت پایانی (Terminal Expression) هست و فقط چک می‌کنه یه کلمه داخل اطلاعات کاربر هست یا نه.
+کلاس‌های `AndExpression` و `OrExpression` عبارت‌های غیرپایانی (Non-terminal Expression) هستن؛ یعنی دو عبارت دیگه رو می‌گیرن و نتیجه‌شون رو با قانون خودشون ترکیب می‌کنن.
+
+در آخر، قانون `employee AND (active OR admin)` رو می‌سازیم و اطلاعات کاربر رو بهش می‌دیم. چون کاربر هم `employee` هست و هم `active`، اجازه ورود می‌گیره.
+
+برای اینکه حواس‌مون پیشِ خودِ پترن بمونه، اینجا `parser` ننوشتیم و درخت عبارت رو با دست ساختیم. توی یه برنامه واقعی، `parser` متن قانون رو می‌خونه و همین درخت رو تحویل می‌ده.
+
+<details>
+<summary>Python</summary>
+
+<div dir="ltr">
+
+```python
+from abc import ABC, abstractmethod
+
+
+class Expression(ABC):
+    @abstractmethod
+    def interpret(self, context):
+        pass
+
+
+# Terminal expression
+class WordExpression(Expression):
+    def __init__(self, word):
+        self.word = word
+
+    def interpret(self, context):
+        return self.word in context
+
+
+# Non-terminal expression
+class AndExpression(Expression):
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+
+    def interpret(self, context):
+        return self.left.interpret(context) and self.right.interpret(context)
+
+
+# Non-terminal expression
+class OrExpression(Expression):
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+
+    def interpret(self, context):
+        return self.left.interpret(context) or self.right.interpret(context)
+
+
+# Represents: employee AND (active OR admin)
+rule = AndExpression(
+    WordExpression("employee"),
+    OrExpression(WordExpression("active"), WordExpression("admin")),
+)
+
+context = {"employee", "active"}
+print("Access granted:", rule.interpret(context))
+# Access granted: True
+```
+
+</div>
+</details>
+
+<details>
+<summary>Typescript</summary>
+
+<div dir="ltr">
+
+```typescript
+interface Expression {
+    interpret(context: Set<string>): boolean;
+}
+
+// Terminal expression
+class WordExpression implements Expression {
+    constructor(private readonly word: string) {}
+
+    interpret(context: Set<string>): boolean {
+        return context.has(this.word);
+    }
+}
+
+// Non-terminal expression
+class AndExpression implements Expression {
+    constructor(
+        private readonly left: Expression,
+        private readonly right: Expression
+    ) {}
+
+    interpret(context: Set<string>): boolean {
+        return this.left.interpret(context) && this.right.interpret(context);
+    }
+}
+
+// Non-terminal expression
+class OrExpression implements Expression {
+    constructor(
+        private readonly left: Expression,
+        private readonly right: Expression
+    ) {}
+
+    interpret(context: Set<string>): boolean {
+        return this.left.interpret(context) || this.right.interpret(context);
+    }
+}
+
+// Represents: employee AND (active OR admin)
+const rule: Expression = new AndExpression(
+    new WordExpression("employee"),
+    new OrExpression(
+        new WordExpression("active"),
+        new WordExpression("admin")
+    )
+);
+
+const context = new Set(["employee", "active"]);
+console.log("Access granted:", rule.interpret(context));
+// Access granted: true
+```
+
+</div>
+</details>
+
+<details>
+<summary>JavaScript</summary>
+
+<div dir="ltr">
+
+```javascript
+class Expression {
+    interpret(context) {
+        throw new Error("Not implemented");
+    }
+}
+
+// Terminal expression
+class WordExpression extends Expression {
+    constructor(word) {
+        super();
+        this.word = word;
+    }
+
+    interpret(context) {
+        return context.has(this.word);
+    }
+}
+
+// Non-terminal expression
+class AndExpression extends Expression {
+    constructor(left, right) {
+        super();
+        this.left = left;
+        this.right = right;
+    }
+
+    interpret(context) {
+        return this.left.interpret(context) && this.right.interpret(context);
+    }
+}
+
+// Non-terminal expression
+class OrExpression extends Expression {
+    constructor(left, right) {
+        super();
+        this.left = left;
+        this.right = right;
+    }
+
+    interpret(context) {
+        return this.left.interpret(context) || this.right.interpret(context);
+    }
+}
+
+// Represents: employee AND (active OR admin)
+const rule = new AndExpression(
+    new WordExpression("employee"),
+    new OrExpression(
+        new WordExpression("active"),
+        new WordExpression("admin")
+    )
+);
+
+const context = new Set(["employee", "active"]);
+console.log("Access granted:", rule.interpret(context));
+// Access granted: true
+```
+
+</div>
+</details>
+
+<details>
+<summary>C#</summary>
+
+<div dir="ltr">
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+
+interface IExpression
+{
+  bool Interpret(HashSet<string> context);
+}
+
+// Terminal expression
+class WordExpression : IExpression
+{
+  private readonly string mWord;
+
+  public WordExpression(string word)
+  {
+    mWord = word;
+  }
+
+  public bool Interpret(HashSet<string> context)
+  {
+    return context.Contains(mWord);
+  }
+}
+
+// Non-terminal expression
+class AndExpression : IExpression
+{
+  private readonly IExpression mLeft;
+  private readonly IExpression mRight;
+
+  public AndExpression(IExpression left, IExpression right)
+  {
+    mLeft = left;
+    mRight = right;
+  }
+
+  public bool Interpret(HashSet<string> context)
+  {
+    return mLeft.Interpret(context) && mRight.Interpret(context);
+  }
+}
+
+// Non-terminal expression
+class OrExpression : IExpression
+{
+  private readonly IExpression mLeft;
+  private readonly IExpression mRight;
+
+  public OrExpression(IExpression left, IExpression right)
+  {
+    mLeft = left;
+    mRight = right;
+  }
+
+  public bool Interpret(HashSet<string> context)
+  {
+    return mLeft.Interpret(context) || mRight.Interpret(context);
+  }
+}
+
+class Program
+{
+  static void Main()
+  {
+    // Represents: employee AND (active OR admin)
+    IExpression rule = new AndExpression(
+      new WordExpression("employee"),
+      new OrExpression(
+        new WordExpression("active"),
+        new WordExpression("admin")
+      )
+    );
+
+    var context = new HashSet<string> { "employee", "active" };
+    Console.WriteLine($"Access granted: {rule.Interpret(context)}");
+    // Access granted: True
+  }
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>PHP</summary>
+
+<div dir="ltr">
+
+```php
+interface Expression
+{
+    public function interpret(array $context): bool;
+}
+
+// Terminal expression
+class WordExpression implements Expression
+{
+    public function __construct(private string $word)
+    {
+    }
+
+    public function interpret(array $context): bool
+    {
+        return in_array($this->word, $context, true);
+    }
+}
+
+// Non-terminal expression
+class AndExpression implements Expression
+{
+    public function __construct(
+        private Expression $left,
+        private Expression $right
+    ) {
+    }
+
+    public function interpret(array $context): bool
+    {
+        return $this->left->interpret($context) && $this->right->interpret($context);
+    }
+}
+
+// Non-terminal expression
+class OrExpression implements Expression
+{
+    public function __construct(
+        private Expression $left,
+        private Expression $right
+    ) {
+    }
+
+    public function interpret(array $context): bool
+    {
+        return $this->left->interpret($context) || $this->right->interpret($context);
+    }
+}
+
+// Represents: employee AND (active OR admin)
+$rule = new AndExpression(
+    new WordExpression("employee"),
+    new OrExpression(
+        new WordExpression("active"),
+        new WordExpression("admin")
+    )
+);
+
+$context = ["employee", "active"];
+echo "Access granted: " . ($rule->interpret($context) ? "True" : "False") . "\n";
+// Access granted: True
+```
+
+</div>
+</details>
+
+<details>
+<summary>Go</summary>
+
+<div dir="ltr">
+
+```go
+package main
+
+import "fmt"
+
+type Expression interface {
+	Interpret(context map[string]bool) bool
+}
+
+// WordExpression is a terminal expression.
+type WordExpression struct {
+	word string
+}
+
+func (w WordExpression) Interpret(context map[string]bool) bool {
+	return context[w.word]
+}
+
+// AndExpression is a non-terminal expression.
+type AndExpression struct {
+	left  Expression
+	right Expression
+}
+
+func (a AndExpression) Interpret(context map[string]bool) bool {
+	return a.left.Interpret(context) && a.right.Interpret(context)
+}
+
+// OrExpression is a non-terminal expression.
+type OrExpression struct {
+	left  Expression
+	right Expression
+}
+
+func (o OrExpression) Interpret(context map[string]bool) bool {
+	return o.left.Interpret(context) || o.right.Interpret(context)
+}
+
+func main() {
+	// Represents: employee AND (active OR admin)
+	rule := AndExpression{
+		left: WordExpression{word: "employee"},
+		right: OrExpression{
+			left:  WordExpression{word: "active"},
+			right: WordExpression{word: "admin"},
+		},
+	}
+
+	context := map[string]bool{"employee": true, "active": true}
+	fmt.Println("Access granted:", rule.Interpret(context))
+	// Access granted: true
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Java</summary>
+
+<div dir="ltr">
+
+```java
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+interface Expression {
+    boolean interpret(Set<String> context);
+}
+
+// Terminal expression
+class WordExpression implements Expression {
+    private final String word;
+
+    public WordExpression(String word) {
+        this.word = word;
+    }
+
+    @Override
+    public boolean interpret(Set<String> context) {
+        return context.contains(word);
+    }
+}
+
+// Non-terminal expression
+class AndExpression implements Expression {
+    private final Expression left;
+    private final Expression right;
+
+    public AndExpression(Expression left, Expression right) {
+        this.left = left;
+        this.right = right;
+    }
+
+    @Override
+    public boolean interpret(Set<String> context) {
+        return left.interpret(context) && right.interpret(context);
+    }
+}
+
+// Non-terminal expression
+class OrExpression implements Expression {
+    private final Expression left;
+    private final Expression right;
+
+    public OrExpression(Expression left, Expression right) {
+        this.left = left;
+        this.right = right;
+    }
+
+    @Override
+    public boolean interpret(Set<String> context) {
+        return left.interpret(context) || right.interpret(context);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Represents: employee AND (active OR admin)
+        Expression rule = new AndExpression(
+            new WordExpression("employee"),
+            new OrExpression(
+                new WordExpression("active"),
+                new WordExpression("admin")
+            )
+        );
+
+        Set<String> context = new HashSet<>(Arrays.asList("employee", "active"));
+        System.out.println("Access granted: " + rule.interpret(context));
+        // Access granted: true
+    }
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>C++</summary>
+
+<div dir="ltr">
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <string>
+#include <unordered_set>
+#include <utility>
+
+using Context = std::unordered_set<std::string>;
+
+class Expression {
+public:
+    virtual ~Expression() = default;
+    virtual bool interpret(const Context& context) const = 0;
+};
+
+// Terminal expression
+class WordExpression : public Expression {
+private:
+    std::string word;
+
+public:
+    explicit WordExpression(std::string value) : word(std::move(value)) {}
+
+    bool interpret(const Context& context) const override {
+        return context.find(word) != context.end();
+    }
+};
+
+// Non-terminal expression
+class AndExpression : public Expression {
+private:
+    std::unique_ptr<Expression> left;
+    std::unique_ptr<Expression> right;
+
+public:
+    AndExpression(
+        std::unique_ptr<Expression> leftExpression,
+        std::unique_ptr<Expression> rightExpression
+    ) : left(std::move(leftExpression)), right(std::move(rightExpression)) {}
+
+    bool interpret(const Context& context) const override {
+        return left->interpret(context) && right->interpret(context);
+    }
+};
+
+// Non-terminal expression
+class OrExpression : public Expression {
+private:
+    std::unique_ptr<Expression> left;
+    std::unique_ptr<Expression> right;
+
+public:
+    OrExpression(
+        std::unique_ptr<Expression> leftExpression,
+        std::unique_ptr<Expression> rightExpression
+    ) : left(std::move(leftExpression)), right(std::move(rightExpression)) {}
+
+    bool interpret(const Context& context) const override {
+        return left->interpret(context) || right->interpret(context);
+    }
+};
+
+int main() {
+    // Represents: employee AND (active OR admin)
+    auto rule = std::make_unique<AndExpression>(
+        std::make_unique<WordExpression>("employee"),
+        std::make_unique<OrExpression>(
+            std::make_unique<WordExpression>("active"),
+            std::make_unique<WordExpression>("admin")
+        )
+    );
+
+    Context context = {"employee", "active"};
+    std::cout << "Access granted: " << std::boolalpha
+              << rule->interpret(context) << std::endl;
+    // Access granted: true
+    return 0;
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Kotlin</summary>
+
+<div dir="ltr">
+
+```kotlin
+interface Expression {
+    fun interpret(context: Set<String>): Boolean
+}
+
+// Terminal expression
+class WordExpression(private val word: String) : Expression {
+    override fun interpret(context: Set<String>): Boolean = word in context
+}
+
+// Non-terminal expression
+class AndExpression(
+    private val left: Expression,
+    private val right: Expression
+) : Expression {
+    override fun interpret(context: Set<String>): Boolean =
+        left.interpret(context) && right.interpret(context)
+}
+
+// Non-terminal expression
+class OrExpression(
+    private val left: Expression,
+    private val right: Expression
+) : Expression {
+    override fun interpret(context: Set<String>): Boolean =
+        left.interpret(context) || right.interpret(context)
+}
+
+fun main() {
+    // Represents: employee AND (active OR admin)
+    val rule: Expression = AndExpression(
+        WordExpression("employee"),
+        OrExpression(
+            WordExpression("active"),
+            WordExpression("admin")
+        )
+    )
+
+    val context = setOf("employee", "active")
+    println("Access granted: ${rule.interpret(context)}")
+    // Access granted: true
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>Dart</summary>
+
+<div dir="ltr">
+
+```dart
+abstract class Expression {
+  bool interpret(Set<String> context);
+}
+
+// Terminal expression
+class WordExpression implements Expression {
+  final String word;
+
+  WordExpression(this.word);
+
+  @override
+  bool interpret(Set<String> context) => context.contains(word);
+}
+
+// Non-terminal expression
+class AndExpression implements Expression {
+  final Expression left;
+  final Expression right;
+
+  AndExpression(this.left, this.right);
+
+  @override
+  bool interpret(Set<String> context) =>
+      left.interpret(context) && right.interpret(context);
+}
+
+// Non-terminal expression
+class OrExpression implements Expression {
+  final Expression left;
+  final Expression right;
+
+  OrExpression(this.left, this.right);
+
+  @override
+  bool interpret(Set<String> context) =>
+      left.interpret(context) || right.interpret(context);
+}
+
+void main() {
+  // Represents: employee AND (active OR admin)
+  Expression rule = AndExpression(
+    WordExpression('employee'),
+    OrExpression(WordExpression('active'), WordExpression('admin')),
+  );
+
+  var context = {'employee', 'active'};
+  print('Access granted: ${rule.interpret(context)}');
+  // Access granted: true
+}
+```
+
+</div>
+</details>
+
+> 🤔 **کی به کارش ببریم؟**
+> ✅ «وقتی یه زبان یا قانونِ کوچیک و نسبتاً ثابت داری و می‌خوای جمله‌های مختلفش رو با ترکیب چند قاعده تفسیر کنی»؛ ❌ «وقتی دستور زبان بزرگ و پیچیده‌ست؛ اونجا یه parser یا ابزار آماده خیلی بهتر از جنگلی از کلاس‌هاست».
+> 🪤 **دام رایج:** «برای هر علامت و قاعده یه کلاس می‌سازی و حواست نیست که با بزرگ‌شدن دستور زبان، هم تعداد کلاس‌ها منفجر می‌شه هم دنبال‌کردن درخت عبارت سخت‌تر».
+> 🔗 **فرقش با [درختی (Composite)](#درختی-composite-):** «هر دو می‌تونن یه ساختار درختی بسازن؛ ولی درختی می‌خواد با جزء و کل یکسان رفتار کنی، مفسر می‌خواد هر گره، یه قاعده از دستور زبان رو معنی کنه».
 
 
 <br>
