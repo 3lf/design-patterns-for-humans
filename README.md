@@ -18159,7 +18159,7 @@ void main() {
 - آریا عزیز که زحمت مثال‌های Kotlin رو کشید. ([ariaramin](https://github.com/ariaramin))
 - مجید عزیز که زحمت مثال‌های Dart رو کشید. ([majidrigizadeh](https://github.com/majidrigizadeh))
 - مهسا، محمد، سجاد و محسن عزیز که زحمت بهبود کدها رو کشیدند. ([MahsaMahdavian](https://github.com/MahsaMahdavian) / [MohammadMMoniri](https://github.com/MohammadMMoniri) / [ssmns](https://github.com/ssmns) / [Serajian](https://github.com/Serajian))
-- جواد عزیز که زحمت اضافه کردن الگوی Interpreter و اصلاح مثال‌های Go برای الگوهای Singleton و Flyweight رو کشید. ([mrjavadseydi](https://github.com/mrjavadseydi))
+- جواد عزیز که زحمت افزودن الگوی Interpreter و بهبود مثال‌های Go رو کشید. ([mrjavadseydi](https://github.com/mrjavadseydi))
 
 </div>
 
