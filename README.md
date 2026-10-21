@@ -13322,7 +13322,7 @@ class Editor {
 }
 
 // Caretaker: memento ها رو توی یک stack نگه می‌داره، بدون اینکه داخلشون رو ببینه.
-class History {
+class EditorHistory {
     private mementos: EditorMemento[] = [];
 
     push(memento: EditorMemento): void {
@@ -13337,20 +13337,20 @@ class History {
 // ----------------------------
 
 const editor = new Editor();
-const history = new History();
+const editorHistory = new EditorHistory();
 
 editor.type("a");
-history.push(editor.save());
+editorHistory.push(editor.save());
 
 editor.type("ab");
-history.push(editor.save());
+editorHistory.push(editor.save());
 
 editor.type("abc");
 
-editor.restore(history.pop());
+editor.restore(editorHistory.pop());
 console.log(editor.getContent()); // ab
 
-editor.restore(history.pop());
+editor.restore(editorHistory.pop());
 console.log(editor.getContent()); // a
 ```
 
