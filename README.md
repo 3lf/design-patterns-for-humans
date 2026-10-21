@@ -476,10 +476,16 @@ public static class DoorFactory
 
 // ----------------------------
 
-var door = DoorFactory.MakeDoor(90, 210);
-Console.WriteLine(door.GetHeight());
-Console.WriteLine(door.GetWidth());
-```
+public class Program
+{
+    public static void Main()
+    {
+        var door = DoorFactory.MakeDoor(90, 210);
+        Console.WriteLine(door.GetHeight());
+        Console.WriteLine(door.GetWidth());
+
+    }
+}```
 
 </div>
 
@@ -1031,13 +1037,19 @@ class MarketingManager : HiringManager
 
 // ----------------------------
 
-var devManager = new DevelopmentManager();
-devManager.TakeInterview(); //Output : Asking about design patterns!
+public class Program
+{
+    public static void Main()
+    {
+        var devManager = new DevelopmentManager();
+        devManager.TakeInterview(); //Output : Asking about design patterns!
 
-var marketingManager = new MarketingManager();
-marketingManager.TakeInterview();//Output : Asking about community building
+        var marketingManager = new MarketingManager();
+        marketingManager.TakeInterview();//Output : Asking about community building
 
-```
+
+    }
+}```
 
 </div>
 
@@ -1839,25 +1851,31 @@ class IronDoorFactory : IDoorFactory
   }
 }
 // ----------------------------
-var woodenFactory = new WoodenDoorFactory();
+public class Program
+{
+    public static void Main()
+    {
+        var woodenFactory = new WoodenDoorFactory();
 
-var woodenDoor = woodenFactory.MakeDoor();
-var woodenExpert = woodenFactory.MakeFittingExpert();
+        var woodenDoor = woodenFactory.MakeDoor();
+        var woodenExpert = woodenFactory.MakeFittingExpert();
 
-woodenDoor.GetDescription();   // Output: I am a wooden door
-woodenExpert.GetDescription(); // Output: I can only fit wooden doors
+        woodenDoor.GetDescription();   // Output: I am a wooden door
+        woodenExpert.GetDescription(); // Output: I can only fit wooden doors
 
-// ----------------------------
+        // ----------------------------
 
-var ironFactory = new IronDoorFactory();
+        var ironFactory = new IronDoorFactory();
 
-var ironDoor = ironFactory.MakeDoor();
-var ironExpert = ironFactory.MakeFittingExpert();
+        var ironDoor = ironFactory.MakeDoor();
+        var ironExpert = ironFactory.MakeFittingExpert();
 
-ironDoor.GetDescription();   // Output: I am an iron door
-ironExpert.GetDescription(); // Output: I can only fit iron doors
+        ironDoor.GetDescription();   // Output: I am an iron door
+        ironExpert.GetDescription(); // Output: I can only fit iron doors
 
-```
+
+    }
+}```
 
 </div>
 
@@ -2863,14 +2881,20 @@ class BurgerBuilder {
 
 // ----------------------------
 
-var burger = new BurgerBuilder(14)
-                .AddCheese()
-                .AddMushrooms()
-                .Build();
-Console.WriteLine(burger.GetDescription());
-// Burger: size 14, cheese: true, mushrooms: true, tomato: false
+public class Program
+{
+    public static void Main()
+    {
+        var burger = new BurgerBuilder(14)
+                        .AddCheese()
+                        .AddMushrooms()
+                        .Build();
+        Console.WriteLine(burger.GetDescription());
+        // Burger: size 14, cheese: true, mushrooms: true, tomato: false
 
-```
+
+    }
+}```
 
 </div>
 
@@ -4056,13 +4080,19 @@ public class President
 
 // ----------------------------
 
-President a = President.GetInstance();
-President b = President.GetInstance();
+public class Program
+{
+    public static void Main()
+    {
+        President a = President.GetInstance();
+        President b = President.GetInstance();
 
-Console.WriteLine($"Same instance? {(a == b ? "True" : "False")}");
-// Output: Same instance? True
+        Console.WriteLine($"Same instance? {(a == b ? "True" : "False")}");
+        // Output: Same instance? True
 
-```
+
+    }
+}```
 
 </div>
 
@@ -4593,21 +4623,27 @@ class WildDogAdapter : ILion
 
 // ----------------------------
 
-var africanLion = new AfricanLion();
-var wildDog = new WildDog();
-var wildDogAdapter = new WildDogAdapter(wildDog);
+public class Program
+{
+    public static void Main()
+    {
+        var africanLion = new AfricanLion();
+        var wildDog = new WildDog();
+        var wildDogAdapter = new WildDogAdapter(wildDog);
 
-var hunter = new Hunter();
-hunter.Hunt(africanLion);      // The hunter is hunting... -> Roaaar
-hunter.Hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
+        var hunter = new Hunter();
+        hunter.Hunt(africanLion);      // The hunter is hunting... -> Roaaar
+        hunter.Hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
 
-// Output:
-// The hunter is hunting...
-// Roaaar
-// The hunter is hunting...
-// Woof
+        // Output:
+        // The hunter is hunting...
+        // Roaaar
+        // The hunter is hunting...
+        // Woof
 
-```
+
+    }
+}```
 
 </div>
 
@@ -5323,16 +5359,22 @@ class AquaTheme : ITheme
 
 // ----------------------------
 
-var darkTheme = new DarkTheme();
-var aquaTheme = new AquaTheme();
+public class Program
+{
+    public static void Main()
+    {
+        var darkTheme = new DarkTheme();
+        var aquaTheme = new AquaTheme();
 
-var about = new About(darkTheme);
-var careers = new Careers(aquaTheme);
+        var about = new About(darkTheme);
+        var careers = new Careers(aquaTheme);
 
-Console.WriteLine(about.GetContent());   // About page in Dark Black
-Console.WriteLine(careers.GetContent()); // Careers page in Light blue
+        Console.WriteLine(about.GetContent());   // About page in Dark Black
+        Console.WriteLine(careers.GetContent()); // Careers page in Light blue
 
-```
+
+    }
+}```
 
 </div>
 
@@ -6149,17 +6191,23 @@ class Organization : IEmployee
 
 // ----------------------------
 
-var designTeam = new Organization("Design Team");
-designTeam.Add(new Designer("Arya", 4000));
+public class Program
+{
+    public static void Main()
+    {
+        var designTeam = new Organization("Design Team");
+        designTeam.Add(new Designer("Arya", 4000));
 
-var company = new Organization("Acme");
-company.Add(new Developer("John", 5000));
-company.Add(new Developer("Jane", 6000));
-company.Add(designTeam);
+        var company = new Organization("Acme");
+        company.Add(new Developer("John", 5000));
+        company.Add(new Developer("Jane", 6000));
+        company.Add(designTeam);
 
-Console.WriteLine($"Total salary: {company.GetSalary()}");
-// Total salary: 15000
-```
+        Console.WriteLine($"Total salary: {company.GetSalary()}");
+        // Total salary: 15000
+
+    }
+}```
 
 </div>
 
@@ -6993,16 +7041,22 @@ class SugarDecorator : ICoffee
 
 // ----------------------------
 
-ICoffee coffee = new SimpleCoffee();
-Console.WriteLine($"{coffee.Description()}: {coffee.Cost()}"); // Simple coffee: 10
+public class Program
+{
+    public static void Main()
+    {
+        ICoffee coffee = new SimpleCoffee();
+        Console.WriteLine($"{coffee.Description()}: {coffee.Cost()}"); // Simple coffee: 10
 
-coffee = new MilkDecorator(coffee);
-Console.WriteLine($"{coffee.Description()}: {coffee.Cost()}"); // Simple coffee, milk: 12
+        coffee = new MilkDecorator(coffee);
+        Console.WriteLine($"{coffee.Description()}: {coffee.Cost()}"); // Simple coffee, milk: 12
 
-coffee = new SugarDecorator(coffee);
-Console.WriteLine($"{coffee.Description()}: {coffee.Cost()}"); // Simple coffee, milk, sugar: 13
+        coffee = new SugarDecorator(coffee);
+        Console.WriteLine($"{coffee.Description()}: {coffee.Cost()}"); // Simple coffee, milk, sugar: 13
 
-```
+
+    }
+}```
 
 </div>
 
@@ -7756,20 +7810,26 @@ class ComputerFacade
 
 // ----------------------------
 
-var computer = new ComputerFacade(new Computer());
-computer.TurnOn();
-computer.TurnOff();
+public class Program
+{
+    public static void Main()
+    {
+        var computer = new ComputerFacade(new Computer());
+        computer.TurnOn();
+        computer.TurnOff();
 
-// Output:
-// Ouch!
-// Beep beep!
-// Loading..
-// Ready to be used!
-// Bup bup..
-// Haaah!
-// Zzzzz
+        // Output:
+        // Ouch!
+        // Beep beep!
+        // Loading..
+        // Ready to be used!
+        // Bup bup..
+        // Haaah!
+        // Zzzzz
 
-```
+
+    }
+}```
 
 </div>
 
@@ -8522,26 +8582,32 @@ class TeaShop
 
 // ----------------------------
 
-var teaMaker = new TeaMaker();
-var teaShop = new TeaShop(teaMaker);
+public class Program
+{
+    public static void Main()
+    {
+        var teaMaker = new TeaMaker();
+        var teaShop = new TeaShop(teaMaker);
 
-teaShop.TakeOrder("Karak", 1);
-teaShop.TakeOrder("Karak", 3);
-teaShop.TakeOrder("Karak", 5);
-teaShop.TakeOrder("Karak", 7);
-teaShop.TakeOrder("Karak", 9);
+        teaShop.TakeOrder("Karak", 1);
+        teaShop.TakeOrder("Karak", 3);
+        teaShop.TakeOrder("Karak", 5);
+        teaShop.TakeOrder("Karak", 7);
+        teaShop.TakeOrder("Karak", 9);
 
-teaShop.Serve();
+        teaShop.Serve();
 
-Console.WriteLine("Total tea objects made: " + teaMaker.TotalTeasMade());
-// Serving Karak Tea to table #1
-// Serving Karak Tea to table #3
-// Serving Karak Tea to table #5
-// Serving Karak Tea to table #7
-// Serving Karak Tea to table #9
-// Total tea objects made: 1
+        Console.WriteLine("Total tea objects made: " + teaMaker.TotalTeasMade());
+        // Serving Karak Tea to table #1
+        // Serving Karak Tea to table #3
+        // Serving Karak Tea to table #5
+        // Serving Karak Tea to table #7
+        // Serving Karak Tea to table #9
+        // Total tea objects made: 1
 
-```
+
+    }
+}```
 
 </div>
 
@@ -9259,12 +9325,18 @@ class SecurityProxy : IDoor
 
 // ----------------------------
 
-IDoor door = new SecurityProxy(new LabDoor());
-door.Open("invalid"); // Big no! It is not possible.
-door.Open("$ecr@t");  // Opening lab door
-door.Close();         // Closing lab door
+public class Program
+{
+    public static void Main()
+    {
+        IDoor door = new SecurityProxy(new LabDoor());
+        door.Open("invalid"); // Big no! It is not possible.
+        door.Open("$ecr@t");  // Opening lab door
+        door.Close();         // Closing lab door
 
-```
+
+    }
+}```
 
 </div>
 
@@ -9971,19 +10043,25 @@ class Bitcoin : Account
 
 // ----------------------------
 
-var bank = new Bank(100);        // Bank with balance 100
-var paypal = new Paypal(300);    // Paypal with balance 300
-var bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
+public class Program
+{
+    public static void Main()
+    {
+        var bank = new Bank(100);        // Bank with balance 100
+        var paypal = new Paypal(300);    // Paypal with balance 300
+        var bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
 
-bank.SetNext(paypal);
-paypal.SetNext(bitcoin);
+        bank.SetNext(paypal);
+        paypal.SetNext(bitcoin);
 
-bank.Pay(259);
-// Output will be
-// ==============
-// Cannot pay using Bank. Proceeding ..
-// Paid 259 using Paypal
-```
+        bank.Pay(259);
+        // Output will be
+        // ==============
+        // Cannot pay using Bank. Proceeding ..
+        // Paid 259 using Paypal
+
+    }
+}```
 
 </div>
 
@@ -10732,16 +10810,22 @@ class RemoteControl
 
 // ----------------------------
 
-var bulb = new Bulb();
+public class Program
+{
+    public static void Main()
+    {
+        var bulb = new Bulb();
 
-var turnOn = new TurnOn(bulb);
-var turnOff = new TurnOff(bulb);
+        var turnOn = new TurnOn(bulb);
+        var turnOff = new TurnOff(bulb);
 
-var remote = new RemoteControl();
-remote.Submit(turnOn);  // Bulb has been lit
-remote.Submit(turnOff); // Darkness!
+        var remote = new RemoteControl();
+        remote.Submit(turnOn);  // Bulb has been lit
+        remote.Submit(turnOff); // Darkness!
 
-```
+
+    }
+}```
 
 </div>
 
@@ -12230,21 +12314,27 @@ class StationList : IEnumerable<RadioStation>
 
 // ----------------------------
 
-var stations = new StationList();
-stations.Add(new RadioStation(89.0f));
-stations.Add(new RadioStation(101.0f));
-stations.Add(new RadioStation(102.5f));
-
-foreach (var station in stations)
+public class Program
 {
-    Console.WriteLine(station.GetFrequency().ToString("F1", CultureInfo.InvariantCulture));
-}
+    public static void Main()
+    {
+        var stations = new StationList();
+        stations.Add(new RadioStation(89.0f));
+        stations.Add(new RadioStation(101.0f));
+        stations.Add(new RadioStation(102.5f));
 
-// Output:
-// 89.0
-// 101.0
-// 102.5
-```
+        foreach (var station in stations)
+        {
+            Console.WriteLine(station.GetFrequency().ToString("F1", CultureInfo.InvariantCulture));
+        }
+
+        // Output:
+        // 89.0
+        // 101.0
+        // 102.5
+
+    }
+}```
 
 </div>
 
@@ -12835,19 +12925,25 @@ class User
 
 // ----------------------------
 
-var mediator = new ChatRoom();
+public class Program
+{
+    public static void Main()
+    {
+        var mediator = new ChatRoom();
 
-var john = new User("John", mediator);
-var jane = new User("Jane", mediator);
+        var john = new User("John", mediator);
+        var jane = new User("Jane", mediator);
 
-john.Send("Hi there!");
-jane.Send("Hey!");
+        john.Send("Hi there!");
+        jane.Send("Hey!");
 
-// Output:
-// John: Hi there!
-// Jane: Hey!
+        // Output:
+        // John: Hi there!
+        // Jane: Hey!
 
-```
+
+    }
+}```
 
 </div>
 
@@ -13503,23 +13599,29 @@ class History
 
 // ----------------------------
 
-var editor = new Editor();
-var history = new History();
+public class Program
+{
+    public static void Main()
+    {
+        var editor = new Editor();
+        var history = new History();
 
-editor.Type("a");
-history.Push(editor.Save());
+        editor.Type("a");
+        history.Push(editor.Save());
 
-editor.Type("ab");
-history.Push(editor.Save());
+        editor.Type("ab");
+        history.Push(editor.Save());
 
-editor.Type("abc");
+        editor.Type("abc");
 
-editor.Restore(history.Pop());
-Console.WriteLine(editor.Content); // ab
+        editor.Restore(history.Pop());
+        Console.WriteLine(editor.Content); // ab
 
-editor.Restore(history.Pop());
-Console.WriteLine(editor.Content); // a
-```
+        editor.Restore(history.Pop());
+        Console.WriteLine(editor.Content); // a
+
+    }
+}```
 
 </div>
 
@@ -14343,24 +14445,30 @@ internal class Unsubscriber<JobPost> : IDisposable
 // ----------------------------
 
 //Create Subscribers
-var johnDoe = new JobSeeker("John Doe");
-var janeDoe = new JobSeeker("Jane Doe");
+public class Program
+{
+    public static void Main()
+    {
+        var johnDoe = new JobSeeker("John Doe");
+        var janeDoe = new JobSeeker("Jane Doe");
 
-//Create publisher and attach subscribers
-var jobPostings = new EmploymentAgency();
-jobPostings.Subscribe(johnDoe);
-jobPostings.Subscribe(janeDoe);
+        //Create publisher and attach subscribers
+        var jobPostings = new EmploymentAgency();
+        jobPostings.Subscribe(johnDoe);
+        jobPostings.Subscribe(janeDoe);
 
-//Add a new job and see if subscribers get notified
-jobPostings.AddJob(new JobPost("Software Engineer"));
+        //Add a new job and see if subscribers get notified
+        jobPostings.AddJob(new JobPost("Software Engineer"));
 
-//Output
-// Hi John Doe! New job posted: Software Engineer
-// Hi Jane Doe! New job posted: Software Engineer
+        //Output
+        // Hi John Doe! New job posted: Software Engineer
+        // Hi Jane Doe! New job posted: Software Engineer
 
-Console.ReadLine();
+        Console.ReadLine();
 
-```
+
+    }
+}```
 
 </div>
 
@@ -15205,21 +15313,27 @@ class Jump : IAnimalOperation
 
 // ----------------------------
 
-var monkey = new Monkey();
-var lion = new Lion();
-var dolphin = new Dolphin();
+public class Program
+{
+    public static void Main()
+    {
+        var monkey = new Monkey();
+        var lion = new Lion();
+        var dolphin = new Dolphin();
 
-var speak = new Speak();
-var jump = new Jump();
+        var speak = new Speak();
+        var jump = new Jump();
 
-monkey.Accept(speak);    // Ooh oo aa aa!
-lion.Accept(speak);      // Roaaar!
-dolphin.Accept(speak);   // Tuut tuttu tuutt!
+        monkey.Accept(speak);    // Ooh oo aa aa!
+        lion.Accept(speak);      // Roaaar!
+        dolphin.Accept(speak);   // Tuut tuttu tuutt!
 
-monkey.Accept(jump);     // Jumped 20 feet high! on to the tree!
-lion.Accept(jump);       // Jumped 7 feet! back on the ground!
-dolphin.Accept(jump);    // Walked on water a little and disappeared
-```
+        monkey.Accept(jump);     // Jumped 20 feet high! on to the tree!
+        lion.Accept(jump);       // Jumped 7 feet! back on the ground!
+        dolphin.Accept(jump);    // Walked on water a little and disappeared
+
+    }
+}```
 
 </div>
 
@@ -16075,13 +16189,19 @@ class ShoppingCart
 
 // ----------------------------
 
-var checkout = new ShoppingCart(new CashPayment());
-checkout.Checkout(100); // Output: Paid 100 in cash
+public class Program
+{
+    public static void Main()
+    {
+        var checkout = new ShoppingCart(new CashPayment());
+        checkout.Checkout(100); // Output: Paid 100 in cash
 
-checkout = new ShoppingCart(new CardPayment());
-checkout.Checkout(250); // Output: Paid 250 by card
+        checkout = new ShoppingCart(new CardPayment());
+        checkout.Checkout(250); // Output: Paid 250 by card
 
-```
+
+    }
+}```
 
 </div>
 
@@ -16745,21 +16865,27 @@ class TrafficLight {
 
 // ----------------------------
 
-var light = new TrafficLight(new RedLight());
-
-for (int i = 0; i < 4; i++)
+public class Program
 {
-  Console.WriteLine(light.Name());
-  light.Next();
-}
+    public static void Main()
+    {
+        var light = new TrafficLight(new RedLight());
 
-// Output:
-// Red
-// Green
-// Yellow
-// Red
+        for (int i = 0; i < 4; i++)
+        {
+          Console.WriteLine(light.Name());
+          light.Next();
+        }
 
-```
+        // Output:
+        // Red
+        // Green
+        // Yellow
+        // Red
+
+
+    }
+}```
 
 </div>
 
@@ -17589,25 +17715,31 @@ class IosBuilder : Builder
 
 // ----------------------------
 
-var androidBuilder = new AndroidBuilder();
-androidBuilder.Build();
+public class Program
+{
+    public static void Main()
+    {
+        var androidBuilder = new AndroidBuilder();
+        androidBuilder.Build();
 
-// Output:
-// Running android tests
-// Linting the android code
-// Assembling the android build
-// Deploying android build to server
+        // Output:
+        // Running android tests
+        // Linting the android code
+        // Assembling the android build
+        // Deploying android build to server
 
-var iosBuilder = new IosBuilder();
-iosBuilder.Build();
+        var iosBuilder = new IosBuilder();
+        iosBuilder.Build();
 
-// Output:
-// Running ios tests
-// Linting the ios code
-// Assembling the ios build
-// Deploying ios build to server
+        // Output:
+        // Running ios tests
+        // Linting the ios code
+        // Assembling the ios build
+        // Deploying ios build to server
 
-```
+
+    }
+}```
 
 </div>
 
