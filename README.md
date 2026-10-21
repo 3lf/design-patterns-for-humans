@@ -586,12 +586,12 @@ func main() {
 <div dir="ltr">
 
 ```java
-public interface Door {
+interface Door {
     int getHeight();
     int getWidth();
 }
 
-public class WoodenDoor implements Door {
+class WoodenDoor implements Door {
     private int width;
     private int height;
 
@@ -608,17 +608,22 @@ public class WoodenDoor implements Door {
     }
 }
 
-public class DoorFactory {
+class DoorFactory {
     public static Door makeDoor(int width, int height) {
         return new WoodenDoor(width, height);
     }
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-Door door = DoorFactory.makeDoor(90, 210);
-System.out.println(door.getHeight());
-System.out.println(door.getWidth());
+        Door door = DoorFactory.makeDoor(90, 210);
+        System.out.println(door.getHeight());
+        System.out.println(door.getWidth());
+
+    }
+}
 ```
 
 </div>
@@ -1230,12 +1235,17 @@ class MarketingManager extends HiringManager {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-DevelopmentManager devManager = new DevelopmentManager();
-devManager.takeInterview();
+        DevelopmentManager devManager = new DevelopmentManager();
+        devManager.takeInterview();
 
-MarketingManager marketingManager = new MarketingManager();
-marketingManager.takeInterview();
+        MarketingManager marketingManager = new MarketingManager();
+        marketingManager.takeInterview();
+
+    }
+}
 ```
 
 </div>
@@ -2133,22 +2143,27 @@ class IronDoorFactory implements DoorFactory {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-WoodenDoorFactory woodenFactory = new WoodenDoorFactory();
-Door woodenDoor = woodenFactory.makeDoor();
-DoorFittingExpert woodenExpert = woodenFactory.makeFittingExpert();
+        WoodenDoorFactory woodenFactory = new WoodenDoorFactory();
+        Door woodenDoor = woodenFactory.makeDoor();
+        DoorFittingExpert woodenExpert = woodenFactory.makeFittingExpert();
 
-woodenDoor.getDescription();   // Output: I am a wooden door
-woodenExpert.getDescription(); // Output: I can only fit wooden doors
+        woodenDoor.getDescription();   // Output: I am a wooden door
+        woodenExpert.getDescription(); // Output: I can only fit wooden doors
 
-// ----------------------------
+        // ----------------------------
 
-IronDoorFactory ironFactory = new IronDoorFactory();
-Door ironDoor = ironFactory.makeDoor();
-DoorFittingExpert ironExpert = ironFactory.makeFittingExpert();
+        IronDoorFactory ironFactory = new IronDoorFactory();
+        Door ironDoor = ironFactory.makeDoor();
+        DoorFittingExpert ironExpert = ironFactory.makeFittingExpert();
 
-ironDoor.getDescription();   // Output: I am an iron door
-ironExpert.getDescription(); // Output: I can only fit iron doors
+        ironDoor.getDescription();   // Output: I am an iron door
+        ironExpert.getDescription(); // Output: I can only fit iron doors
+
+    }
+}
 ```
 
 </div>
@@ -3081,14 +3096,19 @@ class BurgerBuilder {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-Burger burger = new BurgerBuilder(14)
-        .addCheese()
-        .addMushrooms()
-        .build();
+        Burger burger = new BurgerBuilder(14)
+                .addCheese()
+                .addMushrooms()
+                .build();
 
-System.out.println(burger.getDescription());
-// Burger: size 14, cheese: true, mushrooms: true, tomato: false
+        System.out.println(burger.getDescription());
+        // Burger: size 14, cheese: true, mushrooms: true, tomato: false
+
+    }
+}
 ```
 
 </div>
@@ -4175,12 +4195,17 @@ class President {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-President a = President.getInstance();
-President b = President.getInstance();
+        President a = President.getInstance();
+        President b = President.getInstance();
 
-System.out.println("Same instance? " + (a == b ? "True" : "False"));
-// Output: Same instance? True
+        System.out.println("Same instance? " + (a == b ? "True" : "False"));
+        // Output: Same instance? True
+
+    }
+}
 ```
 
 </div>
@@ -4790,20 +4815,25 @@ class WildDogAdapter implements Lion {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-AfricanLion africanLion = new AfricanLion();
-WildDog wildDog = new WildDog();
-WildDogAdapter wildDogAdapter = new WildDogAdapter(wildDog);
+        AfricanLion africanLion = new AfricanLion();
+        WildDog wildDog = new WildDog();
+        WildDogAdapter wildDogAdapter = new WildDogAdapter(wildDog);
 
-Hunter hunter = new Hunter();
-hunter.hunt(africanLion);      // The hunter is hunting... -> Roaaar
-hunter.hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
+        Hunter hunter = new Hunter();
+        hunter.hunt(africanLion);      // The hunter is hunting... -> Roaaar
+        hunter.hunt(wildDogAdapter);   // The hunter is hunting... -> Woof
 
-// Output:
-// The hunter is hunting...
-// Roaaar
-// The hunter is hunting...
-// Woof
+        // Output:
+        // The hunter is hunting...
+        // Roaaar
+        // The hunter is hunting...
+        // Woof
+
+    }
+}
 ```
 
 </div>
@@ -5540,16 +5570,21 @@ class AquaTheme implements Theme {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
 
-DarkTheme darkTheme = new DarkTheme();
-AquaTheme aquaTheme = new AquaTheme();
+        DarkTheme darkTheme = new DarkTheme();
+        AquaTheme aquaTheme = new AquaTheme();
 
-About about = new About(darkTheme);
-Careers careers = new Careers(aquaTheme);
+        About about = new About(darkTheme);
+        Careers careers = new Careers(aquaTheme);
 
-System.out.println(about.getContent());     // About page in Dark Black
-System.out.println(careers.getContent());   // Careers page in Light blue
+        System.out.println(about.getContent());     // About page in Dark Black
+        System.out.println(careers.getContent());   // Careers page in Light blue
+
+    }
+}
 ```
 
 </div>
@@ -6412,17 +6447,22 @@ class Organization implements Employee {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-Organization designTeam = new Organization("Design Team");
-designTeam.add(new Designer("Arya", 4000));
+        Organization designTeam = new Organization("Design Team");
+        designTeam.add(new Designer("Arya", 4000));
 
-Organization company = new Organization("Acme");
-company.add(new Developer("John", 5000));
-company.add(new Developer("Jane", 6000));
-company.add(designTeam);
+        Organization company = new Organization("Acme");
+        company.add(new Developer("John", 5000));
+        company.add(new Developer("Jane", 6000));
+        company.add(designTeam);
 
-System.out.printf("Total salary: %.0f%n", company.getSalary());
-// Total salary: 15000
+        System.out.printf("Total salary: %.0f%n", company.getSalary());
+        // Total salary: 15000
+
+    }
+}
 ```
 
 </div>
@@ -7217,15 +7257,20 @@ class SugarDecorator implements Coffee {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-Coffee coffee = new SimpleCoffee();
-System.out.println(coffee.description() + ": " + coffee.cost()); // Simple coffee: 10
+        Coffee coffee = new SimpleCoffee();
+        System.out.println(coffee.description() + ": " + coffee.cost()); // Simple coffee: 10
 
-coffee = new MilkDecorator(coffee);
-System.out.println(coffee.description() + ": " + coffee.cost()); // Simple coffee, milk: 12
+        coffee = new MilkDecorator(coffee);
+        System.out.println(coffee.description() + ": " + coffee.cost()); // Simple coffee, milk: 12
 
-coffee = new SugarDecorator(coffee);
-System.out.println(coffee.description() + ": " + coffee.cost()); // Simple coffee, milk, sugar: 13
+        coffee = new SugarDecorator(coffee);
+        System.out.println(coffee.description() + ": " + coffee.cost()); // Simple coffee, milk, sugar: 13
+
+    }
+}
 ```
 
 </div>
@@ -8008,19 +8053,24 @@ class ComputerFacade {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-ComputerFacade computer = new ComputerFacade(new Computer());
-computer.turnOn();
-computer.turnOff();
+        ComputerFacade computer = new ComputerFacade(new Computer());
+        computer.turnOn();
+        computer.turnOff();
 
-// Output:
-// Ouch!
-// Beep beep!
-// Loading..
-// Ready to be used!
-// Bup bup..
-// Haaah!
-// Zzzzz
+        // Output:
+        // Ouch!
+        // Beep beep!
+        // Loading..
+        // Ready to be used!
+        // Bup bup..
+        // Haaah!
+        // Zzzzz
+
+    }
+}
 ```
 
 </div>
@@ -8765,25 +8815,30 @@ class TeaShop {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-TeaMaker teaMaker = new TeaMaker();
-TeaShop teaShop = new TeaShop(teaMaker);
+        TeaMaker teaMaker = new TeaMaker();
+        TeaShop teaShop = new TeaShop(teaMaker);
 
-teaShop.takeOrder("Karak", 1);
-teaShop.takeOrder("Karak", 3);
-teaShop.takeOrder("Karak", 5);
-teaShop.takeOrder("Karak", 7);
-teaShop.takeOrder("Karak", 9);
+        teaShop.takeOrder("Karak", 1);
+        teaShop.takeOrder("Karak", 3);
+        teaShop.takeOrder("Karak", 5);
+        teaShop.takeOrder("Karak", 7);
+        teaShop.takeOrder("Karak", 9);
 
-teaShop.serve();
+        teaShop.serve();
 
-System.out.println("Total tea objects made: " + teaMaker.totalTeasMade());
-// Serving Karak Tea to table #1
-// Serving Karak Tea to table #3
-// Serving Karak Tea to table #5
-// Serving Karak Tea to table #7
-// Serving Karak Tea to table #9
-// Total tea objects made: 1
+        System.out.println("Total tea objects made: " + teaMaker.totalTeasMade());
+        // Serving Karak Tea to table #1
+        // Serving Karak Tea to table #3
+        // Serving Karak Tea to table #5
+        // Serving Karak Tea to table #7
+        // Serving Karak Tea to table #9
+        // Total tea objects made: 1
+
+    }
+}
 ```
 
 </div>
@@ -9434,12 +9489,17 @@ class SecurityProxy implements Door {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-Door door = new SecurityProxy(new LabDoor());
+        Door door = new SecurityProxy(new LabDoor());
 
-door.open("invalid");       // Big no! It is not possible.
-door.open("$ecr@t");        // Opening lab door
-door.close();               // Closing lab door
+        door.open("invalid");       // Big no! It is not possible.
+        door.open("$ecr@t");        // Opening lab door
+        door.close();               // Closing lab door
+
+    }
+}
 ```
 
 </div>
@@ -10184,19 +10244,24 @@ class Bitcoin extends Account {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-Bank bank = new Bank(100);           // Bank with balance 100
-Paypal paypal = new Paypal(300);     // Paypal with balance 300
-Bitcoin bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
+        Bank bank = new Bank(100);           // Bank with balance 100
+        Paypal paypal = new Paypal(300);     // Paypal with balance 300
+        Bitcoin bitcoin = new Bitcoin(1000); // Bitcoin with balance 1000
 
-bank.setNext(paypal);
-paypal.setNext(bitcoin);
+        bank.setNext(paypal);
+        paypal.setNext(bitcoin);
 
-bank.pay(259);
-// Output will be
-// ==============
-// Cannot pay using Bank. Proceeding ..
-// Paid 259 using Paypal
+        bank.pay(259);
+        // Output will be
+        // ==============
+        // Cannot pay using Bank. Proceeding ..
+        // Paid 259 using Paypal
+
+    }
+}
 ```
 
 </div>
@@ -10977,14 +11042,19 @@ class RemoteControl {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-Bulb bulb = new Bulb();
-TurnOn turnOnCmd = new TurnOn(bulb);
-TurnOff turnOffCmd = new TurnOff(bulb);
+        Bulb bulb = new Bulb();
+        TurnOn turnOnCmd = new TurnOn(bulb);
+        TurnOff turnOffCmd = new TurnOff(bulb);
 
-RemoteControl remote = new RemoteControl();
-remote.submit(turnOnCmd);  // Bulb has been lit
-remote.submit(turnOffCmd); // Darkness!
+        RemoteControl remote = new RemoteControl();
+        remote.submit(turnOnCmd);  // Bulb has been lit
+        remote.submit(turnOffCmd); // Darkness!
+
+    }
+}
 ```
 
 </div>
@@ -12413,21 +12483,26 @@ class StationList implements Iterable<RadioStation> {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-StationList stations = new StationList();
-stations.add(new RadioStation(89.0f));
-stations.add(new RadioStation(101.0f));
-stations.add(new RadioStation(102.5f));
+        StationList stations = new StationList();
+        stations.add(new RadioStation(89.0f));
+        stations.add(new RadioStation(101.0f));
+        stations.add(new RadioStation(102.5f));
 
-Iterator<RadioStation> stationIterator = stations.iterator();
-while (stationIterator.hasNext()) {
-    RadioStation radioStation = stationIterator.next();
-    System.out.println(radioStation.getFrequency());
+        Iterator<RadioStation> stationIterator = stations.iterator();
+        while (stationIterator.hasNext()) {
+            RadioStation radioStation = stationIterator.next();
+            System.out.println(radioStation.getFrequency());
+        }
+        // Output:
+        // 89.0
+        // 101.0
+        // 102.5
+
+    }
 }
-// Output:
-// 89.0
-// 101.0
-// 102.5
 ```
 
 </div>
@@ -13003,14 +13078,19 @@ class User {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-ChatRoom mediator = new ChatRoom();
+        ChatRoom mediator = new ChatRoom();
 
-User john = new User("John", mediator);
-User jane = new User("Jane", mediator);
+        User john = new User("John", mediator);
+        User jane = new User("Jane", mediator);
 
-john.send("Hi there!"); // John: Hi there!
-jane.send("Hey!");      // Jane: Hey!
+        john.send("Hi there!"); // John: Hi there!
+        jane.send("Hey!");      // Jane: Hey!
+
+    }
+}
 ```
 
 </div>
@@ -14574,17 +14654,22 @@ class EmploymentAgency {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-JobSeeker johnDoe = new JobSeeker("John Doe");
-JobSeeker janeDoe = new JobSeeker("Jane Doe");
+        JobSeeker johnDoe = new JobSeeker("John Doe");
+        JobSeeker janeDoe = new JobSeeker("Jane Doe");
 
-EmploymentAgency jobPostings = new EmploymentAgency();
-jobPostings.attach(johnDoe);
-jobPostings.attach(janeDoe);
+        EmploymentAgency jobPostings = new EmploymentAgency();
+        jobPostings.attach(johnDoe);
+        jobPostings.attach(janeDoe);
 
-jobPostings.addJob(new JobPost("Software Engineer"));
-// Hi John Doe! New job posted: Software Engineer
-// Hi Jane Doe! New job posted: Software Engineer
+        jobPostings.addJob(new JobPost("Software Engineer"));
+        // Hi John Doe! New job posted: Software Engineer
+        // Hi Jane Doe! New job posted: Software Engineer
+
+    }
+}
 ```
 
 </div>
@@ -15526,21 +15611,26 @@ class Jump implements AnimalOperation {
 }
 
 // -----------------------
+public class Main {
+    public static void main(String[] args) {
 
-Monkey monkey = new Monkey();
-Lion lion = new Lion();
-Dolphin dolphin = new Dolphin();
+        Monkey monkey = new Monkey();
+        Lion lion = new Lion();
+        Dolphin dolphin = new Dolphin();
 
-Speak speak = new Speak();
-Jump jump = new Jump();
+        Speak speak = new Speak();
+        Jump jump = new Jump();
 
-monkey.accept(speak);   // Ooh oo aa aa!
-lion.accept(speak);     // Roaaar!
-dolphin.accept(speak);  // Tuut tuttu tuutt!
+        monkey.accept(speak);   // Ooh oo aa aa!
+        lion.accept(speak);     // Roaaar!
+        dolphin.accept(speak);  // Tuut tuttu tuutt!
 
-monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
-lion.accept(jump);      // Jumped 7 feet! back on the ground!
-dolphin.accept(jump);   // Walked on water a little and disappeared
+        monkey.accept(jump);    // Jumped 20 feet high! on to the tree!
+        lion.accept(jump);      // Jumped 7 feet! back on the ground!
+        dolphin.accept(jump);   // Walked on water a little and disappeared
+
+    }
+}
 ```
 
 </div>
@@ -16250,12 +16340,17 @@ class Checkout {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-Checkout checkout = new Checkout(new CashPayment());
-checkout.checkout(100); // Paid 100 in cash
+        Checkout checkout = new Checkout(new CashPayment());
+        checkout.checkout(100); // Paid 100 in cash
 
-checkout = new Checkout(new CardPayment());
-checkout.checkout(250); // Paid 250 by card
+        checkout = new Checkout(new CardPayment());
+        checkout.checkout(250); // Paid 250 by card
+
+    }
+}
 ```
 
 </div>
@@ -16995,19 +17090,24 @@ class TrafficLight {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-TrafficLight light = new TrafficLight(new RedLight());
+        TrafficLight light = new TrafficLight(new RedLight());
 
-for (int i = 0; i < 4; i++) {
-    System.out.println(light.name());
-    light.next();
+        for (int i = 0; i < 4; i++) {
+            System.out.println(light.name());
+            light.next();
+        }
+
+        // Output:
+        // Red
+        // Green
+        // Yellow
+        // Red
+
+    }
 }
-
-// Output:
-// Red
-// Green
-// Yellow
-// Red
 ```
 
 </div>
@@ -17870,20 +17970,25 @@ class IosBuilder extends Builder {
 }
 
 // ----------------------------
+public class Main {
+    public static void main(String[] args) {
 
-AndroidBuilder androidBuilder = new AndroidBuilder();
-androidBuilder.build();
-// Running android tests
-// Linting the android code
-// Assembling the android build
-// Deploying android build to server
+        AndroidBuilder androidBuilder = new AndroidBuilder();
+        androidBuilder.build();
+        // Running android tests
+        // Linting the android code
+        // Assembling the android build
+        // Deploying android build to server
 
-IosBuilder iosBuilder = new IosBuilder();
-iosBuilder.build();
-// Running ios tests
-// Linting the ios code
-// Assembling the ios build
-// Deploying ios build to server
+        IosBuilder iosBuilder = new IosBuilder();
+        iosBuilder.build();
+        // Running ios tests
+        // Linting the ios code
+        // Assembling the ios build
+        // Deploying ios build to server
+
+    }
+}
 ```
 
 </div>
